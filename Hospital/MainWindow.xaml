@@ -5,8 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Zdravo" Height="450" Width="800">
     <Grid>
-        
+
+        <Image Source="/Images/logo.png" HorizontalAlignment="Left" Height="83.6" VerticalAlignment="Top" Width="238.4" Margin="34.4,31.6,0,0"/>
+
+        <Button x:Name="menager" Content="Upravnik" HorizontalAlignment="Left" Height="69.6" 
+                  Margin="182,148.667,0,0" VerticalAlignment="Top" 
+                  Width="159.8" Background="#FFD2F4EE" Foreground="#FF1E49D9" Click="getMenager"/>
+
+        <Button x:Name="secretary" Content="Sekretar" HorizontalAlignment="Right" Height="69.6" 
+                  Margin="0,148.667,182.2,0" VerticalAlignment="Top" 
+                  Width="159.8" Background="#FFD2F4EE" Foreground="#FF1E49D9" Click="getSecretary"/>
+
+        <Button x:Name="doctor" Content="Lekar" HorizontalAlignment="Left" Height="69.6" 
+                  Margin="182,267.067,0,0" VerticalAlignment="Top" 
+                  Width="159.8" Background="#FFD2F4EE" Foreground="#FF1E49D9" Click="getDoctor"/>
+
+        <Button x:Name="patient" Content="Pacijent" HorizontalAlignment="Right" Height="69.6" 
+                  Margin="0,267.067,182.2,0" VerticalAlignment="Top" 
+                  Width="159.8" Background="#FFD2F4EE" Foreground="#FF1E49D9" Click="getPatient"/>
+
+
     </Grid>
+
 </Window>

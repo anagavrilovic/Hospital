@@ -1,0 +1,41 @@
+﻿<Window x:Class="Hospital.View.RoomsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.View"
+        mc:Ignorable="d"
+         WindowStartupLocation="CenterOwner"
+        Title="Pregled Sala" Height="400" Width="650">
+    <Grid>
+
+        <DataGrid x:Name="dataGridRooms" ItemsSource="{Binding Studenti}" IsReadOnly="True" 
+                  SelectionMode="Single" AutoGenerateColumns="False" HorizontalAlignment="Left" 
+                  Height="186.8" Margin="88.4,98.17,0,0" VerticalAlignment="Top" Width="407.6" Background="#FFE3F4F1" FontFamily="Arial" Foreground="#FF536AA0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Oznaka" Binding="{Binding Ime}"/>
+                <DataGridTextColumn Header="Naziv" Binding="{Binding Prezime}" Width="*" />
+                <DataGridTextColumn Header="Sprat" Binding="{Binding Indeks}" Width="*"/>
+                <DataGridTextColumn Header="Tip" Binding="{Binding Indeks}" Width="*"/>
+                <DataGridTextColumn Header="Zauzetost" Binding="{Binding Indeks}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button x:Name="add" Content="Dodaj" HorizontalAlignment="Left" Height="28.8" 
+                  Margin="88.4,33.26,0,0" VerticalAlignment="Top" 
+                  Width="79" Background="#FFD2F4EE" Foreground="#FF1E49D9" Click="addRoom"
+                  d:LayoutOverrides="VerticalAlignment"/>
+
+
+        <Button x:Name="edit" Content="Izmeni" Height="28.8" 
+                  Margin="217.6,33.26,0,0" VerticalAlignment="Top" Background="#FFD2F4EE" 
+                  Foreground="#FF1E49D9" Click="editRoom" d:LayoutOverrides="VerticalAlignment" HorizontalAlignment="Left" Width="79.6"/>
+
+
+        <Button x:Name="delete" Content="Izbriši" Height="28.8" 
+                  Margin="0,33.26,216.4,0" VerticalAlignment="Top" Background="#FFD2F4EE" 
+                  Foreground="#FF1E49D9" Click="deleteRoom" d:LayoutOverrides="HorizontalAlignment, 
+                  VerticalAlignment" HorizontalAlignment="Right" Width="79"/>
+
+    </Grid>
+</Window>
