@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Marija\Desktop\SIMS\Git\SIMS_grupa3_tim10\Hospital\obj\Debug\
+C:\Stefan\Sims\SIMS_grupa3_tim10\Hospital\obj\Debug\
 Hospital
 none
 false
 DEBUG;TRACE
-C:\Users\Marija\Desktop\SIMS\Git\SIMS_grupa3_tim10\Hospital\App.xaml
-3-1100025351
+C:\Stefan\Sims\SIMS_grupa3_tim10\Hospital\App.xaml
+41482760353
 
-27-2063503515
+281626417176
 13-1505183044
-MainWindow.xaml;View\MenagerWindow.xaml;View\RoomsWindow.xaml;
+MainWindow.xaml;View\Anamnesis.xaml;View\Diagnosis.xaml;View\Doctor_Examination.xaml;
 
 True
 
