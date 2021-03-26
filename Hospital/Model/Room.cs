@@ -1,22 +1,114 @@
 using System;
+using System.ComponentModel;
 
 namespace Hospital
 {
-    public class Room
+    public class Room : INotifyPropertyChanged
     {
-        public int id { get; set; }
-        public String name { get; set; }
-        public int floor { get; set; }
-        public Boolean isAvaliable { get; set; }
-        public RoomType type { get; set; }
 
-        public Room(int id, String name, int floor, Boolean free, RoomType type)
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string name)
         {
-            this.id = id;
-            this.name = name;
-            this.floor = floor;
-            this.isAvaliable  = free;
-            this.type = type;
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        private int id;
+        private string name;
+        private int floor;
+        private Boolean isAvaliable;
+        private RoomType type;
+
+        public int Id 
+        { 
+            
+            get
+            {
+                return id;
+            }
+            
+            set
+            {
+                if (value != id)
+                {
+                    id = value;
+                    OnPropertyChanged("Id");
+                }
+            }
+        }
+
+
+        public String Name
+        {
+
+            get
+            {
+                return name;
+            }
+
+            set
+            {
+                if (value != name)
+                {
+                    name = value;
+                    OnPropertyChanged("Name");
+                }
+            }
+        }
+ 
+
+        public int Floor
+        { 
+            get
+            {
+                return floor;
+            }
+
+            set
+            {
+                if (value != floor)
+                {
+                    floor = value;
+                    OnPropertyChanged("Floor");
+                }
+            }
+        }
+
+        public Boolean IsAvaliable
+        {
+            get
+            {
+                return isAvaliable;
+            }
+
+            set
+            {
+                if (value != isAvaliable)
+                {
+                    isAvaliable = value;
+                    OnPropertyChanged("IsAvaliable");
+                }
+            }
+        }
+
+        public RoomType Type
+        {
+            get
+            {
+                return type;
+            }
+
+            set
+            {
+                if (value != type)
+                {
+                    type = value;
+                    OnPropertyChanged("Type");
+                }
+            }
         }
 
     }

@@ -32,8 +32,9 @@ namespace Hospital.View
             this.DataContext = this;
             ObservableCollection<Room> Rooms = new ObservableCollection<Room>();
             this.Rooms = Rooms;
-            //Colors colorValue = (Colors) Enum.Parse(typeof(Colors), colorString, true);
-            this.Rooms.Add(new Room(1, "Soba 1", 1, true, (RoomType) Enum.Parse(typeof(RoomType), "restRoom")));
+          
+            Rooms.Add(new Room { Id = 1, Name = "Sala 1", Floor = 2, IsAvaliable = false, Type = (RoomType)Enum.Parse(typeof(RoomType), "restRoom") });
+           
         }
 
         private void addRoom(object sender, RoutedEventArgs e)
@@ -50,6 +51,21 @@ namespace Hospital.View
 
         private void deleteRoom(object sender, RoutedEventArgs e)
         {
+            Room selectedItem = (Room) dataGridRooms.SelectedItem;
+
+            MessageBoxResult result = MessageBox.Show("Da li ste sigurni da zelite da uklonite izabranu salu",
+                                          "Brisanje sale",
+                                          MessageBoxButton.YesNo,
+                                          MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                if (selectedItem != null)
+                {
+                    this.Rooms.Remove(selectedItem);
+                }
+            }
+
+          
 
         }
     }

@@ -14,11 +14,11 @@
                   Height="186.8" Margin="88.4,98.17,0,0" VerticalAlignment="Top" Width="407.6" 
                   Background="#FFE3F4F1" FontFamily="Arial" Foreground="#FF536AA0">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Oznaka"/>
-                <DataGridTextColumn Header="Naziv"  Width="*" />
-                <DataGridTextColumn Header="Sprat" Width="*"/>
-                <DataGridTextColumn Header="Zauzetost" Width="*"/>
-                <DataGridTextColumn Header="Tip" Width="*"/>
+                <DataGridTextColumn Header="Oznaka" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Naziv"  Width="*" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Sprat" Width="*" Binding="{Binding Floor}"/>
+                <DataGridTextColumn Header="Zauzetost" Width="*" Binding="{Binding IsAvaliable}"/>
+                <DataGridTextColumn Header="Tip" Width="*" Binding="{Binding Type}"/>
             </DataGrid.Columns>
         </DataGrid>
 
