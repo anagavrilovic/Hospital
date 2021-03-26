@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +20,20 @@ namespace Hospital.View
     /// </summary>
     public partial class RoomsWindow : Window
     {
+        public ObservableCollection<Room> Rooms
+        {
+            get;
+            set;
+        }
+
         public RoomsWindow()
         {
             InitializeComponent();
+            this.DataContext = this;
+            ObservableCollection<Room> Rooms = new ObservableCollection<Room>();
+            this.Rooms = Rooms;
+            //Colors colorValue = (Colors) Enum.Parse(typeof(Colors), colorString, true);
+            this.Rooms.Add(new Room(1, "Soba 1", 1, true, (RoomType) Enum.Parse(typeof(RoomType), "restRoom")));
         }
 
         private void addRoom(object sender, RoutedEventArgs e)

@@ -9,15 +9,16 @@
         Title="Pregled Sala" Height="400" Width="650">
     <Grid>
 
-        <DataGrid x:Name="dataGridRooms" ItemsSource="{Binding Studenti}" IsReadOnly="True" 
+        <DataGrid x:Name="dataGridRooms" ItemsSource="{Binding Path=Rooms}" IsReadOnly="True" 
                   SelectionMode="Single" AutoGenerateColumns="False" HorizontalAlignment="Left" 
-                  Height="186.8" Margin="88.4,98.17,0,0" VerticalAlignment="Top" Width="407.6" Background="#FFE3F4F1" FontFamily="Arial" Foreground="#FF536AA0">
+                  Height="186.8" Margin="88.4,98.17,0,0" VerticalAlignment="Top" Width="407.6" 
+                  Background="#FFE3F4F1" FontFamily="Arial" Foreground="#FF536AA0">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Oznaka" Binding="{Binding Ime}"/>
-                <DataGridTextColumn Header="Naziv" Binding="{Binding Prezime}" Width="*" />
-                <DataGridTextColumn Header="Sprat" Binding="{Binding Indeks}" Width="*"/>
-                <DataGridTextColumn Header="Tip" Binding="{Binding Indeks}" Width="*"/>
-                <DataGridTextColumn Header="Zauzetost" Binding="{Binding Indeks}" Width="*"/>
+                <DataGridTextColumn Header="Oznaka"/>
+                <DataGridTextColumn Header="Naziv"  Width="*" />
+                <DataGridTextColumn Header="Sprat" Width="*"/>
+                <DataGridTextColumn Header="Zauzetost" Width="*"/>
+                <DataGridTextColumn Header="Tip" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
