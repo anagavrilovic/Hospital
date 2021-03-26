@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,27 @@ namespace Hospital
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void SecretaryClick(object sender, RoutedEventArgs e)
+        {
+            var s = new SecretaryWindow();
+            s.Show();
+        }
+
+        private void DoctorClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ManagerClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PatientClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
