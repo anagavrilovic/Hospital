@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Genders.cs" />
     <Compile Include="View\KreiranjeKartona.xaml.cs">
       <DependentUpon>KreiranjeKartona.xaml</DependentUpon>
     </Compile>
