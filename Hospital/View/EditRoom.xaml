@@ -1,13 +1,12 @@
-﻿<Window x:Class="Hospital.View.AddRoom"
+﻿<Window x:Class="Hospital.View.EditRoom"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Hospital"
-        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-         WindowStartupLocation="CenterOwner"
-        Title="Dodavanje sale" Height="350" Width="478.8">
+        WindowStartupLocation="CenterOwner"
+        Title="Izmena sale" Height="350" Width="478.8">
 
     <Grid Margin="10,38.4,249.2,-41.6">
 
@@ -56,15 +55,12 @@
                      Width="73.347">Zauzeta</RadioButton>
 
         <Button x:Name="ok" Content="Potvrdi" 
-                  Margin="23.2,71.2,59.79,71.56" Background="#FFD2F4EE" Foreground="#FF2E83BF" Click="acceptAdding" 
+                  Margin="23.2,71.2,59.79,71.56" Background="#FFD2F4EE" Foreground="#FF2E83BF" Click="acceptEdit" 
                 Grid.Row="5" Grid.Column="1" RenderTransformOrigin="0.797,1.832"/>
 
         <Button x:Name="cancel" Content="Odustani" HorizontalAlignment="Right" 
                   Margin="0,71.2,-49.8,71.56"  Width="71.263" Background="White" Foreground="#FF2E83BF" 
-                 Click="cancelAdding" Grid.Row="5" Grid.Column="1" RenderTransformOrigin="0.797,1.832"/>
+                 Click="cancelEdit" Grid.Row="5" Grid.Column="1" RenderTransformOrigin="0.797,1.832"/>
 
     </Grid>
-
-
 </Window>
-

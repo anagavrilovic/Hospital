@@ -58,6 +58,9 @@
     <Compile Include="View\AddRoom.xaml.cs">
       <DependentUpon>AddRoom.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditRoom.xaml.cs">
+      <DependentUpon>EditRoom.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MenagerWindow.xaml.cs">
       <DependentUpon>MenagerWindow.xaml</DependentUpon>
     </Compile>
@@ -77,6 +80,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\AddRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -133,6 +140,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Icon\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

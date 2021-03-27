@@ -8,7 +8,7 @@
         Title="Zdravo" Height="450" Width="800">
     <Grid>
 
-        <Image Source="/Images/logo.png" HorizontalAlignment="Left" Height="83.6" VerticalAlignment="Top" Width="238.4" Margin="34.4,31.6,0,0"/>
+        <Image Source="/Icon/logo.png" HorizontalAlignment="Left" Height="83.6" VerticalAlignment="Top" Width="238.4" Margin="34.4,31.6,0,0"/>
 
         <Button x:Name="menager" Content="Upravnik" HorizontalAlignment="Left" Height="69.6" 
                   Margin="182,148.667,0,0" VerticalAlignment="Top" 

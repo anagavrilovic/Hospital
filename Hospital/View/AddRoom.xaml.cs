@@ -27,6 +27,21 @@ namespace Hospital.View
         private void acceptAdding(object sender, RoutedEventArgs e)
         {
             //TODO
+            int tempId = int.Parse(idTxt.Text);
+            String tempName = nameTxt.Text;
+            int tempFloor = int.Parse(floorTxt.Text);
+            RoomType tempType = (RoomType)Enum.Parse(typeof(RoomType), typeCB.Text);
+
+            Boolean tempFree = true;
+
+            if(btn2.IsChecked == true)
+            {
+                tempFree = false;
+            }
+
+
+            RoomsWindow.Rooms.Add(new Room { Id = tempId, Name = tempName, Floor = tempFloor, IsAvaliable = tempFree, Type = tempType });
+            this.Close();
         }
 
         private void cancelAdding(object sender, RoutedEventArgs e)

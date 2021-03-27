@@ -15,12 +15,11 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for RoomsWindow.xaml
-    /// </summary>
+  
     public partial class RoomsWindow : Window
     {
-        public ObservableCollection<Room> Rooms
+
+        public static ObservableCollection<Room> Rooms
         {
             get;
             set;
@@ -30,10 +29,10 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
-            ObservableCollection<Room> Rooms = new ObservableCollection<Room>();
-            this.Rooms = Rooms;
+            Rooms = new ObservableCollection<Room>();
+            
           
-            Rooms.Add(new Room { Id = 1, Name = "Sala 1", Floor = 2, IsAvaliable = false, Type = (RoomType)Enum.Parse(typeof(RoomType), "restRoom") });
+            Rooms.Add(new Room { Id = 1, Name = "Sala 1", Floor = 2, IsAvaliable = false, Type = (RoomType)Enum.Parse(typeof(RoomType), "SOBA_ZA_ODMOR") });
            
         }
 
@@ -46,14 +45,29 @@ namespace Hospital.View
 
         private void editRoom(object sender, RoutedEventArgs e)
         {
+            Room selectedItem = (Room) dataGridRooms.SelectedItem;
 
+            if (selectedItem != null)
+            {
+                EditRoom room = new EditRoom(selectedItem);
+                room.Owner = Application.Current.MainWindow;
+
+                room.idTxt.Text =  selectedItem.Id.ToString();
+                room.idTxt.IsEnabled = false;
+                room.nameTxt.Text = selectedItem.Name;
+                room.floorTxt.Text = selectedItem.Floor.ToString();
+                room.typeCB.SelectedValue = selectedItem.Type;
+
+                room.Show();
+            }
+            
         }
 
         private void deleteRoom(object sender, RoutedEventArgs e)
         {
             Room selectedItem = (Room) dataGridRooms.SelectedItem;
 
-            MessageBoxResult result = MessageBox.Show("Da li ste sigurni da zelite da uklonite izabranu salu",
+            MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da uklonite izabranu salu",
                                           "Brisanje sale",
                                           MessageBoxButton.YesNo,
                                           MessageBoxImage.Question);
@@ -61,12 +75,21 @@ namespace Hospital.View
             {
                 if (selectedItem != null)
                 {
-                    this.Rooms.Remove(selectedItem);
+                    Rooms.Remove(selectedItem);
                 }
             }
+        }
 
-          
-
+        public Room getRoom (int id)
+        {
+            foreach(Room r in Rooms)
+            {
+                if (r.Id == id)
+                {
+                    return r;
+                }
+            }
+            return null;
         }
     }
 }
