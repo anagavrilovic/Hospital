@@ -35,29 +35,7 @@ namespace Hospital
             mw.Owner = Application.Current.MainWindow;
             mw.Show();
         }
+ 
 
-        private void getSecretary(object sender, RoutedEventArgs e)
-        {
-           
-        }
-
-        private void getDoctor(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void getPatient(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        void Window_Closing(object sender, CancelEventArgs e)
-        {
-            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + "rooms.json"))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, RoomStorage.rooms);
-            }
-        }
     }
 }
