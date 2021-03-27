@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,9 @@ namespace Hospital.View
     {
         private MedicalRecord record;
 
+        private ObservableCollection<MedicalRecord> _pacijenti = new ObservableCollection<MedicalRecord>();
+        public ObservableCollection<MedicalRecord> Pacijenti { get => _pacijenti; set => _pacijenti = value; }
+
         public MedicalRecord Record
         {
             get => record;
@@ -29,12 +33,13 @@ namespace Hospital.View
                 record = value;
             }
         }
-
-        public IzmenaKartona(MedicalRecord mr)
+    
+        public IzmenaKartona(MedicalRecord mr, ObservableCollection<MedicalRecord> p)
         {
             InitializeComponent();
             this.DataContext = this;
             this.record = mr;
+            this.Pacijenti = p;
         }
 
         private void BtnPotvrdi(object sender, RoutedEventArgs e)
@@ -81,6 +86,8 @@ namespace Hospital.View
                 Record.IsInsured = false;
             }
 
+            MedicalRecordStorage mrs = new MedicalRecordStorage();
+            mrs.DoSerialization(Pacijenti);
             this.Close();
         }
 

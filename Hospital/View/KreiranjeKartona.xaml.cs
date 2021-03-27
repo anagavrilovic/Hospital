@@ -20,9 +20,8 @@ namespace Hospital.View
     /// </summary>
     public partial class KreiranjeKartona : Window
     {
-        private ObservableCollection<MedicalRecord> md;
+        private ObservableCollection<MedicalRecord> md = new ObservableCollection<MedicalRecord>();
         private MedicalRecord record = new MedicalRecord();
-        private Patient patient = new Patient();
 
         public ObservableCollection<MedicalRecord> Md
         {
@@ -41,39 +40,34 @@ namespace Hospital.View
                 record = value;
             }
         }
-        public Patient Patient
-        {
-            get => patient;
-            set
-            {
-                patient = value;
-            }
-        }
 
         public KreiranjeKartona(ObservableCollection<MedicalRecord> md)
         {
             InitializeComponent();
             this.DataContext = this;
-            this.md = md;
+            if (md != null)
+            {
+                this.md = md;
+            }
         }
 
         private void BtnPotvrdi(object sender, RoutedEventArgs e)
         {
-            Patient.Password = PasswordText.Password;
+            Record.Patient.Password = PasswordText.Password;
 
             switch (BracnoStanje.SelectedItem.ToString())
             {
-                case "neoženjen - neudata": Patient.MaritalStatus = MaritalStatus.neozenjen; break;
-                case "oženjen - udata": Patient.MaritalStatus = MaritalStatus.ozenjen; break;
-                case "udovac - udovica": Patient.MaritalStatus = MaritalStatus.udovac; break;
-                case "razveden - razvedena": Patient.MaritalStatus = MaritalStatus.razveden; break;
+                case "neoženjen - neudata": Record.Patient.MaritalStatus = MaritalStatus.neozenjen; break;
+                case "oženjen - udata": Record.Patient.MaritalStatus = MaritalStatus.ozenjen; break;
+                case "udovac - udovica": Record.Patient.MaritalStatus = MaritalStatus.udovac; break;
+                case "razveden - razvedena": Record.Patient.MaritalStatus = MaritalStatus.razveden; break;
             }
 
             switch (Pol.SelectedItem.ToString())
             {
-                case "muški": Patient.Gender = Genders.male; break;
-                case "ženski": Patient.Gender = Genders.female; break;
-                case "ostalo": Patient.Gender = Genders.other; break;
+                case "muški": Record.Patient.Gender = Genders.male; break;
+                case "ženski": Record.Patient.Gender = Genders.female; break;
+                case "ostalo": Record.Patient.Gender = Genders.other; break;
             }
 
             if ((bool)DaButton.IsChecked)
@@ -85,9 +79,9 @@ namespace Hospital.View
                 Record.IsInsured = false;
             }
 
-            Record.Patient = this.Patient;
-
             Md.Add(Record);
+            MedicalRecordStorage mds = new MedicalRecordStorage();
+            mds.Save(Record);
             this.Close();
         }
 

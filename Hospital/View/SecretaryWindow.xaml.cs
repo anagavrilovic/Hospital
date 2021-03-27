@@ -20,9 +20,6 @@ namespace Hospital.View
     /// </summary>
     public partial class SecretaryWindow : Window
     {
-        private ObservableCollection<MedicalRecord> _pacijenti = new ObservableCollection<MedicalRecord>();
-        public ObservableCollection<MedicalRecord> Pacijenti { get => _pacijenti; set => _pacijenti = value; }
-
         public SecretaryWindow()
         {
             InitializeComponent();
@@ -30,12 +27,12 @@ namespace Hospital.View
 
         private void PrikazPacijenata(object sender, RoutedEventArgs e)
         {
-            Content = new PrikazPacijenata(Pacijenti);
+            Content = new PrikazPacijenata();
         }
 
         private void KreirajKarton(object sender, RoutedEventArgs e)
         {
-            var kk = new KreiranjeKartona(Pacijenti);
+            var kk = new KreiranjeKartona(null);
             kk.Show();
         }
     }
