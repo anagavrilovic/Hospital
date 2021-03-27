@@ -63,7 +63,8 @@ namespace Hospital.View
 
         private void IzmeniKarton(object sender, RoutedEventArgs e)
         {
-
+            var ik = new IzmenaKartona((MedicalRecord) PacijentiTable.SelectedItem);
+            ik.Show();
         }
     }
 }

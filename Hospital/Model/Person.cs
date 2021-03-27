@@ -4,10 +4,11 @@
 // Purpose: Definition of Class Person
 
 using System;
+using System.ComponentModel;
 
 namespace Hospital
 {
-    public abstract class Person
+    public abstract class Person : INotifyPropertyChanged
     {
         private String firstName;
         private String lastName;
@@ -29,6 +30,7 @@ namespace Hospital
             set
             {
                 firstName = value;
+                OnPropertyChanged("FirstName");
             }
         }
         public string LastName
@@ -37,6 +39,7 @@ namespace Hospital
             set
             {
                 lastName = value;
+                OnPropertyChanged("LastName");
             }
         }
         public string PersonalID
@@ -45,6 +48,7 @@ namespace Hospital
             set
             {
                 personalID = value;
+                OnPropertyChanged("PersonalID");
             }
         }
         public string PhoneNumber
@@ -53,6 +57,7 @@ namespace Hospital
             set
             {
                 phoneNumber = value;
+                OnPropertyChanged("PhoneNumber");
             }
         }
         public string Email
@@ -61,6 +66,7 @@ namespace Hospital
             set
             {
                 email = value;
+                OnPropertyChanged("Email");
             }
         }
         public string Country
@@ -69,6 +75,7 @@ namespace Hospital
             set
             {
                 country = value;
+                OnPropertyChanged("Country");
             }
         }
         public string City
@@ -77,6 +84,7 @@ namespace Hospital
             set
             {
                 city = value;
+                OnPropertyChanged("City");
             }
         }
         public DateTime DateOfBirth 
@@ -85,6 +93,7 @@ namespace Hospital
             set
             {
                 dateOfBirth = value;
+                OnPropertyChanged("DateOfBirth");
             }
         }
         public string Township
@@ -93,6 +102,7 @@ namespace Hospital
             set
             {
                 township = value;
+                OnPropertyChanged("Township");
             }
         }
         public string CardID
@@ -101,6 +111,7 @@ namespace Hospital
             set
             {
                 cardID = value;
+                OnPropertyChanged("CardID");
             }
         }
         public MaritalStatus MaritalStatus 
@@ -109,6 +120,7 @@ namespace Hospital
             set
             {
                 maritalStatus = value;
+                OnPropertyChanged("MaritalStatus");
             }
         }
         public Genders Gender 
@@ -117,6 +129,7 @@ namespace Hospital
             set
             {
                 gender = value;
+                OnPropertyChanged("Gender");
             }
         }
         public string Address
@@ -125,6 +138,17 @@ namespace Hospital
             set
             {
                 address = value;
+                OnPropertyChanged("Address");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
     }

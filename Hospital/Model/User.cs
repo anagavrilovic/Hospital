@@ -18,6 +18,7 @@ namespace Hospital
             set
             {
                 username = value;
+                OnPropertyChanged("Username");
             }
         }
 
@@ -27,6 +28,7 @@ namespace Hospital
             set
             {
                 password = value;
+                OnPropertyChanged("Password");
             }
         }
 

@@ -19,19 +19,42 @@ namespace Hospital.View
     /// </summary>
     public partial class IzmenaKartona : Window
     {
-        public IzmenaKartona()
+        private MedicalRecord record;
+        private Patient patient;
+
+        public MedicalRecord Record
+        {
+            get => record;
+            set
+            {
+                record = value;
+            }
+        }
+        public Patient Patient
+        {
+            get => patient;
+            set
+            {
+                patient = value;
+            }
+        }
+
+        public IzmenaKartona(MedicalRecord mr)
         {
             InitializeComponent();
+            this.DataContext = this;
+            this.record = mr;
+            this.patient = mr.Patient;
         }
 
         private void BtnPotvrdi(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
 
         private void BtnOdustani(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
     }
 }

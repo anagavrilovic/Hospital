@@ -34,7 +34,7 @@
                 <DataGridTextColumn Header="Ime" Width="0.25*" Binding="{Binding Patient.FirstName}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
                 <DataGridTextColumn Header="Prezime" Width="0.25*" Binding="{Binding Patient.LastName}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
                 <DataGridTextColumn Header="JMBG" Width="0.25*" Binding="{Binding Patient.PersonalID}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="Broj zdravstvenog kartona" Width="0.25*" Binding="{Binding Patient.PersonalID}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Broj zdravstvenog kartona" Width="0.25*" Binding="{Binding MedicalRecordID}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

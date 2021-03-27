@@ -5,10 +5,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Hospital
 {
-    public class MedicalRecord
+    public class MedicalRecord : INotifyPropertyChanged
     {
         private String healthCardNumber;
         private String parentName;
@@ -39,6 +40,7 @@ namespace Hospital
             set
             {
                 healthCardNumber = value;
+                OnPropertyChanged("HealthCardNumber");
             }
         }
 
@@ -48,6 +50,7 @@ namespace Hospital
             set
             {
                 parentName = value;
+                OnPropertyChanged("ParentName");
             }
         }
 
@@ -57,6 +60,7 @@ namespace Hospital
             set
             {
                 isInsured = value;
+                OnPropertyChanged("isInsured");
             }
         }
 
@@ -66,6 +70,7 @@ namespace Hospital
             set
             {
                 medicalRecordID = value;
+                OnPropertyChanged("MedicalRecordID");
             }
         }
 
@@ -140,6 +145,16 @@ namespace Hospital
                 foreach (Examination oldExamination in tmpExamination)
                     oldExamination.MedicalRecord = null;
                 tmpExamination.Clear();
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
 
