@@ -35,11 +35,11 @@ namespace Hospital.View
             int tempFloor = int.Parse(floorTxt.Text);
             RoomType tempType = (RoomType)Enum.Parse(typeof(RoomType), "SALA_ZA_PREGLEDE");
 
-            if (typeCB.Text != null)
+            if (typeCB.SelectedItem != null)
             {
                 tempType = (RoomType)Enum.Parse(typeof(RoomType), typeCB.Text);
             }
-           
+
             Boolean tempFree = true;
 
             if (btn2.IsChecked == true)
@@ -49,8 +49,6 @@ namespace Hospital.View
 
             this.room = new Room { Name = tempName, Floor = tempFloor, IsAvaliable = tempFree, Type = tempType };
 
-           // RoomsWindow rw = new RoomsWindow();
-          //  rw.dataGridRooms.SelectedItem = room;
 
             foreach(Room r in RoomsWindow.Rooms)
             {

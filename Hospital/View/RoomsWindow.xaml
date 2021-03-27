@@ -9,16 +9,17 @@
         Title="Pregled Sala" Height="400" Width="650">
     <Grid>
 
+
         <DataGrid x:Name="dataGridRooms" ItemsSource="{Binding Path=Rooms, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" 
                   SelectionMode="Single" AutoGenerateColumns="False" HorizontalAlignment="Left" 
-                  Height="186.8" Margin="88.4,98.17,0,0" VerticalAlignment="Top" Width="407.6" 
+                  Height="195.6" Margin="88.4,98.17,0,0" VerticalAlignment="Top" Width="474.8" 
                   Background="#FFE3F4F1" FontFamily="Arial" Foreground="#FF536AA0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Oznaka" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Naziv"  Width="*" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="Sprat" Width="*" Binding="{Binding Floor}"/>
-                <DataGridTextColumn Header="Zauzetost" Width="*" Binding="{Binding IsAvaliable}"/>
-                <DataGridTextColumn Header="Tip" Width="*" Binding="{Binding Type}"/>
+                <DataGridCheckBoxColumn Header="Slobodna" Width="*" Binding="{Binding IsAvaliable}"/>
+                <DataGridTextColumn Header="Tip" Width="1.3*" Binding="{Binding Type}"/>
             </DataGrid.Columns>
         </DataGrid>
 
@@ -28,15 +29,17 @@
                   d:LayoutOverrides="VerticalAlignment"/>
 
 
-        <Button x:Name="edit" Content="Izmeni" Height="28.8" 
-                  Margin="217.6,33.26,0,0" VerticalAlignment="Top" Background="#FFD2F4EE" 
-                  Foreground="#FF1E49D9" Click="editRoom" d:LayoutOverrides="VerticalAlignment" HorizontalAlignment="Left" Width="79.6"/>
+        <Button x:Name="edit" Content="Izmeni" Height="28.8"  Width="84" HorizontalAlignment="Left"
+                  Margin="278.4,33.26,0,0" VerticalAlignment="Top" Background="#FFD2F4EE" 
+                  Foreground="#FF1E49D9" Click="editRoom" d:LayoutOverrides="VerticalAlignment"/>
 
 
         <Button x:Name="delete" Content="Izbriši" Height="28.8" 
-                  Margin="0,33.26,216.4,0" VerticalAlignment="Top" Background="#FFD2F4EE" 
+                  Margin="0,33.26,80.4,0" VerticalAlignment="Top" Background="#FFD2F4EE" 
                   Foreground="#FF1E49D9" Click="deleteRoom" d:LayoutOverrides="HorizontalAlignment, 
                   VerticalAlignment" HorizontalAlignment="Right" Width="79"/>
 
+
     </Grid>
+
 </Window>

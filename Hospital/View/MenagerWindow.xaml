@@ -15,17 +15,17 @@
 
         <Label FontSize="36" FontWeight="Bold" Foreground="#FF4A83CB" Background="White" Margin="25.6,-8.8,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1">ZDRAVO</Label>
 
-        <Button x:Name="rooms" Content="Sale" HorizontalAlignment="Left" Height="61.6" 
+        <Button x:Name="rooms" Content="Sale" HorizontalAlignment="Left" Height="61.6" Width="141.4"
                   Margin="83.6,113.867,0,0" VerticalAlignment="Top" 
-                  Width="139.263" Background="#FFD2F4EE" Foreground="#FF1E49D9" Click="getRooms" Grid.Row="1"/>
+                   Background="#FFD2F4EE" Foreground="#FF1E49D9" Click="getRooms" Grid.Row="1"/>
 
-        <Button x:Name="employees" Content="Zaposleni" Height="61.6" 
+        <Button x:Name="employees" Content="Zaposleni" Height="61.6" Width="141.4"
                   Margin="312.4,113.867,314.2,0" VerticalAlignment="Top" Background="#FFD2F4EE" 
                   Foreground="#FF1E49D9" Click="getEmployees" Grid.Row="1"/>
 
-        <Button x:Name="inventory" Content="Inventar" Height="61.6" 
+        <Button x:Name="inventory" Content="Inventar" Height="61.6" Width="141.4"
                   Margin="0,113.867,93.4,0" VerticalAlignment="Top" Background="#FFD2F4EE" 
-                  Foreground="#FF1E49D9" Click="getInventory" HorizontalAlignment="Right" Width="141.4" Grid.Row="1"/>
+                  Foreground="#FF1E49D9" Click="getInventory" HorizontalAlignment="Right" Grid.Row="1"/>
 
     </Grid>
 </Window>
