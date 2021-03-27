@@ -25,14 +25,19 @@ namespace Hospital.View
             set;
         }
 
+        RoomStorage rs = new RoomStorage();
+
         public RoomsWindow()
         {
             InitializeComponent();
             this.DataContext = this;
-            Rooms = new ObservableCollection<Room>();
-            
+
+            // Rooms = new ObservableCollection<Room>();
+          //  Rooms = RoomStorage.rooms;
+            RoomStorage rs = new RoomStorage();
+            Rooms = rs.GetAll();
           
-            Rooms.Add(new Room { Id = 1, Name = "Sala 1", Floor = 2, IsAvaliable = false, Type = (RoomType)Enum.Parse(typeof(RoomType), "SOBA_ZA_ODMOR") });
+           // Rooms.Add(new Room { Id = 1, Name = "Sala 1", Floor = 2, IsAvaliable = false, Type = (RoomType)Enum.Parse(typeof(RoomType), "SOBA_ZA_ODMOR") });
            
         }
 
@@ -75,7 +80,8 @@ namespace Hospital.View
             {
                 if (selectedItem != null)
                 {
-                    Rooms.Remove(selectedItem);
+                    // Rooms.Remove(selectedItem);
+                    rs.Delete(selectedItem.Id);
                 }
             }
         }

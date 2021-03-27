@@ -1,31 +1,80 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Hospital
 {
-   public class RoomStorage
+    public class RoomStorage
    {
-      public List<Room> GetAll()
+        public RoomStorage()
+        {
+            this.fileName = "rooms.json";
+        }
+
+        public ObservableCollection<Room> GetAll()
       {
-         throw new NotImplementedException();
+        
+            using (StreamReader sr = File.OpenText(@"..\\..\\Files\\" + fileName))
+            {
+                //JsonSerializer serializer = new JsonSerializer();
+                // rooms = (ObservableCollection<Room>)serializer.Deserialize(file, typeof(ObservableCollection<Room>));
+                rooms = JsonConvert.DeserializeObject<ObservableCollection<Room>>(sr.ReadToEnd());
+            }
+
+            return rooms;
       }
       
       public void Save(Room parameter1)
       {
-         throw new NotImplementedException();
-      }
+
+          //  rooms = GetAll();
+            rooms.Add(parameter1);
+
+            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, rooms);
+            }
+          
+        }
       
       public Boolean Delete(int id)
       {
-         throw new NotImplementedException();
-      }
+          //  rooms = GetAll();
+
+            foreach (Room r in rooms)
+            {
+                if (r.Id == id)
+                {
+                    rooms.Remove(r);
+                    using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
+                    {
+                        JsonSerializer serializer = new JsonSerializer();
+                        serializer.Serialize(file, rooms);
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
       
       public Room GetOne(int id)
       {
-         throw new NotImplementedException();
+         foreach(Room r in rooms)
+            {
+                if(r.Id == id)
+                {
+                    return r;
+                }
+            }
+            return null;
       }
       
-      public String fileName;
+        public static ObservableCollection<Room> rooms = new ObservableCollection<Room>();
+        public String fileName;
    
    }
 }

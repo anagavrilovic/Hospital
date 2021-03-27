@@ -1,6 +1,9 @@
 ﻿using Hospital.View;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,6 +49,15 @@ namespace Hospital
         private void getPatient(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        void Window_Closing(object sender, CancelEventArgs e)
+        {
+            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + "rooms.json"))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, RoomStorage.rooms);
+            }
         }
     }
 }
