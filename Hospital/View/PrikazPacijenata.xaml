@@ -7,6 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="#FFDAEFF3">
+    <UserControl.Resources>
+        <Style x:Key="CenterGridHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -18,9 +23,19 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Button Grid.Column="0" Grid.Row="0" Content="Kreiraj karton" Margin="60,10" FontSize="16" Background="#FF78A5AD" Foreground="White" Click="KreirajKarton"/>
-        <Button Grid.Column="1" Grid.Row="0" Content="Izmeni karton" Margin="60,10" FontSize="16" Background="#FF78A5AD" Foreground="White" />
-        <Button Grid.Column="2" Grid.Row="0" Content="Izbriši karton" Margin="60,10" FontSize="16" Background="#FF78A5AD" Foreground="White"/>
+        <Button Grid.Column="0" Grid.Row="0" Content="Kreiraj karton" Margin="60,15,60,5" FontSize="16" Background="#FF78A5AD" Foreground="White" Click="KreirajKarton"/>
+        <Button Grid.Column="1" Grid.Row="0" Content="Izmeni karton" Margin="60,15,60,5" FontSize="16" Background="#FF78A5AD" Foreground="White" Click="IzmeniKarton"/>
+        <Button Grid.Column="2" Grid.Row="0" Content="Izbriši karton" Margin="60,15,60,5" FontSize="16" Background="#FF78A5AD" Foreground="White" Click="IzbrisiKarton"/>
 
+        <DataGrid x:Name="PacijentiTable" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" 
+                  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="50,23,50,50" CanUserResizeColumns="True"
+                  CanUserSortColumns="True" ItemsSource="{Binding Pacijenti}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Ime" Width="0.25*" Binding="{Binding Patient.FirstName}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Prezime" Width="0.25*" Binding="{Binding Patient.LastName}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="JMBG" Width="0.25*" Binding="{Binding Patient.PersonalID}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Broj zdravstvenog kartona" Width="0.25*" Binding="{Binding Patient.PersonalID}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

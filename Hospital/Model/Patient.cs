@@ -1,19 +1,33 @@
 using System;
+using System.Collections.Generic;
 
 namespace Hospital
 {
    public class Patient : User
    {
-      public Boolean isGuest;
-      
-      public System.Collections.Generic.List<Appointment> appointment;
-      
-      public System.Collections.Generic.List<Appointment> Appointment
+      private Boolean isGuest;
+      private List<Appointment> appointment;
+        
+        public Patient()
+        {
+            appointment = new List<Appointment>();
+        }
+
+      public Boolean IsGuest
+      {
+            get => isGuest;
+            set
+            {
+                isGuest = value;
+            }
+      }
+    
+      public List<Appointment> Appointment
       {
          get
          {
             if (appointment == null)
-               appointment = new System.Collections.Generic.List<Appointment>();
+               appointment = new List<Appointment>();
             return appointment;
          }
          set
@@ -33,7 +47,7 @@ namespace Hospital
          if (newAppointment == null)
             return;
          if (this.appointment == null)
-            this.appointment = new System.Collections.Generic.List<Appointment>();
+            this.appointment = new List<Appointment>();
          if (!this.appointment.Contains(newAppointment))
          {
             this.appointment.Add(newAppointment);

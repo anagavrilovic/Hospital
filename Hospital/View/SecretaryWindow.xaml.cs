@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,9 @@ namespace Hospital.View
     /// </summary>
     public partial class SecretaryWindow : Window
     {
+        private ObservableCollection<MedicalRecord> _pacijenti = new ObservableCollection<MedicalRecord>();
+        public ObservableCollection<MedicalRecord> Pacijenti { get => _pacijenti; set => _pacijenti = value; }
+
         public SecretaryWindow()
         {
             InitializeComponent();
@@ -26,7 +30,13 @@ namespace Hospital.View
 
         private void PrikazPacijenata(object sender, RoutedEventArgs e)
         {
-            this.Content = new PrikazPacijenata();
+            Content = new PrikazPacijenata(Pacijenti);
+        }
+
+        private void KreirajKarton(object sender, RoutedEventArgs e)
+        {
+            var kk = new KreiranjeKartona(Pacijenti);
+            kk.Show();
         }
     }
 }

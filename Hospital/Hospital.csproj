@@ -56,6 +56,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\Genders.cs" />
+    <Compile Include="View\IzmenaKartona.xaml.cs">
+      <DependentUpon>IzmenaKartona.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\KreiranjeKartona.xaml.cs">
       <DependentUpon>KreiranjeKartona.xaml</DependentUpon>
     </Compile>
@@ -77,6 +80,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\IzmenaKartona.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\KreiranjeKartona.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

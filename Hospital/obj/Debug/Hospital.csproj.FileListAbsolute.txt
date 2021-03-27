@@ -19,3 +19,5 @@ D:\Ana\FTN\SIMS\Projekat\SIMS_grupa3_tim10\Hospital\obj\Debug\View\KreiranjeKart
 D:\Ana\FTN\SIMS\Projekat\SIMS_grupa3_tim10\Hospital\obj\Debug\View\PrikazPacijenata.g.cs
 D:\Ana\FTN\SIMS\Projekat\SIMS_grupa3_tim10\Hospital\obj\Debug\View\KreiranjeKartona.baml
 D:\Ana\FTN\SIMS\Projekat\SIMS_grupa3_tim10\Hospital\obj\Debug\View\PrikazPacijenata.baml
+D:\Ana\FTN\SIMS\Projekat\SIMS_grupa3_tim10\Hospital\obj\Debug\View\IzmenaKartona.g.cs
+D:\Ana\FTN\SIMS\Projekat\SIMS_grupa3_tim10\Hospital\obj\Debug\View\IzmenaKartona.baml

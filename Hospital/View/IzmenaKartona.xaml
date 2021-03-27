@@ -1,12 +1,11 @@
-﻿<Window x:Class="Hospital.View.KreiranjeKartona"
+﻿<Window x:Class="Hospital.View.IzmenaKartona"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-        Title="KreiranjeKartona" Height="450" Width="800"
-        Background="#FFDAEBEE">
+        Title="IzmenaKartona" Height="450" Width="800"    Background="#FFDAEBEE">
     <Window.Resources>
         <Style x:Key="cbTB" TargetType="{x:Type Control}">
             <Style.Triggers>
@@ -73,8 +72,8 @@
         <TextBlock Text="Korisničko ime:"              Grid.Row="8" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
         <TextBlock Text="Lozinka:"                     Grid.Row="9" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
 
-        <Button x:Name="btnPotvrdi" Grid.Row="10" Grid.Column="1" Content="Potvrdi" Width="80" Height="25" HorizontalAlignment="Right" Margin="0,0,20,0" Background="#FF78A5AD" Foreground="White" FontFamily="Segoe UI Symbol" FontSize="14" Click="BtnPotvrdi"/>
-        <Button x:Name="btnOduatani" Grid.Row="10" Grid.Column="2" Content="Odustani" Width="80" Height="25" HorizontalAlignment="Left" Margin="20,0,0,0" Background="White" Foreground="#FF67898E" FontFamily="Segoe UI Symbol" FontSize="14" Click="BtnOdustani"/>
+        <Button x:Name="btnPotvrdi" Grid.Row="10" Grid.Column="1" Content="Potvrdi" Width="80" Height="25" HorizontalAlignment="Right" Margin="0,0,20,0" Background="#FF78A5AD" Foreground="White" FontFamily="Segoe UI Symbol" FontSize="14" Click="BtnPotvrdi" />
+        <Button x:Name="btnOduatani" Grid.Row="10" Grid.Column="2" Content="Odustani" Width="80" Height="25" HorizontalAlignment="Left" Margin="20,0,0,0" Background="White" Foreground="#FF67898E" FontFamily="Segoe UI Symbol" FontSize="14" Click="BtnOdustani" />
 
         <TextBox x:Name="ImeText"       Grid.Row="1" Grid.Column="1" BorderThickness="1" Margin="3" />
         <TextBox x:Name="RoditeljText"  Grid.Row="2" Grid.Column="1" BorderThickness="1" Margin="3" Style="{StaticResource cbTB}"/>

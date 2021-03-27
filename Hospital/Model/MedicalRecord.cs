@@ -4,28 +4,81 @@
 // Purpose: Definition of Class MedicalRecord
 
 using System;
+using System.Collections.Generic;
 
 namespace Hospital
 {
     public class MedicalRecord
     {
-        public String healthCardNumber;
-        public String parentName;
-        public Boolean isInsured;
-        public int medicalRecordID;
+        private String healthCardNumber;
+        private String parentName;
+        private Boolean isInsured;
+        private int medicalRecordID;
+        private Patient patient = new Patient();
 
-        public System.Collections.Generic.List<Examination> examination;
+        private List<Examination> examination;
+
+        public MedicalRecord()
+        {
+            Patient = new Patient();
+            examination = new List<Examination>();
+        }
+
+        public Patient Patient
+        {
+            get => patient;
+            set
+            {
+                patient = value;
+            }
+        }
+
+        public String HealthCardNumber
+        {
+            get => healthCardNumber;
+            set
+            {
+                healthCardNumber = value;
+            }
+        }
+
+        public String ParentName
+        {
+            get => parentName;
+            set
+            {
+                parentName = value;
+            }
+        }
+
+        public Boolean IsInsured
+        {
+            get => isInsured;
+            set
+            {
+                isInsured = value;
+            }
+        }
+
+        public int MedicalRecordID
+        {
+            get => medicalRecordID;
+            set
+            {
+                medicalRecordID = value;
+            }
+        }
 
         /// <summary>
         /// Property for collection of Examination
         /// </summary>
         /// <pdGenerated>Default opposite class collection property</pdGenerated>
-        public System.Collections.Generic.List<Examination> Examination
+        public List<Examination> Examination
         {
             get
             {
                 if (examination == null)
-                    examination = new System.Collections.Generic.List<Examination>();
+                    examination = new List<Examination>();
                 return examination;
             }
             set
@@ -48,7 +101,7 @@ namespace Hospital
             if (newExamination == null)
                 return;
             if (this.examination == null)
-                this.examination = new System.Collections.Generic.List<Examination>();
+                this.examination = new List<Examination>();
             if (!this.examination.Contains(newExamination))
             {
                 this.examination.Add(newExamination);
@@ -89,6 +142,7 @@ namespace Hospital
                 tmpExamination.Clear();
             }
         }
+
 
     }
 }

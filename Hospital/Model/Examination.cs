@@ -14,6 +14,11 @@ namespace Hospital
 
         public MedicalRecord medicalRecord;
 
+        public Examination()
+        {
+            medicalRecord = new MedicalRecord();
+        }
+
         /// <summary>
         /// Property for MedicalRecord
         /// </summary>
