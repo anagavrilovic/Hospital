@@ -5,8 +5,46 @@ namespace Hospital
    public class Appointment
    {
       public DateTime dateTime;
+
+      public DateTime DateTime
+        {
+            get
+            {
+                return dateTime;
+            }
+            set
+            {
+                dateTime = value;
+            }
+        }
+          
       public double durationInHours = 0.5;
+        
+        public double DurationInHours
+        {
+            get
+            {
+                return durationInHours;
+            }
+            set
+            {
+                durationInHours = value;
+            }
+        }
+
       public AppointmentType type;
+
+        public AppointmentType Type
+        {
+            get
+            {
+                return type;
+            }
+            set
+            {
+                type = value;
+            }
+        }
       
       public Patient patient;
       

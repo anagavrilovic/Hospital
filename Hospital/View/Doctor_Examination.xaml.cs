@@ -17,6 +17,8 @@ namespace Hospital.View
     
     public partial class Doctor_Examination : Window
     {
+        private string diagnosis_text = "";
+
         public Doctor_Examination()
         {
             InitializeComponent();
@@ -24,7 +26,7 @@ namespace Hospital.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Diagnosis dijagnoza = new Diagnosis();
+            Diagnosis dijagnoza =new Diagnosis();
             dijagnoza.Owner = this;
             dijagnoza.ShowDialog();
         }
@@ -34,6 +36,12 @@ namespace Hospital.View
             Anamnesis anamneza = new Anamnesis();
             anamneza.Owner = this;
             anamneza.ShowDialog();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            MakeApointment apointment = new MakeApointment();
+            apointment.Show();
         }
     }
 }

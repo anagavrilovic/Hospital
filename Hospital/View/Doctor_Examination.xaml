@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-        Title="Doctor_Examination" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Doctor_Examination" Height="600" Width="800" WindowStartupLocation="CenterScreen">
     <DockPanel>
         <DockPanel DockPanel.Dock="Top">
             <StackPanel Orientation="Horizontal">
@@ -36,10 +36,10 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0" Grid.Row="0" Content="Anamneza" Height="94" Margin="99,15,101.8,14.2" Click="Button_Click_1"/>
-                <Button Grid.Column="0" Grid.Row="1" Content="Dijagnostika" Height="94" Margin="99,15,101.8,14.2" Click="Button_Click"/>
+                <Button x:Name="dijagnozaDijalog"  Grid.Column="0" Grid.Row="1" Content="Dijagnostika" Height="94" Margin="99,15,101.8,14.2" Click="Button_Click"/>
                 <Button Grid.Column="0" Grid.Row="2" Content="Medicinski karton" Height="94" Margin="99,15,101.8,14.2"/>
-                <Button Grid.Column="1" Grid.Row="0" Content="Zakazi pregled" Height="94" Margin="99,15,101.8,14.2"/>
-                <Button Grid.Column="1" Grid.Row="1" Content="Zakazi operaciju" Height="94" Margin="99,15,101.8,14.2"/>
+                <Button Grid.Column="1" Grid.Row="0" Content="Termini" Height="94" Margin="99,15,101.8,14.2" Click="Button_Click_2"/>
+                <Button Grid.Column="1" Grid.Row="1" Content="Modifikacija alergena" Height="94" Margin="99,15,101.8,14.2"/>
                 <Button Grid.Column="1" Grid.Row="2" Content="Terapija" Height="94" Margin="99,15,101.8,14.2"/>
             </Grid>
 

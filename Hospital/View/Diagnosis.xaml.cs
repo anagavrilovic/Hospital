@@ -19,6 +19,7 @@ namespace Hospital.View
 
     public partial class Diagnosis : Window, INotifyPropertyChanged
     {
+
         private string _test1;
 
         public event PropertyChangedEventHandler PropertyChanged;
