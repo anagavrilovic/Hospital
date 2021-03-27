@@ -75,20 +75,20 @@
         <Button x:Name="btnPotvrdi" Grid.Row="10" Grid.Column="1" Content="Potvrdi" Width="80" Height="25" HorizontalAlignment="Right" Margin="0,0,20,0" Background="#FF78A5AD" Foreground="White" FontFamily="Segoe UI Symbol" FontSize="14" Click="BtnPotvrdi"/>
         <Button x:Name="btnOduatani" Grid.Row="10" Grid.Column="2" Content="Odustani" Width="80" Height="25" HorizontalAlignment="Left" Margin="20,0,0,0" Background="White" Foreground="#FF67898E" FontFamily="Segoe UI Symbol" FontSize="14" Click="BtnOdustani"/>
 
-        <TextBox x:Name="ImeText"       Grid.Row="1" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Patient.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox x:Name="RoditeljText"  Grid.Row="2" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.ParentName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
-        <TextBox x:Name="PrezimeText"   Grid.Row="3" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Patient.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <DatePicker x:Name="Datum"      Grid.Row="4" Grid.Column="1" Background="White" Margin="3" Text="{Binding Path=Patient.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FirstDayOfWeek="Monday"/>
-        <TextBox x:Name="AdresaText"    Grid.Row="5" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Patient.Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
-        <TextBox x:Name="MestoText"     Grid.Row="6" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Patient.City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
-        <TextBox x:Name="OpstinaText"   Grid.Row="7" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Patient.Township, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
-        <TextBox x:Name="DrzavaText"    Grid.Row="8" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Patient.Country, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
-        <TextBox x:Name="KnjizicaText"  Grid.Row="9" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.HealthCardNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
+        <TextBox x:Name="ImeText"       Grid.Row="1" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.FirstName, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
+        <TextBox x:Name="RoditeljText"  Grid.Row="2" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.ParentName, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}"/>
+        <TextBox x:Name="PrezimeText"   Grid.Row="3" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.LastName, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+        <DatePicker x:Name="Datum"      Grid.Row="4" Grid.Column="1" Background="White" Margin="3" Text="{Binding Path=Record.Patient.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=Explicit}" FirstDayOfWeek="Monday"/>
+        <TextBox x:Name="AdresaText"    Grid.Row="5" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.Address, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}"/>
+        <TextBox x:Name="MestoText"     Grid.Row="6" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.City, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}"/>
+        <TextBox x:Name="OpstinaText"   Grid.Row="7" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.Township, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}"/>
+        <TextBox x:Name="DrzavaText"    Grid.Row="8" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.Country, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}"/>
+        <TextBox x:Name="KnjizicaText"  Grid.Row="9" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.HealthCardNumber, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}"/>
 
-        <TextBox x:Name="LicnaText"     Grid.Row="1" Grid.Column="3" BorderThickness="1" Margin="3" Text="{Binding Path=Patient.CardID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox x:Name="JMBGText"      Grid.Row="2" Grid.Column="3" BorderThickness="1" Margin="3" Text="{Binding Path=Patient.PersonalID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox x:Name="TelefonText"   Grid.Row="3" Grid.Column="3" BorderThickness="1" Margin="3"  Text="{Binding Path=Patient.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
-        <TextBox x:Name="EmailText"     Grid.Row="4" Grid.Column="3" BorderThickness="1" Margin="3"  Text="{Binding Path=Patient.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
+        <TextBox x:Name="LicnaText"     Grid.Row="1" Grid.Column="3" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.CardID, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+        <TextBox x:Name="JMBGText"      Grid.Row="2" Grid.Column="3" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.PersonalID, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
+        <TextBox x:Name="TelefonText"   Grid.Row="3" Grid.Column="3" BorderThickness="1" Margin="3"  Text="{Binding Path=Record.Patient.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}"/>
+        <TextBox x:Name="EmailText"     Grid.Row="4" Grid.Column="3" BorderThickness="1" Margin="3"  Text="{Binding Path=Record.Patient.Email, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}"/>
         <ComboBox x:Name="BracnoStanje" Grid.Row="5" Grid.Column="3" BorderThickness="1" Margin="3" Style="{StaticResource cbTB}">
             <ComboBoxItem IsSelected="True">neoženjen - neudata</ComboBoxItem>
             <ComboBoxItem>oženjen - udata</ComboBoxItem>
@@ -104,7 +104,7 @@
             <RadioButton x:Name="DaButton" Content="DA" Margin="35,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF67898E" Style="{StaticResource cbTB}"/>
             <RadioButton x:Name="NeButton" Content="NE" Margin="15,0,35,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF67898E" Style="{StaticResource cbTB}"/>
         </StackPanel>
-        <TextBox x:Name="UsernameText"      Grid.Row="8" Grid.Column="3" BorderThickness="1" Margin="3"  Text="{Binding Path=Patient.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
+        <TextBox x:Name="UsernameText"      Grid.Row="8" Grid.Column="3" BorderThickness="1" Margin="3"  Text="{Binding Path=Record.Patient.Username, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}"/>
         <PasswordBox x:Name="PasswordText"  Grid.Row="9" Grid.Column="3" BorderThickness="1" Margin="3"  />
 
         <Grid Grid.Row="0" Grid.Column="3" Margin="0">
@@ -117,11 +117,11 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="Br. kartona:" VerticalAlignment="Center" Margin="0,0,5,0" FontFamily="Segoe UI Symbol" FontSize="11" Foreground="#FF688D9E" HorizontalAlignment="Right" />
-            <TextBox x:Name="KartonText" Grid.Row="0" Grid.Column="1" Margin="2,28" Text="{Binding Path=Record.MedicalRecordID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox x:Name="KartonText" Grid.Row="0" Grid.Column="1" Margin="2,28" Text="{Binding Path=Record.MedicalRecordID, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
         </Grid>
 
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical">
-            <CheckBox x:Name="Gost" Content="GOSTUJUĆI PACIJENT" FontSize="12" FontFamily="Segoe UI Symbol" HorizontalAlignment="Left" Margin="40,35,0,0" Foreground="#FF67898E"/>
+            <CheckBox x:Name="Gost" Content="GOSTUJUĆI PACIJENT" FontSize="12" FontFamily="Segoe UI Symbol" HorizontalAlignment="Left" Margin="40,35,0,0" Foreground="#FF67898E" IsChecked="{Binding Path=Patient.IsGuest, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
         </StackPanel>
     </Grid>
 </Window>

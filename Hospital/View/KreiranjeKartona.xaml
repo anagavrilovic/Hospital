@@ -106,7 +106,7 @@
             <RadioButton x:Name="NeButton" Content="NE" Margin="15,0,35,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF67898E" Style="{StaticResource cbTB}"/>
         </StackPanel>
         <TextBox x:Name="UsernameText"      Grid.Row="8" Grid.Column="3" BorderThickness="1" Margin="3"  Text="{Binding Path=Patient.Username, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
-        <PasswordBox x:Name="PasswordText"  Grid.Row="9" Grid.Column="3" BorderThickness="1" Margin="3"  />
+        <PasswordBox x:Name="PasswordText"  Grid.Row="9" Grid.Column="3" BorderThickness="1" Margin="3" />
 
         <Grid Grid.Row="0" Grid.Column="3" Margin="0">
             <Grid.RowDefinitions>
@@ -122,7 +122,7 @@
         </Grid>
 
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical">
-            <CheckBox x:Name="Gost" Content="GOSTUJUĆI PACIJENT" FontSize="12" FontFamily="Segoe UI Symbol" HorizontalAlignment="Left" Margin="40,35,0,0" Foreground="#FF67898E"/>
+            <CheckBox x:Name="Gost" Content="GOSTUJUĆI PACIJENT" FontSize="12" FontFamily="Segoe UI Symbol" HorizontalAlignment="Left" Margin="40,35,0,0" Foreground="#FF67898E" IsChecked="{Binding Path=Patient.IsGuest, Mode=OneWayToSource}"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -59,7 +59,6 @@ namespace Hospital.View
 
         private void BtnPotvrdi(object sender, RoutedEventArgs e)
         {
-            
             Patient.Password = PasswordText.Password;
 
             switch (BracnoStanje.SelectedItem.ToString())
@@ -77,7 +76,11 @@ namespace Hospital.View
                 case "ostalo": Patient.Gender = Genders.other; break;
             }
 
-            if (!(bool)DaButton.IsChecked)
+            if ((bool)DaButton.IsChecked)
+            {
+                Record.IsInsured = true;
+            }
+            else
             {
                 Record.IsInsured = false;
             }
