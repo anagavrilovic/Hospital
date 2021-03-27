@@ -8,7 +8,6 @@ namespace Hospital
    public class MedicalRecordStorage
    {
       private String fileName;
-      //private ObservableCollection<MedicalRecord> Records { get; set; }
 
         public MedicalRecordStorage(String file = "medicalRecords.json")
         {
@@ -48,7 +47,7 @@ namespace Hospital
                 }
             }
             return false;
-      }
+      }*/
       
       public MedicalRecord GetOne(int id)
       {
@@ -62,7 +61,7 @@ namespace Hospital
             }
 
             return null;
-        }*/
+        }
 
         public void DoSerialization(ObservableCollection<MedicalRecord> mr)
         {

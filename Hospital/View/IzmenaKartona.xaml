@@ -50,7 +50,7 @@
             <ColumnDefinition Width="40"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="KREIRANJE KARTONA" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" FontSize="28" FontFamily="Segoe UI Semilight" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FF67898E" TextDecorations="Underline" Margin="0,0,0,10"/>
+        <TextBlock Text="IZMENA KARTONA" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" FontSize="28" FontFamily="Segoe UI Semilight" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FF67898E" TextDecorations="Underline" Margin="0,0,0,10"/>
 
         <TextBlock Text="Ime:"                  Grid.Row="1" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
         <TextBlock Text="Ime jednog roditelja:" Grid.Row="2" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E" />
