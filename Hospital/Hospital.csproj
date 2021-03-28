@@ -67,6 +67,15 @@
     <Compile Include="View\MenagerWindow.xaml.cs">
       <DependentUpon>MenagerWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PatientAppointmentList.xaml.cs">
+      <DependentUpon>PatientAppointmentList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientMain.xaml.cs">
+      <DependentUpon>PatientMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientMakeAnAppointment.xaml.cs">
+      <DependentUpon>PatientMakeAnAppointment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RoomsWindow.xaml.cs">
       <DependentUpon>RoomsWindow.xaml</DependentUpon>
     </Compile>
@@ -105,6 +114,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MenagerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientAppointmentList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientMakeAnAppointment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

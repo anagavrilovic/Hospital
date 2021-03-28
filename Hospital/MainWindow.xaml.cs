@@ -50,7 +50,8 @@ namespace Hospital
 
         private void PatientClick(object sender, RoutedEventArgs e)
         {
-
+            PatientMain patientMain = new PatientMain();
+            patientMain.Show();
         }
 
     }
