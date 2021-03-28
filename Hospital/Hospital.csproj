@@ -67,8 +67,33 @@
     <Compile Include="View\Doctor_Examination.xaml.cs">
       <DependentUpon>Doctor_Examination.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MakeApointment.xaml.cs">
-      <DependentUpon>MakeApointment.xaml</DependentUpon>
+	  <Compile Include="View\MakeApointment.xaml.cs">
+		  <DependentUpon>MakeApointment.xaml</DependentUpon>
+	  </Compile>
+    <Compile Include="View\AddRoom.xaml.cs">
+      <DependentUpon>AddRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditRoom.xaml.cs">
+      <DependentUpon>EditRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MenagerWindow.xaml.cs">
+      <DependentUpon>MenagerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RoomsWindow.xaml.cs">
+      <DependentUpon>RoomsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Genders.cs" />
+    <Compile Include="View\IzmenaKartona.xaml.cs">
+      <DependentUpon>IzmenaKartona.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KreiranjeKartona.xaml.cs">
+      <DependentUpon>KreiranjeKartona.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PrikazPacijenata.xaml.cs">
+      <DependentUpon>PrikazPacijenata.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SecretaryWindow.xaml.cs">
+      <DependentUpon>SecretaryWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -94,7 +119,39 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MakeApointment.xaml">
+	  <Page Include="View\MakeApointment.xaml">
+		  <SubType>Designer</SubType>
+		  <Generator>MSBuild:Compile</Generator>
+	  </Page>
+    <Page Include="View\AddRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MenagerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RoomsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\IzmenaKartona.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\KreiranjeKartona.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PrikazPacijenata.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SecretaryWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -136,6 +193,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Files\rooms.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -144,6 +202,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Icon\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

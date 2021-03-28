@@ -5,7 +5,6 @@ namespace Hospital
    public class Appointment
    {
       public DateTime dateTime;
-
       public DateTime DateTime
         {
             get
@@ -45,6 +44,7 @@ namespace Hospital
                 type = value;
             }
         }
+
       
       public Patient patient;
       
