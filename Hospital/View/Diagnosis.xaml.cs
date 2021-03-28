@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,8 +52,9 @@ namespace Hospital.View
         }
         public Diagnosis(String text)
         {
-            InitializeComponent();
             _test1 = text;
+            InitializeComponent();
+            this.DataContext = this;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -63,6 +66,11 @@ namespace Hospital.View
         {
             BindingExpression be = diagnosisBox.GetBindingExpression(TextBox.TextProperty);
             be.UpdateSource();
+            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\dijagnoza.json" ))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, _test1);
+            }
             Close();
         }
     }

@@ -1,0 +1,54 @@
+﻿<Window x:Class="Hospital.View.KreiranjeTermina"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.View"
+        mc:Ignorable="d"
+        Title="KreiranjeTermina" Height="450" Width="800">
+    <Grid Margin="76,0,75.6,0">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+            <TextBlock FontSize="18" Margin="50,20,0,0" Foreground="#FF67898E" Width="200">Pacijent</TextBlock>
+            <TextBox x:Name="pacijentBox" FontSize="18" Margin="20,0,0,0" Width="200" Height="30" BorderThickness="1"
+                     Text="{Binding Path=ImePrezimePacijent, Mode=OneWayToSource}"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
+            <TextBlock FontSize="18" Margin="50,20,0,0" Foreground="#FF67898E" Width="200">Doktor</TextBlock>
+            <ComboBox x:Name="doctorBox" FontSize="18" Margin="20,0,0,0" Width="200" Height="30" BorderThickness="1" Text="{Binding Path=ImePrezimeDoktor, Mode=TwoWay}">
+                <ComboBoxItem IsSelected="True"></ComboBoxItem>
+            </ComboBox>
+            <ComboBox x:Name="tipTermina" FontSize="18" Margin="20,0,0,0" Width="120" Height="30" BorderThickness="1">
+                <ComboBoxItem x:Name="pregled" IsSelected="True">Pregled</ComboBoxItem>
+                <ComboBoxItem x:Name="operacija">Operacija</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0">
+            <TextBlock FontSize="18" Margin="50,20,0,0" Foreground="#FF67898E" Width="200">Datum termina</TextBlock>
+            <DatePicker x:Name="Datum" Margin="20,0,0,0" Width="200" Height="30" Text="{Binding Path=Termin.DateTime, Mode=OneWayToSource}" FirstDayOfWeek="Monday"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
+            <TextBlock FontSize="18" Margin="50,20,0,0" Foreground="#FF67898E" Width="200">Trajanje termina</TextBlock>
+            <TextBox x:Name="trajanjeTermina" FontSize="18" Margin="20,0,0,0" Width="200" Height="30" BorderThickness="1" Text="{Binding Path=Termin.DurationInHours, Mode=OneWayToSource}" ></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0">
+            <TextBlock FontSize="18" Margin="50,20,0,0" Foreground="#FF67898E" Width="200">Sala</TextBlock>
+            <TextBox x:Name="sala" FontSize="18" Margin="20,0,0,0" Width="200" Height="30" BorderThickness="1" Text="{Binding Path=Termin.Room.Name, Mode=OneWayToSource}"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0">
+            <Button x:Name="save" Height="30" Width="100" FontSize="18" Margin="200,20,0,10" HorizontalAlignment="Center" Click="save_Click">Potvrdi</Button>
+            <Button x:Name="cancel" Width="100" Height="30" FontSize="18" Margin="40,20,0,10" HorizontalAlignment="Center" Click="cancel_Click">Odustani</Button>
+        </StackPanel>
+    </Grid>
+</Window>

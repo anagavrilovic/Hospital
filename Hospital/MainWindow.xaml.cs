@@ -41,6 +41,17 @@ namespace Hospital
         private void DoctorClick(object sender, RoutedEventArgs e)
         {
             Doctor_Examination de = new Doctor_Examination();
+            string text = "";
+            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\dijagnoza.json"))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, text);
+            }
+            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\anamneza.json"))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, text);
+            }
             de.Owner = Application.Current.MainWindow;
             de.Show();
         }

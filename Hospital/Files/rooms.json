@@ -1,1 +1,1 @@
-[{"Id":1,"Name":"Sala 1","Floor":1,"IsAvaliable":true,"Type":1},{"Id":2,"Name":"Sala 2","Floor":1,"IsAvaliable":true,"Type":2},{"Id":3,"Name":"Sala 3","Floor":2,"IsAvaliable":true,"Type":0},{"Id":4,"Name":"Sala 4 ","Floor":3,"IsAvaliable":true,"Type":0}]
+[{"Id":2,"Name":"Sala 2","Floor":1,"IsAvaliable":true,"Type":2},{"Id":3,"Name":"Sala 3","Floor":2,"IsAvaliable":true,"Type":0},{"Id":4,"Name":"Sala 4 ","Floor":3,"IsAvaliable":true,"Type":0}]

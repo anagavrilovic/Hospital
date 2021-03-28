@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +20,7 @@ namespace Hospital.View
     public partial class Doctor_Examination : Window
     {
         private string diagnosis_text = "";
-
+        private string anamneza_text = "";
         public Doctor_Examination()
         {
             InitializeComponent();
@@ -26,14 +28,24 @@ namespace Hospital.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Diagnosis dijagnoza =new Diagnosis(diagnosis_text);
+            using (StreamReader file = File.OpenText(@"..\\..\\Files\\dijagnoza.json"))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                diagnosis_text = (string)serializer.Deserialize(file, typeof(string));
+            }
+            Diagnosis dijagnoza = new Diagnosis(diagnosis_text);
             dijagnoza.Owner = this;
             dijagnoza.ShowDialog();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Anamnesis anamneza = new Anamnesis();
+            using (StreamReader file = File.OpenText(@"..\\..\\Files\\anamneza.json"))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                anamneza_text = (string)serializer.Deserialize(file, typeof(string));
+            }
+            Anamnesis anamneza = new Anamnesis(anamneza_text);
             anamneza.Owner = this;
             anamneza.ShowDialog();
         }

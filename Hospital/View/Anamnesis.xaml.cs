@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,9 +17,7 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for Anamnesis.xaml
-    /// </summary>
+
     public partial class Anamnesis : Window,INotifyPropertyChanged
     {
         private string _test1;
@@ -47,9 +47,11 @@ namespace Hospital.View
             }
         }
 
-        public Anamnesis()
+        public Anamnesis(string text)
         {
+            _test1 = text;
             InitializeComponent();
+            this.DataContext = this;
         }
 
 
@@ -57,6 +59,11 @@ namespace Hospital.View
         {
             BindingExpression be = anamnesisBox.GetBindingExpression(TextBox.TextProperty);
             be.UpdateSource();
+            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\anamneza.json"))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, _test1);
+            }
             Close();
         }
 

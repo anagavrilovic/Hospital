@@ -14,7 +14,7 @@
         </DockPanel>
         <DockPanel DockPanel.Dock="Top">
             <ScrollViewer CanContentScroll="True">
-                <TextBox Name="diagnosisBox" TextWrapping="Wrap" AcceptsReturn="True" FontSize="13" Text="{Binding Path=Test1,Mode=TwoWay,UpdateSourceTrigger=Explicit}"></TextBox>
+                <TextBox Name="diagnosisBox" TextWrapping="Wrap" AcceptsReturn="True" FontSize="13" Text="{Binding Path=Test1,Mode=TwoWay}"></TextBox>
             </ScrollViewer>
         </DockPanel>
     </DockPanel>
