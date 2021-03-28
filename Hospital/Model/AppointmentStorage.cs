@@ -42,15 +42,35 @@ namespace Hospital
             }
         }
 
-            public Boolean Delete(int id)
+            public Boolean Delete(String id)
       {
-         throw new NotImplementedException();
-      }
+            foreach (Appointment app1 in apps)
+            {
+                if (app1.IDAppointment == id)
+                {
+                    apps.Remove(app1);
+                    using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
+                    {
+                        JsonSerializer serializer = new JsonSerializer();
+                        serializer.Serialize(file, apps);
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
       
-      public Appointment GetOne(int id)
+      public Appointment GetOne(String id)
       {
-         throw new NotImplementedException();
-      }
+            foreach (Appointment app1 in apps)
+            {
+                if (app1.IDAppointment == id)
+                {
+                    return app1;
+                }
+            }
+            return null;
+        }
       
       public ObservableCollection<Appointment> GetByPatient(String id)
       {
@@ -78,10 +98,52 @@ namespace Hospital
       
       public ObservableCollection<Appointment> GetByDoctor(String id)
       {
-         throw new NotImplementedException();
-      }
+            ObservableCollection<Appointment> apps = GetAll();
+            ObservableCollection<Appointment> doctorApps = new ObservableCollection<Appointment>();
+            Boolean found = false;
+            foreach (Appointment app in apps)
+            {
+                if (app.IDDoctor.Equals(id))
+                {
+                    found = true;
+                    doctorApps.Add(app);
+                }
+            }
 
-   
+            if (found)
+            {
+                return doctorApps;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
+        public String GetNewID()
+        {
+            using (StreamReader sr = File.OpenText(@"..\\..\\Files\\" + fileName))
+            {
+                
+                apps = JsonConvert.DeserializeObject<ObservableCollection<Appointment>>(sr.ReadToEnd());
+            }
+
+            int retVal = 1;
+            if (apps.Count == 0)
+            {
+                return retVal.ToString();
+            }
+            foreach(Appointment app in apps)
+            {
+                int x = Int32.Parse(app.IDAppointment);
+                if (x >= retVal)
+                {
+                    retVal++;
+                }
+            }
+            return retVal.ToString();
+        }
 
         public String fileName;
         public static ObservableCollection<Appointment> apps = new ObservableCollection<Appointment>();

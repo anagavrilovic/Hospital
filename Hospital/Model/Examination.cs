@@ -1,7 +1,3 @@
-// File:    Examination.cs
-// Author:  ShowRunner
-// Created: Tuesday, March 23, 2021 10:16:39 PM
-// Purpose: Definition of Class Examination
 
 using System;
 
@@ -21,10 +17,6 @@ namespace Hospital
             medicalRecord = new MedicalRecord();
         }
 
-        /// <summary>
-        /// Property for MedicalRecord
-        /// </summary>
-        /// <pdGenerated>Default opposite class property</pdGenerated>
         public MedicalRecord MedicalRecord
         {
             get
@@ -54,4 +46,5 @@ namespace Hospital
 
 
     }
+
 }

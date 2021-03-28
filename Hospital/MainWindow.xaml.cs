@@ -1,7 +1,7 @@
 ﻿using Hospital.View;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -19,15 +19,18 @@ using System.Windows.Shapes;
 
 namespace Hospital
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    /// komentar
+
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Doctor_Examination examination = new Doctor_Examination();
+            examination.Show();
         }
 
         private void SecretaryClick(object sender, RoutedEventArgs e)
@@ -38,7 +41,9 @@ namespace Hospital
 
         private void DoctorClick(object sender, RoutedEventArgs e)
         {
-
+            Doctor_Examination de = new Doctor_Examination();
+            de.Owner = Application.Current.MainWindow;
+            de.Show();
         }
 
         private void ManagerClick(object sender, RoutedEventArgs e)
@@ -53,6 +58,5 @@ namespace Hospital
             PatientMain patientMain = new PatientMain();
             patientMain.Show();
         }
-
     }
 }

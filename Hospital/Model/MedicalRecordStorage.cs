@@ -7,18 +7,18 @@ using Newtonsoft.Json;
 
 namespace Hospital
 {
-   public class MedicalRecordStorage
-   {
-      private String fileName;
+    public class MedicalRecordStorage
+    {
+        private String fileName;
 
         public MedicalRecordStorage(String file = "medicalRecords.json")
         {
             this.fileName = file;
-            
+
         }
-      
-      public ObservableCollection<MedicalRecord> GetAll()
-      {
+
+        public ObservableCollection<MedicalRecord> GetAll()
+        {
             ObservableCollection<MedicalRecord> records;
             using (StreamReader file = File.OpenText(@"..\\..\\Files\\" + fileName))
             {
@@ -27,32 +27,32 @@ namespace Hospital
             }
 
             return records;
-      }
-      
-      public void Save(MedicalRecord parameter1)
-      {
+        }
+
+        public void Save(MedicalRecord parameter1)
+        {
             ObservableCollection<MedicalRecord> records = GetAll();
             records.Add(parameter1);
             DoSerialization(records);
-      }
-      
-      /*public Boolean Delete(int id)
-      {
-            ObservableCollection<MedicalRecord> records = GetAll();
-            foreach(MedicalRecord r in records)
-            {
-                if (r.MedicalRecordID.Equals(id))
-                {
-                    records.Remove(r);
-                    DoSerialization(records);
-                    return true;
-                }
-            }
-            return false;
-      }*/
-      
-      public MedicalRecord GetOne(int id)
-      {
+        }
+
+        /*public Boolean Delete(int id)
+        {
+              ObservableCollection<MedicalRecord> records = GetAll();
+              foreach(MedicalRecord r in records)
+              {
+                  if (r.MedicalRecordID.Equals(id))
+                  {
+                      records.Remove(r);
+                      DoSerialization(records);
+                      return true;
+                  }
+              }
+              return false;
+        }*/
+
+        public MedicalRecord GetOne(int id)
+        {
             ObservableCollection<MedicalRecord> records = GetAll();
             foreach (MedicalRecord r in records)
             {
@@ -73,6 +73,20 @@ namespace Hospital
                 serializer.Serialize(file, mr);
             }
         }
-   
-   }
+
+        public MedicalRecord GetByPatientID(string id)
+        {
+            ObservableCollection<MedicalRecord> records = GetAll();
+            foreach (MedicalRecord r in records)
+            {
+                if (r.Patient.PersonalID.Equals(id))
+                {
+                    return r;
+                }
+            }
+
+            return null;
+        }
+
+    }
 }

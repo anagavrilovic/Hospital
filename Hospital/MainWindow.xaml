@@ -5,11 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Background="#FFCCDDE8"
-        >
+        Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="110"/>
+            <RowDefinition Height="150"/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
@@ -18,11 +17,12 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Button Grid.Row="1" Grid.Column="0" Content="LEKAR" Margin="200,90,20,20" FontSize="20" Background="White" Foreground="#FF6E8FA5" Click="DoctorClick"/>
-        <Button Grid.Row="1" Grid.Column="1" Content="SEKRETAR" Margin="20,90,200,20" FontSize="20" Background="White" Foreground="#FF6E8FA5" Click="SecretaryClick"/>
-        <Button Grid.Row="2" Grid.Column="0" Content="UPRAVNIK" Margin="200,20,20,90" FontSize="20" Background="White" Foreground="#FF6E8FA5" Click="ManagerClick"/>
-        <Button Grid.Row="2" Grid.Column="1" Content="PACIJENT" Margin="20,20,200,90" FontSize="20" Background="White" Foreground="#FF6E8FA5" Click="PatientClick"/>
+        <Button Grid.Row="1" Grid.Column="0" Content="LEKAR" Margin="200,50,20,20" FontSize="20" Background="White" Foreground="#FF6E8FA5" Click="DoctorClick"/>
+        <Button Grid.Row="1" Grid.Column="1" Content="SEKRETAR" Margin="20,50,200,20" FontSize="20" Background="White" Foreground="#FF6E8FA5" Click="SecretaryClick"/>
+        <Button Grid.Row="2" Grid.Column="0" Content="UPRAVNIK" Margin="200,20,20,50" FontSize="20" Background="White" Foreground="#FF6E8FA5" Click="ManagerClick"/>
+        <Button Grid.Row="2" Grid.Column="1" Content="PACIJENT" Margin="20,20,200,50" FontSize="20" Background="White" Foreground="#FF6E8FA5" Click="PatientClick"/>
 
+        <Image Source="/Icon/logo.png" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0"/>
     </Grid>
 
 </Window>

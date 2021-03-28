@@ -90,15 +90,15 @@
         <TextBox x:Name="TelefonText"   Grid.Row="3" Grid.Column="3" BorderThickness="1" Margin="3"  Text="{Binding Path=Record.Patient.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}"/>
         <TextBox x:Name="EmailText"     Grid.Row="4" Grid.Column="3" BorderThickness="1" Margin="3"  Text="{Binding Path=Record.Patient.Email, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}"/>
         <ComboBox x:Name="BracnoStanje" Grid.Row="5" Grid.Column="3" BorderThickness="1" Margin="3" Style="{StaticResource cbTB}">
-            <ComboBoxItem IsSelected="True">neoženjen - neudata</ComboBoxItem>
-            <ComboBoxItem>oženjen - udata</ComboBoxItem>
-            <ComboBoxItem>udovac - udovica</ComboBoxItem>
-            <ComboBoxItem>razveden - razvedena</ComboBoxItem>
+            <ComboBoxItem x:Name="neozenjen" IsSelected="True">neoženjen - neudata</ComboBoxItem>
+            <ComboBoxItem x:Name="ozenjen">oženjen - udata</ComboBoxItem>
+            <ComboBoxItem x:Name="udovac">udovac - udovica</ComboBoxItem>
+            <ComboBoxItem x:Name="razveden">razveden - razvedena</ComboBoxItem>
         </ComboBox>
         <ComboBox x:Name="Pol" Grid.Row="6" Grid.Column="3" BorderThickness="1" Margin="3" Style="{StaticResource cbTB}">
-            <ComboBoxItem IsSelected="True">muški</ComboBoxItem>
-            <ComboBoxItem>ženski</ComboBoxItem>
-            <ComboBoxItem>ostalo</ComboBoxItem>
+            <ComboBoxItem x:Name="muski" IsSelected="True">muški</ComboBoxItem>
+            <ComboBoxItem x:Name="zenski">ženski</ComboBoxItem>
+            <ComboBoxItem x:Name="ostalo">ostalo</ComboBoxItem>
         </ComboBox>
         <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="3">
             <RadioButton x:Name="DaButton" Content="DA" Margin="35,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF67898E" Style="{StaticResource cbTB}"/>

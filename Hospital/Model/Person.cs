@@ -1,7 +1,3 @@
-// File:    Person.cs
-// Author:  Marija
-// Created: Monday, March 22, 2021 2:34:41 PM
-// Purpose: Definition of Class Person
 
 using System;
 using System.ComponentModel;
@@ -24,8 +20,8 @@ namespace Hospital
         private Genders gender;
         private string address;
 
-        public string FirstName 
-        { 
+        public string FirstName
+        {
             get => firstName;
             set
             {
@@ -87,9 +83,9 @@ namespace Hospital
                 OnPropertyChanged("City");
             }
         }
-        public DateTime DateOfBirth 
-        { 
-            get => dateOfBirth; 
+        public DateTime DateOfBirth
+        {
+            get => dateOfBirth;
             set
             {
                 dateOfBirth = value;
@@ -114,18 +110,18 @@ namespace Hospital
                 OnPropertyChanged("CardID");
             }
         }
-        public MaritalStatus MaritalStatus 
-        { 
-            get => maritalStatus; 
+        public MaritalStatus MaritalStatus
+        {
+            get => maritalStatus;
             set
             {
                 maritalStatus = value;
                 OnPropertyChanged("MaritalStatus");
             }
         }
-        public Genders Gender 
-        { 
-            get => gender; 
+        public Genders Gender
+        {
+            get => gender;
             set
             {
                 gender = value;

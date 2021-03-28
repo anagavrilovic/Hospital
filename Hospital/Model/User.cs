@@ -2,8 +2,8 @@ using System;
 
 namespace Hospital
 {
-   public class User : Person
-   {
+    public class User : Person
+    {
         public Boolean LogIn()
         {
             throw new NotImplementedException();

@@ -8,7 +8,8 @@
         Title="PatientMain" Height="450" Width="800">
     <Grid>
         <Button Content="Zakaži pregled" HorizontalAlignment="Left" Height="62" Margin="268,102,0,0" VerticalAlignment="Top" Width="214" Click="MakeAnAppointment"/>
-        <Button Content="Lista pregleda/operacija" HorizontalAlignment="Left" Height="56" Margin="268,260,0,0" VerticalAlignment="Top" Width="214" Click="AppointmentList"/>
+        <Button Content="Lista obavljenih pregleda/operacija" HorizontalAlignment="Left" Height="56" Margin="82,260,0,0" VerticalAlignment="Top" Width="214" Click="PassedAppointmentList"/>
+        <Button Content="Lista zakazanih pregleda/operacija" HorizontalAlignment="Left" Height="56" Margin="489,260,0,0" VerticalAlignment="Top" Width="214" Click="AppointmentList"/>
 
     </Grid>
 </Window>
