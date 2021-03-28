@@ -4,6 +4,6 @@
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-  
+
     </Application.Resources>
 </Application>

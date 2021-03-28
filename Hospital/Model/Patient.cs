@@ -1,24 +1,68 @@
 using System;
+using System.Collections.Generic;
 
 namespace Hospital
 {
-
-    public class Patient : User
-    {
-        public Boolean isGuest;
-
-        public System.Collections.Generic.List<Appointment> appointment;
-
-
-        public System.Collections.Generic.List<Appointment> Appointment
+   public class Patient : User
+   {
+      private Boolean isGuest;
+      private List<Appointment> appointment;
+        
+        public Patient()
         {
-            get
+            appointment = new List<Appointment>();
+        }
+
+      public Boolean IsGuest
+      {
+            get => isGuest;
+            set
+            {
+                isGuest = value;
+            }
+      }
+    
+      public List<Appointment> Appointment
+      {
+         get
+         {
+            if (appointment == null)
+               appointment = new List<Appointment>();
+            return appointment;
+         }
+         set
+         {
+            RemoveAllAppointment();
+            if (value != null)
             {
                 if (appointment == null)
                     appointment = new System.Collections.Generic.List<Appointment>();
                 return appointment;
             }
-            set
+         }
+      }
+      
+      
+      public void AddAppointment(Appointment newAppointment)
+      {
+         if (newAppointment == null)
+            return;
+         if (this.appointment == null)
+            this.appointment = new List<Appointment>();
+         if (!this.appointment.Contains(newAppointment))
+         {
+            this.appointment.Add(newAppointment);
+            newAppointment.Patient = this;
+         }
+      }
+      
+      
+      public void RemoveAppointment(Appointment oldAppointment)
+      {
+         if (oldAppointment == null)
+            return;
+         if (this.appointment != null)
+            if (this.appointment.Contains(oldAppointment))
             {
                 RemoveAllAppointment();
                 if (value != null)

@@ -1,3 +1,8 @@
+// File:    Examination.cs
+// Author:  ShowRunner
+// Created: Tuesday, March 23, 2021 10:16:39 PM
+// Purpose: Definition of Class Examination
+
 using System;
 
 namespace Hospital
@@ -10,6 +15,11 @@ namespace Hospital
 
         public Therapy therapy;
         public MedicalRecord medicalRecord;
+
+        public Examination()
+        {
+            medicalRecord = new MedicalRecord();
+        }
 
         /// <summary>
         /// Property for MedicalRecord
@@ -39,7 +49,9 @@ namespace Hospital
                 }
             }
         }
+
         public Appointment appointment;
+
 
     }
 }

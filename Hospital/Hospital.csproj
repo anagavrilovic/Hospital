@@ -70,6 +70,20 @@
     <Compile Include="View\RoomsWindow.xaml.cs">
       <DependentUpon>RoomsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Genders.cs" />
+    <Compile Include="View\IzmenaKartona.xaml.cs">
+      <DependentUpon>IzmenaKartona.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KreiranjeKartona.xaml.cs">
+      <DependentUpon>KreiranjeKartona.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ObservableObject.cs" />
+    <Compile Include="View\PrikazPacijenata.xaml.cs">
+      <DependentUpon>PrikazPacijenata.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SecretaryWindow.xaml.cs">
+      <DependentUpon>SecretaryWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -95,6 +109,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RoomsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\IzmenaKartona.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\KreiranjeKartona.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PrikazPacijenata.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SecretaryWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

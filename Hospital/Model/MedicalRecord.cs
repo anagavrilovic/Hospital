@@ -1,24 +1,91 @@
 
+
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Hospital
 {
-
-    public class MedicalRecord
+    public class MedicalRecord : INotifyPropertyChanged
     {
-        public String healthCardNumber;
-        public String parentName;
-        public Boolean isInsured;
-        public int medicalRecordID;
+        private String healthCardNumber;
+        private String parentName;
+        private Boolean isInsured;
+        private int medicalRecordID;
+        private Patient patient = new Patient();
 
-        public System.Collections.Generic.List<Examination> examination;
+        private List<Examination> examination;
 
-        public System.Collections.Generic.List<Examination> Examination
+        public MedicalRecord()
+        {
+            Patient = new Patient();
+            examination = new List<Examination>();
+        }
+
+        public Patient Patient
+        {
+            get => patient;
+            set
+            {
+                patient = value;
+            }
+        }
+
+        public String HealthCardNumber
+        {
+            get => healthCardNumber;
+            set
+            {
+                healthCardNumber = value;
+                OnPropertyChanged("HealthCardNumber");
+            }
+        }
+
+        public String ParentName
+        {
+            get => parentName;
+            set
+            {
+                parentName = value;
+                OnPropertyChanged("ParentName");
+            }
+        }
+
+        public Boolean IsInsured
+        {
+            get => isInsured;
+            set
+            {
+                isInsured = value;
+                OnPropertyChanged("isInsured");
+            }
+        }
+
+        public int MedicalRecordID
+        {
+            get => medicalRecordID;
+            set
+            {
+                medicalRecordID = value;
+                OnPropertyChanged("MedicalRecordID");
+            }
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
+
+        /// <summary>
+        /// Property for collection of Examination
+        /// </summary>
+        /// <pdGenerated>Default opposite class collection property</pdGenerated>
+        public List<Examination> Examination
         {
             get
             {
                 if (examination == null)
-                    examination = new System.Collections.Generic.List<Examination>();
+                    examination = new List<Examination>();
                 return examination;
             }
             set
@@ -32,13 +99,16 @@ namespace Hospital
             }
         }
 
-
+        /// <summary>
+        /// Add a new Examination in the collection
+        /// </summary>
+        /// <pdGenerated>Default Add</pdGenerated>
         public void AddExamination(Examination newExamination)
         {
             if (newExamination == null)
                 return;
             if (this.examination == null)
-                this.examination = new System.Collections.Generic.List<Examination>();
+                this.examination = new List<Examination>();
             if (!this.examination.Contains(newExamination))
             {
                 this.examination.Add(newExamination);
@@ -46,6 +116,10 @@ namespace Hospital
             }
         }
 
+        /// <summary>
+        /// Remove an existing Examination from the collection
+        /// </summary>
+        /// <pdGenerated>Default Remove</pdGenerated>
 
         public void RemoveExamination(Examination oldExamination)
         {
@@ -73,7 +147,16 @@ namespace Hospital
                 tmpExamination.Clear();
             }
         }
-        public Patient patient;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
 
     }
 }

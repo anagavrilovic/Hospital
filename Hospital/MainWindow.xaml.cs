@@ -29,13 +29,28 @@ namespace Hospital
             InitializeComponent();
         }
 
-        private void getMenager(object sender, RoutedEventArgs e)
+        private void SecretaryClick(object sender, RoutedEventArgs e)
         {
-            MenagerWindow mw = new MenagerWindow();
+            var s = new SecretaryWindow();
+            s.Show();
+        }
+
+        private void DoctorClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ManagerClick(object sender, RoutedEventArgs e)
+        {
+			MenagerWindow mw = new MenagerWindow();
             mw.Owner = Application.Current.MainWindow;
             mw.Show();
         }
- 
+
+        private void PatientClick(object sender, RoutedEventArgs e)
+        {
+
+        }
 
     }
 }
