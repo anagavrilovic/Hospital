@@ -55,19 +55,19 @@ namespace Hospital.View
         {
             Record.Patient.Password = PasswordText.Password;
 
-            switch (BracnoStanje.SelectedItem.ToString())
+            switch (BracnoStanje.SelectedIndex)
             {
-                case "neoženjen - neudata": Record.Patient.MaritalStatus = MaritalStatus.neozenjen; break;
-                case "oženjen - udata": Record.Patient.MaritalStatus = MaritalStatus.ozenjen; break;
-                case "udovac - udovica": Record.Patient.MaritalStatus = MaritalStatus.udovac; break;
-                case "razveden - razvedena": Record.Patient.MaritalStatus = MaritalStatus.razveden; break;
+                case 0: Record.Patient.MaritalStatus = MaritalStatus.neozenjen; break;
+                case 1: Record.Patient.MaritalStatus = MaritalStatus.ozenjen; break;
+                case 2: Record.Patient.MaritalStatus = MaritalStatus.udovac; break;
+                case 3: Record.Patient.MaritalStatus = MaritalStatus.razveden; break;
             }
 
-            switch (Pol.SelectedItem.ToString())
+            switch (Pol.SelectedIndex)
             {
-                case "muški": Record.Patient.Gender = Genders.male; break;
-                case "ženski": Record.Patient.Gender = Genders.female; break;
-                case "ostalo": Record.Patient.Gender = Genders.other; break;
+                case 0: Record.Patient.Gender = Genders.male; break;
+                case 1: Record.Patient.Gender = Genders.female; break;
+                case 2: Record.Patient.Gender = Genders.other; break;
             }
 
             if ((bool)DaButton.IsChecked)

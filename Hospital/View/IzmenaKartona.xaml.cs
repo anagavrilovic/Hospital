@@ -40,6 +40,30 @@ namespace Hospital.View
             this.DataContext = this;
             this.record = mr;
             this.Pacijenti = p;
+
+            switch (mr.Patient.MaritalStatus)
+            {
+                case MaritalStatus.neozenjen: BracnoStanje.SelectedItem = neozenjen; break;
+                case MaritalStatus.ozenjen: BracnoStanje.SelectedItem = ozenjen; break;
+                case MaritalStatus.udovac: BracnoStanje.SelectedItem = udovac; break;
+                case MaritalStatus.razveden: BracnoStanje.SelectedItem = razveden; break;
+            }
+
+            switch (mr.Patient.Gender)
+            {
+                case Genders.male: Pol.SelectedItem = muski; break;
+                case Genders.female: Pol.SelectedItem = zenski; break;
+                case Genders.other: Pol.SelectedItem = ostalo; break;
+            }
+
+            if (mr.IsInsured)
+            {
+                DaButton.IsChecked = true;
+            }
+            else
+            {
+                NeButton.IsChecked = true;
+            }
         }
 
         private void BtnPotvrdi(object sender, RoutedEventArgs e)
@@ -62,19 +86,19 @@ namespace Hospital.View
 
             Record.Patient.Password = PasswordText.Password;
 
-            switch (BracnoStanje.SelectedItem.ToString())
+            switch (BracnoStanje.SelectedIndex)
             {
-                case "neoženjen - neudata": Record.Patient.MaritalStatus = MaritalStatus.neozenjen; break;
-                case "oženjen - udata": Record.Patient.MaritalStatus = MaritalStatus.ozenjen; break;
-                case "udovac - udovica": Record.Patient.MaritalStatus = MaritalStatus.udovac; break;
-                case "razveden - razvedena": Record.Patient.MaritalStatus = MaritalStatus.razveden; break;
+                case 0: Record.Patient.MaritalStatus = MaritalStatus.neozenjen; break;
+                case 1: Record.Patient.MaritalStatus = MaritalStatus.ozenjen; break;
+                case 2: Record.Patient.MaritalStatus = MaritalStatus.udovac; break;
+                case 3: Record.Patient.MaritalStatus = MaritalStatus.razveden; break;
             }
 
-            switch (Pol.SelectedItem.ToString())
+            switch (Pol.SelectedIndex)
             {
-                case "muški": Record.Patient.Gender = Genders.male; break;
-                case "ženski": Record.Patient.Gender = Genders.female; break;
-                case "ostalo": Record.Patient.Gender = Genders.other; break;
+                case 0: Record.Patient.Gender = Genders.male; break;
+                case 1: Record.Patient.Gender = Genders.female; break;
+                case 2: Record.Patient.Gender = Genders.other; break;
             }
 
             if ((bool)DaButton.IsChecked)
