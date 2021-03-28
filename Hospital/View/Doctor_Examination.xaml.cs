@@ -26,7 +26,7 @@ namespace Hospital.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Diagnosis dijagnoza =new Diagnosis();
+            Diagnosis dijagnoza =new Diagnosis(diagnosis_text);
             dijagnoza.Owner = this;
             dijagnoza.ShowDialog();
         }

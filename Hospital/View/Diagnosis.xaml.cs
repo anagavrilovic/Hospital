@@ -48,9 +48,10 @@ namespace Hospital.View
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
-        public Diagnosis()
+        public Diagnosis(String text)
         {
             InitializeComponent();
+            _test1 = text;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
