@@ -33,7 +33,7 @@ namespace Hospital
             }
             set
             {
-                RemoveAllAppointment();
+              //  RemoveAllAppointment();
                 if (value != null)
                 {
                     foreach (Appointment oAppointment in value)
@@ -52,12 +52,12 @@ namespace Hospital
             if (!this.appointment.Contains(newAppointment))
             {
                 this.appointment.Add(newAppointment);
-                newAppointment.Patient = this;
+                newAppointment.IDpatient = this.PersonalID;
             }
         }
 
 
-        public void RemoveAppointment(Appointment oldAppointment)
+     /*   public void RemoveAppointment(Appointment oldAppointment)
         {
             if (oldAppointment == null)
                 return;
@@ -82,7 +82,7 @@ namespace Hospital
                     oldAppointment.Patient = null;
                 tmpAppointment.Clear();
             }
-        }
+        } */
 
     }
 }

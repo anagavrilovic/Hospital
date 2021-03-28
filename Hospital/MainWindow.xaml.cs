@@ -19,6 +19,7 @@ using System.Windows.Shapes;
 
 namespace Hospital
 {
+
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -54,7 +55,8 @@ namespace Hospital
 
         private void PatientClick(object sender, RoutedEventArgs e)
         {
-
+            PatientMain patientMain = new PatientMain();
+            patientMain.Show();
         }
     }
 }

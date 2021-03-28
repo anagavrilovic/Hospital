@@ -35,7 +35,7 @@ namespace Hospital
          if (!this.appointment.Contains(newAppointment))
          {
             this.appointment.Add(newAppointment);
-            newAppointment.AddDoctor(this);      
+            newAppointment.IDDoctor=this.PersonalID;      
          }
       }
       
@@ -48,7 +48,7 @@ namespace Hospital
             if (this.appointment.Contains(oldAppointment))
             {
                this.appointment.Remove(oldAppointment);
-               oldAppointment.RemoveDoctor(this);
+              // oldAppointment.RemoveDoctor(this);
             }
       }
       
@@ -62,7 +62,7 @@ namespace Hospital
                tmpAppointment.Add(oldAppointment);
             appointment.Clear();
             foreach (Appointment oldAppointment in tmpAppointment)
-               oldAppointment.RemoveDoctor(this);
+            //   oldAppointment.RemoveDoctor(this);
             tmpAppointment.Clear();
          }
       }
