@@ -11,7 +11,7 @@
                   SelectionMode="Single" AutoGenerateColumns="False" Margin="0,0,107,110">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="DatumVreme" Binding="{Binding DateTime}" Width="*"/>
-                <DataGridTextColumn Header="Doktor" Binding="{Binding type}" Width="*"/>
+                <DataGridTextColumn Header="Doktor" Binding="{Binding x}" Width="*"/>
                 <DataGridTextColumn Header="Tip" Binding="{Binding type}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>

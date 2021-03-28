@@ -78,8 +78,27 @@ namespace Hospital
       
       public ObservableCollection<Appointment> GetByDoctor(String id)
       {
-         throw new NotImplementedException();
-      }
+            ObservableCollection<Appointment> apps = GetAll();
+            ObservableCollection<Appointment> doctorApps = new ObservableCollection<Appointment>();
+            Boolean found = false;
+            foreach (Appointment app in apps)
+            {
+                if (app.IDDoctor.Equals(id))
+                {
+                    found = true;
+                    doctorApps.Add(app);
+                }
+            }
+
+            if (found)
+            {
+                return doctorApps;
+            }
+            else
+            {
+                return null;
+            }
+        }
 
    
 

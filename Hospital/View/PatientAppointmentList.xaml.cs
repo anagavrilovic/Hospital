@@ -20,6 +20,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientAppointmentList : Window
     {
+        String x = "123";
         public ObservableCollection<Appointment> Lista
         {
             get;
