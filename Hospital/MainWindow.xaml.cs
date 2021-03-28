@@ -22,6 +22,7 @@ namespace Hospital
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// komentar
     public partial class MainWindow : Window
     {
         public MainWindow()
