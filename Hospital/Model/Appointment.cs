@@ -4,18 +4,7 @@ namespace Hospital
 {
    public class Appointment
    {
-      public DateTime dateTime;
-      public DateTime DateTime
-        {
-            get
-            {
-                return dateTime;
-            }
-            set
-            {
-                dateTime = value;
-            }
-        }
+
           
       public double durationInHours = 0.5;
         
@@ -31,49 +20,23 @@ namespace Hospital
             }
         }
 
-      public AppointmentType type;
 
-        public AppointmentType Type
-        {
-            get
-            {
-                return type;
-            }
-            set
-            {
-                type = value;
-            }
-        }
+
+
+      public DateTime DateTime { get; set; }
+      
+      public AppointmentType type { get; set; }
 
       
-      public Patient patient;
+      public string IDpatient { get; set; }
       
+      public string IDDoctor { get; set; }
+
+      public string IDAppointment { get; set; }
+
+      public string DoctrosNameSurname { get; set; }
       
-      public Patient Patient
-      {
-         get
-         {
-            return patient;
-         }
-         set
-         {
-            if (this.patient == null || !this.patient.Equals(value))
-            {
-               if (this.patient != null)
-               {
-                  Patient oldPatient = this.patient;
-                  this.patient = null;
-                  oldPatient.RemoveAppointment(this);
-               }
-               if (value != null)
-               {
-                  this.patient = value;
-                  this.patient.AddAppointment(this);
-               }
-            }
-         }
-      }
-      public System.Collections.Generic.List<Doctor> doctor;
+    /*  public System.Collections.Generic.List<Doctor> doctor;
       
       public System.Collections.Generic.List<Doctor> Doctor
       {
@@ -134,7 +97,7 @@ namespace Hospital
                oldDoctor.RemoveAppointment(this);
             tmpDoctor.Clear();
          }
-      }
+      }*/
       public Room room;
       
       
