@@ -31,6 +31,10 @@ namespace Hospital
       public string IDpatient { get; set; }
       
       public string IDDoctor { get; set; }
+
+      public string IDAppointment { get; set; }
+
+      public string DoctrosNameSurname { get; set; }
       
     /*  public System.Collections.Generic.List<Doctor> doctor;
       

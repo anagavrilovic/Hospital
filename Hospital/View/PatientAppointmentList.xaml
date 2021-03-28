@@ -11,9 +11,11 @@
                   SelectionMode="Single" AutoGenerateColumns="False" Margin="0,0,107,110">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="DatumVreme" Binding="{Binding DateTime}" Width="*"/>
-                <DataGridTextColumn Header="Doktor" Binding="{Binding x}" Width="*"/>
+                <DataGridTextColumn Header="Doktor" Binding="{Binding DoctrosNameSurname}" Width="*"/>
                 <DataGridTextColumn Header="Tip" Binding="{Binding type}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Button Content="Izmeni termin" HorizontalAlignment="Left" Height="34" Margin="427,348,0,0" VerticalAlignment="Top" Width="118"/>
+        <Button Content="Otkaži termin" HorizontalAlignment="Left" Height="34" Margin="637,348,0,0" VerticalAlignment="Top" Width="118" Click="Button_Click"/>
     </Grid>
 </Window>

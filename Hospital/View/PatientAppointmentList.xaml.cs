@@ -20,7 +20,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientAppointmentList : Window
     {
-        String x = "123";
+       
         public ObservableCollection<Appointment> Lista
         {
             get;
@@ -32,6 +32,11 @@ namespace Hospital.View
             this.DataContext = this;
             AppointmentStorage app = new AppointmentStorage();
             Lista=app.GetByPatient("481561361365");
+            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
             
         }
     }

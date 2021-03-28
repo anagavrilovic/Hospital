@@ -42,15 +42,35 @@ namespace Hospital
             }
         }
 
-            public Boolean Delete(int id)
+            public Boolean Delete(String id)
       {
-         throw new NotImplementedException();
-      }
+            foreach (Appointment app1 in apps)
+            {
+                if (app1.IDAppointment == id)
+                {
+                    apps.Remove(app1);
+                    using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
+                    {
+                        JsonSerializer serializer = new JsonSerializer();
+                        serializer.Serialize(file, apps);
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
       
-      public Appointment GetOne(int id)
+      public Appointment GetOne(String id)
       {
-         throw new NotImplementedException();
-      }
+            foreach (Appointment app1 in apps)
+            {
+                if (app1.IDAppointment == id)
+                {
+                    return app1;
+                }
+            }
+            return null;
+        }
       
       public ObservableCollection<Appointment> GetByPatient(String id)
       {

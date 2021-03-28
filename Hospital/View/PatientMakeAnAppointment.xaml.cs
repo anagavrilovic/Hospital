@@ -35,6 +35,8 @@ namespace Hospital.View
             DateTime datum = DateTime.Parse(datumVreme);
             Appointment appointment = new Appointment { DateTime = datum, type = AppointmentType.examination };
             appointment.IDDoctor = "123";
+            appointment.DoctrosNameSurname = "Petar Petrovic";
+            appointment.IDAppointment = "1";
             MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
             appointment.IDpatient = medicalRecordStorage.GetOne(1).Patient.PersonalID;
             RoomStorage roomStorage = new RoomStorage();
