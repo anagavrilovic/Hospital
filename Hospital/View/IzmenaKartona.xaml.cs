@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -64,6 +65,9 @@ namespace Hospital.View
             {
                 NeButton.IsChecked = true;
             }
+
+            PasswordText.Password = mr.Patient.Password;
+
         }
 
         private void BtnPotvrdi(object sender, RoutedEventArgs e)

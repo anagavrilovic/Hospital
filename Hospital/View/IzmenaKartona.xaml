@@ -20,10 +20,10 @@
         <Style x:Key="cbPB" TargetType="{x:Type PasswordBox}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding ElementName=Gost, Path=IsChecked}" Value="True">
-                    <Setter Property="TextBox.IsEnabled" Value="False"/>
+                    <Setter Property="PasswordBox.IsEnabled" Value="False"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding ElementName=Gost, Path=IsChecked}" Value="False">
-                    <Setter Property="TextBox.IsEnabled" Value="True"/>
+                    <Setter Property="PasswordBox.IsEnabled" Value="True"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -105,7 +105,7 @@
             <RadioButton x:Name="NeButton" Content="NE" Margin="15,0,35,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF67898E" Style="{StaticResource cbTB}"/>
         </StackPanel>
         <TextBox x:Name="UsernameText"      Grid.Row="8" Grid.Column="3" BorderThickness="1" Margin="3"  Text="{Binding Path=Record.Patient.Username, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}"/>
-        <PasswordBox x:Name="PasswordText"  Grid.Row="9" Grid.Column="3" BorderThickness="1" Margin="3"  />
+        <PasswordBox x:Name="PasswordText"  Grid.Row="9" Grid.Column="3" BorderThickness="1" Margin="3" Style="{StaticResource cbPB}" />
 
         <Grid Grid.Row="0" Grid.Column="3" Margin="0">
             <Grid.RowDefinitions>
@@ -121,7 +121,7 @@
         </Grid>
 
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical">
-            <CheckBox x:Name="Gost" Content="GOSTUJUĆI PACIJENT" FontSize="12" FontFamily="Segoe UI Symbol" HorizontalAlignment="Left" Margin="40,35,0,0" Foreground="#FF67898E" IsChecked="{Binding Path=Patient.IsGuest, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+            <CheckBox x:Name="Gost" Content="GOSTUJUĆI PACIJENT" FontSize="12" FontFamily="Segoe UI Symbol" HorizontalAlignment="Left" Margin="40,35,0,0" Foreground="#FF67898E" IsChecked="{Binding Path=Record.Patient.IsGuest, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -24,52 +24,76 @@ namespace Hospital
 
     public partial class MainWindow : Window
     {
+        private ObservableCollection<RegistratedUser> users;
+
+        public ObservableCollection<RegistratedUser> Users
+        {
+            get => users;
+            set
+            {
+                users = value;
+            }
+        }
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BtnUlogujSe(object sender, RoutedEventArgs e)
         {
-            Doctor_Examination examination = new Doctor_Examination();
-            examination.Show();
-        }
+            RegistratedUserStorage rus = new RegistratedUserStorage();
+            users = rus.GetAll();
+            bool found = false;
 
-        private void SecretaryClick(object sender, RoutedEventArgs e)
-        {
-            var s = new SecretaryWindow();
-            s.Show();
-        }
-
-        private void DoctorClick(object sender, RoutedEventArgs e)
-        {
-            Doctor_Examination de = new Doctor_Examination();
-            string text = "";
-            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\dijagnoza.json"))
+            foreach (RegistratedUser user in users)
             {
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, text);
+                if (user.Username.Equals(Username.Text) && user.Password.Equals(Password.Password))
+                {
+                    found = true;
+                    switch (user.Type)
+                    {
+                        case UserType.doctor:
+                            Doctor_Examination de = new Doctor_Examination();
+                            string text = "";
+                            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\dijagnoza.json"))
+                            {
+                                JsonSerializer serializer = new JsonSerializer();
+                                serializer.Serialize(file, text);
+                            }
+                            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\anamneza.json"))
+                            {
+                                JsonSerializer serializer = new JsonSerializer();
+                                serializer.Serialize(file, text);
+                            }
+                            de.Owner = Application.Current.MainWindow;
+                            de.Show();
+                            break;
+                        case UserType.manager:
+                            MenagerWindow mw = new MenagerWindow();
+                            mw.Owner = Application.Current.MainWindow;
+                            mw.Show();
+                            break;
+                        case UserType.patient:
+                            PatientMain patientMain = new PatientMain();
+                            patientMain.Show();
+                            break;
+                        case UserType.secretary:
+                            var s = new SecretaryWindow();
+                            s.Show();
+                            break;
+                    }
+                }
             }
-            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\anamneza.json"))
+
+            if (!found)
             {
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, text);
+                MessageBox.Show("Nepostojeći korisnik!");
             }
-            de.Owner = Application.Current.MainWindow;
-            de.Show();
         }
 
-        private void ManagerClick(object sender, RoutedEventArgs e)
+        private void BtnOtkazi(object sender, RoutedEventArgs e)
         {
-			MenagerWindow mw = new MenagerWindow();
-            mw.Owner = Application.Current.MainWindow;
-            mw.Show();
-        }
-
-        private void PatientClick(object sender, RoutedEventArgs e)
-        {
-            PatientMain patientMain = new PatientMain();
-            patientMain.Show();
+            this.Close();
         }
     }
 }

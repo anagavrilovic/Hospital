@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -78,6 +79,10 @@ namespace Hospital.View
             {
                 Record.IsInsured = false;
             }
+
+            RegistratedUser ru = new RegistratedUser { Username = UsernameText.Text, Password = PasswordText.Password, Type = UserType.patient };
+            RegistratedUserStorage rus = new RegistratedUserStorage();
+            rus.Save(ru);
 
             Md.Add(Record);
             MedicalRecordStorage mds = new MedicalRecordStorage();
