@@ -37,18 +37,28 @@ namespace Hospital
             DoSerialization(appointment);
         }
 
-        internal ObservableCollection<Appointment> GetByPatient(string v)
+        public ObservableCollection<Appointment> GetByPatient(String id)
         {
-            ObservableCollection<Appointment> appointments = GetAll();
-            ObservableCollection<Appointment> ret = new ObservableCollection<Appointment>();
-            foreach (Appointment appointment in appointments)
+            ObservableCollection<Appointment> apps = GetAll();
+            ObservableCollection<Appointment> patientApps = new ObservableCollection<Appointment>();
+            Boolean found = false;
+            foreach (Appointment app in apps)
             {
-                if (appointment.IDpatient.Equals(v))
+                if (app.IDpatient.Equals(id))
                 {
-                    ret.Add(appointment);
+                    found = true;
+                    patientApps.Add(app);
                 }
             }
-            return ret;
+
+            if (found)
+            {
+                return patientApps;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public Boolean Delete(string id)
@@ -88,5 +98,55 @@ namespace Hospital
                 serializer.Serialize(file, appointment);
             }
         }
+
+        public String GetNewID()
+        {
+            ObservableCollection<Appointment> apps;
+            using (StreamReader sr = File.OpenText(@"..\\..\\Files\\" + fileName))
+            {
+                apps = GetAll();
+                apps = JsonConvert.DeserializeObject<ObservableCollection<Appointment>>(sr.ReadToEnd());
+            }
+
+            int retVal = 1;
+            if (apps.Count == 0)
+            {
+                return retVal.ToString();
+            }
+            foreach (Appointment app in apps)
+            {
+                int x = Int32.Parse(app.IDAppointment);
+                if (x >= retVal)
+                {
+                    retVal++;
+                }
+            }
+            return retVal.ToString();
+        }
+
+        public ObservableCollection<Appointment> GetByDoctor(String id)
+        {
+            ObservableCollection<Appointment> apps = GetAll();
+            ObservableCollection<Appointment> doctorApps = new ObservableCollection<Appointment>();
+            Boolean found = false;
+            foreach (Appointment app in apps)
+            {
+                if (app.IDDoctor.Equals(id))
+                {
+                    found = true;
+                    doctorApps.Add(app);
+                }
+            }
+
+            if (found)
+            {
+                return doctorApps;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
     }
 }

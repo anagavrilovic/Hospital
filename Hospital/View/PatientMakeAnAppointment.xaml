@@ -8,7 +8,7 @@
         Title="PatientMakeAnAppointment" Height="450" Width="800">
     <Grid>
         <Label Content="Izaberite lekara" HorizontalAlignment="Left" Height="37" Margin="46,34,0,0" VerticalAlignment="Top" Width="237"/>
-        <CheckBox Name="checkbox1" Content="Lekar1" HorizontalAlignment="Left" Height="22" Margin="46,115,0,0" VerticalAlignment="Top" Width="157"/>
+        <CheckBox Name="checkbox1" Content="Stefan Ljubovic" HorizontalAlignment="Left" Height="22" Margin="46,115,0,0" VerticalAlignment="Top" Width="157"/>
         <Label Content="Odaberite termin" HorizontalAlignment="Left" Height="37" Margin="452,34,0,0" VerticalAlignment="Top" Width="223"/>
         <Label Content="Unesite datum" HorizontalAlignment="Left" Height="39" Margin="376,109,0,0" VerticalAlignment="Top" Width="182"/>
         <Label Content="Unesite vreme" HorizontalAlignment="Left" Height="39" Margin="376,198,0,0" VerticalAlignment="Top" Width="182"/>

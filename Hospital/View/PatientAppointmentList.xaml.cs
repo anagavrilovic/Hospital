@@ -20,7 +20,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientAppointmentList : Window
     {
-       
+
         public ObservableCollection<Appointment> Lista
         {
             get;
@@ -31,13 +31,26 @@ namespace Hospital.View
             InitializeComponent();
             this.DataContext = this;
             AppointmentStorage app = new AppointmentStorage();
-            Lista=app.GetByPatient("481561361365");
-            
+            Lista = app.GetByPatient("532952952");
+
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Otkazi(object sender, RoutedEventArgs e)
         {
-            
+            Appointment selectedItem = (Appointment)dataGridApp.SelectedItem;
+            AppointmentStorage aps = new AppointmentStorage();
+
+            aps.Delete(selectedItem.IDAppointment);
+            Lista.Remove(selectedItem);
+
+        }
+
+        private void Izmeni(object sender, RoutedEventArgs e)
+        {
+            Appointment selectedItem = (Appointment)dataGridApp.SelectedItem;
+            PatientMakeAnAppointment patientMakeAnAppointment = new PatientMakeAnAppointment(selectedItem.IDAppointment);
+            patientMakeAnAppointment.Show();
+            this.Close();
         }
     }
 }

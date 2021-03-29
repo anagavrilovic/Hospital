@@ -26,7 +26,7 @@ namespace Hospital.View
 
         private void AppointmentList(object sender, RoutedEventArgs e)
         {
-            PatientAppointmentList patientAppointmentList=new PatientAppointmentList();
+            PatientAppointmentList patientAppointmentList = new PatientAppointmentList();
             patientAppointmentList.Show();
         }
 
@@ -34,6 +34,12 @@ namespace Hospital.View
         {
             PatientMakeAnAppointment patientMakeAnAppointment = new PatientMakeAnAppointment();
             patientMakeAnAppointment.Show();
+        }
+
+        private void PassedAppointmentList(object sender, RoutedEventArgs e)
+        {
+            PatientPassedAppointmentList patientPassedAppointmentList = new PatientPassedAppointmentList();
+            patientPassedAppointmentList.Show();
         }
     }
 }
