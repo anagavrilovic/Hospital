@@ -62,6 +62,16 @@ namespace Hospital.View
                 room.nameTxt.Text = selectedItem.Name;
                 room.floorTxt.Text = selectedItem.Floor.ToString();
                 room.typeCB.SelectedValue = selectedItem.Type;
+                room.typeCB.Text = selectedItem.Type.ToString();
+
+                if(selectedItem.IsAvaliable == true)
+                {
+                    room.btn1.IsChecked = true;
+                }
+                else
+                {
+                    room.btn2.IsChecked = true;
+                }
 
                 room.Show();
             }

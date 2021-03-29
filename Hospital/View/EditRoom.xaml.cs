@@ -40,11 +40,15 @@ namespace Hospital.View
                 tempType = (RoomType)Enum.Parse(typeof(RoomType), typeCB.Text);
             }
 
-            Boolean tempFree = true;
+            Boolean tempFree;
 
             if (btn2.IsChecked == true)
             {
                 tempFree = false;
+            }
+            else
+            {
+                tempFree = true;
             }
 
             this.room = new Room { Name = tempName, Floor = tempFloor, IsAvaliable = tempFree, Type = tempType };
