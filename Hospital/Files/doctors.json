@@ -1,0 +1,21 @@
+[
+  {
+    "appointment": [],
+    "Appointment": [],
+    "Username": "Stefan99",
+    "Password": "stefan123",
+    "FirstName": "Stefan",
+    "LastName": "Ljubovic",
+    "PersonalID": "123",
+    "PhoneNumber": null,
+    "Email": "ljubovicstefan@gmail.com",
+    "Country": "Srbija",
+    "City": "Subotica",
+    "DateOfBirth": "0001-01-01T00:00:00",
+    "Township": "Subotica",
+    "CardID": "53253435",
+    "MaritalStatus": 0,
+    "Gender": 0,
+    "Address": "Mihajla Pupina"
+  }
+]

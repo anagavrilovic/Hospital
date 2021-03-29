@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-        Title="MakeApointment" Height="450" Width="800">
+        Title="MakeApointment" Height="450" Width="800" 
+        WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -17,15 +18,15 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions> 
-        <DataGrid x:Name="dataGridPregledi" ItemsSource="{Binding Path=appointments}"
+        <DataGrid x:Name="dataGridPregledi" ItemsSource="{Binding Path=Appointments}"
                SelectionMode="Single" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Margin="30,30,30,30" Grid.RowSpan="2" Grid.ColumnSpan="3" AutoGenerateColumns="False">
-        <DataGrid.Columns>
-            <DataGridTextColumn Header="Ime Pacijent" Width="0.25*" Binding="{Binding Patient.FirstName}"/>
-                <DataGridTextColumn Header="Prezime pacijenta" Width="0.25*" Binding="{Binding Patient.LastName}"/>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Ime Pacijent" Width="0.25*" Binding="{Binding patientName}"/>
+                <DataGridTextColumn Header="Prezime pacijenta" Width="0.25*" Binding="{Binding patientSurname}"/>
                 <DataGridTextColumn Header="Duzina trajanja" Width="0.25*" Binding="{Binding DurationInHours}"/>
                 <DataGridTextColumn Header="Datum" Width="0.25*" Binding="{Binding DateTime}"/>
-                <DataGridTextColumn Header="Tip termina" Width="0.25*" Binding="{Binding Type}"/>
-                <DataGridTextColumn Header="Sala" Width="0.25*" Binding="{Binding Room.Name}"/>  
+                <DataGridTextColumn Header="Tip termina" Width="0.25*" Binding="{Binding type}"/>
+                <DataGridTextColumn Header="Sala" Width="0.25*" Binding="{Binding Room.Name}"/>
             </DataGrid.Columns>
         </DataGrid>
             <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">

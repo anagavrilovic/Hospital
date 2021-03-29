@@ -27,7 +27,10 @@ namespace Hospital
       
       public AppointmentType type { get; set; }
 
-      
+      public string patientName { get; set; }
+
+      public string patientSurname { get; set; }
+
       public string IDpatient { get; set; }
       
       public string IDDoctor { get; set; }

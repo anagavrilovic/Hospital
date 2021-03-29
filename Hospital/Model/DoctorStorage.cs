@@ -53,7 +53,7 @@ namespace Hospital.Model
               return false;
         }*/
 
-        public Doctor GetOne(int id)
+        public Doctor GetOne(string id)
         {
             ObservableCollection<Doctor> doctors = GetAll();
             foreach (Doctor d in doctors)

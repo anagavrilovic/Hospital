@@ -38,7 +38,7 @@ namespace Hospital.View
             appointment.DoctrosNameSurname = "Petar Petrovic";
             appointment.IDAppointment = "1";
             MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
-            appointment.IDpatient = medicalRecordStorage.GetOne(1).Patient.PersonalID;
+            appointment.IDpatient = medicalRecordStorage.GetOne("1").Patient.PersonalID;
             RoomStorage roomStorage = new RoomStorage();
             appointment.Room = roomStorage.GetOne(1);
             AppointmentStorage appointmentStorage = new AppointmentStorage();

@@ -53,6 +53,7 @@ namespace Hospital.View
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             MakeApointment apointment = new MakeApointment();
+            apointment.Owner = this;
             apointment.Show();
         }
     }

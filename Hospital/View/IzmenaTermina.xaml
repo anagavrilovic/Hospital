@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-        Title="IzmenaTermina" Height="450" Width="800">
+        Title="IzmenaTermina" Height="450" Width="800"
+        WindowStartupLocation="CenterOwner">
     <Grid Margin="76,0,75.6,0">
 
         <Grid.ColumnDefinitions>
@@ -26,9 +27,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
             <TextBlock FontSize="18" Margin="50,20,0,0" Foreground="#FF67898E" Width="200">Doktor</TextBlock>
-            <ComboBox x:Name="doctorBox" FontSize="18" Margin="20,0,0,0" Width="200" Height="30" BorderThickness="1" Text="{Binding Path=ImePrezimeDoktor, Mode=TwoWay}">
-                <ComboBoxItem IsSelected="True"></ComboBoxItem>
-            </ComboBox>
+            <TextBox x:Name="doctorBox" FontSize="18" Margin="20,0,0,0" Width="200" Height="30" BorderThickness="1" Text="{Binding Path=Termin.DoctrosNameSurname, Mode=TwoWay}"></TextBox>
             <ComboBox x:Name="tipTermina" FontSize="18" Margin="20,0,0,0" Width="120" Height="30" BorderThickness="1">
                 <ComboBoxItem x:Name="pregled" IsSelected="True">Pregled</ComboBoxItem>
                 <ComboBoxItem x:Name="operacija">Operacija</ComboBoxItem>
@@ -39,7 +38,7 @@
             <DatePicker x:Name="Datum" Margin="20,0,0,0" Width="200" Height="30" Text="{Binding Path=Termin.DateTime, Mode=TwoWay}" FirstDayOfWeek="Monday"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
-            <TextBlock FontSize="18" Margin="50,20,0,0" Foreground="#FF67898E" Width="200">Trajanje termina</TextBlock>
+            <TextBlock FontSize="18" Margin="50,20,0,0" Foreground="#FF67898E" Width="200">Trajanje termina u satima</TextBlock>
             <TextBox x:Name="trajanjeTermina" FontSize="18" Margin="20,0,0,0" Width="200" Height="30" BorderThickness="1" Text="{Binding Path=Termin.DurationInHours, Mode=TwoWay}" ></TextBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0">

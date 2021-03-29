@@ -9,7 +9,7 @@ namespace Hospital
         private String healthCardNumber;
         private String parentName;
         private Boolean isInsured;
-        private int medicalRecordID;
+        private String medicalRecordID;
         private Patient patient = new Patient();
 
         private List<Examination> examination;
@@ -59,7 +59,7 @@ namespace Hospital
             }
         }
 
-        public int MedicalRecordID
+        public String MedicalRecordID
         {
             get => medicalRecordID;
             set

@@ -51,12 +51,26 @@ namespace Hospital
               return false;
         }*/
 
-        public MedicalRecord GetOne(int id)
+        public MedicalRecord GetOne(string id)
         {
             ObservableCollection<MedicalRecord> records = GetAll();
             foreach (MedicalRecord r in records)
             {
                 if (r.MedicalRecordID.Equals(id))
+                {
+                    return r;
+                }
+            }
+
+            return null;
+        }
+
+        public MedicalRecord GetByPatientID(string id)
+        {
+            ObservableCollection<MedicalRecord> records = GetAll();
+            foreach (MedicalRecord r in records)
+            {
+                if (r.Patient.PersonalID.Equals(id))
                 {
                     return r;
                 }

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Hospital.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -16,75 +18,41 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for MakeApointment.xaml
-    /// </summary>
-    public partial class MakeApointment : Window
+
+    public partial class MakeApointment : Window, INotifyPropertyChanged
     {
-        public ObservableCollection<Appointment> appointments
+        public ObservableCollection<Appointment> Appointments
         {
-            get;
-            set;
+            get; set;
+        }
+        public double DurationInHours 
+        { 
+            get => _durationInHours;
+            set 
+            {
+                _durationInHours = value; 
+            }
+        }
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        AppointmentStorage aStorage;
+        private double _durationInHours;
         public MakeApointment()
         {
             InitializeComponent();
-            Appointment appointment = new Appointment();
-            Doctor user = new Doctor();
-            user.Address = "Mihajla Pupina";
-            user.City = "Subotica";
-            user.Country = "Srbija";
-            //user.DateOfBirth = DateTime.ParseExact("23-04-1999 ", "dd-MM-yyyy",
-              //                        CultureInfo.InvariantCulture);
-            user.Email = "ljubovicstefan@gmail.com";
-            user.FirstName = "Stefan";
-            user.Gender = Genders.male;
-            user.LastName = "Ljubovic";
-            user.Username = "Stefan99";
-            user.Password = "stefan123";
-            user.CardID = "53253435";
-            user.MaritalStatus = MaritalStatus.neozenjen;
-            user.Township = "Subotica";
-            user.PersonalID = "2304999820057";
-            appointment.doctor = new List<Doctor>();
-            appointment.doctor.Add(user);
-            string termin = "3/9/2021";
-            DateTime vreme = appointment.DateTime;
-            DateTime.TryParse(termin, out vreme);
-            appointment.dateTime = vreme;
-            Patient patient = new Patient();
-            patient.Address = "Strazilovska";
-            patient.City = "Novi Sad";
-            patient.Country = "Srbija";
-           // patient.DateOfBirth = DateTime.ParseExact("15-03-2003 ", "dd-MM-yyyy",
-              //                         CultureInfo.InvariantCulture);
-            patient.Email = "peraperic@gmail.com";
-            patient.FirstName = "Petar";
-            patient.Gender = Genders.male;
-            patient.LastName = "Petrovic";
-            patient.Username = "Petar03";
-            patient.Password = "petar123";
-            patient.CardID = "3533522535";
-            patient.MaritalStatus = MaritalStatus.neozenjen;
-            patient.Township = "Novi Sad";
-            patient.PersonalID = "12321332142";
-            appointment.Patient = patient;
-            appointment.Type = AppointmentType.examination;
-            this.DataContext = this; 
-            appointments = new ObservableCollection<Appointment>();
-            appointments.Add(appointment);
+            this.DataContext = this;
+            aStorage=new AppointmentStorage();
+             Appointments = aStorage.GetAll();
             dataGridPregledi.Loaded += setMinWidths;
-            Room room=new Room();
-            room.Id = 532553252;
-            room.IsAvaliable = true;
-            room.Name = "Sala za preglede";
-            room.Type = RoomType.SALA_ZA_PREGLEDE;
-            room.Floor = 3;
-            appointment.room = room;
-
-            
         }
+        
 
         private void setMinWidths(object sender, RoutedEventArgs e)
         {
@@ -97,18 +65,25 @@ namespace Hospital.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            appointments.Remove((Appointment)dataGridPregledi.SelectedItem);
+            Appointment appointment = (Appointment)dataGridPregledi.SelectedItem;
+            Appointments.Remove((Appointment)dataGridPregledi.SelectedItem);
+            aStorage.Delete(appointment.IDAppointment);
+            dataGridPregledi.ItemsSource = aStorage.GetAll();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            IzmenaTermina termin = new IzmenaTermina((Appointment)dataGridPregledi.SelectedItem);
-            termin.Show();
+            if (dataGridPregledi.SelectedItem != null)
+            {
+                IzmenaTermina termin = new IzmenaTermina((Appointment)dataGridPregledi.SelectedItem);
+                termin.Owner = this;
+                termin.Show();
+            }
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            KreiranjeTermina termin = new KreiranjeTermina();
+            KreiranjeTermina termin = new KreiranjeTermina(this);
             termin.Owner=this;
             termin.Show();
         }

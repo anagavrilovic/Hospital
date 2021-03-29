@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -24,17 +25,20 @@ namespace Hospital.View
         public string ImePrezimePacijent { get => imePrezimePacijent; set => imePrezimePacijent = value; }
         private Doctor doktor = new Doctor();
         public Doctor Doktor { get => doktor; set => doktor = value; }
-        private string imePrezimeDoktor;
-        public string ImePrezimeDoktor { get => imePrezimeDoktor; set => imePrezimeDoktor = value; }
         public IzmenaTermina(Appointment appointment)
         {
             this.termin = appointment;
-            imePrezimePacijent = appointment.Patient.FirstName +" " + appointment.Patient.LastName;
-            doktor = appointment.Doctor.First();
-            imePrezimeDoktor = doktor.FirstName +" " + doktor.LastName;
+           // DoctorStorage storage = new DoctorStorage();
+            MedicalRecordStorage mrs = new MedicalRecordStorage();
+           // doktor = storage.GetOne(termin.IDDoctor);
+            Patient patient = new Patient();
+            MedicalRecord mr = new MedicalRecord();
+            mr = mrs.GetByPatientID(termin.IDpatient);
+            patient = mr.Patient;
+            imePrezimePacijent = patient.FirstName +" " + patient.LastName;
             InitializeComponent();
             this.DataContext = this;
-            switch (appointment.Type)
+            switch (appointment.type)
             {
                 case AppointmentType.examination: tipTermina.SelectedItem = pregled; break;
                 case AppointmentType.operation: tipTermina.SelectedItem = operacija; break;
@@ -49,15 +53,18 @@ namespace Hospital.View
 
         private void save_Click(object sender, RoutedEventArgs e)
         {
-
+            doctorBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             trajanjeTermina.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             sala.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             switch (tipTermina.SelectedIndex)
             {
-                case 0: termin.Type = AppointmentType.examination; break;
-                case 1: termin.Type = AppointmentType.operation; break;
+                case 0: termin.type = AppointmentType.examination; break;
+                case 1: termin.type = AppointmentType.operation; break;
             }
             Datum.GetBindingExpression(DatePicker.TextProperty).UpdateSource();
+            AppointmentStorage storage = new AppointmentStorage();
+            storage.Delete(termin.IDAppointment);
+            storage.Save(termin);
             this.Close();
         }
     }
