@@ -63,13 +63,13 @@ namespace Hospital
 
         public Boolean Delete(string id)
         {
-              ObservableCollection<Appointment> records = GetAll();
-              foreach(Appointment r in records)
+              ObservableCollection<Appointment> appointments = GetAll();
+              foreach(Appointment r in appointments)
               {
                   if (r.IDAppointment.Equals(id))
                   {
-                      records.Remove(r);
-                      DoSerialization(records);
+                    appointments.Remove(r);
+                      DoSerialization(appointments);
                       return true;
                   }
               }

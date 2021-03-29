@@ -69,11 +69,6 @@ namespace Hospital
             }
         }
 
-        public object Clone()
-        {
-            return this.MemberwiseClone();
-        }
-
         /// <summary>
         /// Property for collection of Examination
         /// </summary>

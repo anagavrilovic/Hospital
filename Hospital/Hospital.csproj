@@ -221,7 +221,6 @@
     <Compile Include="Model\Secretary.cs" />
     <Compile Include="Model\Therapy.cs" />
     <Compile Include="Model\User.cs" />
-    <Compile Include="Model\UserStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

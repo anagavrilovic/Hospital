@@ -4,11 +4,6 @@ namespace Hospital
 {
     public class User : Person
     {
-        public Boolean LogIn()
-        {
-            throw new NotImplementedException();
-        }
-
         private String username;
         private String password;
 
