@@ -24,6 +24,7 @@ namespace Hospital
 
     public partial class MainWindow : Window
     {
+        public static String IDnumber;
         private ObservableCollection<RegistratedUser> users;
 
         public ObservableCollection<RegistratedUser> Users
@@ -74,6 +75,8 @@ namespace Hospital
                             mw.Show();
                             break;
                         case UserType.patient:
+                            MedicalRecordStorage mds = new MedicalRecordStorage();
+                            IDnumber = mds.GetByUsername(user.Username);
                             PatientMain patientMain = new PatientMain();
                             patientMain.Show();
                             break;

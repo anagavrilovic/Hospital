@@ -64,9 +64,9 @@ namespace Hospital.View
             appointment.DoctrosNameSurname = "Stefan Ljubovic";
             appointment.IDAppointment = appointmentStorage.GetNewID();
             MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
-            appointment.IDpatient = medicalRecordStorage.GetOne("145212").Patient.PersonalID;
-            appointment.patientName = medicalRecordStorage.GetOne("145212").Patient.FirstName;
-            appointment.patientSurname = medicalRecordStorage.GetOne("145212").Patient.LastName;
+            appointment.IDpatient = medicalRecordStorage.GetByPatientID(MainWindow.IDnumber).Patient.PersonalID;
+            appointment.patientName = medicalRecordStorage.GetByPatientID(MainWindow.IDnumber).Patient.FirstName;
+            appointment.patientSurname = medicalRecordStorage.GetByPatientID(MainWindow.IDnumber).Patient.LastName;
             RoomStorage roomStorage = new RoomStorage();
             appointment.Room = roomStorage.GetOne(1);
 

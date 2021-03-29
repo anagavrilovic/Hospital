@@ -31,7 +31,7 @@ namespace Hospital.View
             InitializeComponent();
             this.DataContext = this;
             AppointmentStorage app = new AppointmentStorage();
-            Lista = app.GetByPatient("532952952");
+            Lista = app.GetByPatient(MainWindow.IDnumber);
 
         }
 

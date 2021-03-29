@@ -30,7 +30,7 @@ namespace Hospital.View
             InitializeComponent();
             this.DataContext = this;
             MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
-            MedicalRecord record = medicalRecordStorage.GetByPatientID("481561361365");
+            MedicalRecord record = medicalRecordStorage.GetByPatientID(MainWindow.IDnumber);
             List<Examination> lista = record.Examination;
             List<Appointment> lista1 = new List<Appointment>();
             foreach (Examination examination in lista)
