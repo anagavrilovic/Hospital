@@ -75,7 +75,7 @@ namespace Hospital.View
         {
             if (dataGridPregledi.SelectedItem != null)
             {
-                IzmenaTermina termin = new IzmenaTermina((Appointment)dataGridPregledi.SelectedItem);
+                IzmenaTermina termin = new IzmenaTermina((Appointment)dataGridPregledi.SelectedItem,this);
                 termin.Owner = this;
                 termin.Show();
             }

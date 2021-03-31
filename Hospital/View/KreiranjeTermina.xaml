@@ -29,7 +29,16 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
             <TextBlock FontSize="18" Margin="50,20,0,0" Foreground="#FF67898E" Width="200">Doktor</TextBlock>
-            <TextBox x:Name="doktorIme" FontSize="18" Margin="20,0,0,0" Width="200" Height="30"  Text="{Binding Termin.DoctrosNameSurname, Mode=OneWayToSource}"></TextBox>
+            <ComboBox Name="doktorIme" Width="150" Height="30" ItemsSource="{Binding Doktori, Mode=TwoWay}" SelectionChanged="doktorIme_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                        <Run Text="{Binding FirstName}"/>
+                        <Run Text="{Binding LastName}"/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <ComboBox x:Name="tipTermina" FontSize="18" Margin="20,0,0,0" Width="120" Height="30" BorderThickness="1" >
                 <ComboBoxItem x:Name="pregled" IsSelected="True">Pregled</ComboBoxItem>
                 <ComboBoxItem x:Name="operacija">Operacija</ComboBoxItem>
@@ -45,7 +54,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0">
             <TextBlock FontSize="18" Margin="50,20,0,0" Foreground="#FF67898E" Width="200">Sala</TextBlock>
-            <TextBox x:Name="sala" FontSize="18" Margin="20,0,0,0" Width="200" Height="30" BorderThickness="1" Text="{Binding ImeSale, Mode=OneWayToSource}"></TextBox>
+            <ComboBox Name="sale" Width="150" Height="30" ItemsSource="{Binding Sobe, Mode=TwoWay}" DisplayMemberPath="Name" SelectionChanged="sale_SelectionChanged"></ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0">
             <Button x:Name="save" Height="30" Width="100" FontSize="18" Margin="200,20,0,10" HorizontalAlignment="Center" Click="save_Click">Potvrdi</Button>
