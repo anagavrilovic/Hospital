@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Hospital
 {
@@ -55,34 +56,38 @@ namespace Hospital
                 newAppointment.IDpatient = this.PersonalID;
             }
         }
-
-
-     /*   public void RemoveAppointment(Appointment oldAppointment)
+        public override string ToString()
         {
-            if (oldAppointment == null)
-                return;
-            if (this.appointment != null)
-                if (this.appointment.Contains(oldAppointment))
-                {
-                    this.appointment.Remove(oldAppointment);
-                    oldAppointment.Patient = null;
-                }
+            return this.FirstName + " " + this.LastName+" "+this.PersonalID;
         }
 
+        /*   public void RemoveAppointment(Appointment oldAppointment)
+           {
+               if (oldAppointment == null)
+                   return;
+               if (this.appointment != null)
+                   if (this.appointment.Contains(oldAppointment))
+                   {
+                       this.appointment.Remove(oldAppointment);
+                       oldAppointment.Patient = null;
+                   }
+           }
 
-        public void RemoveAllAppointment()
-        {
-            if (appointment != null)
-            {
-                System.Collections.ArrayList tmpAppointment = new System.Collections.ArrayList();
-                foreach (Appointment oldAppointment in appointment)
-                    tmpAppointment.Add(oldAppointment);
-                appointment.Clear();
-                foreach (Appointment oldAppointment in tmpAppointment)
-                    oldAppointment.Patient = null;
-                tmpAppointment.Clear();
-            }
-        } */
+
+           public void RemoveAllAppointment()
+           {
+               if (appointment != null)
+               {
+                   System.Collections.ArrayList tmpAppointment = new System.Collections.ArrayList();
+                   foreach (Appointment oldAppointment in appointment)
+                       tmpAppointment.Add(oldAppointment);
+                   appointment.Clear();
+                   foreach (Appointment oldAppointment in tmpAppointment)
+                       oldAppointment.Patient = null;
+                   tmpAppointment.Clear();
+               }
+           } */
 
     }
+    class Pretraga: ObservableCollection<Patient> { }
 }

@@ -89,6 +89,9 @@
     <Compile Include="View\MenagerWindow.xaml.cs">
       <DependentUpon>MenagerWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PacijentListBox.xaml.cs">
+      <DependentUpon>PacijentListBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PatientAppointmentList.xaml.cs">
       <DependentUpon>PatientAppointmentList.xaml</DependentUpon>
     </Compile>
@@ -162,6 +165,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MenagerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PacijentListBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -248,7 +255,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Icon\search.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\logo.png" />
   </ItemGroup>

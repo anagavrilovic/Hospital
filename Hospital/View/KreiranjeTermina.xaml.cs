@@ -36,6 +36,17 @@ namespace Hospital.View
             }
 
         }
+        private Patient pacijent;
+        public Patient Pacijent
+        {
+            get { return pacijent; }
+            set
+            {
+                pacijent = value;
+                OnPropertyChanged();
+            }
+
+        }
         public ObservableCollection<Doctor> Doktori  
             {
                 get{ return doktori;}
@@ -48,6 +59,7 @@ namespace Hospital.View
         public MakeApointment parentAppointment { get; set; }
         AppointmentStorage storage = new AppointmentStorage();
         DoctorStorage dStorage = new DoctorStorage();
+        MedicalRecordStorage mStorage = new MedicalRecordStorage();
         RoomStorage rStorage = new RoomStorage();
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -67,6 +79,7 @@ namespace Hospital.View
             parentAppointment = parentWindow;
             Doktori = dStorage.GetAll();
             Sobe = rStorage.GetAll();
+
         }
 
         private void cancel_Click(object sender, RoutedEventArgs e)
@@ -76,26 +89,11 @@ namespace Hospital.View
         }
 
         private void save_Click(object sender, RoutedEventArgs e)
-        {
-            Boolean wrongPatient = true;
-            MedicalRecordStorage mStorage = new MedicalRecordStorage();
-            foreach (MedicalRecord record in mStorage.GetAll())
-            {
-                if (record.Patient.FirstName.Equals(Termin.patientName) && record.Patient.LastName.Equals(Termin.patientSurname))
-                {
-                    Termin.IDpatient = record.Patient.PersonalID;
-                    wrongPatient = false;
-                }
-            }
-            if (wrongPatient)
-            {
-                
-                    MessageBox.Show("Uneli ste nepostojeceg pacijenta");
-             }
-            else { 
-                pacijentIme.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-                pacijentPrezime.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        { 
                 trajanjeTermina.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                Termin.IDpatient = Pacijent.PersonalID;
+                Termin.patientName = Pacijent.FirstName;
+                Termin.patientSurname = Pacijent.LastName;
                 switch (tipTermina.SelectedIndex)
                 {
                     case 0: Termin.type = AppointmentType.examination; break;
@@ -107,8 +105,7 @@ namespace Hospital.View
                 storage.Save(Termin);
                 parentAppointment.dataGridPregledi.ItemsSource = storage.GetAll();
                 this.Close();
-                }
-            
+
         }
 
         private void sale_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -120,6 +117,12 @@ namespace Hospital.View
         {
             Doctor temp = (Doctor)doktorIme.SelectedItem;
             Termin.IDDoctor = temp.PersonalID;
+        }
+
+        private void dodajPacijenta(object sender, RoutedEventArgs e)
+        {
+            PacijentListBox pacijentLB = new PacijentListBox(this);
+            pacijentLB.ShowDialog();
         }
     }
 }
