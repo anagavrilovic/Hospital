@@ -24,6 +24,8 @@ namespace Hospital.View
         public Doctor_Examination()
         {
             InitializeComponent();
+            this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight*3/4);
+            this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth*3/4);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -55,6 +57,11 @@ namespace Hospital.View
             MakeApointment apointment = new MakeApointment();
             apointment.Owner = this;
             apointment.Show();
+            this.Hide();
+        }
+
+        private void image_Click(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

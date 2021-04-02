@@ -68,6 +68,7 @@ namespace Hospital
                             }
                             de.Owner = Application.Current.MainWindow;
                             de.Show();
+                            this.Hide();
                             break;
                         case UserType.manager:
                             MenagerWindow mw = new MenagerWindow();

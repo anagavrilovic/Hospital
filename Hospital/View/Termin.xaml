@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-        Title="Doctor_Examination" Height="600" Width="800" WindowStartupLocation="CenterScreen">
-    <DockPanel>
+        Title="Termin" WindowStartupLocation="CenterScreen"
+        Style="{StaticResource CustomWindowStyle}">
+
+    <DockPanel x:Name="LayoutRoot">
         <DockPanel DockPanel.Dock="Top">
             <StackPanel Orientation="Horizontal">
                 <StackPanel.Resources>
@@ -14,14 +16,16 @@
                         <Setter Property="Margin" Value="250,0,0,5"/>
                     </Style>
                 </StackPanel.Resources>
-                <Button Height="30" Width="60" HorizontalAlignment="Left" Margin="10">Logo</Button>
-                <TextBlock 
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="25"
-                    FontWeight="Black">
-                    Examination
-                </TextBlock>
+                <Button Name="image" Margin="40,20,20,20" Width="60" Height="60" Click="image_Click">
+                    <Button.Content>
+                        <Image Source="/Icon/logo.png" />
+                    </Button.Content>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="30"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
             </StackPanel>
         </DockPanel>
         <DockPanel DockPanel.Dock="Bottom">

@@ -47,6 +47,8 @@ namespace Hospital.View
         public MakeApointment()
         {
             InitializeComponent();
+            this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
+            this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 3 / 4);
             this.DataContext = this;
             aStorage=new AppointmentStorage();
              Appointments = aStorage.GetAll();

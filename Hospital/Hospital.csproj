@@ -68,8 +68,11 @@
     <Compile Include="View\Diagnosis.xaml.cs">
       <DependentUpon>Diagnosis.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doctor_Examination.xaml.cs">
-      <DependentUpon>Doctor_Examination.xaml</DependentUpon>
+    <Compile Include="View\Termin.xaml.cs">
+      <DependentUpon>Termin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DoktorGlavniProzor.xaml.cs">
+      <DependentUpon>DoktorGlavniProzor.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\IzmenaTermina.xaml.cs">
       <DependentUpon>IzmenaTermina.xaml</DependentUpon>
@@ -77,8 +80,8 @@
     <Compile Include="View\KreiranjeTermina.xaml.cs">
       <DependentUpon>KreiranjeTermina.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MakeApointment.xaml.cs">
-      <DependentUpon>MakeApointment.xaml</DependentUpon>
+    <Compile Include="View\PregledTermina.xaml.cs">
+      <DependentUpon>PregledTermina.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AddRoom.xaml.cs">
       <DependentUpon>AddRoom.xaml</DependentUpon>
@@ -140,7 +143,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Doctor_Examination.xaml">
+    <Page Include="View\Termin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DoktorGlavniProzor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -152,7 +159,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MakeApointment.xaml">
+    <Page Include="View\PregledTermina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

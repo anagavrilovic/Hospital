@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-        Title="MakeApointment" Height="450" Width="800" 
-        WindowStartupLocation="CenterOwner">
+        Title="PregledTermina"
+        WindowStartupLocation="CenterOwner"
+        Style="{StaticResource CustomWindowStyle}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
