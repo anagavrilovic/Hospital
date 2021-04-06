@@ -58,9 +58,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Allergen.cs" />
+    <Compile Include="Model\DoctorSpecialty.cs" />
     <Compile Include="Model\DoctorStorage.cs" />
+    <Compile Include="Model\Inventory.cs" />
+    <Compile Include="Model\InventoryStorage.cs" />
+    <Compile Include="Model\MedicalSupply.cs" />
+    <Compile Include="Model\MedicalSupplyStorage.cs" />
+    <Compile Include="Model\Medicine.cs" />
+    <Compile Include="Model\MedicineStorage.cs" />
     <Compile Include="Model\RegistratedUser.cs" />
     <Compile Include="Model\RegistratedUserStorage.cs" />
+    <Compile Include="Model\UnitsType.cs" />
     <Compile Include="Model\UserType.cs" />
     <Compile Include="View\Anamnesis.xaml.cs">
       <DependentUpon>Anamnesis.xaml</DependentUpon>
@@ -221,7 +230,6 @@
     <Compile Include="Model\AppointmentStorage.cs" />
     <Compile Include="Model\AppointmentType.cs" />
     <Compile Include="Model\Doctor.cs" />
-    <Compile Include="Model\DoctorSpeciality.cs" />
     <Compile Include="Model\Examination.cs" />
     <Compile Include="Model\Manager.cs" />
     <Compile Include="Model\MaritalStatus.cs" />
