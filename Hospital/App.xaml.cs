@@ -27,5 +27,23 @@ namespace Hospital
         {
             Application.Current.Shutdown();
         }
+
+        private void Resize(object sender, RoutedEventArgs e)
+        {
+            foreach (Window w in Application.Current.Windows)
+            {
+                if (w.Visibility == Visibility.Visible)
+                {
+                    if (w.WindowState == WindowState.Maximized)
+                    {
+                        w.WindowState = WindowState.Normal;
+                    }
+                    else
+                    {
+                        w.WindowState = WindowState.Maximized;
+                    }
+                }
+            }
+        }
     }
 }

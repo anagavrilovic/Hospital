@@ -47,6 +47,20 @@
                                         </Style>
                                     </Button.Resources>
                                 </Button>
+                                <Button Click="Resize"
+                                        Width="25"
+                                        Height="22"
+                                        Margin="0 0 10 0"
+                                        Background="WhiteSmoke">
+                                    <Button.Content>
+                                        <Image Source="/Icon/restored.png"/>
+                                    </Button.Content>
+                                    <Button.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="10"/>
+                                        </Style>
+                                    </Button.Resources>
+                                </Button>
                                 <Button Content="X" Click="CloseApp"
                                         Width="25"
                                         Height="22" 

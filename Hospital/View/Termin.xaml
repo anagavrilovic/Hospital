@@ -16,13 +16,13 @@
                         <Setter Property="Margin" Value="250,0,0,5"/>
                     </Style>
                 </StackPanel.Resources>
-                <Button Name="image" Margin="40,20,20,20" Width="60" Height="60" Click="image_Click">
+                <Button Name="image" Margin="40,20,20,20" Width="80" Height="50" Click="image_Click">
                     <Button.Content>
                         <Image Source="/Icon/logo.png" />
                     </Button.Content>
                     <Button.Resources>
                         <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="30"/>
+                            <Setter Property="CornerRadius" Value="10"/>
                         </Style>
                     </Button.Resources>
                 </Button>
