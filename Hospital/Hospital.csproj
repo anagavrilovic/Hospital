@@ -61,6 +61,7 @@
     <Compile Include="Model\Allergen.cs" />
     <Compile Include="Model\DoctorSpecialty.cs" />
     <Compile Include="Model\DoctorStorage.cs" />
+    <Compile Include="Model\Ingredient.cs" />
     <Compile Include="Model\Inventory.cs" />
     <Compile Include="Model\InventoryStorage.cs" />
     <Compile Include="Model\MedicalSupply.cs" />

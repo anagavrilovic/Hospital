@@ -4,13 +4,15 @@
 // Purpose: Definition of Class Allergen
 
 using System;
+using System.Collections.Generic;
 
 namespace Hospital
 {
     public class Allergen
     {
-       public string name;
+       public string other;
+       public List<string> medicineNames;
+       public List<string> ingredientNames;
 
     }
 }
-
