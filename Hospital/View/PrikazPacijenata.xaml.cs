@@ -47,8 +47,24 @@ namespace Hospital.View
 
         private void IzmeniKarton(object sender, RoutedEventArgs e)
         {
+            if (PacijentiTable.SelectedItem == null)
+            {
+                return;
+            }
+
             var ik = new IzmenaKartona((MedicalRecord) PacijentiTable.SelectedItem, Pacijenti);
             ik.Show();
+        }
+
+        private void Alergeni(object sender, RoutedEventArgs e)
+        {
+            if (PacijentiTable.SelectedItem == null)
+            {
+                return;
+            }
+
+            var alergeni = new ModifikacijaAlergena((MedicalRecord)PacijentiTable.SelectedItem, Pacijenti);
+            alergeni.Show();
         }
     }
 }

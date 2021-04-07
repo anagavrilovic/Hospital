@@ -15,6 +15,15 @@ namespace Hospital
 
         public System.Collections.Generic.List<Ingredient> ingredient;
 
+        public string Name
+        {
+            get { return name; }
+            set 
+            { 
+                name = value; 
+            }
+        }
+
         /// <summary>
         /// Property for collection of Ingredient
         /// </summary>

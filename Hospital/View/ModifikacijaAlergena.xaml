@@ -1,0 +1,98 @@
+﻿<Window x:Class="Hospital.View.ModifikacijaAlergena"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.View"
+        mc:Ignorable="d"
+        Title="ModifikacijaAlergena" Height="665" Width="1070"
+        Background="#FFDAEBEE">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock  Text="ALERGENI" FontSize="28" Margin="50, 10, 0, 5" FontFamily="Segoe UI Semilight"  Foreground="#FF67898E" TextDecorations="Underline"/>
+            <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 0">
+                <TextBlock Text="Pacijent: " FontFamily="Segoe UI Semilight"  Foreground="#FF67898E"/>
+                <TextBlock Text="{Binding Mr.Patient.FirstName, Mode=OneWay}" FontFamily="Segoe UI Semilight"  Foreground="#FF67898E"/>
+                <TextBlock Text=" "/>
+                <TextBlock Text="{Binding Mr.Patient.LastName, Mode=OneWay}" FontFamily="Segoe UI Semilight"  Foreground="#FF67898E"/>
+                <TextBlock Text="  Broj kartona: " FontFamily="Segoe UI Semilight"  Foreground="#FF67898E"/>
+                <TextBlock Text="{Binding Mr.MedicalRecordID, Mode=OneWay}" FontFamily="Segoe UI Semilight"  Foreground="#FF67898E"/>
+            </StackPanel>
+        </StackPanel>
+        
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,0,0" >
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Lekovi:" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+                <TextBox  x:Name="LekoviFilter" TextChanged="LekoviFilterTextChanged" Width="250" Margin="20,0,0,0"/>
+                <Button Width="20" Margin="20,0,0,0" Background="#FF78A5AD" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Height="20" Click="BtnPlusLekoviClick">
+                    <TextBlock Text="+" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Button>
+            </StackPanel>
+            <ListBox ItemsSource="{Binding LekoviCollection}" x:Name="LekoviLista" Height="120" Margin="150,10,25,10">
+
+            </ListBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,0,0,0">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Sastojci:" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+                <TextBox x:Name="SastojciFilter" TextChanged="SastojciFilterTextChanged" Width="243" Margin="20,0,0,0"/>
+                <Button Width="20" Margin="20,0,0,0" Background="#FF78A5AD" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Height="20" Click="BtnPlusSastojciClick" >
+                    <TextBlock Text="+" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Button>
+            </StackPanel>
+            <ListBox ItemsSource="{Binding SastojciCollection}" x:Name="SastojciLista" Height="120" Margin="150,10,25,10">
+
+            </ListBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,0,0,0" >
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Dodati lekovi:" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+                <Button  Margin="213,0,150,0" Background="#FF78A5AD" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="15" Height="20" Click="LekoviUkloni">
+                    <TextBlock Text="UKLONI" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Button>
+            </StackPanel>
+            <ListBox x:Name="DodatiLekovi" ItemsSource="{Binding Mr.Allergen.MedicineNames, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Height="120" Margin="25,10,150,10">
+
+            </ListBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1" Margin="0,0,0,0" >
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Dodati sastojci:" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+                <Button  Margin="205,0,155,0" Background="#FF78A5AD" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="15" Height="20" Click="SastojciUkloni">
+                    <TextBlock Text="UKLONI" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Button>
+            </StackPanel>
+            <ListBox x:Name="DodatiSastojci" ItemsSource="{Binding Mr.Allergen.IngredientNames, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Height="120" Margin="25,10,150,10">
+
+            </ListBox>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="4" Grid.Column="0" Margin="0,10,0,0">
+            <TextBlock Text="Ostalo:" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+            <TextBox x:Name="OstaloTxt" Text="{Binding Mr.Allergen.Other, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Margin="150,0,25,0" Height="70"/>
+        </StackPanel>      
+        
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Margin="100,0,0,40">
+            <Button x:Name="btnPotvrdi" Content="Potvrdi" Width="80" Height="25" HorizontalAlignment="Right" Background="#FF78A5AD" Foreground="White" FontFamily="Segoe UI Symbol" FontSize="14" Click="btnPotvrdi_Click"/>
+            <Button x:Name="btnOdustani" Content="Odustani" Width="80" Height="25" HorizontalAlignment="Left" Margin="40,0,0,0" Background="White" Foreground="#FF67898E" FontFamily="Segoe UI Symbol" FontSize="14" Click="btnOdustani_Click"/>
+
+        </StackPanel>
+        
+    </Grid>
+</Window>

@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,21 +28,16 @@ namespace Hospital.View
 
         public ObservableCollection<MedicalRecord> Md
         {
-            get => md;
-            set
-            {
-                md = value;
-            }
+            get { return md; }
+            set { md = value; }
         }
 
         public MedicalRecord Record
         {
-            get => record;
-            set
-            {
-                record = value;
-            }
+            get { return record; }
+            set { record = value; }
         }
+
 
         public KreiranjeKartona(ObservableCollection<MedicalRecord> md)
         {
@@ -94,5 +91,6 @@ namespace Hospital.View
         {
             this.Close();
         }
+
     }
 }
