@@ -10,5 +10,11 @@ namespace Hospital
 
         public Therapy therapy;
         public Appointment appointment;
+
+        public Examination()
+        {
+            therapy = new Therapy();
+            appointment = new Appointment();
+        }
     }
 }

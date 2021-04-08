@@ -44,7 +44,7 @@
                 <Button Grid.Column="0" Grid.Row="2" Content="Medicinski karton" Height="94" Margin="99,15,101.8,14.2"/>
                 <Button Grid.Column="1" Grid.Row="0" Content="Termini" Height="94" Margin="99,15,101.8,14.2" Click="Button_Click_2"/>
                 <Button Grid.Column="1" Grid.Row="1" Content="Modifikacija alergena" Height="94" Margin="99,15,101.8,14.2"/>
-                <Button Grid.Column="1" Grid.Row="2" Content="Terapija" Height="94" Margin="99,15,101.8,14.2"/>
+                <Button Grid.Column="1" Grid.Row="2" Content="Terapija" Height="94" Margin="99,15,101.8,14.2" Click="Terapija"/>
             </Grid>
 
 

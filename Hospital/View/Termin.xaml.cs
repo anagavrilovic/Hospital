@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,12 +19,33 @@ using System.Windows.Shapes;
 namespace Hospital.View
 {
     
-    public partial class Doctor_Examination : Window
+    public partial class Doctor_Examination : Window,INotifyPropertyChanged
     {
         private string diagnosis_text = "";
         private string anamneza_text = "";
+        private Examination pregled;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public Examination Pregled
+        {
+            get { return pregled; }
+            set
+            {
+                pregled = value;
+                OnPropertyChanged();
+            }
+        }
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            if (PropertyChanged != null)
+            {
+                this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
+            }
+        }
         public Doctor_Examination()
         {
+            pregled = new Examination();
             InitializeComponent();
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight*3/4);
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth*3/4);
@@ -62,6 +85,14 @@ namespace Hospital.View
 
         private void image_Click(object sender, RoutedEventArgs e)
         {
+        }
+
+        private void Terapija(object sender, RoutedEventArgs e)
+        {
+            Terapija t = new Terapija(this);
+            this.Hide();
+            t.Owner = this;
+            t.Show();
         }
     }
 }

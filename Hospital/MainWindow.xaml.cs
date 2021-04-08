@@ -66,6 +66,8 @@ namespace Hospital
                                 JsonSerializer serializer = new JsonSerializer();
                                 serializer.Serialize(file, text);
                             }
+                            DoctorStorage ds = new DoctorStorage();
+                            IDnumber= ds.GetByUsername(user.Username);
                             de.Owner = Application.Current.MainWindow;
                             de.Show();
                             this.Hide();

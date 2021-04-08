@@ -4,15 +4,59 @@
 // Purpose: Definition of Class Medicine
 
 using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Hospital
 {
-    public class Medicine
+    public class Medicine : INotifyPropertyChanged
     {
-       public string id;
-       public string name;
-       public double dosageInMg;
+       private string id;
+        public string ID
+        {
+            get => id;
+            set
+            {
+                id = value;
+                OnPropertyChanged("ID");
+            }
+        }
 
+        private string name;
+        public string Name
+        {
+            get => name;
+            set
+            {
+                name = value;
+                OnPropertyChanged("Name");
+            }
+        }
+        private double dosageInMg;
+        public double DosageInMg
+        {
+            get => dosageInMg;
+            set
+            {
+                dosageInMg = value;
+                OnPropertyChanged("DosageInMg");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+        public override string ToString()
+        {
+            return Name + " " + ID;
+        }
     }
+    class PretragaM : ObservableCollection<Medicine> { }
 }
 

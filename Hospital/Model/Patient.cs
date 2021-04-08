@@ -19,7 +19,10 @@ namespace Hospital
                 isGuest = value;
             }
         }
-
+        public override string ToString()
+        {
+            return FirstName + " "+LastName + " " + PersonalID;
+        }
     }
-    class Pretraga: ObservableCollection<Patient> { }
+    class Pretraga : ObservableCollection<Patient> { }
 }

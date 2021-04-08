@@ -77,6 +77,12 @@
     <Compile Include="View\Diagnosis.xaml.cs">
       <DependentUpon>Diagnosis.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\LekListBox.xaml.cs">
+      <DependentUpon>LekListBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Terapija.xaml.cs">
+      <DependentUpon>Terapija.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Termin.xaml.cs">
       <DependentUpon>Termin.xaml</DependentUpon>
     </Compile>
@@ -149,6 +155,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Diagnosis.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LekListBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Terapija.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

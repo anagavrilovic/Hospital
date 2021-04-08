@@ -75,6 +75,19 @@ namespace Hospital.Model
                 serializer.Serialize(file, doctors);
             }
         }
+        public String GetByUsername(string username)
+        {
+            ObservableCollection<Doctor> doctors = GetAll();
+            foreach (Doctor d in doctors)
+            {
+                if (d.Username.Equals(username))
+                {
+                    return d.PersonalID;
+                }
+            }
+
+            return null;
+        }
 
     }
 }
