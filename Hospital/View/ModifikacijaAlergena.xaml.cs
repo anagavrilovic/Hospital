@@ -29,6 +29,22 @@ namespace Hospital.View
         private MedicalRecord mr;
         private ObservableCollection<MedicalRecord> pacijenti;
 
+        private List<string> stariLekovi = new List<string>();
+
+        public List<string> StariLekovi
+        {
+            get { return stariLekovi; }
+            set { stariLekovi = value; }
+        }
+
+        private List<string> stariSastojci = new List<string>();
+
+        public List<string> StariSastojci
+        {
+            get { return stariSastojci; }
+            set { stariSastojci = value; }
+        }
+
         public ObservableCollection<MedicalRecord> Pacijenti
         {
             get { return pacijenti; }
@@ -84,6 +100,13 @@ namespace Hospital.View
             this.Mr = mr;
             this.Pacijenti = p;
             this.ReadDrugsAndIngredients();
+
+            foreach (string lek in Mr.Allergen.MedicineNames)
+                StariLekovi.Add(lek);
+
+            foreach (string sastojak in Mr.Allergen.IngredientNames)
+                StariSastojci.Add(sastojak);
+
         }
 
         private void btnPotvrdi_Click(object sender, RoutedEventArgs e)
@@ -97,6 +120,14 @@ namespace Hospital.View
 
         private void btnOdustani_Click(object sender, RoutedEventArgs e)
         {
+            foreach(string lek in Mr.Allergen.MedicineNames.ToList<string>())
+                if (!StariLekovi.Contains(lek))
+                    Mr.Allergen.MedicineNames.Remove(lek);
+
+            foreach (string sastojak in Mr.Allergen.IngredientNames.ToList<string>())
+                if (!StariSastojci.Contains(sastojak))
+                    Mr.Allergen.IngredientNames.Remove(sastojak);
+
             this.Close();
         }
 
