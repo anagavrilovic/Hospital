@@ -18,7 +18,7 @@ using System.Windows.Shapes;
 namespace Hospital.View
 {
 
-    public partial class Anamnesis : Window,INotifyPropertyChanged
+    public partial class Anamnesis : Page, INotifyPropertyChanged
     {
         private string _test1;
 
@@ -47,29 +47,22 @@ namespace Hospital.View
             }
         }
 
-        public Anamnesis(string text)
+        public Anamnesis()
         {
-            _test1 = text;
             InitializeComponent();
             this.DataContext = this;
         }
 
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Sacuvaj(object sender, System.Windows.RoutedEventArgs e)
         {
-            BindingExpression be = anamnesisBox.GetBindingExpression(TextBox.TextProperty);
-            be.UpdateSource();
-            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\anamneza.json"))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, _test1);
-            }
-            Close();
+            BindingExpression binding = anamnesisBox.GetBindingExpression(TextBox.TextProperty);
+            binding.UpdateSource();
+            ((Doctor_Examination)Window.GetWindow(this)).Pregled.anamnesis = Test1;
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void Odustani(object sender, System.Windows.RoutedEventArgs e)
         {
-            Close();
+
         }
     }
 }

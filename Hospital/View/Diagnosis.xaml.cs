@@ -19,13 +19,13 @@ namespace Hospital.View
 {
     
 
-    public partial class Diagnosis : Window, INotifyPropertyChanged
+    public partial class Diagnosis : Page, INotifyPropertyChanged
     {
 
         private string _test1;
 
         public event PropertyChangedEventHandler PropertyChanged;
-
+        
         public string Test1
         {
             get
@@ -40,9 +40,7 @@ namespace Hospital.View
                     OnPropertyChanged("Test1");
                 }
             }
-
         }
-
         protected void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
@@ -50,28 +48,25 @@ namespace Hospital.View
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
-        public Diagnosis(String text)
+  
+        public Diagnosis()
         {
-            _test1 = text;
             InitializeComponent();
             this.DataContext = this;
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        
+        private void Sacuvaj(object sender, System.Windows.RoutedEventArgs e)
         {
-            Close();
+
+            BindingExpression binding = diagnosisBox.GetBindingExpression(TextBox.TextProperty);
+            binding.UpdateSource();
+            ((Doctor_Examination)Window.GetWindow(this)).Pregled.diagnosis = Test1;
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Odustani(object sender, System.Windows.RoutedEventArgs e)
         {
-            BindingExpression be = diagnosisBox.GetBindingExpression(TextBox.TextProperty);
-            be.UpdateSource();
-            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\dijagnoza.json" ))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, _test1);
-            }
-            Close();
+
         }
+        
     }
 }

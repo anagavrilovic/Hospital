@@ -20,12 +20,11 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for Terapija.xaml
     /// </summary>
-    public partial class Terapija : Window,INotifyPropertyChanged
+    public partial class Terapija : Page, INotifyPropertyChanged
     {
-       private  ObservableCollection<Medicine> lekovi = new ObservableCollection<Medicine>();
+        private ObservableCollection<Medicine> lekovi = new ObservableCollection<Medicine>();
         public int dani;
         public event PropertyChangedEventHandler PropertyChanged;
-        private Doctor_Examination parentWindow;
         public ObservableCollection<Medicine> Lekovi
         {
             get { return lekovi; }
@@ -36,7 +35,7 @@ namespace Hospital.View
             }
         }
         private string text;
-        public  string Text
+        public string Text
         {
             get { return text; }
             set
@@ -46,11 +45,8 @@ namespace Hospital.View
             }
         }
 
-        public Terapija(Doctor_Examination parentWindow)
+        public Terapija()
         {
-            this.parentWindow = parentWindow;
-            this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
-            this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 3 / 4);
             InitializeComponent();
             medicineBox.ItemsSource = Lekovi;
         }
@@ -58,6 +54,7 @@ namespace Hospital.View
         private void DodajLek(object sender, RoutedEventArgs e)
         {
             LekListBox lb = new LekListBox(this);
+            lb.Owner = Window.GetWindow(this);
             lb.ShowDialog();
         }
         protected void OnPropertyChanged([CallerMemberName] string name = null)
@@ -69,27 +66,29 @@ namespace Hospital.View
             }
         }
 
-        private void medicineBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-           
-        }
-
         private void Odustani(object sender, RoutedEventArgs e)
         {
-            this.Owner.Show();
-            this.Close();
+            // this.Owner.Show();
+            // this.Close();
         }
 
         private void Sacuvaj(object sender, RoutedEventArgs e)
         {
+            Therapy t = new Therapy();
             foreach (Medicine lek in Lekovi)
             {
-                parentWindow.Pregled.therapy.AddMedicine(lek);
+                t.AddMedicine(lek);
             }
-            parentWindow.Pregled.therapy.durationInDays = dani;
-            parentWindow.Pregled.therapy.description = Text;
-            this.Owner.Show();
-            this.Close();
+            t.description = textBox.Text;
+            ((Doctor_Examination)Window.GetWindow(this)).Pregled.therapy = t;
+        }
+
+        private void Obrisi(object sender, RoutedEventArgs e)
+        {
+            if (medicineBox.SelectedItem != null)
+            {
+               Lekovi.Remove((Medicine)medicineBox.SelectedItem);
+            }
         }
     }
 }

@@ -5,49 +5,112 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-        Title="Termin" WindowStartupLocation="CenterScreen"
-        Style="{StaticResource CustomWindowStyle}">
+        Title="Termin" WindowStartupLocation="CenterScreen" 
+        Background="#FFDCE6ED">
+    <Window.Resources>
+        <SolidColorBrush x:Key="RedBrush" Color="Red"/>
 
-    <DockPanel x:Name="LayoutRoot">
-        <DockPanel DockPanel.Dock="Top">
-            <StackPanel Orientation="Horizontal">
-                <StackPanel.Resources>
-                    <Style TargetType="{x:Type TextBlock}">
-                        <Setter Property="Margin" Value="250,0,0,5"/>
-                    </Style>
-                </StackPanel.Resources>
-                <Button Name="image" Margin="40,20,20,20" Width="80" Height="50" Click="image_Click">
-                    <Button.Content>
-                        <Image Source="/Icon/logo.png" />
-                    </Button.Content>
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="10"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
-            </StackPanel>
-        </DockPanel>
-        <DockPanel DockPanel.Dock="Bottom">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Grid.Row="0" Content="Anamneza" Height="94" Margin="99,15,101.8,14.2" Click="Button_Click_1"/>
-                <Button x:Name="dijagnozaDijalog"  Grid.Column="0" Grid.Row="1" Content="Dijagnostika" Height="94" Margin="99,15,101.8,14.2" Click="Button_Click"/>
-                <Button Grid.Column="0" Grid.Row="2" Content="Medicinski karton" Height="94" Margin="99,15,101.8,14.2"/>
-                <Button Grid.Column="1" Grid.Row="0" Content="Termini" Height="94" Margin="99,15,101.8,14.2" Click="Button_Click_2"/>
-                <Button Grid.Column="1" Grid.Row="1" Content="Modifikacija alergena" Height="94" Margin="99,15,101.8,14.2"/>
-                <Button Grid.Column="1" Grid.Row="2" Content="Terapija" Height="94" Margin="99,15,101.8,14.2" Click="Terapija"/>
-            </Grid>
+        <SolidColorBrush x:Key="SolidBorderBrush" Color="#888" />
 
+        <SolidColorBrush x:Key="GreenBrush" Color="Green" />
 
-        </DockPanel>
-    </DockPanel>
+        <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#EEE" />
+
+        <SolidColorBrush x:Key="DisabledBorderBrush" Color="#AAA" />
+
+        <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" />
+
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Grid>
+                            <Border 
+                                Name="Border"
+                                Margin="0,0,-4,0" 
+                                Background="White"
+                                BorderBrush="{StaticResource  SolidBorderBrush}" 
+                                BorderThickness="1,1,1,1" 
+                                CornerRadius="2,12,0,0" >
+                                <ContentPresenter x:Name="ContentSite"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    ContentSource="Header"
+                                    Margin="12,2,12,2"
+                                    RecognizesAccessKey="True"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Panel.ZIndex" Value="100" />
+                                <Setter TargetName="Border" Property="Background" Value="Lime" />
+                                <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,0" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource DisabledBackgroundBrush}" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource DisabledBorderBrush}" />
+                                <Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <TabControl x:Name="tab" TabStripPlacement="Left">
+            <TabItem x:Name="Logo" Width="100" Height="60">
+                <TabItem.Header>
+                    <Image Source="/Icon/logo.png"/>
+                </TabItem.Header>
+            </TabItem >
+            <TabItem x:Name="Termini">
+                <TabItem.Content>
+                    <Frame Source="PregledTermina.xaml"/>
+                </TabItem.Content>
+                <TabItem.Header>
+                    <StackPanel Orientation="Vertical">
+                        <Image x:Name="SlikaTermin" Source="/Icon/calender.png" Width="100" Height="30"/>
+                        <Label x:Name="TerminiLabela" Content="Termini" HorizontalAlignment="Center" FontSize="15"></Label>
+                        </StackPanel>
+                </TabItem.Header>
+            </TabItem >
+            <TabItem x:Name="Terapija">
+                <TabItem.Content>
+                    <Frame Source="Terapija.xaml"/>
+                </TabItem.Content>
+                <TabItem.Header>
+                    <StackPanel Orientation="Vertical">
+                        <Image x:Name="TerapijaSlika" Source="/Icon/plusSquare.png" Width="100" Height="30"/>
+                        <Label x:Name="TerapijaLabela" Content="Terapija" HorizontalAlignment="Center" FontSize="15"></Label>
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem x:Name="Anamneza">
+                <TabItem.Content>
+                    <Frame Source="Anamnesis.xaml"/>
+                </TabItem.Content>
+                <TabItem.Header>
+                    <StackPanel Orientation="Vertical">
+                        <Image x:Name="AnamnezaSlika" Source="/Icon/pen.png" Width="100" Height="30"/>
+                        <Label x:Name="AnamnezaLabela" Content="Anamneza" HorizontalAlignment="Center" FontSize="15"></Label>
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem x:Name="Dijagnoza">
+                <TabItem.Content>
+                    <Frame Source="Diagnosis.xaml"/>
+                </TabItem.Content>
+                <TabItem.Header>
+                    <StackPanel Orientation="Vertical">
+                        <Image x:Name="DijagnozaSlika" Source="/Icon/penPaper.png" Width="100" Height="30"/>
+                        <Label x:Name="DiagnozaLabela" Content="Dijagnoza" HorizontalAlignment="Center" FontSize="15"></Label>
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+        </TabControl>
+        
+        
+    </Grid>
+   
 </Window>

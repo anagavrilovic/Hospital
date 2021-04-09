@@ -13,37 +13,6 @@ namespace Hospital
     /// </summary>
     public partial class App : Application
     {
-        private void Minimize(object sender, RoutedEventArgs e)
-        {
-            foreach(Window w in Application.Current.Windows)
-            {
-                if (w.Visibility == Visibility.Visible)
-                {
-                    w.WindowState = WindowState.Minimized;
-                }
-            }
-        }
-        private void CloseApp(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
-        private void Resize(object sender, RoutedEventArgs e)
-        {
-            foreach (Window w in Application.Current.Windows)
-            {
-                if (w.Visibility == Visibility.Visible)
-                {
-                    if (w.WindowState == WindowState.Maximized)
-                    {
-                        w.WindowState = WindowState.Normal;
-                    }
-                    else
-                    {
-                        w.WindowState = WindowState.Maximized;
-                    }
-                }
-            }
-        }
+        
     }
 }

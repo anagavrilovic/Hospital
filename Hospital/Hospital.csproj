@@ -291,10 +291,16 @@
     <Resource Include="Icon\logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icon\restore.png" />
+    <Resource Include="Icon\calender.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icon\restored.png" />
+    <Resource Include="Icon\plusSquare.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\pen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\penPaper.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

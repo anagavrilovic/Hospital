@@ -21,7 +21,26 @@ namespace Hospital
                 OnPropertyChanged("ID");
             }
         }
-
+        private int durationInDays;
+        public int DurationInDays
+        {
+            get => durationInDays;
+            set
+            {
+                durationInDays = value;
+                OnPropertyChanged("durationInDays");
+            }
+        }
+        private int timesPerDay;
+        public int TimesPerDay
+        {
+            get => timesPerDay;
+            set
+            {
+                timesPerDay = value;
+                OnPropertyChanged("timesPerDay");
+            }
+        }
         private string name;
         public string Name
         {

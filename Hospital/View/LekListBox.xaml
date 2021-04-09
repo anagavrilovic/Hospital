@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-        Title="LekListBox" Height="450" Width="450">
+        Title="LekListBox" Height="450" Width="450"
+        Background="#FFDCE6ED" WindowStartupLocation="CenterOwner">
     <DockPanel>
         <DockPanel DockPanel.Dock="Top">
             <WrapPanel>
@@ -19,8 +20,20 @@
         </DockPanel>
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="40,40,0,40" Width="150">Dana za konzumiranje:</TextBlock>
-                <TextBox Width="40"  Margin="0,40,20,40" Text="{Binding Text, Mode=OneWayToSource}"></TextBox>
+                <TextBlock Margin="40,20,0,10" Width="150" Height="20">Dana za konzumiranje:</TextBlock>
+                <ComboBox x:Name="danaZaK" Width="40" Height="20" Margin="0,25,20,20" Text="{Binding Dana, Mode=OneWayToSource}" SelectionChanged="danaZaK_SelectionChanged"/>
+                <Button Width="100" Height="30" Content="Odustani" Margin="20,40,20,0" VerticalAlignment="Top" Click="Odustani"
+                        Background="Crimson" Foreground="White">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="40,0,0,10" Width="150" Height="20">Dnevni unos leka:</TextBlock>
+                <ComboBox x:Name="dnevni" Margin="0,0,20,20" Text="{Binding Dan, Mode=OneWayToSource}" SelectionChanged="dnevni_SelectionChanged" Width="40" Height="20"></ComboBox>
             </StackPanel>
             <ListBox Name="listBox" Margin="40,20,40,40" MouseDoubleClick="listBox_MouseDoubleClick" Height="200"></ListBox>
         </StackPanel>

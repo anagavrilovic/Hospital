@@ -20,7 +20,7 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for LekListBox.xaml
     /// </summary>
-    public partial class LekListBox : Window , INotifyPropertyChanged
+    public partial class LekListBox : Window, INotifyPropertyChanged
     {
         ObservableCollection<Medicine> lekovi = new ObservableCollection<Medicine>();
         MedicineStorage mStorage = new MedicineStorage();
@@ -36,13 +36,23 @@ namespace Hospital.View
             }
 
         }
-        private string text;
-        public string Text
+        private string dana;
+        public string Dana
         {
-            get { return text; }
+            get { return dana; }
             set
             {
-                text = value;
+                dana = value;
+                OnPropertyChanged();
+            }
+        }
+        private string dan;
+        public string Dan
+        {
+            get { return dan; }
+            set
+            {
+                dan = value;
                 OnPropertyChanged();
             }
         }
@@ -57,22 +67,15 @@ namespace Hospital.View
         public LekListBox(Terapija parentWindow)
         {
             InitializeComponent();
-            foreach (Medicine medicine in mStorage.GetAll())
+            for(int i = 1; i < 10; i++)
             {
-                Boolean duplirani = false;
-                foreach (Medicine medicine1 in parentWindow.Lekovi)
-                {
-                    if (medicine.ID.Equals(medicine1.ID))
-                    {
-                        duplirani = true;
-                    }
-                }
-                if (!duplirani)
-                {
-                    Lekovi.Add(medicine);
-                }
-                
+                dnevni.Items.Add(i.ToString());
             }
+            for(int i = 1; i < 60; i++)
+            {
+                danaZaK.Items.Add(i.ToString());
+            }
+            Lekovi=mStorage.GetAll();
             InitializeComponent();
             this.parentWindow = parentWindow;
             this.listBox.ItemsSource = Lekovi;
@@ -95,10 +98,45 @@ namespace Hospital.View
 
         private void listBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            parentWindow.Lekovi.Add((Medicine)listBox.SelectedItem);
-            parentWindow.dani= Int32.Parse(Text);
-            parentWindow.medicineBox.SelectedItem= ((Medicine)listBox.SelectedItem);
-            Close();
+            if (dan != null && dana != null)
+            {
+                Medicine m=((Medicine)listBox.SelectedItem);
+                m.DurationInDays = int.Parse(Dana);
+                m.TimesPerDay = int.Parse(Dan);
+                bool postoji = false;
+                foreach (Medicine m1 in parentWindow.Lekovi){
+                    if (m1.ID.Equals(m.ID))
+                    {
+                        postoji = true;
+                    }
+                }
+                if (postoji)
+                {
+                    MessageBox.Show("Vec ste dodali ovaj lek");
+                }
+                else
+                {
+                    parentWindow.Lekovi.Add(m);
+                    this.Close();
+                }
+            }
+        }
+
+        private void dnevni_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            dan = (string)dnevni.SelectedItem;
+          
+        }
+
+        private void danaZaK_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dana = (string)danaZaK.SelectedItem;
+        }
+
+        private void Odustani(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

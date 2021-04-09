@@ -19,7 +19,7 @@ using System.Windows.Shapes;
 namespace Hospital.View
 {
 
-    public partial class MakeApointment : Window, INotifyPropertyChanged
+    public partial class MakeApointment : Page, INotifyPropertyChanged
     {
         public ObservableCollection<Appointment> Appointments
         {
@@ -33,6 +33,16 @@ namespace Hospital.View
                 _durationInHours = value; 
             }
         }
+        private ObservableCollection<string> comboBoxItems;
+        public ObservableCollection<string> ComboBoxItems
+        {
+            get => comboBoxItems;
+            set
+            {
+                comboBoxItems = value;
+            }
+        }
+
         protected virtual void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
@@ -47,10 +57,10 @@ namespace Hospital.View
         public MakeApointment()
         {
             InitializeComponent();
-            this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
-            this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 3 / 4);
             this.DataContext = this;
-            aStorage=new AppointmentStorage();
+            ComboBox.ItemsSource = Enum.GetValues(typeof(DoctorSpecialty)).Cast<DoctorSpecialty>();
+            ComboBox.SelectedIndex = 0;
+            aStorage =new AppointmentStorage();
              Appointments = aStorage.GetAll();
             dataGridPregledi.Loaded += setMinWidths;
         }
@@ -65,28 +75,9 @@ namespace Hospital.View
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Appointment appointment = (Appointment)dataGridPregledi.SelectedItem;
-            Appointments.Remove((Appointment)dataGridPregledi.SelectedItem);
-            aStorage.Delete(appointment.IDAppointment);
-            dataGridPregledi.ItemsSource = aStorage.GetAll();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            if (dataGridPregledi.SelectedItem != null)
-            {
-                IzmenaTermina termin = new IzmenaTermina((Appointment)dataGridPregledi.SelectedItem,this);
-                termin.Owner = this;
-                termin.Show();
-            }
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void Dodaj(object sender, RoutedEventArgs e)
         {
             KreiranjeTermina termin = new KreiranjeTermina(this);
-            termin.Owner=this;
             termin.Show();
         }
     }
