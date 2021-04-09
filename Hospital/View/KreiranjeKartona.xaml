@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-        Title="KreiranjeKartona" Height="450" Width="800"
+        Title="KreiranjeKartona" Height="665" Width="1070"
         Background="#FFDAEBEE">
     <Window.Resources>
         <Style x:Key="cbTB" TargetType="{x:Type Control}">
@@ -29,19 +29,22 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
+
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition Height="90"/>
+            <RowDefinition Height="140"/>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="140"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -57,11 +60,12 @@
         <TextBlock Text="Ime jednog roditelja:" Grid.Row="2" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E" />
         <TextBlock Text="Prezime:"              Grid.Row="3" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
         <TextBlock Text="Datum rođenja:"        Grid.Row="4" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Adresa stanovanja:"    Grid.Row="5" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Mesto stanovanja:"     Grid.Row="6" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Opština:"              Grid.Row="7" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Država:"               Grid.Row="8" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Broj zdrav. knjizice:" Grid.Row="9" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Ulica stanovanja:"     Grid.Row="5" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Broj:"                 Grid.Row="6" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Mesto stanovanja:"     Grid.Row="7" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Opština:"              Grid.Row="8" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Država:"               Grid.Row="9" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Broj zdrav. knjizice:" Grid.Row="10" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
 
         <TextBlock Text="Broj lične karte:"            Grid.Row="1" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
         <TextBlock Text="JMBG:"                        Grid.Row="2" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
@@ -72,19 +76,17 @@
         <TextBlock Text="Osiguran:"                    Grid.Row="7" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
         <TextBlock Text="Korisničko ime:"              Grid.Row="8" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
         <TextBlock Text="Lozinka:"                     Grid.Row="9" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-
-        <Button x:Name="btnPotvrdi" Grid.Row="10" Grid.Column="1" Content="Potvrdi" Width="80" Height="25" HorizontalAlignment="Right" Margin="0,0,20,0" Background="#FF78A5AD" Foreground="White" FontFamily="Segoe UI Symbol" FontSize="14" Click="BtnPotvrdi"/>
-        <Button x:Name="btnOduatani" Grid.Row="10" Grid.Column="2" Content="Odustani" Width="80" Height="25" HorizontalAlignment="Left" Margin="20,0,0,0" Background="White" Foreground="#FF67898E" FontFamily="Segoe UI Symbol" FontSize="14" Click="BtnOdustani"/>
+        <TextBlock Text="Potvrda lozinke:"             Grid.Row="10" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
 
         <TextBox x:Name="ImeText"       Grid.Row="1" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.FirstName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
         <TextBox x:Name="RoditeljText"  Grid.Row="2" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.ParentName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
         <TextBox x:Name="PrezimeText"   Grid.Row="3" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.LastName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
         <DatePicker x:Name="Datum"      Grid.Row="4" Grid.Column="1" Background="White" Margin="3" Text="{Binding Path=Record.Patient.DateOfBirth, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" FirstDayOfWeek="Monday"/>
         <TextBox x:Name="AdresaText"    Grid.Row="5" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.Address, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
-        <TextBox x:Name="MestoText"     Grid.Row="6" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.City, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
-        <TextBox x:Name="OpstinaText"   Grid.Row="7" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.Township, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
-        <TextBox x:Name="DrzavaText"    Grid.Row="8" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.Country, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
-        <TextBox x:Name="KnjizicaText"  Grid.Row="9" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.HealthCardNumber, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
+        <TextBox x:Name="MestoText"     Grid.Row="7" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.City, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
+        <TextBox x:Name="OpstinaText"   Grid.Row="8" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.Township, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
+        <TextBox x:Name="DrzavaText"    Grid.Row="9" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.Country, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
+        <TextBox x:Name="KnjizicaText"  Grid.Row="10" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.HealthCardNumber, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
 
         <TextBox x:Name="LicnaText"     Grid.Row="1" Grid.Column="3" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.CardID, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox x:Name="JMBGText"      Grid.Row="2" Grid.Column="3" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.PersonalID, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
@@ -105,8 +107,9 @@
             <RadioButton x:Name="DaButton" Content="DA" Margin="35,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF67898E" Style="{StaticResource cbTB}"/>
             <RadioButton x:Name="NeButton" Content="NE" Margin="15,0,35,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF67898E" Style="{StaticResource cbTB}"/>
         </StackPanel>
-        <TextBox x:Name="UsernameText"      Grid.Row="8" Grid.Column="3" BorderThickness="1" Margin="3"  Text="{Binding Path=Record.Patient.Username, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
-        <PasswordBox x:Name="PasswordText"  Grid.Row="9" Grid.Column="3" BorderThickness="1" Margin="3" Style="{StaticResource cbPB}"/>
+        <TextBox x:Name="UsernameText"          Grid.Row="8" Grid.Column="3" BorderThickness="1" Margin="3"  Text="{Binding Path=Record.Patient.Username, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
+        <PasswordBox x:Name="PasswordText"      Grid.Row="9" Grid.Column="3" BorderThickness="1" Margin="3" Style="{StaticResource cbPB}"/>
+        <PasswordBox x:Name="PasswordReentered" Grid.Row="10" Grid.Column="3" BorderThickness="1" Margin="3" Style="{StaticResource cbPB}"/>
 
         <Grid Grid.Row="0" Grid.Column="3" Margin="0">
             <Grid.RowDefinitions>
@@ -118,11 +121,14 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="Br. kartona:" VerticalAlignment="Center" Margin="0,0,5,0" FontFamily="Segoe UI Symbol" FontSize="11" Foreground="#FF688D9E" HorizontalAlignment="Right" />
-            <TextBox x:Name="KartonText" Grid.Row="0" Grid.Column="1" Margin="2,28" Text="{Binding Path=Record.MedicalRecordID, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox x:Name="KartonText" Grid.Row="0" Grid.Column="1" Margin="2,55" Text="{Binding Path=Record.MedicalRecordID, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical">
-            <CheckBox x:Name="Gost" Content="GOSTUJUĆI PACIJENT" FontSize="12" FontFamily="Segoe UI Symbol" HorizontalAlignment="Left" Margin="40,35,0,0" Foreground="#FF67898E" IsChecked="{Binding Path=Record.Patient.IsGuest, Mode=OneWayToSource}"/>
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <CheckBox x:Name="Gost" Content="GOSTUJUĆI PACIJENT" FontSize="12" FontFamily="Segoe UI Symbol" HorizontalAlignment="Left" Margin="40,0,0,0" Foreground="#FF67898E" IsChecked="{Binding Path=Record.Patient.IsGuest, Mode=OneWayToSource}"/>
         </StackPanel>
+
+        <Button x:Name="btnPotvrdi" Grid.Row="11" Grid.Column="1" Content="Potvrdi" Width="80" Height="25" HorizontalAlignment="Right"  Background="#FF78A5AD" Foreground="White" FontFamily="Segoe UI Symbol" FontSize="14" Click="BtnPotvrdi" Margin="0,0,20,0"/>
+        <Button x:Name="btnOduatani" Grid.Row="11" Grid.Column="2" Content="Odustani" Width="80" Height="25" HorizontalAlignment="Left"  Background="White" Foreground="#FF67898E" FontFamily="Segoe UI Symbol" FontSize="14" Click="BtnOdustani" Margin="20,0,0,0"/>
     </Grid>
 </Window>

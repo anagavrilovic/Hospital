@@ -61,6 +61,7 @@
     <Compile Include="Model\Allergen.cs" />
     <Compile Include="Model\DoctorSpecialty.cs" />
     <Compile Include="Model\DoctorStorage.cs" />
+    <Compile Include="Model\Ingredient.cs" />
     <Compile Include="Model\Inventory.cs" />
     <Compile Include="Model\InventoryStorage.cs" />
     <Compile Include="Model\MedicalSupply.cs" />
@@ -82,6 +83,9 @@
     </Compile>
     <Compile Include="View\Terapija.xaml.cs">
       <DependentUpon>Terapija.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ModifikacijaAlergena.xaml.cs">
+      <DependentUpon>ModifikacijaAlergena.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Termin.xaml.cs">
       <DependentUpon>Termin.xaml</DependentUpon>
@@ -158,11 +162,16 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+
     <Page Include="View\LekListBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Terapija.xaml">
+    <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ModifikacijaAlergena.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

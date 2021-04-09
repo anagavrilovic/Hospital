@@ -21,14 +21,16 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Button Grid.Column="0" Grid.Row="0" Content="Kreiraj karton" Margin="60,15,60,5" FontSize="16" Background="#FF78A5AD" Foreground="White" Click="KreirajKarton"/>
-        <Button Grid.Column="1" Grid.Row="0" Content="Izmeni karton" Margin="60,15,60,5" FontSize="16" Background="#FF78A5AD" Foreground="White" Click="IzmeniKarton"/>
-        <Button Grid.Column="2" Grid.Row="0" Content="Izbriši karton" Margin="60,15,60,5" FontSize="16" Background="#FF78A5AD" Foreground="White" Click="IzbrisiKarton"/>
+        <Button Grid.Column="0" Grid.Row="0" Content="Kreiraj karton" Margin="50,15,45,5" FontSize="16" Background="#FF78A5AD" Foreground="White" Click="KreirajKarton"/>
+        <Button Grid.Column="1" Grid.Row="0" Content="Izmeni karton" Margin="45,15,45,5" FontSize="16" Background="#FF78A5AD" Foreground="White" Click="IzmeniKarton"/>
+        <Button Grid.Column="2" Grid.Row="0" Content="Izbriši karton" Margin="45,15,45,5" FontSize="16" Background="#FF78A5AD" Foreground="White" Click="IzbrisiKarton"/>
+        <Button Grid.Column="3" Grid.Row="0" Content="Alergeni" Margin="45,15,50,5" FontSize="16" Background="#FF78A5AD" Foreground="White" Click="Alergeni" />
 
         <DataGrid x:Name="PacijentiTable" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" 
-                  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="50,23,50,50" CanUserResizeColumns="True"
+                  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Margin="50,23,50,50" CanUserResizeColumns="True"
                   CanUserSortColumns="True" ItemsSource="{Binding Pacijenti}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Ime" Width="0.25*" Binding="{Binding Patient.FirstName}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
