@@ -17,13 +17,13 @@ namespace Hospital
             }
         }
 
-        private int id;
+        private string id;
         private string name;
         private int floor;
         private Boolean isAvaliable;
         private RoomType type;
 
-        public int Id 
+        public string Id 
         { 
             
             get
@@ -111,6 +111,5 @@ namespace Hospital
                 }
             }
         }
-
     }
 }
