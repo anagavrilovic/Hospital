@@ -53,7 +53,6 @@ Azathioprine
 Azelastine
 Azilect
 Azithromycin
-
 Bacitracin
 Baclofen
 Bactrim
@@ -104,7 +103,6 @@ Buspar
 Buspirone
 Bydureon
 Bystolic
-
 Cabometyx
 Calcitriol
 Calcium carbonate
@@ -153,7 +151,6 @@ Crestor
 Cyanocobalamin
 Cyclobenzaprine
 Cymbalta
-
 Decadron
 Demerol
 Depakote
@@ -198,7 +195,6 @@ DuoNeb
 Duopa
 Dupixent
 Dutasteride
-
 Ecotrin
 Effexor
 Effexor XR
@@ -242,7 +238,6 @@ Excedrin
 Exelon
 Exemestane
 Ezetimibe
-
 Famciclovir
 Famotidine
 Farxiga
@@ -288,7 +283,6 @@ Fosamax
 Fosfomycin
 Fulvestrant
 Furosemide
-
 Gabapentin
 Galantamine
 Ganciclovir
@@ -333,7 +327,6 @@ Griseofulvin
 Guaifenesin
 Guanfacine
 Gvoke HypoPen
-
 Haegarda
 Halcion
 Haldol
@@ -377,7 +370,6 @@ Hyoscyamine
 Hysingla ER
 Hytrin
 Hyzaar
-
 Ibandronate
 Ibrance
 Ibrutinib
@@ -426,7 +418,6 @@ Isotretinoin
 Itraconazole
 Ivabradine
 Ivermectin
-
 Jadenu
 Jaimiess
 Jakafi
@@ -457,7 +448,6 @@ Junel Fe 24
 Juvederm
 Juxtapid
 Jynarque
-
 K-Dur
 K-Tab
 Kadcyla
@@ -499,7 +489,6 @@ Kynmobi
 Kyprolis
 Kytril
 kalbitor
-
 Labetalol
 Lactulose
 Lamictal
@@ -549,7 +538,6 @@ Lupron
 Lupron Depot
 Lyrica
 Lyumjev
-
 Macrobid
 Magnesium
 Magnesium citrate
@@ -595,7 +583,6 @@ Mycapssa
 Mycophenolate mofetil
 Mylotarg
 Myrbetriq
-
 NAC
 NPlate
 Nabumetone
@@ -643,7 +630,6 @@ Nurtec ODT
 NuvaRing
 Nuvigil
 Nystatin
-
 Ocrelizumab
 Ocrevus
 Octreotide
@@ -689,7 +675,6 @@ Oxymetazoline nasal
 Oxytocin
 Ozanimod
 Ozempic
-
 Pantoprazole
 Paracetamol
 Paragard
@@ -735,7 +720,6 @@ Provenge
 Prozac
 Pseudoephedrine
 Pyridium
-
 QNASL
 Qbrelis
 Qbrexza
@@ -762,7 +746,6 @@ Quinine
 Qutenza
 Qvar
 Qvar Redihaler
-
 Rabeprazole
 Raloxifene
 Ramelteon
@@ -811,7 +794,6 @@ Ruconest
 Rybelsus
 Rydapt
 Rytary
-
 Sabril
 Salbutamol
 Salmeterol
@@ -866,7 +848,6 @@ Sutent
 Symbicort
 Sympazan
 Synthroid
-
 Tacrolimus
 Tadalafil
 Takhzyro
@@ -922,7 +903,6 @@ Twirla
 Tylenol
 Tylenol with Codeine #3
 Tysabri
-
 Ubiquinone
 Ubrelvy
 Ubrogepant
@@ -963,7 +943,6 @@ Urso
 Ursodiol
 Ustekinumab
 Uva Ursi
-
 VESIcare
 Valacyclovir
 Valium
@@ -1010,7 +989,6 @@ Votrient
 Vraylar
 Vyndamax
 Vyvanse
-
 WP Thyroid
 Wakix
 Wal-itin
@@ -1033,7 +1011,6 @@ Witch Hazel
 Witch hazel topical
 Wixela Inhub
 Wormwood
-
 Xadago
 Xalatan
 Xalkori
@@ -1074,7 +1051,6 @@ Xyosted
 Xyrem
 Xywav
 Xyzal
-
 Yasmin
 Yaz
 Yellow fever vaccine
@@ -1085,7 +1061,6 @@ Yohimbine
 Yondelis
 Yupelri
 Yuvafem
-
 Zaditor
 Zaleplon
 Zanaflex
@@ -1128,4 +1103,3 @@ Zyprexa
 Zyrtec
 Zytiga
 Zyvox
-
