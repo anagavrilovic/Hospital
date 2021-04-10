@@ -52,6 +52,7 @@ namespace Hospital.View
                 Pacijenti.Add(record.Patient);
             }
             InitializeComponent();
+            this.DataContext = this;
             this.parentWindow = parentWindow;
             this.listBox.ItemsSource = Pacijenti;
         }

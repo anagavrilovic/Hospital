@@ -36,6 +36,40 @@ namespace Hospital.View
             }
 
         }
+        private string vremeTermin;
+        public string VremeTermin
+        {
+            get { return vremeTermin; }
+            set
+            {
+                vremeTermin = value;
+                OnPropertyChanged();
+            }
+
+        }
+        private DateTime date;
+        public DateTime Date
+        {
+            get { return date; }
+            set
+            {
+                date = value;
+                OnPropertyChanged();
+            }
+
+        }
+        private Doctor doktor;
+        public Doctor Doktor
+        {
+            get { return doktor; }
+            set
+            {
+                doktor = value;
+                OnPropertyChanged();
+            }
+
+        }
+        private DateTime time = DateTime.Today;
         private Patient pacijent;
         public Patient Pacijent
         {
@@ -56,6 +90,8 @@ namespace Hospital.View
             }
 
             }
+        
+
         public MakeApointment parentAppointment { get; set; }
         AppointmentStorage storage = new AppointmentStorage();
         DoctorStorage dStorage = new DoctorStorage();
@@ -74,8 +110,17 @@ namespace Hospital.View
         public KreiranjeTermina(MakeApointment parentWindow)
         {
             InitializeComponent();
-            this.DataContext = this;
+            Doktor = new Doctor();
+            Pacijent = new Patient();
             Termin = new Appointment();
+            this.DataContext = this;
+            for (DateTime tm = time.AddHours(0); tm < time.AddHours(24); tm = tm.AddMinutes(30))
+            {
+                vreme.Items.Add(tm.ToShortTimeString());
+
+            }
+            this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
+            this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 3 / 4);
             parentAppointment = parentWindow;
             Doktori = dStorage.GetAll();
             Sobe = rStorage.GetAll();
@@ -84,27 +129,30 @@ namespace Hospital.View
 
         private void cancel_Click(object sender, RoutedEventArgs e)
         {
-
             Close();
         }
 
         private void save_Click(object sender, RoutedEventArgs e)
-        { 
-                trajanjeTermina.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-                Termin.IDpatient = Pacijent.PersonalID;
+        {
+            if (Pacijent == null || Date == null || VremeTermin == null || Doktor == null)
+            {
+                MessageBox.Show("Nisu uneti svi podace");
+            }
+            else
+            {
+                MessageBox.Show(Pacijent.FirstName);
                 Termin.patientName = Pacijent.FirstName;
+                Termin.IDpatient = Pacijent.PersonalID;
                 Termin.patientSurname = Pacijent.LastName;
-                switch (tipTermina.SelectedIndex)
-                {
-                    case 0: Termin.type = AppointmentType.examination; break;
-                    case 1: Termin.type = AppointmentType.operation; break;
-                }
-                Datum.GetBindingExpression(DatePicker.TextProperty).UpdateSource();
+                Termin.DateTime = Date.Date.Add(DateTime.Parse(vremeTermin).TimeOfDay);
                 Random random = new Random();
+                Termin.IDDoctor = Doktor.PersonalID;
+                Termin.DoctrosNameSurname = Doktor.FirstName + " " + Doktor.LastName;
                 Termin.IDAppointment = random.Next(0, 10000).ToString();
                 storage.Save(Termin);
                 parentAppointment.dataGridPregledi.ItemsSource = storage.GetAll();
                 this.Close();
+            }
 
         }
 
@@ -113,16 +161,13 @@ namespace Hospital.View
             Termin.Room= (Room)sale.SelectedItem;
         }
 
-        private void doktorIme_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Doctor temp = (Doctor)doktorIme.SelectedItem;
-            Termin.IDDoctor = temp.PersonalID;
-        }
 
         private void dodajPacijenta(object sender, RoutedEventArgs e)
         {
             PacijentListBox pacijentLB = new PacijentListBox(this);
+            pacijentLB.Owner = this;
             pacijentLB.ShowDialog();
         }
+
     }
 }

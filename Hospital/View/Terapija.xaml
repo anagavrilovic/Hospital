@@ -18,11 +18,15 @@
         <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
             <Label FontSize="17" Margin="40,40,0,0">Opis terapije:</Label>
             <ScrollViewer CanContentScroll="True" Margin="40,10,19.2,40" Height="500">
-            <TextBox Name="textBox" TextWrapping="Wrap" AcceptsReturn="True" FontSize="15" Text="{Binding Text, Mode=OneWayToSource}"></TextBox>
+            <TextBox Name="textBox" TextWrapping="Wrap" AcceptsReturn="True" FontSize="15" Text="{Binding Text, Mode=TwoWay}"></TextBox>
         </ScrollViewer>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" Margin="0,0,20.2,19.6">
-            <Label FontSize="17" Margin="40,40,0,0">Prepisani lekovi:</Label>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="30,75,0,0">
+                <Label FontSize="17" Content="Naziv terapije: " Margin="5,0,0,0"></Label>
+                <TextBox Width="150" Height="25" Text="{Binding Naslov, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            </StackPanel>
+            <Label FontSize="17" Margin="40,20,0,0">Prepisani lekovi:</Label>
             <StackPanel Orientation="Horizontal">
                 <ScrollViewer CanContentScroll="True" Height="200" Width="250" Margin="40,10,19.2,40">
                 <ListBox Name="medicineBox" BorderThickness="1" BorderBrush="Black">

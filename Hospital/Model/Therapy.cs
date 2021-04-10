@@ -10,7 +10,7 @@ namespace Hospital
     public class Therapy
     {
        public string description;
-   
+        public string name;
        public System.Collections.Generic.List<Medicine> medicine;
    
        /// <summary>

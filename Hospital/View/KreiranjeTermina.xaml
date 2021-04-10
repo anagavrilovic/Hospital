@@ -5,8 +5,174 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-        Title="KreiranjeTermina" Height="450" Width="800"
-        WindowStartupLocation="CenterOwner">
+        Title="KreiranjeTermina"
+        WindowStartupLocation="CenterScreen"
+        Background="#FFDCE6ED">
+    <Window.Resources>
+        <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <Border
+                  x:Name="Border" 
+                  Grid.ColumnSpan="2"
+                  CornerRadius="0"
+                  Background="#FF3F3F3F"
+                  BorderBrush="#FF97A0A5"
+                  BorderThickness="1" />
+                <Border 
+                  Grid.Column="0"
+                  CornerRadius="0" 
+                  Margin="1" 
+                  Background="#FF3F3F3F" 
+                  BorderBrush="#FF97A0A5"
+                  BorderThickness="0,0,1,0" />
+                <Path 
+                  x:Name="Arrow"
+                  Grid.Column="1"     
+                  Fill="White"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,4 z"
+                />
+            </Grid>
+            <!--<ControlTemplate.Triggers>
+            <Trigger Property="ToggleButton.IsMouseOver" Value="true">
+                <Setter TargetName="Border" Property="Background" Value="#808080" />
+            </Trigger>
+            <Trigger Property="ToggleButton.IsChecked" Value="true">
+                <Setter TargetName="Border" Property="Background" Value="#E0E0E0" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="Border" Property="Background" Value="#EEEEEE" />
+                <Setter TargetName="Border" Property="BorderBrush" Value="#AAAAAA" />
+                <Setter Property="Foreground" Value="#888888"/>
+                <Setter TargetName="Arrow" Property="Fill" Value="#888888" />
+            </Trigger>
+        </ControlTemplate.Triggers>-->
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ComboBoxTextBox" TargetType="{x:Type TextBox}">
+            <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
+        </ControlTemplate>
+
+        <Style x:Key="{x:Type ComboBox}" TargetType="{x:Type ComboBox}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="MinHeight" Value="20"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid>
+                            <ToggleButton 
+                            Name="ToggleButton" 
+                            Template="{StaticResource ComboBoxToggleButton}" 
+                            Grid.Column="2" 
+                            Focusable="false"
+                            IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                            ClickMode="Press">
+                            </ToggleButton>
+                            <ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}"
+                            ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                            ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                            Margin="3,3,23,3"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left" />
+                            <TextBox x:Name="PART_EditableTextBox"
+                            Style="{x:Null}" 
+                            Template="{StaticResource ComboBoxTextBox}" 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Center" 
+                            Margin="3,3,23,3"
+                            Focusable="True" 
+                            Background="#FF3F3F3F"
+                            Foreground="Green"
+                            Visibility="Hidden"
+                            IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                            <Popup 
+                            Name="Popup"
+                            Placement="Bottom"
+                            IsOpen="{TemplateBinding IsDropDownOpen}"
+                            AllowsTransparency="True" 
+                            Focusable="False"
+                            PopupAnimation="Slide">
+
+                                <Grid Name="DropDown"
+                              SnapsToDevicePixels="True"                
+                              MinWidth="{TemplateBinding ActualWidth}"
+                              MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border 
+                                x:Name="DropDownBorder"
+                                Background="#FF3F3F3F"
+
+                                BorderThickness="1"
+                                BorderBrush="#888888"/>
+                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasItems" Value="false">
+                                <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#888888"/>
+                            </Trigger>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            </Trigger>
+                            <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="true">
+                                <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="0"/>
+                                <Setter TargetName="DropDownBorder" Property="Margin" Value="0,2,0,0"/>
+                            </Trigger>
+                            <Trigger Property="IsEditable"  Value="true">
+                                <Setter Property="IsTabStop" Value="false"/>
+                                <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+            </Style.Triggers>
+        </Style>
+
+        <!-- SimpleStyles: ComboBoxItem -->
+        <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                        <Border Name="Border"
+                              Padding="2"
+                              SnapsToDevicePixels="true">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="#FF4F4F4F"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#888888"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid Margin="76,0,75.6,0">
 
         <Grid.ColumnDefinitions>
@@ -17,13 +183,12 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="200"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
-            <TextBlock FontSize="18" Margin="50,20,0,0" Foreground="#FF67898E" Width="150">Pacijent</TextBlock>
-            <Border BorderThickness="1" BorderBrush="Black" Width="150" Height="30">
-                <TextBlock x:Name="pacijentIme" FontSize="18" Margin="20,0,0,0" >
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Margin="64,0,202.6,4.8">
+            <Label FontSize="17" Width="77" HorizontalAlignment="Left" Margin="0,25,0,0" Content="Pacijent:"/>
+            <Border BorderThickness="1" BorderBrush="Black" Width="150" Margin="0,30,0,27" Height="25">
+                <TextBlock x:Name="pacijentIme" FontSize="17" HorizontalAlignment="Left">
                     <TextBlock.Text>
                         <MultiBinding StringFormat="{}{0}  {1}">
                             <Binding Path="Pacijent.FirstName" />
@@ -32,40 +197,57 @@
                     </TextBlock.Text>
                 </TextBlock>
             </Border>
-            <Button x:Name="btnDodajPacijenta" FontSize="18" Margin="20,0,0,0" Width="60" Height="30" BorderThickness="1" Click="dodajPacijenta">Dodaj</Button>
+            <Button x:Name="btnDodajPacijenta" Height="25" FontSize="17" Margin="15,20,0,17.2" Width="100" BorderThickness="1" Click="dodajPacijenta" Content="Dodaj" Background="Crimson" Foreground="White">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
-            <TextBlock FontSize="18" Margin="50,20,0,0" Foreground="#FF67898E" Width="200">Doktor</TextBlock>
-            <ComboBox Name="doktorIme" Width="150" Height="30" ItemsSource="{Binding Doktori, Mode=TwoWay}" SelectionChanged="doktorIme_SelectionChanged">
+        <StackPanel Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Center" Grid.Row="1" Margin="64,0,135.6,76.6" Grid.RowSpan="2">
+            <Label FontSize="17" Margin="0,20,0,0"  Width="76" Content="Doktor:" HorizontalAlignment="Left"/>
+            <ComboBox x:Name="doktorIme" Width="150" Height="25" Margin="10,20,0,0" SelectedValue="{Binding Doktor}" ItemsSource="{Binding Doktori, Mode=TwoWay}" VerticalAlignment="Top">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock>
-                        <Run Text="{Binding FirstName}"/>
-                        <Run Text="{Binding LastName}"/>
+                        <TextBlock FontSize="17">
+                            <Run Text="{Binding FirstName}"/>
+                            <Run Text=" "/><Run Text="{Binding LastName}"/>
                         </TextBlock>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <ComboBox x:Name="tipTermina" FontSize="18" Margin="20,0,0,0" Width="120" Height="30" BorderThickness="1" >
-                <ComboBoxItem x:Name="pregled" IsSelected="True">Pregled</ComboBoxItem>
-                <ComboBoxItem x:Name="operacija">Operacija</ComboBoxItem>
-            </ComboBox>
+            <RadioButton x:Name="rdbPregled" FontSize="17" Margin="10,28,0,0" Content="pregled" IsChecked="True" />
+            <RadioButton x:Name="rdbOperacija" FontSize="17" Margin="0,28,0,0" Content="operacija" IsChecked="False" />
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0">
-            <TextBlock FontSize="18" Margin="50,20,0,0" Foreground="#FF67898E" Width="200">Datum termina</TextBlock>
-            <DatePicker x:Name="Datum" Margin="20,0,0,0" Width="200" Height="30" Text="{Binding Termin.DateTime, Mode=OneWayToSource}" FirstDayOfWeek="Monday"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" >
+            <Label FontSize="17" Margin="0,30,0,23.2" Width="190" Content="Datum i vreme termina:"/>
+            <DatePicker x:Name="Datum" Margin="10,0,10,0" Width="150" Height="25" 
+                        SelectedDate="{Binding Date, Mode=OneWayToSource}" FirstDayOfWeek="Monday"/>
+            <ComboBox x:Name="vreme" Width="20" Height="25" Margin="0,23,0,23.2" SelectedValue="{Binding VremeTermin
+                ,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
-            <TextBlock FontSize="18" Margin="50,20,0,0" Foreground="#FF67898E" Width="200">Trajanje termina u satima</TextBlock>
-            <TextBox x:Name="trajanjeTermina" FontSize="18" Margin="20,0,0,0" Width="200" Height="30" BorderThickness="1" Text="{Binding Termin.DurationInHours, Mode=OneWayToSource}" ></TextBox>
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" Margin="64,0.4,334.6,199.6" Grid.RowSpan="2">
+            <Label FontSize="17" Margin="0,30,15,0">Sala:</Label>
+            <ComboBox Name="sale" Width="150" Height="25" ItemsSource="{Binding Sobe, Mode=TwoWay}" DisplayMemberPath="Name" SelectionChanged="sale_SelectionChanged"></ComboBox>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0">
-            <TextBlock FontSize="18" Margin="50,20,0,0" Foreground="#FF67898E" Width="200">Sala</TextBlock>
-            <ComboBox Name="sale" Width="150" Height="30" ItemsSource="{Binding Sobe, Mode=TwoWay}" DisplayMemberPath="Name" SelectionChanged="sale_SelectionChanged"></ComboBox>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0">
-            <Button x:Name="save" Height="30" Width="100" FontSize="18" Margin="200,20,0,10" HorizontalAlignment="Center" Click="save_Click">Potvrdi</Button>
-            <Button x:Name="cancel" Width="100" Height="30" FontSize="18" Margin="40,20,0,10" HorizontalAlignment="Center" Click="cancel_Click">Odustani</Button>
+        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Button x:Name="save" Height="30" Width="100" FontSize="18" Margin="0,10,30,0" HorizontalAlignment="Center" Click="save_Click"
+                Background="Crimson" Foreground="White" Content="Potvrdi">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="cancel" Width="100" Height="30" FontSize="18" Margin="10,10,0,0" HorizontalAlignment="Center" Click="cancel_Click"
+                Background="White" Content="Odustani">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </StackPanel>
     </Grid>
 </Window>

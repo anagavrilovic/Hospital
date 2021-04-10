@@ -1,1 +1,82 @@
-[{"durationInHours":0.2,"room":{"Id":0,"Name":"Sala za pregled","Floor":0,"IsAvaliable":false,"Type":0},"DurationInHours":0.2,"DateTime":"2021-12-16T00:00:00","type":0,"patientName":"Mika","patientSurname":"Mikic","IDpatient":"532952952","IDDoctor":"123","IDAppointment":"1","DoctrosNameSurname":"Stefan Ljubovic","Room":{"Id":0,"Name":"Sala za pregled","Floor":0,"IsAvaliable":false,"Type":0}},{"durationInHours":0.5,"room":null,"DurationInHours":0.5,"DateTime":"2022-12-12T00:12:12","type":0,"patientName":"Mika","patientSurname":"Mikic","IDpatient":"532952952","IDDoctor":"123","IDAppointment":"3","DoctrosNameSurname":"Stefan Ljubovic","Room":null},{"durationInHours":0.5,"room":null,"DurationInHours":0.5,"DateTime":"2025-12-12T00:12:12","type":0,"patientName":"Petar","patientSurname":"Petrovic","IDpatient":"481561361365","IDDoctor":"123","IDAppointment":"3","DoctrosNameSurname":"Stefan Ljubovic","Room":null},{"durationInHours":0.4,"room":{"Id":2,"Name":"Sala 2","Floor":1,"IsAvaliable":false,"Type":2},"DurationInHours":0.4,"DateTime":"2021-03-06T00:00:00","type":1,"patientName":"Mika","patientSurname":"Mikic","IDpatient":"532952952","IDDoctor":"123","IDAppointment":"8810","DoctrosNameSurname":null,"Room":{"Id":2,"Name":"Sala 2","Floor":1,"IsAvaliable":false,"Type":2}}]
+[
+  {
+    "durationInHours": 0.2,
+    "room": {
+      "Id": 0,
+      "Name": "Sala za pregled",
+      "Floor": 0,
+      "IsAvaliable": false,
+      "Type": 0
+    },
+    "DurationInHours": 0.2,
+    "DateTime": "2021-12-16T00:00:00",
+    "type": 0,
+    "patientName": "Mika",
+    "patientSurname": "Mikic",
+    "IDpatient": "532952952",
+    "IDDoctor": "123",
+    "IDAppointment": "1",
+    "DoctrosNameSurname": "Stefan Ljubovic",
+    "Room": {
+      "Id": 0,
+      "Name": "Sala za pregled",
+      "Floor": 0,
+      "IsAvaliable": false,
+      "Type": 0
+    }
+  },
+  {
+    "durationInHours": 0.5,
+    "room": null,
+    "DurationInHours": 0.5,
+    "DateTime": "2022-12-12T00:12:12",
+    "type": 0,
+    "patientName": "Mika",
+    "patientSurname": "Mikic",
+    "IDpatient": "532952952",
+    "IDDoctor": "123",
+    "IDAppointment": "3",
+    "DoctrosNameSurname": "Stefan Ljubovic",
+    "Room": null
+  },
+  {
+    "durationInHours": 0.5,
+    "room": null,
+    "DurationInHours": 0.5,
+    "DateTime": "2025-12-12T00:12:12",
+    "type": 0,
+    "patientName": "Petar",
+    "patientSurname": "Petrovic",
+    "IDpatient": "481561361365",
+    "IDDoctor": "123",
+    "IDAppointment": "3",
+    "DoctrosNameSurname": "Stefan Ljubovic",
+    "Room": null
+  },
+  {
+    "durationInHours": 0.4,
+    "room": {
+      "Id": 1,
+      "Name": "Sala 1",
+      "Floor": 1,
+      "IsAvaliable": true,
+      "Type": 0
+    },
+    "DurationInHours": 0.4,
+    "DateTime": "2021-03-06T00:00:00",
+    "type": 1,
+    "patientName": "Mika",
+    "patientSurname": "Mikic",
+    "IDpatient": "532952952",
+    "IDDoctor": "123",
+    "IDAppointment": "8810",
+    "DoctrosNameSurname": null,
+    "Room": {
+      "Id": 1,
+      "Name": "Sala 1",
+      "Floor": 1,
+      "IsAvaliable": true,
+      "Type": 0
+    }
+  }
+]

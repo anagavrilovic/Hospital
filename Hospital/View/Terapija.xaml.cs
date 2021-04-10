@@ -44,10 +44,21 @@ namespace Hospital.View
                 OnPropertyChanged();
             }
         }
+        private string naslov;
+        public string Naslov
+        {
+            get { return naslov; }
+            set
+            {
+                naslov = value;
+                OnPropertyChanged();
+            }
+        }
 
         public Terapija()
         {
             InitializeComponent();
+            this.DataContext = this;
             medicineBox.ItemsSource = Lekovi;
         }
 
@@ -79,7 +90,8 @@ namespace Hospital.View
             {
                 t.AddMedicine(lek);
             }
-            t.description = textBox.Text;
+            t.description = Text;
+            t.name = Naslov;
             ((Doctor_Examination)Window.GetWindow(this)).Pregled.therapy = t;
         }
 
