@@ -22,6 +22,7 @@ namespace Hospital.View
     public partial class StaticInventory : Window
     {
         private string id;
+        private static ObservableCollection<Inventory> allInventory;
 
         public static ObservableCollection<Inventory> Inventory
         {
@@ -38,8 +39,22 @@ namespace Hospital.View
             this.id = id;
 
             InventoryStorage storage = new InventoryStorage();
-            Inventory = storage.GetAll();
-           // Inventory = storage.GetByRoomID(id);
+            allInventory = storage.GetAll();
+            // Inventory = storage.GetByRoomID(id);
+
+            //Console.WriteLine("SOBA  " + id);
+            Inventory = new ObservableCollection<Inventory>();
+            Inventory = storage.GetByRoomID(id);
+            /*
+            foreach (Inventory i in allInventory)
+            {
+                if (i.RoomID.Equals(id))
+                {
+                    Console.WriteLine("INV " + i.Id + " " + i.Name);
+                    //  Console.WriteLine("++++");
+                    Inventory.Add(i);
+                }
+            }*/
         }
 
         private void add(object o, RoutedEventArgs e)
@@ -73,6 +88,7 @@ namespace Hospital.View
             {
                 if (selectedItem != null)
                 {
+                    Inventory.Remove(selectedItem);
                     storage.Delete(selectedItem.Id);
                 }
             }

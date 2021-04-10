@@ -32,9 +32,9 @@
         <Button x:Name="add"    Content="Dodaj"    HorizontalAlignment="Left"   Height="29"  Margin="88,33,0,0"    VerticalAlignment="Top" Width="79" Background="#FFD2F4EE" Foreground="#FF1E49D9" Click="addRoom"/>
         <Button x:Name="edit"   Content="Izmeni"   HorizontalAlignment="Left"   Height="29"  Margin="183,33,0,0"   VerticalAlignment="Top" Width="84" Background="#FFD2F4EE" Foreground="#FF1E49D9" Click="editRoom"/>
         <Button x:Name="delete" Content="Izbriši"  HorizontalAlignment="Right"  Height="29"  Margin="0,33,269.2,0" VerticalAlignment="Top" Width="79" Background="#FFD2F4EE" Foreground="#FF1E49D9" Click="deleteRoom"/>
-                          
-        <Button x:Name="staticInventory" Content="Statički inventar" Height="29" 
-                Background="#FFD2F4EE"  Foreground="#FF1E49D9" Margin="401,33,129.2,202.8" Click="viewStaticInventory"/>
+
+        <Button x:Name="staticInventory" Content="Statički inventar" Height="29"  Margin="401,33,129.2,202.8"      Background="#FFD2F4EE" Foreground="#FF1E49D9" Click="viewStaticInventory"/>
+               
 
 
     </Grid>

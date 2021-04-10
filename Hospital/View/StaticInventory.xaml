@@ -27,12 +27,13 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FFE1FAFA">
             <Image Source="/Icon/back.png" Grid.Row="0" Grid.Column="1" Margin="10,8,5,5"/>
-            <Label Content="INVENTAR" Background="#FFFAFAFA" Foreground="#FF1E49D9" FontSize="24" Margin="0,15,5,10.2"/>
+            <Label Content="INVENTAR" Background="#FFE1FAFA" Foreground="#FF1E49D9" FontSize="24" Margin="0,15,5,10.2"/>
+            <Image Source="/Icon/logo.png" Margin="10,5,5,2"/>
         </StackPanel>
 
-        <Image Source="/Icon/logo.png" Grid.Row="0" Grid.Column="1" Margin="10,5,5,2"/>
+      
 
         <Button Grid.Column="0" Grid.Row="1"  Content="IZMENI STAVKU" Background="#FFD2F4EE" Foreground="#FF1E49D9" Margin="10,23,10.2,10" Click="edit" />
         <Button Grid.Column="1" Grid.Row="1"  Content="OBRIŠI STAVKU" Background="#FFD2F4EE" Foreground="#FF1E49D9" Margin="10,23,17,10" Click="delete"/>

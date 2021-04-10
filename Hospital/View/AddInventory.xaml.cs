@@ -48,7 +48,7 @@ namespace Hospital.View
             inventory.Add(inv);
             InventoryStorage invStorage = new InventoryStorage();
             invStorage.Save(inv);
-            ;
+            StaticInventory.Inventory.Add(inv);
 
             this.Close();
         }

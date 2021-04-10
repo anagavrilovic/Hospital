@@ -30,6 +30,8 @@ namespace Hospital
    
        public void Save(Inventory parameter1)
        {
+            inventory = GetAll();
+
             if (inventory == null)
             {
                 inventory = new ObservableCollection<Inventory>();
@@ -46,6 +48,7 @@ namespace Hospital
    
        public Boolean Delete(string id)
        {
+            inventory = GetAll();
             foreach (Inventory i in inventory)
             {
                 if (i.Id.Equals(id))
@@ -77,11 +80,12 @@ namespace Hospital
    
        public ObservableCollection<Inventory> GetByRoomID(string id)
        {
+            inventory = GetAll();
             ObservableCollection<Inventory> ret = new ObservableCollection<Inventory>();
 
             foreach (Inventory i in inventory)
             {
-                if (i.Id.Equals(id))
+                if (i.RoomID.Equals(id))
                 {
                   //  Console.WriteLine("++++");
                     ret.Add(i);
