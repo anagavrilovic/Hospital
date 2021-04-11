@@ -54,20 +54,10 @@ namespace Hospital
                     switch (user.Type)
                     {
                         case UserType.doctor:
-                            Doctor_Examination de = new Doctor_Examination();
-                            string text = "";
-                            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\dijagnoza.json"))
-                            {
-                                JsonSerializer serializer = new JsonSerializer();
-                                serializer.Serialize(file, text);
-                            }
-                            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\anamneza.json"))
-                            {
-                                JsonSerializer serializer = new JsonSerializer();
-                                serializer.Serialize(file, text);
-                            }
                             DoctorStorage ds = new DoctorStorage();
                             IDnumber= ds.GetByUsername(user.Username);
+                            DoktorGlavniProzor de = new DoktorGlavniProzor(IDnumber);
+                            //Doctor_Examination de = new Doctor_Examination(IDnumber);
                             de.Owner = Application.Current.MainWindow;
                             de.Show();
                             this.Hide();

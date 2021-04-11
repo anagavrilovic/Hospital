@@ -75,10 +75,15 @@ namespace Hospital.View
             {
                 danaZaK.Items.Add(i.ToString());
             }
+            dnevni.SelectedIndex = 2;
+            danaZaK.SelectedIndex = 7;
             Lekovi=mStorage.GetAll();
             InitializeComponent();
             this.parentWindow = parentWindow;
             this.listBox.ItemsSource = Lekovi;
+            ICollectionView view = GetPretraga();
+            view.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
+            view.SortDescriptions.Add(new SortDescription("ID", ListSortDirection.Ascending));
         }
 
         private void filterMedicine(object sender, RoutedEventArgs e)

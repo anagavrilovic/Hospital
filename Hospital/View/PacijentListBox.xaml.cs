@@ -55,6 +55,10 @@ namespace Hospital.View
             this.DataContext = this;
             this.parentWindow = parentWindow;
             this.listBox.ItemsSource = Pacijenti;
+            ICollectionView view = GetPretraga();
+            view.SortDescriptions.Add(new SortDescription("FirstName", ListSortDirection.Ascending));
+            view.SortDescriptions.Add(new SortDescription("LastName", ListSortDirection.Ascending));
+            view.SortDescriptions.Add(new SortDescription("PersonalID", ListSortDirection.Ascending));
         }
 
         private void listBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)

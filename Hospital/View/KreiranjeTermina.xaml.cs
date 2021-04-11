@@ -25,13 +25,13 @@ namespace Hospital.View
         private ObservableCollection<Doctor> doktori;
         private Appointment termin;
         public Appointment Termin { get => termin; set => termin = value; } 
-        private ObservableCollection<Room> sobe;
-        public ObservableCollection<Room> Sobe
+        private Room soba;
+        public Room Soba
         {
-            get { return sobe; }
+            get { return soba; }
             set
             {
-                sobe = value;
+                soba = value;
                 OnPropertyChanged();
             }
 
@@ -90,7 +90,17 @@ namespace Hospital.View
             }
 
             }
-        
+        private string trajanjeMinuti;
+        public string TrajanjeMinuti
+        {
+            get { return trajanjeMinuti; }
+            set
+            {
+                trajanjeMinuti = value;
+                OnPropertyChanged();
+            }
+
+        }
 
         public MakeApointment parentAppointment { get; set; }
         AppointmentStorage storage = new AppointmentStorage();
@@ -110,20 +120,25 @@ namespace Hospital.View
         public KreiranjeTermina(MakeApointment parentWindow)
         {
             InitializeComponent();
-            Doktor = new Doctor();
+            this.DataContext = this;
             Pacijent = new Patient();
             Termin = new Appointment();
-            this.DataContext = this;
+            Doktor = new Doctor();
             for (DateTime tm = time.AddHours(0); tm < time.AddHours(24); tm = tm.AddMinutes(30))
             {
                 vreme.Items.Add(tm.ToShortTimeString());
 
             }
+            for(int i = 0; i < 10; i++)
+            {
+                trajanje.Items.Add(((i + 1) * 15));
+            }
+            trajanje.SelectedIndex = 1;
+            vreme.SelectedIndex = 7;
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 3 / 4);
             parentAppointment = parentWindow;
             Doktori = dStorage.GetAll();
-            Sobe = rStorage.GetAll();
 
         }
 
@@ -134,31 +149,36 @@ namespace Hospital.View
 
         private void save_Click(object sender, RoutedEventArgs e)
         {
-            if (Pacijent == null || Date == null || VremeTermin == null || Doktor == null)
+            if (Pacijent == null || Date == null || VremeTermin == null || Doktor == null || (rdbOperacija.IsChecked.Equals(false) && rdbPregled.IsChecked.Equals(false)))
             {
+                
                 MessageBox.Show("Nisu uneti svi podace");
             }
             else
             {
-                MessageBox.Show(Pacijent.FirstName);
                 Termin.patientName = Pacijent.FirstName;
                 Termin.IDpatient = Pacijent.PersonalID;
                 Termin.patientSurname = Pacijent.LastName;
                 Termin.DateTime = Date.Date.Add(DateTime.Parse(vremeTermin).TimeOfDay);
+                int v=int.Parse(TrajanjeMinuti);
+                Termin.DurationInHours=(double)(v / 60);
+                
                 Random random = new Random();
                 Termin.IDDoctor = Doktor.PersonalID;
                 Termin.DoctrosNameSurname = Doktor.FirstName + " " + Doktor.LastName;
                 Termin.IDAppointment = random.Next(0, 10000).ToString();
                 storage.Save(Termin);
+                foreach(Room r in rStorage.GetAll())
+                {
+                    if(rdbPregled.IsChecked.Equals(true) && Doktor.RoomID==r.Id)
+                    {
+                        Termin.Room = r;
+                    }
+                }
                 parentAppointment.dataGridPregledi.ItemsSource = storage.GetAll();
                 this.Close();
             }
 
-        }
-
-        private void sale_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Termin.Room= (Room)sale.SelectedItem;
         }
 
 
@@ -168,6 +188,5 @@ namespace Hospital.View
             pacijentLB.Owner = this;
             pacijentLB.ShowDialog();
         }
-
     }
 }

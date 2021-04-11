@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Hospital.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,8 +23,18 @@ namespace Hospital.View
     public partial class Doctor_Examination : Window, INotifyPropertyChanged
     {
         private Examination pregled;
+        private Doctor doktor;
+        public Doctor Doktor
+        {
+            get { return doktor; }
+            set
+            {
+                doktor = value;
+                OnPropertyChanged();
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
-
+        private DoctorStorage dStorage = new DoctorStorage();
         public Examination Pregled
         {
             get { return pregled; }
@@ -40,11 +51,14 @@ namespace Hospital.View
                 this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
             }
         }
-        public Doctor_Examination()
+        public Doctor_Examination(string id)
         {
             pregled = new Examination();
+            Doktor = new Doctor();
+            Doktor = dStorage.GetOne(id);
+            
             InitializeComponent();
-            tab.SelectedIndex = 1;
+            tab.SelectedIndex = 5;
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 3 / 4);
         }

@@ -19,9 +19,27 @@ namespace Hospital.View
     /// </summary>
     public partial class DoktorGlavniProzor : Window
     {
-        public DoktorGlavniProzor()
+        private string IDnumber;
+
+        public DoktorGlavniProzor(string IDnumber)
         {
+            this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
+            this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 3 / 4);
+            this.IDnumber = IDnumber;
             InitializeComponent();
+        }
+
+        private void Pregled(object sender, RoutedEventArgs e)
+        {
+            Doctor_Examination de = new Doctor_Examination(IDnumber);
+            de.Owner = Application.Current.MainWindow;
+            de.Show();
+            this.Hide();
+        }
+
+        private void Logo(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

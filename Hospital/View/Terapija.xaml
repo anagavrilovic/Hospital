@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
         Title="Terapija" Background="#FFDCE6ED">
+    <Page.Resources>
+        
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>

@@ -35,7 +35,7 @@
                 <TextBlock Margin="40,0,0,10" Width="150" Height="20">Dnevni unos leka:</TextBlock>
                 <ComboBox x:Name="dnevni" Margin="0,0,20,20" Text="{Binding Dan, Mode=OneWayToSource}" SelectionChanged="dnevni_SelectionChanged" Width="40" Height="20"></ComboBox>
             </StackPanel>
-            <ListBox Name="listBox" Margin="40,20,40,40" MouseDoubleClick="listBox_MouseDoubleClick" Height="200"></ListBox>
+            <ListBox Name="listBox" Margin="40,20,40,40" MouseDoubleClick="listBox_MouseDoubleClick" Height="200" IsSynchronizedWithCurrentItem="True"></ListBox>
         </StackPanel>
 
     </DockPanel>

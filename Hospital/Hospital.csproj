@@ -322,5 +322,14 @@
   <ItemGroup>
     <Resource Include="Icon\document.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\inbox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\odmor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\inventory.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

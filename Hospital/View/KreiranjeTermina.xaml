@@ -173,21 +173,18 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid Margin="76,0,75.6,0">
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+    <Grid Margin="300,20,0,0">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition Height="200"/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Margin="64,0,202.6,4.8">
-            <Label FontSize="17" Width="77" HorizontalAlignment="Left" Margin="0,25,0,0" Content="Pacijent:"/>
-            <Border BorderThickness="1" BorderBrush="Black" Width="150" Margin="0,30,0,27" Height="25">
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Left">
+            <Label FontSize="17" Width="77" Margin="0,0,10,0" HorizontalAlignment="Left" Content="Pacijent:" VerticalAlignment="Center"/>
+            <Border BorderThickness="1" BorderBrush="Black" Width="150" Height="25" Margin="0,0,5,0" >
                 <TextBlock x:Name="pacijentIme" FontSize="17" HorizontalAlignment="Left">
                     <TextBlock.Text>
                         <MultiBinding StringFormat="{}{0}  {1}">
@@ -197,7 +194,7 @@
                     </TextBlock.Text>
                 </TextBlock>
             </Border>
-            <Button x:Name="btnDodajPacijenta" Height="25" FontSize="17" Margin="15,20,0,17.2" Width="100" BorderThickness="1" Click="dodajPacijenta" Content="Dodaj" Background="Crimson" Foreground="White">
+            <Button x:Name="btnDodajPacijenta" Height="25" FontSize="17" Width="100" BorderThickness="1" Click="dodajPacijenta" Content="Dodaj" Background="Crimson" Foreground="White">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>
@@ -205,9 +202,9 @@
                 </Button.Resources>
             </Button>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Center" Grid.Row="1" Margin="64,0,135.6,76.6" Grid.RowSpan="2">
-            <Label FontSize="17" Margin="0,20,0,0"  Width="76" Content="Doktor:" HorizontalAlignment="Left"/>
-            <ComboBox x:Name="doktorIme" Width="150" Height="25" Margin="10,20,0,0" SelectedValue="{Binding Doktor}" ItemsSource="{Binding Doktori, Mode=TwoWay}" VerticalAlignment="Top">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center">
+            <Label FontSize="17"  Width="76" Content="Doktor:" Margin="0,0,10,0"  HorizontalAlignment="Left"/>
+            <ComboBox x:Name="doktorIme" Width="150" Height="30" SelectedValue="{Binding Doktor}" ItemsSource="{Binding Doktori, Mode=TwoWay}" VerticalAlignment="Top" Margin="0,0,5,0">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock FontSize="17">
@@ -217,30 +214,34 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <RadioButton x:Name="rdbPregled" FontSize="17" Margin="10,28,0,0" Content="pregled" IsChecked="True" />
-            <RadioButton x:Name="rdbOperacija" FontSize="17" Margin="0,28,0,0" Content="operacija" IsChecked="False" />
+            <RadioButton GroupName="tipTermina" x:Name="rdbPregled" FontSize="17"  Content="pregled" IsChecked="False"/>
+            <RadioButton GroupName="tipTermina" x:Name="rdbOperacija" FontSize="17"  Content="operacija" IsChecked="False"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" >
-            <Label FontSize="17" Margin="0,30,0,23.2" Width="190" Content="Datum i vreme termina:"/>
-            <DatePicker x:Name="Datum" Margin="10,0,10,0" Width="150" Height="25" 
-                        SelectedDate="{Binding Date, Mode=OneWayToSource}" FirstDayOfWeek="Monday"/>
-            <ComboBox x:Name="vreme" Width="20" Height="25" Margin="0,23,0,23.2" SelectedValue="{Binding VremeTermin
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" >
+            <Label FontSize="17"  Width="190" Content="Datum i vreme termina:"/>
+            <DatePicker x:Name="Datum" Width="150" Height="25" 
+                        SelectedDate="{Binding Date, Mode=OneWayToSource}" FirstDayOfWeek="Monday" Margin="10,0,5,0"/>
+            <ComboBox x:Name="vreme" Width="20" Height="25" SelectedValue="{Binding VremeTermin
                 ,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" Margin="64,0.4,334.6,199.6" Grid.RowSpan="2">
-            <Label FontSize="17" Margin="0,30,15,0">Sala:</Label>
-            <ComboBox Name="sale" Width="150" Height="25" ItemsSource="{Binding Sobe, Mode=TwoWay}" DisplayMemberPath="Name" SelectionChanged="sale_SelectionChanged"></ComboBox>
+        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Label FontSize="17" Margin="0,0,10,0">Trajanje u minutama:</Label>
+            <ComboBox FontSize="17" x:Name="trajanje" Width="150" Height="25" SelectedValue="{Binding TrajanjeMinuti, Mode=OneWayToSource}"></ComboBox>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <Button x:Name="save" Height="30" Width="100" FontSize="18" Margin="0,10,30,0" HorizontalAlignment="Center" Click="save_Click"
-                Background="Crimson" Foreground="White" Content="Potvrdi">
+        <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Label FontSize="17" Margin="0,0,10,0">Tip pregleda/operacije:</Label>
+            <TextBox FontSize="17" Name="sale" Width="150" Height="25" IsEnabled="False">Text</TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Button x:Name="save" Height="30" Width="100" FontSize="18" Click="save_Click"
+                Background="Crimson" Foreground="White" Content="Potvrdi" Margin="50,0,40,0">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button x:Name="cancel" Width="100" Height="30" FontSize="18" Margin="10,10,0,0" HorizontalAlignment="Center" Click="cancel_Click"
+            <Button x:Name="cancel" Width="100" Height="30" FontSize="18" Click="cancel_Click"
                 Background="White" Content="Odustani">
                 <Button.Resources>
                     <Style TargetType="Border">
@@ -250,4 +251,5 @@
             </Button>
         </StackPanel>
     </Grid>
+    
 </Window>

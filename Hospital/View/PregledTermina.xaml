@@ -181,7 +181,7 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Orientation="Horizontal">
                     <Label FontSize="17" Content="Termin kod:" Margin="30,20,0,0"/>
-                    <ComboBox x:Name="ComboBox" Width="100" Height="25" Margin="10,20,0,20" HorizontalAlignment="Left"/>
+                    <ComboBox x:Name="ComboBox" Width="100" Height="25" Margin="10,20,0,20" HorizontalAlignment="Left" SelectionChanged="ComboBox_SelectionChanged"/>
                 </StackPanel>
                 <Button x:Name="dodaj" Width="100" Height="30" Margin="0,20,30,20" Click="Dodaj" Content="Novi termin"
                         Background="Crimson" Foreground="White" Grid.Column="2" HorizontalAlignment="Right">
