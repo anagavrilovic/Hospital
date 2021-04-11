@@ -58,7 +58,7 @@ namespace Hospital
                             IDnumber= ds.GetByUsername(user.Username);
                             DoktorGlavniProzor de = new DoktorGlavniProzor(IDnumber);
                             //Doctor_Examination de = new Doctor_Examination(IDnumber);
-                            de.Owner = Application.Current.MainWindow;
+                            de.Owner = this;
                             de.Show();
                             this.Hide();
                             break;

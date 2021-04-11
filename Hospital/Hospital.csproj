@@ -331,5 +331,14 @@
   <ItemGroup>
     <Resource Include="Icon\inventory.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\notification.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\person.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\announcment.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
