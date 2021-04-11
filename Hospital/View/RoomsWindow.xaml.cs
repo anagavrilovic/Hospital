@@ -103,5 +103,10 @@ namespace Hospital.View
                 inv.Show();
             }
         }
+
+        private void viewDynamicInventory(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
