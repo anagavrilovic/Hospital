@@ -6,30 +6,27 @@
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
         Title="Anamnesis" Background="#FFDCE6ED" >
+    <Page.Resources>
+       <!-- <Style TargetType="TextBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                        <Border CornerRadius="2" Padding="2" Background="#19212F" BorderBrush="Red" BorderThickness="1">
+                            <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>-->
+    </Page.Resources>
     <Grid>
         <StackPanel Orientation="Vertical">
             <Label FontSize="25" Content="Anamneza:" Margin="60,0,0,0"></Label>
-            <ScrollViewer CanContentScroll="True" Width="600" Height="400" Margin="30,10,30,20">
+            <ScrollViewer CanContentScroll="True" Width="600" Height="500" Margin="30,10,30,20">
                 <Border  BorderThickness="1" BorderBrush="Black">
-                    <TextBox Name="anamnesisBox" TextWrapping="Wrap" FontSize="15" AcceptsReturn="True" Text="{Binding Test1, Mode=TwoWay, UpdateSourceTrigger=Explicit}"></TextBox>
+                    <TextBox Name="anamnesisBox" TextWrapping="Wrap" FontSize="15" AcceptsReturn="True" Text="{Binding Test1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 </Border>
             </ScrollViewer>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="120" Height="30" Content="Sacuvaj izmene" Background="Crimson" Foreground="White" Margin="0,0,40,0" Click="Sacuvaj">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="10"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
-                <Button Width="120" Height="30" Content="Odustani" Background="White" Click="Odustani">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="10"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
-            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

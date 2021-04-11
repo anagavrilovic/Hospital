@@ -1,8 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,34 +11,28 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    
-
-    public partial class Diagnosis : Page, INotifyPropertyChanged
+    /// <summary>
+    /// Interaction logic for DoktorKarton.xaml
+    /// </summary>
+    public partial class DoktorKarton : Page, INotifyPropertyChanged
     {
 
-        private string _test1;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        
-        public string Test1
+        private MedicalRecord karton;
+        private MedicalRecordStorage mStorage;
+        public MedicalRecord Karton
         {
-            get
-            {
-                return _test1;
-            }
+            get { return karton; }
             set
             {
-                if (value != _test1)
-                {
-                    _test1 = value;
-                    OnPropertyChanged("Test1");
-                }
+                karton = value;
             }
         }
+
         protected void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
@@ -48,12 +40,15 @@ namespace Hospital.View
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
-  
-        public Diagnosis()
+
+        public DoktorKarton()
         {
             InitializeComponent();
             this.DataContext = this;
+            mStorage = new MedicalRecordStorage();
+           Karton= mStorage.GetOne("241521526");
         }
-        
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

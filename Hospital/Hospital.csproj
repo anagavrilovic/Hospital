@@ -59,6 +59,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\Allergen.cs" />
+    <Compile Include="Model\BoolToStringConverter.cs" />
     <Compile Include="Model\DoctorSpecialty.cs" />
     <Compile Include="Model\DoctorStorage.cs" />
     <Compile Include="Model\Ingredient.cs" />
@@ -77,6 +78,9 @@
     </Compile>
     <Compile Include="View\Diagnosis.xaml.cs">
       <DependentUpon>Diagnosis.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DoktorKarton.xaml.cs">
+      <DependentUpon>DoktorKarton.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LekListBox.xaml.cs">
       <DependentUpon>LekListBox.xaml</DependentUpon>
@@ -159,6 +163,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Diagnosis.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DoktorKarton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -310,6 +318,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\penPaper.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\document.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

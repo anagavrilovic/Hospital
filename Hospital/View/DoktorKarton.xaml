@@ -1,0 +1,140 @@
+﻿<Page x:Class="Hospital.View.DoktorKarton"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xml:lang="en-IN"
+      xmlns:local="clr-namespace:Hospital.View"
+      xmlns:converters="clr-namespace:Hospital.Model"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="DoktorKarton"
+      Background="#FFDCE6ED">
+    <Page.Resources>
+        <converters:BoolToStringConverter x:Key="BoolToString"/>
+    </Page.Resources>
+    <Grid>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Margin="20,20,0,0" Grid.Column="0">
+            <Label FontSize="24" Content="PACIJENTI: Detalji o pacijentu"/>
+            <StackPanel Orientation="Horizontal" Margin="20,40,0,0">
+                <Label FontSize="13" Content="Ime:"/>
+                <Label FontSize="13" Content="{Binding Karton.Patient.FirstName}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
+                <Label FontSize="13" Content="Ime jednog roditelja:"/>
+                <Label FontSize="13" Content="{Binding Karton.ParentName}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
+                <Label FontSize="13" Content="Prezime:"/>
+                <Label FontSize="13" Content="{Binding Karton.Patient.LastName}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
+                <Label FontSize="13" Content="Datum rođenja:"/>
+                <Label FontSize="13" Content="{Binding Karton.Patient.DateOfBirth}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
+                <Label FontSize="13" Content="Ulica stanovanja:"/>
+                <Label FontSize="13" Content="{Binding Karton.Patient.Address}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
+                <Label FontSize="13" Content="Mesto stanovanja:"/>
+                <Label FontSize="13" Content="{Binding Karton.Patient.City}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
+                <Label FontSize="13" Content="Poštanski broj:"/>
+                <Label FontSize="13"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
+                <Label FontSize="13" Content="Opština:"/>
+                <Label FontSize="13" Content="{Binding Karton.Patient.Township }"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
+                <Label FontSize="13" Content="Država:"/>
+                <Label FontSize="13" Content="{Binding Karton.Patient.Country }"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
+                <Label FontSize="13" Content="Broj zdravstvene knjižice:"/>
+                <Label FontSize="13" Content="{Binding Karton.HealthCardNumber }"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
+                <Label FontSize="13" Content="Broj lične karte:"/>
+                <Label FontSize="13" Content="{Binding Karton.Patient.PersonalID }"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
+                <Label FontSize="13" Content="JMBG:"/>
+                <Label FontSize="13" Content="{Binding Karton.Patient.CardID }"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
+                <Label FontSize="13" Content="Kontakt telefon:"/>
+                <Label FontSize="13" Content="{Binding Karton.Patient.PhoneNumber }"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
+                <Label FontSize="13" Content="E-mail:"/>
+                <Label FontSize="13" Content="{Binding Karton.Patient.Email }"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
+                <Label FontSize="13" Content="Bračno stanje:"/>
+                <Label FontSize="13" Content="{Binding Karton.Patient.MaritalStatus }"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
+                <Label FontSize="13" Content="Pol:"/>
+                <Label FontSize="13" Content="{Binding Karton.Patient.Gender }"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
+                <Label FontSize="13" Content="Krvna grupa:"/>
+                <Label FontSize="13" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
+                <Label FontSize="13" Content="Osiguran:"/>
+                <Label x:Name="Bool" FontSize="13" Content="{Binding Karton.IsInsured , 
+                    Converter={StaticResource BoolToString }}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
+                <Label FontSize="13" Content="Korisničko ime:"/>
+                <Label FontSize="13" Content="{Binding Karton.Patient.Username }"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,30,30,0">
+                <Label FontSize="15" Content="Broj zdravstvenog kartona:"/>
+                <Label FontSize="15" Content="{Binding Karton.MedicalRecordID }"/>
+            </StackPanel>
+            <Label HorizontalAlignment="Right" Margin="0,10,275,0" Content="Alergičan na lek:"/>
+            <ScrollViewer CanContentScroll="True" Margin="0,0,40,0">
+                <ListBox HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                  Height="100" Width="310" ScrollViewer.CanContentScroll="True" ItemsSource="{Binding Karton.Allergen.MedicineNames}"></ListBox>
+            </ScrollViewer>
+            <Label HorizontalAlignment="Right" Margin="0,10,247,0" Content="Alergičan na sastojak:"/>
+            <ScrollViewer CanContentScroll="True" Margin="0,0,40,0">
+                <ListBox HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                  Height="100" Width="310" ScrollViewer.CanContentScroll="True" ItemsSource="{Binding Karton.Allergen.IngredientNames}"></ListBox>
+            </ScrollViewer>
+            <Label HorizontalAlignment="Right" Margin="0,10,285,0" Content="Ostali alergeni:"/>
+            <TextBox HorizontalAlignment="Right" Height="100" Width="330" Margin="0,0,40,0"
+                     Text="{Binding Karton.Allergen.Other}" IsEnabled="False"></TextBox>
+            <StackPanel Orientation="Horizontal" Margin="0,20,40,0" HorizontalAlignment="Right">
+                <Button Width="100" Height="30" Content="Sačuvaj pregled"
+                        Background="Crimson" Foreground="White" Margin="0,0,130,0">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Width="100" Height="30" Content="Prekini pregled"
+                        Background="White">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

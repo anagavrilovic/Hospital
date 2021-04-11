@@ -21,34 +21,34 @@
             <TextBox Name="textBox" TextWrapping="Wrap" AcceptsReturn="True" FontSize="15" Text="{Binding Text, Mode=TwoWay}"></TextBox>
         </ScrollViewer>
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" Margin="0,0,20.2,19.6">
+        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Margin="0,0,20.2,19.6">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="30,75,0,0">
                 <Label FontSize="17" Content="Naziv terapije: " Margin="5,0,0,0"></Label>
                 <TextBox Width="150" Height="25" Text="{Binding Naslov, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </StackPanel>
             <Label FontSize="17" Margin="40,20,0,0">Prepisani lekovi:</Label>
             <StackPanel Orientation="Horizontal">
-                <ScrollViewer CanContentScroll="True" Height="200" Width="250" Margin="40,10,19.2,40">
-                <ListBox Name="medicineBox" BorderThickness="1" BorderBrush="Black">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock>
+                <ScrollViewer CanContentScroll="True" Height="300" Width="250" Margin="40,10,19.2,40">
+                    <ListBox Name="medicineBox" BorderThickness="1" BorderBrush="Black">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
                         <Run Text="{Binding Name}"/>
                         <Run Text="{Binding ID}"/>
-                        </TextBlock>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-            </ScrollViewer>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </ScrollViewer>
                 <StackPanel Orientation="Vertical">
                     <Button Width="100" Height="30" Content="Dodaj lek" Margin="10,5,20,0" VerticalAlignment="Top" Click="DodajLek"
                         Background="Crimson" Foreground="White">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
                     <Button Width="100" Height="30" Content="Izbaci iz liste" Margin="10,20,20,0" VerticalAlignment="Top" Click="Obrisi"
                         Background="White">
                         <Button.Resources>
@@ -59,23 +59,6 @@
                     </Button>
                 </StackPanel>
             </StackPanel>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="20.8,20.4,10.2,20.4">
-            <Button Width="120" Height="30" Content="Sacuvaj izmene" Margin="20,20,20,0" Click="Sacuvaj" Background="Crimson" Foreground="White">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-            <Button Width="120" Height="30" Content="Odustani" Margin="20,20,20,0" Click="Odustani" Background="White">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-
         </StackPanel>
     </Grid>
 </Page>

@@ -52,17 +52,5 @@ namespace Hospital.View
             InitializeComponent();
             this.DataContext = this;
         }
-
-        private void Sacuvaj(object sender, System.Windows.RoutedEventArgs e)
-        {
-            BindingExpression binding = anamnesisBox.GetBindingExpression(TextBox.TextProperty);
-            binding.UpdateSource();
-            ((Doctor_Examination)Window.GetWindow(this)).Pregled.anamnesis = Test1;
-        }
-
-        private void Odustani(object sender, System.Windows.RoutedEventArgs e)
-        {
-
-        }
     }
 }
