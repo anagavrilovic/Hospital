@@ -65,7 +65,6 @@ namespace Hospital.View
                 }
             }
 
-           // RoomsWindow.Rooms.Add(new Room { Id = tempId, Name = tempName, Floor = tempFloor, IsAvaliable = tempFree, Type = tempType });
             this.Close();
         }
 

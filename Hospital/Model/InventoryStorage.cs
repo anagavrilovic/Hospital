@@ -1,13 +1,15 @@
-// File:    InventoryStorage.cs
+﻿// File:    InventoryStorage.cs
 // Author:  Marija
 // Created: Tuesday, March 23, 2021 10:19:32 PM
 // Purpose: Definition of Class InventoryStorage
 
+using Hospital.View;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Windows;
 
 namespace Hospital
 {
@@ -95,10 +97,66 @@ namespace Hospital
             return ret;
         }
    
-       public bool UpdateInventory(string firstRoomID, string secondRoomID, int quantity)
+       public void UpdateInventory(Inventory fromFirstRoom, string secondRoomID, int quantity)
        {
-          throw new NotImplementedException();
-       }
+            if (fromFirstRoom.Quantity > quantity)
+            {
+                ObservableCollection<Inventory> inventar = new ObservableCollection<Inventory>();
+                inventar = this.GetByRoomID(secondRoomID);
+
+                bool found = false;
+
+                foreach (Inventory i in inventar)
+                {
+                    if (i.Name.Equals(fromFirstRoom.Name))
+                    {
+                        i.Quantity += quantity;
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    Inventory newItem = new Inventory
+                    {
+                        Id = fromFirstRoom.Id,
+                        Name = fromFirstRoom.Name,
+                        Quantity = quantity,
+                        Price = fromFirstRoom.Price,
+                        RoomID = secondRoomID
+                    };
+                    inventory.Add(newItem);
+                }
+
+
+                foreach (Inventory i in StaticInventory.Inventory)
+                {
+                    if (i.Id.Equals(fromFirstRoom.Id) && i.RoomID.Equals(fromFirstRoom.RoomID))
+                    {
+                        i.Quantity -= quantity;
+                    }
+                }
+
+                foreach (Inventory i in inventory)
+                {
+                    if (i.Id.Equals(fromFirstRoom.Id) && i.RoomID.Equals(fromFirstRoom.RoomID))
+                    {
+                        i.Quantity -= quantity;
+                    }
+                }
+
+                using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Serialize(file, inventory);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Pogrešan unos količine!");
+            }
+        }
 
         public static ObservableCollection<Inventory> inventory = new ObservableCollection<Inventory>();
         public String fileName;

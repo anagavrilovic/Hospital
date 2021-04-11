@@ -32,14 +32,14 @@
 
         <Label Content="RAZMENA INVENTARA" Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="77,15.4,28,0.4" FontWeight="Bold"/>
 
-        <Label Content="ID odredišne sale:"     Grid.Row="2" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
-        <TextBox x:Name="oznaka"     Grid.Row="3" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" />
+        <Label Content="Naziv stavke:"          Grid.Row="2" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
+        <TextBox x:Name="nazivTxt"      Grid.Row="3" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C"  />
 
-        <Label Content="Naziv stavke:"          Grid.Row="4" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
-        <TextBox x:Name="naziv"      Grid.Row="5" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C"  />
+        <Label Content="Količina:"   Grid.Row="4" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
+        <TextBox x:Name="kolicinaTxt" Grid.Row="5" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" />
 
-        <Label Content="Količina:"   Grid.Row="6" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
-        <TextBox x:Name="kolicina" Grid.Row="7" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" />
+        <Label Content="ID odredišne sale:"     Grid.Row="6" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
+        <TextBox x:Name="oznakaTxt"     Grid.Row="7" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" />
 
         <Button Grid.Column="0" Grid.Row="8" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFD2F4EE" Foreground="#FF1E49D9" Margin="30,31.2,10,39.8" Click="accept" />
         <Button Grid.Column="1" Grid.Row="8" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="10,31.2,28,39.8" Click="cancel" />

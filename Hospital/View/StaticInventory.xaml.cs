@@ -96,7 +96,15 @@ namespace Hospital.View
 
         private void transfer(object o, RoutedEventArgs e)
         {
-            
+            Inventory selectedItem = (Inventory)dataGridInventory.SelectedItem;
+
+            if(selectedItem != null)
+            {
+                PrebacivanjeInventara transfer = new PrebacivanjeInventara(selectedItem);
+                transfer.Owner = Application.Current.MainWindow;
+                transfer.nazivTxt.Text = selectedItem.Name;
+                transfer.Show();
+            }
         }
     }
 }
