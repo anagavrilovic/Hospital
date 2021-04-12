@@ -1,6 +1,6 @@
 [
   {
-    "DurationInHours": 0.2,
+    "DurationInHours": 1.5,
     "DateTime": "2021-12-16T00:00:00",
     "type": 0,
     "patientName": "Mika",
@@ -19,7 +19,7 @@
   },
   {
     "DurationInHours": 0.5,
-    "DateTime": "2022-12-12T00:12:12",
+    "DateTime": "2022-12-12T12:00:00",
     "type": 0,
     "patientName": "Mika",
     "patientSurname": "Mikic",
@@ -31,7 +31,7 @@
   },
   {
     "DurationInHours": 0.5,
-    "DateTime": "2025-12-12T00:12:12",
+    "DateTime": "2025-12-12T12:30:00",
     "type": 0,
     "patientName": "Petar",
     "patientSurname": "Petrovic",
@@ -42,7 +42,7 @@
     "Room": null
   },
   {
-    "DurationInHours": 0.4,
+    "DurationInHours": 1,
     "DateTime": "2021-03-06T00:00:00",
     "type": 1,
     "patientName": "Mika",
