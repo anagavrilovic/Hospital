@@ -41,7 +41,7 @@
                 <Button x:Name="Zakazi" Grid.Column="2" Height="25" Width="25" Content="+" Margin="5" Style="{StaticResource ButtonCalendar}"/>
                 <Button x:Name="Otkazi" Grid.Column="3" Height="25" Width="25" Content="-" Margin="5" Style="{StaticResource ButtonCalendar}"/>
                 <DatePicker x:Name="Datum" Grid.Column="5" Focusable="False" Width="150" Height="25" Margin="5" SelectedDate="{Binding Date}" SelectedDateChanged="DateChanged" FirstDayOfWeek="Monday"/>
-                <Button x:Name="Danas" Grid.Column="6" Height="25" Width="80" Content="Danas" Margin="5" Click="DanasClick" Style="{StaticResource ButtonCalendar}" />
+                <Button x:Name="TrenutnaNedelja" Grid.Column="6" Height="25" Width="100" Content="Trenutna nedelja" Margin="5" Click="TrenutnaNedeljaClick" Style="{StaticResource ButtonCalendar}" />
                 
                 <Button x:Name="Previous" Grid.Column="7" Width="25" Height="25" Margin="5" Click="PreviousClick" Style="{StaticResource ButtonCalendar}">
                     <Button.Resources>

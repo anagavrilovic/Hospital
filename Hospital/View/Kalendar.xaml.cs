@@ -186,37 +186,38 @@ namespace Hospital.View
             return dt.AddDays(-1 * diff).Date;
         }
 
-        private void ComboBoxDoctorEvent(object sender, SelectionChangedEventArgs e)
+        private void OsveziKalendar()
         {
             PopuniKalendar();
             PopuniTermine((Doctor)DoctorComboBox.SelectedItem);
+        }
+
+        private void ComboBoxDoctorEvent(object sender, SelectionChangedEventArgs e)
+        {
+            OsveziKalendar();
         }
 
         private void DateChanged(object sender, SelectionChangedEventArgs e)
         {
-            PopuniKalendar();
-            PopuniTermine((Doctor)DoctorComboBox.SelectedItem);
+            OsveziKalendar();
         }
 
-        private void DanasClick(object sender, RoutedEventArgs e)
+        private void TrenutnaNedeljaClick(object sender, RoutedEventArgs e)
         {
             Date = DateTime.Today;
-            PopuniKalendar();
-            PopuniTermine((Doctor)DoctorComboBox.SelectedItem);
+            OsveziKalendar();
         }
 
         private void PreviousClick(object sender, RoutedEventArgs e)
         {
             Date = Date.AddDays(-7);
-            PopuniKalendar();
-            PopuniTermine((Doctor)DoctorComboBox.SelectedItem);
+            OsveziKalendar();
         }
 
         private void NextClick(object sender, RoutedEventArgs e)
         {
             Date = Date.AddDays(7);
-            PopuniKalendar();
-            PopuniTermine((Doctor)DoctorComboBox.SelectedItem);
+            OsveziKalendar();
         }
     }
 }
