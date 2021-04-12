@@ -364,7 +364,7 @@
                 </StackPanel>
             </Button.Content>
         </Button>
-        <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource GelButton}" Margin="0,40,40,0" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+        <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource GelButton}" Margin="0,40,40,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="Button_Click">
             <Button.Content>
                 <StackPanel Orientation="Vertical">
                     <Image Source="/Icon/odmor.png" Width="150" Height="50"/>

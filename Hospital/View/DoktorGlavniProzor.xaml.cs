@@ -91,5 +91,13 @@ namespace Hospital.View
             obavestenje.Source = new BitmapImage(new Uri("pack://application:,,,/Icon/announcment.png", UriKind.Absolute));
             view.Visibility = Visibility.Visible;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            KalendarTermini k = new KalendarTermini(IDnumber);
+            k.Owner = this;
+            this.Hide();
+            k.Show();
+        }
     }
 }

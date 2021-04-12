@@ -82,9 +82,12 @@
     </Compile>
     <Compile Include="View\DoktorKarton.xaml.cs">
       <DependentUpon>DoktorKarton.xaml</DependentUpon>
-	</Compile>
+    </Compile>
     <Compile Include="View\Kalendar.xaml.cs">
       <DependentUpon>Kalendar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KalendarTermini.xaml.cs">
+      <DependentUpon>KalendarTermini.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LekListBox.xaml.cs">
       <DependentUpon>LekListBox.xaml</DependentUpon>
@@ -175,10 +178,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DoktorKarton.xaml">
-		<SubType>Designer</SubType>
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Kalendar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\KalendarTermini.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

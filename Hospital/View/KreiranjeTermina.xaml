@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
         Title="KreiranjeTermina"
@@ -219,7 +220,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" >
             <Label FontSize="17"  Width="190" Content="Datum i vreme termina:"/>
-            <DatePicker x:Name="Datum" Width="150" Height="25" 
+            <DatePicker x:Name="Datum" Width="150" Height="25"  DisplayDateStart="{x:Static sys:DateTime.Today}"
                         SelectedDate="{Binding Date, Mode=OneWayToSource}" FirstDayOfWeek="Monday" Margin="10,0,5,0"/>
             <ComboBox x:Name="vreme" Width="20" Height="25" SelectedValue="{Binding VremeTermin
                 ,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
