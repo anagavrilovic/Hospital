@@ -106,7 +106,14 @@ namespace Hospital.View
 
         private void viewDynamicInventory(object sender, RoutedEventArgs e)
         {
-            
+            Room selectedItem = (Room)dataGridRooms.SelectedItem;
+
+            if(selectedItem != null)
+            {
+                DynamicInventory inv = new DynamicInventory(selectedItem.Id);
+                inv.Owner = Application.Current.MainWindow;
+                inv.Show();
+            }
         }
     }
 }

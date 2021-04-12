@@ -47,11 +47,11 @@
                   Background="#FFE3F4F1" FontFamily="Arial" Foreground="#FF536AA0" Grid.RowSpan="2" Width="404">
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn     Header="Oznaka"                   Binding="{Binding Id}"/>
-                    <DataGridTextColumn     Header="Naziv"    Width="1.1*"    Binding="{Binding Name}" />
+                    <DataGridTextColumn     Header="Oznaka"                    Binding="{Binding Id}"/>
+                    <DataGridTextColumn     Header="Naziv"    Width="1.1*"     Binding="{Binding Name}" />
                     <DataGridTextColumn     Header="Sprat"    Width="1.01*"    Binding="{Binding Floor}"/>
-                    <DataGridCheckBoxColumn Header="Slobodna" Width="1.1*"    Binding="{Binding IsAvaliable}"/>
-                    <DataGridTextColumn     Header="Tip"      Width="1.4*"    Binding="{Binding Type}"/>
+                    <DataGridCheckBoxColumn Header="Slobodna" Width="1.1*"     Binding="{Binding IsAvaliable}"/>
+                    <DataGridTextColumn     Header="Tip"      Width="1.4*"     Binding="{Binding Type}"/>
                 </DataGrid.Columns>
 
             </DataGrid>

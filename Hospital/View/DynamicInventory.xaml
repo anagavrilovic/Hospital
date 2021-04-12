@@ -1,0 +1,65 @@
+﻿<Window x:Class="Hospital.View.DynamicInventory"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.View"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
+        Title="Oprema" Height="750" Width="430">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
+            <Image Source="/Icon/back.png" Grid.Row="0" Grid.Column="0" Margin="10,8,5,5"/>
+            <Label Content="OPREMA" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" Margin="0,15,5,10.2"/>
+            <Image Source="/Icon/logo.png" Margin="50,5,5,2"/>
+        </StackPanel>
+
+        <Button x:Name="edit"     Content="IZMENI STAVKU"    Grid.Row="1" Grid.Column="0" Margin="10,23,10.2,10" Background="#FFBBD7F9" Foreground="#FF051D6E" Click="editItem" />
+        <Button x:Name="delete"   Content="IZBRIŠI STAVKU"   Grid.Row="1" Grid.Column="1" Margin="10,23,10.2,10" Background="#FFBBD7F9" Foreground="#FF051D6E" Click="deleteItem"/>
+        <Button x:Name="transfer" Content="PREBACI STAVKU"   Grid.Row="2" Grid.Column="0" Margin="10,10,10.2,23" Background="#FFBBD7F9" Foreground="#FF051D6E" Click="transferItem"/>
+        <Button x:Name="report"   Content="KREIRAJ IZVEŠTAJ" Grid.Row="2" Grid.Column="1" Margin="10,10,10.2,23" Background="#FFBBD7F9" Foreground="#FF051D6E" Click="createReport"/>
+
+        <TextBox x:Name="search"  Grid.Row="3" Grid.ColumnSpan="2" Margin="10,0,62,19.8" />
+        <Image Source="/Icon/search-blue.png" Grid.Row="3" Grid.Column="1" Margin="155,0,15,19.8"/>
+
+        <ScrollViewer Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="2" Background="Azure" HorizontalScrollBarVisibility="Auto" Margin="10,0,0,0">
+            <Grid MinWidth="200">
+                <DataGrid  x:Name ="dataGridInventory" Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="2"  
+                               IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" 
+                               ItemsSource="{Binding Path=Inventory, UpdateSourceTrigger=PropertyChanged}"
+                               Background="#FFCADEED" FontFamily="Arial" Foreground="#FF536AA0" Margin="0,0,0,0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Oznaka"             Binding="{Binding Id}"          Width="70"/>
+                        <DataGridTextColumn Header="Naziv"              Binding="{Binding Name}"        Width="100"/>
+                        <DataGridTextColumn Header="Cena"               Binding="{Binding Price}"       Width="60"/>
+                        <DataGridTextColumn Header="Količina"           Binding="{Binding Quantity}"    Width="70"/>
+                        <DataGridTextColumn Header="Merna jedinica"     Binding="{Binding Unit}"        Width="90"/>
+                    </DataGrid.Columns>
+
+                </DataGrid>
+            </Grid>
+        </ScrollViewer>
+
+        <Button x:Name="add"    Content="DODAJ STAVKU"  Grid.Row="9" Grid.ColumnSpan="2" Margin="10,10.2,15,9.8" Background="#FFBBD7F9" Foreground="#FF051D6E" Click="addItem" />
+
+    </Grid>
+</Window>

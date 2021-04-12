@@ -55,7 +55,6 @@ namespace Hospital
             {
                 if (i.Id.Equals(id))
                 {
-                  //  Console.WriteLine("*********");
                     inventory.Remove(i);
                     using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
                     {
@@ -89,7 +88,6 @@ namespace Hospital
             {
                 if (i.RoomID.Equals(id))
                 {
-                  //  Console.WriteLine("++++");
                     ret.Add(i);
                 }
             }

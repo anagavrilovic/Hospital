@@ -81,6 +81,9 @@
     <Compile Include="View\Diagnosis.xaml.cs">
       <DependentUpon>Diagnosis.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DynamicInventory.xaml.cs">
+      <DependentUpon>DynamicInventory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EditInventory.xaml.cs">
       <DependentUpon>EditInventory.xaml</DependentUpon>
     </Compile>
@@ -169,6 +172,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Diagnosis.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DynamicInventory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -311,6 +318,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\back.png" />
+    <Resource Include="Icon\menu.JPG" />
+    <Resource Include="Icon\search-blue.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
