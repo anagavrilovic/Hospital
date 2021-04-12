@@ -5,6 +5,7 @@ namespace Hospital
    public enum AppointmentType
    {
       examination,
-      operation
+      operation, 
+      none
    }
 }
