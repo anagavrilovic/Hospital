@@ -22,9 +22,10 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for KalendarTermini.xaml
     /// </summary>
-    public partial class KalendarTermini : Window
+    public partial class KalendarTermini : Window, INotifyPropertyChanged
     {
         private DoctorStorage dStorage = new DoctorStorage();
+        private AppointmentStorage aStorage = new AppointmentStorage();
         private Doctor doctor = new Doctor();
         public Doctor Doctor
         {
@@ -32,22 +33,29 @@ namespace Hospital.View
             set
             {
                 doctor = value;
+                OnPropertyChanged();
             }
         }
-        private ObservableCollection<Termini> tabela = new ObservableCollection<Termini>();
-        private DateTime date = DateTime.Today;
-
-        public DateTime Date
+        private ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
+        public ObservableCollection<Appointment> Appointments
         {
-            get { return date; }
-            set { date = value; }
+            get { return appointments; }
+            set
+            {
+                appointments = value;
+                OnPropertyChanged();
+            }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        public ObservableCollection<Termini> Tabela
+
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
-            get { return tabela; }
-            set { tabela = value; }
+            if (PropertyChanged != null)
+            {
+                this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
+            }
         }
         public KalendarTermini(string IDnumber)
         {
@@ -56,166 +64,27 @@ namespace Hospital.View
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 3 / 4);
             Doctor=dStorage.GetOne(IDnumber);
-            PopuniKalendar();
-        }
-        private void PopuniKalendar()
-        {
-            Tabela.Clear();
-
-            DateTime start = new DateTime();
-            TimeSpan ts = new TimeSpan(7, 0, 0);
-            start = start.Date + ts;
-            for (int i = 0; i < 48; i++)
-            {
-                Termini termin = new Termini();
-                termin.Vreme = start.ToString("HH.mm", CultureInfo.InvariantCulture);
-                start = start.AddMinutes(30);
-                tabela.Add(termin);
-            }
+            InitAppointments();
         }
 
-        private void PopuniTermine()
+        private void InitAppointments()
         {
-            if (doctor == null)
+            foreach(Appointment a in aStorage.GetAll())
             {
-                return;
-            }
-
-            DateTime weekBegin = GetWeekBegin(Date);
-            DateTime weekEnd = weekBegin.AddDays(6);
-
-            AppointmentStorage storage = new AppointmentStorage();
-            ObservableCollection<Appointment> appointments = storage.GetAll();
-
-            foreach (Appointment app in appointments)
-            {
-                if (app.DateTime.Date >= weekBegin.Date && app.DateTime.Date <= weekEnd.Date && app.IDDoctor.Equals(doctor.PersonalID))
+                if (a.IDDoctor.Equals(Doctor.PersonalID))
                 {
-                    DayOfWeek dan = app.DateTime.DayOfWeek;
-
-                    double numberOfCells = app.DurationInHours / 0.5;
-
-                    switch (dan)
-                    {
-                        case DayOfWeek.Monday:
-                            tabela[NadjiVreme(app.DateTime.ToString("HH.mm"))].Ponedeljak = app;
-                            for (int i = 1; i < numberOfCells; i++)
-                            {
-                                tabela[NadjiVreme(app.DateTime.ToString("HH.mm")) + i].Ponedeljak.Type = app.Type;
-                            }
-                            break;
-
-                        case DayOfWeek.Tuesday:
-                            tabela[NadjiVreme(app.DateTime.ToString("HH.mm"))].Utorak = app;
-                            for (int i = 1; i < numberOfCells; i++)
-                            {
-                                tabela[NadjiVreme(app.DateTime.ToString("HH.mm")) + i].Utorak.Type = app.Type;
-                            }
-                            break;
-
-                        case DayOfWeek.Wednesday:
-                            tabela[NadjiVreme(app.DateTime.ToString("HH.mm"))].Sreda = app;
-                            for (int i = 1; i < numberOfCells; i++)
-                            {
-                                tabela[NadjiVreme(app.DateTime.ToString("HH.mm")) + i].Sreda.Type = app.Type;
-                            }
-                            break;
-
-                        case DayOfWeek.Thursday:
-                            tabela[NadjiVreme(app.DateTime.ToString("HH.mm"))].Cetvrtak = app;
-                            for (int i = 1; i < numberOfCells; i++)
-                            {
-                                tabela[NadjiVreme(app.DateTime.ToString("HH.mm")) + i].Cetvrtak.Type = app.Type;
-                            }
-                            break;
-
-                        case DayOfWeek.Friday:
-                            tabela[NadjiVreme(app.DateTime.ToString("HH.mm"))].Petak = app;
-                            for (int i = 1; i < numberOfCells; i++)
-                            {
-                                tabela[NadjiVreme(app.DateTime.ToString("HH.mm")) + i].Petak.Type = app.Type;
-                            }
-                            break;
-
-                        case DayOfWeek.Saturday:
-                            tabela[NadjiVreme(app.DateTime.ToString("HH.mm"))].Subota = app;
-                            for (int i = 1; i < numberOfCells; i++)
-                            {
-                                tabela[NadjiVreme(app.DateTime.ToString("HH.mm")) + i].Subota.Type = app.Type;
-                            }
-                            break;
-
-                        case DayOfWeek.Sunday:
-                            tabela[NadjiVreme(app.DateTime.ToString("HH.mm"))].Nedelja = app;
-                            for (int i = 1; i < numberOfCells; i++)
-                            {
-                                tabela[NadjiVreme(app.DateTime.ToString("HH.mm")) + i].Nedelja.Type = app.Type;
-                            }
-                            break;
-                    }
-
+                    Appointments.Add(a);
                 }
             }
+            
         }
 
-        private int NadjiVreme(String vreme)
+        private void dataGridPregledi_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
-            DateTime start = new DateTime();
-            TimeSpan ts = new TimeSpan(7, 0, 0);
-            start = start.Date + ts;
-            for (int i = 0; i < 48; i++)
-            {
-
-                if (start.ToString("HH.mm", CultureInfo.InvariantCulture).Equals(vreme))
-                {
-                    return i;
-                }
-
-                start = start.AddMinutes(30);
-            }
-
-            return -1;
-        }
-
-        public DateTime GetWeekBegin(DateTime dt)
-        {
-            int diff = (7 + (dt.DayOfWeek - DayOfWeek.Monday)) % 7;
-            return dt.AddDays(-1 * diff).Date;
-        }
-
-        private void OsveziKalendar()
-        {
-            PopuniKalendar();
-            PopuniTermine();
-        }
-
-        private void ComboBoxDoctorEvent(object sender, SelectionChangedEventArgs e)
-        {
-            OsveziKalendar();
-        }
-
-        private void DateChanged(object sender, SelectionChangedEventArgs e)
-        {
-            OsveziKalendar();
-        }
-
-        private void TrenutnaNedeljaClick(object sender, RoutedEventArgs e)
-        {
-            Date = DateTime.Today;
-            OsveziKalendar();
-        }
-
-        private void PreviousClick(object sender, RoutedEventArgs e)
-        {
-            Date = Date.AddDays(-7);
-            OsveziKalendar();
-        }
-
-        private void NextClick(object sender, RoutedEventArgs e)
-        {
-            Date = Date.AddDays(7);
-            OsveziKalendar();
+            DetaljiPregleda d = new DetaljiPregleda((Appointment)dataGridPregledi.SelectedItem);
+            d.Owner = this;
+            d.Show();
+            this.Hide();
         }
     }
 }

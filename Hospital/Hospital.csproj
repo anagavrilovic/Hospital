@@ -77,6 +77,9 @@
     <Compile Include="View\Anamnesis.xaml.cs">
       <DependentUpon>Anamnesis.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DetaljiPregleda.xaml.cs">
+      <DependentUpon>DetaljiPregleda.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Diagnosis.xaml.cs">
       <DependentUpon>Diagnosis.xaml</DependentUpon>
     </Compile>
@@ -170,6 +173,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Anamnesis.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DetaljiPregleda.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

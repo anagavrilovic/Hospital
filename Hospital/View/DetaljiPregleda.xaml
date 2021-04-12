@@ -1,0 +1,71 @@
+﻿<Window x:Class="Hospital.View.DetaljiPregleda"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.View"
+        mc:Ignorable="d"
+        Title="DetaljiPregleda" Height="450" Width="800"
+        Background="#FFDCE6ED" WindowStartupLocation="CenterOwner">
+    <Grid Margin="300,20,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Label FontSize="17" Width="77" Margin="0,0,10,0" Content="Pacijent:"/>
+            <Label x:Name="DoktorLabel" FontSize="17">
+                <Label.Content>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0}  {1}">
+                                <Binding Path="Appointment.PatientSurname" />
+                                <Binding Path="Appointment.PatientName" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </Label.Content>
+            </Label>
+            <Label x:Name="tip" FontSize="17" Content="{Binding TipTermina}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1">
+            <Label Content="Datum i vreme termina:" FontSize="17" />
+        <Label x:Name="Datum" FontSize="17" Content="{Binding Appointment.DateTime, StringFormat=d}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Label FontSize="17" Margin="0,0,10,0">Trajanje u minutama:</Label>
+            <Label FontSize="17" x:Name="trajanje" Content="{Binding TrajanjeUMinutima, Mode=OneWay}"></Label>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Label FontSize="17" Margin="0,0,10,0">Tip pregleda/operacije:</Label>
+            <Label FontSize="17" Name="novac" IsEnabled="False">Text</Label>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Label FontSize="17">Sala:</Label>
+            <Label x:Name="salalab" FontSize="17" Content="{Binding Appointment.Room.Name}"></Label>
+            </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Button x:Name="save" Height="30" Width="130" FontSize="18" 
+                Background="Crimson" Foreground="White" Content="Započni pregled" Margin="50,0,40,0">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="cancel" Width="100" Height="30" FontSize="18"
+                Background="White" Content="Nazad">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+    </Grid>
+
+</Window>
