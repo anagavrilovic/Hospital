@@ -197,11 +197,11 @@
         <DataGrid x:Name="dataGridPregledi" ItemsSource="{Binding Path=Appointments}"
                SelectionMode="Single" IsReadOnly="True" Margin="30,30,30,30" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Ime Pacijent" Width="0.25*" Binding="{Binding patientName}"/>
-                <DataGridTextColumn Header="Prezime pacijenta" Width="0.25*" Binding="{Binding patientSurname}"/>
+                <DataGridTextColumn Header="Ime Pacijent" Width="0.25*" Binding="{Binding PatientName}"/>
+                <DataGridTextColumn Header="Prezime pacijenta" Width="0.25*" Binding="{Binding PatientSurname}"/>
                 <DataGridTextColumn Header="Duzina trajanja" Width="0.25*" Binding="{Binding DurationInHours}"/>
                 <DataGridTextColumn Header="Datum" Width="0.25*" Binding="{Binding DateTime}"/>
-                <DataGridTextColumn Header="Tip termina" Width="0.25*" Binding="{Binding type}"/>
+                <DataGridTextColumn Header="Tip termina" Width="0.25*" Binding="{Binding Type}"/>
                 <DataGridTextColumn Header="Sala" Width="0.25*" Binding="{Binding Room.Name}"/>
             </DataGrid.Columns>
         </DataGrid>

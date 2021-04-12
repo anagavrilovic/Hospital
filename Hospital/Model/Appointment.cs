@@ -5,7 +5,7 @@ namespace Hospital
 {
    public class Appointment
    {
-      public double durationInHours = 0.5;
+      private double durationInHours = 0.5;
         
         public double DurationInHours
         {
@@ -71,7 +71,7 @@ namespace Hospital
 
       public string DoctrosNameSurname { get; set; }
       
-      public Room room;
+      private Room room;
       
       public Room Room
       {

@@ -75,7 +75,7 @@ namespace Hospital
         {
             return Name + " " + ID;
         }
-        public System.Collections.Generic.List<Ingredient> ingredient;
+        private System.Collections.Generic.List<Ingredient> ingredient;
 
 
         /// <summary>
