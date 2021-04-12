@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 namespace Hospital
 {
@@ -11,6 +12,18 @@ namespace Hospital
             get { return specialty; }
             set { specialty = value; }
         }
-   
-   }
+
+        override
+        public string ToString()
+        {
+            StringBuilder sb = new StringBuilder("");
+            sb.Append("dr ");
+            sb.Append(this.FirstName);
+            sb.Append(" ");
+            sb.Append(this.LastName);
+
+            return sb.ToString();
+        }
+
+    }
 }

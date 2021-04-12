@@ -64,6 +64,7 @@
     <Compile Include="Model\Ingredient.cs" />
     <Compile Include="Model\Inventory.cs" />
     <Compile Include="Model\InventoryStorage.cs" />
+    <Compile Include="Model\Termini.cs" />
     <Compile Include="Model\MedicalSupply.cs" />
     <Compile Include="Model\MedicalSupplyStorage.cs" />
     <Compile Include="Model\Medicine.cs" />
@@ -77,6 +78,9 @@
     </Compile>
     <Compile Include="View\Diagnosis.xaml.cs">
       <DependentUpon>Diagnosis.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Kalendar.xaml.cs">
+      <DependentUpon>Kalendar.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LekListBox.xaml.cs">
       <DependentUpon>LekListBox.xaml</DependentUpon>
@@ -154,6 +158,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resources\SecretaryResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Anamnesis.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -162,13 +170,16 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-
+    <Page Include="View\Kalendar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LekListBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Terapija.xaml">
-    <SubType>Designer</SubType>
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ModifikacijaAlergena.xaml">
@@ -283,6 +294,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Files\anamneza.json" />
+    <None Include="Files\appointments.json" />
+    <None Include="Files\dijagnoza.json" />
+    <None Include="Files\doctors.json" />
+    <None Include="Files\medicalRecords.json" />
+    <None Include="Files\medicine.json" />
+    <None Include="Files\registratedUsers.json" />
     <None Include="Files\rooms.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -310,6 +328,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\penPaper.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\drugs.txt" />
+    <Resource Include="Files\ingredients.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\1.png" />
+    <Resource Include="Icon\11.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

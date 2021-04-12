@@ -35,5 +35,11 @@ namespace Hospital.View
             var kk = new KreiranjeKartona(null);
             kk.Show();
         }
+
+        private void KalendarClick(object sender, RoutedEventArgs e)
+        {
+            var kalendar = new Kalendar();
+            kalendar.Show();
+        }
     }
 }

@@ -4,7 +4,6 @@
              xmlns:local="clr-namespace:Hospital"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-       
-
+        <ResourceDictionary Source="Resources/SecretaryResourceDictionary.xaml" />
     </Application.Resources>
 </Application>
