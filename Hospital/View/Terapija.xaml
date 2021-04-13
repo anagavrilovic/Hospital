@@ -45,7 +45,7 @@
                 </ScrollViewer>
                 <StackPanel Orientation="Vertical">
                     <Button Width="100" Height="30" Content="Dodaj lek" Margin="10,5,20,0" VerticalAlignment="Top" Click="DodajLek"
-                        Background="Crimson" Foreground="White">
+                        Background="Navy" Foreground="White">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="10"/>
@@ -63,5 +63,13 @@
                 </StackPanel>
             </StackPanel>
         </StackPanel>
+        <Button Width="100" Height="30" Content="Sačuvaj terapiju" Margin="10,5,40,50" Click="Sacuvaj"
+                        Background="Crimson" Foreground="White" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
     </Grid>
 </Page>

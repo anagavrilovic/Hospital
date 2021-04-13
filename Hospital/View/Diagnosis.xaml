@@ -46,11 +46,19 @@ VerticalScrollBarVisibility="Hidden"/>
     <Grid>
         <StackPanel Orientation="Vertical">
             <Label FontSize="25" Content="Dijagnoza:" Margin="60,0,0,0"></Label>
-            <ScrollViewer CanContentScroll="True" Width="600" Height="500" Margin="30,10,30,20">
+            <ScrollViewer CanContentScroll="True" Width="600" Height="450" Margin="30,10,30,20">
                 <Border  BorderThickness="1" BorderBrush="Black">
                     <TextBox Name="diagnosisBox" TextWrapping="Wrap" FontSize="15" AcceptsReturn="True" Text="{Binding Test1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 </Border>
             </ScrollViewer>
+            <Button Width="100" Height="30" Content="Sačuvaj dijagnozu" Margin="200,5,20,0" VerticalAlignment="Top" Click="Sacuvaj" HorizontalAlignment="Left"
+                        Background="Crimson" Foreground="White">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </StackPanel>
     </Grid>
 </Page>

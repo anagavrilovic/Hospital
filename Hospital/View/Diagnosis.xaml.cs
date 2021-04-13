@@ -51,9 +51,17 @@ namespace Hospital.View
   
         public Diagnosis()
         {
-            InitializeComponent();
+            InitializeComponent();           
             this.DataContext = this;
         }
-        
+
+        private void Sacuvaj(object sender, RoutedEventArgs e)
+        {
+            ((Doctor_Examination)Window.GetWindow(this)).Pregled.diagnosis=Test1;
+            MessageBox.Show(((Doctor_Examination)Window.GetWindow(this)).Pregled.diagnosis);
+            ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = 5;
+            ((Doctor_Examination)Window.GetWindow(this)).Dijagnoza.IsEnabled = false;
+            ((Doctor_Examination)Window.GetWindow(this)).Termini.IsEnabled = true;
+        }
     }
 }

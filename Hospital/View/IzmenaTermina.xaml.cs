@@ -67,13 +67,13 @@ namespace Hospital.View
         private ObservableCollection<Doctor> doktori=new ObservableCollection<Doctor>();
         DoctorStorage dStorage = new DoctorStorage();
         RoomStorage rStorage = new RoomStorage();
-        MakeApointment parentWindow = new MakeApointment();
+       // MakeApointment parentWindow = new MakeApointment();
         public event PropertyChangedEventHandler PropertyChanged;
 
 
         public IzmenaTermina(Appointment appointment, MakeApointment parentWindow)
         {
-            this.parentWindow = parentWindow;
+            //this.parentWindow = parentWindow;
             this.termin = appointment;
             MedicalRecordStorage mrs = new MedicalRecordStorage();
             InitializeComponent();
@@ -133,7 +133,7 @@ namespace Hospital.View
             AppointmentStorage storage = new AppointmentStorage();
             storage.Delete(termin.IDAppointment);
             storage.Save(termin);
-            parentWindow.dataGridPregledi.ItemsSource = storage.GetAll();
+           // parentWindow.dataGridPregledi.ItemsSource = storage.GetAll();
             this.Close();
         }
 

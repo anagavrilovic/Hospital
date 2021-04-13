@@ -24,6 +24,7 @@ namespace Hospital.View
 
         private MedicalRecord karton;
         private MedicalRecordStorage mStorage;
+        private Appointment pregled=new Appointment();
         public MedicalRecord Karton
         {
             get { return karton; }
@@ -41,12 +42,13 @@ namespace Hospital.View
             }
         }
 
-        public KartonDoktorStranica(string id)
+        public KartonDoktorStranica(string id,Appointment pregled)
         {
             InitializeComponent();
             this.DataContext = this;
             mStorage = new MedicalRecordStorage();
             Karton = mStorage.GetOne(id);
+            this.pregled = pregled;
 
         }
 
@@ -59,7 +61,12 @@ namespace Hospital.View
 
         private void sacuvaj_Click(object sender, RoutedEventArgs e)
         {
-
+            Karton.AddExamination(((Doctor_Examination)Window.GetWindow(this)).Pregled);
+            Window.GetWindow(this).Close();
+            (Window.GetWindow(((Doctor_Examination)Window.GetWindow(this)).Owner)).Show();
+            mStorage.Save(Karton);
+            AppointmentStorage a = new AppointmentStorage();
+            a.Delete(pregled.IDAppointment);
         }
     }
 }

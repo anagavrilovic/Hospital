@@ -52,5 +52,13 @@ namespace Hospital.View
             InitializeComponent();
             this.DataContext = this;
         }
+
+        private void Sacuvaj(object sender, RoutedEventArgs e)
+        {
+            ((Doctor_Examination)Window.GetWindow(this)).Pregled.anamnesis=Test1;
+            ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = 3;
+            ((Doctor_Examination)Window.GetWindow(this)).Terapija.IsEnabled = true;
+            ((Doctor_Examination)Window.GetWindow(this)).Anamneza.IsEnabled = false;
+        }
     }
 }
