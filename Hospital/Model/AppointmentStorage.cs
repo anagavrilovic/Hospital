@@ -37,6 +37,21 @@ namespace Hospital
             DoSerialization(appointment);
         }
 
+        public bool SaveAndCheck(Appointment p)
+        {
+            ObservableCollection<Appointment> appointment = GetAll();
+
+            foreach (Appointment ap in appointment)
+            {
+                if (ap.DateTime < p.DateTime.AddHours(p.DurationInHours) && p.DateTime < ap.DateTime.AddHours(ap.DurationInHours))
+                    return false;
+            }
+
+            appointment.Add(p);
+            DoSerialization(appointment);
+            return true;
+        }
+
         public ObservableCollection<Appointment> GetByPatient(String id)
         {
             ObservableCollection<Appointment> apps = GetAll();
@@ -68,7 +83,7 @@ namespace Hospital
               {
                   if (r.IDAppointment.Equals(id))
                   {
-                    appointments.Remove(r);
+                      appointments.Remove(r);
                       DoSerialization(appointments);
                       return true;
                   }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text;
 
 namespace Hospital
 {
@@ -149,5 +150,17 @@ namespace Hospital
             }
         }
 
+        override
+        public string ToString()
+        {
+            StringBuilder sb = new StringBuilder("");
+            sb.Append(this.Patient.FirstName);
+            sb.Append(" ");
+            sb.Append(this.Patient.LastName);
+            sb.Append(" ");
+            sb.Append(this.Patient.PersonalID);
+
+            return sb.ToString();
+        }
     }
 }
