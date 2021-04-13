@@ -101,6 +101,12 @@
     <Compile Include="View\LekListBox.xaml.cs">
       <DependentUpon>LekListBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ObavestenjaSekretar.xaml.cs">
+      <DependentUpon>ObavestenjaSekretar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OdaberiPacijenta.xaml.cs">
+      <DependentUpon>OdaberiPacijenta.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Terapija.xaml.cs">
       <DependentUpon>Terapija.xaml</DependentUpon>
     </Compile>
@@ -162,6 +168,9 @@
     <Compile Include="View\SecretaryWindow.xaml.cs">
       <DependentUpon>SecretaryWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ZakazivanjeTermina.xaml.cs">
+      <DependentUpon>ZakazivanjeTermina.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -211,6 +220,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\LekListBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ObavestenjaSekretar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OdaberiPacijenta.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -294,6 +311,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ZakazivanjeTermina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Appointment.cs" />
@@ -331,9 +352,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include=".editorconfig" />
-    <None Include="Files\anamneza.json" />
     <None Include="Files\appointments.json" />
-    <None Include="Files\dijagnoza.json" />
     <None Include="Files\doctors.json" />
     <None Include="Files\medicalRecords.json" />
     <None Include="Files\medicine.json" />
@@ -394,6 +413,9 @@
   <ItemGroup>
     <Resource Include="Icon\1.png" />
     <Resource Include="Icon\11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

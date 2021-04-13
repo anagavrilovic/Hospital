@@ -40,7 +40,7 @@
                     <TextBlock Text="+" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Button>
             </StackPanel>
-            <ListBox ItemsSource="{Binding LekoviCollection}" x:Name="LekoviLista" Height="120" Margin="150,10,25,10">
+            <ListBox ItemsSource="{Binding Lekovi}" x:Name="LekoviLista" Height="120" Margin="150,10,25,10">
 
             </ListBox>
         </StackPanel>
@@ -53,7 +53,7 @@
                     <TextBlock Text="+" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Button>
             </StackPanel>
-            <ListBox ItemsSource="{Binding SastojciCollection}" x:Name="SastojciLista" Height="120" Margin="150,10,25,10">
+            <ListBox ItemsSource="{Binding Sastojci}" x:Name="SastojciLista" Height="120" Margin="150,10,25,10">
 
             </ListBox>
         </StackPanel>

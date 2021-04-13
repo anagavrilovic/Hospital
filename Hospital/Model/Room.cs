@@ -112,5 +112,11 @@ namespace Hospital
             }
         }
 
+        override
+        public string ToString()
+        {
+            return this.Name;
+        }
+
     }
 }

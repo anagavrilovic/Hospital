@@ -137,16 +137,14 @@ namespace Hospital.View
             foreach (string line in lines)
                 Lekovi.Add(line);
 
-            LekoviLista.ItemsSource = Lekovi;
-            LekoviCollection = CollectionViewSource.GetDefaultView(LekoviLista.ItemsSource);
+            LekoviCollection = CollectionViewSource.GetDefaultView(Lekovi);
             LekoviCollection.Filter = CustomFilterLekovi;
 
             string[] lines2 = File.ReadAllLines("..\\..\\Files\\ingredients.txt");
             foreach (string line in lines2)
                 Sastojci.Add(line);
 
-            SastojciLista.ItemsSource = Sastojci;
-            SastojciCollection = CollectionViewSource.GetDefaultView(SastojciLista.ItemsSource);
+            SastojciCollection = CollectionViewSource.GetDefaultView(Sastojci);
             SastojciCollection.Filter = CustomFilterSastojci;
         }
 

@@ -71,7 +71,7 @@ namespace Hospital
 
       public string DoctrosNameSurname { get; set; }
       
-      private Room room;
+      private Room room = new Room();
       
       public Room Room
       {
@@ -106,7 +106,7 @@ namespace Hospital
                 ret.AppendLine();
                 ret.Append(this.DoctrosNameSurname);
                 ret.AppendLine();
-                //ret.Append(this.Room.Name);
+                ret.Append(this.Room.Name);
 
                 return ret.ToString();
             }

@@ -41,5 +41,11 @@ namespace Hospital.View
             var kalendar = new Kalendar();
             kalendar.Show();
         }
+
+        private void ObavestenjaClick(object sender, RoutedEventArgs e)
+        {
+            var obavestenja = new ObavestenjaSekretar();
+            obavestenja.Show();
+        }
     }
 }
