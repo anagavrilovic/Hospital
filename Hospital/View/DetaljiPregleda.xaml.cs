@@ -68,5 +68,23 @@ namespace Hospital.View
                 this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
             }
         }
+
+        private void pregledKartona(object sender, RoutedEventArgs e)
+        {
+            MedicalRecordStorage m = new MedicalRecordStorage();
+            DoktorKarton d = new DoktorKarton((m.GetByPatientID(Appointment.IDpatient)).MedicalRecordID);
+            d.Owner = this;
+            this.Hide();
+            d.Show();
+        }
+
+        private void zapocniTermin(object sender, RoutedEventArgs e)
+        {
+            Doctor_Examination d = new Doctor_Examination(appointment);
+            d.Show();
+            d.Owner=(Window.GetWindow(this.Owner)).Owner;
+            this.Close();
+
+        }
     }
 }

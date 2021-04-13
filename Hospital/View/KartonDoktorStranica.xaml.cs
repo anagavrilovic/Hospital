@@ -17,9 +17,9 @@ using System.Windows.Shapes;
 namespace Hospital.View
 {
     /// <summary>
-    /// Interaction logic for DoktorKarton.xaml
+    /// Interaction logic for KartonDoktorStranica.xaml
     /// </summary>
-    public partial class DoktorKarton : Window, INotifyPropertyChanged
+    public partial class KartonDoktorStranica : Page, INotifyPropertyChanged
     {
 
         private MedicalRecord karton;
@@ -38,25 +38,28 @@ namespace Hospital.View
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
-
             }
         }
 
-        public DoktorKarton(string id)
+        public KartonDoktorStranica(string id)
         {
             InitializeComponent();
             this.DataContext = this;
             mStorage = new MedicalRecordStorage();
-           Karton= mStorage.GetOne(id);
-            
+            Karton = mStorage.GetOne(id);
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void nazad_Click(object sender, RoutedEventArgs e)
         {
-            Window.GetWindow(this.Owner).Show();
-            this.Close();
+            
+        }
+
+        private void sacuvaj_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
