@@ -1,20 +1,17 @@
-﻿<Window x:Class="Hospital.View.DoktorKarton"
+﻿<Page x:Class="Hospital.View.KartonDoktorStranica"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xml:lang="en-IN"
       xmlns:local="clr-namespace:Hospital.View"
       xmlns:converters="clr-namespace:Hospital.Model"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="DoktorKarton"
-      Background="#FFDCE6ED">
-    <Window.Resources>
+      Title="KartonDoktorStranica" Background="#FFDCE6ED">
+    <Page.Resources>
         <converters:BoolToStringConverter x:Key="BoolToString"/>
-    </Window.Resources>
+    </Page.Resources>
     <Grid>
-        
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -118,6 +115,14 @@
             <TextBox HorizontalAlignment="Right" Height="100" Width="330" Margin="0,0,40,0"
                      Text="{Binding Karton.Allergen.Other}" IsEnabled="False"></TextBox>
             <StackPanel Orientation="Horizontal" Margin="0,20,40,0" HorizontalAlignment="Right">
+                <Button x:Name="sacuvaj" Width="100" Height="30" Content="Nazad" Click="sacuvaj_Click" Margin="10,0,0,0"
+                        Background="Crimson">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
                 <Button x:Name="nazad" Width="100" Height="30" Content="Nazad" Click="nazad_Click"
                         Background="White">
                     <Button.Resources>
@@ -129,4 +134,4 @@
             </StackPanel>
         </StackPanel>
     </Grid>
-</Window>
+</Page>

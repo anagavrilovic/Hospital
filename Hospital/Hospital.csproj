@@ -83,6 +83,9 @@
     <Compile Include="View\Diagnosis.xaml.cs">
       <DependentUpon>Diagnosis.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DoktorGlavnaStranica.xaml.cs">
+      <DependentUpon>DoktorGlavnaStranica.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DoktorKarton.xaml.cs">
       <DependentUpon>DoktorKarton.xaml</DependentUpon>
     </Compile>
@@ -91,6 +94,9 @@
     </Compile>
     <Compile Include="View\KalendarTermini.xaml.cs">
       <DependentUpon>KalendarTermini.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KartonDoktorStranica.xaml.cs">
+      <DependentUpon>KartonDoktorStranica.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LekListBox.xaml.cs">
       <DependentUpon>LekListBox.xaml</DependentUpon>
@@ -184,6 +190,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\DoktorGlavnaStranica.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DoktorKarton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -193,6 +203,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\KalendarTermini.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\KartonDoktorStranica.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

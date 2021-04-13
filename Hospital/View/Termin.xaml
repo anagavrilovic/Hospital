@@ -58,12 +58,21 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <TabControl x:Name="tab" TabStripPlacement="Left">
+        <Frame x:Name="Main" NavigationUIVisibility="Hidden"/>
+        <TabControl x:Name="tab" TabStripPlacement="Left" SelectionChanged="tab_SelectionChanged">
             <TabItem x:Name="Logo" Width="100" Height="60">
                 <TabItem.Header>
                     <Image Source="/Icon/logo.png"/>
                 </TabItem.Header>
             </TabItem >
+            <TabItem x:Name="Karton">
+                <TabItem.Header>
+                    <StackPanel Orientation="Vertical">
+                        <Image x:Name="KartonSlika" Source="/Icon/document.png" Width="100" Height="30"/>
+                        <Label x:Name="KartonLabela" Content="Karton" HorizontalAlignment="Center" FontSize="15"></Label>
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
             <TabItem x:Name="Termini">
                 <TabItem.Content>
                     <Frame Source="PregledTermina.xaml"/>
@@ -105,17 +114,6 @@
                     <StackPanel Orientation="Vertical">
                         <Image x:Name="DijagnozaSlika" Source="/Icon/penPaper.png" Width="100" Height="30"/>
                         <Label x:Name="DiagnozaLabela" Content="Dijagnoza" HorizontalAlignment="Center" FontSize="15"></Label>
-                    </StackPanel>
-                </TabItem.Header>
-            </TabItem>
-            <TabItem x:Name="Karton">
-                <TabItem.Content>
-                    <Frame Source="DoktorKarton.xaml"/>
-                </TabItem.Content>
-                <TabItem.Header>
-                    <StackPanel Orientation="Vertical">
-                        <Image x:Name="KartonSlika" Source="/Icon/document.png" Width="100" Height="30"/>
-                        <Label x:Name="KartonLabela" Content="Karton" HorizontalAlignment="Center" FontSize="15"></Label>
                     </StackPanel>
                 </TabItem.Header>
             </TabItem>

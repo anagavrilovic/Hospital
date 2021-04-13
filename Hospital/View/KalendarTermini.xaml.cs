@@ -22,7 +22,7 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for KalendarTermini.xaml
     /// </summary>
-    public partial class KalendarTermini : Window, INotifyPropertyChanged
+    public partial class KalendarTermini : Page, INotifyPropertyChanged
     {
         private DoctorStorage dStorage = new DoctorStorage();
         private AppointmentStorage aStorage = new AppointmentStorage();
@@ -82,9 +82,9 @@ namespace Hospital.View
         private void dataGridPregledi_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DetaljiPregleda d = new DetaljiPregleda((Appointment)dataGridPregledi.SelectedItem);
-            d.Owner = this;
+            d.Owner = Window.GetWindow(this);
             d.Show();
-            this.Hide();
+            Window.GetWindow(this).Hide();
         }
     }
 }

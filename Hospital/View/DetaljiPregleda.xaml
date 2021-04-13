@@ -8,6 +8,7 @@
         Title="DetaljiPregleda" Height="450" Width="800"
         Background="#FFDCE6ED" WindowStartupLocation="CenterOwner">
     <Grid Margin="300,20,0,0">
+        
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -16,6 +17,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <Frame x:Name="Main" NavigationUIVisibility="Hidden"/>
         <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Label FontSize="17" Width="77" Margin="0,0,10,0" Content="Pacijent:"/>
             <Label x:Name="DoktorLabel" FontSize="17">
@@ -31,6 +33,16 @@
                 </Label.Content>
             </Label>
             <Label x:Name="tip" FontSize="17" Content="{Binding TipTermina}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,20,20,0">
+            <Button x:Name="zapocniPregled" Height="30" Width="150" FontSize="18" 
+                Background="Navy" Foreground="White" Content="Zapocni pregled" Margin="50,0,40,0" Click="zapocniTermin">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1">
             <Label Content="Datum i vreme termina:" FontSize="17" />
@@ -49,15 +61,15 @@
             <Label x:Name="salalab" FontSize="17" Content="{Binding Appointment.Room.Name}"></Label>
             </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Button x:Name="save" Height="30" Width="130" FontSize="18" 
-                Background="Crimson" Foreground="White" Content="Započni pregled" Margin="50,0,40,0">
+            <Button x:Name="karton" Height="30" Width="150" FontSize="18"  Click="pregledKartona"
+                Background="Crimson" Foreground="White" Content="Pregled kartona" Margin="50,0,40,0">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button x:Name="cancel" Width="100" Height="30" FontSize="18"
+            <Button x:Name="cancel" Width="150" Height="30" FontSize="18"
                 Background="White" Content="Nazad">
                 <Button.Resources>
                     <Style TargetType="Border">

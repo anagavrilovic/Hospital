@@ -57,7 +57,6 @@ namespace Hospital
                             DoctorStorage ds = new DoctorStorage();
                             IDnumber= ds.GetByUsername(user.Username);
                             DoktorGlavniProzor de = new DoktorGlavniProzor(IDnumber);
-                            //Doctor_Examination de = new Doctor_Examination(IDnumber);
                             de.Owner = this;
                             de.Show();
                             this.Hide();
