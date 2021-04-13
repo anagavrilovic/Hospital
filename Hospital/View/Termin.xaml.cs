@@ -24,8 +24,19 @@ namespace Hospital.View
     public partial class Doctor_Examination : Window, INotifyPropertyChanged
     {
         private Examination pregled;
+
         private Doctor doktor;
         private Appointment appointment;
+        private Frame frameKarton;
+        private Frame frameAnamnesis;
+        private Frame frameDiagnosis;
+        private Frame frameAppointment;
+        private Frame frameTherapy;
+        private KartonDoktorStranica kDS;
+        private Anamnesis ana;
+        private Diagnosis dia;
+        private MakeApointment ma;
+        private Terapija th;
         public Doctor Doktor
         {
             get { return doktor; }
@@ -61,9 +72,31 @@ namespace Hospital.View
             Doktor = dStorage.GetOne(a.IDDoctor);
             
             InitializeComponent();
+            intiProperties();
+        }
+
+        private void intiProperties()
+        {
             tab.SelectedIndex = 1;
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 3 / 4);
+            frameKarton = new Frame();
+            MedicalRecordStorage mStorage = new MedicalRecordStorage();
+            kDS = new KartonDoktorStranica((mStorage.GetByPatientID(appointment.IDpatient)).MedicalRecordID,appointment);
+            frameKarton.Content = kDS;
+            Karton.Content = frameKarton;
+            frameAnamnesis = new Frame();
+            ana = new Anamnesis();
+            frameAnamnesis.Content = ana;
+            frameAppointment = new Frame();
+            ma = new MakeApointment(doktor);
+            frameAppointment.Content = ma;
+            frameDiagnosis = new Frame();
+            dia = new Diagnosis();
+            frameDiagnosis.Content = dia;
+            frameTherapy = new Frame();
+            th = new Terapija();
+            frameTherapy.Content = th;
         }
 
         private void tab_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -71,11 +104,19 @@ namespace Hospital.View
             switch (tab.SelectedIndex)
             {
                 case 1:
-                    Frame frame = new Frame();
-                    MedicalRecordStorage mStorage = new MedicalRecordStorage();
-                    KartonDoktorStranica k = new KartonDoktorStranica((mStorage.GetByPatientID(appointment.IDpatient)).MedicalRecordID);
-                    frame.Content = k;
-                    Karton.Content = frame; 
+                    Karton.Content = frameKarton;
+                    break;
+                case 2:
+                    Anamneza.Content = frameAnamnesis;
+                    break;
+                case 3:
+                    Terapija.Content = frameTherapy;
+                    break;
+                case 4:
+                    Dijagnoza.Content = frameDiagnosis;
+                    break;
+                case 5:
+                    Termini.Content = frameAppointment;
                     break;
             }
         }

@@ -73,32 +73,7 @@
                     </StackPanel>
                 </TabItem.Header>
             </TabItem>
-            <TabItem x:Name="Termini">
-                <TabItem.Content>
-                    <Frame Source="PregledTermina.xaml"/>
-                </TabItem.Content>
-                <TabItem.Header>
-                    <StackPanel Orientation="Vertical">
-                        <Image x:Name="SlikaTermin" Source="/Icon/calender.png" Width="100" Height="30"/>
-                        <Label x:Name="TerminiLabela" Content="Termini" HorizontalAlignment="Center" FontSize="15"></Label>
-                        </StackPanel>
-                </TabItem.Header>
-            </TabItem >
-            <TabItem x:Name="Terapija">
-                <TabItem.Content>
-                    <Frame Source="Terapija.xaml"/>
-                </TabItem.Content>
-                <TabItem.Header>
-                    <StackPanel Orientation="Vertical">
-                        <Image x:Name="TerapijaSlika" Source="/Icon/plusSquare.png" Width="100" Height="30"/>
-                        <Label x:Name="TerapijaLabela" Content="Terapija" HorizontalAlignment="Center" FontSize="15"></Label>
-                    </StackPanel>
-                </TabItem.Header>
-            </TabItem>
             <TabItem x:Name="Anamneza">
-                <TabItem.Content>
-                    <Frame Source="Anamnesis.xaml"/>
-                </TabItem.Content>
                 <TabItem.Header>
                     <StackPanel Orientation="Vertical">
                         <Image x:Name="AnamnezaSlika" Source="/Icon/pen.png" Width="100" Height="30"/>
@@ -106,10 +81,15 @@
                     </StackPanel>
                 </TabItem.Header>
             </TabItem>
-            <TabItem x:Name="Dijagnoza">
-                <TabItem.Content>
-                    <Frame Source="Diagnosis.xaml"/>
-                </TabItem.Content>
+            <TabItem x:Name="Terapija" IsEnabled="False">
+                <TabItem.Header>
+                    <StackPanel Orientation="Vertical">
+                        <Image x:Name="TerapijaSlika" Source="/Icon/plusSquare.png" Width="100" Height="30"/>
+                        <Label x:Name="TerapijaLabela" Content="Terapija" HorizontalAlignment="Center" FontSize="15"></Label>
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem x:Name="Dijagnoza" IsEnabled="False">
                 <TabItem.Header>
                     <StackPanel Orientation="Vertical">
                         <Image x:Name="DijagnozaSlika" Source="/Icon/penPaper.png" Width="100" Height="30"/>
@@ -117,6 +97,14 @@
                     </StackPanel>
                 </TabItem.Header>
             </TabItem>
+            <TabItem x:Name="Termini" IsEnabled="False">
+                <TabItem.Header>
+                    <StackPanel Orientation="Vertical">
+                        <Image x:Name="SlikaTermin" Source="/Icon/calender.png" Width="100" Height="30"/>
+                        <Label x:Name="TerminiLabela" Content="Termini" HorizontalAlignment="Center" FontSize="15"></Label>
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem >
         </TabControl>
         
         

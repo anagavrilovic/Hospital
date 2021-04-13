@@ -144,6 +144,7 @@ namespace Hospital.View
 
         private void cancel_Click(object sender, RoutedEventArgs e)
         {
+            parentAppointment.dodaj.IsEnabled = true;
             Close();
         }
 

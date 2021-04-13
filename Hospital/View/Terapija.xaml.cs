@@ -77,12 +77,6 @@ namespace Hospital.View
             }
         }
 
-        private void Odustani(object sender, RoutedEventArgs e)
-        {
-            // this.Owner.Show();
-            // this.Close();
-        }
-
         private void Sacuvaj(object sender, RoutedEventArgs e)
         {
             Therapy t = new Therapy();
@@ -93,6 +87,9 @@ namespace Hospital.View
             t.description = Text;
             t.name = Naslov;
             ((Doctor_Examination)Window.GetWindow(this)).Pregled.therapy = t;
+            ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = 4;
+            ((Doctor_Examination)Window.GetWindow(this)).Terapija.IsEnabled = false;
+            ((Doctor_Examination)Window.GetWindow(this)).Dijagnoza.IsEnabled = true;
         }
 
         private void Obrisi(object sender, RoutedEventArgs e)
