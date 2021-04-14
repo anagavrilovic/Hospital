@@ -5,8 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-        Title="ObavestenjaSekretar" Height="450" Width="800">
+        Title="ObavestenjaSekretar" Height="665" Width="1070"
+        Background="#FFD0DADD" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="OBAVEŠTENJA" FontSize="24" Foreground="#FF517C7C" Margin="20,10,0,0"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" HorizontalAlignment="Left" Margin="0">
+                <Button Height="50" Width="50" Margin="20,50,0,0" Style="{StaticResource ButtonCalendar}">
+                    <Image Source="../Icon/doc.png" Width="20"/>
+                </Button>
+                <Button Height="50" Width="50" Margin="20,20,0,0" Style="{StaticResource ButtonCalendar}">
+                    <Image Source="../Icon/edit.png" Width="20"/>
+                </Button>
+                <Button Height="50" Width="50" Margin="20,20,0,0" Style="{StaticResource ButtonCalendar}">
+                    <Image Source="../Icon/delete.png" Width="20"/>
+                </Button>
+                <Button Height="50" Width="50" Margin="20,20,0,0" Style="{StaticResource ButtonCalendar}">
+                    <Image Source="../Icon/view.png" Width="20"/>
+                </Button>
+            </StackPanel>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBox Width="200" Height="25" HorizontalAlignment="Right" Margin="0,10,20,0"/>
+                <ListBox Grid.Row="1" Margin="0,10,20,23">
+                    
+                </ListBox>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

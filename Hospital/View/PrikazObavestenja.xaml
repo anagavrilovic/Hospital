@@ -1,0 +1,50 @@
+﻿<Window x:Class="Hospital.View.PrikazObavestenja"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.View"
+        mc:Ignorable="d"
+        Title="PrikazObavestenja" Height="410" Width="630" Background="#FFB0BFBE" WindowStartupLocation="CenterScreen" 
+        ResizeMode="NoResize" BorderBrush="#FF517C7C" BorderThickness="1" AllowsTransparency="True" WindowStyle="None">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,25,0,0">
+                        <TextBlock Text="Naslov:" FontSize="15" Foreground="#FF517C7C" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"/>
+                        <TextBlock Text="Naslov" Width="200" Height="25" Margin="10,5,0,0"  FontSize="15" Foreground="#FF517C7C"/>
+                    </StackPanel>
+
+                    <TextBlock Grid.Column="2" Text="Datum" VerticalAlignment="Center" FontSize="15" Foreground="#FF517C7C" Margin="20,25,20,0"  />
+
+                </Grid>
+
+                <TextBox Grid.Row="1" Margin="20,0,20,20" IsReadOnly="True">
+
+                </TextBox>
+            </Grid>
+
+
+            <StackPanel Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,0,20,0">
+                <Button Content="Nazad" Width="100" Height="30" Margin="0" Style="{StaticResource ButtonCalendar}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
