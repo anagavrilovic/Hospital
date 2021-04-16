@@ -1,0 +1,54 @@
+﻿<Window x:Class="Hospital.View.AddInventory"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.View"
+        mc:Ignorable="d"
+        Title="Unos inventara" Height="750" Width="430"
+        WindowStartupLocation="CenterOwner">
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Image Source="/Icon/back.png" Grid.Row="0" Grid.Column="0" Margin="10,8,130,5"/>
+        <Image Source="/Icon/logo.png" Grid.Row="0" Grid.Column="1" Margin="10,5,5,2"/>
+
+        <Label Content="UNOS INVENTARA" Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="100,15,5,0" FontWeight="Bold"/>
+
+        <Label Content="Oznaka:"   Grid.Row="2" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
+        <TextBox Grid.Row="3" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Inv.Id,       Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Label Content="Naziv:"    Grid.Row="4" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
+        <TextBox Grid.Row="5" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Inv.Name,     Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
+
+        <Label Content="Cena:"     Grid.Row="6" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
+        <TextBox Grid.Row="7" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Inv.Price,    Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Label Content="Količina:" Grid.Row="8" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
+        <TextBox Grid.Row="9" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Inv.Quantity, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
+
+        <Button Grid.Column="0" Grid.Row="10" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFD2F4EE" Foreground="#FF1E49D9" Margin="30,31.2,10,39.8" Click="accept" />
+        <Button Grid.Column="1" Grid.Row="10" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="10,31.2,28,39.8" Click="cancel" />
+
+    </Grid>
+</Window>

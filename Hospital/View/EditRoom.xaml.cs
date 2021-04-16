@@ -30,7 +30,7 @@ namespace Hospital.View
         private void acceptEdit(object sender, RoutedEventArgs e)
         {
            
-            int tempId = int.Parse(idTxt.Text);
+            string tempId = idTxt.Text;
             String tempName = nameTxt.Text;
             int tempFloor = int.Parse(floorTxt.Text);
             RoomType tempType = (RoomType)Enum.Parse(typeof(RoomType), "SALA_ZA_PREGLEDE");
@@ -56,7 +56,7 @@ namespace Hospital.View
 
             foreach(Room r in RoomsWindow.Rooms)
             {
-                if(r.Id == tempId)
+                if(r.Id.Equals(tempId))
                 {
                     r.Name = tempName;
                     r.Floor = tempFloor;
@@ -65,7 +65,6 @@ namespace Hospital.View
                 }
             }
 
-           // RoomsWindow.Rooms.Add(new Room { Id = tempId, Name = tempName, Floor = tempFloor, IsAvaliable = tempFree, Type = tempType });
             this.Close();
         }
 

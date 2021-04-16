@@ -68,7 +68,7 @@ namespace Hospital.View
             appointment.patientName = medicalRecordStorage.GetByPatientID(MainWindow.IDnumber).Patient.FirstName;
             appointment.patientSurname = medicalRecordStorage.GetByPatientID(MainWindow.IDnumber).Patient.LastName;
             RoomStorage roomStorage = new RoomStorage();
-            appointment.Room = roomStorage.GetOne(1);
+            appointment.Room = roomStorage.GetOne("1");
 
             appointmentStorage.Save(appointment);
             this.Close();

@@ -1,47 +1,163 @@
-// File:    InventoryStorage.cs
+﻿// File:    InventoryStorage.cs
 // Author:  Marija
 // Created: Tuesday, March 23, 2021 10:19:32 PM
 // Purpose: Definition of Class InventoryStorage
 
+using Hospital.View;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Windows;
 
 namespace Hospital
 {
     public class InventoryStorage
-    {
-       public List<Inventory> GetAll()
-       {
-          throw new NotImplementedException();
-       }
+    { 
+        public InventoryStorage()
+        {
+          this.fileName = "inventory.json";
+        }
+    
+       public ObservableCollection<Inventory> GetAll()
+       {   
+            using (StreamReader sr = File.OpenText(@"..\\..\\Files\\" + fileName))
+            {
+                inventory = JsonConvert.DeserializeObject<ObservableCollection<Inventory>>(sr.ReadToEnd());
+            }
+
+            return inventory;
+        }
    
        public void Save(Inventory parameter1)
        {
-          throw new NotImplementedException();
-       }
-   
-       public Boolean Delete(int id)
-       {
-          throw new NotImplementedException();
-       }
-   
-       public Inventory GetOne(int id)
-       {
-          throw new NotImplementedException();
-       }
-   
-       public List<Inventory> GetByRoomID(string id)
-       {
-          throw new NotImplementedException();
-       }
-   
-       public bool UpdateInventory(string firstRoomID, string secondRoomID, int quantity)
-       {
-          throw new NotImplementedException();
-       }
-   
-       public String fileName;
+            inventory = GetAll();
 
+            if (inventory == null)
+            {
+                inventory = new ObservableCollection<Inventory>();
+            }
+
+            inventory.Add(parameter1);
+
+            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, inventory);
+            }
+        }
+   
+       public Boolean Delete(string id)
+       {
+            inventory = GetAll();
+            foreach (Inventory i in inventory)
+            {
+                if (i.Id.Equals(id))
+                {
+                    inventory.Remove(i);
+                    using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
+                    {
+                        JsonSerializer serializer = new JsonSerializer();
+                        serializer.Serialize(file, inventory);
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+   
+       public Inventory GetOne(string id)
+       {
+            foreach (Inventory i in inventory)
+            {
+                if (i.Id.Equals(id))
+                {
+                    return i;
+                }
+            }
+            return null;
+        }
+   
+       public ObservableCollection<Inventory> GetByRoomID(string id)
+       {
+            inventory = GetAll();
+            ObservableCollection<Inventory> ret = new ObservableCollection<Inventory>();
+
+            foreach (Inventory i in inventory)
+            {
+                if (i.RoomID.Equals(id))
+                {
+                    ret.Add(i);
+                }
+            }
+
+            return ret;
+        }
+   
+       public void UpdateInventory(Inventory fromFirstRoom, string secondRoomID, int quantity)
+       {
+            if (fromFirstRoom.Quantity > quantity)
+            {
+                ObservableCollection<Inventory> inventar = new ObservableCollection<Inventory>();
+                inventar = this.GetByRoomID(secondRoomID);
+
+                bool found = false;
+
+                foreach (Inventory i in inventar)
+                {
+                    if (i.Name.Equals(fromFirstRoom.Name))
+                    {
+                        i.Quantity += quantity;
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    Inventory newItem = new Inventory
+                    {
+                        Id = fromFirstRoom.Id,
+                        Name = fromFirstRoom.Name,
+                        Quantity = quantity,
+                        Price = fromFirstRoom.Price,
+                        RoomID = secondRoomID
+                    };
+                    inventory.Add(newItem);
+                }
+
+
+                foreach (Inventory i in StaticInventory.Inventory)
+                {
+                    if (i.Id.Equals(fromFirstRoom.Id) && i.RoomID.Equals(fromFirstRoom.RoomID))
+                    {
+                        i.Quantity -= quantity;
+                    }
+                }
+
+                foreach (Inventory i in inventory)
+                {
+                    if (i.Id.Equals(fromFirstRoom.Id) && i.RoomID.Equals(fromFirstRoom.RoomID))
+                    {
+                        i.Quantity -= quantity;
+                    }
+                }
+
+                using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Serialize(file, inventory);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Pogrešan unos količine!");
+            }
+        }
+
+        public static ObservableCollection<Inventory> inventory = new ObservableCollection<Inventory>();
+        public String fileName;
     }
 }
 

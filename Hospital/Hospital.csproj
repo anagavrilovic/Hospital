@@ -74,6 +74,9 @@
     <Compile Include="Model\RegistratedUserStorage.cs" />
     <Compile Include="Model\UnitsType.cs" />
     <Compile Include="Model\UserType.cs" />
+    <Compile Include="View\AddInventory.xaml.cs">
+      <DependentUpon>AddInventory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Anamnesis.xaml.cs">
       <DependentUpon>Anamnesis.xaml</DependentUpon>
     </Compile>
@@ -110,8 +113,17 @@
     <Compile Include="View\Terapija.xaml.cs">
       <DependentUpon>Terapija.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditInventory.xaml.cs">
+      <DependentUpon>EditInventory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ModifikacijaAlergena.xaml.cs">
       <DependentUpon>ModifikacijaAlergena.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PrebacivanjeInventara.xaml.cs">
+      <DependentUpon>PrebacivanjeInventara.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StaticInventory.xaml.cs">
+      <DependentUpon>StaticInventory.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Termin.xaml.cs">
       <DependentUpon>Termin.xaml</DependentUpon>
@@ -187,6 +199,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AddInventory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Anamnesis.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -235,7 +251,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\EditInventory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ModifikacijaAlergena.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PrebacivanjeInventara.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StaticInventory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -416,6 +444,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\x.png" />
+    <Resource Include="Icon\back.png" />
+    <Resource Include="Icon\menu.JPG" />
+    <Resource Include="Icon\search-blue.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
