@@ -117,11 +117,12 @@ namespace Hospital.View
             }
         }
 
-        public KreiranjeTermina(MakeApointment parentWindow)
+        public KreiranjeTermina(MakeApointment parentWindow,string id)
         {
             InitializeComponent();
             this.DataContext = this;
             Pacijent = new Patient();
+            Pacijent = (mStorage.GetByPatientID(id)).Patient;
             Termin = new Appointment();
             Doktor = new Doctor();
             for (DateTime tm = time.AddHours(0); tm < time.AddHours(24); tm = tm.AddMinutes(30))
@@ -129,16 +130,18 @@ namespace Hospital.View
                 vreme.Items.Add(tm.ToShortTimeString());
 
             }
-            for(int i = 0; i < 10; i++)
+            for(int i = 0; i < 15; i++)
             {
-                trajanje.Items.Add(((i + 1) * 15));
+                trajanje.Items.Add(((i + 1) * 10));
             }
             trajanje.SelectedIndex = 1;
             vreme.SelectedIndex = 7;
+            
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 3 / 4);
             parentAppointment = parentWindow;
             Doktori = dStorage.GetAll();
+            
 
         }
 
@@ -161,33 +164,45 @@ namespace Hospital.View
                 Termin.IDpatient = Pacijent.PersonalID;
                 Termin.patientSurname = Pacijent.LastName;
                 Termin.DateTime = Date.Date.Add(DateTime.Parse(vremeTermin).TimeOfDay);
-                int v=int.Parse(TrajanjeMinuti);
-                Termin.DurationInHours=(double)(v / 60);
-                
+                double v=double.Parse(TrajanjeMinuti);
+                Termin.DurationInHours=v / 60;
+                    
                 Random random = new Random();
                 Termin.IDDoctor = Doktor.PersonalID;
                 Termin.DoctrosNameSurname = Doktor.FirstName + " " + Doktor.LastName;
                 Termin.IDAppointment = random.Next(0, 10000).ToString();
-                storage.Save(Termin);
                 foreach(Room r in rStorage.GetAll())
                 {
                     if(rdbPregled.IsChecked.Equals(true) && Doktor.RoomID==r.Id)
                     {
                         Termin.Room = r;
+                        Termin.Type = AppointmentType.examination;
+                        break;
+                    }
+                    else
+                    {
+                        if (r.Type.Equals(RoomType.OPERACIONA_SALA))
+                        {
+                            Termin.Room = r;
+                            Termin.Type = AppointmentType.operation;
+                            break;
+                        }
                     }
                 }
-                parentAppointment.dataGridPregledi.ItemsSource = storage.GetAll();
+                ((Doctor_Examination)Window.GetWindow(this.Owner)).Pregled.appointment = Termin;
+                ObservableCollection<Appointment> list = new ObservableCollection<Appointment>();
+                storage.Save(Termin);
+                foreach (Appointment a in storage.GetAll())
+                {
+                    if (a.IDDoctor.Equals(Termin.IDDoctor))
+                    {
+                        list.Add(a);
+                    }
+                }
+                parentAppointment.dataGridPregledi.ItemsSource = list;
                 this.Close();
             }
 
-        }
-
-
-        private void dodajPacijenta(object sender, RoutedEventArgs e)
-        {
-            PacijentListBox pacijentLB = new PacijentListBox(this);
-            pacijentLB.Owner = this;
-            pacijentLB.ShowDialog();
         }
     }
 }

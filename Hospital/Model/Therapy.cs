@@ -11,7 +11,7 @@ namespace Hospital
     {
        public string description;
         public string name;
-       public System.Collections.Generic.List<Medicine> medicine;
+       private System.Collections.Generic.List<Medicine> medicine;
    
        /// <summary>
        /// Property for collection of Medicine

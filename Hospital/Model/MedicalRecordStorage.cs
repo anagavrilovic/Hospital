@@ -65,12 +65,27 @@ namespace Hospital
             return null;
         }
 
+        public void EditRecord(MedicalRecord r)
+        {
+            ObservableCollection<MedicalRecord> records = GetAll();
+            foreach(MedicalRecord m in records)
+            {
+                if (r.MedicalRecordID.Equals(m.MedicalRecordID))
+                {
+                    records.Remove(m);
+                    records.Add(r);
+                    break;
+                }
+            }
+            DoSerialization(records);
+        }
+
         public MedicalRecord GetByPatientID(string id)
         {
             ObservableCollection<MedicalRecord> records = GetAll();
             foreach (MedicalRecord r in records)
             {
-                if (r.Patient.PersonalID.Equals(id))
+                    if (r.Patient.PersonalID.Equals(id))
                 {
                     return r;
                 }

@@ -89,7 +89,7 @@ namespace Hospital.View
             ana = new Anamnesis();
             frameAnamnesis.Content = ana;
             frameAppointment = new Frame();
-            ma = new MakeApointment(doktor);
+            ma = new MakeApointment(doktor, (mStorage.GetByPatientID(appointment.IDpatient)).Patient.PersonalID);
             frameAppointment.Content = ma;
             frameDiagnosis = new Frame();
             dia = new Diagnosis();

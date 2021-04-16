@@ -51,16 +51,18 @@ namespace Hospital.View
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
-
+        private string patientId;
         public event PropertyChangedEventHandler PropertyChanged;
         AppointmentStorage aStorage;
         private double _durationInHours;
         private DoctorStorage dStorage = new DoctorStorage();
-        public MakeApointment(Doctor d)
+
+        public MakeApointment(Doctor d,string patientId)
         {
             Appointments = new ObservableCollection<Appointment>();
             InitializeComponent();
             this.DataContext = this;
+            this.patientId = patientId;
             ComboBox.ItemsSource = Enum.GetValues(typeof(DoctorSpecialty)).Cast<DoctorSpecialty>();
             ComboBox.SelectedIndex =(int)d.Specialty ;
             dataGridPregledi.Loaded += setMinWidths;
@@ -78,8 +80,9 @@ namespace Hospital.View
 
         private void Dodaj(object sender, RoutedEventArgs e)
         {
-            KreiranjeTermina termin = new KreiranjeTermina(this);
+            KreiranjeTermina termin = new KreiranjeTermina(this,patientId);
             dodaj.IsEnabled = false;
+            termin.Owner = Window.GetWindow(this);
             termin.Show();
         }
 

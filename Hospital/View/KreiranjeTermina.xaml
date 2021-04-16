@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="KreiranjeTermina"
         WindowStartupLocation="CenterScreen"
-        Background="#FFDCE6ED">
+        Background="#FFDCE6ED" Width="843.6">
     <Window.Resources>
         <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
             <Grid>
@@ -195,13 +195,6 @@
                     </TextBlock.Text>
                 </TextBlock>
             </Border>
-            <Button x:Name="btnDodajPacijenta" Height="25" FontSize="17" Width="100" BorderThickness="1" Click="dodajPacijenta" Content="Dodaj" Background="Crimson" Foreground="White">
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center">
             <Label FontSize="17"  Width="76" Content="Doktor:" Margin="0,0,10,0"  HorizontalAlignment="Left"/>
