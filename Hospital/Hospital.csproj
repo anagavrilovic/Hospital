@@ -89,6 +89,9 @@
     <Compile Include="View\DoktorKarton.xaml.cs">
       <DependentUpon>DoktorKarton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DoktorObavestenja.xaml.cs">
+      <DependentUpon>DoktorObavestenja.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Kalendar.xaml.cs">
       <DependentUpon>Kalendar.xaml</DependentUpon>
     </Compile>
@@ -204,6 +207,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DoktorKarton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DoktorObavestenja.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

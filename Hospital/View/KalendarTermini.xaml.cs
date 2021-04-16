@@ -81,10 +81,13 @@ namespace Hospital.View
 
         private void dataGridPregledi_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            DetaljiPregleda d = new DetaljiPregleda((Appointment)dataGridPregledi.SelectedItem);
-            d.Owner = Window.GetWindow(this);
-            d.Show();
-            Window.GetWindow(this).Hide();
+            if (dataGridPregledi.SelectedItem != null)
+            {
+                DetaljiPregleda d = new DetaljiPregleda((Appointment)dataGridPregledi.SelectedItem);
+                d.Owner = Window.GetWindow(this);
+                d.Show();
+                Window.GetWindow(this).Hide();
+            }
         }
     }
 }

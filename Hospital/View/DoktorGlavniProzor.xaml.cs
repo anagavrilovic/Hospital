@@ -64,6 +64,7 @@ namespace Hospital.View
         private void Announcment(object sender, RoutedEventArgs e)
         {
             obavestenje.Source = new BitmapImage(new Uri("pack://application:,,,/Icon/announcment.png", UriKind.Absolute));
+            Main.Content = new DoktorObavestenja();
         }
     }
 }
