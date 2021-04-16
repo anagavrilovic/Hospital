@@ -65,6 +65,8 @@
     <Compile Include="Model\Ingredient.cs" />
     <Compile Include="Model\Inventory.cs" />
     <Compile Include="Model\InventoryStorage.cs" />
+    <Compile Include="Model\Notification.cs" />
+    <Compile Include="Model\NotificationStorage.cs" />
     <Compile Include="Model\Termini.cs" />
     <Compile Include="Model\MedicalSupply.cs" />
     <Compile Include="Model\MedicalSupplyStorage.cs" />
@@ -86,11 +88,17 @@
     <Compile Include="View\Diagnosis.xaml.cs">
       <DependentUpon>Diagnosis.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DodajObavestenje.xaml.cs">
+      <DependentUpon>DodajObavestenje.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DoktorGlavnaStranica.xaml.cs">
       <DependentUpon>DoktorGlavnaStranica.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DoktorKarton.xaml.cs">
       <DependentUpon>DoktorKarton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\IzmenaObavestenja.xaml.cs">
+      <DependentUpon>IzmenaObavestenja.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Kalendar.xaml.cs">
       <DependentUpon>Kalendar.xaml</DependentUpon>
@@ -109,6 +117,9 @@
     </Compile>
     <Compile Include="View\OdaberiPacijenta.xaml.cs">
       <DependentUpon>OdaberiPacijenta.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PrikazObavestenja.xaml.cs">
+      <DependentUpon>PrikazObavestenja.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Terapija.xaml.cs">
       <DependentUpon>Terapija.xaml</DependentUpon>
@@ -215,11 +226,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\DodajObavestenje.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DoktorGlavnaStranica.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DoktorKarton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\IzmenaObavestenja.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -244,6 +263,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\OdaberiPacijenta.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PrikazObavestenja.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -447,6 +470,12 @@
     <Resource Include="Icon\back.png" />
     <Resource Include="Icon\menu.JPG" />
     <Resource Include="Icon\search-blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\delete.png" />
+    <Resource Include="Icon\doc.png" />
+    <Resource Include="Icon\edit.png" />
+    <Resource Include="Icon\view.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
