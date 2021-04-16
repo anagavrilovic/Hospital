@@ -41,6 +41,11 @@ namespace Hospital.View
 
         private void IzbrisiKarton(object sender, RoutedEventArgs e)
         {
+            if (PacijentiTable.SelectedItem == null)
+            {
+                return;
+            }
+
             Pacijenti.Remove((MedicalRecord) PacijentiTable.SelectedItem);
             mrs.DoSerialization(Pacijenti);
         }

@@ -19,7 +19,9 @@ namespace Hospital
                 isGuest = value;
             }
         }
-        public override string ToString()
+
+        override
+        public string ToString()
         {
             return FirstName + " "+LastName + " " + PersonalID;
         }

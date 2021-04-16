@@ -34,31 +34,31 @@
 
                 <StackPanel Orientation="Horizontal" Margin="0,25,0,0">
                     <TextBlock Text="Naslov:" FontSize="15" Foreground="#FF517C7C" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"/>
-                    <TextBox Width="200" Height="25" Margin="10,0,0,0" />
+                    <TextBox x:Name="NaslovText" Text="{Binding Notification.Title, UpdateSourceTrigger=Explicit}" Width="200" Height="25" Margin="10,0,0,0" />
                 </StackPanel>
 
-                <TextBlock Grid.Column="1" Text="Datum" VerticalAlignment="Center" FontSize="15" Foreground="#FF517C7C" Margin="20,25,20,0"  />
+                <TextBlock x:Name="DatumText" Grid.Column="1" Text="{Binding Notification.Date, StringFormat='{}{0: dd.MM.yyyy, HH:mm}'}" VerticalAlignment="Center" FontSize="15" Foreground="#FF517C7C" Margin="20,25,20,0"  />
 
                 <StackPanel Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,25,10,0">
-                    <CheckBox Content="SEKRETAR" FontSize="15" Foreground="#FF517C7C"/>
-                    <CheckBox Content="LEKAR" FontSize="15" Foreground="#FF517C7C"/>
+                    <CheckBox x:Name="SekretarCheck" IsChecked="{Binding Notification.Sekretar, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Content="SEKRETAR" FontSize="15" Foreground="#FF517C7C"/>
+                    <CheckBox x:Name="LekarCheck" IsChecked="{Binding Notification.Lekar, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Content="LEKAR" FontSize="15" Foreground="#FF517C7C"/>
                 </StackPanel>
                 <StackPanel Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,25,20,0">
-                    <CheckBox Content="UPRAVNIK" FontSize="15" Foreground="#FF517C7C"/>
-                    <CheckBox Content="PACIJENT" FontSize="15" Foreground="#FF517C7C"/>
+                    <CheckBox x:Name="UpravnikCheck" IsChecked="{Binding Notification.Upravnik, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Content="UPRAVNIK" FontSize="15" Foreground="#FF517C7C"/>
+                    <CheckBox x:Name="PacijentCheck" IsChecked="{Binding Notification.Pacijent, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Content="PACIJENT" FontSize="15" Foreground="#FF517C7C"/>
                 </StackPanel>
 
             </Grid>
 
-            <ListBox Grid.Row="1" Margin="20,0,20,20">
+            <TextBox x:Name="SadrzajText" Text="{Binding Notification.Content, UpdateSourceTrigger=Explicit}" Grid.Row="1" Margin="20,0,20,20" TextWrapping="Wrap">
 
-            </ListBox>
+            </TextBox>
         </Grid>
 
 
         <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-            <Button Content="Potvrdi" Width="100" Height="30" Margin="0,0,10,0" Style="{StaticResource ButtonCalendar}" Click="PotvrdiClick" />
-            <Button Content="Odustani" Width="100" Margin="10,0,0,0" Style="{StaticResource ButtonOdustani}" Click="OdustaniClick" />
+            <Button Content="Potvrdi" Width="100" Height="30" Margin="0,0,10,0" Style="{StaticResource ButtonCalendar}" Click="BtnPotvrdiClick" />
+            <Button Content="Odustani" Width="100" Margin="10,0,0,0" Style="{StaticResource ButtonOdustani}" Click="BtnOdustaniClick" />
         </StackPanel>
     </Grid>
 </Window>

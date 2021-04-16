@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,24 @@ namespace Hospital.View
     /// </summary>
     public partial class PrikazObavestenja : Window
     {
-        public PrikazObavestenja()
+        private Notification notification = new Notification();
+
+        public Notification Notification
+        {
+            get { return notification; }
+            set { notification = value; }
+        }
+
+        public PrikazObavestenja(Notification n)
         {
             InitializeComponent();
+            this.DataContext = this;
+            Notification = n;
+        }
+
+        private void BtnNazadClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
