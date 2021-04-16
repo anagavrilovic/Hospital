@@ -5,10 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-        Title="Kalendar" Height="665" Width="1070">
-    <Window.Resources>
-        
-    </Window.Resources>
+        Title="Kalendar" Height="665" Width="1070" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
@@ -37,9 +34,9 @@
                 </Grid.ColumnDefinitions>
 
                 <ComboBox x:Name="DoctorComboBox" Width="160" Height="25" Margin="20,5,5,5" ItemsSource="{Binding Doctors}"  SelectionChanged="ComboBoxDoctorEvent" />
-                <Button x:Name="Pacijent" Grid.Column="1" Content="Odaberi pacijenta" Margin="5" Width="100" Height="25" Style="{StaticResource ButtonCalendar}"/>
-                <Button x:Name="Zakazi" Grid.Column="2" Height="25" Width="25" Content="+" Margin="5" Style="{StaticResource ButtonCalendar}"/>
-                <Button x:Name="Otkazi" Grid.Column="3" Height="25" Width="25" Content="-" Margin="5" Style="{StaticResource ButtonCalendar}"/>
+                <Button x:Name="Pacijent" Grid.Column="1" Content="Odaberi pacijenta" Margin="5" Width="110" Height="25" Style="{StaticResource ButtonCalendar}" Click="OdaberiPacijentaClick" />
+                <Button x:Name="Zakazi" Grid.Column="2" Height="25" Width="25" Content="+" Margin="5" Style="{StaticResource ButtonCalendar}" Click="ZakaziClick" />
+                <Button x:Name="Otkazi" Grid.Column="3" Height="25" Width="25" Content="-" Margin="5" Style="{StaticResource ButtonCalendar}" Click="OtkaziClick"/>
                 <DatePicker x:Name="Datum" Grid.Column="5" Focusable="False" Width="30" Height="25" Margin="5" SelectedDate="{Binding Date}" SelectedDateChanged="DateChanged" FirstDayOfWeek="Monday"/>
                 <Button x:Name="TrenutnaNedelja" Grid.Column="6" Height="25" Width="100" Content="Trenutna nedelja" Margin="5" Click="TrenutnaNedeljaClick" Style="{StaticResource ButtonCalendar}" />
                 
@@ -64,7 +61,7 @@
             </Grid>
         </Grid>
 
-        <DataGrid Grid.Row="1" ItemsSource="{Binding Tabela, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource Kalendar}" Margin="0" >
+        <DataGrid x:Name="KalendarDataGrid" Grid.Row="1" ItemsSource="{Binding Tabela, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource Kalendar}" Margin="0" SelectionUnit="Cell" SelectionMode="Single" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="" Width="35" Binding="{Binding Vreme}"/>
                 

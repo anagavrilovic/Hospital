@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -25,13 +26,28 @@ namespace Hospital.View
         private ObservableCollection<Termini> tabela = new ObservableCollection<Termini>();
         private ObservableCollection<Doctor> doctors = new ObservableCollection<Doctor>();
         private DateTime date = DateTime.Today;
+        private MedicalRecord patient = new MedicalRecord();
+
+        private DateTime weekBegin;
+
+        public DateTime WeekBegin
+        {
+            get { return weekBegin; }
+            set { weekBegin = value; }
+        }
+
+
+        public MedicalRecord Patient
+        {
+            get { return patient; }
+            set { patient = value; }
+        }
 
         public DateTime Date
         {
             get { return date; }
             set { date = value; }
         }
-
 
         public ObservableCollection<Termini> Tabela
         {
@@ -64,7 +80,7 @@ namespace Hospital.View
             for (int i = 0; i < 48; i++)
             {
                 Termini termin = new Termini();
-                termin.Vreme = start.ToString("HH.mm", CultureInfo.InvariantCulture);
+                termin.Vreme = start.ToString("HH:mm", CultureInfo.InvariantCulture);
                 start = start.AddMinutes(30);
                 tabela.Add(termin);
             } 
@@ -77,7 +93,7 @@ namespace Hospital.View
                 return;
             }
 
-            DateTime weekBegin = GetWeekBegin(Date);
+            WeekBegin = GetWeekBegin(Date);
             DateTime weekEnd = weekBegin.AddDays(6);
 
             AppointmentStorage storage = new AppointmentStorage();
@@ -94,58 +110,58 @@ namespace Hospital.View
                     switch (dan)
                     {
                         case DayOfWeek.Monday:
-                            tabela[NadjiVreme(app.DateTime.ToString("HH.mm"))].Ponedeljak = app;
+                            tabela[NadjiVreme(app.DateTime.ToString("HH:mm"))].Ponedeljak = app;
                             for(int i = 1; i < numberOfCells; i++)
                             {
-                                tabela[NadjiVreme(app.DateTime.ToString("HH.mm")) + i].Ponedeljak.Type = app.Type;
+                                tabela[NadjiVreme(app.DateTime.ToString("HH:mm")) + i].Ponedeljak.Type = app.Type;
                             }
                             break;
 
                         case DayOfWeek.Tuesday:
-                            tabela[NadjiVreme(app.DateTime.ToString("HH.mm"))].Utorak = app;
+                            tabela[NadjiVreme(app.DateTime.ToString("HH:mm"))].Utorak = app;
                             for (int i = 1; i < numberOfCells; i++)
                             {
-                                tabela[NadjiVreme(app.DateTime.ToString("HH.mm")) + i].Utorak.Type = app.Type;
+                                tabela[NadjiVreme(app.DateTime.ToString("HH:mm")) + i].Utorak.Type = app.Type;
                             }
                             break;
 
                         case DayOfWeek.Wednesday:
-                            tabela[NadjiVreme(app.DateTime.ToString("HH.mm"))].Sreda = app;
+                            tabela[NadjiVreme(app.DateTime.ToString("HH:mm"))].Sreda = app;
                             for (int i = 1; i < numberOfCells; i++)
                             {
-                                tabela[NadjiVreme(app.DateTime.ToString("HH.mm")) + i].Sreda.Type = app.Type;
+                                tabela[NadjiVreme(app.DateTime.ToString("HH:mm")) + i].Sreda.Type = app.Type;
                             }
                             break;
 
                         case DayOfWeek.Thursday:
-                            tabela[NadjiVreme(app.DateTime.ToString("HH.mm"))].Cetvrtak = app;
+                            tabela[NadjiVreme(app.DateTime.ToString("HH:mm"))].Cetvrtak = app;
                             for (int i = 1; i < numberOfCells; i++)
                             {
-                                tabela[NadjiVreme(app.DateTime.ToString("HH.mm")) + i].Cetvrtak.Type = app.Type;
+                                tabela[NadjiVreme(app.DateTime.ToString("HH:mm")) + i].Cetvrtak.Type = app.Type;
                             }
                             break;
 
                         case DayOfWeek.Friday:
-                            tabela[NadjiVreme(app.DateTime.ToString("HH.mm"))].Petak = app;
+                            tabela[NadjiVreme(app.DateTime.ToString("HH:mm"))].Petak = app;
                             for (int i = 1; i < numberOfCells; i++)
                             {
-                                tabela[NadjiVreme(app.DateTime.ToString("HH.mm")) + i].Petak.Type = app.Type;
+                                tabela[NadjiVreme(app.DateTime.ToString("HH:mm")) + i].Petak.Type = app.Type;
                             }
                             break;
 
                         case DayOfWeek.Saturday:
-                            tabela[NadjiVreme(app.DateTime.ToString("HH.mm"))].Subota = app;
+                            tabela[NadjiVreme(app.DateTime.ToString("HH:mm"))].Subota = app;
                             for (int i = 1; i < numberOfCells; i++)
                             {
-                                tabela[NadjiVreme(app.DateTime.ToString("HH.mm")) + i].Subota.Type = app.Type;
+                                tabela[NadjiVreme(app.DateTime.ToString("HH:mm")) + i].Subota.Type = app.Type;
                             }
                             break;
 
                         case DayOfWeek.Sunday:
-                            tabela[NadjiVreme(app.DateTime.ToString("HH.mm"))].Nedelja = app;
+                            tabela[NadjiVreme(app.DateTime.ToString("HH:mm"))].Nedelja = app;
                             for (int i = 1; i < numberOfCells; i++)
                             {
-                                tabela[NadjiVreme(app.DateTime.ToString("HH.mm")) + i].Nedelja.Type = app.Type;
+                                tabela[NadjiVreme(app.DateTime.ToString("HH:mm")) + i].Nedelja.Type = app.Type;
                             }
                             break;
                     }
@@ -169,7 +185,7 @@ namespace Hospital.View
             for (int i = 0; i < 48; i++)
             {
                 
-                if(start.ToString("HH.mm", CultureInfo.InvariantCulture).Equals(vreme))
+                if(start.ToString("HH:mm", CultureInfo.InvariantCulture).Equals(vreme))
                 {
                     return i;
                 }
@@ -218,6 +234,106 @@ namespace Hospital.View
         {
             Date = Date.AddDays(7);
             OsveziKalendar();
+        }
+
+        private void OdaberiPacijentaClick(object sender, RoutedEventArgs e)
+        {
+            var op = new OdaberiPacijenta(Patient);
+            op.Show();
+        }
+
+        private void ZakaziClick(object sender, RoutedEventArgs e)
+        {
+            if(KalendarDataGrid.SelectedCells == null)
+            {
+                return;
+            }
+
+            int indexColumn = KalendarDataGrid.SelectedCells[0].Column.DisplayIndex;
+            var vreme = ((Termini)KalendarDataGrid.SelectedCells[0].Item).Vreme;
+            
+            var zt = new ZakazivanjeTermina((Doctor)DoctorComboBox.SelectedItem, Patient, indexColumn, vreme, WeekBegin, Tabela);
+            zt.Show();
+
+        }
+
+        private void OtkaziClick(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Da li ste sigurni da želite da otkažete termin?",
+                        "Potvrda", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                int indexColumn = KalendarDataGrid.SelectedCells[0].Column.DisplayIndex;
+                var vreme = ((Termini)KalendarDataGrid.SelectedCells[0].Item).Vreme;
+
+                AppointmentStorage aps = new AppointmentStorage();
+                double trajanje;
+
+                switch (indexColumn)
+                {
+                    case 1:
+                        aps.Delete(Tabela[NadjiVreme(vreme)].Ponedeljak.IDAppointment);
+                        trajanje = Tabela[NadjiVreme(vreme)].Ponedeljak.DurationInHours / 0.5;
+                        for(int i = 1; i < trajanje; i++)
+                        {
+                            Tabela[NadjiVreme(vreme) + i].Ponedeljak.Type = AppointmentType.none;
+                        }
+                        break;
+                    case 2:
+                        aps.Delete(Tabela[NadjiVreme(vreme)].Utorak.IDAppointment);
+                        trajanje = Tabela[NadjiVreme(vreme)].Utorak.DurationInHours / 0.5;
+                        for (int i = 1; i < trajanje; i++)
+                        {
+                            Tabela[NadjiVreme(vreme) + i].Utorak.Type = AppointmentType.none;
+                        }
+                        break;
+                    case 3:
+                        aps.Delete(Tabela[NadjiVreme(vreme)].Sreda.IDAppointment);
+                        trajanje = Tabela[NadjiVreme(vreme)].Sreda.DurationInHours / 0.5;
+                        for (int i = 1; i < trajanje; i++)
+                        {
+                            Tabela[NadjiVreme(vreme) + i].Sreda.Type = AppointmentType.none;
+                        }
+                        break;
+                    case 4:
+                        aps.Delete(Tabela[NadjiVreme(vreme)].Cetvrtak.IDAppointment);
+                        trajanje = Tabela[NadjiVreme(vreme)].Cetvrtak.DurationInHours / 0.5;
+                        for (int i = 1; i < trajanje; i++)
+                        {
+                            Tabela[NadjiVreme(vreme) + i].Cetvrtak.Type = AppointmentType.none;
+                        }
+                        break;
+                    case 5:
+                        aps.Delete(Tabela[NadjiVreme(vreme)].Petak.IDAppointment);
+                        trajanje = Tabela[NadjiVreme(vreme)].Petak.DurationInHours / 0.5;
+                        for (int i = 1; i < trajanje; i++)
+                        {
+                            Tabela[NadjiVreme(vreme) + i].Petak.Type = AppointmentType.none;
+                        }
+                        break;
+                    case 6:
+                        aps.Delete(Tabela[NadjiVreme(vreme)].Subota.IDAppointment);
+                        trajanje = Tabela[NadjiVreme(vreme)].Subota.DurationInHours / 0.5;
+                        for (int i = 1; i < trajanje; i++)
+                        {
+                            Tabela[NadjiVreme(vreme) + i].Subota.Type = AppointmentType.none;
+                        }
+                        break;
+                    case 7:
+                        aps.Delete(Tabela[NadjiVreme(vreme)].Nedelja.IDAppointment);
+                        trajanje = Tabela[NadjiVreme(vreme)].Nedelja.DurationInHours / 0.5;
+                        for (int i = 1; i < trajanje; i++)
+                        {
+                            Tabela[NadjiVreme(vreme) + i].Nedelja.Type = AppointmentType.none;
+                        }
+                        break;
+                }
+
+                OsveziKalendar();
+            }
+            else
+            {
+                
+            }
         }
     }
 }
