@@ -49,11 +49,11 @@
         <TextBox x:Name="nameTxt"          Grid.Row="5"  Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" />
         <TextBox x:Name="floorTxt"         Grid.Row="7"  Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" />
 
-        <ComboBox x:Name="typeCB"          Grid.Row="9" Grid.ColumnSpan="2" Margin="30,7,28,4.8" BorderThickness="1">
-            <ComboBoxItem                   Content="OPERACIONA_SALA"  Foreground="#FF2E83BF"/>
-            <ComboBoxItem IsSelected="True" Content="SALA_ZA_PREGLEDE" Foreground="#FF2E83BF"/>
-            <ComboBoxItem                   Content="SOBA_ZA_ODMOR"    Foreground="#FF2E83BF"/>
-            <ComboBoxItem                   Content="MAGACIN"          Foreground="#FF2E83BF"/>
+        <ComboBox x:Name="typeCB"          Grid.Row="9"  Grid.ColumnSpan="2" Margin="30,7,28,4.8"    BorderThickness="1">
+            <ComboBoxItem                   Content="OPERACIONA_SALA"     Foreground="#FF2E83BF"/>
+            <ComboBoxItem IsSelected="True" Content="SALA_ZA_PREGLEDE"    Foreground="#FF2E83BF"/>
+            <ComboBoxItem                   Content="SOBA_ZA_ODMOR"       Foreground="#FF2E83BF"/>
+            <ComboBoxItem                   Content="MAGACIN"             Foreground="#FF2E83BF"/>
         </ComboBox>
 
         <RadioButton GroupName="free" x:Name="btn1" Grid.Row="11" Grid.Column="0"  Content="SLOBODNA" Foreground="#FF2E83BF" Margin="30,16,-96,12" FontSize="16"/>

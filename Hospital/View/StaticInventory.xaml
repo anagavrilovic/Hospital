@@ -35,10 +35,8 @@
             <Image Source="/Icon/logo.png" Margin="10,5,250,2"/>
         </StackPanel>
 
-
-
-        <Button Grid.Column="0" Grid.Row="1"  Content="IZMENI STAVKU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="10,23,10.2,10" Click="edit" />
-        <Button Grid.Column="1" Grid.Row="1"  Content="OBRIŠI STAVKU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="10,23,17,10" Click="delete"/>
+        <Button Grid.Column="0"     Grid.Row="1"  Content="IZMENI STAVKU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="10,23,10.2,10" Click="edit" />
+        <Button Grid.Column="1"     Grid.Row="1"  Content="OBRIŠI STAVKU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="10,23,17,10" Click="delete"/>
         <Button Grid.ColumnSpan="2" Grid.Row="2"  Content="PREBACI STAVKU U DRUGU SALU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="10,10,17,24" Click="transfer"/>
 
         <TextBox x:Name="search" Grid.ColumnSpan="2" Grid.Row="3" Margin="10,20,51,23.8"/>
