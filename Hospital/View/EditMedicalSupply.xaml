@@ -1,0 +1,77 @@
+﻿<Window x:Class="Hospital.View.EditMedicalSupply"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.View"
+        mc:Ignorable="d"
+        Title="Izmena opreme" Height="750" Width="430"
+        WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <Style x:Key="cbTB" TargetType="{x:Type Control}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=Gost, Path=IsChecked}" Value="True">
+                    <Setter Property="TextBox.IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=Gost, Path=IsChecked}" Value="False">
+                    <Setter Property="TextBox.IsEnabled" Value="True"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+        
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2">
+            <Button Grid.Row="0" Grid.Column="0" Background="white" Click="back" BorderBrush="white" >
+                <Image  Source="/Icon/back.png" Margin="10,0,150,0"/>
+            </Button>
+            <Image Source="/Icon/logo.png" Margin="60,5,15,5"  />
+        </StackPanel>
+
+        <Label Content="IZMENA OPREME" Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="100,15,5,0" FontWeight="Bold"/>
+
+        <Label Content="Oznaka:"           Grid.Row="2"  Grid.Column="0"   Foreground="#FF1E49D9" FontSize="20" Margin="30,7,5,10.2"/>
+        <Label Content="Naziv:"            Grid.Row="4"  Grid.Column="0"   Foreground="#FF1E49D9" FontSize="20" Margin="30,7,5,10.2"/>
+        <Label Content="Cena po jedinici:" Grid.Row="6"  Grid.Column="0"   Foreground="#FF1E49D9" FontSize="20" Margin="30,7,5,10.2"/>
+        <Label Content="Količina:"         Grid.Row="8"  Grid.Column="0"   Foreground="#FF1E49D9" FontSize="20" Margin="30,7,5,10.2"/>
+        <Label Content="Merna jedinica:"   Grid.Row="10" Grid.Column="0"   Foreground="#FF1E49D9" FontSize="20" Margin="30,7,5,10.2"/>
+
+        <TextBox x:Name="oznakaTxt"   Grid.Row="3"  Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Ms.Id,            Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+        <TextBox x:Name="nazivTxt"    Grid.Row="5"  Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Ms.Name,          Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+        <TextBox x:Name="cenaTxt"     Grid.Row="7"  Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Ms.Price,         Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+        <TextBox x:Name="kolicinaTxt" Grid.Row="9"  Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Ms.Quantity,      Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+
+        <ComboBox x:Name="units" Grid.Row="11" Grid.ColumnSpan="2" BorderThickness="1" Margin="30,7,28,4.8" Style="{StaticResource cbTB}">
+            <ComboBoxItem x:Name="kutije" IsSelected="True"> KUTIJE  </ComboBoxItem>
+            <ComboBoxItem x:Name="trake">                    TRAKE   </ComboBoxItem>
+            <ComboBoxItem x:Name="flasice">                  FLAŠICE </ComboBoxItem>
+        </ComboBox>
+
+        <Button Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,22.6,5,20.8" Click="accept"/>
+        <Button Grid.Row="12" Grid.Column="1" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="5,22.6,28,20.8" Click="cancel"/>
+
+    </Grid>
+</Window>

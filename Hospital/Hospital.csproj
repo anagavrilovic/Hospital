@@ -79,6 +79,9 @@
     <Compile Include="View\AddInventory.xaml.cs">
       <DependentUpon>AddInventory.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\AddMedicalSupply.xaml.cs">
+      <DependentUpon>AddMedicalSupply.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Anamnesis.xaml.cs">
       <DependentUpon>Anamnesis.xaml</DependentUpon>
     </Compile>
@@ -99,6 +102,9 @@
     </Compile>
     <Compile Include="View\IzmenaObavestenja.xaml.cs">
       <DependentUpon>IzmenaObavestenja.xaml</DependentUpon>
+   </Compile>
+    <Compile Include="View\EditMedicalSupply.xaml.cs">
+      <DependentUpon>EditMedicalSupply.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Kalendar.xaml.cs">
       <DependentUpon>Kalendar.xaml</DependentUpon>
@@ -121,6 +127,9 @@
     <Compile Include="View\PrikazObavestenja.xaml.cs">
       <DependentUpon>PrikazObavestenja.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PrebacivanjeOpreme.xaml.cs">
+      <DependentUpon>PrebacivanjeOpreme.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Terapija.xaml.cs">
       <DependentUpon>Terapija.xaml</DependentUpon>
     </Compile>
@@ -134,6 +143,9 @@
       <DependentUpon>PrebacivanjeInventara.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\StaticInventory.xaml.cs">
+      <DependentUpon>StaticInventory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DynamicInventory.xaml.cs">
       <DependentUpon>StaticInventory.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Termin.xaml.cs">
@@ -214,6 +226,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AddMedicalSupply.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Anamnesis.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -239,6 +255,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\IzmenaObavestenja.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditMedicalSupply.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -270,6 +290,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\PrebacivanjeOpreme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Terapija.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -287,6 +311,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\StaticInventory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DynamicInventory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -476,6 +504,7 @@
     <Resource Include="Icon\doc.png" />
     <Resource Include="Icon\edit.png" />
     <Resource Include="Icon\view.png" />
+    <Resource Include="Icon\menu.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

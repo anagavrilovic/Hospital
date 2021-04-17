@@ -26,17 +26,19 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FFAEF6ED">
-            <Image Source="/Icon/back.png"  Margin="10,8,5,5"/>
-            <Label Content="PRIKAZ SALA"    Margin="0,15,5,10.2" Background="#FFAEF6ED" Foreground="#FF1E49D9" FontSize="24" />
-            <Image Source="/Icon/logo.png"  Margin="0,8,0,0" Width="181"/>
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
+            <Button Background="#FF95C0F4" BorderBrush="#FF95C0F4" Click="menuButton">
+                <Image Source="/Icon/menu.png"  Margin="10,8,5,5"/>
+            </Button>
+            <Label Content="PRIKAZ SALA"    Margin="0,15,5,10.2" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" />
+            <Image Source="/Icon/logo.png"  Margin="40,8,0,10"/>
         </StackPanel>
 
 
-        <Button x:Name="edit"             Content="IZMENI SALU"        Grid.Row="1" Grid.Column="0"   Margin="19,23,22,10" Background="#FFD2F4EE" Foreground="#FF1E49D9" Click="editRoom"/>
-        <Button x:Name="staticInventory"  Content="PREGLED INVENTARA"  Grid.Row="1" Grid.Column="1"   Margin="22,23,19,10" Background="#FFD2F4EE" Foreground="#FF1E49D9" Click="viewStaticInventory" />
-        <Button x:Name="delete"           Content="IZBRIŠI SALU"       Grid.Row="2" Grid.Column="0"   Margin="19,10,22,21" Background="#FFD2F4EE" Foreground="#FF1E49D9" Click="deleteRoom"/>
-        <Button x:Name="dynamicInventory" Content="PREGLED OPREME"     Grid.Row="2" Grid.Column="1"   Margin="22,10,19,21" Background="#FFD2F4EE" Foreground="#FF1E49D9" Click="viewDynamicInventory"/>
+        <Button x:Name="edit"             Content="IZMENI SALU"        Grid.Row="1" Grid.Column="0"   Margin="19,23,22,10" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="editRoom"/>
+        <Button x:Name="staticInventory"  Content="PREGLED INVENTARA"  Grid.Row="1" Grid.Column="1"   Margin="22,23,19,10" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="viewStaticInventory" />
+        <Button x:Name="delete"           Content="IZBRIŠI SALU"       Grid.Row="2" Grid.Column="0"   Margin="19,10,22,21" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="deleteRoom"/>
+        <Button x:Name="dynamicInventory" Content="PREGLED OPREME"     Grid.Row="2" Grid.Column="1"   Margin="22,10,19,21" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="viewDynamicInventory"/>
 
         <TextBox x:Name="searchRoom" Grid.Row="3" Grid.ColumnSpan="2" Margin="19,22,19,26.8"/>
 
@@ -44,7 +46,7 @@
 
             <DataGrid x:Name="dataGridRooms" ItemsSource="{Binding Path=Rooms, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" 
                   SelectionMode="Single" AutoGenerateColumns="False" HorizontalAlignment="Left" 
-                  Background="#FFE3F4F1" FontFamily="Arial" Foreground="#FF536AA0" Grid.RowSpan="2" Width="404">
+                  Background="#FFCADEED" FontFamily="Arial" Foreground="#FF536AA0" Grid.RowSpan="2" Width="404">
 
                 <DataGrid.Columns>
                     <DataGridTextColumn     Header="Oznaka"                    Binding="{Binding Id}"/>
@@ -58,7 +60,7 @@
 
         </ScrollViewer>
 
-        <Button x:Name="add" Content="DODAJ SALU"  Grid.Row="9" Grid.ColumnSpan="2"  Margin="19,10.2,19,9.8" Background="#FFD2F4EE" Foreground="#FF1E49D9" Click="addRoom"/>
+        <Button x:Name="add" Content="DODAJ SALU"  Grid.Row="9" Grid.ColumnSpan="2"  Margin="19,10.2,19,9.8" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="addRoom"/>
  
     </Grid>
 

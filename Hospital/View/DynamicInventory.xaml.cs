@@ -11,63 +11,60 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Hospital.View
 {
     /// <summary>
-    /// Interaction logic for StaticInventory.xaml
+    /// Interaction logic for DynamicInventory.xaml
     /// </summary>
-    public partial class StaticInventory : Window
+    public partial class DynamicInventory : Window
     {
         private string id;
-        private static ObservableCollection<Inventory> allInventory;
+        private static ObservableCollection<MedicalSupply> supplies;
 
-        public static ObservableCollection<Inventory> Inventory
+        public static ObservableCollection<MedicalSupply> Supply
         {
             get;
             set;
         }
 
-        InventoryStorage storage = new InventoryStorage();
+        MedicalSupplyStorage storage = new MedicalSupplyStorage();
 
-        public StaticInventory(string id)
+
+        public DynamicInventory(string id)
         {
             InitializeComponent();
             this.DataContext = this;
             this.id = id;
 
-            InventoryStorage storage = new InventoryStorage();
-            allInventory = storage.GetAll();
-            // Inventory = storage.GetByRoomID(id);
-
-            Inventory = new ObservableCollection<Inventory>();
-            Inventory = storage.GetByRoomID(id);
+            MedicalSupplyStorage storage = new MedicalSupplyStorage();
+            Supply = new ObservableCollection<MedicalSupply>();
+            Supply = storage.GetByRoomID(id);
         }
 
-        private void add(object o, RoutedEventArgs e)
+        private void addItem(object o, RoutedEventArgs e)
         {
-            AddInventory addInv = new AddInventory(id);
-            addInv.Owner = Application.Current.MainWindow;
-            addInv.Show();
+            AddMedicalSupply addMS = new AddMedicalSupply(id);
+            addMS.Owner = Application.Current.MainWindow;
+            addMS.Show();
         }
 
-        private void edit(object o, RoutedEventArgs e)
+        private void editItem(object o, RoutedEventArgs e)
         {
-            Inventory selectedItem = (Inventory)dataGridInventory.SelectedItem;
+            MedicalSupply selectedItem = (MedicalSupply)dataGridMedicalSupply.SelectedItem;
 
             if (selectedItem != null)
             {
-                EditInventory editInv = new EditInventory(selectedItem);
-                editInv.Owner = Application.Current.MainWindow;
-                editInv.Show();
+                EditMedicalSupply editMS= new EditMedicalSupply(selectedItem);
+                editMS.Owner = Application.Current.MainWindow;
+                editMS.Show();
             }
         }
 
-        private void delete(object o, RoutedEventArgs e)
+        private void deleteItem(object o, RoutedEventArgs e)
         {
-            Inventory selectedItem = (Inventory)dataGridInventory.SelectedItem;
+            MedicalSupply selectedItem = (MedicalSupply) dataGridMedicalSupply.SelectedItem;
 
             MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da izbrišete izabranu stavku",
                                                       "Brisanje stavke",
@@ -77,28 +74,38 @@ namespace Hospital.View
             {
                 if (selectedItem != null)
                 {
-                    Inventory.Remove(selectedItem);
+                    Supply.Remove(selectedItem);
                     storage.Delete(selectedItem.Id);
                 }
             }
         }
 
-        private void transfer(object o, RoutedEventArgs e)
+        private void transferItem(object o, RoutedEventArgs e)
         {
-            Inventory selectedItem = (Inventory)dataGridInventory.SelectedItem;
+            MedicalSupply selectedItem = (MedicalSupply)dataGridMedicalSupply.SelectedItem;
 
-            if(selectedItem != null)
+            if (selectedItem != null)
             {
-                PrebacivanjeInventara transfer = new PrebacivanjeInventara(selectedItem);
+                PrebacivanjeOpreme transfer = new PrebacivanjeOpreme(selectedItem);
                 transfer.Owner = Application.Current.MainWindow;
                 transfer.nazivTxt.Text = selectedItem.Name;
                 transfer.Show();
             }
         }
 
+        private void createReport(object o, RoutedEventArgs e)
+        {
+            //TODO HCI 
+        }
+
         private void back(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
+
     }
+
 }
+
+
+

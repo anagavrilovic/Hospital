@@ -18,34 +18,40 @@ using System.Windows.Shapes;
 namespace Hospital.View
 {
     /// <summary>
-    /// Interaction logic for EditInventory.xaml
+    /// Interaction logic for EditMedicalSupply.xaml
     /// </summary>
-    public partial class EditInventory : Window
+    public partial class EditMedicalSupply : Window
     {
-        private ObservableCollection<Inventory> inventory;
-        private Inventory inv;
+        private MedicalSupply ms;
+        private ObservableCollection<MedicalSupply> supply;
 
-        public ObservableCollection<Inventory> Inventory
+        public MedicalSupply Ms
         {
-            get { return inventory; }
-            set { inventory = value; }
+            get { return ms;  }
+            set { ms = value; }
         }
 
-        public Inventory Inv
+        public ObservableCollection<MedicalSupply> Supply
         {
-            get { return inv; }
-            set { inv = value; }
+            get { return supply; }
+            set { supply = value; }
         }
 
 
-        public EditInventory(Inventory inventory)
+
+        public EditMedicalSupply(MedicalSupply supply)
         {
             InitializeComponent();
             this.DataContext = this;
-            this.inv = inventory;
+            this.ms = supply;
+
+            switch (ms.Units)
+            {
+                case UnitsType.kutije:  units.SelectedItem = kutije;  break;
+                case UnitsType.trake:   units.SelectedItem = trake;   break;
+                case UnitsType.flasice: units.SelectedItem = flasice; break;
+            }
         }
-
-
 
         private void accept(object sender, RoutedEventArgs e)
         {
@@ -54,13 +60,19 @@ namespace Hospital.View
             cenaTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             kolicinaTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
 
- 
-            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + "inventory.json"))
+            switch (units.SelectedIndex)
             {
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, InventoryStorage.inventory);
+                case 0: Ms.Units = UnitsType.kutije;  break;
+                case 1: Ms.Units = UnitsType.trake;   break;
+                case 2: Ms.Units = UnitsType.flasice; break;
             }
 
+
+            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + "medicalSupply.json"))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, MedicalSupplyStorage.supplies);
+            }
             this.Close();
         }
 

@@ -85,5 +85,10 @@ namespace Hospital.View
         {
             this.Close();
         }
+
+        private void back(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

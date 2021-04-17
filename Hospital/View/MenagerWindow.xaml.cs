@@ -36,10 +36,12 @@ namespace Hospital.View
             //TODO
         }
 
-        private void getInventory(object sender, RoutedEventArgs e)
+        private void back(object sender, RoutedEventArgs e)
         {
-           //TODO
+            this.Hide();
         }
+
+
     }
 }
 
