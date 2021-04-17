@@ -118,6 +118,15 @@
     <Compile Include="View\OdaberiPacijenta.xaml.cs">
       <DependentUpon>OdaberiPacijenta.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PatientAppointmentOptions.xaml.cs">
+      <DependentUpon>PatientAppointmentOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientChangeAppointment.xaml.cs">
+      <DependentUpon>PatientChangeAppointment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientRescheduleAppointment.xaml.cs">
+      <DependentUpon>PatientRescheduleAppointment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PrikazObavestenja.xaml.cs">
       <DependentUpon>PrikazObavestenja.xaml</DependentUpon>
     </Compile>
@@ -263,6 +272,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\OdaberiPacijenta.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientAppointmentOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientChangeAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientRescheduleAppointment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

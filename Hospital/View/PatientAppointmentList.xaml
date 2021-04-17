@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-        Title="PatientAppointmentList" Height="450" Width="800">
+        Title="PatientAppointmentList" Height="450" Width="800"
+        KeyDown="myTestKey">
 
     <Grid>
 
@@ -14,7 +15,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn  Header="DatumVreme" Binding="{Binding DateTime}" Width="*"/>
                 <DataGridTextColumn  Header="Doktor" Binding="{Binding DoctrosNameSurname}" Width="*"/>
-                <DataGridTextColumn  Header="Tip" Binding="{Binding type}" Width="*"/>
+                <DataGridTextColumn  Header="Tip" Binding="{Binding Type}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Name="change" Content="Izmeni termin" HorizontalAlignment="Left" Height="34" Margin="427,348,0,0" VerticalAlignment="Top" Width="118" Click="Izmeni">

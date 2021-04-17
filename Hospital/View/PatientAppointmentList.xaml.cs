@@ -33,6 +33,25 @@ namespace Hospital.View
             AppointmentStorage app = new AppointmentStorage();
             Lista = app.GetByPatient(MainWindow.IDnumber);
 
+            dataGridApp.SelectedIndex = 0;
+
+            dataGridApp.Focus();
+        }
+
+        private void myTestKey(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                Appointment selectedItem = (Appointment)dataGridApp.SelectedItem;
+                PatientAppointmentOptions patientAppointmentOptions = new PatientAppointmentOptions(selectedItem);
+                patientAppointmentOptions.Show();
+                this.Close();
+            }
+
+            if (e.Key == Key.Escape)
+            {
+                this.Close();
+            }
         }
 
         private void Otkazi(object sender, RoutedEventArgs e)
