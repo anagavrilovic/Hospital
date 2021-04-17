@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
+        xmlns:val="clr-namespace:Hospital.ValidacijeSekretar"
         mc:Ignorable="d"
         Title="IzmenaKartona" Height="665" Width="1070"    Background="#FFDAEBEE">
     <Window.Resources>
@@ -82,22 +83,140 @@
         <TextBlock Text="Lozinka*:"                     Grid.Row="10" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
         <TextBlock Text="Potvrda lozinke*:"             Grid.Row="11" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
 
-        <TextBox x:Name="ImeText"       Grid.Row="1" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Text="{Binding Path=Record.Patient.FirstName, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
-        <TextBox x:Name="RoditeljText"  Grid.Row="2" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Text="{Binding Path=Record.ParentName, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}"/>
-        <TextBox x:Name="PrezimeText"   Grid.Row="3" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Text="{Binding Path=Record.Patient.LastName, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
-        <DatePicker x:Name="Datum"      Grid.Row="4" Grid.Column="1" Background="White" Margin="3,3,3,10" Text="{Binding Path=Record.Patient.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=Explicit}" FirstDayOfWeek="Monday"/>
-        <TextBox x:Name="AdresaText"    Grid.Row="5" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Text="{Binding Path=Record.Patient.Address, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}"/>
-        <TextBox x:Name="BrojUliceText" Grid.Row="6" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}"/>
-        <TextBox x:Name="MestoText"     Grid.Row="7" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Text="{Binding Path=Record.Patient.City, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}"/>
-        <TextBox x:Name="PostanskiBrojText" Grid.Row="8" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}"/>
-        <TextBox x:Name="OpstinaText"   Grid.Row="9" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Text="{Binding Path=Record.Patient.Township, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}"/>
-        <TextBox x:Name="DrzavaText"    Grid.Row="10" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Text="{Binding Path=Record.Patient.Country, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}"/>
-        <TextBox x:Name="KnjizicaText"  Grid.Row="11" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Text="{Binding Path=Record.HealthCardNumber, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}"/>
+        <TextBox x:Name="ImeText" Grid.Row="1" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+            <TextBox.Text>
+                <Binding Path="Record.Patient.FirstName" Mode="TwoWay" UpdateSourceTrigger="Explicit" >
+                    <Binding.ValidationRules>
+                        <val:OnlyLettersValidationRule ValidationStep="RawProposedValue" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
-        <TextBox x:Name="LicnaText"     Grid.Row="1" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Text="{Binding Path=Record.Patient.CardID, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
-        <TextBox x:Name="JMBGText"      Grid.Row="2" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Text="{Binding Path=Record.Patient.PersonalID, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
-        <TextBox x:Name="TelefonText"   Grid.Row="3" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10"  Text="{Binding Path=Record.Patient.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}"/>
-        <TextBox x:Name="EmailText"     Grid.Row="4" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10"  Text="{Binding Path=Record.Patient.Email, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}"/>
+        <TextBox x:Name="RoditeljText" Grid.Row="2" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
+            <TextBox.Text>
+                <Binding Path="Record.ParentName" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                    <Binding.ValidationRules>
+                        <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox x:Name="PrezimeText" Grid.Row="3" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+            <TextBox.Text>
+                <Binding Path="Record.Patient.LastName" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                    <Binding.ValidationRules>
+                        <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <DatePicker x:Name="Datum" Grid.Row="4" Grid.Column="1" Background="White" Margin="3,3,3,10" Text="{Binding Path=Record.Patient.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=Explicit}" FirstDayOfWeek="Monday" Validation.ErrorTemplate="{x:Null}"/>
+        <TextBox x:Name="AdresaText" Grid.Row="5" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
+            <TextBox.Text>
+                <Binding Path="Record.Patient.Address" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                    <Binding.ValidationRules>
+                        <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox x:Name="BrojUliceText" Grid.Row="6" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
+            
+        </TextBox>
+
+        <TextBox x:Name="MestoText" Grid.Row="7" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
+            <TextBox.Text>
+                <Binding Path="Record.Patient.City" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                    <Binding.ValidationRules>
+                        <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox x:Name="PostanskiBrojText" Grid.Row="8" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
+            <!--<TextBox.Text>
+                <Binding Path="" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                    <Binding.ValidationRules>
+                        <val:PostalCodeValidationRule ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>-->
+        </TextBox>
+
+        <TextBox x:Name="OpstinaText" Grid.Row="9" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
+            <TextBox.Text>
+                <Binding Path="Record.Patient.Township" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                    <Binding.ValidationRules>
+                        <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox x:Name="DrzavaText" Grid.Row="10" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
+            <TextBox.Text>
+                <Binding Path="Record.Patient.Country" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                    <Binding.ValidationRules>
+                        <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox x:Name="KnjizicaText" Grid.Row="11" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
+            <TextBox.Text>
+                <Binding Path="Record.HealthCardNumber" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                    <Binding.ValidationRules>
+                        <val:OnlyDigitsValidationRuleHealthCardID ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox x:Name="LicnaText" Grid.Row="1" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+            <TextBox.Text>
+                <Binding Path="Record.Patient.CardID" Mode="TwoWay" UpdateSourceTrigger="Explicit" >
+                    <Binding.ValidationRules>
+                        <val:OnlyDigitsValidationRuleCardID ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox x:Name="JMBGText" Grid.Row="2" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+            <TextBox.Text>
+                <Binding Path="Record.Patient.PersonalID" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                    <Binding.ValidationRules>
+                        <val:OnlyDigitsValidationRulePersonalID ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox x:Name="TelefonText" Grid.Row="3" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
+            <TextBox.Text>
+                <Binding Path="Record.Patient.PhoneNumber" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                    <Binding.ValidationRules>
+                        <val:OnlyDigitsValidationRulePhoneNumber ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox x:Name="EmailText" Grid.Row="4" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
+            <TextBox.Text>
+                <Binding Path="Record.Patient.Email" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                    <Binding.ValidationRules>
+                        <val:EmailValidationRule ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         
         <ComboBox x:Name="BracnoStanje" Grid.Row="5" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
             <ComboBoxItem x:Name="neozenjen" IsSelected="True">neoženjen - neudata</ComboBoxItem>
@@ -120,10 +239,18 @@
             <RadioButton x:Name="DaButton" Content="DA" Margin="35,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF67898E" Style="{StaticResource cbTB}"/>
             <RadioButton x:Name="NeButton" Content="NE" Margin="15,0,35,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF67898E" Style="{StaticResource cbTB}"/>
         </StackPanel>
-        
-        <TextBox x:Name="UsernameText"      Grid.Row="9" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10"  Text="{Binding Path=Record.Patient.Username, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}"/>
-        <PasswordBox x:Name="PasswordText"  Grid.Row="10" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbPB}" />
-        <PasswordBox x:Name="PasswordReentered"  Grid.Row="11" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbPB}" />
+
+        <TextBox x:Name="UsernameText" Grid.Row="9" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10"  Text="{Binding Path=Record.Patient.Username, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}">
+            
+        </TextBox>
+
+        <PasswordBox x:Name="PasswordText" Grid.Row="10" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbPB}" >
+            
+        </PasswordBox>
+
+        <PasswordBox x:Name="PasswordReentered" Grid.Row="11" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbPB}">
+            
+        </PasswordBox>
 
         <Grid Grid.Row="0" Grid.Column="3" Margin="0">
             <Grid.RowDefinitions>
@@ -135,7 +262,15 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="Br. kartona:" VerticalAlignment="Center" Margin="0,0,5,0" FontFamily="Segoe UI Symbol" FontSize="11" Foreground="#FF688D9E" HorizontalAlignment="Right" />
-            <TextBox x:Name="KartonText" Grid.Row="0" Grid.Column="1" Margin="2,45" Text="{Binding Path=Record.MedicalRecordID, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+            <TextBox x:Name="KartonText" Grid.Row="0" Grid.Column="1" Margin="2,45" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                <TextBox.Text>
+                    <Binding Path="Record.MedicalRecordID" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                        <Binding.ValidationRules>
+                            <val:OnlyDigitsValidationRuleRecordID ValidationStep="RawProposedValue"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
         </Grid>
 
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">

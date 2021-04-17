@@ -146,7 +146,7 @@
 
         <TextBox x:Name="PostanskiBrojText" Grid.Row="8" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
             <!--<TextBox.Text>
-                <Binding Path="Record.Patient.City" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <val:PostalCodeValidationRule ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
@@ -230,6 +230,7 @@
             <ComboBoxItem>udovac - udovica</ComboBoxItem>
             <ComboBoxItem>razveden - razvedena</ComboBoxItem>
         </ComboBox>
+        
         <ComboBox x:Name="Pol" Grid.Row="6" Grid.Column="3" BorderThickness="1" Margin="3,3,3,7" Style="{StaticResource cbTB}">
             <ComboBoxItem IsSelected="True">muški</ComboBoxItem>
             <ComboBoxItem>ženski</ComboBoxItem>
