@@ -95,5 +95,10 @@ namespace Hospital.View
                 transfer.Show();
             }
         }
+
+        private void back(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

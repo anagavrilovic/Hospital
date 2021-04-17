@@ -98,6 +98,11 @@ namespace Hospital.View
             //TODO HCI 
         }
 
+        private void back(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
     }
 
 }

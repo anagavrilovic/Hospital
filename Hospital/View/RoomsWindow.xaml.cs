@@ -117,5 +117,12 @@ namespace Hospital.View
             }
             
         }
+
+        private void menuButton(object sender, RoutedEventArgs e)
+        {
+
+            this.Hide();
+
+        }
     }
 }

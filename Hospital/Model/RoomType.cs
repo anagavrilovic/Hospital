@@ -6,6 +6,7 @@ namespace Hospital
    {
       OPERACIONA_SALA,
       SALA_ZA_PREGLEDE,
-      SOBA_ZA_ODMOR
+      SOBA_ZA_ODMOR,
+      MAGACIN
    }
 }

@@ -6,26 +6,38 @@
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
-        Title="Zdravo" Height="450" Width="800">
+        Title="Zdravo" Height="750" Width="430">
     <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="7*"/>
-            <RowDefinition Height="73*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Label FontSize="36" FontWeight="Bold" Foreground="#FF4A83CB" Background="White" Margin="25.6,-8.8,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1">ZDRAVO</Label>
+        <StackPanel Grid.Row="0"  Orientation="Horizontal" Background="#FF95C0F4">
+            <Button  Background="#FF95C0F4" Click="back" BorderBrush="#FF95C0F4">
+                <Image  Source="/Icon/back.png"  Margin="10,8,5,5" />
+            </Button>
+            <Image  Source="/Icon/logo.png"  Margin="140,5,5,5"/>
+        </StackPanel>
 
-        <Button x:Name="rooms" Content="Sale" HorizontalAlignment="Left" Height="61.6" Width="141.4"
-                  Margin="83.6,113.867,0,0" VerticalAlignment="Top" 
-                   Background="#FFD2F4EE" Foreground="#FF1E49D9" Click="getRooms" Grid.Row="1"/>
+        <Label  Grid.Row="1" Content="Lider u inovaciji, na usluzi pacijenta" FontSize="20" Foreground="#FF4A83CB"  Margin="53,10.2,-30,79.8" Grid.RowSpan="2" />
 
-        <Button x:Name="employees" Content="Zaposleni" Height="61.6" Width="141.4"
-                  Margin="312.4,113.867,314.2,0" VerticalAlignment="Top" Background="#FFD2F4EE" 
-                  Foreground="#FF1E49D9" Click="getEmployees" Grid.Row="1"/>
-
-        <Button x:Name="inventory" Content="Inventar" Height="61.6" Width="141.4"
-                  Margin="0,113.867,93.4,0" VerticalAlignment="Top" Background="#FFD2F4EE" 
-                  Foreground="#FF1E49D9" Click="getInventory" HorizontalAlignment="Right" Grid.Row="1"/>
+        <Button x:Name="profil"    Content="PRIKAŽI PROFIL"              Grid.Row="2"  Margin="15,10"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20"/>
+        <Button x:Name="rooms"     Content="SALE"                        Grid.Row="3"  Margin="15,10"  Background="#FFAAD0E0" Foreground="#FF051D6E" Click="getRooms" FontSize="20" />
+        <Button x:Name="employees" Content="ZAPOSLENI"                   Grid.Row="4"  Margin="15,10"  Background="#FFAAD0E0" Foreground="#FF051D6E" Click="getEmployees" FontSize="20"/>
+        <Button x:Name="report"    Content="IZVEŠTAJ O STANJU OPREME"    Grid.Row="5"  Margin="15,10"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20"/>
 
     </Grid>
 </Window>

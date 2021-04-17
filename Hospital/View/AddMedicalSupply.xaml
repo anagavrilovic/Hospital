@@ -45,7 +45,9 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2">
-            <Image Source="/Icon/back.png" Margin="30,8,130,5" />
+            <Button Grid.Row="0" Grid.Column="0" Background="white" Click="back" BorderBrush="white" >
+                <Image  Source="/Icon/back.png" Margin="10,8,150,5"/>
+            </Button>
             <Image Source="/Icon/logo.png" Margin="60,5,15,5"  />
         </StackPanel>
 
@@ -68,7 +70,7 @@
             <ComboBoxItem>FLAŠICE</ComboBoxItem>
         </ComboBox>
 
-        <Button Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFD2F4EE" Foreground="#FF1E49D9" Margin="30,22.6,5,20.8" Click="accept"/>
+        <Button Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,22.6,5,20.8" Click="accept"/>
         <Button Grid.Row="12" Grid.Column="1" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="5,22.6,28,20.8" Click="cancel"/>
 
     </Grid>

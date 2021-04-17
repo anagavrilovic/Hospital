@@ -28,7 +28,9 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
-            <Image Source="/Icon/back.png" Grid.Row="0" Grid.Column="0" Margin="10,8,5,5"/>
+            <Button  Click="back" Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
+                <Image  Source="/Icon/back.png" Margin="10,8,0,5"/>
+            </Button>
             <Label Content="OPREMA" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" Margin="0,15,5,10.2"/>
             <Image Source="/Icon/logo.png" Margin="50,5,5,2"/>
         </StackPanel>

@@ -28,9 +28,11 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
-            <Image Source="/Icon/back.png" Grid.Row="0" Grid.Column="1" Margin="10,8,5,5"/>
+            <Button  Click="back" Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
+                <Image  Source="/Icon/back.png" Margin="10,8,0,5"/>
+            </Button>
             <Label Content="INVENTAR" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" Margin="0,15,5,10.2"/>
-            <Image Source="/Icon/logo.png" Margin="10,5,5,2"/>
+            <Image Source="/Icon/logo.png" Margin="10,5,250,2"/>
         </StackPanel>
 
 
@@ -50,11 +52,11 @@
                                ItemsSource="{Binding Path=Inventory, UpdateSourceTrigger=PropertyChanged}"
                                Background="#FFCADEED" FontFamily="Arial" Foreground="#FF536AA0" Margin="0,0,0,0">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Oznaka"   Binding="{Binding Id}"         Width="70"/>
-                        <DataGridTextColumn Header="Naziv"    Binding="{Binding Name}"       Width="100"/>
+                        <DataGridTextColumn Header="Oznaka"   Binding="{Binding Id}"          Width="70"/>
+                        <DataGridTextColumn Header="Naziv"    Binding="{Binding Name}"        Width="100"/>
                         <DataGridTextColumn Header="Cena"     Binding="{Binding Price}"       Width="70"/>
                         <DataGridTextColumn Header="Količina" Binding="{Binding Quantity}"    Width="70"/>
-                        <DataGridTextColumn Header="Sala"     Binding="{Binding RoomID}"    Width="60"/>
+                        <DataGridTextColumn Header="Sala"     Binding="{Binding RoomID}"      Width="60"/>
                  </DataGrid.Columns>
 
             </DataGrid>

@@ -27,7 +27,9 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Image Source="/Icon/back.png" Grid.Row="0" Grid.Column="0" Margin="10,8,130,5"/>
+        <Button Grid.Row="0" Grid.Column="0" Background="white" Click="back" BorderBrush="white" >
+            <Image  Source="/Icon/back.png" Margin="2,0,150,0"/>
+        </Button>
         <Image Source="/Icon/logo.png" Grid.Row="0" Grid.Column="1" Margin="10,5,5,2"/>
 
         <Label Content="RAZMENA OPREME" Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="77,15.4,28,0.4" FontWeight="Bold"/>
@@ -40,7 +42,7 @@
         <TextBox x:Name="kolicinaTxt"   Grid.Row="5" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" />
         <TextBox x:Name="oznakaTxt"     Grid.Row="7" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" />
 
-        <Button Grid.Column="0" Grid.Row="8" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFD2F4EE" Foreground="#FF1E49D9" Margin="30,31.2,10,39.8" Click="accept" />
+        <Button Grid.Column="0" Grid.Row="8" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,31.2,10,39.8" Click="accept" />
         <Button Grid.Column="1" Grid.Row="8" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="10,31.2,28,39.8" Click="cancel" />
 
     </Grid>
