@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,8 +30,14 @@ namespace Hospital.View
         private void Izmeni(object sender, RoutedEventArgs e)
         {
             DateTime currentTime = DateTime.Now;
-            
-            if ((app.DateTime-currentTime).TotalDays >= 2)
+            DoctorStorage doctorStorage = new DoctorStorage();
+            Doctor d = doctorStorage.GetOne(app.IDDoctor);
+            if (d.Specialty != DoctorSpecialty.general)
+            {
+                MessageBox.Show("Nije moguce pomeriti termin kod specijaliste");
+            }
+
+            else if ((app.DateTime-currentTime).TotalDays >= 2)
             {
                 PatientChangeAppointment patientChangeAppointment = new PatientChangeAppointment(app);
                 patientChangeAppointment.Show();

@@ -54,22 +54,6 @@ namespace Hospital.View
             }
         }
 
-        private void Otkazi(object sender, RoutedEventArgs e)
-        {
-            Appointment selectedItem = (Appointment)dataGridApp.SelectedItem;
-            AppointmentStorage aps = new AppointmentStorage();
-
-            aps.Delete(selectedItem.IDAppointment);
-            Lista.Remove(selectedItem);
-
-        }
-
-        private void Izmeni(object sender, RoutedEventArgs e)
-        {
-            Appointment selectedItem = (Appointment)dataGridApp.SelectedItem;
-            PatientMakeAnAppointment patientMakeAnAppointment = new PatientMakeAnAppointment(selectedItem.IDAppointment);
-            patientMakeAnAppointment.Show();
-            this.Close();
-        }
+    
     }
 }

@@ -89,6 +89,24 @@ namespace Hospital.Model
             return null;
         }
 
+        public String GetIDByNameSurname(string nameSurname)
+        {
+            String[] nameSurnameSplitted = nameSurname.Split(' ');
+            ObservableCollection<Doctor> doctors = GetAll();
+            foreach (Doctor d in doctors)
+            {
+                if (d.FirstName.Equals(nameSurnameSplitted[0]) && d.LastName.Equals(nameSurnameSplitted[1]))
+                {
+                    return d.PersonalID;
+                }
+            }
+
+            return null;
+        }
+
+
+
+
     }
 }
 

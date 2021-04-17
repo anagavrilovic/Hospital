@@ -5,17 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-        Title="PatientMakeAnAppointment" Height="450" Width="800">
+        Title="PatientMakeAnAppointment" Height="450" Width="800" KeyDown="myTestKey">
     <Grid>
-        <Label Content="Izaberite lekara" HorizontalAlignment="Left" Height="37" Margin="46,34,0,0" VerticalAlignment="Top" Width="237"/>
-        <CheckBox Name="checkbox1" Content="Stefan Ljubovic" HorizontalAlignment="Left" Height="22" Margin="46,115,0,0" VerticalAlignment="Top" Width="157"/>
-        <Label Content="Odaberite termin" HorizontalAlignment="Left" Height="37" Margin="452,34,0,0" VerticalAlignment="Top" Width="223"/>
-        <Label Content="Unesite datum" HorizontalAlignment="Left" Height="39" Margin="376,109,0,0" VerticalAlignment="Top" Width="182"/>
-        <Label Content="Unesite vreme" HorizontalAlignment="Left" Height="39" Margin="376,198,0,0" VerticalAlignment="Top" Width="182"/>
-        <TextBox Name="date" HorizontalAlignment="Left" Height="28" Margin="536,109,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="139"/>
-        <TextBox Name="time" HorizontalAlignment="Left" Height="28" Margin="536,198,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="139"/>
-        <Button Content="Odustani" HorizontalAlignment="Left" Height="53" Margin="312,326,0,0" VerticalAlignment="Top" Width="176" Click="Back"/>
-        <Button Content="Zakaži" HorizontalAlignment="Left" Height="53" Margin="536,326,0,0" VerticalAlignment="Top" Width="176" Click="Schedule"/>
+        <DataGrid x:Name="dataGridApp" ItemsSource="{Binding Lista}" IsReadOnly="True" 
+                  SelectionMode="Single" AutoGenerateColumns="False" Margin="0,0,107,110" >
+            <DataGrid.Columns>
+                <DataGridTextColumn  Header="DatumVreme" Binding="{Binding DateTime}" Width="*"/>
+                <DataGridTextColumn  Header="Doktor" Binding="{Binding DoctrosNameSurname}" Width="*"/>
+                
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </Window>

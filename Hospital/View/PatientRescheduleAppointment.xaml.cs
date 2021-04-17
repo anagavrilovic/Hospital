@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -41,9 +42,43 @@ namespace Hospital.View
                     Appointment appTemp = new Appointment();
                     appTemp.DateTime = varVreme;
                     appTemp.type = AppointmentType.examination;
-                    appTemp.DoctrosNameSurname = "Stefan Ljubovic";
+                    PatientSettingsStorage patientSettingsStorage = new PatientSettingsStorage();
+                    PatientSettings patientSettings = patientSettingsStorage.getByID(MainWindow.IDnumber);
+                    DoctorStorage doctorStorage = new DoctorStorage();
                     AppointmentStorage aps = new AppointmentStorage();
-                    if (!aps.ExistByTime(varVreme)) { Lista.Add(appTemp); }
+                    if (!patientSettings.ChosenDoctor.Equals("Nije mi bitno"))
+                    {
+                        appTemp.DoctrosNameSurname = patientSettings.ChosenDoctor;
+                        appTemp.IDDoctor = doctorStorage.GetIDByNameSurname(patientSettings.ChosenDoctor);
+                        if (!aps.ExistByTime(varVreme, appTemp.IDDoctor)) { Lista.Add(appTemp); }
+                    }
+                    else
+                    {
+                        ObservableCollection<Doctor> doctors = doctorStorage.GetAll();
+                        Boolean first = true;
+                        
+                        foreach (Doctor d in doctors)
+                        {
+                            if (aps.ExistByTime(varVreme, d.PersonalID)) continue;
+                            if (first)
+                            {
+                                appTemp.IDDoctor = d.PersonalID;
+                                appTemp.DoctrosNameSurname = d.FirstName + " " + d.LastName;
+                                first = false;
+                            }
+                            else
+                            {
+                                if (aps.GetNumberOfAppointmentsForDoctor(appTemp.IDDoctor) > aps.GetNumberOfAppointmentsForDoctor(d.PersonalID))
+                                {
+                                    appTemp.IDDoctor = d.PersonalID;
+                                    appTemp.DoctrosNameSurname = d.FirstName + " " + d.LastName;
+                                }
+                            }
+                        }
+                        if (!first) Lista.Add(appTemp);
+
+                    }
+
                     dataGridApp.SelectedIndex = 0;
 
                     dataGridApp.Focus();

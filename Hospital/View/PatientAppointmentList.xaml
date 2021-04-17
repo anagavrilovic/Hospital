@@ -18,31 +18,6 @@
                 <DataGridTextColumn  Header="Tip" Binding="{Binding Type}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Name="change" Content="Izmeni termin" HorizontalAlignment="Left" Height="34" Margin="427,348,0,0" VerticalAlignment="Top" Width="118" Click="Izmeni">
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding SelectedItems.Count,ElementName=dataGridApp}"
-                                 Value="0">
-                            <Setter Property="IsEnabled"
-                                Value="False" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
-        <Button x:Name="cancel" Content="Otkaži termin" HorizontalAlignment="Left" Height="34" Margin="637,348,0,0" VerticalAlignment="Top" Width="118" Click="Otkazi">
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding SelectedItems.Count,ElementName=dataGridApp}"
-                                 Value="0">
-                            <Setter Property="IsEnabled"
-                                Value="False" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
+     
     </Grid>
 </Window>

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Hospital.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,63 +21,98 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientMakeAnAppointment : Window
     {
-        Boolean izmena;
-        String appForDelete;
+        public ObservableCollection<Appointment> Lista
+        {
+            get;
+            set;
+        }
 
-        public PatientMakeAnAppointment()
+        
+
+        public PatientMakeAnAppointment(DateTime vreme1, DateTime vreme2)
         {
             InitializeComponent();
-            izmena = false;
+            this.DataContext = this;
+            Lista = new ObservableCollection<Appointment>();
+            while (vreme1 <= vreme2)
+            {
+                for (int i = 0; i < 7; i++)
+                {
+                    TimeSpan ts = new TimeSpan(i + 8, 0, 0);
+                    DateTime varVreme = vreme1.Date + ts;
+                    Appointment appTemp = new Appointment();
+                    appTemp.DateTime = varVreme;
+                    appTemp.type = AppointmentType.examination;
+                    PatientSettingsStorage patientSettingsStorage = new PatientSettingsStorage();
+                    PatientSettings patientSettings = patientSettingsStorage.getByID(MainWindow.IDnumber);
+                    DoctorStorage doctorStorage = new DoctorStorage();
+                    AppointmentStorage aps = new AppointmentStorage();
+                    if (!patientSettings.ChosenDoctor.Equals("Nije mi bitno"))
+                    {
+                        appTemp.DoctrosNameSurname = patientSettings.ChosenDoctor;
+                        appTemp.IDDoctor = doctorStorage.GetIDByNameSurname(patientSettings.ChosenDoctor);
+                        if (!aps.ExistByTime(varVreme, appTemp.IDDoctor)) { Lista.Add(appTemp); }
+                    }
+                    else
+                    {
+                        ObservableCollection<Doctor> doctors = doctorStorage.GetAll();
+                        Boolean first = true;
+                        
+                        foreach(Doctor d in doctors)
+                        {
+                            if (aps.ExistByTime(varVreme, d.PersonalID)) continue;
+                                if (first)
+                            {
+                                appTemp.IDDoctor = d.PersonalID;
+                                appTemp.DoctrosNameSurname = d.FirstName + " " + d.LastName;
+                                first = false;
+                            }
+                            else
+                            {
+                                if (aps.GetNumberOfAppointmentsForDoctor(appTemp.IDDoctor) > aps.GetNumberOfAppointmentsForDoctor(d.PersonalID))
+                                {
+                                    appTemp.IDDoctor = d.PersonalID;
+                                    appTemp.DoctrosNameSurname = d.FirstName + " " + d.LastName;
+                                    
+                                }
+                            }
+                        }
+                        if(!first) Lista.Add(appTemp);
+
+                    }
+                    
+                    
+                    dataGridApp.SelectedIndex = 0;
+
+                    dataGridApp.Focus();
+
+                }
+                vreme1 = vreme1.AddDays(1);
+            }
+           
         }
-        public PatientMakeAnAppointment(String appForDelte)
+
+        private void myTestKey(object sender, KeyEventArgs e)
         {
-            InitializeComponent();
-            this.appForDelete = appForDelte;
-            izmena = true;
-        }
-
-        private void Back(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void Schedule(object sender, RoutedEventArgs e)
-        {
-            String datumVreme = date.Text.Trim() + " " + time.Text;
-            DateTime datum;
-            try
+            if (e.Key == Key.Space)
             {
-                datum = DateTime.Parse(datumVreme);
-            }
-            catch
-            {
-                MessageBox.Show("Nije dobro unesen datum/vreme.\nDatum:mm/dd/yyyy \nVreme:H:mm:ss AM(PM)");
-                return;
-            }
-            Appointment appointment = new Appointment { DateTime = datum, type = AppointmentType.examination };
+                AppointmentStorage appointmentStorage = new AppointmentStorage();
+                Appointment selectedItem = (Appointment)dataGridApp.SelectedItem;
+                selectedItem.IDAppointment = appointmentStorage.GetNewID();
+                MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
+                selectedItem.IDpatient = medicalRecordStorage.GetByPatientID(MainWindow.IDnumber).Patient.PersonalID;
+                selectedItem.patientName = medicalRecordStorage.GetByPatientID(MainWindow.IDnumber).Patient.FirstName;
+                selectedItem.patientSurname = medicalRecordStorage.GetByPatientID(MainWindow.IDnumber).Patient.LastName;
+                RoomStorage roomStorage = new RoomStorage();
+                selectedItem.Room = roomStorage.GetOne("1");
 
-            if (checkbox1.IsChecked != true)
-            {
-                MessageBox.Show("Morate odabrati doktora");
-                return;
-            }
-            AppointmentStorage appointmentStorage = new AppointmentStorage();
-            appointment.IDDoctor = "123";
-            appointment.DoctrosNameSurname = "Stefan Ljubovic";
-            appointment.IDAppointment = appointmentStorage.GetNewID();
-            MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
-            appointment.IDpatient = medicalRecordStorage.GetByPatientID(MainWindow.IDnumber).Patient.PersonalID;
-            appointment.patientName = medicalRecordStorage.GetByPatientID(MainWindow.IDnumber).Patient.FirstName;
-            appointment.patientSurname = medicalRecordStorage.GetByPatientID(MainWindow.IDnumber).Patient.LastName;
-            RoomStorage roomStorage = new RoomStorage();
-            appointment.Room = roomStorage.GetOne("1");
-
-            appointmentStorage.Save(appointment);
-            this.Close();
-            if (izmena)
-            {
-                appointmentStorage.Delete(appForDelete);
+                appointmentStorage.Save(selectedItem);
+                
+                this.Close();
             }
         }
+
+
+
     }
 }
