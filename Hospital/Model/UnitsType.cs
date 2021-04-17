@@ -9,9 +9,9 @@ namespace Hospital
 {
     public enum UnitsType
     {
-       bottles,
-       units,
-       strips
+       kutije,
+       trake,
+       flasice
     }
 }
 

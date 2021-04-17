@@ -42,19 +42,8 @@ namespace Hospital.View
             allInventory = storage.GetAll();
             // Inventory = storage.GetByRoomID(id);
 
-            //Console.WriteLine("SOBA  " + id);
             Inventory = new ObservableCollection<Inventory>();
             Inventory = storage.GetByRoomID(id);
-            /*
-            foreach (Inventory i in allInventory)
-            {
-                if (i.RoomID.Equals(id))
-                {
-                    Console.WriteLine("INV " + i.Id + " " + i.Name);
-                    //  Console.WriteLine("++++");
-                    Inventory.Add(i);
-                }
-            }*/
         }
 
         private void add(object o, RoutedEventArgs e)
