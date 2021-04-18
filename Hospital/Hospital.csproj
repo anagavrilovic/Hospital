@@ -76,6 +76,15 @@
     <Compile Include="Model\RegistratedUserStorage.cs" />
     <Compile Include="Model\UnitsType.cs" />
     <Compile Include="Model\UserType.cs" />
+    <Compile Include="ValidacijeSekretar\EmailValidationRule.cs" />
+    <Compile Include="ValidacijeSekretar\OnlyDigitsValidationRuleCardID.cs" />
+    <Compile Include="ValidacijeSekretar\OnlyDigitsValidationRuleHealthCardID.cs" />
+    <Compile Include="ValidacijeSekretar\OnlyDigitsValidationRulePersonalID.cs" />
+    <Compile Include="ValidacijeSekretar\OnlyDigitsValidationRulePhoneNumber.cs" />
+    <Compile Include="ValidacijeSekretar\OnlyDigitsValidationRuleRecordID.cs" />
+    <Compile Include="ValidacijeSekretar\OnlyLettersValidationRule.cs" />
+    <Compile Include="ValidacijeSekretar\PasswordValidationRule.cs" />
+    <Compile Include="ValidacijeSekretar\PostalCodeValidationRule.cs" />
     <Compile Include="View\AddInventory.xaml.cs">
       <DependentUpon>AddInventory.xaml</DependentUpon>
     </Compile>

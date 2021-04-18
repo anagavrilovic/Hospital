@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
+        xmlns:val="clr-namespace:Hospital.ValidacijeSekretar"
         mc:Ignorable="d"
         Title="KreiranjeKartona" Height="665" Width="1070"
         Background="#FFDAEBEE">
@@ -12,9 +13,11 @@
             <Style.Triggers>
                 <DataTrigger Binding="{Binding ElementName=Gost, Path=IsChecked}" Value="True">
                     <Setter Property="TextBox.IsEnabled" Value="False"/>
+                    <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding ElementName=Gost, Path=IsChecked}" Value="False">
                     <Setter Property="TextBox.IsEnabled" Value="True"/>
+                    <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ValidationErrorTemplate}"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -22,9 +25,11 @@
             <Style.Triggers>
                 <DataTrigger Binding="{Binding ElementName=Gost, Path=IsChecked}" Value="True">
                     <Setter Property="PasswordBox.IsEnabled" Value="False"/>
+                    <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding ElementName=Gost, Path=IsChecked}" Value="False">
                     <Setter Property="PasswordBox.IsEnabled" Value="True"/>
+                    <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ValidationErrorTemplate}"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -33,7 +38,7 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="140"/>
+            <RowDefinition Height="120"/>
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
@@ -44,7 +49,8 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
-            <RowDefinition Height="140"/>
+            <RowDefinition />
+            <RowDefinition Height="120"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -56,60 +62,201 @@
 
         <TextBlock Text="KREIRANJE KARTONA" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" FontSize="28" FontFamily="Segoe UI Semilight" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FF67898E" TextDecorations="Underline" Margin="0,0,0,10"/>
 
-        <TextBlock Text="Ime:"                  Grid.Row="1" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Ime jednog roditelja:" Grid.Row="2" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E" />
-        <TextBlock Text="Prezime:"              Grid.Row="3" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Datum rođenja:"        Grid.Row="4" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Ulica stanovanja:"     Grid.Row="5" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Broj:"                 Grid.Row="6" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Mesto stanovanja:"     Grid.Row="7" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Opština:"              Grid.Row="8" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Država:"               Grid.Row="9" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Broj zdrav. knjizice:" Grid.Row="10" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Ime*:"                  Grid.Row="1" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Ime jednog roditelja*:" Grid.Row="2" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E" />
+        <TextBlock Text="Prezime*:"              Grid.Row="3" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Datum rođenja*:"        Grid.Row="4" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Ulica stanovanja*:"     Grid.Row="5" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Broj*:"                 Grid.Row="6" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Mesto stanovanja*:"     Grid.Row="7" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Poštanski broj*:"       Grid.Row="8" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Opština*:"              Grid.Row="9" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Država*:"               Grid.Row="10" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Broj zdrav. knjizice*:" Grid.Row="11" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
 
-        <TextBlock Text="Broj lične karte:"            Grid.Row="1" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="JMBG:"                        Grid.Row="2" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Kontakt telefon:"             Grid.Row="3" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="E-mail:"                      Grid.Row="4" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Bračno stanje:"               Grid.Row="5" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Pol:"                         Grid.Row="6" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Osiguran:"                    Grid.Row="7" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Korisničko ime:"              Grid.Row="8" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Lozinka:"                     Grid.Row="9" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Potvrda lozinke:"             Grid.Row="10" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Broj lične karte*:"            Grid.Row="1" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="JMBG*:"                        Grid.Row="2" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Kontakt telefon*:"             Grid.Row="3" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="E-mail*:"                      Grid.Row="4" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Bračno stanje*:"               Grid.Row="5" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Pol*:"                         Grid.Row="6" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Krvna grupa*:"                 Grid.Row="7" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Osiguran*:"                    Grid.Row="8" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Korisničko ime*:"              Grid.Row="9" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Lozinka*:"                     Grid.Row="10" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
+        <TextBlock Text="Potvrda lozinke*:"             Grid.Row="11" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
 
-        <TextBox x:Name="ImeText"       Grid.Row="1" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.FirstName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox x:Name="RoditeljText"  Grid.Row="2" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.ParentName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
-        <TextBox x:Name="PrezimeText"   Grid.Row="3" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.LastName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
-        <DatePicker x:Name="Datum"      Grid.Row="4" Grid.Column="1" Background="White" Margin="3" Text="{Binding Path=Record.Patient.DateOfBirth, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" FirstDayOfWeek="Monday"/>
-        <TextBox x:Name="AdresaText"    Grid.Row="5" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.Address, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
-        <TextBox x:Name="MestoText"     Grid.Row="7" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.City, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
-        <TextBox x:Name="OpstinaText"   Grid.Row="8" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.Township, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
-        <TextBox x:Name="DrzavaText"    Grid.Row="9" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.Country, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
-        <TextBox x:Name="KnjizicaText"  Grid.Row="10" Grid.Column="1" BorderThickness="1" Margin="3" Text="{Binding Path=Record.HealthCardNumber, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
+        <TextBox x:Name="ImeText" Grid.Row="1" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+            <TextBox.Text>
+                <Binding Path="Record.Patient.FirstName" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged" >
+                    <Binding.ValidationRules>
+                        <val:OnlyLettersValidationRule ValidationStep="RawProposedValue" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
-        <TextBox x:Name="LicnaText"     Grid.Row="1" Grid.Column="3" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.CardID, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox x:Name="JMBGText"      Grid.Row="2" Grid.Column="3" BorderThickness="1" Margin="3" Text="{Binding Path=Record.Patient.PersonalID, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox x:Name="TelefonText"   Grid.Row="3" Grid.Column="3" BorderThickness="1" Margin="3"  Text="{Binding Path=Record.Patient.PhoneNumber, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
-        <TextBox x:Name="EmailText"     Grid.Row="4" Grid.Column="3" BorderThickness="1" Margin="3"  Text="{Binding Path=Record.Patient.Email, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
-        <ComboBox x:Name="BracnoStanje" Grid.Row="5" Grid.Column="3" BorderThickness="1" Margin="3" Style="{StaticResource cbTB}">
+        <TextBox x:Name="RoditeljText" Grid.Row="2" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}" >
+            <TextBox.Text>
+                <Binding Path="Record.ParentName" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox x:Name="PrezimeText" Grid.Row="3" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+            <TextBox.Text>
+                <Binding Path="Record.Patient.LastName" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <DatePicker x:Name="Datum" Grid.Row="4" Grid.Column="1" Background="White" Margin="3,3,3,10" Text="{Binding Path=Record.Patient.DateOfBirth, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" FirstDayOfWeek="Monday" Validation.ErrorTemplate="{x:Null}">
+            
+        </DatePicker>
+
+        <TextBox x:Name="AdresaText" Grid.Row="5" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
+            <TextBox.Text>
+                <Binding Path="Record.Patient.Address" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox x:Name="BrojUliceText" Grid.Row="6" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
+            
+        </TextBox>
+
+        <TextBox x:Name="MestoText" Grid.Row="7" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
+            <TextBox.Text>
+                <Binding Path="Record.Patient.City" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox x:Name="PostanskiBrojText" Grid.Row="8" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
+            <!--<TextBox.Text>
+                <Binding Path="" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:PostalCodeValidationRule ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>-->
+        </TextBox>
+
+        <TextBox x:Name="OpstinaText" Grid.Row="9" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
+            <TextBox.Text>
+                <Binding Path="Record.Patient.Township" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox x:Name="DrzavaText" Grid.Row="10" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
+            <TextBox.Text>
+                <Binding Path="Record.Patient.Country" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox x:Name="KnjizicaText" Grid.Row="11" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
+            <TextBox.Text>
+                <Binding Path="Record.HealthCardNumber" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:OnlyDigitsValidationRuleHealthCardID ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox x:Name="LicnaText" Grid.Row="1" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}" >
+            <TextBox.Text>
+                <Binding Path="Record.Patient.CardID" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged" >
+                    <Binding.ValidationRules>
+                        <val:OnlyDigitsValidationRuleCardID ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox x:Name="JMBGText" Grid.Row="2" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+            <TextBox.Text>
+                <Binding Path="Record.Patient.PersonalID" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:OnlyDigitsValidationRulePersonalID ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox x:Name="TelefonText" Grid.Row="3" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
+            <TextBox.Text>
+                <Binding Path="Record.Patient.PhoneNumber" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:OnlyDigitsValidationRulePhoneNumber ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox x:Name="EmailText" Grid.Row="4" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
+            <TextBox.Text>
+                <Binding Path="Record.Patient.Email" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:EmailValidationRule ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        
+        <ComboBox x:Name="BracnoStanje" Grid.Row="5" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}" >
             <ComboBoxItem IsSelected="True">neoženjen - neudata</ComboBoxItem>
             <ComboBoxItem>oženjen - udata</ComboBoxItem>
             <ComboBoxItem>udovac - udovica</ComboBoxItem>
             <ComboBoxItem>razveden - razvedena</ComboBoxItem>
         </ComboBox>
-        <ComboBox x:Name="Pol" Grid.Row="6" Grid.Column="3" BorderThickness="1" Margin="3" Style="{StaticResource cbTB}">
+        
+        <ComboBox x:Name="Pol" Grid.Row="6" Grid.Column="3" BorderThickness="1" Margin="3,3,3,7" Style="{StaticResource cbTB}">
             <ComboBoxItem IsSelected="True">muški</ComboBoxItem>
             <ComboBoxItem>ženski</ComboBoxItem>
             <ComboBoxItem>ostalo</ComboBoxItem>
         </ComboBox>
-        <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="3">
+
+        <ComboBox x:Name="KrvnaGrupa" Grid.Row="7" Grid.Column="3" BorderThickness="1" Margin="3,3,3,7" Style="{StaticResource cbTB}">
+            
+        </ComboBox>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="8" Grid.Column="3">
             <RadioButton x:Name="DaButton" Content="DA" Margin="35,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF67898E" Style="{StaticResource cbTB}"/>
             <RadioButton x:Name="NeButton" Content="NE" Margin="15,0,35,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF67898E" Style="{StaticResource cbTB}"/>
         </StackPanel>
-        <TextBox x:Name="UsernameText"          Grid.Row="8" Grid.Column="3" BorderThickness="1" Margin="3"  Text="{Binding Path=Record.Patient.Username, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"/>
-        <PasswordBox x:Name="PasswordText"      Grid.Row="9" Grid.Column="3" BorderThickness="1" Margin="3" Style="{StaticResource cbPB}"/>
-        <PasswordBox x:Name="PasswordReentered" Grid.Row="10" Grid.Column="3" BorderThickness="1" Margin="3" Style="{StaticResource cbPB}"/>
+
+        <TextBox x:Name="UsernameText" Grid.Row="9" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10"  Text="{Binding Path=Record.Patient.Username, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}">
+
+        </TextBox>
+
+        <PasswordBox x:Name="PasswordText" Grid.Row="10" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbPB}" >
+            
+        </PasswordBox>
+
+        <PasswordBox x:Name="PasswordReentered" Grid.Row="11" Grid.Column="3" BorderThickness="1" Margin="3,3,3,7" Style="{StaticResource cbPB}">
+            
+        </PasswordBox>
 
         <Grid Grid.Row="0" Grid.Column="3" Margin="0">
             <Grid.RowDefinitions>
@@ -120,15 +267,23 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="Br. kartona:" VerticalAlignment="Center" Margin="0,0,5,0" FontFamily="Segoe UI Symbol" FontSize="11" Foreground="#FF688D9E" HorizontalAlignment="Right" />
-            <TextBox x:Name="KartonText" Grid.Row="0" Grid.Column="1" Margin="2,55" Text="{Binding Path=Record.MedicalRecordID, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Br. kartona*:" VerticalAlignment="Center" Margin="0,0,5,0" FontFamily="Segoe UI Symbol" FontSize="11" Foreground="#FF688D9E" HorizontalAlignment="Right" />
+            <TextBox x:Name="KartonText" Grid.Row="0" Grid.Column="1" Margin="2,45" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}" >
+                <TextBox.Text>
+                    <Binding Path="Record.MedicalRecordID" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <val:OnlyDigitsValidationRuleRecordID ValidationStep="RawProposedValue"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
         </Grid>
 
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
             <CheckBox x:Name="Gost" Content="GOSTUJUĆI PACIJENT" FontSize="12" FontFamily="Segoe UI Symbol" HorizontalAlignment="Left" Margin="40,0,0,0" Foreground="#FF67898E" IsChecked="{Binding Path=Record.Patient.IsGuest, Mode=OneWayToSource}"/>
         </StackPanel>
 
-        <Button x:Name="btnPotvrdi" Grid.Row="11" Grid.Column="1" Content="Potvrdi" Width="80" Height="25" HorizontalAlignment="Right"  Background="#FF78A5AD" Foreground="White" FontFamily="Segoe UI Symbol" FontSize="14" Click="BtnPotvrdi" Margin="0,0,20,0"/>
-        <Button x:Name="btnOduatani" Grid.Row="11" Grid.Column="2" Content="Odustani" Width="80" Height="25" HorizontalAlignment="Left"  Background="White" Foreground="#FF67898E" FontFamily="Segoe UI Symbol" FontSize="14" Click="BtnOdustani" Margin="20,0,0,0"/>
+        <Button x:Name="btnPotvrdi" Grid.Row="12" Grid.Column="1" Content="Potvrdi" Width="80" Height="25" HorizontalAlignment="Right"  Background="#FF78A5AD" Foreground="White" FontFamily="Segoe UI Symbol" FontSize="14" Click="BtnPotvrdi" Margin="0,0,20,0"/>
+        <Button x:Name="btnOduatani" Grid.Row="12" Grid.Column="2" Content="Odustani" Width="80" Height="25" HorizontalAlignment="Left"  Background="White" Foreground="#FF67898E" FontFamily="Segoe UI Symbol" FontSize="14" Click="BtnOdustani" Margin="20,0,0,0"/>
     </Grid>
 </Window>
