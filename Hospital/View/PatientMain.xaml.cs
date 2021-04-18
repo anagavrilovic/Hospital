@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Hospital.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +24,39 @@ namespace Hospital.View
         public PatientMain()
         {
             InitializeComponent();
+            Boolean newNotification=false;
+            PatientNotificationsStorage patientNotificationsStorage = new PatientNotificationsStorage();
+            //  patientNotificationsStorage.SaveAll();
+            ObservableCollection<PatientTherapyMedicineNotification> lista = patientNotificationsStorage.GetAll();
+            foreach(PatientTherapyMedicineNotification ptm in lista)
+            {
+                if((ptm.FromDate.Date <= DateTime.Now.Date) && (ptm.ToDate.Date >= DateTime.Now.Date)){
+                    if(ptm.LastRead.Date<= DateTime.Now.Date)
+                    {
+                        string[] times = ptm.Times.Split(' ');
+                        for(int i = 0; i < times.Length-1; i += 2)
+                        {
+                            
+                           TimeSpan ts = TimeSpan.Parse(times[i]);
+
+
+                            DateTime dt = DateTime.Now.Date + ts;
+                            if (times[i + 1].Equals("PM")) dt=dt.AddHours(12);
+                            if (ptm.LastRead < dt)
+                            {
+                                newNotification = true;
+                                ptm.Read = false;
+                                patientNotificationsStorage.Delete(ptm.ID);
+                                patientNotificationsStorage.Save(ptm);
+                            }
+                        }
+                    }
+                }
+            }
+            if (newNotification)
+            {
+                MessageBox.Show("Imate novo obavestenje!");
+            }
         }
 
         private void AppointmentList(object sender, RoutedEventArgs e)
@@ -46,6 +81,12 @@ namespace Hospital.View
         {
             PatientSettingsPage patientSettings = new PatientSettingsPage();
             patientSettings.Show();
+        }
+
+        private void Notifications(object sender, RoutedEventArgs e)
+        {
+            PatientNotifications patientNotifications = new PatientNotifications();
+            patientNotifications.Show();
         }
     }
 }
