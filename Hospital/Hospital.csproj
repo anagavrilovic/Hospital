@@ -128,9 +128,6 @@
     <Compile Include="View\Doctor\DoktorObavestenja.xaml.cs">
       <DependentUpon>DoktorObavestenja.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\IzmenaObavestenja.xaml.cs">
-      <DependentUpon>IzmenaObavestenja.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\EditMedicalSupply.xaml.cs">
       <DependentUpon>EditMedicalSupply.xaml</DependentUpon>
     </Compile>
@@ -166,9 +163,6 @@
     </Compile>
     <Compile Include="View\Secretary\IzmenaObavestenja.xaml.cs">
       <DependentUpon>IzmenaObavestenja.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\EditMedicalSupply.xaml.cs">
-      <DependentUpon>EditMedicalSupply.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\Kalendar.xaml.cs">
       <DependentUpon>Kalendar.xaml</DependentUpon>
