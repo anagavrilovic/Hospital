@@ -30,10 +30,11 @@ namespace Hospital.View
 
         private void accept(object sender, RoutedEventArgs e)
         {
-            if (!(string.IsNullOrEmpty(kolicinaTxt.Text) && string.IsNullOrEmpty(oznakaTxt.Text)))
+            if (!(string.IsNullOrEmpty(kolicinaTxt.Text)))
             {
                 MedicalSupplyStorage msStorage = new MedicalSupplyStorage();
-                msStorage.UpdateSupply(this.supplySelected, oznakaTxt.Text, int.Parse(kolicinaTxt.Text));
+                String id = typeCB.Text;
+                msStorage.UpdateSupply(this.supplySelected, id, int.Parse(kolicinaTxt.Text));
                 DynamicInventory.Supply = msStorage.GetByRoomID(this.supplySelected.RoomID);
             }
 

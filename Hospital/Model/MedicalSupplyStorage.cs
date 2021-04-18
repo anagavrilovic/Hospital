@@ -96,7 +96,14 @@ namespace Hospital
    
        public void UpdateSupply(MedicalSupply fromFirstRoom, string secondRoomID, int quantity)
        {
-            if (fromFirstRoom.Quantity > quantity)
+
+            if (fromFirstRoom.RoomID.Equals(secondRoomID))
+            {
+                return;
+            }
+                
+
+            if (fromFirstRoom.Quantity >= quantity)
             {
                 ObservableCollection<MedicalSupply> supply = new ObservableCollection<MedicalSupply>();
                 supply = this.GetByRoomID(secondRoomID);
@@ -105,7 +112,7 @@ namespace Hospital
 
                 foreach (MedicalSupply ms in supply)
                 {
-                    if (ms.Name.Equals(fromFirstRoom.Name))
+                    if (ms.Name.ToLower().Equals(fromFirstRoom.Name.ToLower()))
                     {
                         ms.Quantity += quantity;
                         found = true;

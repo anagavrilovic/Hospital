@@ -97,7 +97,12 @@ namespace Hospital
    
        public void UpdateInventory(Inventory fromFirstRoom, string secondRoomID, int quantity)
        {
-            if (fromFirstRoom.Quantity > quantity)
+            if (fromFirstRoom.RoomID.Equals(secondRoomID))
+            {
+                return;
+            }
+
+            if (fromFirstRoom.Quantity >= quantity)
             {
                 ObservableCollection<Inventory> inventar = new ObservableCollection<Inventory>();
                 inventar = this.GetByRoomID(secondRoomID);
@@ -106,7 +111,7 @@ namespace Hospital
 
                 foreach (Inventory i in inventar)
                 {
-                    if (i.Name.Equals(fromFirstRoom.Name))
+                    if (i.Name.ToLower().Equals(fromFirstRoom.Name.ToLower()))
                     {
                         i.Quantity += quantity;
                         found = true;
