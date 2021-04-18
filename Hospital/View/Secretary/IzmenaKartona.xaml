@@ -285,7 +285,35 @@
             <CheckBox x:Name="Gost" Content="GOSTUJUĆI PACIJENT" FontSize="12" FontFamily="Segoe UI Symbol" HorizontalAlignment="Left" Margin="40,0,0,0" Foreground="#FF67898E" IsChecked="{Binding Path=Record.Patient.IsGuest, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
         </StackPanel>
 
-        <Button x:Name="btnPotvrdi" Grid.Row="12" Grid.Column="1" Content="Potvrdi" Width="80" Height="25" HorizontalAlignment="Right" Margin="0,0,20,0" Background="#FF78A5AD" Foreground="White" FontFamily="Segoe UI Symbol" FontSize="14" Click="BtnPotvrdi"/>
+        <Button x:Name="btnPotvrdi" Grid.Row="12" Grid.Column="1" Content="Potvrdi" Width="80" Height="25" HorizontalAlignment="Right" Margin="0,0,20,0" Background="#FF78A5AD" Foreground="White" FontFamily="Segoe UI Symbol" FontSize="14" Click="BtnPotvrdi">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ImeText}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=RoditeljText}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=PrezimeText}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=Datum}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=AdresaText}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=MestoText}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=PostanskiBrojText}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=OpstinaText}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=DrzavaText}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=KnjizicaText}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=LicnaText}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=JMBGText}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=TelefonText}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=EmailText}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=KartonText}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
         <Button x:Name="btnOduatani" Grid.Row="12" Grid.Column="2" Content="Odustani" Width="80" Height="25" HorizontalAlignment="Left" Margin="20,0,0,0" Background="White" Foreground="#FF67898E" FontFamily="Segoe UI Symbol" FontSize="14" Click="BtnOdustani"/>
     </Grid>
 </Window>
