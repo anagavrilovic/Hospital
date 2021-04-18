@@ -32,14 +32,20 @@ namespace Hospital.View
 
         private void MakeAnAppointment(object sender, RoutedEventArgs e)
         {
-            PatientMakeAnAppointment patientMakeAnAppointment = new PatientMakeAnAppointment();
-            patientMakeAnAppointment.Show();
+            PatientChooseDatesForAnAppointment patientChooseDatesForAnAppointment = new PatientChooseDatesForAnAppointment();
+            patientChooseDatesForAnAppointment.Show();
         }
 
         private void PassedAppointmentList(object sender, RoutedEventArgs e)
         {
             PatientPassedAppointmentList patientPassedAppointmentList = new PatientPassedAppointmentList();
             patientPassedAppointmentList.Show();
+        }
+
+        private void Settings(object sender, RoutedEventArgs e)
+        {
+            PatientSettingsPage patientSettings = new PatientSettingsPage();
+            patientSettings.Show();
         }
     }
 }

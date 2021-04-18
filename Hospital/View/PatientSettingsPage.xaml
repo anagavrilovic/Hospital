@@ -1,0 +1,17 @@
+﻿<Window x:Class="Hospital.View.PatientSettingsPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.View"
+        mc:Ignorable="d"
+        Title="PatientSettingsPage" Height="450" Width="800">
+    <Grid>
+        <Button Content="Nazad" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="338,373,0,0" Click="Nazad"/>
+        <Label Content="Preferiran lekar:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,101,0,0"/>
+        <RadioButton Name="lekar1" Content="Stefan Ljubovic" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="620,115,0,0" GroupName="grupa1"/>
+        <RadioButton Name="lekar2" Content="Aleksa Aleksic" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="620,166,0,0" GroupName="grupa1"/>
+        <RadioButton Name="lekar3" Content="Nije mi bitno" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="620,219,0,0" GroupName="grupa1"/>
+        <Button Content="Sačuvaj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="338,315,0,0" Click="Sacuvaj"/>
+    </Grid>
+</Window>

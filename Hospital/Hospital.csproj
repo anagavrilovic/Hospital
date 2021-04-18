@@ -67,6 +67,8 @@
     <Compile Include="Model\InventoryStorage.cs" />
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\NotificationStorage.cs" />
+    <Compile Include="Model\PatientSettings.cs" />
+    <Compile Include="Model\PatientSettingsStorage.cs" />
     <Compile Include="Model\Termini.cs" />
     <Compile Include="Model\MedicalSupply.cs" />
     <Compile Include="Model\MedicalSupplyStorage.cs" />
@@ -132,6 +134,21 @@
     </Compile>
     <Compile Include="View\OdaberiPacijenta.xaml.cs">
       <DependentUpon>OdaberiPacijenta.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientAppointmentOptions.xaml.cs">
+      <DependentUpon>PatientAppointmentOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientChangeAppointment.xaml.cs">
+      <DependentUpon>PatientChangeAppointment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientChooseDatesForAnAppointment.xaml.cs">
+      <DependentUpon>PatientChooseDatesForAnAppointment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientRescheduleAppointment.xaml.cs">
+      <DependentUpon>PatientRescheduleAppointment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientSettingsPage.xaml.cs">
+      <DependentUpon>PatientSettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PrikazObavestenja.xaml.cs">
       <DependentUpon>PrikazObavestenja.xaml</DependentUpon>
@@ -292,6 +309,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\OdaberiPacijenta.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientAppointmentOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientChangeAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientChooseDatesForAnAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientRescheduleAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -163,5 +163,34 @@ namespace Hospital
             }
         }
 
+        public Boolean ExistByTime(DateTime dt,String idDoctor)
+        {
+            ObservableCollection<Appointment> appointment = GetAll();
+            foreach (Appointment a in appointment)
+            {
+                if (a.DateTime == dt && a.IDDoctor.Equals(idDoctor))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public int GetNumberOfAppointmentsForDoctor(string id)
+        {
+            ObservableCollection<Appointment> appointment = GetAll();
+            int number = 0;
+            foreach (Appointment a in appointment)
+            {
+                if (a.IDDoctor.Equals(id))
+                {
+                    number++;
+                }
+            }
+
+            return number;
+        }
+
     }
 }

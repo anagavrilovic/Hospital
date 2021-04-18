@@ -17,9 +17,9 @@ using System.Windows.Shapes;
 namespace Hospital.View
 {
     /// <summary>
-    /// Interaction logic for PatientMakeAnAppointment.xaml
+    /// Interaction logic for PatientRescheduleAppointment.xaml
     /// </summary>
-    public partial class PatientMakeAnAppointment : Window
+    public partial class PatientRescheduleAppointment : Window
     {
         public ObservableCollection<Appointment> Lista
         {
@@ -27,9 +27,8 @@ namespace Hospital.View
             set;
         }
 
-        
-
-        public PatientMakeAnAppointment(DateTime vreme1, DateTime vreme2)
+        private String zaBrisanje;
+        public PatientRescheduleAppointment(DateTime vreme1, DateTime vreme2, String s)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -58,10 +57,10 @@ namespace Hospital.View
                         ObservableCollection<Doctor> doctors = doctorStorage.GetAll();
                         Boolean first = true;
                         
-                        foreach(Doctor d in doctors)
+                        foreach (Doctor d in doctors)
                         {
                             if (aps.ExistByTime(varVreme, d.PersonalID)) continue;
-                                if (first)
+                            if (first)
                             {
                                 appTemp.IDDoctor = d.PersonalID;
                                 appTemp.DoctrosNameSurname = d.FirstName + " " + d.LastName;
@@ -73,15 +72,13 @@ namespace Hospital.View
                                 {
                                     appTemp.IDDoctor = d.PersonalID;
                                     appTemp.DoctrosNameSurname = d.FirstName + " " + d.LastName;
-                                    
                                 }
                             }
                         }
-                        if(!first) Lista.Add(appTemp);
+                        if (!first) Lista.Add(appTemp);
 
                     }
-                    
-                    
+
                     dataGridApp.SelectedIndex = 0;
 
                     dataGridApp.Focus();
@@ -89,7 +86,7 @@ namespace Hospital.View
                 }
                 vreme1 = vreme1.AddDays(1);
             }
-           
+            zaBrisanje = s;
         }
 
         private void myTestKey(object sender, KeyEventArgs e)
@@ -107,12 +104,10 @@ namespace Hospital.View
                 selectedItem.Room = roomStorage.GetOne("1");
 
                 appointmentStorage.Save(selectedItem);
-                
+                appointmentStorage.Delete(zaBrisanje);
                 this.Close();
             }
         }
-
-
 
     }
 }
