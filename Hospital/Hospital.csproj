@@ -88,6 +88,7 @@
     <Compile Include="Model\RegistratedUserStorage.cs" />
     <Compile Include="Model\UnitsType.cs" />
     <Compile Include="Model\UserType.cs" />
+    <Compile Include="ValidacijeLekar\NaslovValidationRule.cs" />
     <Compile Include="ValidacijeSekretar\EmailValidationRule.cs" />
     <Compile Include="ValidacijeSekretar\OnlyDigitsValidationRuleCardID.cs" />
     <Compile Include="ValidacijeSekretar\OnlyDigitsValidationRuleHealthCardID.cs" />
@@ -263,6 +264,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resources\DoctorResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\SecretaryResourceDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -583,5 +588,6 @@
     <Resource Include="Icon\view.png" />
     <Resource Include="Icon\menu.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

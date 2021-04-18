@@ -57,9 +57,9 @@ namespace Hospital
                             DoctorStorage ds = new DoctorStorage();
                             IDnumber= ds.GetByUsername(user.Username);
                             DoktorGlavniProzor de = new DoktorGlavniProzor(IDnumber);
-                            de.Owner = this;
+                            Application.Current.MainWindow=de;
                             de.Show();
-                            this.Hide();
+                            this.Close();
                             break;
                         case UserType.manager:
                             MenagerWindow mw = new MenagerWindow();
