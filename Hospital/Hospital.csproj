@@ -124,9 +124,6 @@
     <Compile Include="View\Doctor\DoktorObavestenja.xaml.cs">
       <DependentUpon>DoktorObavestenja.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditMedicalSupply.xaml.cs">
-      <DependentUpon>EditMedicalSupply.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Doctor\IzmenaTermina.xaml.cs">
       <DependentUpon>IzmenaTermina.xaml</DependentUpon>
     </Compile>

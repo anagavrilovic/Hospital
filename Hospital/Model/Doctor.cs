@@ -6,14 +6,14 @@ namespace Hospital
    public class Doctor : User
    {
         private DoctorSpecialty specialty;
-        private int roomID;
+        private string roomID;
         public DoctorSpecialty Specialty
         {
             get { return specialty; }
             set { specialty = value; }
         }
 
-        public int RoomID
+        public string RoomID
         {
             get { return roomID; }
             set { roomID = value; }
