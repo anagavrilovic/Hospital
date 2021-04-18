@@ -1,11 +1,12 @@
 using System;
+using System.ComponentModel;
 using System.Text;
 
 namespace Hospital
 {
-   public class Appointment
+   public class Appointment : INotifyPropertyChanged
    {
-      private double durationInHours = 0.5;
+        private double durationInHours = 0.5;
         
         public double DurationInHours
         {
@@ -16,10 +17,24 @@ namespace Hospital
             set
             {
                 durationInHours = value;
+                OnPropertyChanged("DurationInHours");
             }
         }
 
-      public DateTime DateTime { get; set; }
+        private DateTime dateTime;
+
+        public DateTime DateTime 
+        {
+            get
+            {
+                return dateTime;
+            }
+            set
+            {
+                dateTime = value;
+                OnPropertyChanged("DateTime");
+            } 
+        }
 
         public AppointmentType type;
 
@@ -32,6 +47,7 @@ namespace Hospital
             set
             {
                 type = value;
+                OnPropertyChanged("AppointmentType");
             }
         }
 
@@ -46,6 +62,7 @@ namespace Hospital
             set
             {
                 patientName = value;
+                OnPropertyChanged("PatientName");
             }
         }
 
@@ -60,34 +77,95 @@ namespace Hospital
             set
             {
                 patientSurname = value;
+                OnPropertyChanged("PatientSurname");
             }
         }
 
-        public string IDpatient { get; set; }
-      
-      public string IDDoctor { get; set; }
+        private string iDpatient;
 
-      public string IDAppointment { get; set; }
+        public string IDpatient 
+        {
+            get
+            {
+                return iDpatient;
+            }
+            set
+            {
+                iDpatient = value;
+                OnPropertyChanged("IDpatient");
+            } 
+        }
 
-      public string DoctrosNameSurname { get; set; }
+        private string iDDoctor;
+        public string IDDoctor 
+        {
+            get
+            {
+                return iDDoctor;
+            }
+            set
+            {
+                iDDoctor = value;
+                OnPropertyChanged("IDDoctor");
+            }
+        }
+
+        private string iDAppointment;
+        public string IDAppointment 
+        {
+            get
+            {
+                return iDAppointment;
+            }
+            set
+            {
+               iDAppointment = value;
+                OnPropertyChanged("IDAppointment");
+            } 
+        }
+
+        private string doctrosNameSurname;
+        public string DoctrosNameSurname 
+        {
+            get
+            {
+                return doctrosNameSurname;
+            }
+            set
+            {
+                doctrosNameSurname = value;
+                OnPropertyChanged("DoctrosNameSurname");
+            } 
+        }
       
-      private Room room = new Room();
+        private Room room = new Room();
       
-      public Room Room
-      {
-         get
-         {
-            return room;
-         }
-         set
-         {
-            this.room = value;
-         }
-      }
+        public Room Room
+        {
+            get
+            {
+                return room;
+            }
+            set
+            {
+                this.room = value;
+                OnPropertyChanged("Room");
+            }
+        }
 
         public Appointment()
         {
             this.Type = AppointmentType.none;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
 
         override
