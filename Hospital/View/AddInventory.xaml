@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:val="clr-namespace:Hospital.ValidationRulesManager"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
         Title="Unos inventara" Height="750" Width="430"
@@ -38,18 +39,83 @@
         <Label Content="UNOS INVENTARA" Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="100,15,5,0" FontWeight="Bold"/>
 
         <Label Content="Oznaka:"   Grid.Row="2" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
-        <TextBox Grid.Row="3" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Inv.Id,       Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
-
         <Label Content="Naziv:"    Grid.Row="4" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
-        <TextBox Grid.Row="5" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Inv.Name,     Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
-
         <Label Content="Cena:"     Grid.Row="6" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
-        <TextBox Grid.Row="7" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Inv.Price,    Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
-
         <Label Content="Količina:" Grid.Row="8" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
-        <TextBox Grid.Row="9" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Inv.Quantity, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
 
-        <Button Grid.Column="0" Grid.Row="10" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,31.2,10,39.8" Click="accept" />
+        <TextBox Grid.Row="3" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Inv.Id,       Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Grid.Row="5" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Inv.Name,     Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBox x:Name="cenaTxt" Grid.Row="7" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C">
+            <TextBox.Text>
+                <Binding  Path="Inv.Price"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:StringToDouble ValidationStep="RawProposedValue"/>
+                        <val:MinValue       ValidationStep="ConvertedProposedValue" Min="0" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="cenaTxt"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+
+        <TextBox x:Name="kolicinaTxt" Grid.Row="9" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C">
+        <TextBox.Text>
+            <Binding  Path="Inv.Quantity"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                <Binding.ValidationRules>
+                    <val:StringToInteger ValidationStep="RawProposedValue"/>
+                    <val:MinValue        ValidationStep="ConvertedProposedValue" Min="0"/>
+                </Binding.ValidationRules>
+            </Binding>
+        </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="kolicinaTxt"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+
+        <Button Grid.Column="0" Grid.Row="10" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,31.2,10,39.8" Click="accept" >
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=kolicinaTxt}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=cenaTxt}"     Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
         <Button Grid.Column="1" Grid.Row="10" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="10,31.2,28,39.8" Click="cancel" />
 
     </Grid>

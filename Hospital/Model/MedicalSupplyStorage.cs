@@ -115,7 +115,6 @@ namespace Hospital
 
                 if (!found)
                 {
-                    Console.WriteLine("******************");
                     MedicalSupply newItem = new MedicalSupply
                     {
                         Id = fromFirstRoom.Id,

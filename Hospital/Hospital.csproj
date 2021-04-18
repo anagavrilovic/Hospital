@@ -76,6 +76,9 @@
     <Compile Include="Model\RegistratedUserStorage.cs" />
     <Compile Include="Model\UnitsType.cs" />
     <Compile Include="Model\UserType.cs" />
+    <Compile Include="ValidationRulesManager\MinValue.cs" />
+    <Compile Include="ValidationRulesManager\StringToDouble.cs" />
+    <Compile Include="ValidationRulesManager\StringToInteger.cs" />
     <Compile Include="View\AddInventory.xaml.cs">
       <DependentUpon>AddInventory.xaml</DependentUpon>
     </Compile>
@@ -102,7 +105,7 @@
     </Compile>
     <Compile Include="View\IzmenaObavestenja.xaml.cs">
       <DependentUpon>IzmenaObavestenja.xaml</DependentUpon>
-   </Compile>
+    </Compile>
     <Compile Include="View\EditMedicalSupply.xaml.cs">
       <DependentUpon>EditMedicalSupply.xaml</DependentUpon>
     </Compile>
