@@ -26,6 +26,9 @@ namespace Hospital
                 rooms = JsonConvert.DeserializeObject<ObservableCollection<Room>>(sr.ReadToEnd());
             }
 
+            if (rooms == null)
+                return new ObservableCollection<Room>();
+
             return rooms;
         }
 
@@ -51,8 +54,35 @@ namespace Hospital
             {
                 if (r.Id.Equals(id))
                 {
+
+                    InventoryStorage storage = new InventoryStorage();
+                    InventoryStorage.inventory = storage.GetAll();
+                    foreach (Inventory i in InventoryStorage.inventory)
+                    {
+                        if(i.RoomID.Equals(id))
+                            i.RoomID = "M1";
+                    }
+                    using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + "inventory.json"))
+                    {
+                        JsonSerializer serializer = new JsonSerializer();
+                        serializer.Serialize(file, InventoryStorage.inventory);
+                    }
+
+                    MedicalSupplyStorage msStorage = new MedicalSupplyStorage();
+                    MedicalSupplyStorage.supplies = msStorage.GetAll();
+                    foreach(MedicalSupply ms in MedicalSupplyStorage.supplies)
+                    {
+                        if (ms.RoomID.Equals(id))
+                            ms.RoomID = "M1";
+                    }
+                    using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + "medicalSupply.json"))
+                    {
+                        JsonSerializer serializer = new JsonSerializer();
+                        serializer.Serialize(file, MedicalSupplyStorage.supplies);
+                    }
+
                     rooms.Remove(r);
-                    using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
+                   using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
                     {
                         JsonSerializer serializer = new JsonSerializer();
                         serializer.Serialize(file, rooms);

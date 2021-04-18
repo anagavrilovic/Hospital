@@ -27,9 +27,10 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="0" Grid.Column="0" Background="white" Click="back" BorderBrush="white" >
+        <Button Grid.Row="0" Grid.Column="0" Background="white" Click="back" BorderBrush="white" Margin="0,0,10,0" >
             <Image  Source="/Icon/back.png" Margin="10,8,150,5"/>
         </Button>
+        <Label Grid.Row="0" Grid.Column="1" Background="White" x:Name="Naslov"/>
         <Image Source="/Icon/logo.png" Grid.Row="0" Grid.Column="1" Margin="10,5,5,2"/>
 
         <Label Content="RAZMENA INVENTARA" Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="77,15.4,28,0.4" FontWeight="Bold"/>
@@ -40,7 +41,14 @@
         
         <TextBox x:Name="nazivTxt"      Grid.Row="3" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C"  />
         <TextBox x:Name="kolicinaTxt"   Grid.Row="5" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" />
-        <TextBox x:Name="oznakaTxt"     Grid.Row="7" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" />
+        <!--" TextBox x:Name="oznakaTxt"     Grid.Row="7" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C"/-->
+
+        <ComboBox x:Name="typeCB"          Grid.Row="7" Grid.ColumnSpan="2" Margin="30,7,28,4.8" BorderThickness="1">
+            <ComboBoxItem                   Content="532553252"  Foreground="#FF2E83BF" FontSize="20" HorizontalContentAlignment="Center"/>
+            <ComboBoxItem IsSelected="True" Content="1"          Foreground="#FF2E83BF" FontSize="20" HorizontalContentAlignment="Center"/>
+            <ComboBoxItem                   Content="2"          Foreground="#FF2E83BF" FontSize="20" HorizontalContentAlignment="Center"/>
+            <ComboBoxItem                   Content="M1"         Foreground="#FF2E83BF" FontSize="20" HorizontalContentAlignment="Center"/>
+        </ComboBox>
 
         <Button Grid.Column="0" Grid.Row="8" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,31.2,10,39.8" Click="accept" />
         <Button Grid.Column="1" Grid.Row="8" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="10,31.2,28,39.8" Click="cancel" />

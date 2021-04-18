@@ -98,6 +98,9 @@
     <Compile Include="ValidacijeSekretar\OnlyLettersValidationRule.cs" />
     <Compile Include="ValidacijeSekretar\PasswordValidationRule.cs" />
     <Compile Include="ValidacijeSekretar\PostalCodeValidationRule.cs" />
+    <Compile Include="ValidationRulesManager\MinValue.cs" />
+    <Compile Include="ValidationRulesManager\StringToDouble.cs" />
+    <Compile Include="ValidationRulesManager\StringToInteger.cs" />
     <Compile Include="View\AddInventory.xaml.cs">
       <DependentUpon>AddInventory.xaml</DependentUpon>
     </Compile>
@@ -124,6 +127,12 @@
     </Compile>
     <Compile Include="View\Doctor\DoktorObavestenja.xaml.cs">
       <DependentUpon>DoktorObavestenja.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\IzmenaObavestenja.xaml.cs">
+      <DependentUpon>IzmenaObavestenja.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditMedicalSupply.xaml.cs">
+      <DependentUpon>EditMedicalSupply.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Doctor\IzmenaTermina.xaml.cs">
       <DependentUpon>IzmenaTermina.xaml</DependentUpon>

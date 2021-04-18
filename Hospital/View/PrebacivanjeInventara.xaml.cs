@@ -33,7 +33,8 @@ namespace Hospital.View
 
         private void accept(object sender, RoutedEventArgs e)
         {
-            if(!(string.IsNullOrEmpty(kolicinaTxt.Text) && string.IsNullOrEmpty(oznakaTxt.Text)))
+            if(!string.IsNullOrEmpty(kolicinaTxt.Text))
+
             {
                 /*ObservableCollection<Inventory> inventar = new ObservableCollection<Inventory>();
                 InventoryStorage storage = new InventoryStorage();
@@ -74,7 +75,8 @@ namespace Hospital.View
                 }*/
 
                 InventoryStorage istorage = new InventoryStorage();
-                istorage.UpdateInventory(this.inventorySeleceted, oznakaTxt.Text, int.Parse(kolicinaTxt.Text));
+                String id = typeCB.Text;
+                istorage.UpdateInventory(this.inventorySeleceted, id, int.Parse(kolicinaTxt.Text));
                 StaticInventory.Inventory = istorage.GetByRoomID(this.inventorySeleceted.RoomID);
             }
 

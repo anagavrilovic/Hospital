@@ -21,7 +21,6 @@ namespace Hospital.View
     public partial class DynamicInventory : Window
     {
         private string id;
-        private static ObservableCollection<MedicalSupply> supplies;
 
         public static ObservableCollection<MedicalSupply> Supply
         {
