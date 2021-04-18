@@ -46,7 +46,7 @@
                             <Setter Property="CornerRadius" Value="25"/>
                         </Style>
                     </Button.Resources>
-                    <Image Source="../Icon/1.png" Width="15" Height="25"/>
+                    <Image Source="../../Icon/1.png" Width="15" Height="25"/>
                 </Button>
 
                 <Button x:Name="Next" Grid.Column="8" Width="25" Height="25" Margin="5,5,10,5" Click="NextClick" Style="{StaticResource ButtonCalendar}">
@@ -55,7 +55,7 @@
                             <Setter Property="CornerRadius" Value="25"/>
                         </Style>
                     </Button.Resources>
-                    <Image Source="../Icon/11.png" Width="15" Height="25"/>
+                    <Image Source="../../Icon/11.png" Width="15" Height="25"/>
                 </Button>
                 
             </Grid>

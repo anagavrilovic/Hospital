@@ -1,4 +1,5 @@
 
+using Hospital.Model;
 using System;
 using System.ComponentModel;
 
@@ -11,14 +12,11 @@ namespace Hospital
         private String personalID;
         private String phoneNumber;
         private String email;
-        private String country;
-        private String city;
         private DateTime dateOfBirth;
-        private String township;
         private String cardID;
         private MaritalStatus maritalStatus;
         private Genders gender;
-        private string address;
+        private Address address = new Address();
 
         public string FirstName
         {
@@ -65,24 +63,8 @@ namespace Hospital
                 OnPropertyChanged("Email");
             }
         }
-        public string Country
-        {
-            get => country;
-            set
-            {
-                country = value;
-                OnPropertyChanged("Country");
-            }
-        }
-        public string City
-        {
-            get => city;
-            set
-            {
-                city = value;
-                OnPropertyChanged("City");
-            }
-        }
+
+
         public DateTime DateOfBirth
         {
             get => dateOfBirth;
@@ -92,15 +74,7 @@ namespace Hospital
                 OnPropertyChanged("DateOfBirth");
             }
         }
-        public string Township
-        {
-            get => township;
-            set
-            {
-                township = value;
-                OnPropertyChanged("Township");
-            }
-        }
+
         public string CardID
         {
             get => cardID;
@@ -128,7 +102,8 @@ namespace Hospital
                 OnPropertyChanged("Gender");
             }
         }
-        public string Address
+
+        public Address Address
         {
             get => address;
             set

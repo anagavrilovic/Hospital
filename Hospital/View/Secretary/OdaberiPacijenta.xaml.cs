@@ -109,10 +109,11 @@ namespace Hospital.View
             MedicalRecord mr = (MedicalRecord)ListBoxPacijenti.SelectedItem;
             Patient.Patient.FirstName = mr.Patient.FirstName;
             Patient.Patient.LastName = mr.Patient.LastName;
-            Patient.Patient.Address = mr.Patient.Address;
+            Patient.Patient.Address.Street = mr.Patient.Address.Street;
+            Patient.Patient.Address.StreetNumber = mr.Patient.Address.StreetNumber;
             Patient.Patient.CardID = mr.Patient.CardID;
-            Patient.Patient.City = mr.Patient.City;
-            Patient.Patient.Country = mr.Patient.Country;
+            Patient.Patient.Address.City.CityName = mr.Patient.Address.City.CityName;
+            Patient.Patient.Address.City.Country.CountryName = mr.Patient.Address.City.Country.CountryName;
             Patient.Patient.DateOfBirth = mr.Patient.DateOfBirth;
             Patient.Patient.Email = mr.Patient.Email;
             Patient.Patient.Gender = mr.Patient.Gender;
@@ -121,7 +122,8 @@ namespace Hospital.View
             Patient.Patient.Password = mr.Patient.Password;
             Patient.Patient.PersonalID = mr.Patient.PersonalID;
             Patient.Patient.PhoneNumber = mr.Patient.PhoneNumber;
-            Patient.Patient.Township = mr.Patient.Township;
+            Patient.Patient.Address.City.Township = mr.Patient.Address.City.Township;
+            Patient.Patient.Address.City.PostalCode = mr.Patient.Address.City.PostalCode;
             Patient.Patient.Username = mr.Patient.Username;
             Patient.Allergen = mr.Allergen;
             Patient.Examination = mr.Examination;
@@ -129,6 +131,7 @@ namespace Hospital.View
             Patient.IsInsured = mr.IsInsured;
             Patient.MedicalRecordID = mr.MedicalRecordID;
             Patient.ParentName = mr.ParentName;
+            Patient.BloodType = mr.BloodType;
         }
 
         private void OdustaniClick(object sender, RoutedEventArgs e)

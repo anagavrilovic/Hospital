@@ -1,3 +1,4 @@
+using Hospital.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,14 +13,17 @@ namespace Hospital
         private Boolean isInsured;
         private String medicalRecordID;
         private Patient patient = new Patient();
-
-        private List<Examination> examination;
+        private List<Examination> examination = new List<Examination>();
         private Allergen allergen = new Allergen();
+        private BloodType bloodType;
 
-        public MedicalRecord()
+
+        public MedicalRecord() {}
+
+        public BloodType BloodType
         {
-            Patient = new Patient();
-            examination = new List<Examination>();
+            get { return bloodType; }
+            set { bloodType = value; }
         }
 
         public Allergen Allergen

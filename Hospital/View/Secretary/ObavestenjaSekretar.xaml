@@ -23,16 +23,16 @@
 
             <StackPanel Grid.Column="0" HorizontalAlignment="Left" Margin="0">
                 <Button Height="50" Width="50" Margin="20,50,0,0" Style="{StaticResource ButtonCalendar}" Click="NovoObavestenjeClick" >
-                    <Image Source="../Icon/doc.png" Width="20"/>
+                    <Image Source="../../Icon/doc.png" Width="20"/>
                 </Button>
                 <Button Height="50" Width="50" Margin="20,20,0,0" Style="{StaticResource ButtonCalendar}" Click="IzmenaObavestenjaClick" >
-                    <Image Source="../Icon/edit.png" Width="20"/>
+                    <Image Source="../../Icon/edit.png" Width="20"/>
                 </Button>
                 <Button Height="50" Width="50" Margin="20,20,0,0" Style="{StaticResource ButtonCalendar}" Click="BrisanjeClick" >
-                    <Image Source="../Icon/delete.png" Width="20"/>
+                    <Image Source="../../Icon/delete.png" Width="20"/>
                 </Button>
                 <Button Height="50" Width="50" Margin="20,20,0,0" Style="{StaticResource ButtonCalendar}" Click="PrikazObavestenjaClick" >
-                    <Image Source="../Icon/view.png" Width="20"/>
+                    <Image Source="../../Icon/view.png" Width="20"/>
                 </Button>
             </StackPanel>
 

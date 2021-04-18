@@ -57,6 +57,18 @@ namespace Hospital.View
                 case Genders.other: Pol.SelectedItem = ostalo; break;
             }
 
+            switch (mr.BloodType)
+            {
+                case BloodType.Aplus: KrvnaGrupa.SelectedItem = Aplus; break;
+                case BloodType.Aneg: KrvnaGrupa.SelectedItem = Aneg; break;
+                case BloodType.Bplus: KrvnaGrupa.SelectedItem = Bplus; break;
+                case BloodType.Bneg: KrvnaGrupa.SelectedItem = Bneg; break;
+                case BloodType.ABplus: KrvnaGrupa.SelectedItem = ABplus; break;
+                case BloodType.ABneg: KrvnaGrupa.SelectedItem = ABneg; break;
+                case BloodType.Oplus: KrvnaGrupa.SelectedItem = Oplus; break;
+                case BloodType.Oneg: KrvnaGrupa.SelectedItem = Oneg; break;
+            }
+
             if (mr.IsInsured)
             {
                 DaButton.IsChecked = true;
@@ -77,7 +89,9 @@ namespace Hospital.View
             PrezimeText.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             Datum.GetBindingExpression(DatePicker.TextProperty).UpdateSource();
             AdresaText.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            BrojUliceText.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             MestoText.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            PostanskiBrojText.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             OpstinaText.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             DrzavaText.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             KnjizicaText.GetBindingExpression(TextBox.TextProperty).UpdateSource();
@@ -103,6 +117,18 @@ namespace Hospital.View
                 case 0: Record.Patient.Gender = Genders.male; break;
                 case 1: Record.Patient.Gender = Genders.female; break;
                 case 2: Record.Patient.Gender = Genders.other; break;
+            }
+
+            switch (KrvnaGrupa.SelectedIndex)
+            {
+                case 0: Record.BloodType = BloodType.Aplus; break;
+                case 1: Record.BloodType = BloodType.Aneg; break;
+                case 2: Record.BloodType = BloodType.Bplus; break;
+                case 3: Record.BloodType = BloodType.Bneg; break;
+                case 4: Record.BloodType = BloodType.ABplus; break;
+                case 5: Record.BloodType = BloodType.ABneg; break;
+                case 6: Record.BloodType = BloodType.Oplus; break;
+                case 7: Record.BloodType = BloodType.Oneg; break;
             }
 
             if ((bool)DaButton.IsChecked)

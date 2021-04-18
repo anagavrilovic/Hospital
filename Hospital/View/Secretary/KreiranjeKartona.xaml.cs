@@ -68,6 +68,18 @@ namespace Hospital.View
                 case 2: Record.Patient.Gender = Genders.other; break;
             }
 
+            switch (KrvnaGrupa.SelectedIndex)
+            {
+                case 0: Record.BloodType = BloodType.Aplus; break;
+                case 1: Record.BloodType = BloodType.Aneg; break;
+                case 2: Record.BloodType = BloodType.Bplus; break;
+                case 3: Record.BloodType = BloodType.Bneg; break;
+                case 4: Record.BloodType = BloodType.ABplus; break;
+                case 5: Record.BloodType = BloodType.ABneg; break;
+                case 6: Record.BloodType = BloodType.Oplus; break;
+                case 7: Record.BloodType = BloodType.Oneg; break;
+            }
+
             if ((bool)DaButton.IsChecked)
             {
                 Record.IsInsured = true;

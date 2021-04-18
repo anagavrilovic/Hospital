@@ -31,7 +31,7 @@
                         <Setter Property="CornerRadius" Value="15"/>
                     </Style>
                 </Button.Resources>
-                <Image Source="../Icon/x.png" Width="15" Height="15" />
+                <Image Source="../../Icon/x.png" Width="15" Height="15" />
             </Button>
         </Grid>
         

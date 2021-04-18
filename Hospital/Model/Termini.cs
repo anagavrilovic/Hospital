@@ -4,81 +4,115 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Hospital.Model
 {
-    public class Termini
+    public class Termini : INotifyPropertyChanged
     {
         private string vreme;
-        private Appointment ponedeljak;
-        private Appointment utorak;
-        private Appointment sreda;
-        private Appointment cetvrtak;
-        private Appointment petak;
-        private Appointment subota;
-        private Appointment nedelja;
+        private Appointment ponedeljak = new Appointment();
+        private Appointment utorak = new Appointment();
+        private Appointment sreda = new Appointment();
+        private Appointment cetvrtak = new Appointment();
+        private Appointment petak = new Appointment();
+        private Appointment subota = new Appointment();
+        private Appointment nedelja = new Appointment();
 
         public string Vreme
         {
             get { return vreme; }
-            set { vreme = value; }
+            set 
+            { 
+                vreme = value;
+                OnPropertyChanged("Vreme");
+            }
         }
 
         public Appointment Ponedeljak
         {
             get { return ponedeljak; }
-            set { ponedeljak = value; }
+            set 
+            { 
+                ponedeljak = value;
+                OnPropertyChanged("Ponedeljak");
+            }
         }
 
         public Appointment Utorak
         {
             get { return utorak; }
-            set { utorak = value; }
+            set 
+            { 
+                utorak = value;
+                OnPropertyChanged("Utorak");
+            }
         }
 
         public Appointment Sreda
         {
             get { return sreda; }
-            set { sreda = value; }
+            set 
+            { 
+                sreda = value;
+                OnPropertyChanged("Sreda");
+            }
         }
 
         public Appointment Cetvrtak
         {
             get { return cetvrtak; }
-            set { cetvrtak = value; }
+            set 
+            { 
+                cetvrtak = value;
+                OnPropertyChanged("Cetvrtak");
+            }
         }
 
         public Appointment Petak
         {
             get { return petak; }
-            set { petak = value; }
+            set 
+            { 
+                petak = value;
+                OnPropertyChanged("Petak");
+            }
         }
 
         public Appointment Subota
         {
             get { return subota; }
-            set { subota = value; }
+            set 
+            { 
+                subota = value;
+                OnPropertyChanged("Subota");
+            }
         }
 
         public Appointment Nedelja
         {
             get { return nedelja; }
-            set { nedelja = value; }
+            set 
+            { 
+                nedelja = value;
+                OnPropertyChanged("Nedelja");
+            }
         }
 
         public Termini()
         {
             this.Vreme = "";
-            this.Ponedeljak = new Appointment();
-            this.Utorak = new Appointment();
-            this.Sreda = new Appointment();
-            this.Cetvrtak = new Appointment();
-            this.Petak = new Appointment();
-            this.Subota = new Appointment();
-            this.Nedelja = new Appointment();
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
 
     }
 

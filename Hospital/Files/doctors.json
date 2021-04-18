@@ -16,7 +16,18 @@
     "CardID": "53253435",
     "MaritalStatus": 0,
     "Gender": 0,
-    "Address": "Mihajla Pupina"
+    "Address": {
+      "Street": "Bulevar kralja Petra",
+      "StreetNumber": "4a",
+      "City": {
+          "CityName": "Subotica",
+          "Township": "Subotica",
+          "PostalCode": "24000",
+          "Country": {
+              "CountryName": "Srbija"
+          }
+      }
+  }
   },
   {
     "Specialty": 0,
@@ -35,6 +46,17 @@
     "CardID": "623621236",
     "MaritalStatus": 1,
     "Gender": 0,
-    "Address": "Bulevar kralja Petra"
+    "Address": {
+      "Street": "Strazilovska",
+      "StreetNumber": "5/3",
+      "City": {
+          "CityName": "Novi Sad",
+          "Township": "Novi Sad",
+          "PostalCode": "21000",
+          "Country": {
+              "CountryName": "Srbija"
+          }
+      }
+  }
   }
 ]

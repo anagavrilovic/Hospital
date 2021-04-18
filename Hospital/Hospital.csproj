@@ -39,6 +39,10 @@
       <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,8 +62,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Allergen.cs" />
+    <Compile Include="Model\BloodType.cs" />
     <Compile Include="Model\BoolToStringConverter.cs" />
+    <Compile Include="Model\City.cs" />
+    <Compile Include="Model\Country.cs" />
     <Compile Include="Model\DoctorSpecialty.cs" />
     <Compile Include="Model\DoctorStorage.cs" />
     <Compile Include="Model\Ingredient.cs" />
@@ -141,22 +149,22 @@
     <Compile Include="View\Doctor\Termin.xaml.cs">
       <DependentUpon>Termin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DodajObavestenje.xaml.cs">
+    <Compile Include="View\Secretary\DodajObavestenje.xaml.cs">
       <DependentUpon>DodajObavestenje.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\IzmenaObavestenja.xaml.cs">
+    <Compile Include="View\Secretary\IzmenaObavestenja.xaml.cs">
       <DependentUpon>IzmenaObavestenja.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EditMedicalSupply.xaml.cs">
       <DependentUpon>EditMedicalSupply.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Kalendar.xaml.cs">
+    <Compile Include="View\Secretary\Kalendar.xaml.cs">
       <DependentUpon>Kalendar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ObavestenjaSekretar.xaml.cs">
+    <Compile Include="View\Secretary\ObavestenjaSekretar.xaml.cs">
       <DependentUpon>ObavestenjaSekretar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\OdaberiPacijenta.xaml.cs">
+    <Compile Include="View\Secretary\OdaberiPacijenta.xaml.cs">
       <DependentUpon>OdaberiPacijenta.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PatientAppointmentOptions.xaml.cs">
@@ -174,7 +182,7 @@
     <Compile Include="View\PatientSettingsPage.xaml.cs">
       <DependentUpon>PatientSettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PrikazObavestenja.xaml.cs">
+    <Compile Include="View\Secretary\PrikazObavestenja.xaml.cs">
       <DependentUpon>PrikazObavestenja.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PrebacivanjeOpreme.xaml.cs">
@@ -183,7 +191,7 @@
     <Compile Include="View\EditInventory.xaml.cs">
       <DependentUpon>EditInventory.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ModifikacijaAlergena.xaml.cs">
+    <Compile Include="View\Secretary\ModifikacijaAlergena.xaml.cs">
       <DependentUpon>ModifikacijaAlergena.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PrebacivanjeInventara.xaml.cs">
@@ -220,19 +228,19 @@
       <DependentUpon>RoomsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Genders.cs" />
-    <Compile Include="View\IzmenaKartona.xaml.cs">
+    <Compile Include="View\Secretary\IzmenaKartona.xaml.cs">
       <DependentUpon>IzmenaKartona.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KreiranjeKartona.xaml.cs">
+    <Compile Include="View\Secretary\KreiranjeKartona.xaml.cs">
       <DependentUpon>KreiranjeKartona.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PrikazPacijenata.xaml.cs">
+    <Compile Include="View\Secretary\PrikazPacijenata.xaml.cs">
       <DependentUpon>PrikazPacijenata.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\SecretaryWindow.xaml.cs">
+    <Compile Include="View\Secretary\SecretaryWindow.xaml.cs">
       <DependentUpon>SecretaryWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ZakazivanjeTermina.xaml.cs">
+    <Compile Include="View\Secretary\ZakazivanjeTermina.xaml.cs">
       <DependentUpon>ZakazivanjeTermina.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
@@ -323,11 +331,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\DodajObavestenje.xaml">
+    <Page Include="View\Secretary\DodajObavestenje.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\IzmenaObavestenja.xaml">
+    <Page Include="View\Secretary\IzmenaObavestenja.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -335,15 +343,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Kalendar.xaml">
+    <Page Include="View\Secretary\Kalendar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ObavestenjaSekretar.xaml">
+    <Page Include="View\Secretary\ObavestenjaSekretar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\OdaberiPacijenta.xaml">
+    <Page Include="View\Secretary\OdaberiPacijenta.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -367,7 +375,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PrikazObavestenja.xaml">
+    <Page Include="View\Secretary\PrikazObavestenja.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -379,7 +387,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ModifikacijaAlergena.xaml">
+    <Page Include="View\Secretary\ModifikacijaAlergena.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -427,23 +435,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\IzmenaKartona.xaml">
+    <Page Include="View\Secretary\IzmenaKartona.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\KreiranjeKartona.xaml">
+    <Page Include="View\Secretary\KreiranjeKartona.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PrikazPacijenata.xaml">
+    <Page Include="View\Secretary\PrikazPacijenata.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\SecretaryWindow.xaml">
+    <Page Include="View\Secretary\SecretaryWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ZakazivanjeTermina.xaml">
+    <Page Include="View\Secretary\ZakazivanjeTermina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

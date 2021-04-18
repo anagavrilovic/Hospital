@@ -114,9 +114,10 @@
         </TextBox>
 
         <DatePicker x:Name="Datum" Grid.Row="4" Grid.Column="1" Background="White" Margin="3,3,3,10" Text="{Binding Path=Record.Patient.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=Explicit}" FirstDayOfWeek="Monday" Validation.ErrorTemplate="{x:Null}"/>
+        
         <TextBox x:Name="AdresaText" Grid.Row="5" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
             <TextBox.Text>
-                <Binding Path="Record.Patient.Address" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                <Binding Path="Record.Patient.Address.Street" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                     <Binding.ValidationRules>
                         <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
@@ -124,13 +125,13 @@
             </TextBox.Text>
         </TextBox>
 
-        <TextBox x:Name="BrojUliceText" Grid.Row="6" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
+        <TextBox x:Name="BrojUliceText" Grid.Row="6" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Text="{Binding Record.Patient.Address.StreetNumber}" Style="{StaticResource cbTB}">
             
         </TextBox>
 
         <TextBox x:Name="MestoText" Grid.Row="7" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
             <TextBox.Text>
-                <Binding Path="Record.Patient.City" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                <Binding Path="Record.Patient.Address.City.CityName" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                     <Binding.ValidationRules>
                         <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
@@ -139,18 +140,18 @@
         </TextBox>
 
         <TextBox x:Name="PostanskiBrojText" Grid.Row="8" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
-            <!--<TextBox.Text>
-                <Binding Path="" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+            <TextBox.Text>
+                <Binding Path="Record.Patient.Address.City.PostalCode" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                     <Binding.ValidationRules>
                         <val:PostalCodeValidationRule ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
                 </Binding>
-            </TextBox.Text>-->
+            </TextBox.Text>
         </TextBox>
 
         <TextBox x:Name="OpstinaText" Grid.Row="9" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
             <TextBox.Text>
-                <Binding Path="Record.Patient.Township" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                <Binding Path="Record.Patient.Address.City.Township" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                     <Binding.ValidationRules>
                         <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
@@ -160,7 +161,7 @@
 
         <TextBox x:Name="DrzavaText" Grid.Row="10" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
             <TextBox.Text>
-                <Binding Path="Record.Patient.Country" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                <Binding Path="Record.Patient.Address.City.Country.CountryName" Mode="TwoWay" UpdateSourceTrigger="Explicit">
                     <Binding.ValidationRules>
                         <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
@@ -232,7 +233,14 @@
         </ComboBox>
 
         <ComboBox x:Name="KrvnaGrupa" Grid.Row="7" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
-
+            <ComboBoxItem x:Name="Aplus"  Content="A+"/>
+            <ComboBoxItem x:Name="Aneg"   Content="A-"/>
+            <ComboBoxItem x:Name="Bplus"  Content="B+"/>
+            <ComboBoxItem x:Name="Bneg"   Content="B+"/>
+            <ComboBoxItem x:Name="ABplus" Content="AB+"/>
+            <ComboBoxItem x:Name="ABneg"  Content="AB-"/>
+            <ComboBoxItem x:Name="Oplus"  Content="O+"/>
+            <ComboBoxItem x:Name="Oneg"   Content="O-"/>
         </ComboBox>
 
         <StackPanel Orientation="Horizontal" Grid.Row="8" Grid.Column="3">
