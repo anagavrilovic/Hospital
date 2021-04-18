@@ -82,7 +82,7 @@ namespace Hospital.View
         {
             Doctor_Examination d = new Doctor_Examination(appointment);
             d.Show();
-            d.Owner=(Window.GetWindow(this.Owner)).Owner;
+            d.Owner=(Window.GetWindow(this) ).Owner;
             this.Close();
 
         }

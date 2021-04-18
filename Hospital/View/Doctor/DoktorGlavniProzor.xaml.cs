@@ -52,18 +52,20 @@ namespace Hospital.View
 
         private void Logo(object sender, RoutedEventArgs e)
         {
-
+            Main.Content = new DoktorGlavnaStranica (IDnumber);
         }
 
         private void SignOut(object sender, RoutedEventArgs e)
         {
-            Window.GetWindow(this.Owner).Show();
+            MainWindow m = new MainWindow();
+            Application.Current.MainWindow = m;
+            m.Show();
             this.Close();
         }
 
         private void Announcment(object sender, RoutedEventArgs e)
         {
-            obavestenje.Source = new BitmapImage(new Uri("pack://application:,,,/Icon/announcment.png", UriKind.Absolute));
+            //obavestenje.Source = new BitmapImage(new Uri("pack://application:,,,/Icon/announcment.png", UriKind.Absolute));
             Main.Content = new DoktorObavestenja();
         }
     }

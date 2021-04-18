@@ -63,7 +63,7 @@ namespace Hospital.View
         {
             Karton.AddExamination(((Doctor_Examination)Window.GetWindow(this)).Pregled);
             Window.GetWindow(this).Close();
-            (Window.GetWindow(((Doctor_Examination)Window.GetWindow(this)).Owner)).Show();           
+            (Window.GetWindow(((Doctor_Examination)Window.GetWindow(this))).Owner).Show();           
             mStorage.EditRecord(Karton);
             AppointmentStorage a = new AppointmentStorage();
             a.Delete(pregled.IDAppointment);

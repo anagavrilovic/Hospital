@@ -359,7 +359,7 @@
             <Button.Content>
                 <StackPanel Orientation="Vertical">
                     <Image Source="/Icon/inbox.png" Width="150" Height="50"/>
-                    <Label FontSize="19" Content="Termini" HorizontalAlignment="Center"/>
+                    <Label FontSize="19" Content="Inbox" HorizontalAlignment="Center"/>
                 </StackPanel>
             </Button.Content>
         </Button>
