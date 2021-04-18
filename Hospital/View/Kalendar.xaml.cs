@@ -244,7 +244,7 @@ namespace Hospital.View
 
         private void ZakaziClick(object sender, RoutedEventArgs e)
         {
-            if(KalendarDataGrid.SelectedCells == null)
+            if(KalendarDataGrid.SelectedCells.Count == 0)
             {
                 return;
             }

@@ -173,7 +173,7 @@ namespace Hospital.View
                 Termin.IDAppointment = random.Next(0, 10000).ToString();
                 foreach(Room r in rStorage.GetAll())
                 {
-                    if(rdbPregled.IsChecked.Equals(true) && Doktor.RoomID==r.Id)
+                    if(rdbPregled.IsChecked.Equals(true) && Doktor.RoomID.Equals(r.Id))
                     {
                         Termin.Room = r;
                         Termin.Type = AppointmentType.examination;

@@ -33,12 +33,9 @@ namespace Hospital.View
             this.DataContext = this;
 
             // Rooms = new ObservableCollection<Room>();
-          //  Rooms = RoomStorage.rooms;
+            // Rooms = RoomStorage.rooms;
             RoomStorage rs = new RoomStorage();
-            Rooms = rs.GetAll();
-          
-           // Rooms.Add(new Room { Id = 1, Name = "Sala 1", Floor = 2, IsAvaliable = false, Type = (RoomType)Enum.Parse(typeof(RoomType), "SOBA_ZA_ODMOR") });
-           
+            Rooms = rs.GetAll();    
         }
 
         private void addRoom(object sender, RoutedEventArgs e)
@@ -57,7 +54,7 @@ namespace Hospital.View
                 EditRoom room = new EditRoom(selectedItem);
                 room.Owner = Application.Current.MainWindow;
 
-                room.idTxt.Text =  selectedItem.Id.ToString();
+                room.idTxt.Text =  selectedItem.Id;
                 room.idTxt.IsEnabled = false;
                 room.nameTxt.Text = selectedItem.Name;
                 room.floorTxt.Text = selectedItem.Floor.ToString();
@@ -74,8 +71,7 @@ namespace Hospital.View
                 }
 
                 room.Show();
-            }
-            
+            }    
         }
 
         private void deleteRoom(object sender, RoutedEventArgs e)
@@ -96,16 +92,37 @@ namespace Hospital.View
             }
         }
 
-        public Room getRoom (int id)
+        private void viewStaticInventory(object sender, RoutedEventArgs e)
         {
-            foreach(Room r in Rooms)
+            Room selectedItem = (Room)dataGridRooms.SelectedItem;
+
+            if (selectedItem != null)
             {
-                if (r.Id == id)
-                {
-                    return r;
-                }
+                StaticInventory inv = new StaticInventory(selectedItem.Id);
+                inv.Owner = Application.Current.MainWindow;
+                inv.Show();
             }
-            return null;
+        }
+
+        private void viewDynamicInventory(object sender, RoutedEventArgs e)
+        {
+            
+            Room selectedItem = (Room)dataGridRooms.SelectedItem;
+
+            if(selectedItem != null)
+            {
+                DynamicInventory inv = new DynamicInventory(selectedItem.Id);
+                inv.Owner = Application.Current.MainWindow;
+                inv.Show();
+            }
+            
+        }
+
+        private void menuButton(object sender, RoutedEventArgs e)
+        {
+
+            this.Hide();
+
         }
     }
 }

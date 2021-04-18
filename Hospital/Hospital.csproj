@@ -65,6 +65,10 @@
     <Compile Include="Model\Ingredient.cs" />
     <Compile Include="Model\Inventory.cs" />
     <Compile Include="Model\InventoryStorage.cs" />
+    <Compile Include="Model\Notification.cs" />
+    <Compile Include="Model\NotificationStorage.cs" />
+    <Compile Include="Model\PatientSettings.cs" />
+    <Compile Include="Model\PatientSettingsStorage.cs" />
     <Compile Include="Model\Termini.cs" />
     <Compile Include="Model\MedicalSupply.cs" />
     <Compile Include="Model\MedicalSupplyStorage.cs" />
@@ -74,6 +78,21 @@
     <Compile Include="Model\RegistratedUserStorage.cs" />
     <Compile Include="Model\UnitsType.cs" />
     <Compile Include="Model\UserType.cs" />
+    <Compile Include="ValidacijeSekretar\EmailValidationRule.cs" />
+    <Compile Include="ValidacijeSekretar\OnlyDigitsValidationRuleCardID.cs" />
+    <Compile Include="ValidacijeSekretar\OnlyDigitsValidationRuleHealthCardID.cs" />
+    <Compile Include="ValidacijeSekretar\OnlyDigitsValidationRulePersonalID.cs" />
+    <Compile Include="ValidacijeSekretar\OnlyDigitsValidationRulePhoneNumber.cs" />
+    <Compile Include="ValidacijeSekretar\OnlyDigitsValidationRuleRecordID.cs" />
+    <Compile Include="ValidacijeSekretar\OnlyLettersValidationRule.cs" />
+    <Compile Include="ValidacijeSekretar\PasswordValidationRule.cs" />
+    <Compile Include="ValidacijeSekretar\PostalCodeValidationRule.cs" />
+    <Compile Include="View\AddInventory.xaml.cs">
+      <DependentUpon>AddInventory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddMedicalSupply.xaml.cs">
+      <DependentUpon>AddMedicalSupply.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Anamnesis.xaml.cs">
       <DependentUpon>Anamnesis.xaml</DependentUpon>
     </Compile>
@@ -83,6 +102,9 @@
     <Compile Include="View\Diagnosis.xaml.cs">
       <DependentUpon>Diagnosis.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DodajObavestenje.xaml.cs">
+      <DependentUpon>DodajObavestenje.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DoktorGlavnaStranica.xaml.cs">
       <DependentUpon>DoktorGlavnaStranica.xaml</DependentUpon>
     </Compile>
@@ -91,6 +113,12 @@
     </Compile>
     <Compile Include="View\DoktorObavestenja.xaml.cs">
       <DependentUpon>DoktorObavestenja.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\IzmenaObavestenja.xaml.cs">
+      <DependentUpon>IzmenaObavestenja.xaml</DependentUpon>
+   </Compile>
+    <Compile Include="View\EditMedicalSupply.xaml.cs">
+      <DependentUpon>EditMedicalSupply.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Kalendar.xaml.cs">
       <DependentUpon>Kalendar.xaml</DependentUpon>
@@ -110,11 +138,44 @@
     <Compile Include="View\OdaberiPacijenta.xaml.cs">
       <DependentUpon>OdaberiPacijenta.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PatientAppointmentOptions.xaml.cs">
+      <DependentUpon>PatientAppointmentOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientChangeAppointment.xaml.cs">
+      <DependentUpon>PatientChangeAppointment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientChooseDatesForAnAppointment.xaml.cs">
+      <DependentUpon>PatientChooseDatesForAnAppointment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientRescheduleAppointment.xaml.cs">
+      <DependentUpon>PatientRescheduleAppointment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientSettingsPage.xaml.cs">
+      <DependentUpon>PatientSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PrikazObavestenja.xaml.cs">
+      <DependentUpon>PrikazObavestenja.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PrebacivanjeOpreme.xaml.cs">
+      <DependentUpon>PrebacivanjeOpreme.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Terapija.xaml.cs">
       <DependentUpon>Terapija.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditInventory.xaml.cs">
+      <DependentUpon>EditInventory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ModifikacijaAlergena.xaml.cs">
       <DependentUpon>ModifikacijaAlergena.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PrebacivanjeInventara.xaml.cs">
+      <DependentUpon>PrebacivanjeInventara.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StaticInventory.xaml.cs">
+      <DependentUpon>StaticInventory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DynamicInventory.xaml.cs">
+      <DependentUpon>StaticInventory.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Termin.xaml.cs">
       <DependentUpon>Termin.xaml</DependentUpon>
@@ -190,6 +251,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AddInventory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddMedicalSupply.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Anamnesis.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -202,6 +271,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\DodajObavestenje.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DoktorGlavnaStranica.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -211,6 +284,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DoktorObavestenja.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\IzmenaObavestenja.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditMedicalSupply.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -238,11 +319,55 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\PatientAppointmentOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientChangeAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientChooseDatesForAnAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientRescheduleAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PrikazObavestenja.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PrebacivanjeOpreme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Terapija.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\EditInventory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ModifikacijaAlergena.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PrebacivanjeInventara.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StaticInventory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DynamicInventory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -423,6 +548,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\x.png" />
+    <Resource Include="Icon\back.png" />
+    <Resource Include="Icon\menu.JPG" />
+    <Resource Include="Icon\search-blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\delete.png" />
+    <Resource Include="Icon\doc.png" />
+    <Resource Include="Icon\edit.png" />
+    <Resource Include="Icon\view.png" />
+    <Resource Include="Icon\menu.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -43,13 +43,13 @@ namespace Hospital
 
         }
 
-        public Boolean Delete(int id)
+        public Boolean Delete(string id)
         {
             //  rooms = GetAll();
 
             foreach (Room r in rooms)
             {
-                if (r.Id == id)
+                if (r.Id.Equals(id))
                 {
                     rooms.Remove(r);
                     using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
@@ -63,11 +63,11 @@ namespace Hospital
             return false;
         }
 
-        public Room GetOne(int id)
+        public Room GetOne(string id)
         {
             foreach (Room r in rooms)
             {
-                if (r.Id == id)
+                if (r.Id.Equals(id))
                 {
                     return r;
                 }

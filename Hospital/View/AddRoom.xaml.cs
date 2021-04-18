@@ -26,8 +26,7 @@ namespace Hospital.View
 
         private void acceptAdding(object sender, RoutedEventArgs e)
         {
-            //TODO
-            int tempId = int.Parse(idTxt.Text);
+            string tempId = idTxt.Text;
             String tempName = nameTxt.Text;
             int tempFloor = int.Parse(floorTxt.Text);
             RoomType tempType = (RoomType)Enum.Parse(typeof(RoomType), typeCB.Text);
@@ -46,6 +45,11 @@ namespace Hospital.View
         }
 
         private void cancelAdding(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void back(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

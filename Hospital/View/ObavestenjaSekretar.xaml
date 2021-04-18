@@ -5,8 +5,71 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-        Title="ObavestenjaSekretar" Height="450" Width="800">
+        Title="ObavestenjaSekretar" Height="665" Width="1070"
+        Background="#FFD0DADD" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="OBAVEŠTENJA" FontSize="24" Foreground="#FF517C7C" Margin="20,10,0,0"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" HorizontalAlignment="Left" Margin="0">
+                <Button Height="50" Width="50" Margin="20,50,0,0" Style="{StaticResource ButtonCalendar}" Click="NovoObavestenjeClick" >
+                    <Image Source="../Icon/doc.png" Width="20"/>
+                </Button>
+                <Button Height="50" Width="50" Margin="20,20,0,0" Style="{StaticResource ButtonCalendar}" Click="IzmenaObavestenjaClick" >
+                    <Image Source="../Icon/edit.png" Width="20"/>
+                </Button>
+                <Button Height="50" Width="50" Margin="20,20,0,0" Style="{StaticResource ButtonCalendar}" Click="BrisanjeClick" >
+                    <Image Source="../Icon/delete.png" Width="20"/>
+                </Button>
+                <Button Height="50" Width="50" Margin="20,20,0,0" Style="{StaticResource ButtonCalendar}" Click="PrikazObavestenjaClick" >
+                    <Image Source="../Icon/view.png" Width="20"/>
+                </Button>
+            </StackPanel>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBox x:Name="ObavestenjaFilter" TextChanged="ObavestenjaFilterTextChanged" Width="200" Height="25" HorizontalAlignment="Right" Margin="0,10,20,0"/>
+                <ListBox x:Name="ListBoxNotifications" ItemsSource="{Binding NotificationList, Mode=TwoWay}" Grid.Row="1" Margin="0,10,20,23" Width="950"
+                         ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="115">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" Width="900">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Title, Mode=TwoWay}" FontSize="16" FontWeight="Bold"/>
+                                    <TextBlock Grid.Column="2" Text="{Binding Date, StringFormat='{}{0: dd.MM.yyyy, HH:mm}', Mode=TwoWay}" FontStyle="Italic" />
+                                </Grid>
+                                <TextBlock Margin="0,10,0,0" Grid.Row="1" Text="{Binding Content, Mode=TwoWay}" FontSize="14" TextWrapping="Wrap" Width="900"/>
+                                <Separator Grid.Row="2"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

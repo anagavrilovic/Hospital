@@ -1,45 +1,172 @@
-// File:    MedicalSupplyStorage.cs
+﻿// File:    MedicalSupplyStorage.cs
 // Author:  Marija
 // Created: Tuesday, March 23, 2021 10:19:32 PM
 // Purpose: Definition of Class MedicalSupplyStorage
 
+using Hospital.View;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Windows;
 
 namespace Hospital
 {
     public class MedicalSupplyStorage
     {
-       public List<MedicalSupply> GetAll()
+        public MedicalSupplyStorage()
+        {
+            this.fileName = "medicalSupply.json";
+        }
+
+       public ObservableCollection<MedicalSupply> GetAll()
        {
-          throw new NotImplementedException();
-       }
+            using (StreamReader sr = File.OpenText(@"..\\..\\Files\\" + fileName))
+            {
+                supplies = JsonConvert.DeserializeObject<ObservableCollection<MedicalSupply>>(sr.ReadToEnd());
+            }
+
+            if (supplies == null)
+                supplies = new ObservableCollection<MedicalSupply>();
+
+            return supplies;
+        }
    
        public void Save(MedicalSupply parameter1)
        {
-          throw new NotImplementedException();
+            supplies = GetAll();
+
+            if(supplies == null)
+            {
+                supplies = new ObservableCollection<MedicalSupply>();
+            }
+
+            supplies.Add(parameter1);
+
+            doSerialization();
        }
    
-       public Boolean Delete(int id)
+       public Boolean Delete(string id)
        {
-          throw new NotImplementedException();
+            supplies = GetAll();
+
+            foreach(MedicalSupply ms in supplies)
+            {
+                if(ms.Id.Equals(id))
+                {
+                    supplies.Remove(ms);
+                    doSerialization();
+                    return true;
+                }
+            }
+            return false;
        }
    
-       public MedicalSupply GetOne(int id)
+       public MedicalSupply GetOne(string id)
        {
-          throw new NotImplementedException();
+            supplies = GetAll();
+
+            foreach(MedicalSupply ms in supplies)
+            {
+                if(ms.Id.Equals(id))
+                {
+                    return ms;
+                }
+            }
+            
+            return null;
        }
    
-       public List<MedicalSupply> GetByRoomID(string id)
+       public ObservableCollection<MedicalSupply> GetByRoomID(string id)
        {
-          throw new NotImplementedException();
+            ObservableCollection<MedicalSupply> ret = new ObservableCollection<MedicalSupply>();
+            supplies = GetAll();
+
+            foreach(MedicalSupply ms in supplies)
+            {
+                if(ms.RoomID.Equals(id))
+                {
+                    ret.Add(ms);
+                }
+            }
+
+            return ret;
        }
    
-       public bool UpdateSupply(string firstRoomID, string secondRoomID, int quantity)
+       public void UpdateSupply(MedicalSupply fromFirstRoom, string secondRoomID, int quantity)
        {
-          throw new NotImplementedException();
-       }
-   
+            if (fromFirstRoom.Quantity > quantity)
+            {
+                ObservableCollection<MedicalSupply> supply = new ObservableCollection<MedicalSupply>();
+                supply = this.GetByRoomID(secondRoomID);
+
+                bool found = false;
+
+                foreach (MedicalSupply ms in supply)
+                {
+                    if (ms.Name.Equals(fromFirstRoom.Name))
+                    {
+                        ms.Quantity += quantity;
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    Console.WriteLine("******************");
+                    MedicalSupply newItem = new MedicalSupply
+                    {
+                        Id = fromFirstRoom.Id,
+                        Name = fromFirstRoom.Name,
+                        Quantity = quantity,
+                        Price = fromFirstRoom.Price,
+                        RoomID = secondRoomID,
+                        Units = fromFirstRoom.Units
+                    };
+                    supplies.Add(newItem);
+                }
+
+
+                foreach (MedicalSupply ms in DynamicInventory.Supply)
+                {
+                    if (ms.Id.Equals(fromFirstRoom.Id) && ms.RoomID.Equals(fromFirstRoom.RoomID))
+                    {
+                        ms.Quantity -= quantity;
+                    }
+                }
+
+                foreach (MedicalSupply ms in supplies)
+                {
+                    if (ms.Id.Equals(fromFirstRoom.Id) && ms.RoomID.Equals(fromFirstRoom.RoomID))
+                    {
+                        ms.Quantity -= quantity;
+                    }
+                }
+
+                using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Serialize(file, supplies);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Pogrešan unos količine!");
+            }
+        }
+
+        private void doSerialization()
+        {
+            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, supplies);
+            }
+        }
+
+       public static ObservableCollection<MedicalSupply> supplies;
        public String fileName;
 
     }
