@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,12 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientTherapy : Window
     {
-        public PatientTherapy()
+        private PatientTherapyMedicineNotification PatientTherapyMedicineNotification;
+        public PatientTherapy(PatientTherapyMedicineNotification patientTherapyMedicineNotification)
         {
             InitializeComponent();
+            this.PatientTherapyMedicineNotification = patientTherapyMedicineNotification;
+            label1.Content = patientTherapyMedicineNotification.Name;
         }
     }
 }

@@ -46,9 +46,14 @@ namespace Hospital.View
                 return;
             }
 
-            if (datum1 > datum2)
+            if ((datum1 > datum2) || (datum1.Date < DateTime.Now.Date))
             {
                 MessageBox.Show("Datumi nisu dobro uneseni");
+                return;
+            }
+            else if ((datum1 - DateTime.Now).TotalDays < 2)
+            {
+                MessageBox.Show("Nije moguće zakazati termin tako kasno.");
                 return;
             }
 

@@ -80,7 +80,7 @@ namespace Hospital.View
                 PatientNotificationsStorage patientNotificationsStorage = new PatientNotificationsStorage();
                 patientNotificationsStorage.Delete(selectedItem.ID);
                 patientNotificationsStorage.Save(selectedItem);
-                PatientTherapy patientTherapy = new PatientTherapy();
+                PatientTherapy patientTherapy = new PatientTherapy(selectedItem);
                 patientTherapy.Show();
                 
             }

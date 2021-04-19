@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="PatientTherapy" Height="450" Width="800">
     <Grid>
-        
+        <Label Name="label1" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="363,106,0,0"/>
+
     </Grid>
 </Window>
