@@ -42,7 +42,7 @@ namespace Hospital.View
 
                             DateTime dt = DateTime.Now.Date + ts;
                             if (times[i + 1].Equals("PM")) dt=dt.AddHours(12);
-                            if (ptm.LastRead < dt)
+                            if ((ptm.LastRead < dt) && (dt <= DateTime.Now))
                             {
                                 newNotification = true;
                                 ptm.Read = false;

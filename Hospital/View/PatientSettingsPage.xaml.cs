@@ -25,7 +25,11 @@ namespace Hospital.View
             InitializeComponent();
             PatientSettingsStorage patientSettingsStorage = new PatientSettingsStorage();
             PatientSettings patientSettings = patientSettingsStorage.getByID(MainWindow.IDnumber);
-            if (lekar1.Content.ToString().Equals(patientSettings.ChosenDoctor))
+            if (patientSettings == null)
+            {
+                lekar3.IsChecked = true;
+            }
+            else if (lekar1.Content.ToString().Equals(patientSettings.ChosenDoctor))
             {
                 lekar1.IsChecked = true;
             }
@@ -64,6 +68,7 @@ namespace Hospital.View
             }
 
             patientSettingsStorage.Save(patientSettings);
+            this.Close();
         }
     }
 }

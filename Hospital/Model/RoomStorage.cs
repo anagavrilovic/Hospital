@@ -95,6 +95,7 @@ namespace Hospital
 
         public Room GetOne(string id)
         {
+            rooms = GetAll();
             foreach (Room r in rooms)
             {
                 if (r.Id.Equals(id))

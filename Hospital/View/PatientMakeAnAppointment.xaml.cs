@@ -47,10 +47,13 @@ namespace Hospital.View
                     PatientSettings patientSettings = patientSettingsStorage.getByID(MainWindow.IDnumber);
                     DoctorStorage doctorStorage = new DoctorStorage();
                     AppointmentStorage aps = new AppointmentStorage();
+                    RoomStorage roomStorage = new RoomStorage();
                     if (!patientSettings.ChosenDoctor.Equals("Nije mi bitno"))
                     {
                         appTemp.DoctrosNameSurname = patientSettings.ChosenDoctor;
                         appTemp.IDDoctor = doctorStorage.GetIDByNameSurname(patientSettings.ChosenDoctor);
+                        Doctor doc = doctorStorage.GetOne(appTemp.IDDoctor);
+                        appTemp.Room = roomStorage.GetOne(doc.RoomID);
                         if (!aps.ExistByTime(varVreme, appTemp.IDDoctor)) { Lista.Add(appTemp); }
                     }
                     else
@@ -65,6 +68,7 @@ namespace Hospital.View
                             {
                                 appTemp.IDDoctor = d.PersonalID;
                                 appTemp.DoctrosNameSurname = d.FirstName + " " + d.LastName;
+                                appTemp.Room = roomStorage.GetOne(d.RoomID);
                                 first = false;
                             }
                             else
@@ -73,7 +77,8 @@ namespace Hospital.View
                                 {
                                     appTemp.IDDoctor = d.PersonalID;
                                     appTemp.DoctrosNameSurname = d.FirstName + " " + d.LastName;
-                                    
+                                    appTemp.Room = roomStorage.GetOne(d.RoomID);
+
                                 }
                             }
                         }
@@ -103,8 +108,7 @@ namespace Hospital.View
                 selectedItem.IDpatient = medicalRecordStorage.GetByPatientID(MainWindow.IDnumber).Patient.PersonalID;
                 selectedItem.patientName = medicalRecordStorage.GetByPatientID(MainWindow.IDnumber).Patient.FirstName;
                 selectedItem.patientSurname = medicalRecordStorage.GetByPatientID(MainWindow.IDnumber).Patient.LastName;
-                RoomStorage roomStorage = new RoomStorage();
-                selectedItem.Room = roomStorage.GetOne("1");
+             
 
                 appointmentStorage.Save(selectedItem);
                 

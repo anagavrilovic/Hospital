@@ -10,8 +10,8 @@
         <Label Content="Interesuju me termini:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="340,46,0,0"/>
         <Label Content="Od datuma:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="85,127,0,0"/>
         <Label Content="Do datuma:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="85,229,0,0"/>
-        <TextBox Name="DatumPrvi" HorizontalAlignment="Left" Height="23" Margin="568,127,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name="DatumDrugi" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Margin="568,229,0,0"/>
+        <TextBox Name="DatumPrvi" HorizontalAlignment="Left" Height="23" Margin="568,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="DatumDrugi" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="568,229,0,0"/>
         <Button Content="Prikaži" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="365,322,0,0" Click="Prikazi"/>
         <Button Content="Odustani" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="365,374,0,0" Click="Odustani"/>
 

@@ -28,6 +28,20 @@ namespace Hospital.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            String datumVreme1 = TextBox1.Text.Trim() + " " + "12:00:00 AM";
+            String datumVreme2 = TextBox2.Text.Trim() + " " + "12:00:00 AM";
+            DateTime datum1;
+            DateTime datum2;
+            try
+            {
+                datum1 = DateTime.Parse(datumVreme1);
+                datum2 = DateTime.Parse(datumVreme2);
+            }
+            catch
+            {
+                MessageBox.Show("Nije dobro unesen datum.\nDatum:mm/dd/yyyy");
+                return;
+            }
             DateTime vreme = app.DateTime;
             DateTime vreme1 = Convert.ToDateTime(TextBox1.Text);
             DateTime vreme2 = Convert.ToDateTime(TextBox2.Text);

@@ -54,6 +54,7 @@ namespace Hospital.View
 
             PatientMakeAnAppointment patientMakeAnAppointment = new PatientMakeAnAppointment(datum1,datum2);
             patientMakeAnAppointment.Show();
+            this.Close();
         }
     }
 }

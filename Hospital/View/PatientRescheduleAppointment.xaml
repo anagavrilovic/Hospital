@@ -13,7 +13,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn  Header="DatumVreme" Binding="{Binding DateTime}" Width="*"/>
                 <DataGridTextColumn  Header="Doktor" Binding="{Binding DoctrosNameSurname}" Width="*"/>
-                <DataGridTextColumn  Header="Tip" Binding="{Binding type}" Width="*"/>
+                <DataGridTextColumn  Header="Tip" Binding="{Binding Type}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

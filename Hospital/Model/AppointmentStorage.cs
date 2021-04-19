@@ -33,6 +33,7 @@ namespace Hospital
         public void Save(Appointment parameter1)
         {
             ObservableCollection<Appointment> appointment = GetAll();
+            if (appointment == null) appointment = new ObservableCollection<Appointment>();
             appointment.Add(parameter1);
             DoSerialization(appointment);
         }
@@ -57,6 +58,10 @@ namespace Hospital
             ObservableCollection<Appointment> apps = GetAll();
             ObservableCollection<Appointment> patientApps = new ObservableCollection<Appointment>();
             Boolean found = false;
+            if (apps == null)
+            {
+                return null;
+            }
             foreach (Appointment app in apps)
             {
                 if (app.IDpatient.Equals(id))
@@ -124,14 +129,26 @@ namespace Hospital
             }
 
             int retVal = 1;
-            if (apps.Count == 0)
+            if (apps==null || apps.Count == 0)
             {
                 return retVal.ToString();
             }
+           
+
+            List<int> lista = new List<int>();
             foreach (Appointment app in apps)
             {
                 int x = Int32.Parse(app.IDAppointment);
-                if (x >= retVal)
+                lista.Add(x);
+            }
+
+            while (true)
+            {
+                if (!lista.Contains(retVal))
+                {
+                    break;
+                }
+                else
                 {
                     retVal++;
                 }
@@ -166,6 +183,7 @@ namespace Hospital
         public Boolean ExistByTime(DateTime dt,String idDoctor)
         {
             ObservableCollection<Appointment> appointment = GetAll();
+            if (appointment == null) return false;
             foreach (Appointment a in appointment)
             {
                 if (a.DateTime == dt && a.IDDoctor.Equals(idDoctor))
@@ -181,6 +199,7 @@ namespace Hospital
         {
             ObservableCollection<Appointment> appointment = GetAll();
             int number = 0;
+            if (appointment == null) return 0;
             foreach (Appointment a in appointment)
             {
                 if (a.IDDoctor.Equals(id))
