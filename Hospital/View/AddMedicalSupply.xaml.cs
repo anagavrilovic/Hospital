@@ -53,8 +53,27 @@ namespace Hospital.View
 
             supply.Add(ms);
             MedicalSupplyStorage msStorage = new MedicalSupplyStorage();
-            msStorage.Save(ms);
-            DynamicInventory.Supply.Add(ms);
+            bool found = false;
+
+            foreach (MedicalSupply sup in msStorage.GetByRoomID(ms.RoomID))
+            {
+                if (sup.Id.Equals(ms.Id))
+                {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                msStorage.Save(ms);
+                DynamicInventory.Supply.Add(ms);
+            }
+            else
+            {
+                MessageBox.Show("Vec postoji stavka sa unetom oznakom!");
+            }
+
 
             this.Close();
         }

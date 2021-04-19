@@ -46,9 +46,29 @@ namespace Hospital.View
         private void accept(object o, RoutedEventArgs e)
         {
             inventory.Add(inv);
+
+            bool found = false;
+
             InventoryStorage invStorage = new InventoryStorage();
-            invStorage.Save(inv);
-            StaticInventory.Inventory.Add(inv);
+
+            foreach (Inventory i in invStorage.GetByRoomID(inv.RoomID))
+            {
+                if(i.Id.Equals(inv.Id))
+                {
+                    found = true;
+                    break;
+                }
+            }
+
+            if(!found)
+            {
+                invStorage.Save(inv);
+                StaticInventory.Inventory.Add(inv);
+            }
+            else
+            {
+                MessageBox.Show("Vec postoji stavka sa unetom oznakom!");
+            }
 
             this.Close();
         }
