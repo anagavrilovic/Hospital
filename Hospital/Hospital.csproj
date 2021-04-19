@@ -98,6 +98,7 @@
     <Compile Include="ValidacijeSekretar\OnlyLettersValidationRule.cs" />
     <Compile Include="ValidacijeSekretar\PasswordValidationRule.cs" />
     <Compile Include="ValidacijeSekretar\PostalCodeValidationRule.cs" />
+    <Compile Include="ValidationRulesManager\EmptyField.cs" />
     <Compile Include="ValidationRulesManager\MinValue.cs" />
     <Compile Include="ValidationRulesManager\StringToDouble.cs" />
     <Compile Include="ValidationRulesManager\StringToInteger.cs" />
