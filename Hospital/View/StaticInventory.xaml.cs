@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,17 @@ namespace Hospital.View
 
         InventoryStorage storage = new InventoryStorage();
 
+        private string searchstr;
+
+        private ICollectionView inventoryCollection;
+
+        public ICollectionView InventoryCollection
+        {
+            get { return inventoryCollection; }
+            set { inventoryCollection = value; }
+        }
+
+
         public StaticInventory(string id)
         {
             InitializeComponent();
@@ -44,6 +56,44 @@ namespace Hospital.View
 
             Inventory = new ObservableCollection<Inventory>();
             Inventory = storage.GetByRoomID(id);
+
+            InventoryCollection = CollectionViewSource.GetDefaultView(Inventory);
+        }
+
+        private void searchInventory(object sender, TextChangedEventArgs e)
+        {
+            TextBox textbox = sender as TextBox;
+            if (textbox != null)
+            {
+                this.searchstr = textbox.Text;
+                if (!string.IsNullOrEmpty(searchstr))
+                {
+                    ICollectionView view = CollectionViewSource.GetDefaultView(dataGridInventory.ItemsSource);
+                    view.Filter = new Predicate<object>(filter);
+                    this.InventoryCollection.Refresh();
+                }
+                else
+                {
+                    ICollectionView view = CollectionViewSource.GetDefaultView(Inventory);
+                    this.InventoryCollection.Refresh();
+                }
+            }
+        }
+
+        private void btnSearchMouseDown(object sender, RoutedEventArgs e)
+        {
+            this.InventoryCollection.Refresh();
+        }
+
+      
+        private bool filter(object item)
+        {
+            if (((Inventory)item).Name.Contains(searchstr) || ((Inventory)item).Id.Contains(searchstr) || ((Inventory)item).Price.ToString().Contains(searchstr) ||
+                ((Inventory)item).RoomID.Contains(searchstr) || ((Inventory)item).Quantity.ToString().Contains(searchstr))
+            {
+                return true;
+            }
+            return false;
         }
 
         private void add(object o, RoutedEventArgs e)
