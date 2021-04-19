@@ -70,7 +70,7 @@
                 </Button.Resources>
             </Button>
             <Button x:Name="cancel" Width="150" Height="30" FontSize="18"
-                Background="White" Content="Nazad">
+                Background="White" Content="Nazad" Click="cancel_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>

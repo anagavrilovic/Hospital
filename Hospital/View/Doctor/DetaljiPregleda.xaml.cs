@@ -86,5 +86,11 @@ namespace Hospital.View
             this.Close();
 
         }
+
+        private void cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Owner.Show();
+            this.Close();
+        }
     }
 }
