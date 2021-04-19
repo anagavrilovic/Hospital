@@ -47,13 +47,13 @@ namespace Hospital
             doSerialization();
        }
    
-       public Boolean Delete(string id)
+       public Boolean Delete(string id, string roomID)
        {
             supplies = GetAll();
 
             foreach(MedicalSupply ms in supplies)
             {
-                if(ms.Id.Equals(id))
+                if(ms.Id.Equals(id) && ms.RoomID.Equals(roomID))
                 {
                     supplies.Remove(ms);
                     doSerialization();

@@ -48,12 +48,12 @@ namespace Hospital
             }
         }
    
-       public Boolean Delete(string id)
+       public Boolean Delete(string id, string roomID)
        {
             inventory = GetAll();
             foreach (Inventory i in inventory)
             {
-                if (i.Id.Equals(id))
+                if (i.Id.Equals(id) && i.RoomID.Equals(roomID))
                 {
                     inventory.Remove(i);
                     using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))

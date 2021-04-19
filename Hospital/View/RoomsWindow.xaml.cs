@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,17 @@ namespace Hospital.View
 
         RoomStorage rs = new RoomStorage();
 
+        private string searchstr;
+
+        private ICollectionView roomsCollection;
+
+        public ICollectionView RoomsCollection
+        {
+            get { return roomsCollection; }
+            set { roomsCollection = value; }
+        }
+
+
         public RoomsWindow()
         {
             InitializeComponent();
@@ -35,7 +47,44 @@ namespace Hospital.View
             // Rooms = new ObservableCollection<Room>();
             // Rooms = RoomStorage.rooms;
             RoomStorage rs = new RoomStorage();
-            Rooms = rs.GetAll();    
+            Rooms = rs.GetAll();
+
+            RoomsCollection = CollectionViewSource.GetDefaultView(Rooms);
+        }
+
+        private void searchRooms(object sender, TextChangedEventArgs e)
+        {
+            TextBox textbox = sender as TextBox;
+            if (textbox != null)
+            {
+                this.searchstr = textbox.Text;
+                if (!string.IsNullOrEmpty(searchstr))
+                {
+                    ICollectionView view = CollectionViewSource.GetDefaultView(dataGridRooms.ItemsSource);
+                    view.Filter = new Predicate<object>(filter);
+                    this.RoomsCollection.Refresh();
+                }
+                else
+                {
+                    ICollectionView view = CollectionViewSource.GetDefaultView(Rooms);
+                    this.RoomsCollection.Refresh();
+                }
+            }
+        }
+
+        private void btnSearchMouseDown(object sender, RoutedEventArgs e)
+        {
+            this.RoomsCollection.Refresh();
+        }
+
+
+        private bool filter(object item)
+        {
+            if (((Room)item).Name.Contains(searchstr) || ((Room)item).Id.Contains(searchstr) || ((Room)item).Floor.ToString().Contains(searchstr))
+            {
+                return true;
+            }
+            return false;
         }
 
         private void addRoom(object sender, RoutedEventArgs e)

@@ -40,8 +40,8 @@
         <Button x:Name="transfer" Content="PREBACI STAVKU"   Grid.Row="2" Grid.Column="0" Margin="10,10,10.2,23" Background="#FFBBD7F9" Foreground="#FF051D6E" Click="transferItem"/>
         <Button x:Name="report"   Content="KREIRAJ IZVEŠTAJ" Grid.Row="2" Grid.Column="1" Margin="10,10,10.2,23" Background="#FFBBD7F9" Foreground="#FF051D6E" Click="createReport"/>
 
-        <TextBox x:Name="search"  Grid.Row="3" Grid.ColumnSpan="2" Margin="10,0,62,19.8" />
-        <Image Source="/Icon/search-blue.png" Grid.Row="3" Grid.Column="1" Margin="155,0,15,19.8"/>
+        <TextBox x:Name="search"  TextChanged="searchSupply" Grid.Row="3" Grid.ColumnSpan="2" Margin="10,0,62,19.8" />
+        <Image Source="/Icon/search-blue.png" Grid.Row="3" Grid.Column="1" Margin="155,0,15,19.8" MouseDown="btnSearchMouseDown"/>
 
         <ScrollViewer Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="2" Background="Azure" HorizontalScrollBarVisibility="Auto" Margin="10,0,0,0">
             <Grid MinWidth="200">
