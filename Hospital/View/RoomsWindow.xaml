@@ -40,7 +40,7 @@
         <Button x:Name="delete"           Content="IZBRIŠI SALU"       Grid.Row="2" Grid.Column="0"   Margin="19,10,22,21" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="deleteRoom"/>
         <Button x:Name="dynamicInventory" Content="PREGLED OPREME"     Grid.Row="2" Grid.Column="1"   Margin="22,10,19,21" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="viewDynamicInventory"/>
 
-        <TextBox x:Name="searchRoom" Grid.Row="3" Grid.ColumnSpan="2" Margin="19,22,19,26.8"/>
+        <TextBox x:Name="searchRoom" TextChanged="searchRooms" Grid.Row="3" Grid.ColumnSpan="2" Margin="19,22,19,26.8"/>
 
         <ScrollViewer Grid.Row="4" Grid.RowSpan="6" Grid.ColumnSpan="2" Background="Azure" HorizontalScrollBarVisibility="Auto" Margin="10,0.2,0,71.8">
 

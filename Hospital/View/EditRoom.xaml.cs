@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,6 +65,25 @@ namespace Hospital.View
                     r.IsAvaliable = tempFree;
                     r.Type = tempType;
                 }
+            }
+
+            foreach (Room r in RoomStorage.rooms)
+            {
+                if (r.Id.Equals(tempId))
+                {
+                    r.Name = tempName;
+                    r.Floor = tempFloor;
+                    r.IsAvaliable = tempFree;
+                    r.Type = tempType;
+
+                }
+
+            }
+
+            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + "rooms.json"))
+            {
+                 JsonSerializer serializer = new JsonSerializer();
+                 serializer.Serialize(file, RoomStorage.rooms);
             }
 
             this.Close();

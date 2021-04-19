@@ -128,7 +128,7 @@ namespace Hospital.View
                 if (selectedItem != null)
                 {
                     Inventory.Remove(selectedItem);
-                    storage.Delete(selectedItem.Id);
+                    storage.Delete(selectedItem.Id, selectedItem.RoomID);
                 }
             }
         }

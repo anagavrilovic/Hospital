@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,16 @@ namespace Hospital.View
 
         MedicalSupplyStorage storage = new MedicalSupplyStorage();
 
+        private string searchstr;
+
+        private ICollectionView supplyCollection;
+
+        public ICollectionView SupplyCollection
+        {
+            get { return supplyCollection; }
+            set { supplyCollection = value; }
+        }
+
 
         public DynamicInventory(string id)
         {
@@ -40,6 +51,44 @@ namespace Hospital.View
             MedicalSupplyStorage storage = new MedicalSupplyStorage();
             Supply = new ObservableCollection<MedicalSupply>();
             Supply = storage.GetByRoomID(id);
+
+            SupplyCollection = CollectionViewSource.GetDefaultView(Supply);
+        }
+
+        private void searchSupply(object sender, TextChangedEventArgs e)
+        {
+            TextBox textbox = sender as TextBox;
+            if (textbox != null)
+            {
+                this.searchstr = textbox.Text;
+                if (!string.IsNullOrEmpty(searchstr))
+                {
+                    ICollectionView view = CollectionViewSource.GetDefaultView(dataGridMedicalSupply.ItemsSource);
+                    view.Filter = new Predicate<object>(filter);
+                    this.SupplyCollection.Refresh();
+                }
+                else
+                {
+                    ICollectionView view = CollectionViewSource.GetDefaultView(Supply);
+                    this.SupplyCollection.Refresh();
+                }
+            }
+        }
+
+        private void btnSearchMouseDown(object sender, RoutedEventArgs e)
+        {
+            this.SupplyCollection.Refresh();
+        }
+
+
+        private bool filter(object item)
+        {
+            if (((MedicalSupply)item).Name.Contains(searchstr) || ((MedicalSupply)item).Id.Contains(searchstr) || ((MedicalSupply)item).Price.ToString().Contains(searchstr) ||
+                ((MedicalSupply)item).RoomID.Contains(searchstr) || ((MedicalSupply)item).Quantity.ToString().Contains(searchstr))
+            {
+                return true;
+            }
+            return false;
         }
 
         private void addItem(object o, RoutedEventArgs e)
@@ -74,7 +123,7 @@ namespace Hospital.View
                 if (selectedItem != null)
                 {
                     Supply.Remove(selectedItem);
-                    storage.Delete(selectedItem.Id);
+                    storage.Delete(selectedItem.Id, selectedItem.RoomID);
                 }
             }
         }
