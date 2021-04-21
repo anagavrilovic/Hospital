@@ -24,7 +24,7 @@ namespace Hospital.View
     public partial class Kalendar : Window
     {
         private ObservableCollection<Termini> tabela = new ObservableCollection<Termini>();
-        private ObservableCollection<Doctor> doctors = new ObservableCollection<Doctor>();
+        private ObservableCollection<Hospital.Model.Doctor> doctors = new ObservableCollection<Hospital.Model.Doctor>();
         private DateTime date = DateTime.Today;
         private MedicalRecord patient = new MedicalRecord();
 
@@ -55,7 +55,7 @@ namespace Hospital.View
             set { tabela = value; }
         }
 
-        public ObservableCollection<Doctor> Doctors
+        public ObservableCollection<Hospital.Model.Doctor> Doctors
         {
             get { return doctors; }
             set { doctors = value; }
@@ -86,7 +86,7 @@ namespace Hospital.View
             } 
         }
 
-        private void PopuniTermine(Doctor doctor)
+        private void PopuniTermine(Hospital.Model.Doctor doctor)
         {
             if(doctor == null)
             {
@@ -205,7 +205,7 @@ namespace Hospital.View
         private void OsveziKalendar()
         {
             PopuniKalendar();
-            PopuniTermine((Doctor)DoctorComboBox.SelectedItem);
+            PopuniTermine((Hospital.Model.Doctor)DoctorComboBox.SelectedItem);
         }
 
         private void ComboBoxDoctorEvent(object sender, SelectionChangedEventArgs e)
@@ -252,7 +252,7 @@ namespace Hospital.View
             int indexColumn = KalendarDataGrid.SelectedCells[0].Column.DisplayIndex;
             var vreme = ((Termini)KalendarDataGrid.SelectedCells[0].Item).Vreme;
             
-            var zt = new ZakazivanjeTermina((Doctor)DoctorComboBox.SelectedItem, Patient, indexColumn, vreme, WeekBegin, Tabela);
+            var zt = new ZakazivanjeTermina((Hospital.Model.Doctor)DoctorComboBox.SelectedItem, Patient, indexColumn, vreme, WeekBegin, Tabela);
             zt.Show();
 
         }

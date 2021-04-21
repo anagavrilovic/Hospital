@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.View.Doctor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,6 +33,11 @@ namespace Hospital.View
             ((DoktorGlavniProzor)Window.GetWindow(this)).Main.Content = new KalendarTermini(IDnumber);
             
           
+        }
+
+        private void Lekovi(object sender, RoutedEventArgs e)
+        {
+            ((DoktorGlavniProzor)Window.GetWindow(this)).Main.Content = new Lekovi();
         }
     }
 }

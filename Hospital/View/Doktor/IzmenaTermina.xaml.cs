@@ -1,20 +1,9 @@
 ﻿using Hospital.Model;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Hospital.View
 {
@@ -54,7 +43,7 @@ namespace Hospital.View
             }
 
         }
-        public ObservableCollection<Doctor> Doktori
+        public ObservableCollection<Hospital.Model.Doctor> Doktori
         {
             get { return doktori; }
             set
@@ -64,7 +53,7 @@ namespace Hospital.View
             }
 
         }
-        private ObservableCollection<Doctor> doktori=new ObservableCollection<Doctor>();
+        private ObservableCollection<Hospital.Model.Doctor> doktori=new ObservableCollection<Hospital.Model.Doctor>();
         DoctorStorage dStorage = new DoctorStorage();
         RoomStorage rStorage = new RoomStorage();
        // MakeApointment parentWindow = new MakeApointment();
@@ -86,7 +75,7 @@ namespace Hospital.View
                     sala.SelectedItem = room;
                 }
             }
-            foreach(Doctor doktor in Doktori)               
+            foreach(Hospital.Model.Doctor doktor in Doktori)               
             {
                 if (doktor.PersonalID.Equals(Termin.IDDoctor))
                 {
@@ -139,7 +128,7 @@ namespace Hospital.View
 
         private void doktorBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Doctor temp = (Doctor)doctorBox.SelectedItem;
+            Hospital.Model.Doctor temp = (Hospital.Model.Doctor)doctorBox.SelectedItem;
             Termin.IDDoctor = temp.PersonalID;
         }
 

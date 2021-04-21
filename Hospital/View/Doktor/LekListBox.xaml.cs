@@ -23,9 +23,21 @@ namespace Hospital.View
     public partial class LekListBox : Window, INotifyPropertyChanged
     {
         ObservableCollection<Medicine> lekovi = new ObservableCollection<Medicine>();
+        private MedicalRecord medicalRecord;
         MedicineStorage mStorage = new MedicineStorage();
         public event PropertyChangedEventHandler PropertyChanged;
         private Terapija parentWindow;
+        private string text;
+        public string Text
+        {
+            get { return text; }
+            set
+            {
+                text = value;
+                OnPropertyChanged();
+            }
+
+        }
         ObservableCollection<Medicine> Lekovi
         {
             get { return lekovi; }
@@ -64,9 +76,11 @@ namespace Hospital.View
                 this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
             }
         }
-        public LekListBox(Terapija parentWindow)
+        public LekListBox(Terapija parentWindow,MedicalRecord medicalRecord)
         {
             InitializeComponent();
+            this.DataContext = this;
+            this.medicalRecord = medicalRecord;
             for(int i = 1; i < 10; i++)
             {
                 dnevni.Items.Add(i.ToString());
@@ -76,9 +90,8 @@ namespace Hospital.View
                 danaZaK.Items.Add(i.ToString());
             }
             dnevni.SelectedIndex = 2;
-            danaZaK.SelectedIndex = 7;
+            danaZaK.SelectedIndex = 6;
             Lekovi=mStorage.GetAll();
-            InitializeComponent();
             this.parentWindow = parentWindow;
             this.listBox.ItemsSource = Lekovi;
             ICollectionView view = GetPretraga();
@@ -108,6 +121,8 @@ namespace Hospital.View
                 Medicine m=((Medicine)listBox.SelectedItem);
                 m.DurationInDays = int.Parse(Dana);
                 m.TimesPerDay = int.Parse(Dan);
+                m.Description = Text;
+                MessageBox.Show(Text);
                 bool postoji = false;
                 foreach (Medicine m1 in parentWindow.Lekovi){
                     if (m1.ID.Equals(m.ID))
@@ -121,8 +136,18 @@ namespace Hospital.View
                 }
                 else
                 {
-                    parentWindow.Lekovi.Add(m);
-                    this.Close();
+                    foreach(string medicineName in medicalRecord.Allergen.MedicineNames)
+                    {
+                        if (medicineName.Equals(m.Name))
+                        {
+                            MessageBox.Show("Pacijent je alergican na dati lek");
+                        }
+                        else
+                        {
+                            parentWindow.Lekovi.Add(m);
+                            this.Close();
+                        }
+                    }
                 }
             }
         }

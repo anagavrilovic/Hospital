@@ -55,10 +55,10 @@ namespace Hospital.View
                     }
                     else
                     {
-                        ObservableCollection<Doctor> doctors = doctorStorage.GetAll();
+                        ObservableCollection<Hospital.Model.Doctor> doctors = doctorStorage.GetAll();
                         Boolean first = true;
                         
-                        foreach(Doctor d in doctors)
+                        foreach(Hospital.Model.Doctor d in doctors)
                         {
                             if (aps.ExistByTime(varVreme, d.PersonalID)) continue;
                                 if (first)

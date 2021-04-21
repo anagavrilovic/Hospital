@@ -22,7 +22,7 @@ namespace Hospital.View
   
     public partial class KreiranjeTermina : Window,INotifyPropertyChanged
     {
-        private ObservableCollection<Doctor> doktori;
+        private ObservableCollection<Hospital.Model.Doctor> doktori;
         private Appointment termin;
         public Appointment Termin { get => termin; set => termin = value; } 
         private Room soba;
@@ -58,8 +58,8 @@ namespace Hospital.View
             }
 
         }
-        private Doctor doktor;
-        public Doctor Doktor
+        private Hospital.Model.Doctor doktor;
+        public Hospital.Model.Doctor Doktor
         {
             get { return doktor; }
             set
@@ -81,7 +81,7 @@ namespace Hospital.View
             }
 
         }
-        public ObservableCollection<Doctor> Doktori  
+        public ObservableCollection<Hospital.Model.Doctor> Doktori  
             {
                 get{ return doktori;}
                 set {
@@ -124,7 +124,7 @@ namespace Hospital.View
             Pacijent = new Patient();
             Pacijent = (mStorage.GetByPatientID(id)).Patient;
             Termin = new Appointment();
-            Doktor = new Doctor();
+            Doktor = new Hospital.Model.Doctor();
             for (DateTime tm = time.AddHours(0); tm < time.AddHours(24); tm = tm.AddMinutes(30))
             {
                 vreme.Items.Add(tm.ToShortTimeString());

@@ -31,7 +31,7 @@ namespace Hospital.View
         {
             DateTime currentTime = DateTime.Now;
             DoctorStorage doctorStorage = new DoctorStorage();
-            Doctor d = doctorStorage.GetOne(app.IDDoctor);
+            Hospital.Model.Doctor d = doctorStorage.GetOne(app.IDDoctor);
             if (d.Specialty != DoctorSpecialty.general)
             {
                 MessageBox.Show("Nije moguce pomeriti termin kod specijaliste");

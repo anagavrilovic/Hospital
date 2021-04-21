@@ -22,7 +22,7 @@ namespace Hospital.View
     /// </summary>
     public partial class ZakazivanjeTermina : Window
     {
-        private Doctor doktor = new Doctor();
+        private Hospital.Model.Doctor doktor = new Hospital.Model.Doctor();
         private MedicalRecord pacijent = new MedicalRecord();
         private string time;
         private int danUNedelji;
@@ -90,13 +90,13 @@ namespace Hospital.View
             set { pacijent = value; }
         }
 
-        public Doctor Doktor
+        public Hospital.Model.Doctor Doktor
         {
             get { return doktor; }
             set { doktor = value; }
         }
 
-        public ZakazivanjeTermina(Doctor d, MedicalRecord mr, int dan, string vreme, DateTime weekBegin, ObservableCollection<Termini> t)
+        public ZakazivanjeTermina(Hospital.Model.Doctor d, MedicalRecord mr, int dan, string vreme, DateTime weekBegin, ObservableCollection<Termini> t)
         {
             InitializeComponent();
             this.DataContext = this;
