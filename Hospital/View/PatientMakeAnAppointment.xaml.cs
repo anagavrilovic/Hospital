@@ -52,16 +52,16 @@ namespace Hospital.View
                     {
                         appTemp.DoctrosNameSurname = patientSettings.ChosenDoctor;
                         appTemp.IDDoctor = doctorStorage.GetIDByNameSurname(patientSettings.ChosenDoctor);
-                        Doctor doc = doctorStorage.GetOne(appTemp.IDDoctor);
+                        Hospital.Model. Doctor doc = doctorStorage.GetOne(appTemp.IDDoctor);
                         appTemp.Room = roomStorage.GetOne(doc.RoomID);
                         if (!aps.ExistByTime(varVreme, appTemp.IDDoctor)) { Lista.Add(appTemp); }
                     }
                     else
                     {
-                        ObservableCollection<Doctor> doctors = doctorStorage.GetAll();
+                        ObservableCollection<Hospital.Model.Doctor> doctors = doctorStorage.GetAll();
                         Boolean first = true;
                         
-                        foreach(Doctor d in doctors)
+                        foreach(Hospital.Model.Doctor d in doctors)
                         {
                             if (aps.ExistByTime(varVreme, d.PersonalID)) continue;
                                 if (first)

@@ -25,8 +25,8 @@ namespace Hospital.View
     {
         private Examination pregled;
 
-        private Doctor doktor;
-        private Appointment appointment;
+        private Hospital.Model.Doctor doktor;
+        public Appointment appointment;
         private Frame frameKarton;
         private Frame frameAnamnesis;
         private Frame frameDiagnosis;
@@ -37,7 +37,7 @@ namespace Hospital.View
         private Diagnosis dia;
         private MakeApointment ma;
         private Terapija th;
-        public Doctor Doktor
+        public Hospital.Model.Doctor Doktor
         {
             get { return doktor; }
             set
@@ -68,7 +68,7 @@ namespace Hospital.View
         {
             appointment = a;
             pregled = new Examination();
-            Doktor = new Doctor();
+            Doktor = new Hospital.Model.Doctor();
             Doktor = dStorage.GetOne(a.IDDoctor);
             
             InitializeComponent();

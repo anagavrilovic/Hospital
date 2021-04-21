@@ -57,7 +57,7 @@ namespace Hospital.View
         private double _durationInHours;
         private DoctorStorage dStorage = new DoctorStorage();
 
-        public MakeApointment(Doctor d,string patientId)
+        public MakeApointment(Hospital.Model.Doctor d,string patientId)
         {
             Appointments = new ObservableCollection<Appointment>();
             InitializeComponent();
@@ -92,7 +92,7 @@ namespace Hospital.View
             aStorage = new AppointmentStorage();
             foreach (Appointment a in aStorage.GetAll())
             {
-                Doctor d = dStorage.GetOne(a.IDDoctor);
+                Hospital.Model.Doctor d = dStorage.GetOne(a.IDDoctor);
                 if (d.Specialty.Equals((DoctorSpecialty)ComboBox.SelectedItem))
                 {
                     Appointments.Add(a);

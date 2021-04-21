@@ -108,55 +108,58 @@
     <Compile Include="View\AddMedicalSupply.xaml.cs">
       <DependentUpon>AddMedicalSupply.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doctor\Anamnesis.xaml.cs">
+    <Compile Include="View\Doktor\Anamnesis.xaml.cs">
       <DependentUpon>Anamnesis.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doctor\DetaljiPregleda.xaml.cs">
+    <Compile Include="View\Doktor\DetaljiPregleda.xaml.cs">
       <DependentUpon>DetaljiPregleda.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doctor\Diagnosis.xaml.cs">
+    <Compile Include="View\Doktor\Diagnosis.xaml.cs">
       <DependentUpon>Diagnosis.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doctor\DoktorGlavnaStranica.xaml.cs">
+    <Compile Include="View\Doktor\DoktorGlavnaStranica.xaml.cs">
       <DependentUpon>DoktorGlavnaStranica.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doctor\DoktorGlavniProzor.xaml.cs">
+    <Compile Include="View\Doktor\DoktorGlavniProzor.xaml.cs">
       <DependentUpon>DoktorGlavniProzor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doctor\DoktorKarton.xaml.cs">
+    <Compile Include="View\Doktor\DoktorKarton.xaml.cs">
       <DependentUpon>DoktorKarton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doctor\DoktorObavestenja.xaml.cs">
+    <Compile Include="View\Doktor\DoktorObavestenja.xaml.cs">
       <DependentUpon>DoktorObavestenja.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EditMedicalSupply.xaml.cs">
       <DependentUpon>EditMedicalSupply.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doctor\IzmenaTermina.xaml.cs">
+    <Compile Include="View\Doktor\IzmenaTermina.xaml.cs">
       <DependentUpon>IzmenaTermina.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doctor\KalendarTermini.xaml.cs">
+    <Compile Include="View\Doktor\KalendarTermini.xaml.cs">
       <DependentUpon>KalendarTermini.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doctor\KartonDoktorStranica.xaml.cs">
+    <Compile Include="View\Doktor\KartonDoktorStranica.xaml.cs">
       <DependentUpon>KartonDoktorStranica.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doctor\KreiranjeTermina.xaml.cs">
+    <Compile Include="View\Doktor\KreiranjeTermina.xaml.cs">
       <DependentUpon>KreiranjeTermina.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doctor\LekListBox.xaml.cs">
+    <Compile Include="View\Doktor\LekListBox.xaml.cs">
       <DependentUpon>LekListBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doctor\PacijentListBox.xaml.cs">
+    <Compile Include="View\Doktor\Lekovi.xaml.cs">
+      <DependentUpon>Lekovi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Doktor\PacijentListBox.xaml.cs">
       <DependentUpon>PacijentListBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doctor\PregledTermina.xaml.cs">
+    <Compile Include="View\Doktor\PregledTermina.xaml.cs">
       <DependentUpon>PregledTermina.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doctor\Terapija.xaml.cs">
+    <Compile Include="View\Doktor\Terapija.xaml.cs">
       <DependentUpon>Terapija.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doctor\Termin.xaml.cs">
+    <Compile Include="View\Doktor\Termin.xaml.cs">
       <DependentUpon>Termin.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\DodajObavestenje.xaml.cs">
@@ -284,73 +287,77 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Doctor\Anamnesis.xaml">
+    <Page Include="View\Doktor\Anamnesis.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doctor\DetaljiPregleda.xaml">
+    <Page Include="View\Doktor\DetaljiPregleda.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doctor\Diagnosis.xaml">
+    <Page Include="View\Doktor\Diagnosis.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doctor\DoktorGlavnaStranica.xaml">
+    <Page Include="View\Doktor\DoktorGlavnaStranica.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doctor\DoktorGlavniProzor.xaml">
+    <Page Include="View\Doktor\DoktorGlavniProzor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doctor\DoktorKarton.xaml">
+    <Page Include="View\Doktor\DoktorKarton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doctor\DoktorObavestenja.xaml">
+    <Page Include="View\Doktor\DoktorObavestenja.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doctor\IzmenaTermina.xaml">
+    <Page Include="View\Doktor\IzmenaTermina.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doctor\KalendarTermini.xaml">
+    <Page Include="View\Doktor\KalendarTermini.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doctor\KartonDoktorStranica.xaml">
+    <Page Include="View\Doktor\KartonDoktorStranica.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doctor\KreiranjeTermina.xaml">
+    <Page Include="View\Doktor\KreiranjeTermina.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doctor\LekListBox.xaml">
+    <Page Include="View\Doktor\LekListBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doctor\PacijentListBox.xaml">
+    <Page Include="View\Doktor\Lekovi.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doctor\PregledTermina.xaml">
+    <Page Include="View\Doktor\PacijentListBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doctor\Terapija.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Doctor\Termin.xaml">
+    <Page Include="View\Doktor\PregledTermina.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Secretary\DodajObavestenje.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Doktor\Terapija.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Doktor\Termin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Secretary\IzmenaObavestenja.xaml">
       <SubType>Designer</SubType>
@@ -592,6 +599,8 @@
     <Resource Include="Icon\view.png" />
     <Resource Include="Icon\menu.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Icon\medicals.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-        Title="LekListBox" Height="450" Width="450"
+        Title="LekListBox"
         Background="#FFDCE6ED" WindowStartupLocation="CenterOwner">
     <DockPanel>
         <DockPanel DockPanel.Dock="Top">
@@ -18,7 +18,12 @@
                 </Button>
             </WrapPanel>
         </DockPanel>
-        <StackPanel Orientation="Vertical">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Margin="40,20,0,10" Width="150" Height="20">Dana za konzumiranje:</TextBlock>
                 <ComboBox x:Name="danaZaK" Width="40" Height="20" Margin="0,25,20,20" Text="{Binding Dana, Mode=OneWayToSource}" SelectionChanged="danaZaK_SelectionChanged"/>
@@ -37,6 +42,12 @@
             </StackPanel>
             <ListBox Name="listBox" Margin="40,20,40,40" MouseDoubleClick="listBox_MouseDoubleClick" Height="200" IsSynchronizedWithCurrentItem="True"></ListBox>
         </StackPanel>
-
+            <StackPanel Orientation="Vertical" Grid.Column="1">
+                <Label Content="Način upotrebe leka:" FontSize="20"></Label>
+                <ScrollViewer CanContentScroll="True" Height="300">
+                    <TextBox Name="textBox" TextWrapping="Wrap" AcceptsReturn="True" FontSize="15" Text="{Binding Text, Mode=TwoWay}"></TextBox>
+                </ScrollViewer>
+            </StackPanel>
+        </Grid>
     </DockPanel>
 </Window>

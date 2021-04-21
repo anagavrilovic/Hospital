@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace Hospital
+namespace Hospital.Model
 {
    public class Doctor : User
    {

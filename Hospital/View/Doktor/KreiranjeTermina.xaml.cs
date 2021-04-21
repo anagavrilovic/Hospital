@@ -22,7 +22,7 @@ namespace Hospital.View
   
     public partial class KreiranjeTermina : Window,INotifyPropertyChanged
     {
-        private ObservableCollection<Doctor> doktori;
+        private ObservableCollection<Hospital.Model.Doctor> doktori;
         private Appointment termin;
         public Appointment Termin { get => termin; set => termin = value; } 
         private Room soba;
@@ -58,8 +58,8 @@ namespace Hospital.View
             }
 
         }
-        private Doctor doktor;
-        public Doctor Doktor
+        private Hospital.Model.Doctor doktor;
+        public Hospital.Model.Doctor Doktor
         {
             get { return doktor; }
             set
@@ -81,7 +81,7 @@ namespace Hospital.View
             }
 
         }
-        public ObservableCollection<Doctor> Doktori  
+        public ObservableCollection<Hospital.Model.Doctor> Doktori  
             {
                 get{ return doktori;}
                 set {
@@ -124,7 +124,7 @@ namespace Hospital.View
             Pacijent = new Patient();
             Pacijent = (mStorage.GetByPatientID(id)).Patient;
             Termin = new Appointment();
-            Doktor = new Doctor();
+            Doktor = new Hospital.Model.Doctor();
             for (DateTime tm = time.AddHours(0); tm < time.AddHours(24); tm = tm.AddMinutes(30))
             {
                 vreme.Items.Add(tm.ToShortTimeString());
@@ -164,13 +164,26 @@ namespace Hospital.View
                 Termin.IDpatient = Pacijent.PersonalID;
                 Termin.patientSurname = Pacijent.LastName;
                 Termin.DateTime = Date.Date.Add(DateTime.Parse(vremeTermin).TimeOfDay);
+                DateTime apStart = Date.Date.Add(DateTime.Parse(vremeTermin).TimeOfDay);
                 double v=double.Parse(TrajanjeMinuti);
                 Termin.DurationInHours=v / 60;
-                    
-                Random random = new Random();
+                DateTime apEnd = apStart.AddMinutes(v);    
                 Termin.IDDoctor = Doktor.PersonalID;
+                foreach(Appointment a in storage.GetAll())
+                {
+                    if (a.IDDoctor.Equals(Doktor.PersonalID))
+                    {
+                        double d = a.DurationInHours / 60;
+                        bool overlap = a.DateTime < apStart && a.DateTime.AddMinutes(d) < apEnd;
+                        if (overlap)
+                        {
+                            MessageBox.Show("Preklapaju se termini");
+                            return;
+                        }
+                    }
+                }
                 Termin.DoctrosNameSurname = Doktor.FirstName + " " + Doktor.LastName;
-                Termin.IDAppointment = random.Next(0, 10000).ToString();
+                Termin.IDAppointment = storage.GetNewID();
                 foreach(Room r in rStorage.GetAll())
                 {
                     if(rdbPregled.IsChecked.Equals(true) && Doktor.RoomID.Equals(r.Id))
@@ -194,6 +207,7 @@ namespace Hospital.View
                 storage.Save(Termin);
                 foreach (Appointment a in storage.GetAll())
                 {
+
                     if (a.IDDoctor.Equals(Termin.IDDoctor))
                     {
                         list.Add(a);

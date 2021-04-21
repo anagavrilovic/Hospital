@@ -62,6 +62,17 @@ namespace Hospital
             }
         }
 
+        private string description;
+        public string Description
+        {
+            get => description;
+            set
+            {
+                description = value;
+                OnPropertyChanged("Description");
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string name)
@@ -133,6 +144,69 @@ namespace Hospital
         /// </summary>
         /// <pdGenerated>Default removeAll</pdGenerated>
         public void RemoveAllIngredient()
+        {
+            if (ingredient != null)
+                ingredient.Clear();
+        }
+
+        private System.Collections.Generic.List<Medicine> medicines;
+
+
+        /// <summary>
+        /// Property for collection of Ingredient
+        /// </summary>
+        /// <pdGenerated>Default opposite class collection property</pdGenerated>
+        public System.Collections.Generic.List<Medicine> Medicines
+        {
+            get
+            {
+                if (medicines == null)
+                    medicines = new System.Collections.Generic.List<Medicine>();
+                return medicines;
+            }
+            set
+            {
+                RemoveAllMedicine();
+                if (value != null)
+                {
+                    foreach (Medicine oIngredient in value)
+                        AddMedicine(oIngredient);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Add a new Ingredient in the collection
+        /// </summary>
+        /// <pdGenerated>Default Add</pdGenerated>
+        public void AddMedicine(Medicine medicine)
+        {
+            if (medicine == null)
+                return;
+            if (this.medicines == null)
+                this.medicines = new System.Collections.Generic.List<Medicine>();
+            if (!this.medicines.Contains(medicine))
+                this.medicines.Add(medicine);
+        }
+
+        /// <summary>
+        /// Remove an existing Ingredient from the collection
+        /// </summary>
+        /// <pdGenerated>Default Remove</pdGenerated>
+        public void RemoveMedicine(Medicine medicine)
+        {
+            if (medicine == null)
+                return;
+            if (this.medicines != null)
+                if (this.medicines.Contains(medicine))
+                    this.medicines.Remove(medicine);
+        }
+
+        /// <summary>
+        /// Remove all instances of Ingredient from the collection
+        /// </summary>
+        /// <pdGenerated>Default removeAll</pdGenerated>
+        public void RemoveAllMedicine()
         {
             if (ingredient != null)
                 ingredient.Clear();

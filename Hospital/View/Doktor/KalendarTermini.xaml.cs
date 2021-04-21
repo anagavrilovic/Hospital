@@ -26,8 +26,8 @@ namespace Hospital.View
     {
         private DoctorStorage dStorage = new DoctorStorage();
         private AppointmentStorage aStorage = new AppointmentStorage();
-        private Doctor doctor = new Doctor();
-        public Doctor Doctor
+        private Hospital.Model.Doctor doctor = new Hospital.Model.Doctor();
+        public Hospital.Model.Doctor Doctor
         {
             get { return doctor; }
             set

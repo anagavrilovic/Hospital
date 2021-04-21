@@ -24,6 +24,7 @@ namespace Hospital.View
     {
         private ObservableCollection<Medicine> lekovi = new ObservableCollection<Medicine>();
         public int dani;
+        private MedicalRecordStorage mStorage = new MedicalRecordStorage();
         public event PropertyChangedEventHandler PropertyChanged;
         public ObservableCollection<Medicine> Lekovi
         {
@@ -64,7 +65,8 @@ namespace Hospital.View
 
         private void DodajLek(object sender, RoutedEventArgs e)
         {
-            LekListBox lb = new LekListBox(this);
+            MedicalRecord medicalRecord = mStorage.GetByPatientID(((Doctor_Examination)Window.GetWindow(this)).appointment.IDpatient);
+            LekListBox lb = new LekListBox(this,medicalRecord);
             lb.Owner = Window.GetWindow(this);
             lb.ShowDialog();
         }
