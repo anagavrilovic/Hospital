@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Hospital.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -36,47 +37,14 @@ namespace Hospital.View
             if(!string.IsNullOrEmpty(kolicinaTxt.Text))
 
             {
-                /*ObservableCollection<Inventory> inventar = new ObservableCollection<Inventory>();
-                InventoryStorage storage = new InventoryStorage();
-                inventar = storage.GetByRoomID(oznakaTxt.Text);
-
-                bool found = false;
-
-                foreach(Inventory i in inventar)
-                {
-                    if (i.Name.Equals(nazivTxt.Text))
-                    {
-                        i.Quantity += int.Parse(kolicinaTxt.Text);
-                        found = true;
-                        break;
-                    }
-                }
-
-                if(!found)
-                {
-                    Inventory newItem = new Inventory
-                    {
-                        Id = inventorySeleceted.Id,
-                        Name = nazivTxt.Text,
-                        Quantity = int.Parse(kolicinaTxt.Text),
-                        Price = inventorySeleceted.Price,
-                        RoomID = oznakaTxt.Text
-                    };
-                    storage.Save(newItem);
-                }
-
-                
-                this.inventorySeleceted.Quantity -= int.Parse(kolicinaTxt.Text);
-
-                using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + "inventory.json"))
-                {
-                    JsonSerializer serializer = new JsonSerializer();
-                    serializer.Serialize(file, InventoryStorage.inventory);
-                }*/
-
                 InventoryStorage istorage = new InventoryStorage();
-                String id = typeCB.Text;
-                istorage.UpdateInventory(this.inventorySeleceted, id, int.Parse(kolicinaTxt.Text));
+                String secondRoomID = typeCB.Text;
+                //DateTime date = datumPrebacivanja.SelectedDate.Value.Date;
+
+                TransferInventory transferInventory = new TransferInventory(inventorySeleceted.Id, int.Parse(kolicinaTxt.Text), 
+                                                                            inventorySeleceted.RoomID, secondRoomID);
+                //istorage.UpdateInventory(this.inventorySeleceted, id, int.Parse(kolicinaTxt.Text));
+                transferInventory.updateInventory();
                 StaticInventory.Inventory = istorage.GetByRoomID(this.inventorySeleceted.RoomID);
             }
 

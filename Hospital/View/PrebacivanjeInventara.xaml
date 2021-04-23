@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
+        xmlns:val="clr-namespace:Hospital.ValidationRulesManager"
         mc:Ignorable="d"
         Title="Prebacivanje Inventara" Height="750" Width="430"
         WindowStartupLocation="CenterOwner">
@@ -25,20 +26,26 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="0" Grid.Column="0" Background="white" Click="back" BorderBrush="white" Margin="0,0,10,0" >
+        <Button Grid.Row="0" Grid.Column="0" Background="white" Click="back" BorderBrush="white" Margin="0,0,0,0.2" >
             <Image  Source="/Icon/back.png" Margin="10,8,150,5"/>
         </Button>
         <Label Grid.Row="0" Grid.Column="1" Background="White" x:Name="Naslov"/>
-        <Image Source="/Icon/logo.png" Grid.Row="0" Grid.Column="1" Margin="10,5,5,2"/>
+        <Image Source="/Icon/logo.png" Grid.Row="0" Grid.Column="1" Margin="72,5,5,2.2"/>
 
-        <Label Content="RAZMENA INVENTARA" Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="77,15.4,28,0.4" FontWeight="Bold"/>
+        <Label Content="RAZMENA INVENTARA" Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="77,5.8,28,10.2" FontWeight="Bold"/>
 
-        <Label Content="Naziv stavke:"          Grid.Row="2" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
-        <Label Content="Količina:"              Grid.Row="4" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
-        <Label Content="ID odredišne sale:"     Grid.Row="6" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
-        
+        <Label Content="Naziv stavke:"          Grid.Row="2"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,9.8,5,0.2" />
+        <Label Content="Količina:"              Grid.Row="4"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,14.8,5,0.2" />
+        <Label Content="ID odredišne sale:"     Grid.Row="6"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,14.6,5,50.8" Grid.RowSpan="2" />
+        <Label Content="Datum prebacivanja:"    Grid.Row="8"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,14.2,200,0"   Grid.ColumnSpan="2" />
+        <Label Content="Vreme prebacivanja:"    Grid.Row="10" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,14.8,186,0.2" Grid.ColumnSpan="2"/>
+
         <TextBox x:Name="nazivTxt"      Grid.Row="3" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C"  />
         <TextBox x:Name="kolicinaTxt"   Grid.Row="5" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" />
         <!--" TextBox x:Name="oznakaTxt"     Grid.Row="7" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C"/-->
@@ -50,8 +57,35 @@
             <ComboBoxItem                   Content="M1"         Foreground="#FF2E83BF" FontSize="20" HorizontalContentAlignment="Center"/>
         </ComboBox>
 
-        <Button Grid.Column="0" Grid.Row="8" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,31.2,10,39.8" Click="accept" />
-        <Button Grid.Column="1" Grid.Row="8" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="10,31.2,28,39.8" Click="cancel" />
+        <DatePicker x:Name="datumPrebacivanja" Grid.Row="9"  Grid.ColumnSpan="2" Margin="30,5,28,5.2"/>
+        <TextBox    x:Name="vremePrebacivanja" Grid.Row="11" Grid.ColumnSpan="2" Margin="30,5,28,5.2">
+            <TextBox.Text>
+                <Binding RelativeSource="{RelativeSource Self}" Path="Text" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <val:EmptyField ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="vremePrebacivanja"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+
+        <Button Grid.Column="0" Grid.Row="12"  Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,31.6,10,27.8" Click="accept" />
+        <Button Grid.Column="1" Grid.Row="12"  Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="10,31.6,28,27.8" Click="cancel" />
 
     </Grid>
 </Window>

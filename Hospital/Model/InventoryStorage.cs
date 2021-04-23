@@ -41,11 +41,7 @@ namespace Hospital
 
             inventory.Add(parameter1);
 
-            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, inventory);
-            }
+            doSerialization();
         }
    
        public Boolean Delete(string id, string roomID)
@@ -56,11 +52,7 @@ namespace Hospital
                 if (i.Id.Equals(id) && i.RoomID.Equals(roomID))
                 {
                     inventory.Remove(i);
-                    using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
-                    {
-                        JsonSerializer serializer = new JsonSerializer();
-                        serializer.Serialize(file, inventory);
-                    }
+                    doSerialization();
                     return true;
                 }
             }
@@ -78,8 +70,20 @@ namespace Hospital
             }
             return null;
         }
-   
-       public ObservableCollection<Inventory> GetByRoomID(string id)
+
+        public Inventory GetOneByRoom(string id, string roomId)
+        {
+            foreach (Inventory i in inventory)
+            {
+                if (i.Id.Equals(id) && i.RoomID.Equals(roomId))
+                {
+                    return i;
+                }
+            }
+            return null;
+        }
+
+        public ObservableCollection<Inventory> GetByRoomID(string id)
        {
             inventory = GetAll();
             ObservableCollection<Inventory> ret = new ObservableCollection<Inventory>();
@@ -149,15 +153,20 @@ namespace Hospital
                     }
                 }
 
-                using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
-                {
-                    JsonSerializer serializer = new JsonSerializer();
-                    serializer.Serialize(file, inventory);
-                }
+                doSerialization();
             }
             else
             {
                 MessageBox.Show("Pogrešan unos količine!");
+            }
+        }
+
+        public void doSerialization()
+        {
+            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, inventory);
             }
         }
 

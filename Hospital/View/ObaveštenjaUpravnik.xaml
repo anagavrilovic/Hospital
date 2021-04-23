@@ -25,7 +25,7 @@
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
             <Button Background="#FF95C0F4" BorderBrush="#FF95C0F4" Click="back">
-                <Image Source="/Icon/back.png"  Margin="0,8,5,5"/>
+                <Image Source="/Icon/back.png"  Margin="0,0,5,0" Height="72" Width="59"/>
             </Button>
             <Label Content="OBAVEŠTENJA"    Margin="0,25,0,10.2" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" />
             <Image Source="/Icon/logo.png"  Margin="0,8,200,10.4"/>
@@ -60,11 +60,8 @@
                                 <TextBlock Grid.Column="2" Text="{Binding Date, StringFormat='{}{0: dd.MM.yyyy, HH:mm}', Mode=OneWay}" FontStyle="Italic" />
                             </Grid>
                             <ScrollViewer Grid.Row="1" Margin="5,5,5,5" VerticalScrollBarVisibility="Auto">
-                                <TextBlock Text="{Binding Content, Mode=OneWay}" FontSize="14" TextWrapping="Wrap" Width="400">
-
-                                </TextBlock>
+                                <TextBlock Text="{Binding Content, Mode=OneWay}" FontSize="14" TextWrapping="Wrap" Width="400"/>
                             </ScrollViewer>
-
                             <Separator Grid.Row="2"/>
                         </Grid>
                     </DataTemplate>

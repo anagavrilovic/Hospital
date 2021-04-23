@@ -86,6 +86,7 @@
     <Compile Include="Model\MedicineStorage.cs" />
     <Compile Include="Model\RegistratedUser.cs" />
     <Compile Include="Model\RegistratedUserStorage.cs" />
+    <Compile Include="Model\TransferInventory.cs" />
     <Compile Include="Model\UnitsType.cs" />
     <Compile Include="Model\UserType.cs" />
     <Compile Include="ValidacijeLekar\NaslovValidationRule.cs" />
