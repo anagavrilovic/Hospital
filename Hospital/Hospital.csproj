@@ -162,6 +162,9 @@
     <Compile Include="View\Doktor\Termin.xaml.cs">
       <DependentUpon>Termin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ObaveštenjaUpravnik.xaml.cs">
+      <DependentUpon>ObaveštenjaUpravnik.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Secretary\DodajObavestenje.xaml.cs">
       <DependentUpon>DodajObavestenje.xaml</DependentUpon>
     </Compile>
@@ -346,6 +349,10 @@
     <Page Include="View\Doktor\PregledTermina.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ObaveštenjaUpravnik.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Secretary\DodajObavestenje.xaml">
       <Generator>MSBuild:Compile</Generator>

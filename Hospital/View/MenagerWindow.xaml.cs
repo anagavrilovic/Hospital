@@ -31,6 +31,13 @@ namespace Hospital.View
             rw.Show();
         }
 
+        private void getNotifications(object sender, RoutedEventArgs e)
+        {
+            ObaveštenjaUpravnik obavestenja = new ObaveštenjaUpravnik();
+            obavestenja.Owner = Application.Current.MainWindow;
+            obavestenja.Show();
+        }
+
         private void getEmployees(object sender, RoutedEventArgs e)
         {
             //TODO
