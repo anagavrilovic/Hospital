@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -21,33 +22,83 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for PrebacivanjeInventara.xaml
     /// </summary>
-    public partial class PrebacivanjeInventara : Window
+    public partial class PrebacivanjeInventara : Window, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
         private Inventory inventorySeleceted;
+        private TransferInventory transferItem;
+
+        public Inventory InventorySeleceted
+        {
+            get { return inventorySeleceted;  }
+            set { inventorySeleceted = value; }
+        }
+
+
+        public TransferInventory TransferItem
+        {
+            get
+            {
+                return transferItem;
+            }
+
+            set
+            {
+                if (value != transferItem)
+                {
+                    transferItem = value;
+                   // OnPropertyChanged("TransferItem");
+                }
+            }
+        }
 
         public PrebacivanjeInventara(Inventory inv)
         {
             InitializeComponent();
+            this.DataContext = this;
             this.inventorySeleceted = inv;
-            
+            this.transferItem = new TransferInventory();
         }
 
         private void accept(object sender, RoutedEventArgs e)
         {
-            if(!string.IsNullOrEmpty(kolicinaTxt.Text))
+           
+            InventoryStorage istorage = new InventoryStorage();
+            String secondRoomID = roomID.Text;
+            transferItem.ItemID = inventorySeleceted.Id;
+            transferItem.FirstRoomID = inventorySeleceted.RoomID;
+            transferItem.SecondRoomID = roomID.Text;
+            transferItem.Date = datumPrebacivanja.SelectedDate.Value.Date;
+            transferItem.DateString = datumPrebacivanja.SelectedDate.Value.ToShortDateString();
 
+            
+            TimeSpan timeSpan = TimeSpan.ParseExact(transferItem.Time, "c", null);
+            transferItem.Date = transferItem.Date.Add(timeSpan);
+
+            if (transferItem.Date < DateTime.Now)
             {
-                InventoryStorage istorage = new InventoryStorage();
-                String secondRoomID = typeCB.Text;
-                //DateTime date = datumPrebacivanja.SelectedDate.Value.Date;
-
-                TransferInventory transferInventory = new TransferInventory(inventorySeleceted.Id, int.Parse(kolicinaTxt.Text), 
-                                                                            inventorySeleceted.RoomID, secondRoomID);
-                //istorage.UpdateInventory(this.inventorySeleceted, id, int.Parse(kolicinaTxt.Text));
-                transferInventory.updateInventory();
-                StaticInventory.Inventory = istorage.GetByRoomID(this.inventorySeleceted.RoomID);
+                MessageBox.Show("Niste ispravno uneli vreme!");
+                return;
             }
 
+            TransferInventoryStorage transferStorage = new TransferInventoryStorage();
+            transferStorage.Save(transferItem);
+            transferItem.doTransfer();
+        
+            //TransferInventory transferInventory = new TransferInventory(inventorySeleceted.Id, int.Parse(kolicinaTxt.Text), 
+             //                                                               inventorySeleceted.RoomID, secondRoomID);
+            //transferItem.updateInventory();
+            StaticInventory.Inventory = istorage.GetByRoomID(this.inventorySeleceted.RoomID);
+          
             this.Close();
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -20,8 +21,19 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for StaticInventory.xaml
     /// </summary>
-    public partial class StaticInventory : Window
+    public partial class StaticInventory : Window, INotifyPropertyChanged
     {
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
         private string id;
         private static ObservableCollection<Inventory> allInventory;
 
@@ -58,6 +70,16 @@ namespace Hospital.View
             Inventory = storage.GetByRoomID(id);
 
             InventoryCollection = CollectionViewSource.GetDefaultView(Inventory);
+
+            TransferInventoryStorage transferStorage = new TransferInventoryStorage();
+
+            foreach(TransferInventory ti in transferStorage.GetAll())
+            {
+                if(ti.Date < DateTime.Now)
+                {
+                    ti.doTransfer();
+                }
+            }
         }
 
         private void searchInventory(object sender, TextChangedEventArgs e)
@@ -141,7 +163,7 @@ namespace Hospital.View
             {
                 PrebacivanjeInventara transfer = new PrebacivanjeInventara(selectedItem);
                 transfer.Owner = Application.Current.MainWindow;
-                transfer.nazivTxt.Text = selectedItem.Name;
+                transfer.nazivTxt.Text = selectedItem.Id + "-" + selectedItem.Name;
                 transfer.Show();
             }
         }
@@ -150,5 +172,6 @@ namespace Hospital.View
         {
             this.Close();
         }
+
     }
 }

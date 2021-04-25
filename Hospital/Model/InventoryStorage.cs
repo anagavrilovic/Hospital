@@ -99,68 +99,7 @@ namespace Hospital
             return ret;
         }
    
-       public void UpdateInventory(Inventory fromFirstRoom, string secondRoomID, int quantity)
-       {
-            if (fromFirstRoom.RoomID.Equals(secondRoomID))
-            {
-                return;
-            }
-
-            if (fromFirstRoom.Quantity >= quantity)
-            {
-                ObservableCollection<Inventory> inventar = new ObservableCollection<Inventory>();
-                inventar = this.GetByRoomID(secondRoomID);
-
-                bool found = false;
-
-                foreach (Inventory i in inventar)
-                {
-                    if (i.Name.ToLower().Equals(fromFirstRoom.Name.ToLower()))
-                    {
-                        i.Quantity += quantity;
-                        found = true;
-                        break;
-                    }
-                }
-
-                if (!found)
-                {
-                    Inventory newItem = new Inventory
-                    {
-                        Id = fromFirstRoom.Id,
-                        Name = fromFirstRoom.Name,
-                        Quantity = quantity,
-                        Price = fromFirstRoom.Price,
-                        RoomID = secondRoomID
-                    };
-                    inventory.Add(newItem);
-                }
-
-
-                foreach (Inventory i in StaticInventory.Inventory)
-                {
-                    if (i.Id.Equals(fromFirstRoom.Id) && i.RoomID.Equals(fromFirstRoom.RoomID))
-                    {
-                        i.Quantity -= quantity;
-                    }
-                }
-
-                foreach (Inventory i in inventory)
-                {
-                    if (i.Id.Equals(fromFirstRoom.Id) && i.RoomID.Equals(fromFirstRoom.RoomID))
-                    {
-                        i.Quantity -= quantity;
-                    }
-                }
-
-                doSerialization();
-            }
-            else
-            {
-                MessageBox.Show("Pogrešan unos količine!");
-            }
-        }
-
+      
         public void doSerialization()
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))

@@ -6,17 +6,21 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
 namespace Hospital.Model
 {
-    class TransferInventory : INotifyPropertyChanged
+    public class TransferInventory : INotifyPropertyChanged
     {
         private string itemID;
         private int quantity;
         private string firstRoomID;
         private string secondRoomID;
+        private DateTime date;
+        private string dateString;
+        private string time;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -96,6 +100,62 @@ namespace Hospital.Model
             }
         }
 
+        public DateTime Date
+        {
+            get
+            {
+                return date;
+            }
+
+            set
+            {
+                if (value != date)
+                {
+                    date = value;
+                    OnPropertyChanged("Date");
+                }
+            }
+        }
+
+        public string DateString
+        {
+            get
+            {
+                return dateString;
+            }
+
+            set
+            {
+                if (value != dateString)
+                {
+                    dateString = value;
+                    OnPropertyChanged("DateString");
+                }
+            }
+        }
+
+        public string Time
+        {
+            get
+            {
+                return time;
+            }
+
+            set
+            {
+                if (value != time)
+                {
+                    time = value;
+                    OnPropertyChanged("Time");
+                }
+            }
+        }
+
+        public TransferInventory()
+        {
+
+        }
+
         public TransferInventory(string itemId, int quantity, string firstRoomID, string secondRoomID)
         {
             this.itemID = itemId;
@@ -104,9 +164,32 @@ namespace Hospital.Model
             this.secondRoomID = secondRoomID;
         }
 
+        public void doTransfer()
+        {
+           // TransferInventoryStorage transferStorage = new TransferInventoryStorage();
+           // transferStorage.Save(this);
+            Task task = new Task(() => this.waitUntilChosenDate());
+            task.Start();
+        }
+
+        public void waitUntilChosenDate()
+        {
+            TimeSpan timeSpan = this.Date.Subtract(DateTime.Now);
+
+            if (Date > DateTime.Now)
+            {
+                Thread.Sleep(timeSpan);
+            }
+            else
+            {
+                Thread.Sleep(0);
+            }
+
+            updateInventory();
+        }
+
         public void updateInventory()
         {
-
             InventoryStorage inventoryStorage = new InventoryStorage();
             Inventory inventoryItem = inventoryStorage.GetOneByRoom(itemID, firstRoomID);
 
@@ -163,10 +246,17 @@ namespace Hospital.Model
                 }
 
                 inventoryStorage.doSerialization();
+
+                TransferInventoryStorage transferStorage = new TransferInventoryStorage();
+                transferStorage.Delete(this);
+
+                InventoryStorage istorage = new InventoryStorage();
+                StaticInventory.Inventory = istorage.GetByRoomID(this.FirstRoomID);
             }
             else
             {
                 MessageBox.Show("Pogrešan unos količine!");
+                return;
             }
         }
     }

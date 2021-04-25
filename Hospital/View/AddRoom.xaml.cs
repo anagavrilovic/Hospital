@@ -40,7 +40,7 @@ namespace Hospital.View
             RoomStorage rs = new RoomStorage();
             rs.Save(new Room { Id = tempId, Name = tempName, Floor = tempFloor, IsAvaliable = tempFree, Type = tempType });
             RoomsWindow.Rooms = RoomStorage.rooms;
-           // RoomsWindow.Rooms.Add(new Room { Id = tempId, Name = tempName, Floor = tempFloor, IsAvaliable = tempFree, Type = tempType });
+
             this.Close();
         }
 
