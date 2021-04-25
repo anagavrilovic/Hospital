@@ -9,7 +9,7 @@ namespace Hospital
 {
     public class Ingredient
     {
-        public string name;
+        private string name;
 
         public string Name
         {

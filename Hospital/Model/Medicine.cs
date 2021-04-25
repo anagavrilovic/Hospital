@@ -149,28 +149,28 @@ namespace Hospital
                 ingredient.Clear();
         }
 
-        private System.Collections.Generic.List<Medicine> medicines;
+        private System.Collections.Generic.List<string> replacementMedicineIDs;
 
 
         /// <summary>
         /// Property for collection of Ingredient
         /// </summary>
         /// <pdGenerated>Default opposite class collection property</pdGenerated>
-        public System.Collections.Generic.List<Medicine> Medicines
+        public System.Collections.Generic.List<string> ReplacementMedicineIDs
         {
             get
             {
-                if (medicines == null)
-                    medicines = new System.Collections.Generic.List<Medicine>();
-                return medicines;
+                if (replacementMedicineIDs == null)
+                    replacementMedicineIDs = new System.Collections.Generic.List<string>();
+                return replacementMedicineIDs;
             }
             set
             {
-                RemoveAllMedicine();
+                RemoveAllMedicineID();
                 if (value != null)
                 {
-                    foreach (Medicine oIngredient in value)
-                        AddMedicine(oIngredient);
+                    foreach (string id in value)
+                        AddMedicineID(id);
                 }
             }
         }
@@ -179,37 +179,31 @@ namespace Hospital
         /// Add a new Ingredient in the collection
         /// </summary>
         /// <pdGenerated>Default Add</pdGenerated>
-        public void AddMedicine(Medicine medicine)
+        public void AddMedicineID(string medicineID)
         {
-            if (medicine == null)
+            if (medicineID == null)
                 return;
-            if (this.medicines == null)
-                this.medicines = new System.Collections.Generic.List<Medicine>();
-            if (!this.medicines.Contains(medicine))
-                this.medicines.Add(medicine);
+            if (this.ReplacementMedicineIDs == null)
+                this.ReplacementMedicineIDs = new System.Collections.Generic.List<string>();
+            if (!this.ReplacementMedicineIDs.Contains(medicineID))
+                this.ReplacementMedicineIDs.Add(medicineID);
         }
 
-        /// <summary>
-        /// Remove an existing Ingredient from the collection
-        /// </summary>
-        /// <pdGenerated>Default Remove</pdGenerated>
-        public void RemoveMedicine(Medicine medicine)
+
+        public void RemoveMedicineID(string medicineID)
         {
-            if (medicine == null)
+            if (medicineID == null)
                 return;
-            if (this.medicines != null)
-                if (this.medicines.Contains(medicine))
-                    this.medicines.Remove(medicine);
+            if (this.ReplacementMedicineIDs != null)
+                if (this.ReplacementMedicineIDs.Contains(medicineID))
+                    this.ReplacementMedicineIDs.Remove(medicineID);
         }
 
-        /// <summary>
-        /// Remove all instances of Ingredient from the collection
-        /// </summary>
-        /// <pdGenerated>Default removeAll</pdGenerated>
-        public void RemoveAllMedicine()
+
+        public void RemoveAllMedicineID()
         {
-            if (ingredient != null)
-                ingredient.Clear();
+            if (ReplacementMedicineIDs != null)
+                ReplacementMedicineIDs.Clear();
         }
     }
     class PretragaM : ObservableCollection<Medicine> { }

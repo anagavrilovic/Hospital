@@ -40,7 +40,7 @@ namespace Hospital
             DoSerialization(medicines);
         }
 
-        public Boolean Delete(int id)
+        public Boolean Delete(string id)
         {
               ObservableCollection<Medicine> records = GetAll();
               foreach(Medicine r in records)
@@ -67,6 +67,21 @@ namespace Hospital
             }
 
             return null;
+        }
+        public void EditMedicine(Medicine editedMedicine)
+        {
+            ObservableCollection<Medicine> medicines = GetAll();
+            foreach (Medicine medicine in medicines)
+            {
+                if (editedMedicine.ID.Equals(medicine.ID))
+                {
+                    medicines.Remove(medicine);
+                    medicines.Add(editedMedicine);
+                    DoSerialization(medicines);
+                    break;
+                }
+            }
+
         }
 
         public void DoSerialization(ObservableCollection<Medicine> medicines)
