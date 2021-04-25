@@ -19,7 +19,7 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for IzmenaKartona.xaml
     /// </summary>
-    public partial class IzmenaKartona : Window
+    public partial class IzmenaKartona : Page
     {
         private MedicalRecord record;
 
@@ -44,17 +44,17 @@ namespace Hospital.View
 
             switch (mr.Patient.MaritalStatus)
             {
-                case MaritalStatus.neozenjen: BracnoStanje.SelectedItem = neozenjen; break;
-                case MaritalStatus.ozenjen: BracnoStanje.SelectedItem = ozenjen; break;
-                case MaritalStatus.udovac: BracnoStanje.SelectedItem = udovac; break;
-                case MaritalStatus.razveden: BracnoStanje.SelectedItem = razveden; break;
+                case MaritalStatus.neozenjen: BracnoStanje.SelectedItem = Neozenjen; break;
+                case MaritalStatus.ozenjen: BracnoStanje.SelectedItem = Ozenjen; break;
+                case MaritalStatus.udovac: BracnoStanje.SelectedItem = Udovac; break;
+                case MaritalStatus.razveden: BracnoStanje.SelectedItem = Razveden; break;
             }
 
             switch (mr.Patient.Gender)
             {
-                case Genders.male: Pol.SelectedItem = muski; break;
-                case Genders.female: Pol.SelectedItem = zenski; break;
-                case Genders.other: Pol.SelectedItem = ostalo; break;
+                case Genders.male: Pol.SelectedItem = Muski; break;
+                case Genders.female: Pol.SelectedItem = Zenski; break;
+                case Genders.other: Pol.SelectedItem = Ostalo; break;
             }
 
             switch (mr.BloodType)
@@ -77,12 +77,9 @@ namespace Hospital.View
             {
                 NeButton.IsChecked = true;
             }
-
-            PasswordText.Password = mr.Patient.Password;
-
         }
 
-        private void BtnPotvrdi(object sender, RoutedEventArgs e)
+        private void BtnPotvrdiClick(object sender, RoutedEventArgs e)
         {
             ImeText.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             RoditeljText.GetBindingExpression(TextBox.TextProperty).UpdateSource();
@@ -101,8 +98,7 @@ namespace Hospital.View
             EmailText.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             UsernameText.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             KartonText.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-
-            Record.Patient.Password = PasswordText.Password;
+            PasswordText.GetBindingExpression(TextBox.TextProperty).UpdateSource();
 
             switch (BracnoStanje.SelectedIndex)
             {
@@ -142,12 +138,12 @@ namespace Hospital.View
 
             MedicalRecordStorage mrs = new MedicalRecordStorage();
             mrs.DoSerialization(Pacijenti);
-            this.Close();
+            NavigationService.Navigate(new PrikazPacijenata());
         }
 
-        private void BtnOdustani(object sender, RoutedEventArgs e)
+        private void BtnOdustaniClick(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new PrikazPacijenata());
         }
     }
 }

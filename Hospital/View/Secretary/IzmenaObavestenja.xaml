@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="IzmenaObavestenja" Height="665" Width="1070"
         Background="#FFD0DADD" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <ResourceDictionary Source="../../Resources/SecretaryResourceDictionary.xaml"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -57,8 +60,8 @@
 
 
         <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-            <Button Content="Potvrdi" Width="100" Height="30" Margin="0,0,10,0" Style="{StaticResource ButtonCalendar}" Click="BtnPotvrdiClick" />
-            <Button Content="Odustani" Width="100" Margin="10,0,0,0" Style="{StaticResource ButtonOdustani}" Click="BtnOdustaniClick" />
+            <Button Content="Potvrdi" Width="100" Height="30" Margin="0,0,10,0" Style="{StaticResource ButtonPotvrdiStyle}" Click="BtnPotvrdiClick" />
+            <Button Content="Odustani" Width="100" Margin="10,0,0,0" Style="{StaticResource ButtonOdustaniStyle}" Click="BtnOdustaniClick" />
         </StackPanel>
     </Grid>
 </Window>

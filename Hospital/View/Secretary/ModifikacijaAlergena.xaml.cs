@@ -20,7 +20,7 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for ModifikacijaAlergena.xaml
     /// </summary>
-    public partial class ModifikacijaAlergena : Window
+    public partial class ModifikacijaAlergena : Page
     {
         private ObservableCollection<string> lekovi = new ObservableCollection<string>();
         private ObservableCollection<string> sastojci = new ObservableCollection<string>();
@@ -109,16 +109,16 @@ namespace Hospital.View
 
         }
 
-        private void btnPotvrdi_Click(object sender, RoutedEventArgs e)
+        private void BtnPotvrdiClick(object sender, RoutedEventArgs e)
         {
             OstaloTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
 
             MedicalRecordStorage mrs = new MedicalRecordStorage();
             mrs.DoSerialization(Pacijenti);
-            this.Close();
+            NavigationService.Navigate(new PrikazPacijenata());
         }
 
-        private void btnOdustani_Click(object sender, RoutedEventArgs e)
+        private void BtnOtkaziClick(object sender, RoutedEventArgs e)
         {
             foreach(string lek in Mr.Allergen.MedicineNames.ToList<string>())
                 if (!StariLekovi.Contains(lek))
@@ -128,7 +128,7 @@ namespace Hospital.View
                 if (!StariSastojci.Contains(sastojak))
                     Mr.Allergen.IngredientNames.Remove(sastojak);
 
-            this.Close();
+            NavigationService.Navigate(new PrikazPacijenata());
         }
 
         private void ReadDrugsAndIngredients()

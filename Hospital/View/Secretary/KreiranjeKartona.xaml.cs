@@ -18,19 +18,9 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for KreiranjeKartona.xaml
-    /// </summary>
-    public partial class KreiranjeKartona : Window
+    public partial class KreiranjeKartona : Page
     {
-        private ObservableCollection<MedicalRecord> md = new ObservableCollection<MedicalRecord>();
         private MedicalRecord record = new MedicalRecord();
-
-        public ObservableCollection<MedicalRecord> Md
-        {
-            get { return md; }
-            set { md = value; }
-        }
 
         public MedicalRecord Record
         {
@@ -39,20 +29,14 @@ namespace Hospital.View
         }
 
 
-        public KreiranjeKartona(ObservableCollection<MedicalRecord> md)
+        public KreiranjeKartona()
         {
             InitializeComponent();
             this.DataContext = this;
-            if (md != null)
-            {
-                this.md = md;
-            }
         }
 
-        private void BtnPotvrdi(object sender, RoutedEventArgs e)
+        private void BtnPotvrdiClick(object sender, RoutedEventArgs e)
         {
-            Record.Patient.Password = PasswordText.Password;
-
             switch (BracnoStanje.SelectedIndex)
             {
                 case 0: Record.Patient.MaritalStatus = MaritalStatus.neozenjen; break;
@@ -89,19 +73,18 @@ namespace Hospital.View
                 Record.IsInsured = false;
             }
 
-            RegistratedUser ru = new RegistratedUser { Username = UsernameText.Text, Password = PasswordText.Password, Type = UserType.patient };
+            RegistratedUser ru = new RegistratedUser { Username = Record.Patient.Username, Password = Record.Patient.Password, Type = UserType.patient };
             RegistratedUserStorage rus = new RegistratedUserStorage();
             rus.Save(ru);
 
-            Md.Add(Record);
             MedicalRecordStorage mds = new MedicalRecordStorage();
             mds.Save(Record);
-            this.Close();
+            NavigationService.Navigate(new PrikazPacijenata());
         }
 
-        private void BtnOdustani(object sender, RoutedEventArgs e)
+        private void BtnOdustaniClick(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new PrikazPacijenata());
         }
 
     }

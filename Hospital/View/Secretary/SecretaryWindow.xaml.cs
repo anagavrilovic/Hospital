@@ -25,27 +25,70 @@ namespace Hospital.View
             InitializeComponent();
         }
 
-        private void PrikazPacijenata(object sender, RoutedEventArgs e)
+        private void NextBtnClick(object sender, RoutedEventArgs e)
         {
-            Content = new PrikazPacijenata();
+            if (Main.NavigationService.CanGoForward)
+                Main.NavigationService.GoForward();
+            /*else
+                NavigationService.Navigate(new HomeView());*/
         }
 
-        private void KreirajKarton(object sender, RoutedEventArgs e)
+        private void BackBtnClick(object sender, RoutedEventArgs e)
         {
-            var kk = new KreiranjeKartona(null);
-            kk.Show();
+            if (Main.NavigationService.CanGoBack)
+                Main.NavigationService.GoBack();
+            /*else
+                NavigationService.Navigate(new HomeView());*/
         }
 
-        private void KalendarClick(object sender, RoutedEventArgs e)
+        private void ExitBtnClick(object sender, RoutedEventArgs e)
         {
-            var kalendar = new Kalendar();
-            kalendar.Show();
+            Application.Current.Shutdown();
         }
 
-        private void ObavestenjaClick(object sender, RoutedEventArgs e)
+
+
+        /// <summary>
+        /// Eventi za dugmice za navigacioni bar
+        /// </summary>
+        private void ButtonPocetnaClick(object sender, RoutedEventArgs e)
         {
-            var obavestenja = new ObavestenjaSekretar();
-            obavestenja.Show();
+            
+        }
+
+        private void ButtonPacijentiClick(object sender, RoutedEventArgs e)
+        {
+            Main.Navigate(new PrikazPacijenata());
+        }
+
+        private void ButtonKalendarClick(object sender, RoutedEventArgs e)
+        {
+            Main.Navigate(new Kalendar());
+        }
+
+        private void ButtonHitanPregledClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonNaplataClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonObavestenjaClick(object sender, RoutedEventArgs e)
+        {
+            Main.Navigate(new ObavestenjaSekretar());
+        }
+
+        private void ButtonAnalitikaClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonNaseBolniceClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

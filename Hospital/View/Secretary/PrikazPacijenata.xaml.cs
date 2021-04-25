@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.View.Secretary;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -19,12 +20,13 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for PrikazPacijenata.xaml
     /// </summary>
-    public partial class PrikazPacijenata : UserControl
+    public partial class PrikazPacijenata : Page
     {
+        MedicalRecordStorage mrs = new MedicalRecordStorage();
+
         private ObservableCollection<MedicalRecord> _pacijenti = new ObservableCollection<MedicalRecord>();
         public ObservableCollection<MedicalRecord> Pacijenti { get => _pacijenti; set => _pacijenti = value; }
         
-        MedicalRecordStorage mrs = new MedicalRecordStorage();
 
         public PrikazPacijenata()
         {
@@ -33,43 +35,50 @@ namespace Hospital.View
             Pacijenti = mrs.GetAll();
         }    
 
-        private void KreirajKarton(object sender, RoutedEventArgs e)
+        private void NoviClick(object sender, RoutedEventArgs e)
         {
-            KreiranjeKartona kk = new KreiranjeKartona(Pacijenti);
-            kk.Show();
+            NavigationService.Navigate(new KreiranjeKartona());
         }
-
-        private void IzbrisiKarton(object sender, RoutedEventArgs e)
+        
+        private void IzmeniClick(object sender, RoutedEventArgs e)
         {
             if (PacijentiTable.SelectedItem == null)
             {
                 return;
             }
 
-            Pacijenti.Remove((MedicalRecord) PacijentiTable.SelectedItem);
-            mrs.DoSerialization(Pacijenti);
+            NavigationService.Navigate(new IzmenaKartona((MedicalRecord)PacijentiTable.SelectedItem, Pacijenti));
         }
 
-        private void IzmeniKarton(object sender, RoutedEventArgs e)
+        private void DetaljiClick(object sender, RoutedEventArgs e)
         {
             if (PacijentiTable.SelectedItem == null)
             {
                 return;
             }
 
-            var ik = new IzmenaKartona((MedicalRecord) PacijentiTable.SelectedItem, Pacijenti);
-            ik.Show();
+            NavigationService.Navigate(new DetaljiKarton((MedicalRecord)PacijentiTable.SelectedItem));
         }
 
-        private void Alergeni(object sender, RoutedEventArgs e)
+        private void BrisanjeClick(object sender, RoutedEventArgs e)
         {
             if (PacijentiTable.SelectedItem == null)
             {
                 return;
             }
 
-            var alergeni = new ModifikacijaAlergena((MedicalRecord)PacijentiTable.SelectedItem, Pacijenti);
-            alergeni.Show();
+            var obrisi = new IzbrisiPacijenta((MedicalRecord)PacijentiTable.SelectedItem, Pacijenti);
+            obrisi.Show();
+        }
+
+        private void AlergeniClick(object sender, RoutedEventArgs e)
+        {
+            if (PacijentiTable.SelectedItem == null)
+            {
+                return;
+            }
+
+            NavigationService.Navigate(new ModifikacijaAlergena((MedicalRecord)PacijentiTable.SelectedItem, Pacijenti));
         }
     }
 }

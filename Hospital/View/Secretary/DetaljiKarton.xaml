@@ -1,0 +1,168 @@
+﻿<Page x:Class="Hospital.View.Secretary.DetaljiKarton"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hospital.View.Secretary"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1065"
+      Title="DetaljiKarton" Background="{StaticResource BackgroundGray}">
+    <Page.Resources>
+        <ResourceDictionary Source="../../Resources/SecretaryResourceDictionary.xaml"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+            <TextBlock Text="PACIJENTI > Detalji o pacijentu" Style="{StaticResource TitleStyle}"/>
+            <!--<Separator Margin="15,0"/>-->
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,20,15,0">
+            <TextBlock Text="Broj zdravstvenog kartona:" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding Record.MedicalRecordID, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+        </StackPanel>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Margin="15,5,7,30" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Ime:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding Record.Patient.FirstName, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Ime jednog roditelja:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding Record.ParentName, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Prezime:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding Record.Patient.LastName, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Datum rođenja:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding Record.Patient.DateOfBirth, Mode=OneWay, StringFormat='{}{0: dd.MM.yyyy}'}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Ulica stanovanja:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding Record.Patient.Address.Street, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Broj:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding Record.Patient.Address.StreetNumber, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Mesto stanovanja:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding Record.Patient.Address.City.CityName, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Poštanski broj:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding Record.Patient.Address.City.PostalCode, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Opština:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding Record.Patient.Address.City.Township, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Država:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding Record.Patient.Address.City.Country.CountryName, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Broj zdrav. knjizice:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding Record.HealthCardNumber, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Broj lične karte:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding Record.Patient.CardID, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="JMBG:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding Record.Patient.PersonalID, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Kontakt telefon:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding Record.Patient.PhoneNumber, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="E-mail:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding Record.Patient.Email, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Bračno stanje:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding Record.Patient.MaritalStatus, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Pol:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding Record.Patient.Gender, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Krvna grupa:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding Record.BloodType, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Osiguran:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding Record.IsInsured, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Korisničko ime:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding Record.Patient.Username, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="1" Margin="7,5,15,30" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0">
+                    <StackPanel Margin="0,20" >
+                        <TextBlock Text="Alergičan na lek:" Style="{StaticResource KartoniTextBlock}"/>
+                        <ListBox x:Name="LekoviListBox" Margin="40,0" Width="430" Height="100">
+
+                        </ListBox>
+                    </StackPanel>
+
+                    <StackPanel Margin="0,20" >
+                        <TextBlock Text="Alergičan na sastojak:" Style="{StaticResource KartoniTextBlock}"/>
+                        <ListBox x:Name="SastojciListBox" Margin="40,0" Width="430" Height="100">
+
+                        </ListBox>
+                    </StackPanel>
+
+                    <StackPanel Margin="0,20" >
+                        <TextBlock Text="Ostalo:" Style="{StaticResource KartoniTextBlock}"/>
+                        <TextBox Margin="40,0" Width="430" Height="100" Style="{StaticResource KartoniTextBox}">
+
+                        </TextBox>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Page>

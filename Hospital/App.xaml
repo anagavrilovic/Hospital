@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:Hospital"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary Source="Resources/SecretaryResourceDictionary.xaml" />
+        <SolidColorBrush x:Key="BackgroundGray">#FFDCDCDC</SolidColorBrush>
     </Application.Resources>
 </Application>

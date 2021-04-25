@@ -1,4 +1,4 @@
-﻿<Window x:Class="Hospital.View.IzmenaKartona"
+﻿<Page x:Class="Hospital.View.IzmenaKartona"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,314 +6,308 @@
         xmlns:local="clr-namespace:Hospital.View"
         xmlns:val="clr-namespace:Hospital.ValidacijeSekretar"
         mc:Ignorable="d"
-        Title="IzmenaKartona" Height="665" Width="1070"    Background="#FFDAEBEE">
-    <Window.Resources>
-        <Style x:Key="cbTB" TargetType="{x:Type Control}">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=Gost, Path=IsChecked}" Value="True">
-                    <Setter Property="TextBox.IsEnabled" Value="False"/>
-                    <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding ElementName=Gost, Path=IsChecked}" Value="False">
-                    <Setter Property="TextBox.IsEnabled" Value="True"/>
-                    <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ValidationErrorTemplate}"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-        <Style x:Key="cbPB" TargetType="{x:Type PasswordBox}">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=Gost, Path=IsChecked}" Value="True">
-                    <Setter Property="PasswordBox.IsEnabled" Value="False"/>
-                    <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding ElementName=Gost, Path=IsChecked}" Value="False">
-                    <Setter Property="PasswordBox.IsEnabled" Value="True"/>
-                    <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ValidationErrorTemplate}"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-    </Window.Resources>
+        Title="IzmenaKartona" d:DesignHeight="700" d:DesignWidth="1065" Background="{StaticResource BackgroundGray}">
+    <Page.Resources>
+        <ResourceDictionary Source="../../Resources/SecretaryResourceDictionary.xaml"/>
+    </Page.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="120"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition Height="120"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="40"/>
-        </Grid.ColumnDefinitions>
 
-        <TextBlock Text="IZMENA KARTONA" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" FontSize="28" FontFamily="Segoe UI Semilight" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FF67898E" TextDecorations="Underline" Margin="0,0,0,10"/>
-
-        <TextBlock Text="Ime*:"                  Grid.Row="1" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Ime jednog roditelja*:" Grid.Row="2" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E" />
-        <TextBlock Text="Prezime*:"              Grid.Row="3" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Datum rođenja*:"        Grid.Row="4" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Ulica stanovanja*:"     Grid.Row="5" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Broj*:"                 Grid.Row="6" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Mesto stanovanja*:"     Grid.Row="7" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Poštanski broj*:"       Grid.Row="8" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Opština*:"              Grid.Row="9" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Država*:"               Grid.Row="10" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Broj zdrav. knjizice*:" Grid.Row="11" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-
-        <TextBlock Text="Broj lične karte*:"            Grid.Row="1" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="JMBG*:"                        Grid.Row="2" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Kontakt telefon*:"             Grid.Row="3" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="E-mail*:"                      Grid.Row="4" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Bračno stanje*:"               Grid.Row="5" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Pol*:"                         Grid.Row="6" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Krvna grupa*:"                 Grid.Row="7" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Osiguran*:"                    Grid.Row="8" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Korisničko ime*:"              Grid.Row="9" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Lozinka*:"                     Grid.Row="10" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-        <TextBlock Text="Potvrda lozinke*:"             Grid.Row="11" Grid.Column="2" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,10" FontFamily="Segoe UI Symbol" Foreground="#FF67898E"/>
-
-        <TextBox x:Name="ImeText" Grid.Row="1" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
-            <TextBox.Text>
-                <Binding Path="Record.Patient.FirstName" Mode="TwoWay" UpdateSourceTrigger="Explicit" >
-                    <Binding.ValidationRules>
-                        <val:OnlyLettersValidationRule ValidationStep="RawProposedValue" />
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-
-        <TextBox x:Name="RoditeljText" Grid.Row="2" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
-            <TextBox.Text>
-                <Binding Path="Record.ParentName" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                    <Binding.ValidationRules>
-                        <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-
-        <TextBox x:Name="PrezimeText" Grid.Row="3" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
-            <TextBox.Text>
-                <Binding Path="Record.Patient.LastName" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                    <Binding.ValidationRules>
-                        <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-
-        <DatePicker x:Name="Datum" Grid.Row="4" Grid.Column="1" Background="White" Margin="3,3,3,10" Text="{Binding Path=Record.Patient.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=Explicit}" FirstDayOfWeek="Monday" Validation.ErrorTemplate="{x:Null}"/>
-        
-        <TextBox x:Name="AdresaText" Grid.Row="5" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
-            <TextBox.Text>
-                <Binding Path="Record.Patient.Address.Street" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                    <Binding.ValidationRules>
-                        <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-
-        <TextBox x:Name="BrojUliceText" Grid.Row="6" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Text="{Binding Record.Patient.Address.StreetNumber}" Style="{StaticResource cbTB}">
-            
-        </TextBox>
-
-        <TextBox x:Name="MestoText" Grid.Row="7" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
-            <TextBox.Text>
-                <Binding Path="Record.Patient.Address.City.CityName" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                    <Binding.ValidationRules>
-                        <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-
-        <TextBox x:Name="PostanskiBrojText" Grid.Row="8" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
-            <TextBox.Text>
-                <Binding Path="Record.Patient.Address.City.PostalCode" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                    <Binding.ValidationRules>
-                        <val:PostalCodeValidationRule ValidationStep="RawProposedValue"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-
-        <TextBox x:Name="OpstinaText" Grid.Row="9" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
-            <TextBox.Text>
-                <Binding Path="Record.Patient.Address.City.Township" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                    <Binding.ValidationRules>
-                        <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-
-        <TextBox x:Name="DrzavaText" Grid.Row="10" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
-            <TextBox.Text>
-                <Binding Path="Record.Patient.Address.City.Country.CountryName" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                    <Binding.ValidationRules>
-                        <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-
-        <TextBox x:Name="KnjizicaText" Grid.Row="11" Grid.Column="1" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
-            <TextBox.Text>
-                <Binding Path="Record.HealthCardNumber" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                    <Binding.ValidationRules>
-                        <val:OnlyDigitsValidationRuleHealthCardID ValidationStep="RawProposedValue"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-
-        <TextBox x:Name="LicnaText" Grid.Row="1" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
-            <TextBox.Text>
-                <Binding Path="Record.Patient.CardID" Mode="TwoWay" UpdateSourceTrigger="Explicit" >
-                    <Binding.ValidationRules>
-                        <val:OnlyDigitsValidationRuleCardID ValidationStep="RawProposedValue"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-
-        <TextBox x:Name="JMBGText" Grid.Row="2" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
-            <TextBox.Text>
-                <Binding Path="Record.Patient.PersonalID" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                    <Binding.ValidationRules>
-                        <val:OnlyDigitsValidationRulePersonalID ValidationStep="RawProposedValue"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-
-        <TextBox x:Name="TelefonText" Grid.Row="3" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
-            <TextBox.Text>
-                <Binding Path="Record.Patient.PhoneNumber" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                    <Binding.ValidationRules>
-                        <val:OnlyDigitsValidationRulePhoneNumber ValidationStep="RawProposedValue"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-
-        <TextBox x:Name="EmailText" Grid.Row="4" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
-            <TextBox.Text>
-                <Binding Path="Record.Patient.Email" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                    <Binding.ValidationRules>
-                        <val:EmailValidationRule ValidationStep="RawProposedValue"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-        
-        <ComboBox x:Name="BracnoStanje" Grid.Row="5" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
-            <ComboBoxItem x:Name="neozenjen" IsSelected="True">neoženjen - neudata</ComboBoxItem>
-            <ComboBoxItem x:Name="ozenjen">oženjen - udata</ComboBoxItem>
-            <ComboBoxItem x:Name="udovac">udovac - udovica</ComboBoxItem>
-            <ComboBoxItem x:Name="razveden">razveden - razvedena</ComboBoxItem>
-        </ComboBox>
-        
-        <ComboBox x:Name="Pol" Grid.Row="6" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
-            <ComboBoxItem x:Name="muski" IsSelected="True">muški</ComboBoxItem>
-            <ComboBoxItem x:Name="zenski">ženski</ComboBoxItem>
-            <ComboBoxItem x:Name="ostalo">ostalo</ComboBoxItem>
-        </ComboBox>
-
-        <ComboBox x:Name="KrvnaGrupa" Grid.Row="7" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbTB}">
-            <ComboBoxItem x:Name="Aplus"  Content="A+"/>
-            <ComboBoxItem x:Name="Aneg"   Content="A-"/>
-            <ComboBoxItem x:Name="Bplus"  Content="B+"/>
-            <ComboBoxItem x:Name="Bneg"   Content="B+"/>
-            <ComboBoxItem x:Name="ABplus" Content="AB+"/>
-            <ComboBoxItem x:Name="ABneg"  Content="AB-"/>
-            <ComboBoxItem x:Name="Oplus"  Content="O+"/>
-            <ComboBoxItem x:Name="Oneg"   Content="O-"/>
-        </ComboBox>
-
-        <StackPanel Orientation="Horizontal" Grid.Row="8" Grid.Column="3">
-            <RadioButton x:Name="DaButton" Content="DA" Margin="35,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF67898E" Style="{StaticResource cbTB}"/>
-            <RadioButton x:Name="NeButton" Content="NE" Margin="15,0,35,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF67898E" Style="{StaticResource cbTB}"/>
+        <StackPanel>
+            <TextBlock Text="PACIJENTI > Izmena pacijenta" Style="{StaticResource TitleStyle}"/>
+            <!--<Separator Margin="15,0"/>-->
         </StackPanel>
 
-        <TextBox x:Name="UsernameText" Grid.Row="9" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10"  Text="{Binding Path=Record.Patient.Username, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}">
-            
-        </TextBox>
-
-        <PasswordBox x:Name="PasswordText" Grid.Row="10" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbPB}" >
-            
-        </PasswordBox>
-
-        <PasswordBox x:Name="PasswordReentered" Grid.Row="11" Grid.Column="3" BorderThickness="1" Margin="3,3,3,10" Style="{StaticResource cbPB}">
-            
-        </PasswordBox>
-
-        <Grid Grid.Row="0" Grid.Column="3" Margin="0">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="Br. kartona:" VerticalAlignment="Center" Margin="0,0,5,0" FontFamily="Segoe UI Symbol" FontSize="11" Foreground="#FF688D9E" HorizontalAlignment="Right" />
-            <TextBox x:Name="KartonText" Grid.Row="0" Grid.Column="1" Margin="2,45" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
-                <TextBox.Text>
-                    <Binding Path="Record.MedicalRecordID" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                        <Binding.ValidationRules>
-                            <val:OnlyDigitsValidationRuleRecordID ValidationStep="RawProposedValue"/>
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
+            <CheckBox x:Name="Gost" Content="GOSTUJUĆI PACIJENT" Style="{StaticResource CheckBoxStyle}" Margin="15,40,0,0" 
+                      IsChecked="{Binding Path=Record.Patient.IsGuest, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+           
+
+            <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,40,15,0">
+                <TextBlock Text="Broj zdravstvenog kartona*:" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Center"/>
+                <TextBox x:Name="KartonText" Width="100" Height="20" Margin="15,0,0,0" Style="{StaticResource TextBoxStyle}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                    <TextBox.Text>
+                        <Binding Path="Record.MedicalRecordID" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <val:OnlyDigitsValidationRuleRecordID ValidationStep="RawProposedValue"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </StackPanel>
+
         </Grid>
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <CheckBox x:Name="Gost" Content="GOSTUJUĆI PACIJENT" FontSize="12" FontFamily="Segoe UI Symbol" HorizontalAlignment="Left" Margin="40,0,0,0" Foreground="#FF67898E" IsChecked="{Binding Path=Record.Patient.IsGuest, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
-        </StackPanel>
+        <Border Grid.Row="2" Margin="15,5,15,15" CornerRadius="10" Background="{StaticResource MainWhite}">
+            <Grid Margin="0,50,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition Height="110"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
-        <Button x:Name="btnPotvrdi" Grid.Row="12" Grid.Column="1" Content="Potvrdi" Width="80" Height="25" HorizontalAlignment="Right" Margin="0,0,20,0" Background="#FF78A5AD" Foreground="White" FontFamily="Segoe UI Symbol" FontSize="14" Click="BtnPotvrdi">
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Setter Property="IsEnabled" Value="False"/>
-                    <Style.Triggers>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ImeText}" Value="False"/>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=RoditeljText}" Value="False"/>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=PrezimeText}" Value="False"/>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=Datum}" Value="False"/>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=AdresaText}" Value="False"/>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=MestoText}" Value="False"/>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=PostanskiBrojText}" Value="False"/>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=OpstinaText}" Value="False"/>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=DrzavaText}" Value="False"/>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=KnjizicaText}" Value="False"/>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=LicnaText}" Value="False"/>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=JMBGText}" Value="False"/>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=TelefonText}" Value="False"/>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=EmailText}" Value="False"/>
-                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=KartonText}" Value="False"/>
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="IsEnabled" Value="True"/>
-                        </MultiDataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
-        <Button x:Name="btnOduatani" Grid.Row="12" Grid.Column="2" Content="Odustani" Width="80" Height="25" HorizontalAlignment="Left" Margin="20,0,0,0" Background="White" Foreground="#FF67898E" FontFamily="Segoe UI Symbol" FontSize="14" Click="BtnOdustani"/>
+                <TextBlock Text="Ime*:"                  Grid.Row="0"  Grid.Column="0" Style="{StaticResource KartoniTextBlock}"/>
+                <TextBlock Text="Ime jednog roditelja*:" Grid.Row="1"  Grid.Column="0" Style="{StaticResource KartoniTextBlock}"/>
+                <TextBlock Text="Prezime*:"              Grid.Row="2"  Grid.Column="0" Style="{StaticResource KartoniTextBlock}"/>
+                <TextBlock Text="Datum rođenja*:"        Grid.Row="3"  Grid.Column="0" Style="{StaticResource KartoniTextBlock}"/>
+                <TextBlock Text="Ulica stanovanja*:"     Grid.Row="4"  Grid.Column="0" Style="{StaticResource KartoniTextBlock}"/>
+                <TextBlock Text="Broj*:"                 Grid.Row="5"  Grid.Column="0" Style="{StaticResource KartoniTextBlock}"/>
+                <TextBlock Text="Mesto stanovanja*:"     Grid.Row="6"  Grid.Column="0" Style="{StaticResource KartoniTextBlock}"/>
+                <TextBlock Text="Poštanski broj*:"       Grid.Row="7"  Grid.Column="0" Style="{StaticResource KartoniTextBlock}"/>
+                <TextBlock Text="Opština*:"              Grid.Row="8"  Grid.Column="0" Style="{StaticResource KartoniTextBlock}"/>
+                <TextBlock Text="Država*:"               Grid.Row="9"  Grid.Column="0" Style="{StaticResource KartoniTextBlock}"/>
+                <TextBlock Text="Broj zdrav. knjizice*:" Grid.Row="10" Grid.Column="0" Style="{StaticResource KartoniTextBlock}"/>
+
+                <TextBlock Text="Broj lične karte*:"     Grid.Row="0"  Grid.Column="2" Style="{StaticResource KartoniTextBlock}"/>
+                <TextBlock Text="JMBG*:"                 Grid.Row="1"  Grid.Column="2" Style="{StaticResource KartoniTextBlock}"/>
+                <TextBlock Text="Kontakt telefon*:"      Grid.Row="2"  Grid.Column="2" Style="{StaticResource KartoniTextBlock}"/>
+                <TextBlock Text="E-mail*:"               Grid.Row="3"  Grid.Column="2" Style="{StaticResource KartoniTextBlock}"/>
+                <TextBlock Text="Bračno stanje*:"        Grid.Row="4"  Grid.Column="2" Style="{StaticResource KartoniTextBlock}"/>
+                <TextBlock Text="Pol*:"                  Grid.Row="5"  Grid.Column="2" Style="{StaticResource KartoniTextBlock}"/>
+                <TextBlock Text="Krvna grupa*:"          Grid.Row="6"  Grid.Column="2" Style="{StaticResource KartoniTextBlock}"/>
+                <TextBlock Text="Osiguran*:"             Grid.Row="7"  Grid.Column="2" Style="{StaticResource KartoniTextBlock}"/>
+                <TextBlock Text="Korisničko ime*:"       Grid.Row="8"  Grid.Column="2" Style="{StaticResource KartoniTextBlock}"/>
+                <TextBlock Text="Lozinka*:"              Grid.Row="9"  Grid.Column="2" Style="{StaticResource KartoniTextBlock}"/>
+                <TextBlock Text="Potvrda lozinke*:"      Grid.Row="10" Grid.Column="2" Style="{StaticResource KartoniTextBlock}"/>
+
+                <TextBox x:Name="ImeText" Grid.Row="0" Grid.Column="1" Style="{StaticResource KartoniTextBox}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                    <TextBox.Text>
+                        <Binding Path="Record.Patient.FirstName" Mode="TwoWay" UpdateSourceTrigger="Explicit" >
+                            <Binding.ValidationRules>
+                                <val:OnlyLettersValidationRule ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <TextBox x:Name="RoditeljText" Grid.Row="1" Grid.Column="1" Style="{StaticResource cbTB}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                    <TextBox.Text>
+                        <Binding Path="Record.ParentName" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <TextBox x:Name="PrezimeText" Grid.Row="2" Grid.Column="1" Style="{StaticResource KartoniTextBox}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                    <TextBox.Text>
+                        <Binding Path="Record.Patient.LastName" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <DatePicker x:Name="Datum" Grid.Row="3" Grid.Column="1" Background="White" Margin="3,3,40,10" Foreground="{StaticResource MainDarkBlue}"
+                            Text="{Binding Path=Record.Patient.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=Explicit}" 
+                            FirstDayOfWeek="Monday" Validation.ErrorTemplate="{x:Null}"/>
+
+                <TextBox x:Name="AdresaText" Grid.Row="4" Grid.Column="1" Style="{StaticResource cbTB}">
+                    <TextBox.Text>
+                        <Binding Path="Record.Patient.Address.Street" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <TextBox x:Name="BrojUliceText" Grid.Row="5" Grid.Column="1" Text="{Binding Record.Patient.Address.StreetNumber, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}"
+                         Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+
+                </TextBox>
+
+                <TextBox x:Name="MestoText" Grid.Row="6" Grid.Column="1" Style="{StaticResource cbTB}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                    <TextBox.Text>
+                        <Binding Path="Record.Patient.Address.City.CityName" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <TextBox x:Name="PostanskiBrojText" Grid.Row="7" Grid.Column="1" Style="{StaticResource cbTB}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                    <TextBox.Text>
+                        <Binding Path="Record.Patient.Address.City.PostalCode" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <val:PostalCodeValidationRule ValidationStep="RawProposedValue"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <TextBox x:Name="OpstinaText" Grid.Row="8" Grid.Column="1" Style="{StaticResource cbTB}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                    <TextBox.Text>
+                        <Binding Path="Record.Patient.Address.City.Township" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <TextBox x:Name="DrzavaText" Grid.Row="9" Grid.Column="1" Style="{StaticResource cbTB}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                    <TextBox.Text>
+                        <Binding Path="Record.Patient.Address.City.Country.CountryName" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <TextBox x:Name="KnjizicaText" Grid.Row="10" Grid.Column="1" Style="{StaticResource cbTB}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                    <TextBox.Text>
+                        <Binding Path="Record.HealthCardNumber" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <val:OnlyDigitsValidationRuleHealthCardID ValidationStep="RawProposedValue"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <TextBox x:Name="LicnaText" Grid.Row="0" Grid.Column="3" Style="{StaticResource KartoniTextBox}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                    <TextBox.Text>
+                        <Binding Path="Record.Patient.CardID" Mode="TwoWay" UpdateSourceTrigger="Explicit" >
+                            <Binding.ValidationRules>
+                                <val:OnlyDigitsValidationRuleCardID ValidationStep="RawProposedValue"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <TextBox x:Name="JMBGText" Grid.Row="1" Grid.Column="3" Style="{StaticResource KartoniTextBox}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                    <TextBox.Text>
+                        <Binding Path="Record.Patient.PersonalID" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <val:OnlyDigitsValidationRulePersonalID ValidationStep="RawProposedValue"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <TextBox x:Name="TelefonText" Grid.Row="2" Grid.Column="3" Style="{StaticResource cbTB}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                    <TextBox.Text>
+                        <Binding Path="Record.Patient.PhoneNumber" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <val:OnlyDigitsValidationRulePhoneNumber ValidationStep="RawProposedValue"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <TextBox x:Name="EmailText" Grid.Row="3" Grid.Column="3" Style="{StaticResource cbTB}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                    <TextBox.Text>
+                        <Binding Path="Record.Patient.Email" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                            <Binding.ValidationRules>
+                                <val:EmailValidationRule ValidationStep="RawProposedValue"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <ComboBox x:Name="BracnoStanje" Grid.Row="4" Grid.Column="3" Style="{StaticResource cbTB}" >
+                    <ComboBoxItem x:Name="Neozenjen" Content="neoženjen - neudata" IsSelected="True"/>
+                    <ComboBoxItem x:Name="Ozenjen" Content="oženjen - udata"/>
+                    <ComboBoxItem x:Name="Udovac" Content="udovac - udovica"/>
+                    <ComboBoxItem x:Name="Razveden" Content="razveden - razvedena"/>
+                </ComboBox>
+
+                <ComboBox x:Name="Pol" Grid.Row="5" Grid.Column="3" Style="{StaticResource cbTB}">
+                    <ComboBoxItem x:Name="Muski" Content="muški" IsSelected="True"/>
+                    <ComboBoxItem x:Name="Zenski" Content="ženski"/>
+                    <ComboBoxItem x:Name="Ostalo" Content="ostalo"/>
+                </ComboBox>
+
+                <ComboBox x:Name="KrvnaGrupa" Grid.Row="6" Grid.Column="3" Style="{StaticResource cbTB}">
+                    <ComboBoxItem x:Name="Aplus"  Content="A+"/>
+                    <ComboBoxItem x:Name="Aneg"   Content="A-"/>
+                    <ComboBoxItem x:Name="Bplus"  Content="B+"/>
+                    <ComboBoxItem x:Name="Bneg"   Content="B+"/>
+                    <ComboBoxItem x:Name="ABplus" Content="AB+"/>
+                    <ComboBoxItem x:Name="ABneg"  Content="AB-"/>
+                    <ComboBoxItem x:Name="Oplus"  Content="O+"/>
+                    <ComboBoxItem x:Name="Oneg"   Content="O-"/>
+                </ComboBox>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="3">
+                    <RadioButton x:Name="DaButton" Content="DA" Margin="35,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource cbTB}"/>
+                    <RadioButton x:Name="NeButton" Content="NE" Margin="15,0,35,0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource cbTB}"/>
+                </StackPanel>
+
+                <TextBox x:Name="UsernameText" Grid.Row="8" Grid.Column="3" Text="{Binding Path=Record.Patient.Username, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}"
+                         Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+
+                </TextBox>
+
+                <TextBox x:Name="PasswordText" Grid.Row="9" Grid.Column="3" Text="{Binding Path=Record.Patient.Password, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource cbTB}" >
+
+                </TextBox>
+
+                <TextBox x:Name="PasswordReentered" Grid.Row="10" Grid.Column="3" Style="{StaticResource cbTB}">
+
+                </TextBox>
+
+                <Button x:Name="btnPotvrdi" Grid.Row="11" Grid.Column="1" Content="Potvrdi" Click="BtnPotvrdiClick" >
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource ButtonPotvrdiStyle}">
+                            <Setter Property="IsEnabled" Value="False"/>
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ImeText}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=RoditeljText}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=PrezimeText}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=Datum}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=AdresaText}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=MestoText}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=PostanskiBrojText}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=OpstinaText}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=DrzavaText}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=KnjizicaText}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=LicnaText}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=JMBGText}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=TelefonText}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=EmailText}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=KartonText}" Value="False"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="IsEnabled" Value="True"/>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button x:Name="btnOdustani" Grid.Row="11" Grid.Column="2" Content="Odustani" Style="{StaticResource ButtonOdustaniStyle}" Click="BtnOdustaniClick" />
+            </Grid>
+        </Border>
     </Grid>
-</Window>
+</Page>

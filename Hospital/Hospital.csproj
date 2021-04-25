@@ -168,8 +168,14 @@
     <Compile Include="View\ObaveštenjaUpravnik.xaml.cs">
       <DependentUpon>ObaveštenjaUpravnik.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Secretary\DetaljiKarton.xaml.cs">
+      <DependentUpon>DetaljiKarton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Secretary\DodajObavestenje.xaml.cs">
       <DependentUpon>DodajObavestenje.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\IzbrisiPacijenta.xaml.cs">
+      <DependentUpon>IzbrisiPacijenta.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\IzmenaObavestenja.xaml.cs">
       <DependentUpon>IzmenaObavestenja.xaml</DependentUpon>
@@ -357,6 +363,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Secretary\DetaljiKarton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Secretary\DodajObavestenje.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -368,6 +378,10 @@
     <Page Include="View\Doktor\Termin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Secretary\IzbrisiPacijenta.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Secretary\IzmenaObavestenja.xaml">
       <SubType>Designer</SubType>
@@ -611,6 +625,31 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\medicals.jpg" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Icon\Secretary\1.png" />
+    <Resource Include="Icon\Secretary\11.png" />
+    <Resource Include="Icon\Secretary\adduser.png" />
+    <Resource Include="Icon\Secretary\alergies.png" />
+    <Resource Include="Icon\Secretary\alert.png" />
+    <Resource Include="Icon\Secretary\chart.png" />
+    <Resource Include="Icon\Secretary\chat.png" />
+    <Resource Include="Icon\Secretary\clinics.png" />
+    <Resource Include="Icon\Secretary\date.png" />
+    <Resource Include="Icon\Secretary\delete.png" />
+    <Resource Include="Icon\Secretary\edit.png" />
+    <Resource Include="Icon\Secretary\home24.png" />
+    <Resource Include="Icon\Secretary\info.png" />
+    <Resource Include="Icon\Secretary\logo.png" />
+    <Resource Include="Icon\Secretary\minusdate.png" />
+    <Resource Include="Icon\Secretary\money.png" />
+    <Resource Include="Icon\Secretary\new.png" />
+    <Resource Include="Icon\Secretary\plusdate.png" />
+    <Resource Include="Icon\Secretary\search.png" />
+    <Resource Include="Icon\Secretary\users.png" />
+    <Resource Include="Icon\Secretary\x.png" />
+    <Resource Include="Icon\Secretary\xwhite.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
