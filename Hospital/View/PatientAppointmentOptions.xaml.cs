@@ -21,6 +21,7 @@ namespace Hospital.View
     public partial class PatientAppointmentOptions : Window
     {
         private Appointment app;
+        private PatientSettingsStorage patientSettingsStorage = new PatientSettingsStorage();
         public PatientAppointmentOptions(Appointment app)
         {
             InitializeComponent();
@@ -36,7 +37,10 @@ namespace Hospital.View
             {
                 MessageBox.Show("Nije moguce pomeriti termin kod specijaliste");
             }
-
+            else if (!patientSettingsStorage.isSchedulingAllowed())
+            {
+                MessageBox.Show("Previše puta ste zakazali / pomerili termin u kratkom vremenskom periodu.");
+            }
             else if ((app.DateTime-currentTime).TotalDays >= 2)
             {
                 PatientChangeAppointment patientChangeAppointment = new PatientChangeAppointment(app);

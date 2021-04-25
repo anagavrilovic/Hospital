@@ -80,5 +80,39 @@ namespace Hospital.Model
             }
             return false;
         }
+
+        public Boolean isSchedulingAllowed()
+        {
+            PatientSettings patientSettings = getByID(MainWindow.IDnumber);
+            if ((patientSettings.LatestScheduledAppointmentsTime == null) || (patientSettings.LatestScheduledAppointmentsTime.Count<3))
+            {
+                return true;
+            }
+
+            foreach(DateTime dts in patientSettings.LatestScheduledAppointmentsTime)
+            {
+                if ((DateTime.Now - dts).TotalDays > 10)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void AddScheduling(DateTime dt)
+        {
+            PatientSettings patientSettings = getByID(MainWindow.IDnumber);
+           if(patientSettings.LatestScheduledAppointmentsTime == null)
+            {
+                patientSettings.LatestScheduledAppointmentsTime = new List<DateTime>();
+            }
+            patientSettings.LatestScheduledAppointmentsTime.Add(dt);
+            if (patientSettings.LatestScheduledAppointmentsTime.Count > 3)
+            {
+                patientSettings.LatestScheduledAppointmentsTime.RemoveAt(0);
+            }
+            Delete(MainWindow.IDnumber);
+            Save(patientSettings);
+        }
     }
 }

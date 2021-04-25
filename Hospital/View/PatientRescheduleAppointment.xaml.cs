@@ -21,6 +21,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientRescheduleAppointment : Window
     {
+        private PatientSettingsStorage patientSettingsStorage1 = new PatientSettingsStorage();
         public ObservableCollection<Appointment> Lista
         {
             get;
@@ -109,6 +110,8 @@ namespace Hospital.View
 
                 appointmentStorage.Save(selectedItem);
                 appointmentStorage.Delete(zaBrisanje);
+
+                patientSettingsStorage1.AddScheduling(DateTime.Now);
                 this.Close();
             }
         }

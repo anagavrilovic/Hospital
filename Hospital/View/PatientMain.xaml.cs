@@ -21,6 +21,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientMain : Window
     {
+       private PatientSettingsStorage patientSettingsStorage = new PatientSettingsStorage();
         public PatientMain()
         {
             InitializeComponent();
@@ -67,6 +68,11 @@ namespace Hospital.View
 
         private void MakeAnAppointment(object sender, RoutedEventArgs e)
         {
+            if (!patientSettingsStorage.isSchedulingAllowed())
+            {
+                MessageBox.Show("Previše puta ste zakazali/pomerili termin u kratkom vremenskom periodu.");
+                return;
+            }
             PatientChooseDatesForAnAppointment patientChooseDatesForAnAppointment = new PatientChooseDatesForAnAppointment();
             patientChooseDatesForAnAppointment.Show();
         }

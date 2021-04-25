@@ -10,5 +10,7 @@ namespace Hospital.Model
     {
         public String ChosenDoctor {get;set;}
         public String IDPatient { get; set; }
+
+        public List<DateTime> LatestScheduledAppointmentsTime { get; set; }
     }
 }
