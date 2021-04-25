@@ -52,7 +52,7 @@ namespace Hospital.Model
           
             foreach(TransferInventory ti in transferInventory)
             {
-                if(ti.ItemID.Equals(transfer.ItemID))
+                if(ti.ItemID.Equals(transfer.ItemID) && ti.Date.Equals(transfer.Date))
                 {
                     transferInventory.Remove(ti);
                     break;

@@ -46,19 +46,8 @@ namespace Hospital.View
 
         public TransferInventory TransferItem
         {
-            get
-            {
-                return transferItem;
-            }
-
-            set
-            {
-                if (value != transferItem)
-                {
-                    transferItem = value;
-                   // OnPropertyChanged("TransferItem");
-                }
-            }
+            get { return transferItem;   }
+            set {  transferItem = value; }    
         }
 
         public PrebacivanjeInventara(Inventory inv)
@@ -71,16 +60,13 @@ namespace Hospital.View
 
         private void accept(object sender, RoutedEventArgs e)
         {
-           
+           //Kreiranje objekta međuklase za razmjenu inventara
             InventoryStorage istorage = new InventoryStorage();
-            String secondRoomID = roomID.Text;
             transferItem.ItemID = inventorySeleceted.Id;
             transferItem.FirstRoomID = inventorySeleceted.RoomID;
             transferItem.SecondRoomID = roomID.Text;
             transferItem.Date = datumPrebacivanja.SelectedDate.Value.Date;
-            transferItem.DateString = datumPrebacivanja.SelectedDate.Value.ToShortDateString();
 
-            
             TimeSpan timeSpan = TimeSpan.ParseExact(transferItem.Time, "c", null);
             transferItem.Date = transferItem.Date.Add(timeSpan);
 
@@ -91,6 +77,36 @@ namespace Hospital.View
             }
 
             TransferInventoryStorage transferStorage = new TransferInventoryStorage();
+
+            int totalQuantityForTransfer = 0;
+            TransferInventory lastTransferItem = new TransferInventory();
+
+            foreach(TransferInventory ti in transferStorage.GetAll())
+            {
+                if(ti.ItemID.Equals(transferItem.ItemID) && ti.FirstRoomID.Equals(transferItem.FirstRoomID))
+                {
+                    totalQuantityForTransfer += ti.Quantity;
+
+                    if (ti.Date > lastTransferItem.Date)
+                    {
+                        lastTransferItem = ti;
+                    }
+                }
+            }
+
+            if(totalQuantityForTransfer + transferItem.Quantity> inventorySeleceted.Quantity)
+            {
+               // MessageBox.Show("Iz sale je prethodno rezervisano premeštanje izabrane stavke. \n Pokušajte sa manjom količinom.");
+              //  return;
+
+                if(lastTransferItem.Quantity <= transferItem.Quantity)
+                {
+                    lastTransferItem.FirstRoomID = transferItem.SecondRoomID;
+                    transferStorage.Delete(lastTransferItem);
+                    transferStorage.Save(lastTransferItem);
+                }
+            }
+
             transferStorage.Save(transferItem);
             transferItem.doTransfer();
         

@@ -19,7 +19,6 @@ namespace Hospital.Model
         private string firstRoomID;
         private string secondRoomID;
         private DateTime date;
-        private string dateString;
         private string time;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -117,23 +116,6 @@ namespace Hospital.Model
             }
         }
 
-        public string DateString
-        {
-            get
-            {
-                return dateString;
-            }
-
-            set
-            {
-                if (value != dateString)
-                {
-                    dateString = value;
-                    OnPropertyChanged("DateString");
-                }
-            }
-        }
-
         public string Time
         {
             get
@@ -151,10 +133,7 @@ namespace Hospital.Model
             }
         }
 
-        public TransferInventory()
-        {
-
-        }
+        public TransferInventory() {}
 
         public TransferInventory(string itemId, int quantity, string firstRoomID, string secondRoomID)
         {
