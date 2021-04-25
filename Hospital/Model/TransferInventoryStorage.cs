@@ -49,13 +49,7 @@ namespace Hospital.Model
         {
             transferInventory = GetAll();
             transferInventory.Remove(transfer);
-           /*
-            if(transfer.Date < DateTime.Now)
-            {
-                Console.WriteLine("**********1*****");
-                transferInventory.Remove(transfer);
-            }*/
-
+          
             foreach(TransferInventory ti in transferInventory)
             {
                 if(ti.ItemID.Equals(transfer.ItemID))

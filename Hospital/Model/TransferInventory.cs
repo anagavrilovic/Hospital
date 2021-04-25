@@ -166,8 +166,6 @@ namespace Hospital.Model
 
         public void doTransfer()
         {
-           // TransferInventoryStorage transferStorage = new TransferInventoryStorage();
-           // transferStorage.Save(this);
             Task task = new Task(() => this.waitUntilChosenDate());
             task.Start();
         }

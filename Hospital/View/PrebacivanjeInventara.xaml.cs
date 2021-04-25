@@ -94,9 +94,6 @@ namespace Hospital.View
             transferStorage.Save(transferItem);
             transferItem.doTransfer();
         
-            //TransferInventory transferInventory = new TransferInventory(inventorySeleceted.Id, int.Parse(kolicinaTxt.Text), 
-             //                                                               inventorySeleceted.RoomID, secondRoomID);
-            //transferItem.updateInventory();
             StaticInventory.Inventory = istorage.GetByRoomID(this.inventorySeleceted.RoomID);
           
             this.Close();
