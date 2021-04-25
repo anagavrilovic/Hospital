@@ -1,75 +1,106 @@
-﻿<Window x:Class="Hospital.View.ObavestenjaSekretar"
+﻿<Page x:Class="Hospital.View.ObavestenjaSekretar"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-        Title="ObavestenjaSekretar" Height="665" Width="1070"
-        Background="#FFD0DADD" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="ObavestenjaSekretar" d:DesignHeight="700" d:DesignWidth="1065"
+        Background="{StaticResource BackgroundGray}">
+    <Page.Resources>
+        <ResourceDictionary Source="../../Resources/SecretaryResourceDictionary.xaml"/>
+    </Page.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="OBAVEŠTENJA" FontSize="24" Foreground="#FF517C7C" Margin="20,10,0,0"/>
+        <StackPanel>
+            <TextBlock Text="OBAVEŠTENJA" Style="{StaticResource TitleStyle}"/>
+            <!--<Separator Margin="15,0"/>-->
+        </StackPanel>
 
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+        <Border Grid.Row="1" Margin="15,25,15,15" CornerRadius="10" Background="{StaticResource MainWhite}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0" HorizontalAlignment="Left" Margin="0">
-                <Button Height="50" Width="50" Margin="20,50,0,0" Style="{StaticResource ButtonCalendar}" Click="NovoObavestenjeClick" >
-                    <Image Source="../../Icon/doc.png" Width="20"/>
-                </Button>
-                <Button Height="50" Width="50" Margin="20,20,0,0" Style="{StaticResource ButtonCalendar}" Click="IzmenaObavestenjaClick" >
-                    <Image Source="../../Icon/edit.png" Width="20"/>
-                </Button>
-                <Button Height="50" Width="50" Margin="20,20,0,0" Style="{StaticResource ButtonCalendar}" Click="BrisanjeClick" >
-                    <Image Source="../../Icon/delete.png" Width="20"/>
-                </Button>
-                <Button Height="50" Width="50" Margin="20,20,0,0" Style="{StaticResource ButtonCalendar}" Click="PrikazObavestenjaClick" >
-                    <Image Source="../../Icon/view.png" Width="20"/>
-                </Button>
-            </StackPanel>
+                <!-- Dugmici za CRUD nad obavestenjima -->
+                <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,0,0">
+                    <Button Height="50" Width="50" Margin="0,50,0,0" Style="{StaticResource BigButtons}" Click="NovoObavestenjeClick">
+                        <StackPanel Orientation="Vertical">
+                            <Image Source="../../Icon/Secretary/new.png" Width="30"/>
+                            <TextBlock Text="Novo"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Height="50" Width="50" Margin="0,30,0,0" Style="{StaticResource BigButtons}" Click="IzmenaObavestenjaClick">
+                        <StackPanel Orientation="Vertical">
+                            <Image Source="../../Icon/Secretary/edit.png" Width="30"/>
+                            <TextBlock Text="Izmeni"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Height="50" Width="60" Margin="0,30,0,0" Style="{StaticResource BigButtons}" Click="PrikazObavestenjaClick">
+                        <StackPanel Orientation="Vertical">
+                            <Image Source="../../Icon/Secretary/info.png" Width="30"/>
+                            <TextBlock Text="Pregledaj"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Height="50" Width="50" Margin="0,30,0,0" Style="{StaticResource BigButtons}" Click="BrisanjeObavestenjaClick">
+                        <StackPanel Orientation="Vertical">
+                            <Image Source="../../Icon/Secretary/delete.png" Width="30"/>
+                            <TextBlock Text="Izbriši"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
 
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
 
-                <TextBox x:Name="ObavestenjaFilter" TextChanged="ObavestenjaFilterTextChanged" Width="200" Height="25" HorizontalAlignment="Right" Margin="0,10,20,0"/>
-                <ListBox x:Name="ListBoxNotifications" ItemsSource="{Binding NotificationList, Mode=TwoWay}" Grid.Row="1" Margin="0,10,20,23" Width="950"
-                         ScrollViewer.HorizontalScrollBarVisibility="Hidden">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Height="115">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid Grid.Row="0" Width="900">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Text="{Binding Title, Mode=TwoWay}" FontSize="16" FontWeight="Bold"/>
-                                    <TextBlock Grid.Column="2" Text="{Binding Date, StringFormat='{}{0: dd.MM.yyyy, HH:mm}', Mode=TwoWay}" FontStyle="Italic" />
+                    <!-- Search -->
+                    <Border Width="250" Height="25" Style="{StaticResource TextBoxBorder}" Margin="0,10,20,0" HorizontalAlignment="Right">
+                        <StackPanel Margin="5" Orientation="Horizontal">
+                            <Image Source="../../Icon/Secretary/search.png" Height="13" VerticalAlignment="Center"/>
+                            <TextBox x:Name="ObavestenjaFilter"  BorderThickness="0" Width="200" Height="23" Margin="10,0,0,0" Background="Transparent" 
+                                     FontSize="13" VerticalAlignment="Center" TextChanged="ObavestenjaFilterTextChanged"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Prikaz obavestenja -->
+                    <ListBox x:Name="ListBoxNotifications" ItemsSource="{Binding NotificationList, Mode=TwoWay}" Grid.Row="1" Margin="20,5,20,15"
+                                ScrollViewer.HorizontalScrollBarVisibility="Hidden" Style="{StaticResource ListBoxStyle}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Height="110">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0" Width="860">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Title, Mode=TwoWay}" FontSize="16" FontWeight="Bold"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding Date, StringFormat='{}{0: dd.MM.yyyy, HH:mm}', Mode=TwoWay}" FontStyle="Italic" />
+                                    </Grid>
+                                    <TextBlock Margin="0,10,0,0" Grid.Row="1" Text="{Binding Content, Mode=TwoWay}" FontSize="14" TextWrapping="Wrap" Width="860"/>
+                                    <Separator Grid.Row="2"/>
                                 </Grid>
-                                <TextBlock Margin="0,10,0,0" Grid.Row="1" Text="{Binding Content, Mode=TwoWay}" FontSize="14" TextWrapping="Wrap" Width="900"/>
-                                <Separator Grid.Row="2"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-                
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                </Grid>
             </Grid>
-        </Grid>
+        </Border>
     </Grid>
-</Window>
+</Page>

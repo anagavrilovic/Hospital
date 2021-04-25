@@ -19,7 +19,7 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for IzmenaObavestenja.xaml
     /// </summary>
-    public partial class IzmenaObavestenja : Window
+    public partial class IzmenaObavestenja : Page
     {
         private Notification notification = new Notification();
         private ObservableCollection<Notification> notificationList = new ObservableCollection<Notification>();
@@ -46,14 +46,14 @@ namespace Hospital.View
 
         private void BtnOdustaniClick(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new ObavestenjaSekretar());
         }
 
         private void BtnPotvrdiClick(object sender, RoutedEventArgs e)
         {
             NaslovText.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             SekretarCheck.GetBindingExpression(CheckBox.IsCheckedProperty).UpdateSource();
-            LekarCheck.GetBindingExpression(CheckBox.IsCheckedProperty).UpdateSource();
+            DoktorCheck.GetBindingExpression(CheckBox.IsCheckedProperty).UpdateSource();
             UpravnikCheck.GetBindingExpression(CheckBox.IsCheckedProperty).UpdateSource();
             PacijentCheck.GetBindingExpression(CheckBox.IsCheckedProperty).UpdateSource();
             SadrzajText.GetBindingExpression(TextBox.TextProperty).UpdateSource();
@@ -85,7 +85,12 @@ namespace Hospital.View
 
             NotificationStorage ns = new NotificationStorage();
             ns.DoSerialization(NotificationList);
-            this.Close();
+            NavigationService.Navigate(new ObavestenjaSekretar());
+        }
+
+        private void PacijentiFilterTextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

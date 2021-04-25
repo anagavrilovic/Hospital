@@ -19,16 +19,9 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for DodajObavestenje.xaml
     /// </summary>
-    public partial class DodajObavestenje : Window
+    public partial class DodajObavestenje : Page
     {
         private Notification notification = new Notification();
-        private ObservableCollection<Notification> notificationList;
-
-        public ObservableCollection<Notification> NotificationList
-        {
-            get { return notificationList; }
-            set { notificationList = value; }
-        }
 
         public Notification Notification
         {
@@ -36,12 +29,11 @@ namespace Hospital.View
             set { notification = value; }
         }
 
-        public DodajObavestenje(ObservableCollection<Notification> notifications)
+        public DodajObavestenje()
         {
             InitializeComponent();
             this.DataContext = this;
             this.Notification.Date = DateTime.Now;
-            this.NotificationList = notifications;
         }
 
         private void BtnPotvrdiClick(object sender, RoutedEventArgs e)
@@ -71,15 +63,19 @@ namespace Hospital.View
             }
 
             this.Notification.Id = this.Notification.GetHashCode().ToString();
-            NotificationList.Add(Notification);
             ns.Save(Notification);
 
-            this.Close();
+            NavigationService.Navigate(new ObavestenjaSekretar());
         }
 
         private void BtnOdustaniClick(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new ObavestenjaSekretar());
+        }
+
+        private void PacijentiFilterTextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

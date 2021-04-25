@@ -21,12 +21,19 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for Kalendar.xaml
     /// </summary>
-    public partial class Kalendar : Window
+    public partial class Kalendar : Page
     {
         private ObservableCollection<Termini> tabela = new ObservableCollection<Termini>();
-        private ObservableCollection<Hospital.Model.Doctor> doctors = new ObservableCollection<Hospital.Model.Doctor>();
+        private ObservableCollection<Model.Doctor> doctors = new ObservableCollection<Model.Doctor>();
         private DateTime date = DateTime.Today;
         private MedicalRecord patient = new MedicalRecord();
+        private Model.Doctor selectedDoctor;
+
+        public Model.Doctor SelectedDoctor
+        {
+            get { return selectedDoctor; }
+            set { selectedDoctor = value; }
+        }
 
         private DateTime weekBegin;
 
@@ -35,7 +42,6 @@ namespace Hospital.View
             get { return weekBegin; }
             set { weekBegin = value; }
         }
-
 
         public MedicalRecord Patient
         {
@@ -62,15 +68,15 @@ namespace Hospital.View
         }
 
 
-        public Kalendar()
+        public Kalendar(Model.Doctor doctor)
         {
             InitializeComponent();
             this.DataContext = this;
-            UcitajLekare();
-            PopuniKalendar();
+            UcitajLekare(doctor);
+            OsveziKalendar();
         }
 
-        private void PopuniKalendar()
+        private void OsveziKalendar()
         {
             Tabela.Clear();
 
@@ -83,12 +89,15 @@ namespace Hospital.View
                 termin.Vreme = start.ToString("HH:mm", CultureInfo.InvariantCulture);
                 start = start.AddMinutes(30);
                 tabela.Add(termin);
-            } 
+            }
+
+            if (SelectedDoctor != null)
+                PopuniTermine();
         }
 
-        private void PopuniTermine(Hospital.Model.Doctor doctor)
+        private void PopuniTermine()
         {
-            if(doctor == null)
+            if(SelectedDoctor == null)
             {
                 return;
             }
@@ -101,7 +110,7 @@ namespace Hospital.View
 
             foreach (Appointment app in appointments)
             {
-                if (app.DateTime.Date >= weekBegin.Date && app.DateTime.Date <= weekEnd.Date && app.IDDoctor.Equals(doctor.PersonalID))
+                if (app.DateTime.Date >= weekBegin.Date && app.DateTime.Date <= weekEnd.Date && app.IDDoctor.Equals(SelectedDoctor.PersonalID))
                 {
                     DayOfWeek dan = app.DateTime.DayOfWeek;
 
@@ -170,10 +179,23 @@ namespace Hospital.View
             }
         }
 
-        private void UcitajLekare()
+        private void UcitajLekare(Model.Doctor doctor)
         {
             DoctorStorage ds = new DoctorStorage();
             Doctors = ds.GetAll();
+
+            if(doctor != null)
+            {
+                foreach(Model.Doctor dr in Doctors)
+                {
+                    if (dr.PersonalID.Equals(doctor.PersonalID))
+                    {
+                        //MessageBox.Show(dr.ToString());  // ovde nadje dobrog
+                        DoctorComboBox.SelectedItem = dr;
+                        //MessageBox.Show(DoctorComboBox.SelectedItem.ToString()); //ovde kaze da je null
+                    }    
+                }
+            }
         }
 
         private int NadjiVreme(String vreme)
@@ -200,12 +222,6 @@ namespace Hospital.View
         {
             int diff = (7 + (dt.DayOfWeek - DayOfWeek.Monday)) % 7;
             return dt.AddDays(-1 * diff).Date;
-        }
-
-        private void OsveziKalendar()
-        {
-            PopuniKalendar();
-            PopuniTermine((Hospital.Model.Doctor)DoctorComboBox.SelectedItem);
         }
 
         private void ComboBoxDoctorEvent(object sender, SelectionChangedEventArgs e)
@@ -238,8 +254,8 @@ namespace Hospital.View
 
         private void OdaberiPacijentaClick(object sender, RoutedEventArgs e)
         {
-            var op = new OdaberiPacijenta(Patient);
-            op.Show();
+            var odabirPacijenta = new OdaberiPacijenta(Patient);
+            odabirPacijenta.Show();
         }
 
         private void ZakaziClick(object sender, RoutedEventArgs e)
@@ -252,9 +268,7 @@ namespace Hospital.View
             int indexColumn = KalendarDataGrid.SelectedCells[0].Column.DisplayIndex;
             var vreme = ((Termini)KalendarDataGrid.SelectedCells[0].Item).Vreme;
             
-            var zt = new ZakazivanjeTermina((Hospital.Model.Doctor)DoctorComboBox.SelectedItem, Patient, indexColumn, vreme, WeekBegin, Tabela);
-            zt.Show();
-
+            NavigationService.Navigate(new ZakazivanjeTermina(SelectedDoctor, Patient, indexColumn, vreme, WeekBegin));
         }
 
         private void OtkaziClick(object sender, RoutedEventArgs e)
@@ -329,10 +343,6 @@ namespace Hospital.View
                 }
 
                 OsveziKalendar();
-            }
-            else
-            {
-                
             }
         }
     }

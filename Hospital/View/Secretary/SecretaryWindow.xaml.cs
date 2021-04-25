@@ -63,7 +63,7 @@ namespace Hospital.View
 
         private void ButtonKalendarClick(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new Kalendar());
+            Main.Navigate(new Kalendar(null));
         }
 
         private void ButtonHitanPregledClick(object sender, RoutedEventArgs e)

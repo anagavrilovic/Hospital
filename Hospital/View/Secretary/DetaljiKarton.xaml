@@ -143,21 +143,23 @@
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0">
                     <StackPanel Margin="0,20" >
                         <TextBlock Text="Alergičan na lek:" Style="{StaticResource KartoniTextBlock}"/>
-                        <ListBox x:Name="LekoviListBox" Margin="40,0" Width="430" Height="100">
+                        <ListBox x:Name="LekoviListBox" ItemsSource="{Binding Record.Allergen.MedicineNames}" Margin="40,0" Width="430" Height="100"
+                                 Style="{StaticResource ListBoxStyle}">
 
                         </ListBox>
                     </StackPanel>
 
                     <StackPanel Margin="0,20" >
                         <TextBlock Text="Alergičan na sastojak:" Style="{StaticResource KartoniTextBlock}"/>
-                        <ListBox x:Name="SastojciListBox" Margin="40,0" Width="430" Height="100">
+                        <ListBox x:Name="SastojciListBox" ItemsSource="{Binding Record.Allergen.IngredientNames}" Margin="40,0" Width="430" Height="100"
+                                 Style="{StaticResource ListBoxStyle}">
 
                         </ListBox>
                     </StackPanel>
 
                     <StackPanel Margin="0,20" >
                         <TextBlock Text="Ostalo:" Style="{StaticResource KartoniTextBlock}"/>
-                        <TextBox Margin="40,0" Width="430" Height="100" Style="{StaticResource KartoniTextBox}">
+                        <TextBox Margin="40,0" Width="430" Height="100" Style="{StaticResource KartoniTextBox}" Text="{Binding Record.Allergen.Other}">
 
                         </TextBox>
                     </StackPanel>

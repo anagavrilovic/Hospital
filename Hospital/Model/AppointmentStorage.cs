@@ -1,3 +1,4 @@
+using Hospital.Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -38,14 +39,15 @@ namespace Hospital
             DoSerialization(appointment);
         }
 
-        public bool SaveAndCheck(Appointment p)
+        public bool SaveAndCheck(Appointment p, Doctor doctor)
         {
             ObservableCollection<Appointment> appointment = GetAll();
 
             foreach (Appointment ap in appointment)
             {
-                if (ap.DateTime < p.DateTime.AddHours(p.DurationInHours) && p.DateTime < ap.DateTime.AddHours(ap.DurationInHours))
-                    return false;
+                if(ap.IDDoctor.Equals(doctor.PersonalID))
+                    if (ap.DateTime < p.DateTime.AddHours(p.DurationInHours) && p.DateTime < ap.DateTime.AddHours(ap.DurationInHours))
+                        return false;
             }
 
             appointment.Add(p);

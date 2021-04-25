@@ -5,49 +5,50 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-        Title="PrikazObavestenja" Height="410" Width="630" Background="#FFB0BFBE" WindowStartupLocation="CenterScreen" 
-        ResizeMode="NoResize" BorderBrush="#FF517C7C" BorderThickness="1" AllowsTransparency="True" WindowStyle="None">
+        Title="PrikazObavestenja" Height="420" Width="630" 
+        Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"
+        AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen"
+      BorderThickness="1" BorderBrush="#094f7a">
+    <Window.Resources>
+        <ResourceDictionary Source="../../Resources/SecretaryResourceDictionary.xaml"/>
+    </Window.Resources>
+
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+
+        <!-- Naslov i datum -->
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="100"/>
-            </Grid.RowDefinitions>
-            
-            <Grid Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="80"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <StackPanel Orientation="Horizontal" Margin="0,25,0,0">
-                        <TextBlock Text="Naslov:" FontSize="16" Foreground="#FF517C7C" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"/>
-                        <TextBlock Text="{Binding Notification.Title, Mode=OneWay}" Width="200" Height="25" Margin="10,5,0,0"  FontSize="16" Foreground="#FF517C7C"/>
-                    </StackPanel>
-
-                    <TextBlock Grid.Column="2" Text="{Binding Notification.Date, StringFormat='{}{0: dd.MM.yyyy, HH:mm}', Mode=OneWay}" VerticalAlignment="Center" FontSize="15" Foreground="#FF517C7C" Margin="20,25,20,0"  />
-
-                </Grid>
-
-                <ScrollViewer Grid.Row="1" Margin="20,0,20,20" VerticalScrollBarVisibility="Hidden">
-                    <TextBlock Text="{Binding Notification.Content, Mode=OneWay}" TextWrapping="Wrap" FontSize="14" Foreground="#FF517C7C">
-
-                    </TextBlock>
-                </ScrollViewer>
-                
-            </Grid>
-
-
-            <StackPanel Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,0,20,0">
-                <Button Content="Nazad" Width="100" Height="30" Margin="0" Style="{StaticResource ButtonCalendar}" Click="BtnNazadClick" />
+            <StackPanel Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Naslov:" Margin="20,0,0,0" VerticalAlignment="Center" Style="{StaticResource TitleStyleBlue}"/>
+                <TextBlock Text="{Binding Notification.Title, Mode=OneWay}" Width="200" Height="25" Margin="10,0,0,0" Style="{StaticResource TitleStyleBlue}"/>
             </StackPanel>
+
+            <TextBlock Grid.Column="2" Text="{Binding Notification.Date, StringFormat='{}{0: dd.MM.yyyy, HH:mm}', Mode=OneWay}" 
+                       VerticalAlignment="Center" Style="{StaticResource TitleStyleBlue}" Margin="0,25,20,0"/>
         </Grid>
+
+        <!-- Sadrzaj -->
+        <ScrollViewer Grid.Row="1" Margin="20,0,20,20" VerticalScrollBarVisibility="Hidden">
+            <TextBlock Text="{Binding Notification.Content, Mode=OneWay}" TextWrapping="Wrap" Style="{StaticResource TextBlockStyleBlue}">
+
+            </TextBlock>
+        </ScrollViewer>
+
+
+        <!-- Button nazad -->
+        <StackPanel Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,0,20,0">
+            <Button Content="Nazad" Width="100" Height="30" Style="{StaticResource ButtonOdustaniStyle}" Click="BtnNazadClick"/>
+        </StackPanel>
     </Grid>
 </Window>

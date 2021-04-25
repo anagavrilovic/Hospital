@@ -20,7 +20,7 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for ObavestenjaSekretar.xaml
     /// </summary>
-    public partial class ObavestenjaSekretar : Window
+    public partial class ObavestenjaSekretar : Page
     {
         private ObservableCollection<Notification> notificationList = new ObservableCollection<Notification>();
         private NotificationStorage ns = new NotificationStorage();
@@ -30,7 +30,6 @@ namespace Hospital.View
             get { return ns; }
             set { ns = value; }
         }
-
 
         public ObservableCollection<Notification> NotificationList
         {
@@ -63,7 +62,6 @@ namespace Hospital.View
             NotificationCollection.Filter = CustomFilterObavestenja;
         }
 
-
         private bool CustomFilterObavestenja(object obj)
         {
             if (string.IsNullOrEmpty(ObavestenjaFilter.Text))
@@ -85,12 +83,11 @@ namespace Hospital.View
 
         private void NovoObavestenjeClick(object sender, RoutedEventArgs e)
         {
-            DodajObavestenje dodajObavestenje = new DodajObavestenje(NotificationList);
-            dodajObavestenje.Show();
+            NavigationService.Navigate(new DodajObavestenje());
         }
 
 
-        private void BrisanjeClick(object sender, RoutedEventArgs e)
+        private void BrisanjeObavestenjaClick(object sender, RoutedEventArgs e)
         {
             if (ListBoxNotifications.SelectedItem == null)
             {
@@ -104,6 +101,9 @@ namespace Hospital.View
                 NotificationList.Remove((Notification)ListBoxNotifications.SelectedItem);
                 Ns.DoSerialization(NotificationList);
             }
+
+            /*var izbrisi = new IzbrisiObavestenje();
+            izbrisi.Show();*/
         }
 
         private void IzmenaObavestenjaClick(object sender, RoutedEventArgs e)
@@ -114,8 +114,7 @@ namespace Hospital.View
                 return;
             }
 
-            var io = new IzmenaObavestenja((Notification)ListBoxNotifications.SelectedItem, NotificationList);
-            io.Show();
+            NavigationService.Navigate(new IzmenaObavestenja((Notification)ListBoxNotifications.SelectedItem, NotificationList));
         }
 
         private void PrikazObavestenjaClick(object sender, RoutedEventArgs e)
@@ -126,8 +125,8 @@ namespace Hospital.View
                 return;
             }
 
-            var po = new PrikazObavestenja((Notification)ListBoxNotifications.SelectedItem);
-            po.Show();
+            var prikaz = new PrikazObavestenja((Notification)ListBoxNotifications.SelectedItem);
+            prikaz.Show();
         }
     }
 }

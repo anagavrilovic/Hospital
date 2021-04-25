@@ -93,7 +93,7 @@ namespace Hospital.View
             CollectionViewSource.GetDefaultView(ListBoxPacijenti.ItemsSource).Refresh();
         }
 
-        private void ExitBtn_Click(object sender, RoutedEventArgs e)
+        private void BtnExitClick(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
