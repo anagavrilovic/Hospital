@@ -19,7 +19,6 @@ namespace Hospital.Model
         private string firstRoomID;
         private string secondRoomID;
         private DateTime date;
-        private string dateString;
         private string time;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -117,23 +116,6 @@ namespace Hospital.Model
             }
         }
 
-        public string DateString
-        {
-            get
-            {
-                return dateString;
-            }
-
-            set
-            {
-                if (value != dateString)
-                {
-                    dateString = value;
-                    OnPropertyChanged("DateString");
-                }
-            }
-        }
-
         public string Time
         {
             get
@@ -151,17 +133,15 @@ namespace Hospital.Model
             }
         }
 
-        public TransferInventory()
-        {
+        public TransferInventory() {}
 
-        }
-
-        public TransferInventory(string itemId, int quantity, string firstRoomID, string secondRoomID)
+        public TransferInventory(string itemId, int quantity, string firstRoomID, string secondRoomID, DateTime date)
         {
             this.itemID = itemId;
             this.quantity = quantity;
             this.firstRoomID = firstRoomID;
             this.secondRoomID = secondRoomID;
+            this.date = date;
         }
 
         public void doTransfer()
@@ -178,11 +158,7 @@ namespace Hospital.Model
             {
                 Thread.Sleep(timeSpan);
             }
-            else
-            {
-                Thread.Sleep(0);
-            }
-
+       
             updateInventory();
         }
 
@@ -244,17 +220,16 @@ namespace Hospital.Model
                 }
 
                 inventoryStorage.doSerialization();
+                StaticInventory.Inventory = inventoryStorage.GetByRoomID(this.FirstRoomID);
 
                 TransferInventoryStorage transferStorage = new TransferInventoryStorage();
                 transferStorage.Delete(this);
 
-                InventoryStorage istorage = new InventoryStorage();
-                StaticInventory.Inventory = istorage.GetByRoomID(this.FirstRoomID);
             }
             else
             {
-                MessageBox.Show("Pogrešan unos količine!");
-                return;
+               // MessageBox.Show("Pogrešan unos količine!");
+               // return;
             }
         }
     }
