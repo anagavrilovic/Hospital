@@ -158,11 +158,7 @@ namespace Hospital.Model
             {
                 Thread.Sleep(timeSpan);
             }
-            else
-            {
-                Thread.Sleep(0);
-            }
-
+       
             updateInventory();
         }
 
