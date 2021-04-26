@@ -57,57 +57,6 @@ namespace Hospital.Model
             }
         }
 
-
-        private bool sekretar;
-        private bool lekar;
-        private bool upravnik;
-        private bool pacijent;
-
-        public bool Pacijent
-        {
-            get { return pacijent; }
-            set { pacijent = value; }
-        }
-
-        public bool Upravnik
-        {
-            get { return upravnik; }
-            set { upravnik = value; }
-        }
-
-        public bool Lekar
-        {
-            get { return lekar; }
-            set { lekar = value; }
-        }
-
-        public bool Sekretar
-        {
-            get { return sekretar; }
-            set { sekretar = value; }
-        }
-
-        private Dictionary<string, bool> recipients = new Dictionary<string, bool>();
-
-        public Dictionary<string, bool> Recipients
-        {
-            get { return recipients; }
-            set { recipients = value; }
-        }
-
-        override
-        public string ToString()
-        {
-            StringBuilder sb = new StringBuilder("");
-            sb.Append(Date.ToString("dd.MM.yyyy HH:mm"));
-            sb.Append("\t");
-            sb.Append(Title);
-            sb.AppendLine();
-            sb.Append(Content);
-
-            return sb.ToString();
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string name)

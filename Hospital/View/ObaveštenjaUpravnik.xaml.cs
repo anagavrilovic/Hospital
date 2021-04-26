@@ -58,13 +58,13 @@ namespace Hospital.View
             InitializeComponent();
             this.DataContext = this;
 
-            foreach(Notification n in notificationStorage.GetAll())
+            /*foreach(Notification n in notificationStorage.GetAll())
             {
                 if (n.Upravnik)
                 {
                     Notifications.Add(n);
                 }
-            }
+            }*/
 
             NotificationCollection = CollectionViewSource.GetDefaultView(Notifications);
         }

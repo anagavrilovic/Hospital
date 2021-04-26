@@ -75,6 +75,7 @@
     <Compile Include="Model\InventoryStorage.cs" />
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\NotificationStorage.cs" />
+    <Compile Include="Model\NotificationsUsers.cs" />
     <Compile Include="Model\PatientNotificationsStorage.cs" />
     <Compile Include="Model\PatientSettings.cs" />
     <Compile Include="Model\PatientSettingsStorage.cs" />
@@ -640,7 +641,9 @@
   <ItemGroup>
     <Resource Include="Icon\medicals.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Icon\Secretary\plus.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\Secretary\1.png" />
     <Resource Include="Icon\Secretary\11.png" />

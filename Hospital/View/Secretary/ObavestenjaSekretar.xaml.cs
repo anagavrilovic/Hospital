@@ -56,7 +56,7 @@ namespace Hospital.View
 
         private void UcitajObavestenja()
         {
-            NotificationList = Ns.GetAll();
+            NotificationList = Ns.GetAllNotifications();
 
             NotificationCollection = CollectionViewSource.GetDefaultView(NotificationList);
             NotificationCollection.Filter = CustomFilterObavestenja;
@@ -98,8 +98,10 @@ namespace Hospital.View
             if (MessageBox.Show("Da li ste sigurni da želite da izbrišete obaveštenje?",
                         "Potvrda", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
+
+                Ns.ClearNotificationsUsersByNotificationID(((Notification)ListBoxNotifications.SelectedItem).Id);
                 NotificationList.Remove((Notification)ListBoxNotifications.SelectedItem);
-                Ns.DoSerialization(NotificationList);
+                Ns.SerializeNotifications(NotificationList);
             }
 
             /*var izbrisi = new IzbrisiObavestenje();

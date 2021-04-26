@@ -47,5 +47,74 @@ namespace Hospital.Model
             }
         }
 
+        public UserType GetRoleByUsername(string username)
+        {
+            ObservableCollection<RegistratedUser> registratedUsers = GetAll();
+
+            foreach(RegistratedUser user in registratedUsers)
+            {
+                if (user.Username.Equals(username))
+                    return user.Type;
+            }
+
+            return UserType.doctor;
+        }
+
+        public int CountSecretaries()
+        {
+            ObservableCollection<RegistratedUser> registratedUsers = GetAll();
+            int retVal = 0;
+
+            foreach(RegistratedUser user in registratedUsers)
+            {
+                if (user.Type.Equals(UserType.secretary))
+                    retVal += 1;
+            }
+
+            return retVal;
+        }
+
+        public int CountDoctors()
+        {
+            ObservableCollection<RegistratedUser> registratedUsers = GetAll();
+            int retVal = 0;
+
+            foreach (RegistratedUser user in registratedUsers)
+            {
+                if (user.Type.Equals(UserType.doctor))
+                    retVal += 1;
+            }
+
+            return retVal;
+        }
+
+        public int CountManagers()
+        {
+            ObservableCollection<RegistratedUser> registratedUsers = GetAll();
+            int retVal = 0;
+
+            foreach (RegistratedUser user in registratedUsers)
+            {
+                if (user.Type.Equals(UserType.manager))
+                    retVal += 1;
+            }
+
+            return retVal;
+        }
+
+        public int CountPatients()
+        {
+            ObservableCollection<RegistratedUser> registratedUsers = GetAll();
+            int retVal = 0;
+
+            foreach (RegistratedUser user in registratedUsers)
+            {
+                if (user.Type.Equals(UserType.patient))
+                    retVal += 1;
+            }
+
+            return retVal;
+        }
+
     }
 }
