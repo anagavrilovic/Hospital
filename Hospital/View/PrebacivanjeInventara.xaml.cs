@@ -67,7 +67,6 @@ namespace Hospital.View
                  return;
             }
 
-            //Kreiranje objekta međuklase za razmjenu inventara
             InventoryStorage istorage = new InventoryStorage();
             transferItem.ItemID = inventorySeleceted.Id;
             transferItem.FirstRoomID = inventorySeleceted.RoomID;
@@ -101,11 +100,9 @@ namespace Hospital.View
                 }
             }
 
-            if(totalQuantityForTransfer + transferItem.Quantity> inventorySeleceted.Quantity)
+            if(totalQuantityForTransfer + transferItem.Quantity> inventorySeleceted.Quantity && lastTransferItem.Date > transferItem.Date)
             {
-               // MessageBox.Show("Iz sale je prethodno rezervisano premeštanje izabrane stavke. \n Pokušajte sa manjom količinom.");
-              //  return;
-
+               
                 if(lastTransferItem.Quantity <= transferItem.Quantity)
                 {
                     transferStorage.Delete(lastTransferItem);
@@ -120,9 +117,14 @@ namespace Hospital.View
                     lastTransferItem.Quantity = transferItem.Quantity;
                     transferStorage.Save(lastTransferItem);
 
-                    TransferInventory newTransfer = new TransferInventory(lastTransferItem.ItemID, newQuantity, inventorySeleceted.RoomID, lastTransferItem.SecondRoomID, lastTransferItem.Date + new TimeSpan(0, 0, 1));
+                    TransferInventory newTransfer = new TransferInventory(lastTransferItem.ItemID, newQuantity, inventorySeleceted.RoomID, lastTransferItem.SecondRoomID, lastTransferItem.Date + new TimeSpan(0, 0, 2));
                     transferStorage.Save(newTransfer);
                 }
+            }
+            else if(totalQuantityForTransfer + transferItem.Quantity > inventorySeleceted.Quantity && lastTransferItem.Date < transferItem.Date)
+            {
+                 MessageBox.Show("Sala ne raspolaže traženom količinom stavke. \n Pokušajte sa manjom količinom ili pogledajte stanje u drugim salama.");
+                 return;
             }
 
             transferStorage.Save(transferItem);
