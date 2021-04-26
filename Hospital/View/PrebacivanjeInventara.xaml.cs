@@ -60,7 +60,14 @@ namespace Hospital.View
 
         private void accept(object sender, RoutedEventArgs e)
         {
-           //Kreiranje objekta međuklase za razmjenu inventara
+
+            if(inventorySeleceted.Quantity < transferItem.Quantity)
+            {
+                 MessageBox.Show("Pogrešan unos količine!");
+                 return;
+            }
+
+            //Kreiranje objekta međuklase za razmjenu inventara
             InventoryStorage istorage = new InventoryStorage();
             transferItem.ItemID = inventorySeleceted.Id;
             transferItem.FirstRoomID = inventorySeleceted.RoomID;
@@ -101,9 +108,20 @@ namespace Hospital.View
 
                 if(lastTransferItem.Quantity <= transferItem.Quantity)
                 {
-                    lastTransferItem.FirstRoomID = transferItem.SecondRoomID;
                     transferStorage.Delete(lastTransferItem);
+                    lastTransferItem.FirstRoomID = transferItem.SecondRoomID;
                     transferStorage.Save(lastTransferItem);
+                }
+                else
+                {
+                    int newQuantity = lastTransferItem.Quantity - transferItem.Quantity;
+                    transferStorage.Delete(lastTransferItem);
+                    lastTransferItem.FirstRoomID = transferItem.SecondRoomID;
+                    lastTransferItem.Quantity = transferItem.Quantity;
+                    transferStorage.Save(lastTransferItem);
+
+                    TransferInventory newTransfer = new TransferInventory(lastTransferItem.ItemID, newQuantity, inventorySeleceted.RoomID, lastTransferItem.SecondRoomID, lastTransferItem.Date + new TimeSpan(0, 0, 1));
+                    transferStorage.Save(newTransfer);
                 }
             }
 

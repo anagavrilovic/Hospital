@@ -135,12 +135,13 @@ namespace Hospital.Model
 
         public TransferInventory() {}
 
-        public TransferInventory(string itemId, int quantity, string firstRoomID, string secondRoomID)
+        public TransferInventory(string itemId, int quantity, string firstRoomID, string secondRoomID, DateTime date)
         {
             this.itemID = itemId;
             this.quantity = quantity;
             this.firstRoomID = firstRoomID;
             this.secondRoomID = secondRoomID;
+            this.date = date;
         }
 
         public void doTransfer()
@@ -223,17 +224,16 @@ namespace Hospital.Model
                 }
 
                 inventoryStorage.doSerialization();
+                StaticInventory.Inventory = inventoryStorage.GetByRoomID(this.FirstRoomID);
 
                 TransferInventoryStorage transferStorage = new TransferInventoryStorage();
                 transferStorage.Delete(this);
 
-                InventoryStorage istorage = new InventoryStorage();
-                StaticInventory.Inventory = istorage.GetByRoomID(this.FirstRoomID);
             }
             else
             {
-                MessageBox.Show("Pogrešan unos količine!");
-                return;
+               // MessageBox.Show("Pogrešan unos količine!");
+               // return;
             }
         }
     }
