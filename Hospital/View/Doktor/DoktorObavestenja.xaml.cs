@@ -50,13 +50,13 @@ namespace Hospital.View
 
         private void initProperties()
         {
-            foreach(Notification n in nStorage.GetAll())
+            /*foreach(Notification n in nStorage.GetAll())
             {
                 if (n.Lekar)
                 {
                     Obavestenja.Add(n);
                 }
-            }
+            }*/
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
