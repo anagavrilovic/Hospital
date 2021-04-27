@@ -48,7 +48,7 @@ namespace Hospital.View
                 tempStatus = (RoomStatus)Enum.Parse(typeof(RoomStatus), statusCB.Text);
             }
 
-            this.room = new Room { Name = tempName, Floor = tempFloor, Status = tempStatus, Type = tempType };
+            this.room = new Room { Name = tempName, Floor = tempFloor, Status = tempStatus, Type = tempType, SerializeInfo = true/*, DeserializeInfo = true */};
 
             foreach(Room r in RoomsWindow.Rooms)
             {
@@ -58,6 +58,8 @@ namespace Hospital.View
                     r.Floor = tempFloor;
                     r.Status = tempStatus;
                     r.Type = tempType;
+                    r.SerializeInfo = true;
+                  //  r.DeserializeInfo = true;
                 }
             }
 
@@ -69,6 +71,8 @@ namespace Hospital.View
                     r.Floor = tempFloor;
                     r.Status = tempStatus;
                     r.Type = tempType;
+                    r.SerializeInfo = true;
+                  //  r.DeserializeInfo = true;
                 }
             }
 

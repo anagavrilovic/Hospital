@@ -166,7 +166,11 @@ namespace Hospital.View
             {
                 PrebacivanjeInventara transfer = new PrebacivanjeInventara(selectedItem);
                 transfer.Owner = Application.Current.MainWindow;
-                transfer.nazivTxt.Text = selectedItem.Id + "-" + selectedItem.Name;
+                StringBuilder sb = new StringBuilder();
+                sb.Append(selectedItem.Id);
+                sb.Append("-");
+                sb.Append(selectedItem.Name);
+                transfer.nazivTxt.Text = sb.ToString();
                 transfer.Show();
             }
         }

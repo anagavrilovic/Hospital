@@ -158,9 +158,20 @@ namespace Hospital.View
 
         private void renovateRoom(object sender, RoutedEventArgs e)
         {
-            RenovateRoom renovateRoom = new RenovateRoom();
-            renovateRoom.Owner = Application.Current.MainWindow;
-            renovateRoom.Show();
+            Room selectedItem = (Room)dataGridRooms.SelectedItem;
+
+            if(selectedItem != null)
+            { 
+                RenovateRoom renovateRoom = new RenovateRoom(selectedItem);
+                renovateRoom.Owner = Application.Current.MainWindow;
+                StringBuilder sb = new StringBuilder();
+                sb.Append(selectedItem.Id);
+                sb.Append("-");
+                sb.Append(selectedItem.Name);
+                renovateRoom.nazivTxt.Text = sb.ToString();
+                renovateRoom.Show();
+            }
+            
         }
 
         private void menuButton(object sender, RoutedEventArgs e)

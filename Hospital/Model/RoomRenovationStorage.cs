@@ -42,12 +42,18 @@ namespace Hospital.Model
 
             roomRenovation.Add(parameter1);
 
+            foreach(RoomRenovation renovation in roomRenovation)
+            {
+                renovation.Room.SerializeInfo = false;
+            }
+
             doSerialization();
         }
 
         public void Delete(RoomRenovation renovation)
         {
             roomRenovation = GetAll();
+           
             roomRenovation.Remove(renovation);
 
             foreach (RoomRenovation r in roomRenovation)
@@ -62,6 +68,22 @@ namespace Hospital.Model
             doSerialization();
         }
 
+        /*
+        public bool isBeingRenovatedNow(Appointment appointment)
+        {
+            roomRenovation = GetAll();
+
+            foreach (RoomRenovation r in roomRenovation)
+            {
+                if (appointment.DateTime >= r.StartDate && appointment.DateTime.AddHours(appointment.DurationInHours) <= r.EndDate)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+        }
+        */
         public void doSerialization()
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
@@ -70,6 +92,7 @@ namespace Hospital.Model
                 serializer.Serialize(file, roomRenovation);
             }
         }
+
 
         public static ObservableCollection<RoomRenovation> roomRenovation = new ObservableCollection<RoomRenovation>();
         public String fileName;

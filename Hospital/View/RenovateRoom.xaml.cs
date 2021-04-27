@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,14 +20,61 @@ namespace Hospital.View
     /// </summary>
     public partial class RenovateRoom : Window
     {
-        public RenovateRoom()
+        private Room room;
+        private RoomRenovation roomRenovation;
+
+        public RoomRenovation RoomRenovation
+        {
+            get { return roomRenovation;  }
+            set { roomRenovation = value; }
+        }
+
+
+        public RenovateRoom(Room room)
         {
             InitializeComponent();
+            this.DataContext = this;
+            this.room = room;
+            this.roomRenovation = new RoomRenovation();
         }
 
         private void accept(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            roomRenovation.Room = room;
+            roomRenovation.Room.SerializeInfo = false;
+            // roomRenovation.Room.DeserializeInfo = false;
+
+            if(roomRenovation.StartDate >= roomRenovation.EndDate)
+            {
+                MessageBox.Show("Pogrešan izbor datuma renoviranja!");
+                return;
+            }
+
+            AppointmentStorage appointmentStorage = new AppointmentStorage();
+
+            bool isAnyAppointmentInRenovationPeriod = false;
+
+            foreach(Appointment appointment in appointmentStorage.GetAll())
+            {
+                if(appointment.DateTime >= roomRenovation.StartDate && appointment.DateTime <= roomRenovation.EndDate && appointment.Room.Id.Equals(roomRenovation.Room.Id))
+                {
+                    isAnyAppointmentInRenovationPeriod = true;
+                    break;
+                }
+            }
+
+            if(!isAnyAppointmentInRenovationPeriod)
+            {
+                RoomRenovationStorage storage = new RoomRenovationStorage();
+                storage.Save(roomRenovation);
+
+                this.Close();
+            }
+            else 
+            {
+                MessageBox.Show("U izabranom periodu postoje zakazani termini pa nije moguće zakazati renoviranje!");
+                return;
+            }
         }
 
         private void cancel(object sender, RoutedEventArgs e)

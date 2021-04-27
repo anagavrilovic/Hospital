@@ -46,9 +46,9 @@
         <Label Content="Opis:"                Grid.Row="8"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,14.6,5,50.8"  Grid.RowSpan="2" />
 
         <TextBox    x:Name="nazivTxt"     Grid.Row="3" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" IsReadOnly="True" />
-        <DatePicker x:Name="startDate"    Grid.Row="5" Grid.ColumnSpan="2" Margin="30,5,28,5.2" DisplayDateStart="{x:Static sys:DateTime.Today}" Focusable="False"/>
-        <DatePicker x:Name="endDate"      Grid.Row="7" Grid.ColumnSpan="2" Margin="30,5,28,5.2" DisplayDateStart="{x:Static sys:DateTime.Today}" Focusable="False"/>
-        <TextBox    x:Name="description"  Grid.Row="9" Grid.ColumnSpan="2" Grid.RowSpan="3" Margin="30,5,28,5.4" BorderBrush="#FF26282C" TextWrapping="Wrap"/>
+        <DatePicker x:Name="dateStart"    Grid.Row="5" Grid.ColumnSpan="2" Margin="30,5,28,5.2" SelectedDate="{Binding Path=RoomRenovation.StartDate, Mode=OneWayToSource, TargetNullValue={x:Static sys:DateTime.Now}}" DisplayDateStart="{x:Static sys:DateTime.Today}" Focusable="False"/>
+        <DatePicker x:Name="dateEnd"      Grid.Row="7" Grid.ColumnSpan="2" Margin="30,5,28,5.2" SelectedDate="{Binding Path=RoomRenovation.EndDate,   Mode=OneWayToSource, TargetNullValue={x:Static sys:DateTime.Now}}" DisplayDateStart="{x:Static sys:DateTime.Today}" Focusable="False"/>
+        <TextBox    x:Name="description"  Grid.Row="9" Grid.ColumnSpan="2" Grid.RowSpan="3" Margin="30,5,28,5.4" Text="{Binding Path=RoomRenovation.Description, Mode=OneWayToSource}" BorderBrush="#FF26282C" TextWrapping="Wrap"/>
         
         
         <Button Grid.Column="0" Grid.Row="12"  Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,31.6,10,27.8" Click="accept"/>

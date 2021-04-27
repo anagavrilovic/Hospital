@@ -23,6 +23,7 @@ namespace Hospital.Model
         private DateTime startDate;
         private DateTime endDate;
         private string description;
+        private Room room;
 
         public DateTime StartDate
         {
@@ -51,6 +52,15 @@ namespace Hospital.Model
             {
                 description = value;
                 OnPropertyChanged("Description");
+            }
+        }
+
+        public Room Room
+        {
+            get => room;
+            set
+            {
+                room = value;
             }
         }
     }

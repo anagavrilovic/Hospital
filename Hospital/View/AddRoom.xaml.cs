@@ -34,7 +34,7 @@ namespace Hospital.View
             RoomStatus tempStatus = (RoomStatus)Enum.Parse(typeof(RoomStatus), statusCB.Text);
 
             RoomStorage rs = new RoomStorage();
-            rs.Save(new Room { Id = tempId, Name = tempName, Floor = tempFloor, Status = tempStatus, Type = tempType });
+            rs.Save(new Room { Id = tempId, Name = tempName, Floor = tempFloor, Status = tempStatus, Type = tempType});
             RoomsWindow.Rooms = RoomStorage.rooms;
 
             this.Close();
