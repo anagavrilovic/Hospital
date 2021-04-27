@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,15 +31,10 @@ namespace Hospital.View
             String tempName = nameTxt.Text;
             int tempFloor = int.Parse(floorTxt.Text);
             RoomType tempType = (RoomType)Enum.Parse(typeof(RoomType), typeCB.Text);
+            RoomStatus tempStatus = (RoomStatus)Enum.Parse(typeof(RoomStatus), statusCB.Text);
 
-            Boolean tempFree = true;
-
-            if(btn2.IsChecked == true)
-            {
-                tempFree = false;
-            }
             RoomStorage rs = new RoomStorage();
-            rs.Save(new Room { Id = tempId, Name = tempName, Floor = tempFloor, IsAvaliable = tempFree, Type = tempType });
+            rs.Save(new Room { Id = tempId, Name = tempName, Floor = tempFloor, Status = tempStatus, Type = tempType });
             RoomsWindow.Rooms = RoomStorage.rooms;
 
             this.Close();

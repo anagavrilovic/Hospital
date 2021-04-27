@@ -1,1 +1,1 @@
-[{"Id":"532553252","Name":"Sala za preglede","Floor":3,"IsAvaliable":true,"Type":1},{"Id":"1","Name":"Sala 1","Floor":1,"IsAvaliable":true,"Type":0},{"Id":"2","Name":"Sala 2","Floor":1,"IsAvaliable":false,"Type":2},{"Id":"M1","Name":"Magacin","Floor":0,"IsAvaliable":true,"Type":3}]
+[{"Id":"532553252","Name":"Sala za preglede","Floor":3,"Status":0,"Type":1},{"Id":"1","Name":"Sala 1","Floor":1,"Status":1,"Type":0},{"Id":"2","Name":"Sala 2","Floor":1,"Status":1,"Type":2},{"Id":"M1","Name":"Magacin","Floor":0,"Status":0,"Type":3}]

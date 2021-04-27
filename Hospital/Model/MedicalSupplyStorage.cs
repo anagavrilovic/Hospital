@@ -151,11 +151,7 @@ namespace Hospital
                     }
                 }
 
-                using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
-                {
-                    JsonSerializer serializer = new JsonSerializer();
-                    serializer.Serialize(file, supplies);
-                }
+                doSerialization();
             }
             else
             {
@@ -163,7 +159,7 @@ namespace Hospital
             }
         }
 
-        private void doSerialization()
+        public void doSerialization()
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {

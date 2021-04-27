@@ -141,16 +141,19 @@ namespace Hospital.View
         {
             Inventory selectedItem = (Inventory)dataGridInventory.SelectedItem;
 
-            MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da izbrišete izabranu stavku",
-                                                      "Brisanje stavke",
-                                                       MessageBoxButton.YesNo,
-                                                       MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            if(selectedItem != null)
             {
-                if (selectedItem != null)
+                MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da izbrišete izabranu stavku",
+                                                          "Brisanje stavke",
+                                                           MessageBoxButton.YesNo,
+                                                           MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
                 {
-                    Inventory.Remove(selectedItem);
-                    storage.Delete(selectedItem.Id, selectedItem.RoomID);
+                    if (selectedItem != null)
+                    {
+                        Inventory.Remove(selectedItem);
+                        storage.Delete(selectedItem.Id, selectedItem.RoomID);
+                    }
                 }
             }
         }

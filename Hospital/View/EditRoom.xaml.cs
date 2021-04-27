@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Hospital.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,8 +31,7 @@ namespace Hospital.View
         }
 
         private void acceptEdit(object sender, RoutedEventArgs e)
-        {
-           
+        {  
             string tempId = idTxt.Text;
             String tempName = nameTxt.Text;
             int tempFloor = int.Parse(floorTxt.Text);
@@ -42,19 +42,13 @@ namespace Hospital.View
                 tempType = (RoomType)Enum.Parse(typeof(RoomType), typeCB.Text);
             }
 
-            Boolean tempFree;
-
-            if (btn2.IsChecked == true)
+            RoomStatus tempStatus = (RoomStatus)Enum.Parse(typeof(RoomStatus), "SLOBODNA");
+            if (statusCB.SelectedItem != null)
             {
-                tempFree = false;
-            }
-            else
-            {
-                tempFree = true;
+                tempStatus = (RoomStatus)Enum.Parse(typeof(RoomStatus), statusCB.Text);
             }
 
-            this.room = new Room { Name = tempName, Floor = tempFloor, IsAvaliable = tempFree, Type = tempType };
-
+            this.room = new Room { Name = tempName, Floor = tempFloor, Status = tempStatus, Type = tempType };
 
             foreach(Room r in RoomsWindow.Rooms)
             {
@@ -62,7 +56,7 @@ namespace Hospital.View
                 {
                     r.Name = tempName;
                     r.Floor = tempFloor;
-                    r.IsAvaliable = tempFree;
+                    r.Status = tempStatus;
                     r.Type = tempType;
                 }
             }
@@ -73,11 +67,9 @@ namespace Hospital.View
                 {
                     r.Name = tempName;
                     r.Floor = tempFloor;
-                    r.IsAvaliable = tempFree;
+                    r.Status = tempStatus;
                     r.Type = tempType;
-
                 }
-
             }
 
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + "rooms.json"))

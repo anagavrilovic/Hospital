@@ -80,6 +80,9 @@
     <Compile Include="Model\PatientSettings.cs" />
     <Compile Include="Model\PatientSettingsStorage.cs" />
     <Compile Include="Model\PatientTherapyMedicineNotification.cs" />
+    <Compile Include="Model\RoomRenovation.cs" />
+    <Compile Include="Model\RoomRenovationStorage.cs" />
+    <Compile Include="Model\RoomStatus.cs" />
     <Compile Include="Model\Termini.cs" />
     <Compile Include="Model\MedicalSupply.cs" />
     <Compile Include="Model\MedicalSupplyStorage.cs" />
@@ -168,6 +171,9 @@
     </Compile>
     <Compile Include="View\ObaveštenjaUpravnik.xaml.cs">
       <DependentUpon>ObaveštenjaUpravnik.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RenovateRoom.xaml.cs">
+      <DependentUpon>RenovateRoom.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\DetaljiKarton.xaml.cs">
       <DependentUpon>DetaljiKarton.xaml</DependentUpon>
@@ -367,6 +373,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ObaveštenjaUpravnik.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RenovateRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

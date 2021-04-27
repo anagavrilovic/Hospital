@@ -62,7 +62,6 @@ namespace Hospital.Model
             doSerialization();
         }
 
-
         public void doSerialization()
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))

@@ -1,4 +1,5 @@
 
+using Hospital.Model;
 using System;
 using System.ComponentModel;
 
@@ -20,7 +21,7 @@ namespace Hospital
         private string id;
         private string name;
         private int floor;
-        private Boolean isAvaliable;
+        private RoomStatus status;
         private RoomType type;
 
         public string Id 
@@ -78,19 +79,19 @@ namespace Hospital
             }
         }
 
-        public Boolean IsAvaliable
+        public RoomStatus Status
         {
             get
             {
-                return isAvaliable;
+                return status;
             }
 
             set
             {
-                if (value != isAvaliable)
+                if (value != status)
                 {
-                    isAvaliable = value;
-                    OnPropertyChanged("IsAvaliable");
+                    status = value;
+                    OnPropertyChanged("Status");
                 }
             }
         }
