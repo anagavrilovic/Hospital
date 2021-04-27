@@ -2,4 +2,93 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Hospital"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <SolidColorBrush x:Key="MainWhite">#FFF6F6F6</SolidColorBrush>
+    <SolidColorBrush x:Key="LighterGray">#FFEDEDED</SolidColorBrush>
+    <SolidColorBrush x:Key="TextGray">#FF777777</SolidColorBrush>
+    <SolidColorBrush x:Key="MediumGray">#FFA8A9A9</SolidColorBrush>
+    <SolidColorBrush x:Key="MainBlue">#FF0B6298</SolidColorBrush>
+    <SolidColorBrush x:Key="MainGreen">#FF98B53D</SolidColorBrush>
+    <SolidColorBrush x:Key="SecondBlue">#FF4F6D99</SolidColorBrush>
+    <SolidColorBrush x:Key="HoverBlue">#2272a3</SolidColorBrush>
+    <SolidColorBrush x:Key="MainDarkBlue">#094f7a</SolidColorBrush>
+    
+    <!-- Rounder textbox style -->
+    <Style x:Key="TextBox" TargetType="TextBox">
+        <Setter Property="Foreground" Value="{StaticResource MainBlue}"/>
+        <Setter Property="Background" Value="{StaticResource MainWhite}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate >
+                    <Border Background="{TemplateBinding Background}" x:Name="Bd" 
+BorderThickness="1" CornerRadius="5" BorderBrush="{StaticResource HoverBlue}">
+                        <ScrollViewer x:Name="PART_ContentHost" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!-- Search box style -->
+    <Style x:Key="SearchBox" TargetType="TextBox">
+        <Setter Property="Foreground" Value="{StaticResource MainBlue}"/>
+        <Setter Property="Background" Value="{StaticResource MainWhite}"/>
+    </Style>
+
+    <!-- Label color -->
+    <Style x:Key="Label" TargetType="Label">
+        <Setter Property="Foreground" Value="{StaticResource MainBlue}"/>
+    </Style>
+    
+    <!-- Search box border style -->
+    <Style x:Key="TextBoxBorder" TargetType="Border">
+        <Setter Property="BorderBrush" Value="{StaticResource MainBlue}"/>
+        <Setter Property="CornerRadius" Value="15"/>
+        <Setter Property="Background" Value="{StaticResource MainWhite}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+    
+    <!-- List box style -->
+    <Style x:Key="ListBoxStyle" TargetType="ListBox">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="{StaticResource MainBlue}"/>
+        <Setter Property="FontFamily" Value="Yu Gothic"/>
+        <Setter Property="FontSize" Value="13.5"/>
+    </Style>
+
+    <!-- Button with text style -->
+    <Style x:Key="ButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource MainDarkBlue}"/>
+        <Setter Property="Foreground" Value="{StaticResource MainWhite}"/>
+        <Setter Property="Width" Value="120"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource HoverBlue}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Button with icon style -->
+    <Style x:Key="ImageButtons" TargetType="Button">
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Width" Value="55"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="{StaticResource BackgroundGray}"/>
+        <Setter Property="Foreground" Value="{StaticResource MainDarkBlue}"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Margin" Value="20,0,0,0"/>
+    </Style>
+
 </ResourceDictionary>

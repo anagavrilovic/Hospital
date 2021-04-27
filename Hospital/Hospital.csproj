@@ -640,7 +640,9 @@
   <ItemGroup>
     <Resource Include="Icon\medicals.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Icon\add.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\Secretary\1.png" />
     <Resource Include="Icon\Secretary\11.png" />
@@ -664,6 +666,12 @@
     <Resource Include="Icon\Secretary\users.png" />
     <Resource Include="Icon\Secretary\x.png" />
     <Resource Include="Icon\Secretary\xwhite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\addDark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\edit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
