@@ -58,6 +58,8 @@ namespace Hospital.View
             ((Doctor_Examination)Window.GetWindow(this)).Pregled.anamnesis=Test1;
             ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = 3;
             ((Doctor_Examination)Window.GetWindow(this)).Terapija.IsEnabled = true;
+            ((Doctor_Examination)Window.GetWindow(this)).TerapijaLabela.Foreground = Brushes.White;
+            ((Doctor_Examination)Window.GetWindow(this)).AnamnezaLabela.Foreground = Brushes.Black;
             ((Doctor_Examination)Window.GetWindow(this)).Anamneza.IsEnabled = false;
         }
     }

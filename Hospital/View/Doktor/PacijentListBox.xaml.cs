@@ -63,7 +63,7 @@ namespace Hospital.View
 
         private void listBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            parentWindow.Pacijent= (Patient)listBox.SelectedItem;
+            parentWindow.Patient= (Patient)listBox.SelectedItem;
             Close();
         }
         public ICollectionView GetPretraga()

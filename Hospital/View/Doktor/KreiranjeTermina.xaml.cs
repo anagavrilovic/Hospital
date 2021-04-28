@@ -23,65 +23,64 @@ namespace Hospital.View
     public partial class KreiranjeTermina : Window,INotifyPropertyChanged
     {
         private ObservableCollection<Hospital.Model.Doctor> doktori;
-        private Appointment termin;
-        public Appointment Termin { get => termin; set => termin = value; } 
-        private Room soba;
-        public Room Soba
+        private Appointment appointment;
+        public Appointment Appointment { get => appointment; set => appointment = value; } 
+        private Room room;
+        public Room Room
         {
-            get { return soba; }
+            get { return room; }
             set
             {
-                soba = value;
+                room = value;
                 OnPropertyChanged();
             }
 
         }
-        private string vremeTermin;
-        public string VremeTermin
+        private string timeOfAppointment;
+        public string TimeOfAppointment
         {
-            get { return vremeTermin; }
+            get { return timeOfAppointment; }
             set
             {
-                vremeTermin = value;
+                timeOfAppointment = value;
                 OnPropertyChanged();
             }
 
         }
-        private DateTime date;
-        public DateTime Date
+        private DateTime dateOfAppointment;
+        public DateTime DateOfAppointment
         {
-            get { return date; }
+            get { return dateOfAppointment; }
             set
             {
-                date = value;
+                dateOfAppointment = value;
                 OnPropertyChanged();
             }
 
         }
-        private Hospital.Model.Doctor doktor;
-        public Hospital.Model.Doctor Doktor
+        private Hospital.Model.Doctor doctor;
+        public Hospital.Model.Doctor Doctor
         {
-            get { return doktor; }
+            get { return doctor; }
             set
             {
-                doktor = value;
+                doctor = value;
                 OnPropertyChanged();
             }
 
         }
-        private DateTime time = DateTime.Today;
-        private Patient pacijent;
-        public Patient Pacijent
+        private Patient patient=new Patient();
+        public Patient Patient
         {
-            get { return pacijent; }
+            get { return patient; }
             set
             {
-                pacijent = value;
+                patient = value;
                 OnPropertyChanged();
             }
 
         }
-        public ObservableCollection<Hospital.Model.Doctor> Doktori  
+        public ObservableCollection<Hospital.Model.Doctor> Doctors  
             {
                 get{ return doktori;}
                 set {
@@ -90,23 +89,23 @@ namespace Hospital.View
             }
 
             }
-        private string trajanjeMinuti;
-        public string TrajanjeMinuti
+        private string durationInMinutes;
+        public string DurationInMinutes
         {
-            get { return trajanjeMinuti; }
+            get { return durationInMinutes; }
             set
             {
-                trajanjeMinuti = value;
+                durationInMinutes = value;
                 OnPropertyChanged();
             }
 
         }
-
-        public MakeApointment parentAppointment { get; set; }
-        AppointmentStorage storage = new AppointmentStorage();
-        DoctorStorage dStorage = new DoctorStorage();
-        MedicalRecordStorage mStorage = new MedicalRecordStorage();
-        RoomStorage rStorage = new RoomStorage();
+        private int specialization;
+        public MakeApointment parentWindow { get; set; }
+        AppointmentStorage appointmentStorage = new AppointmentStorage();
+        DoctorStorage doctorStorage = new DoctorStorage();
+        MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
+        RoomStorage roomStorage = new RoomStorage();
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)
@@ -117,106 +116,180 @@ namespace Hospital.View
             }
         }
 
-        public KreiranjeTermina(MakeApointment parentWindow,string id)
+        public KreiranjeTermina(MakeApointment parentWindow,string patientID,int specialization)
         {
             InitializeComponent();
             this.DataContext = this;
-            Pacijent = new Patient();
-            Pacijent = (mStorage.GetByPatientID(id)).Patient;
-            Termin = new Appointment();
-            Doktor = new Hospital.Model.Doctor();
+            this.specialization = specialization;
+            InitProperties(patientID);
+            DateAndTimeComponents();
+            this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
+            this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 1 / 2);
+            this.parentWindow = parentWindow;
+        }
+
+        private void InitProperties(string id)
+        {
+            Patient = new Patient();
+            Patient = (medicalRecordStorage.GetByPatientID(id)).Patient;
+            Appointment = new Appointment();
+            Doctor = new Hospital.Model.Doctor();
+            SetDoctorList();
+        }
+
+        private void SetDoctorList()
+        {
+            Doctors = new ObservableCollection<Model.Doctor>();
+            if (specialization == (int)DoctorSpecialty.general)
+            {
+                rdbOperacija.Visibility = Visibility.Hidden;
+                rdbPregled.IsChecked = true;
+                Doctors = doctorStorage.GetAll();
+            }
+            else
+            {
+                foreach (Model.Doctor doctor in doctorStorage.GetAll())
+                {
+                    if (specialization == (int)doctor.Specialty)
+                    {
+                        Doctors.Add(doctor);
+                    }
+                }
+            }
+        }
+
+        private void DateAndTimeComponents()
+        {
+            DateTime time = DateTime.Today;
             for (DateTime tm = time.AddHours(0); tm < time.AddHours(24); tm = tm.AddMinutes(30))
             {
-                vreme.Items.Add(tm.ToShortTimeString());
+                timeComboBox.Items.Add(tm.ToShortTimeString());
 
             }
-            for(int i = 0; i < 15; i++)
+            for (int i = 0; i < 15; i++)
             {
-                trajanje.Items.Add(((i + 1) * 10));
+                durationInMinutesComboBox.Items.Add(((i + 1) * 10));
             }
-            trajanje.SelectedIndex = 1;
-            vreme.SelectedIndex = 7;
-            
-            this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
-            this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 3 / 4);
-            parentAppointment = parentWindow;
-            Doktori = dStorage.GetAll();
-            
-
+            durationInMinutesComboBox.SelectedIndex = 1;
+            timeComboBox.SelectedIndex = 7;
         }
 
         private void cancel_Click(object sender, RoutedEventArgs e)
         {
-            parentAppointment.dodaj.IsEnabled = true;
+            parentWindow.addButton.IsEnabled = true;
             Close();
         }
 
         private void save_Click(object sender, RoutedEventArgs e)
         {
-            if (Pacijent == null || Date == null || VremeTermin == null || Doktor == null || (rdbOperacija.IsChecked.Equals(false) && rdbPregled.IsChecked.Equals(false)))
+            if (!SomeFieldsEmpty() && !AppointmentsOverlap())
             {
-                
+                FillAppointmentProperties();
+                SetRoomAndRoomType();
+                appointmentStorage.Save(Appointment);
+                UpdateParentPage();
+                this.Close();
+            }
+        }
+
+        private void UpdateParentPage()
+        {
+            ((Doctor_Examination)Window.GetWindow(this.Owner)).Pregled.appointment = Appointment;
+            ObservableCollection<Appointment> list = new ObservableCollection<Appointment>();
+            foreach (Appointment a in appointmentStorage.GetAll())
+            {
+                if (a.IDDoctor.Equals(Appointment.IDDoctor))
+                {
+                    list.Add(a);
+                }
+            }
+            parentWindow.dataGridPregledi.ItemsSource = list;
+            parentWindow.ComboBox.SelectedIndex=(int)(doctorStorage.GetOne(Appointment.IDDoctor).Specialty);
+        }
+
+        private void SetRoomAndRoomType()
+        {
+            foreach (Room storageRoom in roomStorage.GetAll())
+            {
+                if (rdbPregled.IsChecked.Equals(true) && Doctor.RoomID.Equals(storageRoom.Id))
+                {
+                    Appointment.Room = storageRoom;
+                    Appointment.Type = AppointmentType.examination;
+                    break;
+                }
+                else
+                {
+                    if (storageRoom.Type.Equals(RoomType.OPERACIONA_SALA))
+                    {
+                        Appointment.Room = storageRoom;
+                        Appointment.Type = AppointmentType.operation;
+                        break;
+                    }
+                }
+            }
+        }
+
+        private bool AppointmentsOverlap()
+        {
+            double timeInMinutesDouble = double.Parse(DurationInMinutes);
+            Appointment.DurationInHours = timeInMinutesDouble / 60;
+            DateTime appointmentStart, appointmentEnd;
+            appointmentStart = DateOfAppointment.Date.Add(DateTime.Parse(timeOfAppointment).TimeOfDay);
+            appointmentEnd = appointmentStart.AddMinutes(double.Parse(DurationInMinutes));
+            return OverlapBool(appointmentStart, appointmentEnd);
+        }
+
+        private bool OverlapBool(DateTime appointmentStart, DateTime appointmentEnd)
+        {
+            foreach (Appointment storageAppointment in appointmentStorage.GetAll())
+            {
+                if (storageAppointment.IDDoctor.Equals(Doctor.PersonalID))
+                {
+                    double storageAppointmentTime = storageAppointment.DurationInHours * 60;
+                    bool overlap = storageAppointment.DateTime < appointmentEnd && appointmentStart < storageAppointment.DateTime.AddMinutes(storageAppointmentTime);
+                    if (overlap)
+                    {
+                        MessageBox.Show("Preklapaju se termini");
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        private void FillAppointmentProperties()
+        {
+            Appointment.patientName = Patient.FirstName;
+            Appointment.IDpatient = Patient.PersonalID;
+            Appointment.patientSurname = Patient.LastName;
+            Appointment.DateTime = DateOfAppointment.Date.Add(DateTime.Parse(timeOfAppointment).TimeOfDay);
+            Appointment.IDDoctor = Doctor.PersonalID;
+            Appointment.DoctrosNameSurname = Doctor.FirstName + " " + Doctor.LastName;
+            Appointment.IDAppointment = appointmentStorage.GetNewID();
+        }
+
+        private bool SomeFieldsEmpty()
+        {
+            if (DateOfAppointment == null || Doctor == null || (rdbOperacija.IsChecked.Equals(false) && rdbPregled.IsChecked.Equals(false)))
+            {
+
                 MessageBox.Show("Nisu uneti svi podace");
+                return true;
+            }
+            return false;
+        }
+
+        private void SelectedDoctorChanged(object sender, SelectionChangedEventArgs e)
+        {
+           if(((Doctor_Examination)Window.GetWindow(this.Owner)).LoggedInDoctor.PersonalID.Equals
+                (((Hospital.Model.Doctor)doctorComboBox.SelectedItem).PersonalID))
+            {
+                rdbOperacija.IsEnabled = true;
             }
             else
             {
-                Termin.patientName = Pacijent.FirstName;
-                Termin.IDpatient = Pacijent.PersonalID;
-                Termin.patientSurname = Pacijent.LastName;
-                Termin.DateTime = Date.Date.Add(DateTime.Parse(vremeTermin).TimeOfDay);
-                DateTime apStart = Date.Date.Add(DateTime.Parse(vremeTermin).TimeOfDay);
-                double v=double.Parse(TrajanjeMinuti);
-                Termin.DurationInHours=v / 60;
-                DateTime apEnd = apStart.AddMinutes(v);    
-                Termin.IDDoctor = Doktor.PersonalID;
-                foreach(Appointment a in storage.GetAll())
-                {
-                    if (a.IDDoctor.Equals(Doktor.PersonalID))
-                    {
-                        double d = a.DurationInHours / 60;
-                        bool overlap = a.DateTime < apStart && a.DateTime.AddMinutes(d) < apEnd;
-                        if (overlap)
-                        {
-                            MessageBox.Show("Preklapaju se termini");
-                            return;
-                        }
-                    }
-                }
-                Termin.DoctrosNameSurname = Doktor.FirstName + " " + Doktor.LastName;
-                Termin.IDAppointment = storage.GetNewID();
-                foreach(Room r in rStorage.GetAll())
-                {
-                    if(rdbPregled.IsChecked.Equals(true) && Doktor.RoomID.Equals(r.Id))
-                    {
-                        Termin.Room = r;
-                        Termin.Type = AppointmentType.examination;
-                        break;
-                    }
-                    else
-                    {
-                        if (r.Type.Equals(RoomType.OPERACIONA_SALA))
-                        {
-                            Termin.Room = r;
-                            Termin.Type = AppointmentType.operation;
-                            break;
-                        }
-                    }
-                }
-                ((Doctor_Examination)Window.GetWindow(this.Owner)).Pregled.appointment = Termin;
-                ObservableCollection<Appointment> list = new ObservableCollection<Appointment>();
-                storage.Save(Termin);
-                foreach (Appointment a in storage.GetAll())
-                {
-
-                    if (a.IDDoctor.Equals(Termin.IDDoctor))
-                    {
-                        list.Add(a);
-                    }
-                }
-                parentAppointment.dataGridPregledi.ItemsSource = list;
-                this.Close();
+                rdbOperacija.IsEnabled = false;
             }
-
         }
     }
 }

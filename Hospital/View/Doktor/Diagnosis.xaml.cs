@@ -60,6 +60,8 @@ namespace Hospital.View
             ((Doctor_Examination)Window.GetWindow(this)).Pregled.diagnosis=Test1;
             ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = 5;
             ((Doctor_Examination)Window.GetWindow(this)).Dijagnoza.IsEnabled = false;
+            ((Doctor_Examination)Window.GetWindow(this)).DiagnozaLabela.Foreground = Brushes.Black;
+            ((Doctor_Examination)Window.GetWindow(this)).TerminiLabela.Foreground = Brushes.White;
             ((Doctor_Examination)Window.GetWindow(this)).Termini.IsEnabled = true;
         }
     }

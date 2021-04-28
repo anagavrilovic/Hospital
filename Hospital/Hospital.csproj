@@ -668,10 +668,25 @@
     <Resource Include="Icon\Secretary\xwhite.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\minus.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Icon\DoctorIcons\addDark.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icon\DoctorIcons\edit.png" />
+    <Resource Include="Icon\DoctorIcons\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\start.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\view.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\save.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

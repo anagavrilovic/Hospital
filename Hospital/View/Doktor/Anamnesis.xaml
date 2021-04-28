@@ -5,36 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-        Title="Anamnesis" Background="#FFDCE6ED" >
+        Title="Anamnesis" Background="{DynamicResource BackgroundGray}" >
     <Page.Resources>
-       <!-- <Style TargetType="TextBox">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TextBoxBase}">
-                        <Border CornerRadius="2" Padding="2" Background="#19212F" BorderBrush="Red" BorderThickness="1">
-                            <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>-->
+        <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
     </Page.Resources>
     <Grid>
         <StackPanel Orientation="Vertical">
-            <Label FontSize="25" Content="Anamneza:" Margin="60,0,0,0"></Label>
-            <ScrollViewer CanContentScroll="True" Width="600" Height="450" Margin="30,10,30,20">
-                <Border  BorderThickness="1" BorderBrush="Black">
-                    <TextBox Name="anamnesisBox" TextWrapping="Wrap" FontSize="15" AcceptsReturn="True" Text="{Binding Test1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                </Border>
-            </ScrollViewer>
-            <Button Width="100" Height="30" Content="Sačuvaj anamnezu" Margin="200,5,20,0" VerticalAlignment="Top" Click="Sacuvaj" HorizontalAlignment="Left"
-                        Background="Crimson" Foreground="White">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
+            <Label FontSize="25" Content="Anamneza:" Margin="60,0,0,0" Style="{DynamicResource Label}"></Label>
+            <TextBox Name="anamnesisBox" TextWrapping="Wrap" FontSize="15" AcceptsReturn="True" Width="600" Height="450" Margin="30,10,30,20"
+                         Text="{Binding Test1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  VerticalScrollBarVisibility="Visible" Style="{DynamicResource TextBoxStyle}"></TextBox>
+            <Button  Margin="200,5,20,0" VerticalAlignment="Top" Click="Sacuvaj" HorizontalAlignment="Left" Style="{DynamicResource ImageButtonsHorizontal}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../Icon/DoctorIcons/save.png" Width="20"/>
+                    <TextBlock Text="Sačuvaj anamnezu"/>
+                </StackPanel>
+            </Button>   
         </StackPanel>
     </Grid>
 </Page>

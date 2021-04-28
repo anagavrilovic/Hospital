@@ -22,36 +22,36 @@ namespace Hospital.View
     /// </summary>
     public partial class Terapija : Page, INotifyPropertyChanged
     {
-        private ObservableCollection<Medicine> lekovi = new ObservableCollection<Medicine>();
+        private ObservableCollection<Medicine> medics = new ObservableCollection<Medicine>();
         public int dani;
-        private MedicalRecordStorage mStorage = new MedicalRecordStorage();
+        private MedicalRecordStorage medicineStorage = new MedicalRecordStorage();
         public event PropertyChangedEventHandler PropertyChanged;
-        public ObservableCollection<Medicine> Lekovi
+        public ObservableCollection<Medicine> Medics
         {
-            get { return lekovi; }
+            get { return medics; }
             set
             {
-                lekovi = value;
+                medics = value;
                 OnPropertyChanged();
             }
         }
-        private string text;
-        public string Text
+        private string therapyDescription;
+        public string TherapyDescription
         {
-            get { return text; }
+            get { return therapyDescription; }
             set
             {
-                text = value;
+                therapyDescription = value;
                 OnPropertyChanged();
             }
         }
-        private string naslov;
-        public string Naslov
+        private string therapyTitle;
+        public string TherapyTitle
         {
-            get { return naslov; }
+            get { return therapyTitle; }
             set
             {
-                naslov = value;
+                therapyTitle = value;
                 OnPropertyChanged();
             }
         }
@@ -60,15 +60,15 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
-            medicineBox.ItemsSource = Lekovi;
+            medicineBox.ItemsSource = Medics;
         }
 
-        private void DodajLek(object sender, RoutedEventArgs e)
+        private void AddMedicine(object sender, RoutedEventArgs e)
         {
-            MedicalRecord medicalRecord = mStorage.GetByPatientID(((Doctor_Examination)Window.GetWindow(this)).appointment.IDpatient);
-            LekListBox lb = new LekListBox(this,medicalRecord);
-            lb.Owner = Window.GetWindow(this);
-            lb.ShowDialog();
+            MedicalRecord medicalRecord = medicineStorage.GetByPatientID(((Doctor_Examination)Window.GetWindow(this)).appointment.IDpatient);
+            LekListBox AddMedicineWindow = new LekListBox(this,medicalRecord);
+            AddMedicineWindow.Owner = Window.GetWindow(this);
+            AddMedicineWindow.ShowDialog();
         }
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
@@ -79,26 +79,38 @@ namespace Hospital.View
             }
         }
 
-        private void Sacuvaj(object sender, RoutedEventArgs e)
+        private void SaveTherapyInExamination(object sender, RoutedEventArgs e)
         {
-            Therapy t = new Therapy();
-            foreach (Medicine lek in Lekovi)
-            {
-                t.AddMedicine(lek);
-            }
-            t.description = Text;
-            t.name = Naslov;
-            ((Doctor_Examination)Window.GetWindow(this)).Pregled.therapy = t;
+            Therapy therapy = new Therapy();
+            FillTherapy(therapy);
+            ((Doctor_Examination)Window.GetWindow(this)).Pregled.therapy = therapy;
+            SetTabColors();
+        }
+
+        private void SetTabColors()
+        {
             ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = 4;
             ((Doctor_Examination)Window.GetWindow(this)).Terapija.IsEnabled = false;
+            ((Doctor_Examination)Window.GetWindow(this)).TerapijaLabela.Foreground = Brushes.Black;
+            ((Doctor_Examination)Window.GetWindow(this)).DiagnozaLabela.Foreground = Brushes.White;
             ((Doctor_Examination)Window.GetWindow(this)).Dijagnoza.IsEnabled = true;
         }
 
-        private void Obrisi(object sender, RoutedEventArgs e)
+        private void FillTherapy(Therapy therapy)
+        {
+            foreach (Medicine m in Medics)
+            {
+                therapy.AddMedicine(m);
+            }
+            therapy.description = TherapyDescription;
+            therapy.name = TherapyTitle;
+        }
+
+        private void RemoveMedicineFromList(object sender, RoutedEventArgs e)
         {
             if (medicineBox.SelectedItem != null)
             {
-               Lekovi.Remove((Medicine)medicineBox.SelectedItem);
+               Medics.Remove((Medicine)medicineBox.SelectedItem);
             }
         }
     }

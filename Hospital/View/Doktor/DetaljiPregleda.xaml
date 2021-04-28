@@ -5,9 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-        Title="DetaljiPregleda" Height="450" Width="800"
-        Background="#FFDCE6ED" WindowStartupLocation="CenterOwner">
-    <Grid Margin="300,20,0,0">
+        Title="DetaljiPregleda"
+        Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
+    </Window.Resources>
+    <Grid Margin="10,20,0,0">
         
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -18,9 +21,10 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Frame x:Name="Main" NavigationUIVisibility="Hidden"/>
-        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <Label FontSize="17" Width="77" Margin="0,0,10,0" Content="Pacijent:"/>
-            <Label x:Name="DoktorLabel" FontSize="17">
+        
+            <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Label FontSize="17" Width="77" Margin="0,0,10,0" Content="Pacijent:" FontFamily="Yu Gothic"/>
+            <Label x:Name="DoktorLabel" FontSize="17" FontFamily="Yu Gothic">
                 <Label.Content>
                     <TextBlock>
                         <TextBlock.Text>
@@ -32,50 +36,48 @@
                     </TextBlock>
                 </Label.Content>
             </Label>
-            <Label x:Name="tip" FontSize="17" Content="{Binding TipTermina}"/>
+            <Label x:Name="tip" FontSize="17" Content="{Binding TipTermina}" Style="{DynamicResource Label}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,20,20,0">
-            <Button x:Name="zapocniPregled" Height="30" Width="150" FontSize="18" 
-                Background="Navy" Foreground="White" Content="Zapocni pregled" Margin="50,0,40,0" Click="zapocniTermin">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </Button.Resources>
+            <Button x:Name="zapocniPregled" FontSize="18" 
+                  Margin="50,0,40,0" Click="zapocniTermin" Style="{DynamicResource ImageButtonsHorizontal}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../Icon/DoctorIcons/start.jpg" Width="20"/>
+                    <TextBlock Text="Započni pregled"/>
+                </StackPanel>
             </Button>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1">
-            <Label Content="Datum i vreme termina:" FontSize="17" />
-        <Label x:Name="Datum" FontSize="17" Content="{Binding Appointment.DateTime, StringFormat=d}"/>
+            <Label Content="Datum i vreme termina:" FontSize="17" FontFamily="Yu Gothic"/>
+            <Label x:Name="Datum" FontSize="17" Content="{Binding Appointment.DateTime, StringFormat=d}" FontFamily="Yu Gothic"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <Label FontSize="17" Margin="0,0,10,0">Trajanje u minutama:</Label>
-            <Label FontSize="17" x:Name="trajanje" Content="{Binding TrajanjeUMinutima, Mode=OneWay}"></Label>
+            <Label FontSize="17" Margin="0,0,10,0" FontFamily="Yu Gothic">Trajanje u minutama:</Label>
+            <Label FontSize="17" x:Name="trajanje" Content="{Binding TrajanjeUMinutima, Mode=OneWay}" FontFamily="Yu Gothic"></Label>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <Label FontSize="17" Margin="0,0,10,0">Tip pregleda/operacije:</Label>
-            <Label FontSize="17" Name="novac" IsEnabled="False">Text</Label>
+            <Label FontSize="17" Margin="0,0,10,0" FontFamily="Yu Gothic">Tip pregleda/operacije:</Label>
+            <Label FontSize="17" Name="novac" IsEnabled="False" FontFamily="Yu Gothic">Text</Label>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <Label FontSize="17">Sala:</Label>
-            <Label x:Name="salalab" FontSize="17" Content="{Binding Appointment.Room.Name}"></Label>
-            </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Button x:Name="karton" Height="30" Width="150" FontSize="18"  Click="pregledKartona"
-                Background="Crimson" Foreground="White" Content="Pregled kartona" Margin="50,0,40,0">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </Button.Resources>
+            <Label FontSize="17" FontFamily="Yu Gothic">Sala:</Label>
+            <Label x:Name="salalab" FontSize="17" Content="{Binding Appointment.Room.Name}" FontFamily="Yu Gothic"></Label>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" >
+
+            <Button x:Name="karton" FontSize="18"  Click="pregledKartona"
+                  Margin="0,0,40,0" Style="{DynamicResource ImageButtonsHorizontal}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../Icon/DoctorIcons/view.png" Width="20"/>
+                    <TextBlock Text="Pregled kartona"/>
+                </StackPanel>
             </Button>
-            <Button x:Name="cancel" Width="150" Height="30" FontSize="18"
-                Background="White" Content="Nazad" Click="cancel_Click">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </Button.Resources>
+            <Button x:Name="cancel"  FontSize="18" Style="{DynamicResource ImageButtonsHorizontal}"
+                Click="cancel_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../Icon/DoctorIcons/back.png" Width="20"/>
+                    <TextBlock Text="Nazad"/>
+                </StackPanel>
             </Button>
         </StackPanel>
     </Grid>

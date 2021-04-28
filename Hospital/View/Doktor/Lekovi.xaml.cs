@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -54,16 +55,6 @@ namespace Hospital.View.Doctor
                 OnPropertyChanged();
             }
         }
-        private string sastojak;
-        public string Sastojak
-        {
-            get { return sastojak; }
-            set
-            {
-                sastojak = value;
-                OnPropertyChanged();
-            }
-        }
         private ObservableCollection<Medicine> zamenskiLekovi=new ObservableCollection<Medicine>();
         public ObservableCollection<Medicine> ZamenskiLekovi
         {
@@ -71,6 +62,17 @@ namespace Hospital.View.Doctor
             set
             {
                 zamenskiLekovi = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<Ingredient> ingredients = new ObservableCollection<Ingredient>();
+        public ObservableCollection<Ingredient> Ingredients
+        {
+            get { return ingredients; }
+            set
+            {
+                ingredients = value;
                 OnPropertyChanged();
             }
         }
@@ -83,11 +85,20 @@ namespace Hospital.View.Doctor
             set { lekoviCollection = value; }
         }
 
+        private ICollectionView ingredientCollection;
+
+        public ICollectionView IngredientCollection
+        {
+            get { return ingredientCollection; }
+            set { ingredientCollection = value; }
+        }
+
         public Lekovi()
         {
             InitializeComponent();
             this.DataContext = this;
             SetProperites();
+            AddFilterAndSorter();
         }
 
         private void SetProperites()
@@ -97,16 +108,42 @@ namespace Hospital.View.Doctor
             listBox.ItemsSource = lekoviZaPrikaz;
             SetReplacementMedicine();
             text = "Lek: ";
-            AddFilterAndSorter();
+            ReadIngredients();
+            listIngredients.ItemsSource = Ingredients;
+        }
+
+        private void ReadIngredients()
+        {
+            string[] lines2 = File.ReadAllLines("..\\..\\Files\\ingredients.txt");
+            foreach (string line in lines2)
+            {
+                Ingredient ingredient = new Ingredient();
+                ingredient.Name = line;
+                Ingredients.Add(ingredient);
+            }
         }
 
         private void AddFilterAndSorter()
         {
             LekoviCollection = CollectionViewSource.GetDefaultView(LekoviZaPrikaz);
+            IngredientCollection = CollectionViewSource.GetDefaultView(Ingredients);
+            IngredientCollection.Filter = filterIngredients;
             LekoviCollection.Filter = filterMedics;
             ICollectionView view = GetPretraga();
             view.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
             view.SortDescriptions.Add(new SortDescription("ID", ListSortDirection.Ascending));
+        }
+
+        private bool filterIngredients(object obj)
+        {
+            if (string.IsNullOrEmpty(pretraziSastojak.Text))
+            {
+                return true;
+            }
+            else
+            {
+                return (obj.ToString().IndexOf(pretraziSastojak.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
         }
 
         private bool filterMedics(object obj)
@@ -139,6 +176,7 @@ namespace Hospital.View.Doctor
             CollectionViewSource.GetDefaultView(listBox.ItemsSource).Refresh();
         }
 
+
         public ICollectionView GetPretraga()
         {
             return CollectionViewSource.GetDefaultView(LekoviZaPrikaz);
@@ -148,7 +186,7 @@ namespace Hospital.View.Doctor
         {
             if ((Medicine)listBox.SelectedItem != null)
             {
-                if (sacuvaj.Visibility.Equals(Visibility.Hidden))
+                if (sacuvaj.IsEnabled.Equals(false))
                 {
                     Lek = (Medicine)listBox.SelectedItem;
                     SetReplacementMedicine();
@@ -160,32 +198,23 @@ namespace Hospital.View.Doctor
 
         private void EditMedic(object sender, RoutedEventArgs e)
         {
-            dodajZamenu.Visibility = Visibility.Visible;
-            izbaciZamenu.Visibility = Visibility.Visible;
-            sacuvaj.Visibility = Visibility.Visible;
-            izmeni.Visibility = Visibility.Hidden;
             listaZamena.IsEnabled = true;
             doza.IsEnabled = true;
-            izbaciSastojak.Visibility = Visibility.Visible;
-            dodajSastojak.Visibility = Visibility.Visible;
             dodajZamenu.IsEnabled = true;
             izbaciZamenu.IsEnabled = true;
             sacuvaj.IsEnabled = true;
             izbaciSastojak.IsEnabled = true;
             dodajSastojak.IsEnabled = true;
             sastojci.IsEnabled = true;
-            txtSastojak.Visibility = Visibility.Visible;
-            sastojakLabela.Visibility = Visibility.Hidden;
+            izmeni.IsEnabled = false;
         }
 
         private void AddIngridient(object sender, RoutedEventArgs e)
         {
-            if (!Sastojak.Equals(""))
+            if (listIngredients.SelectedItem !=null)
             {
-                Ingredient i = new Ingredient();
-                i.Name = Sastojak;
+                Ingredient i =(Ingredient)listIngredients.SelectedItem;
                 Lek.AddIngredient(i); 
-                Sastojak = "";
                 sastojci.ItemsSource = Lek.Ingredient;
                 sastojci.Items.Refresh();
             }
@@ -242,22 +271,20 @@ namespace Hospital.View.Doctor
 
         private void SavedChangesVisibilities()
         {
-            izmeni.Visibility = Visibility.Visible;
-            sacuvaj.Visibility = Visibility.Hidden;
-            dodajZamenu.Visibility = Visibility.Hidden;
-            izbaciZamenu.Visibility = Visibility.Hidden;
             listaZamena.IsEnabled = false;
             doza.IsEnabled = false;
-            izbaciSastojak.Visibility = Visibility.Hidden;
-            dodajSastojak.Visibility = Visibility.Hidden;
             dodajZamenu.IsEnabled = false;
             izbaciZamenu.IsEnabled = false;
             sacuvaj.IsEnabled = false;
             izbaciSastojak.IsEnabled = false;
             dodajSastojak.IsEnabled = false;
             sastojci.IsEnabled = false;
-            sastojakLabela.Visibility = Visibility.Hidden;
-            txtSastojak.Visibility = Visibility.Hidden;
+            izmeni.IsEnabled = true;
+        }
+
+        private void SearchIngredientFilter(object sender, TextChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(listIngredients.ItemsSource).Refresh();
         }
     }
 }
