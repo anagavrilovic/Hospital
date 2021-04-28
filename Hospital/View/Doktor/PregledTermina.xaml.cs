@@ -21,10 +21,16 @@ namespace Hospital.View
 
     public partial class MakeApointment : Page, INotifyPropertyChanged
     {
+        private ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
         public ObservableCollection<Appointment> Appointments
         {
-            get; set;
+            get => appointments;
+            set
+            {
+                appointments = value;
+            }
         }
+        private double _durationInHours;
         public double DurationInHours 
         { 
             get => _durationInHours;
@@ -33,17 +39,7 @@ namespace Hospital.View
                 _durationInHours = value; 
             }
         }
-        private ObservableCollection<string> comboBoxItems;
-        public ObservableCollection<string> ComboBoxItems
-        {
-            get => comboBoxItems;
-            set
-            {
-                comboBoxItems = value;
-            }
-        }
-        
-
+       
         protected virtual void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
@@ -53,18 +49,16 @@ namespace Hospital.View
         }
         private string patientId;
         public event PropertyChangedEventHandler PropertyChanged;
-        AppointmentStorage aStorage;
-        private double _durationInHours;
-        private DoctorStorage dStorage = new DoctorStorage();
+        AppointmentStorage appointmentStorage=new AppointmentStorage();
+        private DoctorStorage doctorStorage = new DoctorStorage();
 
-        public MakeApointment(Hospital.Model.Doctor d,string patientId)
+        public MakeApointment(Hospital.Model.Doctor doctor,string patientId)
         {
-            Appointments = new ObservableCollection<Appointment>();
             InitializeComponent();
             this.DataContext = this;
             this.patientId = patientId;
             ComboBox.ItemsSource = Enum.GetValues(typeof(DoctorSpecialty)).Cast<DoctorSpecialty>();
-            ComboBox.SelectedIndex =(int)d.Specialty ;
+            ComboBox.SelectedIndex =(int)doctor.Specialty ;
             dataGridPregledi.Loaded += setMinWidths;
         }
         
@@ -78,21 +72,20 @@ namespace Hospital.View
             }
         }
 
-        private void Dodaj(object sender, RoutedEventArgs e)
+        private void AddAppointment(object sender, RoutedEventArgs e)
         {
-            KreiranjeTermina termin = new KreiranjeTermina(this,patientId);
-            dodaj.IsEnabled = false;
-            termin.Owner = Window.GetWindow(this);
-            termin.Show();
+            KreiranjeTermina appointmentWindow = new KreiranjeTermina(this,patientId,ComboBox.SelectedIndex);
+            addButton.IsEnabled = false;
+            appointmentWindow.Owner = Window.GetWindow(this);
+            appointmentWindow.Show();
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void SetAppointmentsInDataGrid(object sender, SelectionChangedEventArgs e)
         {
             Appointments.Clear();
-            aStorage = new AppointmentStorage();
-            foreach (Appointment a in aStorage.GetAll())
+            foreach (Appointment a in appointmentStorage.GetAll())
             {
-                Hospital.Model.Doctor d = dStorage.GetOne(a.IDDoctor);
+                Hospital.Model.Doctor d = doctorStorage.GetOne(a.IDDoctor);
                 if (d.Specialty.Equals((DoctorSpecialty)ComboBox.SelectedItem))
                 {
                     Appointments.Add(a);

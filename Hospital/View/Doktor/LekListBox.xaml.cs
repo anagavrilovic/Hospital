@@ -22,49 +22,60 @@ namespace Hospital.View
     /// </summary>
     public partial class LekListBox : Window, INotifyPropertyChanged
     {
-        ObservableCollection<Medicine> lekovi = new ObservableCollection<Medicine>();
+
         private MedicalRecord medicalRecord;
-        MedicineStorage mStorage = new MedicineStorage();
+        MedicineStorage medicineStorage = new MedicineStorage();
         public event PropertyChangedEventHandler PropertyChanged;
         private Terapija parentWindow;
-        private string text;
-        public string Text
+
+        ObservableCollection<Medicine> medics = new ObservableCollection<Medicine>();
+        ObservableCollection<Medicine> Medics
         {
-            get { return text; }
+            get { return medics; }
             set
             {
-                text = value;
+                medics = value;
                 OnPropertyChanged();
             }
 
         }
-        ObservableCollection<Medicine> Lekovi
+
+        private string medicineDescription;
+        public string MedicineDescription
         {
-            get { return lekovi; }
+            get { return medicineDescription; }
             set
             {
-                lekovi = value;
+                medicineDescription = value;
                 OnPropertyChanged();
             }
 
         }
-        private string dana;
-        public string Dana
+        private ICollectionView medicsCollection;
+
+        public ICollectionView MedicsCollection
         {
-            get { return dana; }
+            get { return medicsCollection; }
+            set { medicsCollection = value; }
+        }
+
+        private string daysForConsumption;
+        public string DaysForConsumption
+        {
+            get { return daysForConsumption; }
             set
             {
-                dana = value;
+                daysForConsumption = value;
                 OnPropertyChanged();
             }
         }
-        private string dan;
-        public string Dan
+        private string dailyIntake;
+        public string DailyIntake
         {
-            get { return dan; }
+            get { return dailyIntake; }
             set
             {
-                dan = value;
+                dailyIntake = value;
                 OnPropertyChanged();
             }
         }
@@ -80,91 +91,112 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
-            this.medicalRecord = medicalRecord;
-            for(int i = 1; i < 10; i++)
-            {
-                dnevni.Items.Add(i.ToString());
-            }
-            for(int i = 1; i < 60; i++)
-            {
-                danaZaK.Items.Add(i.ToString());
-            }
-            dnevni.SelectedIndex = 2;
-            danaZaK.SelectedIndex = 6;
-            Lekovi=mStorage.GetAll();
+            FillComboBoxes();
+            FillProperties(medicalRecord);
+            FilterAndSorterParameters();
             this.parentWindow = parentWindow;
-            this.listBox.ItemsSource = Lekovi;
+        }
+
+        private void FilterAndSorterParameters()
+        {
+            MedicsCollection = CollectionViewSource.GetDefaultView(Medics);
+            MedicsCollection.Filter = filterMedics;
             ICollectionView view = GetPretraga();
             view.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
             view.SortDescriptions.Add(new SortDescription("ID", ListSortDirection.Ascending));
         }
 
-        private void filterMedicine(object sender, RoutedEventArgs e)
+        private void FillProperties(MedicalRecord medicalRecord)
         {
-            ICollectionView view = GetPretraga();
-            view.Filter = delegate (object item)
-            {
-                Medicine m = item as Medicine;
-                string txt = m.Name + " " + m.ID;
-                return txt.Contains(pretrazi.Text);
-            };
-        }
-        public ICollectionView GetPretraga()
-        {
-            return CollectionViewSource.GetDefaultView(Lekovi);
+            Medics = medicineStorage.GetAll();
+            this.medicalRecord = medicalRecord;
+            this.listBox.ItemsSource = Medics;
         }
 
-        private void listBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void FillComboBoxes()
         {
-            if (dan != null && dana != null)
+            for (int i = 1; i < 10; i++)
             {
-                Medicine m=((Medicine)listBox.SelectedItem);
-                m.DurationInDays = int.Parse(Dana);
-                m.TimesPerDay = int.Parse(Dan);
-                m.Description = Text;
-                MessageBox.Show(Text);
-                bool postoji = false;
-                foreach (Medicine m1 in parentWindow.Lekovi){
-                    if (m1.ID.Equals(m.ID))
-                    {
-                        postoji = true;
-                    }
-                }
-                if (postoji)
-                {
-                    MessageBox.Show("Vec ste dodali ovaj lek");
-                }
-                else
-                {
-                    foreach(string medicineName in medicalRecord.Allergen.MedicineNames)
-                    {
-                        if (medicineName.Equals(m.Name))
-                        {
-                            MessageBox.Show("Pacijent je alergican na dati lek");
-                        }
-                        else
-                        {
-                            parentWindow.Lekovi.Add(m);
-                            this.Close();
-                        }
-                    }
-                }
+                dailyIntakeComboBox.Items.Add(i.ToString());
+            }
+            for (int i = 1; i < 60; i++)
+            {
+                daysConsumptionComboBox.Items.Add(i.ToString());
+            }
+            dailyIntakeComboBox.SelectedIndex = 2;
+            daysConsumptionComboBox.SelectedIndex = 6;
+        }
+
+        private bool filterMedics(object obj)
+        {
+            if (string.IsNullOrEmpty(pretrazi.Text))
+            {
+                return true;
+            }
+            else
+            {
+                return (obj.ToString().IndexOf(pretrazi.Text, StringComparison.OrdinalIgnoreCase) >= 0);
             }
         }
 
-        private void dnevni_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void filterMedicine(object sender, RoutedEventArgs e)
         {
-
-            dan = (string)dnevni.SelectedItem;
-          
+            CollectionViewSource.GetDefaultView(listBox.ItemsSource).Refresh();
         }
 
-        private void danaZaK_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public ICollectionView GetPretraga()
         {
-            dana = (string)danaZaK.SelectedItem;
+            return CollectionViewSource.GetDefaultView(Medics);
         }
 
-        private void Odustani(object sender, RoutedEventArgs e)
+        private void AddMedicineToTherapy(object sender, MouseButtonEventArgs e)
+        {
+            Medicine medicToBeAdded = FillMedicine();
+            if(!AlreadyAddedToTherapy(medicToBeAdded) && !AllergicToMedic(medicToBeAdded))
+            {
+                    parentWindow.Medics.Add(medicToBeAdded);
+                    this.Close();
+            }
+        }
+
+        private bool AllergicToMedic(Medicine medicToBeAdded)
+        {
+            foreach (string medicineName in medicalRecord.Allergen.MedicineNames)
+            {
+                if (medicineName.Equals(medicToBeAdded.Name))
+                {
+                    MessageBox.Show("Pacijent je alergican na dati lek");
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+        private bool AlreadyAddedToTherapy(Medicine m)
+        {
+            foreach (Medicine m1 in parentWindow.Medics)
+            {
+                if (m1.ID.Equals(m.ID))
+                {
+                    MessageBox.Show("Vec ste dodali ovaj lek");
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private Medicine FillMedicine()
+        {
+            Medicine m = ((Medicine)listBox.SelectedItem);
+            m.DurationInDays = int.Parse(DaysForConsumption);
+            m.TimesPerDay = int.Parse(DailyIntake);
+            m.Description = MedicineDescription;
+            return m;
+        }
+
+        private void BackToTherapy(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

@@ -52,7 +52,7 @@ namespace Hospital.View
             InitFields();
             this.DataContext = this;
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
-            this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 3 / 4);
+            this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 1 / 2);
         }
 
         private void InitFields()

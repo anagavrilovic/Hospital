@@ -17,14 +17,12 @@
       "Street": "Bulevar kralja Petra",
       "StreetNumber": "4a",
       "City": {
-          "CityName": "Subotica",
-          "Township": "Subotica",
-          "PostalCode": "24000",
-          "Country": {
-              "CountryName": "Srbija"
-          }
+        "CityName": "Subotica",
+        "Township": "Subotica",
+        "PostalCode": "24000",
+        "Country": { "CountryName": "Srbija" }
       }
-  }
+    }
   },
   {
     "Specialty": 12,
@@ -44,13 +42,36 @@
       "Street": "Strazilovska",
       "StreetNumber": "5/3",
       "City": {
-          "CityName": "Novi Sad",
-          "Township": "Novi Sad",
-          "PostalCode": "21000",
-          "Country": {
-              "CountryName": "Srbija"
-          }
+        "CityName": "Novi Sad",
+        "Township": "Novi Sad",
+        "PostalCode": "21000",
+        "Country": { "CountryName": "Srbija" }
       }
-  }
+    }
+  },
+  {
+    "Specialty": 9,
+    "RoomID": "532553252",
+    "Username": "suks",
+    "Password": "suks",
+    "FirstName": "Srdjan",
+    "LastName": "Sukovic",
+    "PersonalID": "1111",
+    "PhoneNumber": "0623662623",
+    "Email": "srdjansuks@gmail.com",
+    "DateOfBirth": "1999-07-07T00:00:00",
+    "CardID": "513155335",
+    "MaritalStatus": 3,
+    "Gender": 0,
+    "Address": {
+      "Street": "Mihajla Pupina",
+      "StreetNumber": "9",
+      "City": {
+        "CityName": "Srpska Crnja",
+        "Township": "Novi Sad",
+        "PostalCode": "21000",
+        "Country": { "CountryName": "Srbija" }
+      }
+    }
   }
 ]

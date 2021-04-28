@@ -37,7 +37,7 @@ namespace Hospital.View
         private Diagnosis dia;
         private MakeApointment ma;
         private Terapija th;
-        public Hospital.Model.Doctor Doktor
+        public Hospital.Model.Doctor LoggedInDoctor
         {
             get { return doktor; }
             set
@@ -68,8 +68,8 @@ namespace Hospital.View
         {
             appointment = a;
             pregled = new Examination();
-            Doktor = new Hospital.Model.Doctor();
-            Doktor = dStorage.GetOne(a.IDDoctor);
+            LoggedInDoctor = new Hospital.Model.Doctor();
+            LoggedInDoctor = dStorage.GetOne(a.IDDoctor);
             
             InitializeComponent();
             intiProperties();
@@ -105,9 +105,13 @@ namespace Hospital.View
             {
                 case 1:
                     Karton.Content = frameKarton;
+                    KartonLabela.Foreground = Brushes.White;
+                    AnamnezaLabela.Foreground = Brushes.Black;
                     break;
                 case 2:
                     Anamneza.Content = frameAnamnesis;
+                    KartonLabela.Foreground = Brushes.Black;
+                    AnamnezaLabela.Foreground = Brushes.White;
                     break;
                 case 3:
                     Terapija.Content = frameTherapy;
