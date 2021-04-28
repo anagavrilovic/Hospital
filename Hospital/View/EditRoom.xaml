@@ -52,7 +52,7 @@
         <ComboBox x:Name="statusCB"        Grid.Row="9"   Grid.ColumnSpan="2" Margin="30,7,28,4.8"    BorderThickness="1">
             <ComboBoxItem IsSelected="True" Content="SLOBODNA"            Foreground="#FF2E83BF"/>
             <ComboBoxItem                   Content="ZAUZETA"             Foreground="#FF2E83BF"/>
-            <ComboBoxItem                   Content="RENOVIRA SE"         Foreground="#FF2E83BF"/>
+            <ComboBoxItem                   Content="RENOVIRA_SE"         Foreground="#FF2E83BF"/>
         </ComboBox>
 
         <ComboBox x:Name="typeCB"          Grid.Row="11"  Grid.ColumnSpan="2" Margin="30,7,28,4.8"    BorderThickness="1">

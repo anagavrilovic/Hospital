@@ -45,6 +45,7 @@ namespace Hospital.Model
             foreach(RoomRenovation renovation in roomRenovation)
             {
                 renovation.Room.SerializeInfo = false;
+                renovation.WareHouse.SerializeInfo = false;
             }
 
             doSerialization();
@@ -65,25 +66,30 @@ namespace Hospital.Model
                 }
             }
 
+            foreach (RoomRenovation r in roomRenovation)
+            {
+                r.Room.SerializeInfo = false;
+                renovation.WareHouse.SerializeInfo = false;
+            }
+
             doSerialization();
         }
 
-        /*
         public bool isBeingRenovatedNow(Appointment appointment)
         {
             roomRenovation = GetAll();
 
             foreach (RoomRenovation r in roomRenovation)
             {
-                if (appointment.DateTime >= r.StartDate && appointment.DateTime.AddHours(appointment.DurationInHours) <= r.EndDate)
+                if (appointment.DateTime > r.StartDate && appointment.DateTime.AddHours(appointment.DurationInHours) < r.EndDate + new TimeSpan(23,59,59) && appointment.Room.Id.Equals(r.Room.Id))
                 {
-                    return false;
+                    return true;
                 }
-
-                return true;
             }
+
+            return false;
         }
-        */
+        
         public void doSerialization()
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))

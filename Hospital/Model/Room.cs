@@ -28,7 +28,6 @@ namespace Hospital
         public Room()
         {
             SerializeInfo = true;
-            DeserializeInfo = true;
         }
 
         public string Id 
@@ -140,33 +139,9 @@ namespace Hospital
             return this.SerializeInfo;
           
         }
-        /*
-        public bool ShouldDeserializeName()
-        {
-            return DeserializeInfo;
-        }
 
-        public bool ShouldDeserializeFloor()
-        {
-            return DeserializeInfo;
-        }
-
-        public bool ShouldDeserializeStatus()
-        {
-            return DeserializeInfo;
-        }
-
-        public bool ShouldDeserializeType()
-        {
-            return DeserializeInfo;
-        }
-
-        */
         [JsonIgnore]
         public bool SerializeInfo { get; set; }
-
-        [JsonIgnore]
-        public bool DeserializeInfo { get; set; }
 
         override
         public string ToString()

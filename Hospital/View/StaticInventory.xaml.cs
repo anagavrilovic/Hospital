@@ -35,8 +35,7 @@ namespace Hospital.View
         }
 
         private string id;
-        private static ObservableCollection<Inventory> allInventory;
-
+     
         public static ObservableCollection<Inventory> Inventory
         {
             get;
@@ -63,10 +62,7 @@ namespace Hospital.View
             this.id = id;
 
             InventoryStorage storage = new InventoryStorage();
-            allInventory = storage.GetAll();
-            // Inventory = storage.GetByRoomID(id);
-
-            Inventory = new ObservableCollection<Inventory>();
+    
             Inventory = storage.GetByRoomID(id);
 
             InventoryCollection = CollectionViewSource.GetDefaultView(Inventory);

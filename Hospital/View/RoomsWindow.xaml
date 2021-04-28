@@ -36,7 +36,7 @@
 
         <Button x:Name="edit"             Content="IZMENI SALU"        Grid.Row="1" Grid.Column="0"   Margin="19,23,10,10" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="editRoom"/>
         <Button x:Name="staticInventory"  Content="PREGLED INVENTARA"  Grid.Row="1" Grid.Column="1"   Margin="10,23,19,10" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="viewStaticInventory" />
-        <Button x:Name="renovation"       Content="ZAKAŽI RENOVIRANJE" Grid.Row="2" Grid.Column="0"   Margin="19,10,10,21" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="renovateRoom"/>
+        <Button x:Name="renovation"       Content="RENOVIRANJA SALA"   Grid.Row="2" Grid.Column="0"   Margin="19,10,10,21" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="renovateRoom"/>
         <Button x:Name="dynamicInventory" Content="PREGLED OPREME"     Grid.Row="2" Grid.Column="1"   Margin="10,10,19,21" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="viewDynamicInventory"/>
 
         <TextBox x:Name="searchRoom"          Grid.Row="3" Grid.ColumnSpan="2" Margin="19,22,51,26.8" TextChanged="searchRooms"/>
@@ -50,9 +50,9 @@
 
                 <DataGrid.Columns>
                     <DataGridTextColumn     Header="Oznaka"                    Binding="{Binding Id}"    />
-                    <DataGridTextColumn     Header="Naziv"    Width="1.1*"     Binding="{Binding Name}"  />
-                    <DataGridTextColumn     Header="Sprat"    Width="1.01*"    Binding="{Binding Floor}" />
-                    <DataGridTextColumn     Header="Status"   Width="1.1*"     Binding="{Binding Status}"/>
+                    <DataGridTextColumn     Header="Naziv"    Width="Auto"     Binding="{Binding Name}"  />
+                    <DataGridTextColumn     Header="Sprat"    Width="Auto"     Binding="{Binding Floor}" />
+                    <DataGridTextColumn     Header="Status"   Width="Auto"     Binding="{Binding Status}"/>
                     <DataGridTextColumn     Header="Tip"      Width="1.4*"     Binding="{Binding Type}"  />
                 </DataGrid.Columns>
             </DataGrid>

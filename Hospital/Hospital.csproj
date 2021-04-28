@@ -175,6 +175,9 @@
     <Compile Include="View\RenovateRoom.xaml.cs">
       <DependentUpon>RenovateRoom.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Renovations.xaml.cs">
+      <DependentUpon>Renovations.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Secretary\DetaljiKarton.xaml.cs">
       <DependentUpon>DetaljiKarton.xaml</DependentUpon>
     </Compile>
@@ -377,6 +380,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RenovateRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Renovations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -133,16 +133,18 @@ namespace Hospital
                     };
                     supplies.Add(newItem);
                 }
-
-
-                foreach (MedicalSupply ms in DynamicInventory.Supply)
-                {
-                    if (ms.Id.Equals(fromFirstRoom.Id) && ms.RoomID.Equals(fromFirstRoom.RoomID))
+            
+               if(!DynamicInventory.Supply.Equals(null))
+               {
+                    foreach (MedicalSupply ms in DynamicInventory.Supply)
                     {
-                        ms.Quantity -= quantity;
+                        if (ms.Id.Equals(fromFirstRoom.Id) && ms.RoomID.Equals(fromFirstRoom.RoomID))
+                        {
+                            ms.Quantity -= quantity;
+                        }
                     }
                 }
-
+         
                 foreach (MedicalSupply ms in supplies)
                 {
                     if (ms.Id.Equals(fromFirstRoom.Id) && ms.RoomID.Equals(fromFirstRoom.RoomID))

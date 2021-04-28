@@ -22,6 +22,7 @@ namespace Hospital.View
     {
         private Room room;
         private RoomRenovation roomRenovation;
+        private RoomStorage roomStorage;
 
         public RoomRenovation RoomRenovation
         {
@@ -36,13 +37,15 @@ namespace Hospital.View
             this.DataContext = this;
             this.room = room;
             this.roomRenovation = new RoomRenovation();
+            this.roomStorage = new RoomStorage();
         }
 
         private void accept(object sender, RoutedEventArgs e)
         {
             roomRenovation.Room = room;
             roomRenovation.Room.SerializeInfo = false;
-            // roomRenovation.Room.DeserializeInfo = false;
+            roomRenovation.WareHouse = roomStorage.GetOne(magacinCB.Text);
+            roomRenovation.WareHouse.SerializeInfo = false;
 
             if(roomRenovation.StartDate >= roomRenovation.EndDate)
             {
@@ -56,7 +59,7 @@ namespace Hospital.View
 
             foreach(Appointment appointment in appointmentStorage.GetAll())
             {
-                if(appointment.DateTime >= roomRenovation.StartDate && appointment.DateTime <= roomRenovation.EndDate && appointment.Room.Id.Equals(roomRenovation.Room.Id))
+                if(appointment.DateTime > roomRenovation.StartDate && appointment.DateTime < roomRenovation.EndDate + new TimeSpan(23,59,59) && appointment.Room.Id.Equals(roomRenovation.Room.Id))
                 {
                     isAnyAppointmentInRenovationPeriod = true;
                     break;

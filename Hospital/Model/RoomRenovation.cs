@@ -1,9 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using Hospital.View;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Hospital.Model
@@ -23,7 +25,6 @@ namespace Hospital.Model
         private DateTime startDate;
         private DateTime endDate;
         private string description;
-        private Room room;
 
         public DateTime StartDate
         {
@@ -55,13 +56,65 @@ namespace Hospital.Model
             }
         }
 
-        public Room Room
+        public Room Room { get; set; }
+        public Room WareHouse { get; set; }
+       
+
+        public void startRenovation()
         {
-            get => room;
-            set
+            Task task = new Task(() => waitUntilEndDate());
+            task.Start();
+        }
+
+        public void waitUntilEndDate()
+        {
+            Room r = roomStorage.GetOne(Room.Id);
+
+            if (StartDate > DateTime.Now)
             {
-                room = value;
+                TimeSpan timeSpan = StartDate.Subtract(DateTime.Now);
+                Thread.Sleep(timeSpan);
+            }
+            else if (EndDate > DateTime.Now && DateTime.Now > StartDate)
+            {
+                TimeSpan timeSpan = EndDate.Subtract(DateTime.Now);
+                if (r.Status != RoomStatus.RENOVIRA_SE)
+                {
+                    transferInventoryToWarehouse();
+                    r.Status = RoomStatus.RENOVIRA_SE;
+                    roomStorage.Save(r);
+                }
+                
+                Thread.Sleep(timeSpan);
+            }
+            else 
+            {
+                finishRenovation();
             }
         }
+
+        private void transferInventoryToWarehouse()
+        {
+            foreach (Inventory inventory in inventoryStorage.GetByRoomID(Room.Id))
+            {
+                TransferInventory transfer = new TransferInventory(inventory.Id, inventory.Quantity, Room.Id, WareHouse.Id, DateTime.Now);
+                transfer.updateInventory(false);
+               // StaticInventory.Inventory = inventoryStorage.GetByRoomID(Room.Id);
+            }            
+        }
+
+        private void finishRenovation()
+        {
+            Room room = roomStorage.GetOne(Room.Id);
+            room.Status = RoomStatus.SLOBODNA;
+            roomStorage.Save(room);
+            roomRenovationStorage.Delete(this);
+        }
+
+       private InventoryStorage inventoryStorage = new InventoryStorage();
+       private MedicalSupplyStorage medicalSupplyStorage = new MedicalSupplyStorage();
+       private TransferInventoryStorage transferInventoryStorage = new TransferInventoryStorage();
+       private RoomStorage roomStorage = new RoomStorage();
+       private RoomRenovationStorage roomRenovationStorage = new RoomRenovationStorage();
     }
 }
