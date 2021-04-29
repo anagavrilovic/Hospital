@@ -69,7 +69,7 @@ namespace Hospital.Model
             foreach (RoomRenovation r in roomRenovation)
             {
                 r.Room.SerializeInfo = false;
-                renovation.WareHouse.SerializeInfo = false;
+                r.WareHouse.SerializeInfo = false;
             }
 
             doSerialization();
