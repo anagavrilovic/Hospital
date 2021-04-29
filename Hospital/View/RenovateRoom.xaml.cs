@@ -93,6 +93,9 @@ namespace Hospital.View
         private void cancel(object sender, RoutedEventArgs e)
         {
             this.Close();
+            Renovations renovations = new Renovations();
+            renovations.Owner = Application.Current.MainWindow;
+            renovations.Show();
         }
 
         private void back(object sender, RoutedEventArgs e)
