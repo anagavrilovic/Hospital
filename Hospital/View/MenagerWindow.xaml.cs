@@ -51,9 +51,11 @@ namespace Hospital.View
             obavestenja.Show();
         }
 
-        private void getEmployees(object sender, RoutedEventArgs e)
+        private void getMedicines(object sender, RoutedEventArgs e)
         {
-            //TODO
+            MedicinesWindow medicinesWindow = new MedicinesWindow();
+            medicinesWindow.Owner = Application.Current.MainWindow;
+            medicinesWindow.Show();
         }
 
         private void back(object sender, RoutedEventArgs e)

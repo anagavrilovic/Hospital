@@ -115,6 +115,9 @@
     <Compile Include="View\AddMedicalSupply.xaml.cs">
       <DependentUpon>AddMedicalSupply.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\AddMedicine.xaml.cs">
+      <DependentUpon>AddMedicine.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Doktor\Anamnesis.xaml.cs">
       <DependentUpon>Anamnesis.xaml</DependentUpon>
     </Compile>
@@ -168,6 +171,9 @@
     </Compile>
     <Compile Include="View\Doktor\Termin.xaml.cs">
       <DependentUpon>Termin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MedicinesWindow.xaml.cs">
+      <DependentUpon>MedicinesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ObaveštenjaUpravnik.xaml.cs">
       <DependentUpon>ObaveštenjaUpravnik.xaml</DependentUpon>
@@ -315,6 +321,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AddMedicine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Doktor\Anamnesis.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -374,6 +384,10 @@
     <Page Include="View\Doktor\PregledTermina.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\MedicinesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ObaveštenjaUpravnik.xaml">
       <SubType>Designer</SubType>
@@ -705,6 +719,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\DoctorIcons\save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\minus.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -36,7 +36,7 @@
 
         <Button x:Name="profil"         Content="PRIKAŽI PROFIL"              Grid.Row="2"  Margin="15,10"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20"/>
         <Button x:Name="rooms"          Content="SALE"                        Grid.Row="3"  Margin="15,10"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Click="getRooms" />
-        <Button x:Name="employees"      Content="ZAPOSLENI"                   Grid.Row="4"  Margin="15,10"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Click="getEmployees"/>
+        <Button x:Name="employees"      Content="LEKOVI"                      Grid.Row="4"  Margin="15,10"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Click="getMedicines"/>
         <Button x:Name="notifications"  Content="OBAVEŠTENJA"                 Grid.Row="5"  Margin="15,10"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Click="getNotifications"/>
         <Button x:Name="report"         Content="IZVEŠTAJ O STANJU OPREME"    Grid.Row="6"  Margin="15,10"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20"/>
 
