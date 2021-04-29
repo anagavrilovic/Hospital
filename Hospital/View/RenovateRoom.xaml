@@ -42,13 +42,21 @@
 
         <Label Content="ZAKAZIVANJE RENOVIRANJA" Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="30,2.8,28,0.2" FontWeight="Bold"/>
 
-        <Label Content="Oznaka i naziv sale:" Grid.Row="2"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,9.8,186,0.2"  Grid.ColumnSpan="2" />
+        <Label Content="Oznaka sale:"         Grid.Row="2"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,9.8,186,0.2"  Grid.ColumnSpan="2" />
         <Label Content="Datum početka:"       Grid.Row="4"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,9.8,186,0.2"  Grid.ColumnSpan="2" />
         <Label Content="Datum završetka:"     Grid.Row="6"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,14.8,5,0.2"   Grid.ColumnSpan="2"/>
         <Label Content="Magacin za privremeno skladištenje opreme:" Grid.Row="8" Foreground="#FF1E49D9" FontSize="16" Margin="30,15,5,43.2" Grid.ColumnSpan="2" Grid.RowSpan="2" />
         <Label Content="Opis:"                Grid.Row="10"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,14.8,5,0" />
 
-        <TextBox    x:Name="nazivTxt"     Grid.Row="3" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" IsReadOnly="True" />
+        <ComboBox x:Name="roomCB"      Grid.Row="3" Grid.ColumnSpan="2" Margin="30,7,28,4.8" BorderThickness="1">
+            <ComboBoxItem                   Content="532553252"    Foreground="#FF2E83BF" Margin="2,0,-2.2,0"/>
+            <ComboBoxItem IsSelected="True" Content="1"            Foreground="#FF2E83BF"/>
+            <ComboBoxItem                   Content="2"            Foreground="#FF2E83BF"/>
+            <ComboBoxItem                   Content="3"            Foreground="#FF2E83BF"/>
+        </ComboBox>
+       
+        <!--TextBox    x:Name="nazivTxt"     Grid.Row="3" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" IsReadOnly="True" /-->
+        
         <DatePicker x:Name="dateStart"    Grid.Row="5" Grid.ColumnSpan="2" Margin="30,5,28,5.2" SelectedDate="{Binding Path=RoomRenovation.StartDate, Mode=OneWayToSource, TargetNullValue={x:Static sys:DateTime.Now}}" DisplayDateStart="{x:Static sys:DateTime.Today}" Focusable="False"/>
         <DatePicker x:Name="dateEnd"      Grid.Row="7" Grid.ColumnSpan="2" Margin="30,5,28,5.2" SelectedDate="{Binding Path=RoomRenovation.EndDate,   Mode=OneWayToSource, TargetNullValue={x:Static sys:DateTime.Now}}" DisplayDateStart="{x:Static sys:DateTime.Today}" Focusable="False"/>
 

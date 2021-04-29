@@ -20,7 +20,7 @@ namespace Hospital.View
     /// </summary>
     public partial class RenovateRoom : Window
     {
-        private Room room;
+        //private Room room;
         private RoomRenovation roomRenovation;
         private RoomStorage roomStorage;
 
@@ -31,23 +31,29 @@ namespace Hospital.View
         }
 
 
-        public RenovateRoom(Room room)
+        public RenovateRoom()
         {
             InitializeComponent();
             this.DataContext = this;
-            this.room = room;
+            // this.room = room;
             this.roomRenovation = new RoomRenovation();
             this.roomStorage = new RoomStorage();
         }
 
         private void accept(object sender, RoutedEventArgs e)
-        {
-            roomRenovation.Room = room;
+        { 
+            // roomRenovation.Room = room;
+            roomRenovation.Room = roomStorage.GetOne(roomCB.Text);
             roomRenovation.Room.SerializeInfo = false;
             roomRenovation.WareHouse = roomStorage.GetOne(magacinCB.Text);
             roomRenovation.WareHouse.SerializeInfo = false;
 
-            if(roomRenovation.StartDate >= roomRenovation.EndDate)
+            if (roomRenovation.Room.Status == RoomStatus.RENOVIRA_SE)
+            {
+                MessageBox.Show("Izabrana sala se trenutno renovira!");
+            }
+
+            if (roomRenovation.StartDate >= roomRenovation.EndDate)
             {
                 MessageBox.Show("Pogrešan izbor datuma renoviranja!");
                 return;
@@ -70,6 +76,10 @@ namespace Hospital.View
             {
                 RoomRenovationStorage storage = new RoomRenovationStorage();
                 storage.Save(roomRenovation);
+                
+                Renovations renovations = new Renovations();
+                renovations.Owner = Application.Current.MainWindow;
+                renovations.Show();
 
                 this.Close();
             }

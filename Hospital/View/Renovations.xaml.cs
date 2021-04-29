@@ -57,8 +57,31 @@ namespace Hospital.View
 
         private void addNewRenovation(object sender, RoutedEventArgs e)
         {
+             RenovateRoom renovateRoom = new RenovateRoom();
+             renovateRoom.Owner = Application.Current.MainWindow;
+             this.Close();
+             renovateRoom.Show();
+        }
 
-            this.Close();
+        private void deleteRenovation(object sender, RoutedEventArgs e)
+        {
+            RoomRenovation selectedItem = (RoomRenovation)listBoxRenovations.SelectedItem;
+
+            if (selectedItem != null)
+            {
+                MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da otkažete renoviranje?",
+                                        "Otkazivanje renoviranja",
+                                        MessageBoxButton.YesNo,
+                                        MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    if (selectedItem != null)
+                    {
+                        roomRenovationStorage.Delete(selectedItem);
+                        RoomRenovations = roomRenovationStorage.GetAll();
+                    }
+                }
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
