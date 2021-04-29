@@ -42,7 +42,7 @@
         <TextBox x:Name="searchRoom"          Grid.Row="3" Grid.ColumnSpan="2" Margin="19,22,51,26.8" TextChanged="searchRooms"/>
         <Image Source="/Icon/search-blue.png" Grid.Row="3" Grid.Column="1"     Margin="161,20,7,21"   MouseDown="btnSearchMouseDown"/>
 
-        <ScrollViewer Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="2" Background="Azure" HorizontalScrollBarVisibility="Auto" Margin="10,0.2,0,9.8">
+        <ScrollViewer Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="2" Background="Azure" VerticalScrollBarVisibility="Hidden" Margin="10,0.2,0,9.8">
 
             <DataGrid x:Name="dataGridRooms" ItemsSource="{Binding Path=Rooms, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" 
                   SelectionMode="Single" AutoGenerateColumns="False" HorizontalAlignment="Left" 

@@ -42,7 +42,7 @@
         <Label Content="Cena:"     Grid.Row="6" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
         <Label Content="Količina:" Grid.Row="8" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
 
-        <TextBox x:Name="oznakaTxt"   Grid.Row="3" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Inv.Id,   Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+        <TextBox x:Name="oznakaTxt"   Grid.Row="3" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Inv.Id,   Mode=TwoWay, UpdateSourceTrigger=Explicit}" IsEnabled="False"/>
         <TextBox x:Name="nazivTxt"    Grid.Row="5" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Inv.Name, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
 
 

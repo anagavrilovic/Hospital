@@ -67,7 +67,7 @@ namespace Hospital.View
         {
             RoomRenovation selectedItem = (RoomRenovation)listBoxRenovations.SelectedItem;
 
-            if (selectedItem != null)
+            if (selectedItem != null && selectedItem.StartDate > DateTime.Now)
             {
                 MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da otkažete renoviranje?",
                                         "Otkazivanje renoviranja",
@@ -81,6 +81,10 @@ namespace Hospital.View
                         RoomRenovations = roomRenovationStorage.GetAll();
                     }
                 }
+            }
+            else if(selectedItem != null && selectedItem.StartDate < DateTime.Now)
+            {
+                MessageBox.Show("Renoviranje je u toku. \n Naknadno otkazivanje nije moguće!");
             }
         }
 
