@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,18 @@ namespace Hospital.View
         public MenagerWindow()
         {
             InitializeComponent();
+
+            RoomRenovationStorage roomRenovationStorage = new RoomRenovationStorage();
+            foreach (RoomRenovation renovation in roomRenovationStorage.GetAll())
+            {
+                if (renovation.StartDate < DateTime.Now)
+                {
+                    //renovation.Room = rs.GetOne(renovation.Room.Id);
+                    renovation.Room.SerializeInfo = false;
+                    renovation.WareHouse.SerializeInfo = false;
+                    renovation.startRenovation();
+                }
+            }
         }
 
         private void getRooms(object sender, RoutedEventArgs e)

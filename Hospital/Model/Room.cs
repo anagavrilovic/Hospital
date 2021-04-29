@@ -1,4 +1,6 @@
 
+using Hospital.Model;
+using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
 
@@ -20,8 +22,13 @@ namespace Hospital
         private string id;
         private string name;
         private int floor;
-        private Boolean isAvaliable;
+        private RoomStatus status;
         private RoomType type;
+
+        public Room()
+        {
+            SerializeInfo = true;
+        }
 
         public string Id 
         { 
@@ -78,19 +85,19 @@ namespace Hospital
             }
         }
 
-        public Boolean IsAvaliable
+        public RoomStatus Status
         {
             get
             {
-                return isAvaliable;
+                return status;
             }
 
             set
             {
-                if (value != isAvaliable)
+                if (value != status)
                 {
-                    isAvaliable = value;
-                    OnPropertyChanged("IsAvaliable");
+                    status = value;
+                    OnPropertyChanged("Status");
                 }
             }
         }
@@ -111,6 +118,30 @@ namespace Hospital
                 }
             }
         }
+
+        public bool ShouldSerializeName()
+        {
+            return this.SerializeInfo;
+        }
+
+        public bool ShouldSerializeFloor()
+        {
+            return this.SerializeInfo;
+        }
+
+        public bool ShouldSerializeStatus()
+        {
+            return this.SerializeInfo;
+        }
+
+        public bool ShouldSerializeType()
+        {
+            return this.SerializeInfo;
+          
+        }
+
+        [JsonIgnore]
+        public bool SerializeInfo { get; set; }
 
         override
         public string ToString()

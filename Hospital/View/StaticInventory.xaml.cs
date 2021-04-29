@@ -35,8 +35,7 @@ namespace Hospital.View
         }
 
         private string id;
-        private static ObservableCollection<Inventory> allInventory;
-
+     
         public static ObservableCollection<Inventory> Inventory
         {
             get;
@@ -63,10 +62,7 @@ namespace Hospital.View
             this.id = id;
 
             InventoryStorage storage = new InventoryStorage();
-            allInventory = storage.GetAll();
-            // Inventory = storage.GetByRoomID(id);
-
-            Inventory = new ObservableCollection<Inventory>();
+    
             Inventory = storage.GetByRoomID(id);
 
             InventoryCollection = CollectionViewSource.GetDefaultView(Inventory);
@@ -141,16 +137,19 @@ namespace Hospital.View
         {
             Inventory selectedItem = (Inventory)dataGridInventory.SelectedItem;
 
-            MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da izbrišete izabranu stavku",
-                                                      "Brisanje stavke",
-                                                       MessageBoxButton.YesNo,
-                                                       MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            if(selectedItem != null)
             {
-                if (selectedItem != null)
+                MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da izbrišete izabranu stavku",
+                                                          "Brisanje stavke",
+                                                           MessageBoxButton.YesNo,
+                                                           MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
                 {
-                    Inventory.Remove(selectedItem);
-                    storage.Delete(selectedItem.Id, selectedItem.RoomID);
+                    if (selectedItem != null)
+                    {
+                        Inventory.Remove(selectedItem);
+                        storage.Delete(selectedItem.Id, selectedItem.RoomID);
+                    }
                 }
             }
         }
@@ -163,7 +162,11 @@ namespace Hospital.View
             {
                 PrebacivanjeInventara transfer = new PrebacivanjeInventara(selectedItem);
                 transfer.Owner = Application.Current.MainWindow;
-                transfer.nazivTxt.Text = selectedItem.Id + "-" + selectedItem.Name;
+                StringBuilder sb = new StringBuilder();
+                sb.Append(selectedItem.Id);
+                sb.Append("-");
+                sb.Append(selectedItem.Name);
+                transfer.nazivTxt.Text = sb.ToString();
                 transfer.Show();
             }
         }

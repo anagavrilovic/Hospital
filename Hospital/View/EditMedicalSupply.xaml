@@ -59,7 +59,7 @@
         <Label Content="Količina:"         Grid.Row="8"  Grid.Column="0"   Foreground="#FF1E49D9" FontSize="20" Margin="30,7,5,10.2"/>
         <Label Content="Merna jedinica:"   Grid.Row="10" Grid.Column="0"   Foreground="#FF1E49D9" FontSize="20" Margin="30,7,5,10.2"/>
 
-        <TextBox x:Name="oznakaTxt"   Grid.Row="3"  Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Ms.Id,            Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+        <TextBox x:Name="oznakaTxt"   Grid.Row="3"  Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Ms.Id,            Mode=TwoWay, UpdateSourceTrigger=Explicit}" IsEnabled="False"/>
         <TextBox x:Name="nazivTxt"    Grid.Row="5"  Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Ms.Name,          Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
         <TextBox x:Name="cenaTxt"     Grid.Row="7"  Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Ms.Price,         Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
         <TextBox x:Name="kolicinaTxt" Grid.Row="9"  Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Ms.Quantity,      Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>

@@ -113,17 +113,19 @@ namespace Hospital.View
         private void deleteItem(object o, RoutedEventArgs e)
         {
             MedicalSupply selectedItem = (MedicalSupply) dataGridMedicalSupply.SelectedItem;
-
-            MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da izbrišete izabranu stavku",
-                                                      "Brisanje stavke",
-                                                       MessageBoxButton.YesNo,
-                                                       MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            if (selectedItem != null)
             {
-                if (selectedItem != null)
+                MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da izbrišete izabranu stavku",
+                                         "Brisanje stavke",
+                                          MessageBoxButton.YesNo,
+                                          MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
                 {
-                    Supply.Remove(selectedItem);
-                    storage.Delete(selectedItem.Id, selectedItem.RoomID);
+                    if (selectedItem != null)
+                    {
+                        Supply.Remove(selectedItem);
+                        storage.Delete(selectedItem.Id, selectedItem.RoomID);
+                    }
                 }
             }
         }

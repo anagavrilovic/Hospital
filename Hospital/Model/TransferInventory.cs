@@ -162,7 +162,7 @@ namespace Hospital.Model
             updateInventory();
         }
 
-        public void updateInventory()
+        public void updateInventory(bool doRefresh = true)
         {
             InventoryStorage inventoryStorage = new InventoryStorage();
             Inventory inventoryItem = inventoryStorage.GetOneByRoom(itemID, firstRoomID);
@@ -202,15 +202,11 @@ namespace Hospital.Model
                     InventoryStorage.inventory.Add(newItem);
                 }
 
-
-                foreach (Inventory i in StaticInventory.Inventory)
+                if(doRefresh)
                 {
-                    if (i.Id.Equals(itemID) && i.RoomID.Equals(firstRoomID))
-                    {
-                        i.Quantity -= quantity;
-                    }
+                    refreshView();
                 }
-
+               
                 foreach (Inventory i in InventoryStorage.inventory)
                 {
                     if (i.Id.Equals(itemID) && i.RoomID.Equals(firstRoomID))
@@ -230,6 +226,20 @@ namespace Hospital.Model
             {
                // MessageBox.Show("Pogrešan unos količine!");
                // return;
+            }
+        }
+
+        public void refreshView()
+        {
+            if (!StaticInventory.Inventory.Equals(null))
+            {
+                foreach (Inventory i in StaticInventory.Inventory)
+                {
+                    if (i.Id.Equals(itemID) && i.RoomID.Equals(firstRoomID))
+                    {
+                        i.Quantity -= quantity;
+                    }
+                }
             }
         }
     }

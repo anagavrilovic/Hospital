@@ -46,7 +46,9 @@
             <ComboBoxItem                   Content="532553252"  Foreground="#FF2E83BF" FontSize="20" HorizontalContentAlignment="Center"/>
             <ComboBoxItem IsSelected="True" Content="1"          Foreground="#FF2E83BF" FontSize="20" HorizontalContentAlignment="Center"/>
             <ComboBoxItem                   Content="2"          Foreground="#FF2E83BF" FontSize="20" HorizontalContentAlignment="Center"/>
+            <ComboBoxItem                   Content="3"          Foreground="#FF2E83BF" FontSize="20" HorizontalContentAlignment="Center"/>
             <ComboBoxItem                   Content="M1"         Foreground="#FF2E83BF" FontSize="20" HorizontalContentAlignment="Center"/>
+            <ComboBoxItem                   Content="M2"         Foreground="#FF2E83BF" FontSize="20" HorizontalContentAlignment="Center"/>
         </ComboBox>
 
         <Button Grid.Column="0" Grid.Row="8" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,31.2,10,39.8" Click="accept" />

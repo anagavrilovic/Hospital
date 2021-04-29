@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using Hospital.View;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -18,11 +19,8 @@ namespace Hospital
 
         public ObservableCollection<Room> GetAll()
         {
-
             using (StreamReader sr = File.OpenText(@"..\\..\\Files\\" + fileName))
             {
-                //JsonSerializer serializer = new JsonSerializer();
-                // rooms = (ObservableCollection<Room>)serializer.Deserialize(file, typeof(ObservableCollection<Room>));
                 rooms = JsonConvert.DeserializeObject<ObservableCollection<Room>>(sr.ReadToEnd());
             }
 
@@ -34,16 +32,27 @@ namespace Hospital
 
         public void Save(Room parameter1)
         {
-
             //  rooms = GetAll();
-            rooms.Add(parameter1);
 
-            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
+            if (!rooms.Contains(parameter1))
             {
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, rooms);
+                rooms.Add(parameter1);
             }
-
+            else
+            {
+                foreach(Room r in rooms)
+                {
+                    if(r.Id.Equals(parameter1.Id))
+                    {
+                        r.Name = parameter1.Name;
+                        r.Floor = parameter1.Floor;
+                        r.Status = parameter1.Status;
+                        r.Type = parameter1.Type;
+                        r.SerializeInfo = true;
+                    }
+                }
+            }
+            doSerialization();
         }
 
         public Boolean Delete(string id)
@@ -54,7 +63,6 @@ namespace Hospital
             {
                 if (r.Id.Equals(id))
                 {
-
                     InventoryStorage storage = new InventoryStorage();
                     InventoryStorage.inventory = storage.GetAll();
                     foreach (Inventory i in InventoryStorage.inventory)
@@ -62,11 +70,7 @@ namespace Hospital
                         if(i.RoomID.Equals(id))
                             i.RoomID = "M1";
                     }
-                    using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + "inventory.json"))
-                    {
-                        JsonSerializer serializer = new JsonSerializer();
-                        serializer.Serialize(file, InventoryStorage.inventory);
-                    }
+                    storage.doSerialization();
 
                     MedicalSupplyStorage msStorage = new MedicalSupplyStorage();
                     MedicalSupplyStorage.supplies = msStorage.GetAll();
@@ -75,18 +79,10 @@ namespace Hospital
                         if (ms.RoomID.Equals(id))
                             ms.RoomID = "M1";
                     }
-                    using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + "medicalSupply.json"))
-                    {
-                        JsonSerializer serializer = new JsonSerializer();
-                        serializer.Serialize(file, MedicalSupplyStorage.supplies);
-                    }
+                    msStorage.doSerialization();
 
                     rooms.Remove(r);
-                   using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
-                    {
-                        JsonSerializer serializer = new JsonSerializer();
-                        serializer.Serialize(file, rooms);
-                    }
+                    doSerialization();
                     return true;
                 }
             }
@@ -104,6 +100,17 @@ namespace Hospital
                 }
             }
             return null;
+        }
+
+        public void doSerialization()
+        {
+            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, rooms);
+            }
+
+            RoomsWindow.Rooms = rooms;
         }
 
         public static ObservableCollection<Room> rooms = new ObservableCollection<Room>();

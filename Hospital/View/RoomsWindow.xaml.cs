@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -43,13 +44,10 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
-
-            // Rooms = new ObservableCollection<Room>();
-            // Rooms = RoomStorage.rooms;
-            RoomStorage rs = new RoomStorage();
             Rooms = rs.GetAll();
 
             RoomsCollection = CollectionViewSource.GetDefaultView(Rooms);
+
         }
 
         private void searchRooms(object sender, TextChangedEventArgs e)
@@ -109,15 +107,8 @@ namespace Hospital.View
                 room.floorTxt.Text = selectedItem.Floor.ToString();
                 room.typeCB.SelectedValue = selectedItem.Type;
                 room.typeCB.Text = selectedItem.Type.ToString();
-
-                if(selectedItem.IsAvaliable == true)
-                {
-                    room.btn1.IsChecked = true;
-                }
-                else
-                {
-                    room.btn2.IsChecked = true;
-                }
+                room.statusCB.SelectedValue = selectedItem.Status;
+                room.statusCB.Text = selectedItem.Status.ToString();
 
                 room.Show();
             }    
@@ -126,17 +117,18 @@ namespace Hospital.View
         private void deleteRoom(object sender, RoutedEventArgs e)
         {
             Room selectedItem = (Room) dataGridRooms.SelectedItem;
-
-            MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da uklonite izabranu salu",
-                                          "Brisanje sale",
-                                          MessageBoxButton.YesNo,
-                                          MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            if (selectedItem != null)
             {
-                if (selectedItem != null)
+                MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da uklonite izabranu salu",
+                                        "Brisanje sale",
+                                        MessageBoxButton.YesNo,
+                                        MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
                 {
-                    // Rooms.Remove(selectedItem);
-                    rs.Delete(selectedItem.Id);
+                    if (selectedItem != null)
+                    {
+                        rs.Delete(selectedItem.Id);
+                    }
                 }
             }
         }
@@ -154,8 +146,7 @@ namespace Hospital.View
         }
 
         private void viewDynamicInventory(object sender, RoutedEventArgs e)
-        {
-            
+        {  
             Room selectedItem = (Room)dataGridRooms.SelectedItem;
 
             if(selectedItem != null)
@@ -167,11 +158,17 @@ namespace Hospital.View
             
         }
 
+        private void renovateRoom(object sender, RoutedEventArgs e)
+        {
+            Renovations renovations = new Renovations();
+            renovations.Owner = Application.Current.MainWindow;
+            renovations.Show();
+            
+        }
+
         private void menuButton(object sender, RoutedEventArgs e)
         {
-
             this.Hide();
-
         }
     }
 }

@@ -79,10 +79,12 @@
             <ComboBoxItem                   Content="532553252"  Foreground="#FF2E83BF" FontSize="20" HorizontalContentAlignment="Center"/>
             <ComboBoxItem IsSelected="True" Content="1"          Foreground="#FF2E83BF" FontSize="20" HorizontalContentAlignment="Center"/>
             <ComboBoxItem                   Content="2"          Foreground="#FF2E83BF" FontSize="20" HorizontalContentAlignment="Center"/>
+            <ComboBoxItem                   Content="3"          Foreground="#FF2E83BF" FontSize="20" HorizontalContentAlignment="Center"/>
             <ComboBoxItem                   Content="M1"         Foreground="#FF2E83BF" FontSize="20" HorizontalContentAlignment="Center"/>
+            <ComboBoxItem                   Content="M2"         Foreground="#FF2E83BF" FontSize="20" HorizontalContentAlignment="Center"/>
         </ComboBox>
 
-        <DatePicker x:Name="datumPrebacivanja" DisplayDateStart="{x:Static sys:DateTime.Today}" Grid.Row="9"  Grid.ColumnSpan="2" Margin="30,5,28,5.2"/>
+        <DatePicker x:Name="datumPrebacivanja" DisplayDateStart="{x:Static sys:DateTime.Today}" Focusable="False" Grid.Row="9"  Grid.ColumnSpan="2" Margin="30,5,28,5.2"/>
 
         <TextBox    x:Name="vremePrebacivanja" Grid.Row="11" Grid.ColumnSpan="2" Margin="30,5,28,5.2">
             <TextBox.Text>
