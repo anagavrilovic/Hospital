@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,13 +19,34 @@ using System.Windows.Shapes;
 namespace Hospital.View
 {
   
-    public partial class RoomsWindow : Window
+    public partial class RoomsWindow : Window, INotifyPropertyChanged
     {
-
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+        private static ObservableCollection<Room> rooms;
         public static ObservableCollection<Room> Rooms
         {
-            get;
-            set;
+            get
+            {
+                return rooms;
+            }
+            set
+            {
+                rooms = value;
+                NotifyStaticPropertyChanged();
+            }    
+        }
+
+        public static event PropertyChangedEventHandler StaticPropertyChanged;
+        private static void NotifyStaticPropertyChanged([CallerMemberName] string name = null)
+        {
+            StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(name));
         }
 
         RoomStorage rs = new RoomStorage();
@@ -47,7 +69,6 @@ namespace Hospital.View
             Rooms = rs.GetAll();
 
             RoomsCollection = CollectionViewSource.GetDefaultView(Rooms);
-
         }
 
         private void searchRooms(object sender, TextChangedEventArgs e)
@@ -74,6 +95,7 @@ namespace Hospital.View
         {
             FilteringInventory filteringInventory = new FilteringInventory();
             filteringInventory.Owner = Application.Current.MainWindow;
+           // this.Close();
             filteringInventory.Show();
         }
 
@@ -166,6 +188,12 @@ namespace Hospital.View
             renovations.Owner = Application.Current.MainWindow;
             renovations.Show();
             
+        }
+
+        private void refreshView(object sender, RoutedEventArgs e)
+        {
+            Rooms = rs.GetAll();
+
         }
 
         private void menuButton(object sender, RoutedEventArgs e)
