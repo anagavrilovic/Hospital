@@ -24,6 +24,8 @@ namespace Hospital.View
     public partial class DoktorObavestenja : Page,INotifyPropertyChanged
     {
         private ObservableCollection<Notification> obavestenja = new ObservableCollection<Notification>();
+        private DoctorStorage doctorStorage = new DoctorStorage();
+        private Hospital.Model.Doctor doctor=new Model.Doctor();
         public ObservableCollection<Notification> Obavestenja
         {
             get
@@ -41,22 +43,24 @@ namespace Hospital.View
         }
         private NotificationStorage nStorage = new NotificationStorage();
 
-        public DoktorObavestenja()
+        public DoktorObavestenja(string doctorId)
         {
             InitializeComponent();
             this.DataContext = this;
+            doctor = doctorStorage.GetOne(doctorId);
             initProperties();
         }
 
         private void initProperties()
         {
-            /*foreach(Notification n in nStorage.GetAll())
+            foreach(NotificationsUsers notificationsUser in nStorage.GetAllNotificationsUsers())
             {
-                if (n.Lekar)
+                if (notificationsUser.Username.Equals(doctor.Username))
                 {
-                    Obavestenja.Add(n);
+                    Obavestenja.Add(nStorage.GetOne(notificationsUser.NotificationID));
                 }
-            }*/
+                       
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

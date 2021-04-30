@@ -23,7 +23,7 @@ namespace Hospital.View
     public partial class DoktorGlavniProzor : Window, INotifyPropertyChanged
     {
     
-        private string IDnumber;
+        private string doctorId;
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
@@ -34,9 +34,9 @@ namespace Hospital.View
             }
         }
 
-        public DoktorGlavniProzor(string IDnumber)
+        public DoktorGlavniProzor(string doctorId)
         { 
-            this.IDnumber = IDnumber;
+            this.doctorId = doctorId;
             InitializeComponent();
             this.DataContext = this;
             InitProperties();
@@ -47,12 +47,12 @@ namespace Hospital.View
         {
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 3 / 4);
-            Main.Content =new DoktorGlavnaStranica(IDnumber);
+            Main.Content =new DoktorGlavnaStranica(doctorId);
         }
 
         private void Logo(object sender, RoutedEventArgs e)
         {
-            Main.Content = new DoktorGlavnaStranica (IDnumber);
+            Main.Content = new DoktorGlavnaStranica (doctorId);
         }
 
         private void SignOut(object sender, RoutedEventArgs e)
@@ -66,7 +66,7 @@ namespace Hospital.View
         private void Announcment(object sender, RoutedEventArgs e)
         {
             //obavestenje.Source = new BitmapImage(new Uri("pack://application:,,,/Icon/announcment.png", UriKind.Absolute));
-            Main.Content = new DoktorObavestenja();
+            Main.Content = new DoktorObavestenja(doctorId);
         }
     }
 }

@@ -36,6 +36,10 @@
                 </Label.Content>
             </Label>
         </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Margin="0,20,20,0">
+            <Label Content="Hitna operacija:" FontSize="17" Style="{DynamicResource Label}" />
+            <CheckBox IsChecked="False"  Style="{DynamicResource CircleCheckbox}" Width="20" Height="20" Margin="0,-35,0,0"/>
+        </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center">
             <Label FontSize="17"  Width="76" Content="Doktor:" Margin="0,0,10,0"  HorizontalAlignment="Left" Style="{DynamicResource Label}"/>
             <ComboBox x:Name="doctorComboBox" Width="150" Height="30" SelectedValue="{Binding Doctor}" ItemsSource="{Binding Doctors, Mode=TwoWay}" VerticalAlignment="Top" Margin="0,0,5,0" SelectionChanged="SelectedDoctorChanged">
