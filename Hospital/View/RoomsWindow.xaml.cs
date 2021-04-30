@@ -70,9 +70,11 @@ namespace Hospital.View
             }
         }
 
-        private void btnSearchMouseDown(object sender, RoutedEventArgs e)
+        private void selectFilters(object sender, RoutedEventArgs e)
         {
-            this.RoomsCollection.Refresh();
+            FilteringInventory filteringInventory = new FilteringInventory();
+            filteringInventory.Owner = Application.Current.MainWindow;
+            filteringInventory.Show();
         }
 
 

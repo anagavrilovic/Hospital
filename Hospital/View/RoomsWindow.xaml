@@ -40,14 +40,12 @@
         <Button x:Name="dynamicInventory" Content="PREGLED OPREME"     Grid.Row="2" Grid.Column="1"   Margin="10,10,19,21" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="viewDynamicInventory"/>
 
         <TextBox x:Name="searchRoom"          Grid.Row="3" Grid.ColumnSpan="2" Margin="19,22,51,26.8" TextChanged="searchRooms"/>
-        <Image Source="/Icon/search-blue.png" Grid.Row="3" Grid.Column="1"     Margin="161,20,7,21"   MouseDown="btnSearchMouseDown"/>
+        <Image Source="/Icon/filtering.jpg" Grid.Row="3" Grid.Column="1"     Margin="161,10,0,23.8"   MouseDown="selectFilters" RenderTransformOrigin="0.565,0.468"/>
 
         <ScrollViewer Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="2" Background="Azure" VerticalScrollBarVisibility="Hidden" Margin="10,0.2,0,9.8">
-
             <DataGrid x:Name="dataGridRooms" ItemsSource="{Binding Path=Rooms, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" 
                   SelectionMode="Single" AutoGenerateColumns="False" HorizontalAlignment="Left" 
                   Background="#FFCADEED" FontFamily="Arial" Foreground="#FF536AA0" Grid.RowSpan="2" Width="404" Height="350">
-
                 <DataGrid.Columns>
                     <DataGridTextColumn     Header="Oznaka"                    Binding="{Binding Id}"    />
                     <DataGridTextColumn     Header="Naziv"    Width="Auto"     Binding="{Binding Name}"  />
