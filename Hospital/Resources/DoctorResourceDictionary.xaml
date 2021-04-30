@@ -31,6 +31,28 @@ BorderThickness="1" CornerRadius="5" BorderBrush="{StaticResource HoverBlue}">
         </Setter>
     </Style>
 
+    <!-- Stil za dugmice u web toolbaru-->
+    <Style x:Key="ButtonWebToolbar" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource MainDarkBlue}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Opacity" Value="0.9"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource HoverBlue}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <!-- Search box style -->
     <Style x:Key="SearchBox" TargetType="TextBox">

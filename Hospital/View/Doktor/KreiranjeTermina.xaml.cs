@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.View.Doktor;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -249,7 +250,7 @@ namespace Hospital.View
                     bool overlap = storageAppointment.DateTime < appointmentEnd && appointmentStart < storageAppointment.DateTime.AddMinutes(storageAppointmentTime);
                     if (overlap)
                     {
-                        MessageBox.Show("Preklapaju se termini");
+                        ErrorBox messageBox = new ErrorBox("Preklapaju se termini");
                         return true;
                     }
                 }
@@ -270,10 +271,9 @@ namespace Hospital.View
 
         private bool SomeFieldsEmpty()
         {
-            if (DateOfAppointment == null || Doctor == null || (rdbOperacija.IsChecked.Equals(false) && rdbPregled.IsChecked.Equals(false)))
+            if (DateOfAppointment == null ||  (rdbOperacija.IsChecked.Equals(false) && rdbPregled.IsChecked.Equals(false)) || doctorComboBox.SelectedIndex == -1)
             {
-
-                MessageBox.Show("Nisu uneti svi podace");
+                ErrorBox messageBox =new ErrorBox("Nisu uneti svi podaci");
                 return true;
             }
             return false;

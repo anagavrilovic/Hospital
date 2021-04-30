@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.View.Doktor;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -40,7 +41,6 @@ namespace Hospital.View
             InitializeComponent();
             this.DataContext = this;
             InitProperties();
-            
         }
 
         private void InitProperties()
