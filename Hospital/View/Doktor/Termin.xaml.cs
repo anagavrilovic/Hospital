@@ -107,6 +107,9 @@ namespace Hospital.View
                     Karton.Content = frameKarton;
                     KartonLabela.Foreground = Brushes.White;
                     AnamnezaLabela.Foreground = Brushes.Black;
+                    DiagnozaLabela.Foreground = Brushes.Black;
+                    TerminiLabela.Foreground = Brushes.Black;
+                    TerapijaLabela.Foreground = Brushes.Black;
                     break;
                 case 2:
                     Anamneza.Content = frameAnamnesis;
@@ -115,12 +118,17 @@ namespace Hospital.View
                     break;
                 case 3:
                     Terapija.Content = frameTherapy;
+                    KartonLabela.Foreground = Brushes.Black;
                     break;
                 case 4:
                     Dijagnoza.Content = frameDiagnosis;
+                    kDS.sacuvaj.Visibility = Visibility.Visible;    
+                    KartonLabela.Foreground = Brushes.Black;
                     break;
                 case 5:
                     Termini.Content = frameAppointment;
+                    kDS.sacuvaj.Visibility = Visibility.Visible;
+                    KartonLabela.Foreground = Brushes.Black;
                     break;
             }
         }

@@ -16,30 +16,30 @@
     </Window.Clip>
     <DockPanel>
         <!-- Web toolbar -->
-        <Grid DockPanel.Dock="Top" >
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Button x:Name="ExitBtn" Click="ExitBtnClick" Style="{StaticResource ButtonWebToolbar}" Grid.Row="0" Margin="0,0,10,0" HorizontalAlignment="Right">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="15"/>
-                    </Style>
-                </Button.Resources>
-                <Image Source="../../Icon/Secretary/xwhite.png" Width="15" Height="15" />
-            </Button>
-            <Label Style="{DynamicResource Label}" FontSize="18" Content="Greška" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1">
-            </Label>
-        </Grid>
+            <Grid DockPanel.Dock="Top" >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button x:Name="ExitBtn" Click="ExitBtnClick" Style="{StaticResource ButtonWebToolbar}" Grid.Row="0" Margin="0,0,10,0" HorizontalAlignment="Right">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <Image Source="../../Icon/Secretary/xwhite.png" Width="15" Height="15" />
+                </Button>
+                <Label Style="{DynamicResource Label}" FontSize="18" Content="Greška" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1">
+                </Label>
+            </Grid>
+        
         <DockPanel DockPanel.Dock="Bottom">
-            <Button VerticalAlignment="Center" HorizontalAlignment="Center" Content="Ok" Width="50" Style="{DynamicResource ImageButtonsHorizontal}" Click="Close">
-            </Button>
-        </DockPanel>
-        <StackPanel Orientation="Horizontal">
-            <Image Source="../../Icon/DoctorIcons/error.png" Width="40" HorizontalAlignment="Left" Margin="10,-50,0,0"/>
-            <TextBlock Text="{Binding Description}"  FontSize="16" TextWrapping="Wrap" Height="100" Width="300" Margin="20,0,10,0"/>
-        </StackPanel>
-
+                <Button VerticalAlignment="Center" HorizontalAlignment="Center" Content="Ok" Width="50" Style="{DynamicResource ImageButtonsHorizontal}" Click="Close">
+                </Button>
+            </DockPanel>
+            <StackPanel Orientation="Horizontal">
+                <Image Source="../../Icon/DoctorIcons/error.png" Width="40" HorizontalAlignment="Left" Margin="10,-50,0,0"/>
+                <TextBlock Text="{Binding Description}"  FontSize="16" TextWrapping="Wrap" Height="100" Width="300" Margin="20,0,10,0"/>
+            </StackPanel>
     </DockPanel>
 </Window>

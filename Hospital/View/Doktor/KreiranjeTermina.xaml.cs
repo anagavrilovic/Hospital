@@ -135,10 +135,10 @@ namespace Hospital.View
             Patient = (medicalRecordStorage.GetByPatientID(id)).Patient;
             Appointment = new Appointment();
             Doctor = new Hospital.Model.Doctor();
-            SetDoctorList();
+            SetDoctorListAndRadioButtons();
         }
 
-        private void SetDoctorList()
+        private void SetDoctorListAndRadioButtons()
         {
             Doctors = new ObservableCollection<Model.Doctor>();
             if (specialization == (int)DoctorSpecialty.general)
@@ -146,6 +146,8 @@ namespace Hospital.View
                 rdbOperacija.Visibility = Visibility.Hidden;
                 rdbPregled.IsChecked = true;
                 Doctors = doctorStorage.GetAll();
+                emergencyOperationLabel.Visibility = Visibility.Collapsed;
+                emergencyOperationCheckBox.Visibility = Visibility.Collapsed;
             }
             else
             {
@@ -289,6 +291,18 @@ namespace Hospital.View
             else
             {
                 rdbOperacija.IsEnabled = false;
+            }
+        }
+
+        private void CheckBoxChanged(object sender, RoutedEventArgs e)
+        {
+            if (emergencyOperationCheckBox.IsChecked.Equals(true))
+            {
+                rdbPregled.IsEnabled = false;
+                rdbOperacija.IsChecked = true;
+            }else 
+            {
+                rdbPregled.IsEnabled = true;    
             }
         }
     }

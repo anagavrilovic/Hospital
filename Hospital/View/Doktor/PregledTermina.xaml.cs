@@ -39,7 +39,16 @@ namespace Hospital.View
                 _durationInHours = value; 
             }
         }
-       
+        private ObservableCollection<Model.Doctor> doctors = new ObservableCollection<Model.Doctor>();
+        public ObservableCollection<Model.Doctor> Doctors
+        {
+            get => doctors;
+            set
+            {
+                doctors = value;
+            }
+        }
+
         protected virtual void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
@@ -83,11 +92,13 @@ namespace Hospital.View
         private void SetAppointmentsInDataGrid(object sender, SelectionChangedEventArgs e)
         {
             Appointments.Clear();
+            Doctors.Clear();
             foreach (Appointment a in appointmentStorage.GetAll())
             {
                 Hospital.Model.Doctor d = doctorStorage.GetOne(a.IDDoctor);
                 if (d.Specialty.Equals((DoctorSpecialty)ComboBox.SelectedItem))
                 {
+                    Doctors.Add(doctorStorage.GetOne(d.PersonalID));
                     Appointments.Add(a);
                 }
             }

@@ -55,12 +55,22 @@ namespace Hospital.View
 
         private void Sacuvaj(object sender, RoutedEventArgs e)
         {
-            ((Doctor_Examination)Window.GetWindow(this)).Pregled.anamnesis=Test1;
-            ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = 3;
-            ((Doctor_Examination)Window.GetWindow(this)).Terapija.IsEnabled = true;
-            ((Doctor_Examination)Window.GetWindow(this)).TerapijaLabela.Foreground = Brushes.White;
+            ((Doctor_Examination)Window.GetWindow(this)).Pregled.anamnesis = Test1;
             ((Doctor_Examination)Window.GetWindow(this)).AnamnezaLabela.Foreground = Brushes.Black;
             ((Doctor_Examination)Window.GetWindow(this)).Anamneza.IsEnabled = false;
+            if (MessageBox.Show("Da li je potrebna terapija?",
+                      "Potvrda", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {                
+                ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = 3;
+                ((Doctor_Examination)Window.GetWindow(this)).Terapija.IsEnabled = true;
+                ((Doctor_Examination)Window.GetWindow(this)).TerapijaLabela.Foreground = Brushes.White;
+            }
+            else
+            {
+                ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = 4;
+                ((Doctor_Examination)Window.GetWindow(this)).Dijagnoza.IsEnabled = true;
+                ((Doctor_Examination)Window.GetWindow(this)).DiagnozaLabela.Foreground = Brushes.White;
+            }
         }
     }
 }

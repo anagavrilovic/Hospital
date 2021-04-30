@@ -94,7 +94,7 @@
     <Compile Include="Model\TransferInventoryStorage.cs" />
     <Compile Include="Model\UnitsType.cs" />
     <Compile Include="Model\UserType.cs" />
-    <Compile Include="ValidacijeLekar\NaslovValidationRule.cs" />
+    <Compile Include="ValidacijeLekar\EmptyStringValidationRule.cs" />
     <Compile Include="ValidacijeSekretar\EmailValidationRule.cs" />
     <Compile Include="ValidacijeSekretar\OnlyDigitsValidationRuleCardID.cs" />
     <Compile Include="ValidacijeSekretar\OnlyDigitsValidationRuleHealthCardID.cs" />
@@ -716,5 +716,6 @@
   <ItemGroup>
     <Resource Include="Icon\DoctorIcons\error.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

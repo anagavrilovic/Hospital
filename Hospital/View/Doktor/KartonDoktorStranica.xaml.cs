@@ -49,6 +49,7 @@ namespace Hospital.View
             mStorage = new MedicalRecordStorage();
             Karton = mStorage.GetOne(id);
             this.pregled = pregled;
+            sacuvaj.Visibility = Visibility.Collapsed;
 
         }
 

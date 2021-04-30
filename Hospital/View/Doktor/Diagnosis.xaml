@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Hospital.View"
-        mc:Ignorable="d"
+        xmlns:local="clr-namespace:Hospital.View" 
+      xmlns:val="clr-namespace:Hospital.ValidacijeLekar"
+      mc:Ignorable="d"
         Title="Diagnosis" Background="#FFDCE6ED">
     <Page.Resources>
         <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
@@ -13,8 +14,17 @@
         <StackPanel Orientation="Vertical">
             <Label FontSize="25" Content="Dijagnoza:" Margin="60,0,0,0" Style="{DynamicResource Label}"></Label>
             <TextBox Name="diagnosisBox" TextWrapping="Wrap" FontSize="15" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"
-                     Text="{Binding Test1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="600" Height="450" Margin="30,10,30,20" Style="{DynamicResource TextBoxStyle}"></TextBox>
-                    <Button  Style="{DynamicResource ImageButtonsHorizontal}"
+                      Width="600" Height="400" Margin="30,10,30,20" Style="{DynamicResource TextBoxStyle}"
+                     Validation.ErrorTemplate="{DynamicResource ValidationErrorTemplate}">
+                <TextBox.Text>
+                    <Binding Path="Test1"  Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <val:EmptyStringValidationRule ValidationStep="RawProposedValue" ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+                    <Button  Style="{DynamicResource ButtonWithValidation}"
                              Margin="200,5,20,0" VerticalAlignment="Top" Click="Sacuvaj" HorizontalAlignment="Left">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../../Icon/DoctorIcons/save.png" Width="20"/>
