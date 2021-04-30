@@ -77,8 +77,20 @@ namespace Hospital
             
             return null;
        }
-   
-       public ObservableCollection<MedicalSupply> GetByRoomID(string id)
+
+        public MedicalSupply GetOneByRoom(string id, string roomId)
+        {
+            foreach (MedicalSupply ms in supplies)
+            {
+                if (ms.Id.Equals(id) && ms.RoomID.Equals(roomId))
+                {
+                    return ms;
+                }
+            }
+            return null;
+        }
+
+        public ObservableCollection<MedicalSupply> GetByRoomID(string id)
        {
             ObservableCollection<MedicalSupply> ret = new ObservableCollection<MedicalSupply>();
             supplies = GetAll();

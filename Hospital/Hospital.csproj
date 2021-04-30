@@ -172,6 +172,9 @@
     <Compile Include="View\Doktor\Termin.xaml.cs">
       <DependentUpon>Termin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\FilteringInventory.xaml.cs">
+      <DependentUpon>FilteringInventory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ObaveštenjaUpravnik.xaml.cs">
       <DependentUpon>ObaveštenjaUpravnik.xaml</DependentUpon>
     </Compile>
@@ -381,6 +384,10 @@
     <Page Include="View\Doktor\PregledTermina.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\FilteringInventory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ObaveštenjaUpravnik.xaml">
       <SubType>Designer</SubType>
@@ -716,6 +723,8 @@
   <ItemGroup>
     <Resource Include="Icon\DoctorIcons\error.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Icon\filtering.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
