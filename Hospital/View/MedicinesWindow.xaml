@@ -44,7 +44,7 @@
 
         <Image Source="/Icon/search-blue.png" Grid.Row="3" Grid.Column="1" Margin="161,10.2,7,15.8" MouseDown="btnSearchMouseDown"/>
 
-        <ScrollViewer Grid.Row="4" Grid.RowSpan="7" Grid.ColumnSpan="2" Background="Azure" VerticalScrollBarVisibility="Hidden" Margin="10,0,0,10">
+        <ScrollViewer Grid.Row="4" Grid.RowSpan="7" Grid.ColumnSpan="2" Background="Azure" VerticalScrollBarVisibility="Auto" Margin="10,0,0,10">
 
             <Grid MinWidth="200">
                 <DataGrid  x:Name ="dataGridMedicines" Grid.Row="4" Grid.RowSpan="7" Grid.ColumnSpan="2"  
@@ -52,11 +52,10 @@
                                ItemsSource="{Binding Path=Medicines, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                Background="#FFCADEED" FontFamily="Arial" Foreground="#FF536AA0" Margin="0,0,10,0">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Oznaka"     Binding="{Binding Id}"          Width="70"/>
-                        <DataGridTextColumn Header="Naziv"      Binding="{Binding Name}"        Width="100"/>
-                        <DataGridTextColumn Header="Gramaža"    Binding="{Binding Dosage}"      Width="70"/>
-                        <DataGridTextColumn Header="Količina"   Binding="{Binding Quantity}"    Width="70"/>
-                        <DataGridTextColumn Header="Cena"       Binding="{Binding Price}"       Width="60"/>
+                        <DataGridTextColumn Header="Oznaka"     Binding="{Binding ID}"          Width="1.1*"/>
+                        <DataGridTextColumn Header="Naziv"      Binding="{Binding Name}"        Width="1.5*"/>
+                        <DataGridTextColumn Header="Doza/mg"    Binding="{Binding DosageInMg}"  Width="1.15*"/>
+                        <DataGridTextColumn Header="Cena"       Binding="{Binding Price}"       Width="1.25*"/>
                     </DataGrid.Columns>
 
                 </DataGrid>

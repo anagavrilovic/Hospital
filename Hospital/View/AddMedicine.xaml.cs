@@ -48,6 +48,8 @@ namespace Hospital.View
             }
         }
 
+        public List<string> Ingridients { get; set; }
+
         public AddMedicine()
         {
             InitializeComponent();
