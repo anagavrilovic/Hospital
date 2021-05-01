@@ -26,16 +26,6 @@ namespace Hospital.View.Doctor
     {
         private MedicineStorage mStorage = new MedicineStorage();
         private Medicine lek=new Medicine();
-        private string text;
-        public string Text
-        {
-            get { return text; }
-            set
-            {
-                text = value;
-                OnPropertyChanged();
-            }
-        }
         public Medicine Lek
         {
             get { return lek; }
@@ -107,7 +97,6 @@ namespace Hospital.View.Doctor
             lekoviZaPrikaz = mStorage.GetAll();
             listBox.ItemsSource = lekoviZaPrikaz;
             SetReplacementMedicine();
-            text = "Lek: ";
             ReadIngredients();
             listIngredients.ItemsSource = Ingredients;
         }

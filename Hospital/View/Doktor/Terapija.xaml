@@ -21,7 +21,7 @@
         <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
             <Label FontSize="17" Margin="40,40,0,0" Style="{DynamicResource Label}">Opis terapije:</Label>
             <TextBox Name="textBox" TextWrapping="Wrap" AcceptsReturn="True" FontSize="15" Margin="40,10,19.2,40" Height="500" Text="{Binding Text, Mode=TwoWay}"
-                     Style="{DynamicResource TextBoxStyle}"  VerticalScrollBarVisibility="Visible"></TextBox>
+                     Style="{DynamicResource TextBox}" ></TextBox>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Margin="0,0,20.2,19.6">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="30,75,0,0">

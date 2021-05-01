@@ -16,14 +16,12 @@
     <SolidColorBrush x:Key="DarkBlue">#0A1625</SolidColorBrush>
     <!-- Rounder textbox style -->
     <Style x:Key="TextBox" TargetType="TextBox">
-        <Setter Property="Foreground" Value="{StaticResource MainBlue}"/>
-        <Setter Property="Background" Value="{StaticResource MainWhite}"/>
         <Setter Property="FontFamily" Value="Yu Gothic"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate >
                     <Border Background="{TemplateBinding Background}" x:Name="Bd" 
-BorderThickness="1" CornerRadius="5" BorderBrush="{StaticResource HoverBlue}">
+BorderThickness="3" CornerRadius="10" BorderBrush="{StaticResource HoverBlue}">
                         <ScrollViewer x:Name="PART_ContentHost" />
                     </Border>
                 </ControlTemplate>
@@ -79,7 +77,7 @@ BorderThickness="1" CornerRadius="5" BorderBrush="{StaticResource HoverBlue}">
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="{Binding [0].ErrorContent}" Foreground="Red" FontSize="12" FontFamily="Yu Gothic"/>
+            <TextBlock Margin="10,10,0,0" Grid.Column="0" Text="{Binding [0].ErrorContent}" Foreground="Red" FontSize="12" FontFamily="Yu Gothic"/>
         </Grid>
     </ControlTemplate>
 

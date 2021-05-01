@@ -64,16 +64,10 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label x:Name="lekLabel" HorizontalAlignment="Left" FontSize="20" Style="{DynamicResource Label}">
-                    <Label.Content>
-                        <TextBlock>
-                            <TextBlock.Text>
-                                <MultiBinding StringFormat="{}{0}  {1}">
-                                    <Binding Path="Text" />
-                                    <Binding Path="Lek.Name" />
-                                </MultiBinding>
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </Label.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text=" Lek: "/>
+                        <TextBlock Text="{Binding Lek.Name}"/>
+                    </StackPanel>
                 </Label>
             </StackPanel>
             
