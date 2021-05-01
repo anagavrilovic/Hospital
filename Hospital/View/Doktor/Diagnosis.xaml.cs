@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Hospital.View.Doktor;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -57,8 +58,8 @@ namespace Hospital.View
 
         private void Sacuvaj(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Da li je potrebna terapija?",
-                      "Potvrda", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            ConfirmBox confirmBox = new ConfirmBox("Da li je potreban termin ?");
+            if ((bool)confirmBox.ShowDialog())
             {
                 ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = 5;
                 ((Doctor_Examination)Window.GetWindow(this)).TerminiLabela.Foreground = Brushes.White;

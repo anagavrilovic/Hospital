@@ -59,7 +59,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" >
             <Label FontSize="17"  Width="190" Content="Datum i vreme termina:" Style="{DynamicResource Label}"/>
-            <DatePicker x:Name="Datum" Width="150" Height="25"  DisplayDateStart="{x:Static sys:DateTime.Today}"
+            <DatePicker x:Name="datePicker" Width="150" Height="25"  DisplayDateStart="{x:Static sys:DateTime.Today}"
                         SelectedDate="{Binding DateOfAppointment, Mode=OneWayToSource}" FirstDayOfWeek="Monday" Margin="10,0,5,0"/>
             <ComboBox x:Name="timeComboBox" Width="20" Height="25" SelectedValue="{Binding TimeOfAppointment
                 ,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></ComboBox>

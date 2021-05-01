@@ -118,6 +118,9 @@
     <Compile Include="View\Doktor\Anamnesis.xaml.cs">
       <DependentUpon>Anamnesis.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Doktor\ConfirmBox.xaml.cs">
+      <DependentUpon>ConfirmBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Doktor\DetaljiPregleda.xaml.cs">
       <DependentUpon>DetaljiPregleda.xaml</DependentUpon>
     </Compile>
@@ -139,11 +142,11 @@
     <Compile Include="View\Doktor\ErrorBox.xaml.cs">
       <DependentUpon>ErrorBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Doktor\ValidnostLeka.xaml.cs">
+      <DependentUpon>ValidnostLeka.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EditMedicalSupply.xaml.cs">
       <DependentUpon>EditMedicalSupply.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Doktor\IzmenaTermina.xaml.cs">
-      <DependentUpon>IzmenaTermina.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Doktor\KalendarTermini.xaml.cs">
       <DependentUpon>KalendarTermini.xaml</DependentUpon>
@@ -325,6 +328,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Doktor\ConfirmBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Doktor\DetaljiPregleda.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -350,10 +357,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Doktor\ErrorBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Doktor\IzmenaTermina.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -384,6 +387,10 @@
     <Page Include="View\Doktor\PregledTermina.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Doktor\ValidnostLeka.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FilteringInventory.xaml">
       <SubType>Designer</SubType>
@@ -725,6 +732,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\filtering.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\medicine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\notification.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

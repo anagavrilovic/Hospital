@@ -79,13 +79,11 @@ BorderThickness="1" CornerRadius="5" BorderBrush="{StaticResource HoverBlue}">
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-
-            <AdornedElementPlaceholder Grid.Column="1" Margin="0,0,10,0"/>
-            <TextBlock Grid.Column="0" Text="{Binding [0].ErrorContent}" Foreground="Red" FontSize="15  "/>
+            <TextBlock Grid.Column="0" Text="{Binding [0].ErrorContent}" Foreground="Red" FontSize="12" FontFamily="Yu Gothic"/>
         </Grid>
     </ControlTemplate>
 
-    <!-- Template za validacije -->
+    <!-- Template za validacije naslova -->
     <ControlTemplate x:Key="ValidationErrorTemplateVertical">
         <Grid>
             <Grid.RowDefinitions>
@@ -94,7 +92,7 @@ BorderThickness="1" CornerRadius="5" BorderBrush="{StaticResource HoverBlue}">
             </Grid.RowDefinitions>
 
             <AdornedElementPlaceholder Grid.Row="0" Margin="0,0,10,0"/>
-            <TextBlock Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red" FontSize="12"/>
+            <TextBlock Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red" FontSize="12" FontFamily="Yu Gothic"/>
         </Grid>
     </ControlTemplate>
 

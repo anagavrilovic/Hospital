@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Hospital.View.Doktor;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -58,8 +59,8 @@ namespace Hospital.View
             ((Doctor_Examination)Window.GetWindow(this)).Pregled.anamnesis = Test1;
             ((Doctor_Examination)Window.GetWindow(this)).AnamnezaLabela.Foreground = Brushes.Black;
             ((Doctor_Examination)Window.GetWindow(this)).Anamneza.IsEnabled = false;
-            if (MessageBox.Show("Da li je potrebna terapija?",
-                      "Potvrda", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            ConfirmBox confirmBox = new ConfirmBox("Da li je potrebna terapija?");
+            if ((bool)confirmBox.ShowDialog())
             {                
                 ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = 3;
                 ((Doctor_Examination)Window.GetWindow(this)).Terapija.IsEnabled = true;

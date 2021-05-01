@@ -201,7 +201,7 @@ namespace Hospital.View
             ObservableCollection<Appointment> list = new ObservableCollection<Appointment>();
             foreach (Appointment a in appointmentStorage.GetAll())
             {
-                if (a.IDDoctor.Equals(Appointment.IDDoctor))
+                if (doctorStorage.GetOne(a.IDDoctor).Specialty.Equals(Doctor.Specialty))
                 {
                     list.Add(a);
                 }
@@ -273,7 +273,8 @@ namespace Hospital.View
 
         private bool SomeFieldsEmpty()
         {
-            if (DateOfAppointment == null ||  (rdbOperacija.IsChecked.Equals(false) && rdbPregled.IsChecked.Equals(false)) || doctorComboBox.SelectedIndex == -1)
+            if (DateOfAppointment == null ||  (rdbOperacija.IsChecked.Equals(false) && rdbPregled.IsChecked.Equals(false)) || 
+                doctorComboBox.SelectedIndex == -1 || datePicker.SelectedDate==null)
             {
                 ErrorBox messageBox =new ErrorBox("Nisu uneti svi podaci");
                 return true;

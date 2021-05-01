@@ -16,9 +16,9 @@ using System.Windows.Shapes;
 namespace Hospital.View.Doktor
 {
     /// <summary>
-    /// Interaction logic for ErrorBox.xaml
+    /// Interaction logic for ConfirmBox.xaml
     /// </summary>
-    public partial class ErrorBox : Window,INotifyPropertyChanged
+    public partial class ConfirmBox :Window, INotifyPropertyChanged
     {
         private string description;
         public string Description
@@ -44,18 +44,23 @@ namespace Hospital.View.Doktor
             }
         }
 
-        public ErrorBox(string description)
+        public ConfirmBox(string description)
         {
             InitializeComponent();
             this.DataContext = this;
             this.description = description;
-            this.ShowDialog();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void Close(object sender, RoutedEventArgs e)
+        private void No_Click(object sender, RoutedEventArgs e)
         {
+            DialogResult = false;
+            this.Close();
+        }
+        private void Yes_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
             this.Close();
         }
     }
