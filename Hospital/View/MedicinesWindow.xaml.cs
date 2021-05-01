@@ -32,7 +32,6 @@ namespace Hospital.View
         }
 
         private MedicineStorage medicineStorage;
-        private Medicine medicine;
 
         private ObservableCollection<Medicine> medicines;
         public ObservableCollection<Medicine> Medicines
@@ -90,7 +89,8 @@ namespace Hospital.View
 
             if (result == MessageBoxResult.Yes)
             {
-                this.medicineStorage.Delete(selectedMedicine.ID);        
+                this.medicineStorage.Delete(selectedMedicine.ID);
+                Medicines.Remove(selectedMedicine);
             }
         }
 
@@ -130,7 +130,7 @@ namespace Hospital.View
 
         private void btnSearchMouseDown(object sender, RoutedEventArgs e)
         {
-            this.MedicineCollection.Refresh();
+            MedicineCollection.Refresh();
         }
 
         private void back(object sender, RoutedEventArgs e)

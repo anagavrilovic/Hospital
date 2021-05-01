@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,15 +22,24 @@ namespace Hospital.View
     /// Interaction logic for AddMedicine.xaml
     /// </summary>
     public partial class AddMedicine : Window, INotifyPropertyChanged
-    {
-        public Medicine Medicine { get; set; }
-
+    { 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        private MedicineRevision medicineRevision;
+        public MedicineRevision MedicineRevision
+        {
+            get => medicineRevision;
+            set
+            {
+                medicineRevision = value;
+                OnPropertyChanged("MedicineRevision");
             }
         }
 
@@ -48,44 +58,123 @@ namespace Hospital.View
             }
         }
 
-        public List<string> Ingridients { get; set; }
+        public List<string> Ingredients { get; set; }
+
+        private string searchstr;
+
+        private ICollectionView ingredientsCollection;
+
+        public ICollectionView IngredientsCollection
+        {
+            get { return ingredientsCollection; }
+            set { ingredientsCollection = value; }
+        }
 
         public AddMedicine()
         {
             InitializeComponent();
-            DoctorsNameSurname = new ObservableCollection<string>();
-            DoctorStorage doctorStorage = new DoctorStorage();
-            foreach(Hospital.Model.Doctor doctor in doctorStorage.GetAll())
-            {
-                DoctorsNameSurname.Add(doctor.ToString());
-            }
+            MedicineRevision = new MedicineRevision();
+            MedicineRevision.Medicine = new Medicine();
+            addDoctorsInComboBox();
+            addIngredientsInListBox();
+            IngredientsCollection = CollectionViewSource.GetDefaultView(Ingredients);
 
             this.DataContext = this;
         }
 
-        private void SearchMedicine(object sender, RoutedEventArgs e)
+        private void addDoctorsInComboBox()
         {
-
+            DoctorsNameSurname = new ObservableCollection<string>();
+            DoctorStorage doctorStorage = new DoctorStorage();
+            foreach (Hospital.Model.Doctor doctor in doctorStorage.GetAll())
+            {
+                DoctorsNameSurname.Add(doctor.ToString());
+            }
         }
 
-        private void BtnPlusIngridients(object sender, RoutedEventArgs e)
+        private void addIngredientsInListBox()
         {
-
+            Ingredients = new List<string>();
+            string[] ingredients = File.ReadAllLines("..\\..\\Files\\ingredients.txt");
+            foreach (string line in ingredients)
+                Ingredients.Add(line);
         }
 
-        private void BtnMinusIngridients(object sender, RoutedEventArgs e)
+        private void SearchIngredients(object sender, RoutedEventArgs e)
         {
+            TextBox textbox = sender as TextBox;
+            if (textbox != null)
+            {
+                this.searchstr = textbox.Text;
+                if (!string.IsNullOrEmpty(searchstr))
+                {
+                    ICollectionView view = CollectionViewSource.GetDefaultView(allIngredientsList.ItemsSource);
+                    view.Filter = new Predicate<object>(filter);
+                    IngredientsCollection.Refresh();
+                }
+                else
+                {
+                    ICollectionView view = CollectionViewSource.GetDefaultView(Ingredients);
+                    IngredientsCollection.Refresh();
+                }
+            }
+        }
 
+        private bool filter(object item)
+        {
+            if (((string)item).Contains(searchstr))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void BtnPlusIngredients(object sender, RoutedEventArgs e)
+        {
+            Ingredient newIngredient = new Ingredient();
+            string selectedIngredient = (string) allIngredientsList.SelectedItem;
+            if (selectedIngredient == null)
+                return;
+
+            newIngredient.Name = selectedIngredient;
+      
+            foreach (Ingredient ing in MedicineRevision.Medicine.Ingredient)
+            {
+                if (ing.Name.Equals(newIngredient.Name))
+                    return;     
+            }
+
+            MedicineRevision.Medicine.AddIngredient(newIngredient);
+            ingredientsList.Items.Refresh();
+        }
+
+        private void BtnMinusIngredients(object sender, RoutedEventArgs e)
+        {
+            Ingredient ingredientToDelete = (Ingredient) ingredientsList.SelectedItem;;
+            if (ingredientToDelete == null)
+                return;
+
+            MedicineRevision.Medicine.RemoveIngredient(ingredientToDelete);
+            ingredientsList.ItemsSource = MedicineRevision.Medicine.Ingredient;
+            ingredientsList.Items.Refresh();
         }
 
         private void BtnSearchMouseDown(object sender, RoutedEventArgs e)
         {
-
+            ingredientsCollection.Refresh();
         }
 
         private void SendOnRevision(object sender, RoutedEventArgs e)
         {
+            string doctorSelected = doctorsCB.Text.Trim().Substring(3);
+            DoctorStorage doctorStorage = new DoctorStorage();
+            MedicineRevision.DoctorID = doctorStorage.GetIDByNameSurname(doctorSelected);
+            MedicineRevision.RevisionDoctor = doctorStorage.GetOne(MedicineRevision.DoctorID);
 
+            MedicineRevisionStorage medicineRevisionStorage = new MedicineRevisionStorage();
+            medicineRevisionStorage.Save(MedicineRevision);
+
+            this.Close();
         }
 
         private void Cancel(object sender, RoutedEventArgs e)

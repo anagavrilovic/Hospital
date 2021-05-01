@@ -73,6 +73,9 @@
     <Compile Include="Model\Ingredient.cs" />
     <Compile Include="Model\Inventory.cs" />
     <Compile Include="Model\InventoryStorage.cs" />
+    <Compile Include="Model\MedicineRevision.cs" />
+    <Compile Include="Model\MedicineRevisionStorage.cs" />
+    <Compile Include="Model\MedicineTherapy.cs" />
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\NotificationStorage.cs" />
     <Compile Include="Model\NotificationsUsers.cs" />

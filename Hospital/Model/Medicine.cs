@@ -125,6 +125,8 @@ namespace Hospital
                     foreach (Ingredient oIngredient in value)
                         AddIngredient(oIngredient);
                 }
+
+                OnPropertyChanged("Ingredient");
             }
         }
 
