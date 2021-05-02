@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -45,9 +46,7 @@ namespace Hospital.View
         }
 
         private string searchstr;
-
         private ICollectionView medicineCollection;
-
         public ICollectionView MedicineCollection
         {
             get { return medicineCollection; }
@@ -72,7 +71,12 @@ namespace Hospital.View
 
         private void editMedicine(object sender, RoutedEventArgs e)
         {
-
+            Medicine selectedMedicine = (Medicine)dataGridMedicines.SelectedItem;
+            MedicineRevision medicineRevision = new MedicineRevision();
+            medicineRevision.Medicine = selectedMedicine;
+           /* EditMedicine editMedicine = new EditMedicine(medicineRevision);
+            editMedicine.Owner = Application.Current.MainWindow;
+            editMedicine.Show();*/
         }
 
         private void deleteMedicine(object sender, RoutedEventArgs e)
@@ -96,7 +100,9 @@ namespace Hospital.View
 
         private void medicinesRevision(object sender, RoutedEventArgs e)
         {
-
+            MedicineRevisionWindow medicineRevisionWindow = new MedicineRevisionWindow();
+            medicineRevisionWindow.Owner = Application.Current.MainWindow;
+            medicineRevisionWindow.Show();
         }
 
         private void searchMedicine(object sender, RoutedEventArgs e)

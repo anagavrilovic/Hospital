@@ -1,4 +1,4 @@
-﻿<Window x:Class="Hospital.View.Renovations"
+﻿<Window x:Class="Hospital.View.MedicineRevisionWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
          WindowStartupLocation="CenterOwner"
-        Title="Renoviranja sala" Height="750" Width="430">
+        Title="Revizija lekova" Height="750" Width="430">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -28,19 +28,18 @@
             <Button Background="#FF95C0F4" BorderBrush="#FF95C0F4" Click="back">
                 <Image Source="/Icon/back.png"  Margin="0,0,5,0" Height="63" Width="55"/>
             </Button>
-            <Label Content="ZAKAZANA RENOVIRANJA"    Margin="0,27,5,28.4" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="18"  />
-            <Image Source="/Icon/logo.png"  Margin="0,20,6,18.6" Width="133"/>
+            <Label Content="REVIZIJA LEKOVA"    Margin="0,27,5,28.4" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="18"  />
+            <Image Source="/Icon/logo.png"  Margin="60,20,6,18.6" Width="133"/>
         </StackPanel>
 
-        <Button Grid.Row="1" Grid.Column="0" Content="ZAKAŽI RENOVIRANJE" Margin="10,18.4,10,19.2" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="addNewRenovation"/>
-        <Button Grid.Row="1" Grid.Column="1" Content="OTKAŽI RENOVIRANJE" Margin="10,18.4,10,19.2" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="deleteRenovation"/>
+        <Button Grid.Row="1" Grid.ColumnSpan="2" Content="IZMENI LEK" Margin="10,18.4,10,19.2" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="editMedicine"/>
 
         <Grid Grid.Row="2" Grid.RowSpan="6" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <ListBox x:Name="listBoxRenovations" ItemsSource="{Binding RoomRenovations, Mode=OneWay}" Grid.Row="0" Margin="0,10,20,23" Width="420"
+            <ListBox x:Name="listBoxMedicines" ItemsSource="{Binding MedicinesOnRevision, Mode=OneWay}" Grid.Row="0" Margin="0,10,20,23" Width="420"
                          ScrollViewer.VerticalScrollBarVisibility="Hidden">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -51,34 +50,33 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"   />
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                           
+
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition  Width="150"/>
-                                <ColumnDefinition  Width="120"/>
+                                <ColumnDefinition  Width="150"/>
                                 <ColumnDefinition  Width="*"  />
                             </Grid.ColumnDefinitions>
-                            <Label     Grid.Row="0" Grid.Column="0" Content="ID sale:"             />
-                            <Label     Grid.Row="1" Grid.Column="0" Content="Datum početka:"       />
-                            <Label     Grid.Row="2" Grid.Column="0" Content="Datum završetka:"     />
-                            <Label     Grid.Row="3" Grid.Column="0" Content="Oprema premeštena u:" />
-                            <Label     Grid.Row="4" Grid.Column="0" Content="Opis:"                />
-                            
-                            <TextBlock Grid.Row="0" Grid.Column="1"     Text="{Binding Room.Id,       Mode=OneWay}" Margin="0,4,0,0"/>
-                            <TextBlock Grid.Row="1" Grid.Column="1"     Text="{Binding StartDate,     Mode=OneWay, StringFormat='{}{0: dd.MM.yyyy, HH:mm}'}" Margin="0,4,0,0" />
-                            <TextBlock Grid.Row="2" Grid.Column="1"     Text="{Binding EndDate,       Mode=OneWay, StringFormat='{}{0: dd.MM.yyyy, HH:mm}'}" Margin="0,4,0,0" />
-                            <TextBlock Grid.Row="3" Grid.Column="1"     Text="{Binding WareHouse.Id,  Mode=OneWay, StringFormat='{}{0: dd.MM.yyyy, HH:mm}'}" Margin="0,4,0,0" />
+                            <Label     Grid.Row="0" Grid.Column="0" Content="ID leka:"             />
+                            <Label     Grid.Row="1" Grid.Column="0" Content="Naziv leka:"          />
+                            <Label     Grid.Row="2" Grid.Column="0" Content="Doza u miligramima:"  />
+                            <Label     Grid.Row="3" Grid.Column="0" Content="Revidira:"            />
+                            <Label     Grid.Row="4" Grid.Column="0" Content="Komentar lekara:"     />
+                          
+                            <TextBlock Grid.Row="0" Grid.Column="1"     Text="{Binding Medicine.ID,          Mode=OneWay}"  Margin="0,4,0,0"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1"     Text="{Binding Medicine.Name,        Mode=OneWay}"  Margin="0,4,0,0" />
+                            <TextBlock Grid.Row="2" Grid.Column="1"     Text="{Binding Medicine.DosageInMg,  Mode=OneWay}"  Margin="0,4,0,0" />
+                            <TextBlock Grid.Row="3" Grid.Column="1"     Text="{Binding DoctorID,             Mode=OneWay}"  Margin="0,4,0,0" />
                             <ScrollViewer Grid.Row="5" Grid.ColumnSpan="3" Margin="5,5,5,5" VerticalScrollBarVisibility="Hidden">
-                                <TextBlock Text="{Binding Description, Mode=OneWay}" TextWrapping="Wrap" />
+                                <TextBlock Text="{Binding RevisionExplanation, Mode=OneWay}" TextWrapping="Wrap" />
                             </ScrollViewer>
-                            <Separator Grid.Row="6" Grid.ColumnSpan="3"/>
+                            <Separator Grid.Row="5" Grid.ColumnSpan="3"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-       </Grid>
+        </Grid>
     </Grid>
-    
 </Window>

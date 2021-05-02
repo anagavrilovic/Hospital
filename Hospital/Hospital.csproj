@@ -175,6 +175,12 @@
     <Compile Include="View\Doktor\Termin.xaml.cs">
       <DependentUpon>Termin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditMedicine.xaml.cs">
+      <DependentUpon>EditMedicine.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MedicineRevisionWindow.xaml.cs">
+      <DependentUpon>MedicineRevisionWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MedicinesWindow.xaml.cs">
       <DependentUpon>MedicinesWindow.xaml</DependentUpon>
     </Compile>
@@ -387,6 +393,14 @@
     <Page Include="View\Doktor\PregledTermina.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditMedicine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MedicineRevisionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MedicinesWindow.xaml">
       <SubType>Designer</SubType>

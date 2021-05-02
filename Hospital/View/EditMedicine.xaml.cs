@@ -18,45 +18,12 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for AddMedicine.xaml
-    /// </summary>
-    public partial class AddMedicine : Window, INotifyPropertyChanged
-    { 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
+    public partial class EditMedicine : Window
+    {
+        public MedicineRevision MedicineOnRevision { get; set; }
 
-        private MedicineRevision medicineRevision;
-        public MedicineRevision MedicineRevision
-        {
-            get => medicineRevision;
-            set
-            {
-                medicineRevision = value;
-                OnPropertyChanged("MedicineRevision");
-            }
-        }
-
-        private ObservableCollection<string> doctorsNameSurname;
-        public ObservableCollection<string> DoctorsNameSurname
-        {
-            get
-            {
-                return doctorsNameSurname;
-            }
-
-            set
-            {
-                doctorsNameSurname = value;
-                OnPropertyChanged("DoctorsNameSurname");
-            }
-        }
+        public ObservableCollection<MedicineRevision> AllMedicinesOnRevision { get; set; }
+        private MedicineRevisionStorage medicineRevisionStorage;
 
         public List<string> Ingredients { get; set; }
 
@@ -70,26 +37,35 @@ namespace Hospital.View
             set { ingredientsCollection = value; }
         }
 
-        public AddMedicine()
+        public EditMedicine(MedicineRevision medicineRevision)
         {
             InitializeComponent();
-            MedicineRevision = new MedicineRevision();
-            MedicineRevision.Medicine = new Medicine();
-            addDoctorsInComboBox();
-            addIngredientsInListBox();
-            IngredientsCollection = CollectionViewSource.GetDefaultView(Ingredients);
-
             this.DataContext = this;
+            this.medicineRevisionStorage = new MedicineRevisionStorage();
+            MedicineOnRevision = medicineRevision;
+            AllMedicinesOnRevision = medicineRevisionStorage.GetAll();
+            addIngredientsInListBox();
+            addDoctorsInComboBox();
+            setDoctorOnComboBox();
         }
 
         private void addDoctorsInComboBox()
         {
-            DoctorsNameSurname = new ObservableCollection<string>();
+            ObservableCollection<string>  DoctorsNameSurname = new ObservableCollection<string>();
             DoctorStorage doctorStorage = new DoctorStorage();
             foreach (Hospital.Model.Doctor doctor in doctorStorage.GetAll())
             {
                 DoctorsNameSurname.Add(doctor.ToString());
             }
+
+            doctorsCB.ItemsSource = DoctorsNameSurname;
+        }
+
+        private void setDoctorOnComboBox()
+        {
+            DoctorStorage doctorStorage = new DoctorStorage();
+            doctorsCB.SelectedItem = doctorStorage.GetOne(MedicineOnRevision.DoctorID).ToString();
+            Console.WriteLine(doctorStorage.GetOne(MedicineOnRevision.DoctorID).ToString());
         }
 
         private void addIngredientsInListBox()
@@ -132,30 +108,30 @@ namespace Hospital.View
         private void BtnPlusIngredients(object sender, RoutedEventArgs e)
         {
             Ingredient newIngredient = new Ingredient();
-            string selectedIngredient = (string) allIngredientsList.SelectedItem;
+            string selectedIngredient = (string)allIngredientsList.SelectedItem;
             if (selectedIngredient == null)
                 return;
 
             newIngredient.Name = selectedIngredient;
-      
-            foreach (Ingredient ing in MedicineRevision.Medicine.Ingredient)
+
+            foreach (Ingredient ing in MedicineOnRevision.Medicine.Ingredient)
             {
                 if (ing.Name.Equals(newIngredient.Name))
-                    return;     
+                    return;
             }
 
-            MedicineRevision.Medicine.AddIngredient(newIngredient);
+            MedicineOnRevision.Medicine.AddIngredient(newIngredient);
             ingredientsList.Items.Refresh();
         }
 
         private void BtnMinusIngredients(object sender, RoutedEventArgs e)
         {
-            Ingredient ingredientToDelete = (Ingredient) ingredientsList.SelectedItem;;
+            Ingredient ingredientToDelete = (Ingredient)ingredientsList.SelectedItem; ;
             if (ingredientToDelete == null)
                 return;
 
-            MedicineRevision.Medicine.RemoveIngredient(ingredientToDelete);
-            ingredientsList.ItemsSource = MedicineRevision.Medicine.Ingredient;
+            MedicineOnRevision.Medicine.RemoveIngredient(ingredientToDelete);
+            ingredientsList.ItemsSource = MedicineOnRevision.Medicine.Ingredient;
             ingredientsList.Items.Refresh();
         }
 
@@ -164,34 +140,16 @@ namespace Hospital.View
             ingredientsCollection.Refresh();
         }
 
-        private void SendOnRevision(object sender, RoutedEventArgs e)
+
+        private void SendAgainOnRevision(object sender, RoutedEventArgs e)
         {
-            string doctorSelected = doctorsCB.Text.Trim().Substring(3);
-            DoctorStorage doctorStorage = new DoctorStorage();
-            MedicineRevision.DoctorID = doctorStorage.GetIDByNameSurname(doctorSelected);
-            MedicineRevision.RevisionDoctor = doctorStorage.GetOne(MedicineRevision.DoctorID);
-            MedicineRevision.IsMedicineRevised = false;
+            priceTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            quantityTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            doctorsCB.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
 
-            CheckUniquenessOfMedicineID();
-
-            MedicineRevisionStorage medicineRevisionStorage = new MedicineRevisionStorage();
-            medicineRevisionStorage.Save(MedicineRevision);
+            medicineRevisionStorage.DoSerialization(AllMedicinesOnRevision);
 
             this.Close();
-        }
-
-        private void CheckUniquenessOfMedicineID()
-        {
-            MedicineStorage medicineStorage = new MedicineStorage();
-            ObservableCollection<Medicine> medicines = medicineStorage.GetAll();
-            foreach (Medicine medicine in medicines)
-            {
-                if (medicine.ID.Equals(MedicineRevision.Medicine.ID))
-                {
-                    MessageBox.Show("Vec postoji lek sa unetom oznakom!");
-                    return;
-                }
-            }
         }
 
         private void Cancel(object sender, RoutedEventArgs e)
@@ -199,7 +157,7 @@ namespace Hospital.View
             this.Close();
         }
 
-        private void BackToMenu(object sender, RoutedEventArgs e)
+        private void Back(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

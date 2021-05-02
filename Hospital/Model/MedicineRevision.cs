@@ -65,6 +65,15 @@ namespace Hospital.Model
             }
         }
 
-        private bool isMedicineRejected;
+        private bool isMedicineRevised;
+        public bool IsMedicineRevised
+        {
+            get => isMedicineRevised;
+            set
+            {
+                isMedicineRevised = value;
+                OnPropertyChanged("IsMedicineRevised");
+            }
+        }
     }
 }
