@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,27 +19,57 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for PrebacivanjeOpreme.xaml
     /// </summary>
-    public partial class PrebacivanjeOpreme : Window
+    public partial class PrebacivanjeOpreme : Window, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
 
-        private MedicalSupply supplySelected;
+        public MedicalSupply SupplySelected { get; set; }
+        private ObservableCollection<string> roomsIDs;
+        public ObservableCollection<string> RoomsIDs
+        {
+            get
+            {
+                return roomsIDs;
+            }
+
+            set
+            {
+                roomsIDs = value;
+                OnPropertyChanged("RoomsIDs");
+            }
+        }
+
 
         public PrebacivanjeOpreme(MedicalSupply ms)
         {
             InitializeComponent();
-            this.supplySelected = ms;
+            RoomsIDs = new ObservableCollection<string>();
+            RoomStorage roomStorage = new RoomStorage();
+            foreach(Room room in roomStorage.GetAll())
+            {
+                RoomsIDs.Add(room.Id);
+            }
+            this.DataContext = this;
+            SupplySelected = ms;
         }
 
         private void accept(object sender, RoutedEventArgs e)
         {
-            if (!(string.IsNullOrEmpty(kolicinaTxt.Text)))
-            {
-                MedicalSupplyStorage msStorage = new MedicalSupplyStorage();
-                String id = typeCB.Text;
-                msStorage.UpdateSupply(this.supplySelected, id, int.Parse(kolicinaTxt.Text));
-                DynamicInventory.Supply = msStorage.GetByRoomID(this.supplySelected.RoomID);
-            }
-
+            if (string.IsNullOrEmpty(kolicinaTxt.Text))
+                return;
+            
+            MedicalSupplyStorage msStorage = new MedicalSupplyStorage();
+            String id = typeCB.Text;
+            msStorage.UpdateSupply(SupplySelected, id, int.Parse(kolicinaTxt.Text));
+            DynamicInventory.Supply = msStorage.GetByRoomID(SupplySelected.RoomID);
+            
             this.Close();
         }
 

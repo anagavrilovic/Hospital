@@ -50,10 +50,31 @@ namespace Hospital.View
             set {  transferItem = value; }    
         }
 
+        private ObservableCollection<string> roomsIDs;
+        public ObservableCollection<string> RoomsIDs
+        {
+            get
+            {
+                return roomsIDs;
+            }
+
+            set
+            {
+                roomsIDs = value;
+                OnPropertyChanged("RoomsIDs");
+            }
+        }
+
         public PrebacivanjeInventara(Inventory inv)
         {
             InitializeComponent();
             this.DataContext = this;
+            RoomsIDs = new ObservableCollection<string>();
+            RoomStorage roomStorage = new RoomStorage();
+            foreach (Room room in roomStorage.GetAll())
+            {
+                RoomsIDs.Add(room.Id);
+            }
             this.inventorySeleceted = inv;
             this.transferItem = new TransferInventory();
         }

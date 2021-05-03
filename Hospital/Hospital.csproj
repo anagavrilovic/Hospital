@@ -73,6 +73,9 @@
     <Compile Include="Model\Ingredient.cs" />
     <Compile Include="Model\Inventory.cs" />
     <Compile Include="Model\InventoryStorage.cs" />
+    <Compile Include="Model\MedicineRevision.cs" />
+    <Compile Include="Model\MedicineRevisionStorage.cs" />
+    <Compile Include="Model\MedicineTherapy.cs" />
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\NotificationStorage.cs" />
     <Compile Include="Model\NotificationsUsers.cs" />
@@ -114,6 +117,9 @@
     </Compile>
     <Compile Include="View\AddMedicalSupply.xaml.cs">
       <DependentUpon>AddMedicalSupply.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddMedicine.xaml.cs">
+      <DependentUpon>AddMedicine.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Doktor\Anamnesis.xaml.cs">
       <DependentUpon>Anamnesis.xaml</DependentUpon>
@@ -177,6 +183,15 @@
     </Compile>
     <Compile Include="View\FilteringInventory.xaml.cs">
       <DependentUpon>FilteringInventory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditMedicine.xaml.cs">
+      <DependentUpon>EditMedicine.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MedicineRevisionWindow.xaml.cs">
+      <DependentUpon>MedicineRevisionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MedicinesWindow.xaml.cs">
+      <DependentUpon>MedicinesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ObaveštenjaUpravnik.xaml.cs">
       <DependentUpon>ObaveštenjaUpravnik.xaml</DependentUpon>
@@ -324,6 +339,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AddMedicine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Doktor\Anamnesis.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -393,6 +412,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FilteringInventory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditMedicine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MedicineRevisionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MedicinesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -738,6 +769,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\DoctorIcons\notification.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\minus.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

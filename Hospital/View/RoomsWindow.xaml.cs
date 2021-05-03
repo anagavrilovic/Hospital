@@ -74,21 +74,22 @@ namespace Hospital.View
         private void searchRooms(object sender, TextChangedEventArgs e)
         {
             TextBox textbox = sender as TextBox;
-            if (textbox != null)
+            if (textbox == null)
+                return;
+           
+            this.searchstr = textbox.Text;
+            if (!string.IsNullOrEmpty(searchstr))
             {
-                this.searchstr = textbox.Text;
-                if (!string.IsNullOrEmpty(searchstr))
-                {
-                    ICollectionView view = CollectionViewSource.GetDefaultView(dataGridRooms.ItemsSource);
-                    view.Filter = new Predicate<object>(filter);
-                    this.RoomsCollection.Refresh();
-                }
-                else
-                {
-                    ICollectionView view = CollectionViewSource.GetDefaultView(Rooms);
-                    this.RoomsCollection.Refresh();
-                }
+                ICollectionView view = CollectionViewSource.GetDefaultView(dataGridRooms.ItemsSource);
+                view.Filter = new Predicate<object>(filter);
+                this.RoomsCollection.Refresh();
             }
+            else
+            {
+                ICollectionView view = CollectionViewSource.GetDefaultView(Rooms);
+                this.RoomsCollection.Refresh();
+            }
+            
         }
 
         private void selectFilters(object sender, RoutedEventArgs e)
@@ -120,66 +121,61 @@ namespace Hospital.View
         {
             Room selectedItem = (Room) dataGridRooms.SelectedItem;
 
-            if (selectedItem != null)
-            {
-                EditRoom room = new EditRoom(selectedItem);
-                room.Owner = Application.Current.MainWindow;
+            if (selectedItem == null)
+                return;
+           
+            EditRoom room = new EditRoom(selectedItem);
+            room.Owner = Application.Current.MainWindow;
 
-                room.idTxt.Text =  selectedItem.Id;
-                room.idTxt.IsEnabled = false;
-                room.nameTxt.Text = selectedItem.Name;
-                room.floorTxt.Text = selectedItem.Floor.ToString();
-                room.typeCB.SelectedValue = selectedItem.Type;
-                room.typeCB.Text = selectedItem.Type.ToString();
-                room.statusCB.SelectedValue = selectedItem.Status;
-                room.statusCB.Text = selectedItem.Status.ToString();
+            room.idTxt.Text =  selectedItem.Id;
+            room.idTxt.IsEnabled = false;
+            room.nameTxt.Text = selectedItem.Name;
+            room.floorTxt.Text = selectedItem.Floor.ToString();
+            room.typeCB.SelectedValue = selectedItem.Type;
+            room.typeCB.Text = selectedItem.Type.ToString();
+            room.statusCB.SelectedValue = selectedItem.Status;
+            room.statusCB.Text = selectedItem.Status.ToString();
 
-                room.Show();
-            }    
+            room.Show();
         }
 
         private void deleteRoom(object sender, RoutedEventArgs e)
         {
             Room selectedItem = (Room) dataGridRooms.SelectedItem;
-            if (selectedItem != null)
-            {
-                MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da uklonite izabranu salu",
-                                        "Brisanje sale",
-                                        MessageBoxButton.YesNo,
-                                        MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
-                {
-                    if (selectedItem != null)
-                    {
-                        rs.Delete(selectedItem.Id);
-                    }
-                }
-            }
+            if (selectedItem == null)
+                return;
+            
+            MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da uklonite izabranu salu",
+                                      "Brisanje sale",
+                                       MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+           if (result == MessageBoxResult.Yes)
+               rs.Delete(selectedItem.Id);
+                   
         }
 
         private void viewStaticInventory(object sender, RoutedEventArgs e)
         {
             Room selectedItem = (Room)dataGridRooms.SelectedItem;
 
-            if (selectedItem != null)
-            {
-                StaticInventory inv = new StaticInventory(selectedItem.Id);
-                inv.Owner = Application.Current.MainWindow;
-                inv.Show();
-            }
+            if (selectedItem == null)
+                return;
+           
+            StaticInventory inv = new StaticInventory(selectedItem.Id);
+            inv.Owner = Application.Current.MainWindow;
+            inv.Show();
         }
 
         private void viewDynamicInventory(object sender, RoutedEventArgs e)
         {  
             Room selectedItem = (Room)dataGridRooms.SelectedItem;
 
-            if(selectedItem != null)
-            {
-                DynamicInventory inv = new DynamicInventory(selectedItem.Id);
-                inv.Owner = Application.Current.MainWindow;
-                inv.Show();
-            }
-            
+            if (selectedItem == null)
+                return;
+
+            DynamicInventory inv = new DynamicInventory(selectedItem.Id);
+            inv.Owner = Application.Current.MainWindow;
+            inv.Show();
         }
 
         private void renovateRoom(object sender, RoutedEventArgs e)
@@ -187,7 +183,6 @@ namespace Hospital.View
             Renovations renovations = new Renovations();
             renovations.Owner = Application.Current.MainWindow;
             renovations.Show();
-            
         }
 
         private void refreshView(object sender, RoutedEventArgs e)

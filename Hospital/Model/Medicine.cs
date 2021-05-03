@@ -3,6 +3,7 @@
 // Created: Monday, April 5, 2021 6:57:36 PM
 // Purpose: Definition of Class Medicine
 
+using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -22,6 +23,7 @@ namespace Hospital
             }
         }
         private int durationInDays;
+        [JsonIgnore]
         public int DurationInDays
         {
             get => durationInDays;
@@ -32,6 +34,7 @@ namespace Hospital
             }
         }
         private int timesPerDay;
+        [JsonIgnore]
         public int TimesPerDay
         {
             get => timesPerDay;
@@ -51,6 +54,7 @@ namespace Hospital
                 OnPropertyChanged("Name");
             }
         }
+      
         private double dosageInMg;
         public double DosageInMg
         {
@@ -62,7 +66,19 @@ namespace Hospital
             }
         }
 
+        private double price;
+        public double Price
+        {
+            get => price;
+            set
+            {
+                price = value;
+                OnPropertyChanged("Price");
+            }
+        }
+       
         private string description;
+        [JsonIgnore]
         public string Description
         {
             get => description;
@@ -109,6 +125,8 @@ namespace Hospital
                     foreach (Ingredient oIngredient in value)
                         AddIngredient(oIngredient);
                 }
+
+                OnPropertyChanged("Ingredient");
             }
         }
 

@@ -1,6 +1,8 @@
 ﻿using Hospital.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,8 +20,46 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for RenovateRoom.xaml
     /// </summary>
-    public partial class RenovateRoom : Window
+    public partial class RenovateRoom : Window, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        private ObservableCollection<string> warehousesIDs;
+        public ObservableCollection<string> WarehousesIDs
+        {
+            get
+            {
+                return warehousesIDs;
+            }
+
+            set
+            {
+                warehousesIDs = value;
+                OnPropertyChanged("WarehousesIDs");
+            }
+        }
+        private ObservableCollection<string> roomIDs;
+        public ObservableCollection<string> RoomIDs
+        {
+            get
+            {
+                return roomIDs;
+            }
+
+            set
+            {
+                roomIDs = value;
+                OnPropertyChanged("RoomIDs");
+            }
+        }
+
         //private Room room;
         private RoomRenovation roomRenovation;
         private RoomStorage roomStorage;
@@ -38,6 +78,14 @@ namespace Hospital.View
             // this.room = room;
             this.roomRenovation = new RoomRenovation();
             this.roomStorage = new RoomStorage();
+            WarehousesIDs = new ObservableCollection<string>();
+            RoomIDs = new ObservableCollection<string>();
+            foreach (Room room in roomStorage.GetAll())
+            {
+                RoomIDs.Add(room.Id);
+                if (room.Type == RoomType.MAGACIN)
+                    WarehousesIDs.Add(room.Id);
+            }
         }
 
         private void accept(object sender, RoutedEventArgs e)

@@ -3,6 +3,7 @@
 // Created: Tuesday, March 23, 2021 7:21:46 PM
 // Purpose: Definition of Class Therapy
 
+using Hospital.Model;
 using System;
 
 namespace Hospital
@@ -11,18 +12,18 @@ namespace Hospital
     {
        public string description;
         public string name;
-       private System.Collections.Generic.List<Medicine> medicine;
+       private System.Collections.Generic.List<MedicineTherapy> medicine;
    
        /// <summary>
        /// Property for collection of Medicine
        /// </summary>
        /// <pdGenerated>Default opposite class collection property</pdGenerated>
-       public System.Collections.Generic.List<Medicine> Medicine
+       public System.Collections.Generic.List<MedicineTherapy> Medicine
        {
           get
           {
              if (medicine == null)
-                medicine = new System.Collections.Generic.List<Medicine>();
+                medicine = new System.Collections.Generic.List<MedicineTherapy>();
              return medicine;
           }
           set
@@ -30,7 +31,7 @@ namespace Hospital
              RemoveAllMedicine();
              if (value != null)
              {
-                foreach (Medicine oMedicine in value)
+                foreach (MedicineTherapy oMedicine in value)
                    AddMedicine(oMedicine);
              }
           }
@@ -40,12 +41,12 @@ namespace Hospital
        /// Add a new Medicine in the collection
        /// </summary>
        /// <pdGenerated>Default Add</pdGenerated>
-       public void AddMedicine(Medicine newMedicine)
+       public void AddMedicine(MedicineTherapy newMedicine)
        {
           if (newMedicine == null)
              return;
           if (this.medicine == null)
-             this.medicine = new System.Collections.Generic.List<Medicine>();
+             this.medicine = new System.Collections.Generic.List<MedicineTherapy>();
           if (!this.medicine.Contains(newMedicine))
              this.medicine.Add(newMedicine);
        }
@@ -54,7 +55,7 @@ namespace Hospital
        /// Remove an existing Medicine from the collection
        /// </summary>
        /// <pdGenerated>Default Remove</pdGenerated>
-       public void RemoveMedicine(Medicine oldMedicine)
+       public void RemoveMedicine(MedicineTherapy oldMedicine)
        {
           if (oldMedicine == null)
              return;

@@ -32,7 +32,7 @@
                 <Image  Source="/Icon/back.png" Margin="10,8,0,5"/>
             </Button>
             <Label Content="INVENTAR" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" Margin="0,15,5,10.2"/>
-            <Image Source="/Icon/logo.png" Margin="10,5,250,2"/>
+            <Image Source="/Icon/logo.png"      Margin="70,5,25,10" Width="153"/>
         </StackPanel>
 
         <Button Grid.Column="0"     Grid.Row="1"  Content="IZMENI STAVKU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="10,23,10.2,10" Click="edit" />
