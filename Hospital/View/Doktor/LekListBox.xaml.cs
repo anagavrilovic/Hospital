@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -151,10 +152,12 @@ namespace Hospital.View
 
         private void AddMedicineToTherapy(object sender, MouseButtonEventArgs e)
         {
-            Medicine medicToBeAdded = FillMedicine();
-            if(!AlreadyAddedToTherapy(medicToBeAdded) && !AllergicToMedic(medicToBeAdded))
+            Medicine medicToBeAdded = ((Medicine)listBox.SelectedItem);
+            MedicineTherapy medicineTherapy = FillMedicine(medicToBeAdded);
+            if (!AlreadyAddedToTherapy(medicToBeAdded) && !AllergicToMedic(medicToBeAdded))
             {
-                    parentWindow.Medics.Add(medicToBeAdded);
+                    parentWindow.MedicineView.Add(medicToBeAdded);
+                    parentWindow.Medics.Add(medicineTherapy);
                     this.Close();
             }
         }
@@ -173,11 +176,11 @@ namespace Hospital.View
         }
 
 
-        private bool AlreadyAddedToTherapy(Medicine m)
+        private bool AlreadyAddedToTherapy(Medicine medicine)
         {
-            foreach (Medicine m1 in parentWindow.Medics)
+            foreach (MedicineTherapy medicineAddedToTherapy in parentWindow.Medics)
             {
-                if (m1.ID.Equals(m.ID))
+                if (medicineAddedToTherapy.MedicineID.Equals(medicine.ID))
                 {
                     MessageBox.Show("Vec ste dodali ovaj lek");
                     return true;
@@ -187,13 +190,15 @@ namespace Hospital.View
             return false;
         }
 
-        private Medicine FillMedicine()
+        private MedicineTherapy FillMedicine(Medicine medicToBeAdded)
         {
-            Medicine m = ((Medicine)listBox.SelectedItem);
-            m.DurationInDays = int.Parse(DaysForConsumption);
-            m.TimesPerDay = int.Parse(DailyIntake);
-            m.Description = MedicineDescription;
-            return m;
+            MedicineTherapy medicineTherapy = new MedicineTherapy();
+            medicineTherapy.MedicineID = medicToBeAdded.ID;
+            medicineTherapy.DurationInDays = int.Parse(DaysForConsumption);
+            medicineTherapy.TimesPerDay = int.Parse(DailyIntake);
+            medicineTherapy.Description = MedicineDescription;
+            return medicineTherapy;
+
         }
 
         private void BackToTherapy(object sender, RoutedEventArgs e)

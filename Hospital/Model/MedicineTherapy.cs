@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Model
 {
-    class MedicineTherapy : INotifyPropertyChanged
+   public class MedicineTherapy : INotifyPropertyChanged
     {
         private int durationInDays;
         public int DurationInDays

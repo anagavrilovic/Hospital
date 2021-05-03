@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -22,16 +23,26 @@ namespace Hospital.View
     /// </summary>
     public partial class Terapija : Page, INotifyPropertyChanged
     {
-        private ObservableCollection<Medicine> medics = new ObservableCollection<Medicine>();
+        private ObservableCollection<MedicineTherapy> medics = new ObservableCollection<MedicineTherapy>();
         public int dani;
         private MedicalRecordStorage medicineStorage = new MedicalRecordStorage();
         public event PropertyChangedEventHandler PropertyChanged;
-        public ObservableCollection<Medicine> Medics
+        public ObservableCollection<MedicineTherapy> Medics
         {
             get { return medics; }
             set
             {
                 medics = value;
+                OnPropertyChanged();
+            }
+        }
+        private ObservableCollection<Medicine> medicineView = new ObservableCollection<Medicine>();
+        public ObservableCollection<Medicine> MedicineView
+        {
+            get { return medicineView; }
+            set
+            {
+                medicineView = value;
                 OnPropertyChanged();
             }
         }
@@ -60,7 +71,7 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
-            medicineBox.ItemsSource = Medics;
+            medicineBox.ItemsSource = MedicineView;
         }
 
         private void AddMedicine(object sender, RoutedEventArgs e)
@@ -98,9 +109,9 @@ namespace Hospital.View
 
         private void FillTherapy(Therapy therapy)
         {
-            foreach (Medicine m in Medics)
+            foreach (MedicineTherapy medicineTherapyAdded in Medics)
             {
-                therapy.AddMedicine(m);
+                therapy.AddMedicine(medicineTherapyAdded);
             }
             therapy.description = TherapyDescription;
             therapy.name = TherapyTitle;
@@ -110,7 +121,7 @@ namespace Hospital.View
         {
             if (medicineBox.SelectedItem != null)
             {
-               Medics.Remove((Medicine)medicineBox.SelectedItem);
+               Medics.Remove((MedicineTherapy)medicineBox.SelectedItem);
             }
         }
     }

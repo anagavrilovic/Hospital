@@ -52,11 +52,13 @@ namespace Hospital.Model
             foreach (Examination e in medicalRecord.Examination)
             {
                 int x = 0;
-                foreach (Medicine med in e.therapy.Medicine)
+                foreach (MedicineTherapy med in e.therapy.Medicine)
                 {
                     x++;
+                    MedicineStorage medicineStorage = new MedicineStorage();
+                    Medicine medicine = medicineStorage.GetOne(med.MedicineID);
                     PatientTherapyMedicineNotification patientTherapyMedicineNotification = new PatientTherapyMedicineNotification();
-                    patientTherapyMedicineNotification.Name = e.therapy.name + ": " + med.Name;
+                    patientTherapyMedicineNotification.Name = e.therapy.name + ": " + medicine.Name;
                     for (int i = 0; i < med.TimesPerDay; i++)
                     {
                         TimeSpan ts = new TimeSpan(i * 3 + 10, 0, 0);
