@@ -3,12 +3,18 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Hospital.View.Doktor"
+      xmlns:local="clr-namespace:Hospital.View.Doktor" 
+      xmlns:converters="clr-namespace:Hospital.DoktorConverters"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ValidnostLeka">
     <Page.Resources>
-        <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converters:ListToStringConverter x:Key="ListToStringConverter"/>
+        </ResourceDictionary>
     </Page.Resources>
 
     <Grid>
@@ -27,16 +33,16 @@
 
                 <!-- Dugmici za CRUD nad obavestenjima -->
                 <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,50,0,0">
-                    <Button Height="50" Width="60" Margin="0,30,0,0" Style="{DynamicResource ImageButtons}">
+                    <Button Height="50" Width="100" Margin="0,30,0,0" Style="{DynamicResource ImageButtons}" Click="ConfirmMedicine_Click">
                         <StackPanel Orientation="Vertical">
-                            <Image Source="../../Icon/Secretary/info.png" Width="30"/>
-                            <TextBlock Text="Pregledaj"/>
+                            <Image Source="../../Icon/DoctorIcons/confirm.png" Width="30"/>
+                            <TextBlock Text="Odobri lek"/>
                         </StackPanel>
                     </Button>
-                    <Button Height="50" Width="50" Margin="0,30,0,0" Style="{DynamicResource ImageButtons}">
+                    <Button Height="50" Width="110" Margin="0,30,-10,0" Style="{DynamicResource ImageButtons}" Click="RejectMedicine_Click">
                         <StackPanel Orientation="Vertical">
-                            <Image Source="../../Icon/Secretary/delete.png" Width="30"/>
-                            <TextBlock Text="Izbriši"/>
+                            <Image Source="../../Icon/DoctorIcons/cancel.png" Width="30"/>
+                            <TextBlock Text="Vrati na izmenu"/>
                         </StackPanel>
                     </Button>
                     <Button Height="50" Width="50" Margin="0,30,0,0" Style="{DynamicResource ImageButtons}">
@@ -69,7 +75,7 @@
                     </Border>
 
                     <!-- Prikaz obavestenja -->
-                    <ListBox x:Name="ListBoxNotifications" ItemsSource="{Binding MedicineRevision, Mode=TwoWay}" Grid.Row="1" Margin="20,5,20,15"
+                    <ListBox x:Name="ListBoxRevisions" ItemsSource="{Binding MedicineRevisions, Mode=TwoWay}" Grid.Row="1" Margin="20,5,20,15"
                                 ScrollViewer.HorizontalScrollBarVisibility="Hidden" Style="{StaticResource ListBoxStyle}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -85,10 +91,26 @@
                                             <ColumnDefinition/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Text="{Binding Title, Mode=TwoWay}" FontSize="16" FontWeight="Bold"/>
-                                        <TextBlock Grid.Column="2" Text="{Binding Date, StringFormat='{}{0: dd.MM.yyyy, HH:mm}', Mode=TwoWay}" FontStyle="Italic" />
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock FontSize="16" FontWeight="Bold">
+                                            <Run Text="Lek:"/>
+                                            <Run Text="{Binding Medicine.Name, Mode=TwoWay}"/>
+                                            
+                                        </TextBlock>
+                                            <TextBlock FontSize="15" FontWeight="Bold">
+                                                <Run Text="Id:"/>
+                                            <Run Text="{Binding Medicine.ID, Mode=TwoWay}"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="2" FontStyle="Italic">
+                                            <Run Text="Doza u miligramima: "/>
+                                            <Run Text="{Binding Medicine.DosageInMg,  Mode=TwoWay}" />
+                                        </TextBlock>
                                     </Grid>
-                                    <TextBlock Margin="0,10,0,0" Grid.Row="1" Text="{Binding Content, Mode=TwoWay}" FontSize="14" TextWrapping="Wrap" Width="860"/>
+                                    <TextBlock Margin="0,10,0,0" Grid.Row="1" FontSize="14" TextWrapping="Wrap" Width="860">
+                                        <Run Text="Sastojci: "/>
+                                        <Run Text="{Binding Medicine.Ingredient, Mode=TwoWay,Converter={StaticResource ListToStringConverter}}"/>
+                                    </TextBlock>
                                     <Separator Grid.Row="2"/>
                                 </Grid>
                             </DataTemplate>

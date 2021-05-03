@@ -1,0 +1,41 @@
+﻿<Window x:Class="Hospital.View.Doktor.OdbijeniLekoviKomentar"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.View.Doktor" 
+        xmlns:val="clr-namespace:Hospital.ValidacijeLekar"
+        mc:Ignorable="d"
+        Title="OdbijeniLekoviKomentar" Height="450" Width="800" WindowStartupLocation="CenterScreen" Background="{DynamicResource BackgroundGray}">
+    <Window.Resources>
+        <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
+    </Window.Resources>
+    <StackPanel Orientation="Vertical">
+        <Label FontSize="22" Content="Obrazloženje:" Margin="60,0,0,0" Style="{DynamicResource Label}"></Label>
+        <TextBox Name="txtName" TextWrapping="Wrap" FontSize="15" AcceptsReturn="True"
+                         Validation.ErrorTemplate="{DynamicResource ValidationErrorTemplate}" Width="600" Height="400" Margin="30,10,30,20"
+                      Style="{DynamicResource TextBox}">
+            <TextBox.Text>
+                <Binding Path="MedicineRevision.RevisionExplanation"  Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:EmptyStringValidationRule ValidationStep="RawProposedValue" ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button VerticalAlignment="Top" Click="SaveRejection_Click" Style="{DynamicResource ButtonWithValidation}">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="../../Icon/DoctorIcons/save.png" Width="20"/>
+                <TextBlock Text="Sačuvaj reviziju"/>
+            </StackPanel>
+        </Button>
+            <Button VerticalAlignment="Top" Margin="30,0,0,0" Click="Nazad" Style="{DynamicResource ImageButtonsHorizontal}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../Icon/DoctorIcons/back.png" Width="20"/>
+                    <TextBlock Text="Nazad"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</Window>

@@ -62,6 +62,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DoktorConverters\ListToStringConverter.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Allergen.cs" />
     <Compile Include="Model\BloodType.cs" />
@@ -147,6 +148,9 @@
     </Compile>
     <Compile Include="View\Doktor\ErrorBox.xaml.cs">
       <DependentUpon>ErrorBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Doktor\OdbijeniLekoviKomentar.xaml.cs">
+      <DependentUpon>OdbijeniLekoviKomentar.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Doktor\ValidnostLeka.xaml.cs">
       <DependentUpon>ValidnostLeka.xaml</DependentUpon>
@@ -398,6 +402,10 @@
     <Page Include="View\Doktor\Lekovi.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Doktor\OdbijeniLekoviKomentar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Doktor\PacijentListBox.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -775,6 +783,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\minus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\confirm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\cancel.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
