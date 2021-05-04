@@ -797,5 +797,14 @@
   <ItemGroup>
     <Resource Include="Icon\DoctorIcons\cancel.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\Secretary\warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\Secretary\del.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\Secretary\plus.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

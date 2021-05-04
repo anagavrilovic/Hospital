@@ -4,12 +4,23 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Hospital.View.Secretary"
+      xmlns:enum="clr-namespace:Hospital"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1065"
       Background="{StaticResource BackgroundGray}"
       Title="HitanPregled">
     <Page.Resources>
-        <ResourceDictionary Source="../../Resources/SecretaryResourceDictionary.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Resources/SecretaryResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="enum:DoctorSpecialty"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+        </ResourceDictionary>
     </Page.Resources>
 
     <Grid>
@@ -19,7 +30,10 @@
         </Grid.RowDefinitions>
 
         <StackPanel>
-            <TextBlock Text="HITAN PREGLED" Style="{StaticResource TitleStyle}"/>
+            <StackPanel Orientation="Horizontal" Margin="15,20,0,5">
+                <Image Source="../../Icon/Secretary/warning.png"/> 
+                <TextBlock Text=" HITAN PREGLED" Style="{StaticResource TitleStyle}" Margin="0"/>
+            </StackPanel>
             <!--<Separator Margin="15,0"/>-->
         </StackPanel>
 
@@ -52,10 +66,12 @@
                     <TextBlock Grid.Row="3" Grid.Column="0" Text="Pacijent: " Style="{StaticResource KartoniTextBlock}" Margin="40,20,0,10"/>
 
                     <!-- ComboBox-ovi -->
-                    <ComboBox Grid.Row="0" Grid.Column="1" Margin="0,30,40,20" Style="{StaticResource cbTB}"/>
-                    <ComboBox Grid.Row="1" Grid.Column="1" Margin="0,20,40,20" Style="{StaticResource cbTB}"/>
-                    <ComboBox Grid.Row="2" Grid.Column="1" Margin="0,20,40,20" Style="{StaticResource cbTB}">
-                        <ComboBoxItem>Pregled</ComboBoxItem>
+                    <ComboBox Grid.Row="0" Grid.Column="1" Margin="0,30,40,20" Style="{StaticResource cbTB}" 
+                              ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedItem="{Binding DoctorsSpecialty}"/>
+                    <ComboBox Grid.Row="1" Grid.Column="1" Margin="0,20,40,20" ItemsSource="{Binding Duration}" 
+                              Style="{StaticResource cbTB}" SelectedItem="{Binding NewAppointment.DurationInHours}"/>
+                    <ComboBox x:Name="AppointmentType" Grid.Row="2" Grid.Column="1" Margin="0,20,40,20" Style="{StaticResource cbTB}">
+                        <ComboBoxItem IsSelected="True">Pregled</ComboBoxItem>
                         <ComboBoxItem>Operacija</ComboBoxItem>
                     </ComboBox>
 
@@ -63,12 +79,13 @@
                     <Border Grid.Row="3" Grid.Column="1" Width="200" Height="25" Style="{StaticResource TextBoxBorder}" Margin="15,20,40,10" HorizontalAlignment="Left">
                         <StackPanel Margin="5" Orientation="Horizontal">
                             <Image Source="../../Icon/Secretary/search.png" Height="13" VerticalAlignment="Center"/>
-                            <TextBox x:Name="PacijentiFilter"  BorderThickness="0" Width="200" Height="23" Margin="10,0,0,0" 
-                                     Background="Transparent" FontSize="13" VerticalAlignment="Center" TextChanged="PacijentiFilterTextChanged"/>
+                            <TextBox x:Name="TextBoxPatientsFilter"  BorderThickness="0" Width="200" Height="23" Margin="10,0,0,0" 
+                                     Background="Transparent" FontSize="13" VerticalAlignment="Center" TextChanged="PatientsFilterTextChanged"/>
                         </StackPanel>
                     </Border>
 
-                    <ListBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="40,0,40,20">
+                    <ListBox x:Name="ListBoxPatients" ItemsSource="{Binding Patients}" Style="{StaticResource ListBoxStyle}" SelectedItem="{Binding SelectedPatient}"
+                             Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="40,0,40,20">
                         
                     </ListBox>
 
@@ -98,7 +115,7 @@
                     </Grid.ColumnDefinitions>
 
                     <CheckBox x:Name="GostNalog" Grid.Row="0" Grid.ColumnSpan="2" Content="Formiranje guest naloga pacijentu" Style="{StaticResource CheckBoxStyle}" 
-                              Margin="40,20,0,0"/>
+                              Margin="40,20,0,0" IsChecked="{Binding NewGuestPatient.Patient.IsGuest}"/>
 
                     <!-- Placeholderi -->
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Ime: " Style="{StaticResource KartoniTextBlock}" Margin="40,10,0,10"/>
@@ -108,11 +125,12 @@
                     <TextBlock Grid.Row="5" Grid.Column="0" Text="JMBG: " Style="{StaticResource KartoniTextBlock}" Margin="40,10,0,10"/>
                     
                     <!-- Polja za unos -->
-                    <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource GuestForm}" Margin="0,15,40,15"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource GuestForm}" Margin="0,15,40,15"/>
-                    <DatePicker Grid.Row="3" Grid.Column="1" Style="{StaticResource GuestForm}" Margin="0,15,40,15"/>
-                    <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource GuestForm}" Margin="0,15,40,15"/>
-                    <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource GuestForm}" Margin="0,15,40,15"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource GuestForm}" Margin="0,15,40,15" Text="{Binding NewGuestPatient.Patient.FirstName}"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource GuestForm}" Margin="0,15,40,15" Text="{Binding NewGuestPatient.Patient.LastName}"/>
+                    <DatePicker Grid.Row="3" Grid.Column="1" Style="{StaticResource GuestForm}" Margin="0,15,40,15" Text="{Binding NewGuestPatient.Patient.DateOfBirth}"
+                                FirstDayOfWeek="Monday"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource GuestForm}" Margin="0,15,40,15" Text="{Binding NewGuestPatient.Patient.CardID}"/>
+                    <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource GuestForm}" Margin="0,15,40,15" Text="{Binding NewGuestPatient.Patient.PersonalID}"/>
                 </Grid>
             </Border>
         </Grid>

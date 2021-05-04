@@ -4,11 +4,13 @@
 // Purpose: Definition of Enum DoctorSpecialty
 
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Hospital
 {
     public enum DoctorSpecialty
     {
+       general,
        cardiologist,
        dermatologist,
        neurologist,
@@ -21,7 +23,6 @@ namespace Hospital
        gynecologist,
        urologist,
        psyciatrist,
-       general,
        none
     }
 }
