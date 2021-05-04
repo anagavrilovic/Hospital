@@ -186,13 +186,11 @@ namespace Hospital.View
 
             if(doctor != null)
             {
-                foreach(Model.Doctor dr in Doctors)
+                foreach (Model.Doctor dr in Doctors)
                 {
                     if (dr.PersonalID.Equals(doctor.PersonalID))
                     {
-                        //MessageBox.Show(dr.ToString());  // ovde nadje dobrog
-                        DoctorComboBox.SelectedItem = dr;
-                        //MessageBox.Show(DoctorComboBox.SelectedItem.ToString()); //ovde kaze da je null
+                        SelectedDoctor = dr;
                     }    
                 }
             }

@@ -92,7 +92,7 @@ namespace Hospital.View.Secretary
                 RegisterGuestPatient();
 
             SetPatientForNewAppointment();
-            SetAppointmentsTypeAndDate();
+            SetAppointmentDetails();
 
             ScheduleUrgentAppointment();
         }
@@ -127,7 +127,7 @@ namespace Hospital.View.Secretary
             NewAppointment.PatientSurname = newPatient.Patient.LastName;
         }
 
-        private void SetAppointmentsTypeAndDate()
+        private void SetAppointmentDetails()
         {
             if (AppointmentType.SelectedIndex == 0)
                 NewAppointment.Type = Hospital.AppointmentType.examination;
