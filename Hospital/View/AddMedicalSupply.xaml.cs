@@ -18,7 +18,7 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for AddMedicalSupply.xaml
     /// </summary>
-    public partial class AddMedicalSupply : Window
+    public partial class AddMedicalSupply : Page
     {
         private MedicalSupply ms = new MedicalSupply();
         private ObservableCollection<MedicalSupply> supply = new ObservableCollection<MedicalSupply>();
@@ -39,7 +39,7 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
-            ms.RoomID = id;
+            Ms.RoomID = id;
         }
 
         private void accept(object o, RoutedEventArgs e)
@@ -51,11 +51,11 @@ namespace Hospital.View
                 case 2: Ms.Units = UnitsType.flasice;  break;
             }
 
-            supply.Add(ms);
+            supply.Add(Ms);
             MedicalSupplyStorage msStorage = new MedicalSupplyStorage();
             bool found = false;
 
-            foreach (MedicalSupply sup in msStorage.GetByRoomID(ms.RoomID))
+            foreach (MedicalSupply sup in msStorage.GetByRoomID(Ms.RoomID))
             {
                 if (sup.Id.Equals(ms.Id))
                 {
@@ -66,8 +66,8 @@ namespace Hospital.View
 
             if (!found)
             {
-                msStorage.Save(ms);
-                DynamicInventory.Supply.Add(ms);
+                msStorage.Save(Ms);
+                DynamicInventory.Supply.Add(Ms);
             }
             else
             {
@@ -75,17 +75,17 @@ namespace Hospital.View
             }
 
 
-            this.Close();
+            NavigationService.Navigate(new StaticInventory(Ms.RoomID));
         }
 
         private void cancel(object o, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new StaticInventory(Ms.RoomID));
         }
 
         private void back(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new StaticInventory(Ms.RoomID));
         }
     }
 }

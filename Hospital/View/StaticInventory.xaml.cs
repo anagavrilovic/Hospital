@@ -21,7 +21,7 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for StaticInventory.xaml
     /// </summary>
-    public partial class StaticInventory : Window, INotifyPropertyChanged
+    public partial class StaticInventory : Page, INotifyPropertyChanged
     {
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -117,8 +117,7 @@ namespace Hospital.View
         private void add(object o, RoutedEventArgs e)
         {
             AddInventory addInv = new AddInventory(id);
-            addInv.Owner = Application.Current.MainWindow;
-            addInv.Show();
+            NavigationService.Navigate(addInv);
         }
 
         private void edit(object o, RoutedEventArgs e)
@@ -128,8 +127,7 @@ namespace Hospital.View
             if (selectedItem != null)
             {
                 EditInventory editInv = new EditInventory(selectedItem);
-                editInv.Owner = Application.Current.MainWindow;
-                editInv.Show();
+                NavigationService.Navigate(editInv);
             }
         }
 
@@ -173,7 +171,7 @@ namespace Hospital.View
 
         private void back(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new RoomsWindow());
         }
 
     }

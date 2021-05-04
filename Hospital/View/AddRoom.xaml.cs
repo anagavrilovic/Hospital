@@ -18,7 +18,7 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for AddRoom.xaml
     /// </summary>
-    public partial class AddRoom : Window
+    public partial class AddRoom : Page
     {
         public AddRoom()
         {
@@ -37,17 +37,17 @@ namespace Hospital.View
             rs.Save(new Room { Id = tempId, Name = tempName, Floor = tempFloor, Status = tempStatus, Type = tempType});
             RoomsWindow.Rooms = RoomStorage.rooms;
 
-            this.Close();
+            NavigationService.Navigate(new RoomsWindow());
         }
 
         private void cancelAdding(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new RoomsWindow());
         }
 
         private void back(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new RoomsWindow());
         }
     }
 }

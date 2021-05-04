@@ -17,15 +17,14 @@ using System.Windows.Shapes;
 namespace Hospital.View
 {
     /// <summary>
-    /// Interaction logic for MenagerWindow.xaml
+    /// Interaction logic for ManagerMainPage.xaml
     /// </summary>
-    public partial class MenagerWindow : Window
+    public partial class ManagerMainPage : Page
     {
-        
-        public MenagerWindow()
+        public ManagerMainPage()
         {
             InitializeComponent();
-            /*
+
             RoomRenovationStorage roomRenovationStorage = new RoomRenovationStorage();
             foreach (RoomRenovation renovation in roomRenovationStorage.GetAll())
             {
@@ -37,13 +36,13 @@ namespace Hospital.View
                     renovation.startRenovation();
                 }
             }
-            */
         }
-        /*
+
+
         private void getRooms(object sender, RoutedEventArgs e)
         {
             RoomsWindow rw = new RoomsWindow();
-            MainFrame.Navigate(new RoomsWindow());
+            NavigationService.Navigate(new RoomsWindow());
         }
 
         private void getNotifications(object sender, RoutedEventArgs e)
@@ -59,12 +58,10 @@ namespace Hospital.View
             medicinesWindow.Owner = Application.Current.MainWindow;
             medicinesWindow.Show();
         }
-        */
+
         private void back(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new MenagerWindow());
         }
     }
 }
-
-  

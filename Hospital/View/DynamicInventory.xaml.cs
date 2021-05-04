@@ -19,7 +19,7 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for DynamicInventory.xaml
     /// </summary>
-    public partial class DynamicInventory : Window
+    public partial class DynamicInventory : Page
     {
         private string id;
 
@@ -94,8 +94,7 @@ namespace Hospital.View
         private void addItem(object o, RoutedEventArgs e)
         {
             AddMedicalSupply addMS = new AddMedicalSupply(id);
-            addMS.Owner = Application.Current.MainWindow;
-            addMS.Show();
+            NavigationService.Navigate(addMS);
         }
 
         private void editItem(object o, RoutedEventArgs e)
@@ -150,7 +149,7 @@ namespace Hospital.View
 
         private void back(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new RoomsWindow());
         }
 
     }

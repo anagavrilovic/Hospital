@@ -14,12 +14,13 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Hospital.View
 {
   
-    public partial class RoomsWindow : Window, INotifyPropertyChanged
+    public partial class RoomsWindow : Page, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string name)
@@ -113,8 +114,7 @@ namespace Hospital.View
         private void addRoom(object sender, RoutedEventArgs e)
         {
             AddRoom room = new AddRoom();
-            room.Owner = Application.Current.MainWindow;
-            room.Show();
+            NavigationService.Navigate(new AddRoom());
         }
 
         private void editRoom(object sender, RoutedEventArgs e)
@@ -125,7 +125,7 @@ namespace Hospital.View
                 return;
            
             EditRoom room = new EditRoom(selectedItem);
-            room.Owner = Application.Current.MainWindow;
+           // room.Owner = Application.Current.MainWindow;
 
             room.idTxt.Text =  selectedItem.Id;
             room.idTxt.IsEnabled = false;
@@ -136,7 +136,7 @@ namespace Hospital.View
             room.statusCB.SelectedValue = selectedItem.Status;
             room.statusCB.Text = selectedItem.Status.ToString();
 
-            room.Show();
+            NavigationService.Navigate(room);
         }
 
         private void deleteRoom(object sender, RoutedEventArgs e)
@@ -162,8 +162,7 @@ namespace Hospital.View
                 return;
            
             StaticInventory inv = new StaticInventory(selectedItem.Id);
-            inv.Owner = Application.Current.MainWindow;
-            inv.Show();
+            NavigationService.Navigate(inv);
         }
 
         private void viewDynamicInventory(object sender, RoutedEventArgs e)
@@ -174,8 +173,7 @@ namespace Hospital.View
                 return;
 
             DynamicInventory inv = new DynamicInventory(selectedItem.Id);
-            inv.Owner = Application.Current.MainWindow;
-            inv.Show();
+            NavigationService.Navigate(inv);
         }
 
         private void renovateRoom(object sender, RoutedEventArgs e)
@@ -193,7 +191,7 @@ namespace Hospital.View
 
         private void menuButton(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            NavigationService.Navigate(new ManagerMainPage());
         }
     }
 }

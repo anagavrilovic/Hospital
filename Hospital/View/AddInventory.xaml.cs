@@ -18,7 +18,7 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for AddInventory.xaml
     /// </summary>
-    public partial class AddInventory : Window
+    public partial class AddInventory : Page
     {
         private ObservableCollection<Inventory> inventory = new ObservableCollection<Inventory>();
         private Inventory inv = new Inventory();
@@ -70,17 +70,17 @@ namespace Hospital.View
                 MessageBox.Show("Vec postoji stavka sa unetom oznakom!");
             }
 
-            this.Close();
+            NavigationService.Navigate(new StaticInventory(inv.RoomID));
         }
 
         private void cancel(object o, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new StaticInventory(inv.RoomID));
         }
 
         private void back(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new StaticInventory(inv.RoomID));
         }
     }
 }

@@ -191,6 +191,9 @@
     <Compile Include="View\EditMedicine.xaml.cs">
       <DependentUpon>EditMedicine.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ManagerMainPage.xaml.cs">
+      <DependentUpon>ManagerMainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MedicineRevisionWindow.xaml.cs">
       <DependentUpon>MedicineRevisionWindow.xaml</DependentUpon>
     </Compile>
@@ -424,6 +427,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EditMedicine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManagerMainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

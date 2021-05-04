@@ -20,7 +20,7 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for EditInventory.xaml
     /// </summary>
-    public partial class EditInventory : Window
+    public partial class EditInventory : Page
     {
         private ObservableCollection<Inventory> inventory;
         private Inventory inv;
@@ -42,10 +42,8 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
-            this.inv = inventory;
+            this.Inv = inventory;
         }
-
-
 
         private void accept(object sender, RoutedEventArgs e)
         {
@@ -61,17 +59,17 @@ namespace Hospital.View
                 serializer.Serialize(file, InventoryStorage.inventory);
             }
 
-            this.Close();
+            NavigationService.Navigate(new StaticInventory(Inv.RoomID));
         }
 
         private void cancel(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new StaticInventory(Inv.RoomID));
         }
 
         private void back(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new StaticInventory(Inv.RoomID));
         }
     }
 }
