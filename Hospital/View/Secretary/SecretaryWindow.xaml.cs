@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.View.Secretary;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -68,7 +69,7 @@ namespace Hospital.View
 
         private void ButtonHitanPregledClick(object sender, RoutedEventArgs e)
         {
-
+            Main.Navigate(new HitanPregled());
         }
 
         private void ButtonNaplataClick(object sender, RoutedEventArgs e)
