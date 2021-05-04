@@ -200,8 +200,8 @@
     <Compile Include="View\MedicinesWindow.xaml.cs">
       <DependentUpon>MedicinesWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ObaveštenjaUpravnik.xaml.cs">
-      <DependentUpon>ObaveštenjaUpravnik.xaml</DependentUpon>
+    <Compile Include="View\ManagerNotifications.xaml.cs">
+      <DependentUpon>ManagerNotifications.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\RenovateRoom.xaml.cs">
       <DependentUpon>RenovateRoom.xaml</DependentUpon>
@@ -442,7 +442,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ObaveštenjaUpravnik.xaml">
+    <Page Include="View\ManagerNotifications.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

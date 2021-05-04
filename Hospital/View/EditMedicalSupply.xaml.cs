@@ -13,6 +13,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Hospital.View
@@ -20,7 +21,7 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for EditMedicalSupply.xaml
     /// </summary>
-    public partial class EditMedicalSupply : Window
+    public partial class EditMedicalSupply : Page
     {
         private MedicalSupply ms;
         private ObservableCollection<MedicalSupply> supply;
@@ -73,17 +74,17 @@ namespace Hospital.View
                 JsonSerializer serializer = new JsonSerializer();
                 serializer.Serialize(file, MedicalSupplyStorage.supplies);
             }
-            this.Close();
+            NavigationService.Navigate(new DynamicInventory(Ms.RoomID));
         }
 
         private void cancel(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new DynamicInventory(Ms.RoomID));
         }
 
         private void back(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new DynamicInventory(Ms.RoomID));
         }
     }
 }

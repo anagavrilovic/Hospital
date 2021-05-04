@@ -96,9 +96,7 @@ namespace Hospital.View
         private void selectFilters(object sender, RoutedEventArgs e)
         {
             FilteringInventory filteringInventory = new FilteringInventory();
-            filteringInventory.Owner = Application.Current.MainWindow;
-           // this.Close();
-            filteringInventory.Show();
+            NavigationService.Navigate(filteringInventory);
         }
 
 
@@ -178,9 +176,7 @@ namespace Hospital.View
 
         private void renovateRoom(object sender, RoutedEventArgs e)
         {
-            Renovations renovations = new Renovations();
-            renovations.Owner = Application.Current.MainWindow;
-            renovations.Show();
+            NavigationService.Navigate(new Renovations());
         }
 
         private void refreshView(object sender, RoutedEventArgs e)

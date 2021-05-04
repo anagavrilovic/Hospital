@@ -20,7 +20,7 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for MedicineRevisionWindow.xaml
     /// </summary>
-    public partial class MedicineRevisionWindow : Window, INotifyPropertyChanged
+    public partial class MedicineRevisionWindow : Page, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
@@ -34,7 +34,7 @@ namespace Hospital.View
         private MedicineRevisionStorage medicineRevisionStorage;
 
         private ObservableCollection<MedicineRevision> medicinesOnRevision;
-        public  ObservableCollection<MedicineRevision> MedicinesOnRevision
+        public ObservableCollection<MedicineRevision> MedicinesOnRevision
         {
             get => medicinesOnRevision;
             set
@@ -49,24 +49,23 @@ namespace Hospital.View
             InitializeComponent();
             this.DataContext = this;
             medicineRevisionStorage = new MedicineRevisionStorage();
-            MedicinesOnRevision = medicineRevisionStorage.GetAll();             
+            MedicinesOnRevision = medicineRevisionStorage.GetAll();
         }
 
-    
+
 
         private void editMedicine(object sender, RoutedEventArgs e)
         {
             MedicineRevision selectedMedicineOnRevision = (MedicineRevision)listBoxMedicines.SelectedItem;
             EditMedicine editMedicine = new EditMedicine(selectedMedicineOnRevision);
-            editMedicine.Owner = Application.Current.MainWindow;
-            editMedicine.Show();
+            NavigationService.Navigate(editMedicine);
         }
 
 
         private void back(object sender, RoutedEventArgs e)
         {
-            this.Close();
-        }
+            NavigationService.Navigate(new MedicinesWindow());
 
+        }
     }
 }

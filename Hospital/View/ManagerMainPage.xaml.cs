@@ -47,16 +47,14 @@ namespace Hospital.View
 
         private void getNotifications(object sender, RoutedEventArgs e)
         {
-            ObaveštenjaUpravnik obavestenja = new ObaveštenjaUpravnik();
-            obavestenja.Owner = Application.Current.MainWindow;
-            obavestenja.Show();
+            ManagerNotifications obavestenja = new ManagerNotifications();
+            NavigationService.Navigate(obavestenja);
         }
 
         private void getMedicines(object sender, RoutedEventArgs e)
         {
             MedicinesWindow medicinesWindow = new MedicinesWindow();
-            medicinesWindow.Owner = Application.Current.MainWindow;
-            medicinesWindow.Show();
+            NavigationService.Navigate(medicinesWindow);
         }
 
         private void back(object sender, RoutedEventArgs e)

@@ -75,17 +75,17 @@ namespace Hospital.View
             }
 
 
-            NavigationService.Navigate(new StaticInventory(Ms.RoomID));
+            NavigationService.Navigate(new DynamicInventory(Ms.RoomID));
         }
 
         private void cancel(object o, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new StaticInventory(Ms.RoomID));
+            NavigationService.Navigate(new DynamicInventory(Ms.RoomID));
         }
 
         private void back(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new StaticInventory(Ms.RoomID));
+            NavigationService.Navigate(new DynamicInventory(Ms.RoomID));
         }
     }
 }

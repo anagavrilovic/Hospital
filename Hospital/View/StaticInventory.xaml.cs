@@ -159,13 +159,12 @@ namespace Hospital.View
             if(selectedItem != null)
             {
                 PrebacivanjeInventara transfer = new PrebacivanjeInventara(selectedItem);
-                transfer.Owner = Application.Current.MainWindow;
                 StringBuilder sb = new StringBuilder();
                 sb.Append(selectedItem.Id);
                 sb.Append("-");
                 sb.Append(selectedItem.Name);
                 transfer.nazivTxt.Text = sb.ToString();
-                transfer.Show();
+                NavigationService.Navigate(transfer);
             }
         }
 

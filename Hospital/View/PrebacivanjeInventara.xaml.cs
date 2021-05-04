@@ -22,7 +22,7 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for PrebacivanjeInventara.xaml
     /// </summary>
-    public partial class PrebacivanjeInventara : Window, INotifyPropertyChanged
+    public partial class PrebacivanjeInventara : Page, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -39,15 +39,15 @@ namespace Hospital.View
 
         public Inventory InventorySeleceted
         {
-            get { return inventorySeleceted;  }
+            get { return inventorySeleceted; }
             set { inventorySeleceted = value; }
         }
 
 
         public TransferInventory TransferItem
         {
-            get { return transferItem;   }
-            set {  transferItem = value; }    
+            get { return transferItem; }
+            set { transferItem = value; }
         }
 
         private ObservableCollection<string> roomsIDs;
@@ -82,10 +82,10 @@ namespace Hospital.View
         private void accept(object sender, RoutedEventArgs e)
         {
 
-            if(inventorySeleceted.Quantity < transferItem.Quantity)
+            if (inventorySeleceted.Quantity < transferItem.Quantity)
             {
-                 MessageBox.Show("Pogrešan unos količine!");
-                 return;
+                MessageBox.Show("Pogrešan unos količine!");
+                return;
             }
 
             InventoryStorage istorage = new InventoryStorage();
@@ -108,9 +108,9 @@ namespace Hospital.View
             int totalQuantityForTransfer = 0;
             TransferInventory lastTransferItem = new TransferInventory();
 
-            foreach(TransferInventory ti in transferStorage.GetAll())
+            foreach (TransferInventory ti in transferStorage.GetAll())
             {
-                if(ti.ItemID.Equals(transferItem.ItemID) && ti.FirstRoomID.Equals(transferItem.FirstRoomID))
+                if (ti.ItemID.Equals(transferItem.ItemID) && ti.FirstRoomID.Equals(transferItem.FirstRoomID))
                 {
                     totalQuantityForTransfer += ti.Quantity;
 
@@ -121,10 +121,10 @@ namespace Hospital.View
                 }
             }
 
-            if(totalQuantityForTransfer + transferItem.Quantity> inventorySeleceted.Quantity && lastTransferItem.Date > transferItem.Date)
+            if (totalQuantityForTransfer + transferItem.Quantity > inventorySeleceted.Quantity && lastTransferItem.Date > transferItem.Date)
             {
-               
-                if(lastTransferItem.Quantity <= transferItem.Quantity)
+
+                if (lastTransferItem.Quantity <= transferItem.Quantity)
                 {
                     transferStorage.Delete(lastTransferItem);
                     lastTransferItem.FirstRoomID = transferItem.SecondRoomID;
@@ -142,28 +142,28 @@ namespace Hospital.View
                     transferStorage.Save(newTransfer);
                 }
             }
-            else if(totalQuantityForTransfer + transferItem.Quantity > inventorySeleceted.Quantity && lastTransferItem.Date < transferItem.Date)
+            else if (totalQuantityForTransfer + transferItem.Quantity > inventorySeleceted.Quantity && lastTransferItem.Date < transferItem.Date)
             {
-                 MessageBox.Show("Sala ne raspolaže traženom količinom stavke. \n Pokušajte sa manjom količinom ili pogledajte stanje u drugim salama.");
-                 return;
+                MessageBox.Show("Sala ne raspolaže traženom količinom stavke. \n Pokušajte sa manjom količinom ili pogledajte stanje u drugim salama.");
+                return;
             }
 
             transferStorage.Save(transferItem);
             transferItem.doTransfer();
-        
+
             StaticInventory.Inventory = istorage.GetByRoomID(this.inventorySeleceted.RoomID);
-          
-            this.Close();
+
+            NavigationService.Navigate(new StaticInventory(InventorySeleceted.RoomID));
         }
 
         private void cancel(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new StaticInventory(InventorySeleceted.RoomID));
         }
 
         private void back(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new StaticInventory(InventorySeleceted.RoomID));
         }
     }
 }

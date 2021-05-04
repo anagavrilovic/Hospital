@@ -104,8 +104,7 @@ namespace Hospital.View
             if (selectedItem != null)
             {
                 EditMedicalSupply editMS= new EditMedicalSupply(selectedItem);
-                editMS.Owner = Application.Current.MainWindow;
-                editMS.Show();
+                NavigationService.Navigate(editMS);
             }
         }
 
@@ -136,9 +135,8 @@ namespace Hospital.View
             if (selectedItem != null)
             {
                 PrebacivanjeOpreme transfer = new PrebacivanjeOpreme(selectedItem);
-                transfer.Owner = Application.Current.MainWindow;
                 transfer.nazivTxt.Text = selectedItem.Name;
-                transfer.Show();
+                NavigationService.Navigate(transfer);
             }
         }
 

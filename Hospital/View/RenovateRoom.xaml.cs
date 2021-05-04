@@ -20,7 +20,7 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for RenovateRoom.xaml
     /// </summary>
-    public partial class RenovateRoom : Window, INotifyPropertyChanged
+    public partial class RenovateRoom : Page, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string name)
@@ -124,12 +124,8 @@ namespace Hospital.View
             {
                 RoomRenovationStorage storage = new RoomRenovationStorage();
                 storage.Save(roomRenovation);
-                
-                Renovations renovations = new Renovations();
-                renovations.Owner = Application.Current.MainWindow;
-                renovations.Show();
 
-                this.Close();
+                NavigationService.Navigate(new Renovations());
             }
             else 
             {
@@ -140,15 +136,12 @@ namespace Hospital.View
 
         private void cancel(object sender, RoutedEventArgs e)
         {
-            this.Close();
-            Renovations renovations = new Renovations();
-            renovations.Owner = Application.Current.MainWindow;
-            renovations.Show();
+            NavigationService.Navigate(new Renovations());
         }
 
         private void back(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new Renovations());
         }
     }
 

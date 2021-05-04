@@ -19,7 +19,7 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for PrebacivanjeOpreme.xaml
     /// </summary>
-    public partial class PrebacivanjeOpreme : Window, INotifyPropertyChanged
+    public partial class PrebacivanjeOpreme : Page, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string name)
@@ -69,18 +69,18 @@ namespace Hospital.View
             String id = typeCB.Text;
             msStorage.UpdateSupply(SupplySelected, id, int.Parse(kolicinaTxt.Text));
             DynamicInventory.Supply = msStorage.GetByRoomID(SupplySelected.RoomID);
-            
-            this.Close();
+
+            NavigationService.Navigate(new DynamicInventory(SupplySelected.RoomID));
         }
 
         private void cancel(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new DynamicInventory(SupplySelected.RoomID));
         }
 
         private void back(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new DynamicInventory(SupplySelected.RoomID));
         }
     }
 }

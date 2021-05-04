@@ -48,7 +48,7 @@ namespace Hospital.View
 
         private void getNotifications(object sender, RoutedEventArgs e)
         {
-            ObaveštenjaUpravnik obavestenja = new ObaveštenjaUpravnik();
+            ManagerNotifications obavestenja = new ManagerNotifications();
             obavestenja.Owner = Application.Current.MainWindow;
             obavestenja.Show();
         }

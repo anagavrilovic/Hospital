@@ -20,7 +20,7 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for MedicinesWindow.xaml
     /// </summary>
-    public partial class MedicinesWindow : Window, INotifyPropertyChanged
+    public partial class MedicinesWindow : Page, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -65,8 +65,7 @@ namespace Hospital.View
         private void addMedicine(object sender, RoutedEventArgs e)
         {
             AddMedicine addMedicine = new AddMedicine();
-            addMedicine.Owner = Application.Current.MainWindow;
-            addMedicine.Show();
+            NavigationService.Navigate(addMedicine);
         }
 
         private void editMedicine(object sender, RoutedEventArgs e)
@@ -101,8 +100,7 @@ namespace Hospital.View
         private void medicinesRevision(object sender, RoutedEventArgs e)
         {
             MedicineRevisionWindow medicineRevisionWindow = new MedicineRevisionWindow();
-            medicineRevisionWindow.Owner = Application.Current.MainWindow;
-            medicineRevisionWindow.Show();
+            NavigationService.Navigate(medicineRevisionWindow);
         }
 
         private void searchMedicine(object sender, RoutedEventArgs e)
@@ -141,7 +139,7 @@ namespace Hospital.View
 
         private void back(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new ManagerMainPage());
         }
     }
 }

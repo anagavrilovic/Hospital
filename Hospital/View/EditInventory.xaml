@@ -7,7 +7,7 @@
         xmlns:val="clr-namespace:Hospital.ValidationRulesManager"
         mc:Ignorable="d"
          Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
-        Title="Izmena inventara" Height="640" Width="420">
+        Title="Izmena inventara" Height="730" Width="420">
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -27,20 +27,28 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Label Content="IZMENA INVENTARA" Grid.Row="0" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="100,15,5,0" FontWeight="Bold"/>
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
+            <Button  Click="back" Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
+                <Image  Source="/Icon/back.png" Margin="10,8,0,5"/>
+            </Button>
+            <Image Source="/Icon/logo.png"      Margin="210,5,25,10" Width="153"/>
+        </StackPanel>
 
-        <Label Content="Oznaka:"   Grid.Row="1" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5,8" />
-        <Label Content="Naziv:"    Grid.Row="3" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5,8" />
-        <Label Content="Cena:"     Grid.Row="5" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5,8" />
-        <Label Content="Količina:" Grid.Row="7" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5,8" />
+        <Label Content="IZMENA INVENTARA" Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="90,10.2,72,9.6" FontWeight="Bold"/>
 
-        <TextBox x:Name="oznakaTxt"   Grid.Row="2" Grid.ColumnSpan="2" Margin="30,0.2,28,10.4" BorderBrush="#FF26282C" Text="{Binding Path=Inv.Id,   Mode=TwoWay, UpdateSourceTrigger=Explicit}" IsEnabled="False"/>
-        <TextBox x:Name="nazivTxt"    Grid.Row="4" Grid.ColumnSpan="2" Margin="30,0.2,28,10.2" BorderBrush="#FF26282C" Text="{Binding Path=Inv.Name, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
+        <Label Content="Oznaka:"   Grid.Row="2" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
+        <Label Content="Naziv:"    Grid.Row="4" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
+        <Label Content="Cena:"     Grid.Row="6" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
+        <Label Content="Količina:" Grid.Row="8" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
+
+        <TextBox x:Name="oznakaTxt"   Grid.Row="3" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Inv.Id,   Mode=TwoWay, UpdateSourceTrigger=Explicit}" IsEnabled="False"/>
+        <TextBox x:Name="nazivTxt"    Grid.Row="5" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Inv.Name, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
 
 
-        <TextBox x:Name="cenaTxt" Grid.Row="6" Grid.ColumnSpan="2" Margin="30,0.2,28,10.4" BorderBrush="#FF26282C">
+        <TextBox x:Name="cenaTxt" Grid.Row="7" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C">
             <TextBox.Text>
                 <Binding  Path="Inv.Price"    Mode="TwoWay" UpdateSourceTrigger="Explicit">
                     <Binding.ValidationRules>
@@ -68,7 +76,7 @@
         </TextBox>
 
 
-        <TextBox x:Name="kolicinaTxt" Grid.Row="8" Grid.ColumnSpan="2" Margin="30,0.2,28,10.2" BorderBrush="#FF26282C">
+        <TextBox x:Name="kolicinaTxt" Grid.Row="9" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C">
             <TextBox.Text>
                 <Binding  Path="Inv.Quantity"    Mode="TwoWay" UpdateSourceTrigger="Explicit">
                     <Binding.ValidationRules>
@@ -95,8 +103,8 @@
             </Validation.ErrorTemplate>
         </TextBox>
 
-        <Button Grid.Column="0" Grid.Row="9" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,9.8,10.4,42" Click="accept" />
-        <Button Grid.Column="1" Grid.Row="9" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="9.6,9.8,28,42" Click="cancel" />
+        <Button Grid.Column="0" Grid.Row="10" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,31.2,10,39.8" Click="accept" />
+        <Button Grid.Column="1" Grid.Row="10" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="10,31.2,28,39.8" Click="cancel" />
 
     </Grid>
 </Page>

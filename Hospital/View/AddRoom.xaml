@@ -7,7 +7,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
-        Title="Dodavanje sale" Height="640" Width="420">
+        Title="Dodavanje sale" Height="730" Width="420">
 
     <Grid>
 
@@ -30,35 +30,48 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Label Content="UNOS SALE"         Grid.Row="0" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="135,5,5,0" FontWeight="Bold"/>
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4" Margin="0,0,0,46.8" Grid.RowSpan="2">
+            <Button Grid.Column="0" Background="#FF95C0F4" BorderBrush="#FF95C0F4" Click="back">
+                <Image Source="/Icon/back.png"  Margin="10,8,5,5"/>
+            </Button>
+            <Image Source="/Icon/logo.png"  Margin="240,8,0,10.4"/>
+        </StackPanel>
 
-        <Label Content="Oznaka:"           Grid.Row="1"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5,8"/>
-        <Label Content="Naziv:"            Grid.Row="3"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5,8"/>
-        <Label Content="Sprat:"            Grid.Row="5"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,0,8"/>
-        <Label Content="Status"            Grid.Row="7"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5,8"/>
-        <Label Content="Tip:"              Grid.Row="9"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5,8"/>
+        <!--Button Grid.Row="0" Grid.Column="0" Background="white" Click="back" BorderBrush="white" >
+            <Image  Source="/Icon/back.png" Margin="10,8,150,5"/>
+        </>
+        <Image Source="/Icon/logo.png" Grid.Row="0" Grid.Column="1" Margin="30,5,5,2"/-->
 
-        <TextBox x:Name="idTxt"            Grid.Row="1"  Grid.ColumnSpan="2" Margin="30,48.4,28,10" BorderBrush="#FF26282C" Grid.RowSpan="2" />
-        <TextBox x:Name="nameTxt"          Grid.Row="4"  Grid.ColumnSpan="2" Margin="30,0.4,28,10.2" BorderBrush="#FF26282C" />
-        <TextBox x:Name="floorTxt"         Grid.Row="6"  Grid.ColumnSpan="2" Margin="30,0.2,28,10.4" BorderBrush="#FF26282C" />
+        <Label Content="UNOS SALE"         Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="135,5,5,0" FontWeight="Bold"/>
 
-        <ComboBox x:Name="statusCB"        Grid.Row="8"   Grid.ColumnSpan="2" Margin="30,0,28,9.8"    BorderThickness="1">
+        <Label Content="Oznaka:"           Grid.Row="2"   Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5,8"/>
+        <Label Content="Naziv:"            Grid.Row="4"   Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5,8"/>
+        <Label Content="Sprat:"            Grid.Row="6"   Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,0,8"/>
+        <Label Content="Status:"           Grid.Row="7"   Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,45.2,0.4,8" Grid.RowSpan="2"/>
+        <Label Content="Tip:"              Grid.Row="10"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5,8"/>
+
+        <TextBox x:Name="idTxt"            Grid.Row="3"  Grid.ColumnSpan="2" Margin="30,0.2,28,9.8" BorderBrush="#FF26282C" />
+        <TextBox x:Name="nameTxt"          Grid.Row="5"  Grid.ColumnSpan="2" Margin="30,0.4,28,10" BorderBrush="#FF26282C" />
+        <TextBox x:Name="floorTxt"         Grid.Row="7"  Grid.ColumnSpan="2" Margin="30,0.2,28,10" BorderBrush="#FF26282C" />
+
+        <ComboBox x:Name="statusCB"        Grid.Row="9"   Grid.ColumnSpan="2" Margin="30,0,28,9.8"    BorderThickness="1">
             <ComboBoxItem IsSelected="True" Content="SLOBODNA"            Foreground="#FF2E83BF"/>
             <ComboBoxItem                   Content="ZAUZETA"             Foreground="#FF2E83BF"/>
             <ComboBoxItem                   Content="RENOVIRA_SE"         Foreground="#FF2E83BF"/>
         </ComboBox>
 
-        <ComboBox x:Name="typeCB"          Grid.Row="10" Grid.ColumnSpan="2" Margin="30,0.4,28,10.4" BorderThickness="1">
+        <ComboBox x:Name="typeCB"          Grid.Row="11" Grid.ColumnSpan="2" Margin="30,0.4,28,10.4" BorderThickness="1">
             <ComboBoxItem                   Content="OPERACIONA_SALA"    Foreground="#FF2E83BF"/>
             <ComboBoxItem IsSelected="True" Content="SALA_ZA_PREGLEDE"   Foreground="#FF2E83BF"/>
             <ComboBoxItem                   Content="SOBA_ZA_ODMOR"      Foreground="#FF2E83BF"/>
             <ComboBoxItem                   Content="MAGACIN"            Foreground="#FF2E83BF"/>
         </ComboBox>
 
-        <Button Grid.Row="11" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,19.6,10.4,32" Click="acceptAdding"/>
-        <Button Grid.Row="11" Grid.Column="1" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="9.6,19.6,28,32" Click="cancelAdding"/>
+        <Button Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,10.4,10.4,41.6" Click="acceptAdding"/>
+        <Button Grid.Row="12" Grid.Column="1" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="9.6,10.4,28,41.6" Click="cancelAdding"/>
 
     </Grid>
 

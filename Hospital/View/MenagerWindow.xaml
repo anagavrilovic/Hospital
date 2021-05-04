@@ -40,8 +40,8 @@
         <Button x:Name="notifications"  Content="OBAVEŠTENJA"                 Grid.Row="5"  Margin="15,10"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Click="getNotifications"/>
         <Button x:Name="report"         Content="IZVEŠTAJ O STANJU OPREME"    Grid.Row="6"  Margin="15,10"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20"/-->
 
-        <DockPanel Grid.Row="0" Grid.RowSpan="9" Width="420" Background="{StaticResource BackgroundGray}" Margin="0">
-            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Source="ManagerMainPage.xaml" Width="420" Margin="0,0,0,-0.2"/>
+        <DockPanel Grid.Row="0" Grid.RowSpan="9" Width="423" Background="#FFDCE6ED" Margin="0">
+            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Source="ManagerMainPage.xaml" Width="423" Margin="0"/>
         </DockPanel>
     </Grid>
 </Window>

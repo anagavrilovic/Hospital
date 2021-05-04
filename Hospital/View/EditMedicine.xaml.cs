@@ -18,7 +18,7 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    public partial class EditMedicine : Window
+    public partial class EditMedicine : Page
     {
         public MedicineRevision MedicineOnRevision { get; set; }
 
@@ -149,17 +149,17 @@ namespace Hospital.View
 
             medicineRevisionStorage.DoSerialization(AllMedicinesOnRevision);
 
-            this.Close();
+            NavigationService.Navigate(new MedicineRevisionWindow());
         }
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new MedicineRevisionWindow());
         }
 
         private void Back(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new MedicineRevisionWindow());
         }
     }
 }

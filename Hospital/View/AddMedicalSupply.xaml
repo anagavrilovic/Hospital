@@ -7,7 +7,7 @@
         xmlns:val="clr-namespace:Hospital.ValidationRulesManager"
         mc:Ignorable="d"
         Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
-        Title="Unos opreme" Height="640" Width="420">
+        Title="Unos opreme" Height="730" Width="420">
     <Page.Resources>
         <Style x:Key="cbTB" TargetType="{x:Type Control}">
             <Style.Triggers>
@@ -42,17 +42,25 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Label Content="UNOS OPREME" Grid.Row="0" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="100,0,5,49.4" FontWeight="Bold" Grid.RowSpan="2"/>
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
+            <Button  Click="back" Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
+                <Image  Source="/Icon/back.png" Margin="0,8,0,5"/>
+            </Button>
+            <Image Source="/Icon/logo.png"      Margin="260,0,25,-0.4" Width="114"/>
+        </StackPanel>
 
-        <Label Content="Oznaka:"           Grid.Row="1"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5,8"/>
-        <Label Content="Naziv:"            Grid.Row="3"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5,8"/>
-        <Label Content="Cena po jedinici:" Grid.Row="5"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5,8"/>
-        <Label Content="Količina:"         Grid.Row="7"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5,8"/>
-        <Label Content="Merna jedinica:"   Grid.Row="9"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5,8"/>
+        <Label Content="UNOS OPREME" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="100,46,138,45.4" FontWeight="Bold" Grid.RowSpan="3"/>
 
-        <TextBox x:Name="idTxt" Grid.Row="1" Grid.ColumnSpan="2" Margin="30,48.4,28,10" BorderBrush="#FF26282C" Grid.RowSpan="2">
+        <Label Content="Oznaka:"           Grid.Row="2"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0.2,5.4,10.4"/>
+        <Label Content="Naziv:"            Grid.Row="4"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5.4,10.6"/>
+        <Label Content="Cena po jedinici:" Grid.Row="5"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,45.4,0.4,9.8" Grid.RowSpan="2"/>
+        <Label Content="Količina:"         Grid.Row="7"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,45.2,5.4,10" Grid.RowSpan="2"/>
+        <Label Content="Merna jedinica:"   Grid.Row="10" Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0.4,5.4,10.2"/>
+
+        <TextBox x:Name="idTxt" Grid.Row="3" Grid.ColumnSpan="2" Margin="30,0.6,28,14" BorderBrush="#FF26282C">
             <TextBox.Text>
                 <Binding  Path="Ms.Id"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -78,7 +86,7 @@
             </Validation.ErrorTemplate>
         </TextBox>
 
-        <TextBox x:Name="nameTxt" Grid.Row="4" Grid.ColumnSpan="2" Margin="30,0.4,28,10.2" BorderBrush="#FF26282C">
+        <TextBox x:Name="nameTxt" Grid.Row="5" Grid.ColumnSpan="2" Margin="30,0.4,28,14.2" BorderBrush="#FF26282C">
             <TextBox.Text>
                 <Binding  Path="Ms.Name"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -105,7 +113,7 @@
         </TextBox>
 
 
-        <TextBox x:Name="cenaTxt" Grid.Row="6" Grid.ColumnSpan="2" Margin="30,0.2,28,10.4" BorderBrush="#FF26282C">
+        <TextBox x:Name="cenaTxt" Grid.Row="7" Grid.ColumnSpan="2" Margin="30,0.2,28,14.4" BorderBrush="#FF26282C">
             <TextBox.Text>
                 <Binding  Path="Ms.Price"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -132,7 +140,7 @@
             </Validation.ErrorTemplate>
         </TextBox>
 
-        <TextBox x:Name="kolicinaTxt" Grid.Row="8" Grid.ColumnSpan="2" Margin="30,0,28,9.8" BorderBrush="#FF26282C">
+        <TextBox x:Name="kolicinaTxt" Grid.Row="9" Grid.ColumnSpan="2" Margin="30,0,28,14.6" BorderBrush="#FF26282C">
             <TextBox.Text>
                 <Binding  Path="Ms.Quantity"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -159,13 +167,13 @@
             </Validation.ErrorTemplate>
         </TextBox>
 
-        <ComboBox x:Name="Units" Grid.Row="10" Grid.ColumnSpan="2" BorderThickness="1" Margin="30,0.4,28,10.4" Style="{StaticResource cbTB}">
+        <ComboBox x:Name="Units" Grid.Row="11" Grid.ColumnSpan="2" BorderThickness="1" Margin="30,1.8,28,9.8" Style="{StaticResource cbTB}">
             <ComboBoxItem IsSelected="True">KUTIJE</ComboBoxItem>
             <ComboBoxItem>TRAKE</ComboBoxItem>
             <ComboBoxItem>FLAŠICE</ComboBoxItem>
         </ComboBox>
 
-        <Button Grid.Row="11" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,9.6,5.4,34" Click="accept">
+        <Button Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,10.4,5.4,43.6" Click="accept">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="IsEnabled" Value="False"/>
@@ -184,8 +192,7 @@
             </Button.Style>
         </Button>
 
-        <Button Grid.Row="11" Grid.Column="1" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="4.6,9.6,28,34" Click="cancel"/>
+        <Button Grid.Row="12" Grid.Column="1" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="4.6,9.4,28,43.6" Click="cancel"/>
 
     </Grid>
-
 </Page>
