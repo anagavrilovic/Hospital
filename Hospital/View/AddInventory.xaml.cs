@@ -15,72 +15,51 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for AddInventory.xaml
-    /// </summary>
     public partial class AddInventory : Page
     {
-        private ObservableCollection<Inventory> inventory = new ObservableCollection<Inventory>();
-        private Inventory inv = new Inventory();
-
-        public ObservableCollection<Inventory> Inventory
-        {
-            get { return inventory; }
-            set { inventory = value; }
-        }
-
-        public Inventory Inv
-        {
-            get { return inv; }
-            set { inv = value; }
-        }
-          
+        public  Inventory Inv { get; set;  }
+        private InventoryStorage _inventoryStorage;
 
         public AddInventory(string id)
         {
             InitializeComponent();
             this.DataContext = this;
-            inv.RoomID = id;
+
+            Inv = new Inventory();
+            Inv.RoomID = id;
+            this._inventoryStorage = new InventoryStorage();
         }
 
-        private void accept(object o, RoutedEventArgs e)
-        {
-            inventory.Add(inv);
+        private void AcceptAddingButtonClick(object o, RoutedEventArgs e)
+        {          
+            bool isItemIDUnique = CheckUniquenessOfNewItemID();
 
-            bool found = false;
-
-            InventoryStorage invStorage = new InventoryStorage();
-
-            foreach (Inventory i in invStorage.GetByRoomID(inv.RoomID))
-            {
-                if(i.Id.Equals(inv.Id))
-                {
-                    found = true;
-                    break;
-                }
-            }
-
-            if(!found)
-            {
-                invStorage.Save(inv);
-                StaticInventory.Inventory.Add(inv);
-            }
+            if(isItemIDUnique)
+                _inventoryStorage.Save(Inv);
             else
+                MessageBox.Show("Već postoji stavka sa unetom oznakom!");
+
+            NavigationService.Navigate(new StaticInventory(Inv.RoomID));
+        }
+
+        private bool CheckUniquenessOfNewItemID()
+        {
+            foreach (Inventory inv in _inventoryStorage.GetByRoomID(Inv.RoomID))
             {
-                MessageBox.Show("Vec postoji stavka sa unetom oznakom!");
+                if (inv.Id.Equals(Inv.Id))
+                    return false;
             }
-
-            NavigationService.Navigate(new StaticInventory(inv.RoomID));
+            return true;
         }
 
-        private void cancel(object o, RoutedEventArgs e)
+        private void CancelButtonClick(object o, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new StaticInventory(inv.RoomID));
+            NavigationService.Navigate(new StaticInventory(Inv.RoomID));
         }
 
-        private void back(object sender, RoutedEventArgs e)
+        private void BackButtonClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new StaticInventory(inv.RoomID));
+            NavigationService.Navigate(new StaticInventory(Inv.RoomID));
         }
     }
 }

@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for ManagerMainPage.xaml
-    /// </summary>
     public partial class ManagerMainPage : Page
     {
         public ManagerMainPage()

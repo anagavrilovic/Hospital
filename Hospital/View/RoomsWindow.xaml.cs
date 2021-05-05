@@ -19,7 +19,6 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-  
     public partial class RoomsWindow : Page, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -30,16 +29,13 @@ namespace Hospital.View
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
-        private static ObservableCollection<Room> rooms;
+        private static ObservableCollection<Room> _rooms;
         public static ObservableCollection<Room> Rooms
         {
-            get
-            {
-                return rooms;
-            }
+            get => _rooms;
             set
             {
-                rooms = value;
+                _rooms = value;
                 NotifyStaticPropertyChanged();
             }    
         }
@@ -50,24 +46,18 @@ namespace Hospital.View
             StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(name));
         }
 
-        RoomStorage rs = new RoomStorage();
+        RoomStorage roomStorage = new RoomStorage();
 
         private string searchstr;
 
-        private ICollectionView roomsCollection;
-
-        public ICollectionView RoomsCollection
-        {
-            get { return roomsCollection; }
-            set { roomsCollection = value; }
-        }
+        public ICollectionView RoomsCollection { get; set; }
 
 
         public RoomsWindow()
         {
             InitializeComponent();
             this.DataContext = this;
-            Rooms = rs.GetAll();
+            Rooms = roomStorage.GetAll();
 
             RoomsCollection = CollectionViewSource.GetDefaultView(Rooms);
         }
@@ -75,6 +65,7 @@ namespace Hospital.View
         private void searchRooms(object sender, TextChangedEventArgs e)
         {
             TextBox textbox = sender as TextBox;
+
             if (textbox == null)
                 return;
            
@@ -89,8 +80,7 @@ namespace Hospital.View
             {
                 ICollectionView view = CollectionViewSource.GetDefaultView(Rooms);
                 this.RoomsCollection.Refresh();
-            }
-            
+            }    
         }
 
         private void selectFilters(object sender, RoutedEventArgs e)
@@ -122,34 +112,32 @@ namespace Hospital.View
             if (selectedItem == null)
                 return;
            
-            EditRoom room = new EditRoom(selectedItem);
-           // room.Owner = Application.Current.MainWindow;
+            EditRoom editRoom = new EditRoom(selectedItem);
 
-            room.idTxt.Text =  selectedItem.Id;
-            room.idTxt.IsEnabled = false;
-            room.nameTxt.Text = selectedItem.Name;
-            room.floorTxt.Text = selectedItem.Floor.ToString();
-            room.typeCB.SelectedValue = selectedItem.Type;
-            room.typeCB.Text = selectedItem.Type.ToString();
-            room.statusCB.SelectedValue = selectedItem.Status;
-            room.statusCB.Text = selectedItem.Status.ToString();
+            editRoom.idTxt.Text =  selectedItem.Id;
+            editRoom.idTxt.IsEnabled = false;
+            editRoom.nameTxt.Text = selectedItem.Name;
+            editRoom.floorTxt.Text = selectedItem.Floor.ToString();
+            editRoom.typeCB.SelectedValue = selectedItem.Type;
+            editRoom.typeCB.Text = selectedItem.Type.ToString();
+            editRoom.statusCB.SelectedValue = selectedItem.Status;
+            editRoom.statusCB.Text = selectedItem.Status.ToString();
 
-            NavigationService.Navigate(room);
+            NavigationService.Navigate(editRoom);
         }
 
         private void deleteRoom(object sender, RoutedEventArgs e)
         {
             Room selectedItem = (Room) dataGridRooms.SelectedItem;
+
             if (selectedItem == null)
                 return;
             
             MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da uklonite izabranu salu",
-                                      "Brisanje sale",
-                                       MessageBoxButton.YesNo, MessageBoxImage.Question);
+                                      "Brisanje sale", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
            if (result == MessageBoxResult.Yes)
-               rs.Delete(selectedItem.Id);
-                   
+               roomStorage.Delete(selectedItem.Id);
         }
 
         private void viewStaticInventory(object sender, RoutedEventArgs e)
@@ -181,8 +169,7 @@ namespace Hospital.View
 
         private void refreshView(object sender, RoutedEventArgs e)
         {
-            Rooms = rs.GetAll();
-
+            Rooms = roomStorage.GetAll();
         }
 
         private void menuButton(object sender, RoutedEventArgs e)

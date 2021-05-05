@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for EditRoom.xaml
-    /// </summary>
     public partial class EditRoom : Page
     {
         private Room room;

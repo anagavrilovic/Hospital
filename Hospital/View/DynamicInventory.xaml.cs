@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,56 +16,54 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace Hospital.View
-{
-    /// <summary>
-    /// Interaction logic for DynamicInventory.xaml
-    /// </summary>
+{ 
     public partial class DynamicInventory : Page
     {
-        private string id;
+        private string _roomID;
 
-        public static ObservableCollection<MedicalSupply> Supply
+        private static ObservableCollection<MedicalSupply> _supply;
+        public static ObservableCollection<MedicalSupply> Supply 
         {
-            get;
-            set;
+            get => _supply;
+            set
+            {
+                _supply = value;
+                NotifyStaticPropertyChanged();
+            }
         }
 
-        MedicalSupplyStorage storage = new MedicalSupplyStorage();
-
-        private string searchstr;
-
-        private ICollectionView supplyCollection;
-
-        public ICollectionView SupplyCollection
+        public static event PropertyChangedEventHandler StaticPropertyChanged;
+        private static void NotifyStaticPropertyChanged([CallerMemberName] string name = null)
         {
-            get { return supplyCollection; }
-            set { supplyCollection = value; }
+            StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(name));
         }
 
+        private MedicalSupplyStorage _medicalSupplyStorage;
+
+        private string _searchCriterion;
+        public ICollectionView SupplyCollection { get; set; }
 
         public DynamicInventory(string id)
         {
             InitializeComponent();
             this.DataContext = this;
-            this.id = id;
+            this._roomID = id;
 
-            MedicalSupplyStorage storage = new MedicalSupplyStorage();
-            Supply = new ObservableCollection<MedicalSupply>();
-            Supply = storage.GetByRoomID(id);
-
+            _medicalSupplyStorage = new MedicalSupplyStorage();
+            Supply = _medicalSupplyStorage.GetByRoomID(id);
             SupplyCollection = CollectionViewSource.GetDefaultView(Supply);
         }
 
-        private void searchSupply(object sender, TextChangedEventArgs e)
+        private void SearchMedicalSupply(object sender, TextChangedEventArgs e)
         {
             TextBox textbox = sender as TextBox;
             if (textbox != null)
             {
-                this.searchstr = textbox.Text;
-                if (!string.IsNullOrEmpty(searchstr))
+                this._searchCriterion = textbox.Text;
+                if (!string.IsNullOrEmpty(_searchCriterion))
                 {
                     ICollectionView view = CollectionViewSource.GetDefaultView(dataGridMedicalSupply.ItemsSource);
-                    view.Filter = new Predicate<object>(filter);
+                    view.Filter = new Predicate<object>(Filter);
                     this.SupplyCollection.Refresh();
                 }
                 else
@@ -75,83 +74,73 @@ namespace Hospital.View
             }
         }
 
-        private void btnSearchMouseDown(object sender, RoutedEventArgs e)
+        private void ButtonSearchMouseDown(object sender, RoutedEventArgs e)
         {
             this.SupplyCollection.Refresh();
         }
 
-
-        private bool filter(object item)
+        private bool Filter(object item)
         {
-            if (((MedicalSupply)item).Name.Contains(searchstr) || ((MedicalSupply)item).Id.Contains(searchstr) || ((MedicalSupply)item).Price.ToString().Contains(searchstr) ||
-                ((MedicalSupply)item).RoomID.Contains(searchstr) || ((MedicalSupply)item).Quantity.ToString().Contains(searchstr))
+            if (((MedicalSupply)item).Name.Contains(_searchCriterion) || ((MedicalSupply)item).Id.Contains(_searchCriterion) || ((MedicalSupply)item).Price.ToString().Contains(_searchCriterion) ||
+                ((MedicalSupply)item).RoomID.Contains(_searchCriterion) || ((MedicalSupply)item).Quantity.ToString().Contains(_searchCriterion))
             {
                 return true;
             }
             return false;
         }
 
-        private void addItem(object o, RoutedEventArgs e)
+        private void AddItemButtonClick(object o, RoutedEventArgs e)
         {
-            AddMedicalSupply addMS = new AddMedicalSupply(id);
+            AddMedicalSupply addMS = new AddMedicalSupply(_roomID);
             NavigationService.Navigate(addMS);
         }
 
-        private void editItem(object o, RoutedEventArgs e)
+        private void EditItemButtonClick(object o, RoutedEventArgs e)
         {
             MedicalSupply selectedItem = (MedicalSupply)dataGridMedicalSupply.SelectedItem;
+            if (selectedItem == null)
+                return;
 
-            if (selectedItem != null)
-            {
-                EditMedicalSupply editMS= new EditMedicalSupply(selectedItem);
-                NavigationService.Navigate(editMS);
-            }
+            EditMedicalSupply editMS= new EditMedicalSupply(selectedItem);
+            NavigationService.Navigate(editMS);
         }
 
-        private void deleteItem(object o, RoutedEventArgs e)
+        private void DeleteItemButtonClick(object o, RoutedEventArgs e)
         {
             MedicalSupply selectedItem = (MedicalSupply) dataGridMedicalSupply.SelectedItem;
-            if (selectedItem != null)
-            {
-                MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da izbrišete izabranu stavku",
-                                         "Brisanje stavke",
-                                          MessageBoxButton.YesNo,
-                                          MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
-                {
-                    if (selectedItem != null)
-                    {
-                        Supply.Remove(selectedItem);
-                        storage.Delete(selectedItem.Id, selectedItem.RoomID);
-                    }
-                }
-            }
+            if (selectedItem == null)
+                return;
+
+            MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da izbrišete izabranu stavku",
+                                         "Brisanje stavke", MessageBoxButton.YesNo, MessageBoxImage.Question);
+           if (result == MessageBoxResult.Yes)
+           {
+              Supply.Remove(selectedItem);
+              _medicalSupplyStorage.Delete(selectedItem.Id, selectedItem.RoomID);
+           }
         }
 
-        private void transferItem(object o, RoutedEventArgs e)
+        private void TransferItemButtonClick(object o, RoutedEventArgs e)
         {
             MedicalSupply selectedItem = (MedicalSupply)dataGridMedicalSupply.SelectedItem;
+            if (selectedItem == null)
+                return;
 
-            if (selectedItem != null)
-            {
-                PrebacivanjeOpreme transfer = new PrebacivanjeOpreme(selectedItem);
-                transfer.nazivTxt.Text = selectedItem.Name;
-                NavigationService.Navigate(transfer);
-            }
+            PrebacivanjeOpreme transfer = new PrebacivanjeOpreme(selectedItem);
+            transfer.nazivTxt.Text = selectedItem.Name;
+            NavigationService.Navigate(transfer);
         }
 
-        private void createReport(object o, RoutedEventArgs e)
+        private void CreateReportButtonClick(object o, RoutedEventArgs e)
         {
             //TODO HCI 
         }
 
-        private void back(object sender, RoutedEventArgs e)
+        private void BackButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RoomsWindow());
         }
-
     }
-
 }
 
 

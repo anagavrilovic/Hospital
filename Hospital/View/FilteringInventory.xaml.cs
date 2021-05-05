@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for FilteringInventory.xaml
-    /// </summary>
     public partial class FilteringInventory : Page, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

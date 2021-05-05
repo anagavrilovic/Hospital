@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for AddRoom.xaml
-    /// </summary>
     public partial class AddRoom : Page
     {
         public AddRoom()
@@ -25,7 +22,7 @@ namespace Hospital.View
             InitializeComponent();
         }
 
-        private void acceptAdding(object sender, RoutedEventArgs e)
+        private void AcceptAddingButtonClick(object sender, RoutedEventArgs e)
         {
             string tempId = idTxt.Text;
             String tempName = nameTxt.Text;
@@ -33,19 +30,18 @@ namespace Hospital.View
             RoomType tempType = (RoomType)Enum.Parse(typeof(RoomType), typeCB.Text);
             RoomStatus tempStatus = (RoomStatus)Enum.Parse(typeof(RoomStatus), statusCB.Text);
 
-            RoomStorage rs = new RoomStorage();
-            rs.Save(new Room { Id = tempId, Name = tempName, Floor = tempFloor, Status = tempStatus, Type = tempType});
-            RoomsWindow.Rooms = RoomStorage.rooms;
+            RoomStorage roomStorage = new RoomStorage();
+            roomStorage.Save(new Room { Id = tempId, Name = tempName, Floor = tempFloor, Status = tempStatus, Type = tempType});
 
             NavigationService.Navigate(new RoomsWindow());
         }
 
-        private void cancelAdding(object sender, RoutedEventArgs e)
+        private void CancelAddingButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RoomsWindow());
         }
 
-        private void back(object sender, RoutedEventArgs e)
+        private void BackButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RoomsWindow());
         }

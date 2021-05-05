@@ -19,9 +19,6 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for PrebacivanjeInventara.xaml
-    /// </summary>
     public partial class PrebacivanjeInventara : Page, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

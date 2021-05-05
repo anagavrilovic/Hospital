@@ -17,57 +17,36 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for EditInventory.xaml
-    /// </summary>
     public partial class EditInventory : Page
     {
-        private ObservableCollection<Inventory> inventory;
-        private Inventory inv;
-
-        public ObservableCollection<Inventory> Inventory
-        {
-            get { return inventory; }
-            set { inventory = value; }
-        }
-
-        public Inventory Inv
-        {
-            get { return inv; }
-            set { inv = value; }
-        }
-
+        public Inventory Inv {  get; set; }
 
         public EditInventory(Inventory inventory)
         {
             InitializeComponent();
             this.DataContext = this;
-            this.Inv = inventory;
+            Inv = inventory;
         }
 
-        private void accept(object sender, RoutedEventArgs e)
+        private void AcceptButtonClick(object sender, RoutedEventArgs e)
         {
             oznakaTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             nazivTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             cenaTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             kolicinaTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
 
- 
-            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + "inventory.json"))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, InventoryStorage.inventory);
-            }
+            InventoryStorage inventoryStorage = new InventoryStorage();
+            inventoryStorage.doSerialization();
 
             NavigationService.Navigate(new StaticInventory(Inv.RoomID));
         }
 
-        private void cancel(object sender, RoutedEventArgs e)
+        private void CancelButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new StaticInventory(Inv.RoomID));
         }
 
-        private void back(object sender, RoutedEventArgs e)
+        private void BackButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new StaticInventory(Inv.RoomID));
         }

@@ -46,7 +46,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
-            <Button  Click="back" Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
+            <Button  Click="BackButtonClick" Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
                 <Image  Source="/Icon/back.png" Margin="0,8,0,5"/>
             </Button>
             <Image Source="/Icon/logo.png"      Margin="260,0,25,-0.4" Width="114"/>
@@ -62,7 +62,7 @@
 
         <TextBox x:Name="idTxt" Grid.Row="3" Grid.ColumnSpan="2" Margin="30,0.6,28,14" BorderBrush="#FF26282C">
             <TextBox.Text>
-                <Binding  Path="Ms.Id"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                <Binding  Path="MedicalSupplyItem.Id"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <val:EmptyField ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
@@ -88,7 +88,7 @@
 
         <TextBox x:Name="nameTxt" Grid.Row="5" Grid.ColumnSpan="2" Margin="30,0.4,28,14.2" BorderBrush="#FF26282C">
             <TextBox.Text>
-                <Binding  Path="Ms.Name"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                <Binding  Path="MedicalSupplyItem.Name"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <val:EmptyField ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
@@ -115,7 +115,7 @@
 
         <TextBox x:Name="cenaTxt" Grid.Row="7" Grid.ColumnSpan="2" Margin="30,0.2,28,14.4" BorderBrush="#FF26282C">
             <TextBox.Text>
-                <Binding  Path="Ms.Price"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                <Binding  Path="MedicalSupplyItem.Price"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <val:StringToDouble ValidationStep="RawProposedValue"/>
                         <val:MinValue       ValidationStep="ConvertedProposedValue" Min="0" />
@@ -142,7 +142,7 @@
 
         <TextBox x:Name="kolicinaTxt" Grid.Row="9" Grid.ColumnSpan="2" Margin="30,0,28,14.6" BorderBrush="#FF26282C">
             <TextBox.Text>
-                <Binding  Path="Ms.Quantity"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                <Binding  Path="MedicalSupplyItem.Quantity"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <val:StringToInteger ValidationStep="RawProposedValue"/>
                         <val:MinValue        ValidationStep="ConvertedProposedValue" Min="0"/>
@@ -173,7 +173,7 @@
             <ComboBoxItem>FLAŠICE</ComboBoxItem>
         </ComboBox>
 
-        <Button Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,10.4,5.4,43.6" Click="accept">
+        <Button Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,10.4,5.4,43.6" Click="AcceptAddingButtonClick">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="IsEnabled" Value="False"/>
@@ -192,7 +192,7 @@
             </Button.Style>
         </Button>
 
-        <Button Grid.Row="12" Grid.Column="1" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="4.6,9.4,28,43.6" Click="cancel"/>
+        <Button Grid.Row="12" Grid.Column="1" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="4.6,9.4,28,43.6" Click="CancelButtonClick"/>
 
     </Grid>
 </Page>

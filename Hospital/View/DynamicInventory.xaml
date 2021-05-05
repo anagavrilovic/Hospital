@@ -28,20 +28,20 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
-            <Button  Click="back" Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
+            <Button  Click="BackButtonClick" Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
                 <Image  Source="/Icon/back.png" Margin="10,8,0,5"/>
             </Button>
             <Label Content="OPREMA" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" Margin="0,15,5,10.2"/>
             <Image Source="/Icon/logo.png" Margin="60,5,5,9.8" Width="166"/>
         </StackPanel>
 
-        <Button x:Name="edit"     Content="IZMENI STAVKU"    Grid.Row="1" Grid.Column="0" Margin="10,23,10.2,10" Background="#FFBBD7F9" Foreground="#FF051D6E" Click="editItem" />
-        <Button x:Name="delete"   Content="IZBRIŠI STAVKU"   Grid.Row="1" Grid.Column="1" Margin="10,23,10.2,10" Background="#FFBBD7F9" Foreground="#FF051D6E" Click="deleteItem"/>
-        <Button x:Name="transfer" Content="PREBACI STAVKU"   Grid.Row="2" Grid.Column="0" Margin="10,10,10.2,23" Background="#FFBBD7F9" Foreground="#FF051D6E" Click="transferItem"/>
-        <Button x:Name="report"   Content="KREIRAJ IZVEŠTAJ" Grid.Row="2" Grid.Column="1" Margin="10,10,10.2,23" Background="#FFBBD7F9" Foreground="#FF051D6E" Click="createReport"/>
+        <Button x:Name="edit"     Content="IZMENI STAVKU"    Grid.Row="1" Grid.Column="0" Margin="10,23,10.2,10" Background="#FFBBD7F9" Foreground="#FF051D6E" Click="EditItemButtonClick" />
+        <Button x:Name="delete"   Content="IZBRIŠI STAVKU"   Grid.Row="1" Grid.Column="1" Margin="10,23,10.2,10" Background="#FFBBD7F9" Foreground="#FF051D6E" Click="DeleteItemButtonClick"/>
+        <Button x:Name="transfer" Content="PREBACI STAVKU"   Grid.Row="2" Grid.Column="0" Margin="10,10,10.2,23" Background="#FFBBD7F9" Foreground="#FF051D6E" Click="TransferItemButtonClick"/>
+        <Button x:Name="report"   Content="KREIRAJ IZVEŠTAJ" Grid.Row="2" Grid.Column="1" Margin="10,10,10.2,23" Background="#FFBBD7F9" Foreground="#FF051D6E" Click="CreateReportButtonClick"/>
 
-        <TextBox x:Name="search"  TextChanged="searchSupply" Grid.Row="2" Grid.ColumnSpan="2" Margin="10,72.4,62,31" Grid.RowSpan="2" />
-        <Image Source="/Icon/search-blue.png" Grid.Row="2" Grid.Column="1" Margin="154.6,72.4,15,31" MouseDown="btnSearchMouseDown" Grid.RowSpan="2"/>
+        <TextBox x:Name="search"  TextChanged="SearchMedicalSupply" Grid.Row="2" Grid.ColumnSpan="2" Margin="10,72.4,62,31" Grid.RowSpan="2" />
+        <Image Source="/Icon/search-blue.png" Grid.Row="2" Grid.Column="1" Margin="154.6,72.4,15,31" MouseDown="ButtonSearchMouseDown" Grid.RowSpan="2"/>
 
         <ScrollViewer Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="2" Background="Azure" HorizontalScrollBarVisibility="Auto" Margin="10,0,0,0">
             <Grid MinWidth="200" Height="330">
@@ -61,7 +61,7 @@
             </Grid>
         </ScrollViewer>
 
-        <Button x:Name="add"    Content="DODAJ STAVKU"  Grid.Row="9" Grid.ColumnSpan="2" Margin="10,0.2,15,28.6" Background="#FFBBD7F9" Foreground="#FF051D6E" Click="addItem" />
+        <Button x:Name="add"    Content="DODAJ STAVKU"  Grid.Row="9" Grid.ColumnSpan="2" Margin="10,0.2,15,28.6" Background="#FFBBD7F9" Foreground="#FF051D6E" Click="AddItemButtonClick" />
 
     </Grid>
 </Page>

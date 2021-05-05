@@ -10,7 +10,6 @@
         Title="Dodavanje sale" Height="730" Width="420">
 
     <Grid>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -34,16 +33,11 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4" Margin="0,0,0,46.8" Grid.RowSpan="2">
-            <Button Grid.Column="0" Background="#FF95C0F4" BorderBrush="#FF95C0F4" Click="back">
+            <Button Grid.Column="0" Background="#FF95C0F4" BorderBrush="#FF95C0F4" Click="BackButtonClick">
                 <Image Source="/Icon/back.png"  Margin="10,8,5,5"/>
             </Button>
             <Image Source="/Icon/logo.png"  Margin="240,8,0,10.4"/>
         </StackPanel>
-
-        <!--Button Grid.Row="0" Grid.Column="0" Background="white" Click="back" BorderBrush="white" >
-            <Image  Source="/Icon/back.png" Margin="10,8,150,5"/>
-        </>
-        <Image Source="/Icon/logo.png" Grid.Row="0" Grid.Column="1" Margin="30,5,5,2"/-->
 
         <Label Content="UNOS SALE"         Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="135,5,5,0" FontWeight="Bold"/>
 
@@ -70,8 +64,8 @@
             <ComboBoxItem                   Content="MAGACIN"            Foreground="#FF2E83BF"/>
         </ComboBox>
 
-        <Button Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,10.4,10.4,41.6" Click="acceptAdding"/>
-        <Button Grid.Row="12" Grid.Column="1" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="9.6,10.4,28,41.6" Click="cancelAdding"/>
+        <Button Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,10.4,10.4,41.6" Click="AcceptAddingButtonClick"/>
+        <Button Grid.Row="12" Grid.Column="1" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="9.6,10.4,28,41.6"  Click="CancelAddingButtonClick"/>
 
     </Grid>
 

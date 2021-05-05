@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for MedicineRevisionWindow.xaml
-    /// </summary>
     public partial class MedicineRevisionWindow : Page, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -31,7 +28,7 @@ namespace Hospital.View
             }
         }
 
-        private MedicineRevisionStorage medicineRevisionStorage;
+        private MedicineRevisionStorage _medicineRevisionStorage;
 
         private ObservableCollection<MedicineRevision> medicinesOnRevision;
         public ObservableCollection<MedicineRevision> MedicinesOnRevision
@@ -48,24 +45,23 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
-            medicineRevisionStorage = new MedicineRevisionStorage();
-            MedicinesOnRevision = medicineRevisionStorage.GetAll();
+            this._medicineRevisionStorage = new MedicineRevisionStorage();
+            MedicinesOnRevision = _medicineRevisionStorage.GetAll();
         }
-
-
 
         private void editMedicine(object sender, RoutedEventArgs e)
         {
             MedicineRevision selectedMedicineOnRevision = (MedicineRevision)listBoxMedicines.SelectedItem;
+            if (selectedMedicineOnRevision == null)
+                return;
+
             EditMedicine editMedicine = new EditMedicine(selectedMedicineOnRevision);
             NavigationService.Navigate(editMedicine);
         }
 
-
         private void back(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new MedicinesWindow());
-
         }
     }
 }

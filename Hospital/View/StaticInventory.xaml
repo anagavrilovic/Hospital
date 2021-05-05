@@ -28,20 +28,20 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
-            <Button  Click="back" Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
+            <Button  Click="BackButtonClick" Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
                 <Image  Source="/Icon/back.png" Margin="10,8,0,5"/>
             </Button>
             <Label Content="INVENTAR" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" Margin="0,15,5,10.2"/>
             <Image Source="/Icon/logo.png"      Margin="60,5,25,10" Width="153"/>
         </StackPanel>
 
-        <Button Grid.Column="0"     Grid.Row="1"  Content="IZMENI STAVKU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="10,23,10.2,10" Click="edit" />
-        <Button Grid.Column="1"     Grid.Row="1"  Content="OBRIŠI STAVKU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="10,23,17,10" Click="delete"/>
-        <Button Grid.ColumnSpan="2" Grid.Row="2"  Content="PREBACI STAVKU U DRUGU SALU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="10,10.4,17,20.4" Click="transfer"/>
+        <Button Grid.Column="0"     Grid.Row="1"  Content="IZMENI STAVKU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="10,23,10.2,10" Click="EditButtonClick" />
+        <Button Grid.Column="1"     Grid.Row="1"  Content="OBRIŠI STAVKU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="10,23,17,10" Click="DeleteButtonClick"/>
+        <Button Grid.ColumnSpan="2" Grid.Row="2"  Content="PREBACI STAVKU U DRUGU SALU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="10,10.4,17,20.4" Click="TransferButtonClick"/>
 
-        <TextBox x:Name="search" TextChanged="searchInventory" Grid.ColumnSpan="2" Grid.Row="3" Margin="10,19.6,51,21"/>
+        <TextBox x:Name="search" TextChanged="SearchInventory" Grid.ColumnSpan="2" Grid.Row="3" Margin="10,19.6,51,21"/>
 
-        <Image Source="/Icon/search-blue.png" Grid.Row="3" Grid.Column="1" Margin="161,20,7,21" MouseDown="btnSearchMouseDown"/>
+        <Image Source="/Icon/search-blue.png" Grid.Row="3" Grid.Column="1" Margin="161,20,7,21" MouseDown="ButtonSearchMouseDown"/>
 
         <ScrollViewer Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="2" Background="Azure" HorizontalScrollBarVisibility="Auto" Margin="0">
 
@@ -62,7 +62,7 @@
             </Grid>
         </ScrollViewer>
 
-        <Button Grid.ColumnSpan="2" Grid.Row="9"  Content="DODAJ STAVKU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="10,0.2,17,29.6" Click="add"/>
+        <Button Grid.ColumnSpan="2" Grid.Row="9"  Content="DODAJ STAVKU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="10,0.2,17,29.6" Click="AddButtonClick"/>
 
     </Grid>
 </Page>
