@@ -71,6 +71,7 @@ namespace Hospital
                             IDnumber = mds.GetByUsername(user.Username);
                             PatientMain patientMain = new PatientMain();
                             patientMain.Show();
+                            this.Close();
                             break;
                         case UserType.secretary:
                             var s = new SecretaryWindow();

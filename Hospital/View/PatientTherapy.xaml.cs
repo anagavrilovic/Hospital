@@ -11,6 +11,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Hospital.View
@@ -18,7 +19,7 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for PatientTherapy.xaml
     /// </summary>
-    public partial class PatientTherapy : Window
+    public partial class PatientTherapy : Page
     {
         private PatientTherapyMedicineNotification PatientTherapyMedicineNotification;
         public PatientTherapy(PatientTherapyMedicineNotification patientTherapyMedicineNotification)

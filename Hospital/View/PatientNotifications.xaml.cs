@@ -12,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Hospital.View
@@ -19,7 +20,7 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for PatientNotifications.xaml
     /// </summary>
-    public partial class PatientNotifications : Window
+    public partial class PatientNotifications : Page
     {
         public ObservableCollection<PatientTherapyMedicineNotification> Lista
         {
@@ -67,7 +68,6 @@ namespace Hospital.View
                         Lista.Add(patientTherapyMedicineNotification);
                     }
                 }*/
-
         }
 
         private void myTestKey(object sender, KeyEventArgs e)
@@ -81,13 +81,13 @@ namespace Hospital.View
                 patientNotificationsStorage.Delete(selectedItem.ID);
                 patientNotificationsStorage.Save(selectedItem);
                 PatientTherapy patientTherapy = new PatientTherapy(selectedItem);
-                patientTherapy.Show();
-                
+                this.NavigationService.Navigate(patientTherapy);
+
             }
 
             if (e.Key == Key.Escape)
             {
-                this.Close();
+                this.NavigationService.GoBack();
             }
         }
     }

@@ -11,22 +11,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Hospital.View
 {
     /// <summary>
-    /// Interaction logic for PatientAppointmentList.xaml
+    /// Interaction logic for PatientAppointments.xaml
     /// </summary>
-    public partial class PatientAppointmentList : Window
+    public partial class PatientAppointments : Page
     {
-
         public ObservableCollection<Appointment> Lista
         {
             get;
             set;
         }
-        public PatientAppointmentList()
+        public PatientAppointments()
         {
             InitializeComponent();
             this.DataContext = this;
@@ -37,23 +37,20 @@ namespace Hospital.View
 
             dataGridApp.Focus();
         }
-
         private void myTestKey(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Space)
             {
                 Appointment selectedItem = (Appointment)dataGridApp.SelectedItem;
                 PatientAppointmentOptions patientAppointmentOptions = new PatientAppointmentOptions(selectedItem);
-                patientAppointmentOptions.Show();
-                this.Close();
+                this.NavigationService.Navigate(patientAppointmentOptions);
+                
             }
 
             if (e.Key == Key.Escape)
             {
-                this.Close();
+                this.NavigationService.GoBack();
             }
         }
-
-    
     }
 }

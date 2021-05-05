@@ -7,11 +7,8 @@
         mc:Ignorable="d"
         Title="PatientMain" Height="450" Width="800">
     <Grid>
-        <Button Content="Zakaži pregled" HorizontalAlignment="Left" Height="40" Margin="267,139,0,0" VerticalAlignment="Top" Width="214" Click="MakeAnAppointment"/>
-        <Button Content="Lista obavljenih pregleda/operacija" HorizontalAlignment="Left" Height="40" Margin="267,286,0,0" VerticalAlignment="Top" Width="214" Click="PassedAppointmentList"/>
-        <Button Content="Lista zakazanih pregleda/operacija" HorizontalAlignment="Left" Height="40" Margin="267,219,0,0" VerticalAlignment="Top" Width="214" Click="AppointmentList"/>
-        <Button Content="Podešavanja" HorizontalAlignment="Left" Height="40" Margin="267,351,0,0" VerticalAlignment="Top" Width="214" Click="Settings"/>
-        <Button Name="NotificationsButton" Content="Obaveštenja" HorizontalAlignment="Left" VerticalAlignment="Top" Width="214" Margin="267,10,0,0" Height="40" Click="Notifications"/>
+        <Frame Name="frame" NavigationUIVisibility="Hidden" Content="Frame" HorizontalAlignment="Left" Height="419" VerticalAlignment="Top" Width="792"/>
+
 
     </Grid>
 </Window>

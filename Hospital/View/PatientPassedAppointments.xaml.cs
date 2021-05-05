@@ -11,21 +11,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Hospital.View
 {
     /// <summary>
-    /// Interaction logic for PatientPassedAppointmentList.xaml
+    /// Interaction logic for PatientPassedAppointments.xaml
     /// </summary>
-    public partial class PatientPassedAppointmentList : Window
+    public partial class PatientPassedAppointments : Page
     {
         public ObservableCollection<Appointment> Lista
         {
             get;
             set;
         }
-        public PatientPassedAppointmentList()
+        public PatientPassedAppointments()
         {
             InitializeComponent();
             this.DataContext = this;

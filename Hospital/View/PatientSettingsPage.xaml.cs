@@ -11,6 +11,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Hospital.View
@@ -18,7 +19,7 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for PatientSettingsPage.xaml
     /// </summary>
-    public partial class PatientSettingsPage : Window
+    public partial class PatientSettingsPage : Page
     {
         public PatientSettingsPage()
         {
@@ -43,9 +44,10 @@ namespace Hospital.View
             }
         }
 
+
         private void Nazad(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.NavigationService.GoBack();
         }
 
         private void Sacuvaj(object sender, RoutedEventArgs e)
@@ -68,7 +70,8 @@ namespace Hospital.View
             }
 
             patientSettingsStorage.Save(patientSettings);
-            this.Close();
+            this.NavigationService.GoBack();
         }
+
     }
 }
