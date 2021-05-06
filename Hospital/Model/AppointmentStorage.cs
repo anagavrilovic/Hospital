@@ -34,7 +34,10 @@ namespace Hospital
         public void Save(Appointment parameter1)
         {
             ObservableCollection<Appointment> appointment = GetAll();
-            if (appointment == null) appointment = new ObservableCollection<Appointment>();
+
+            if (appointment == null) 
+                appointment = new ObservableCollection<Appointment>();
+
             appointment.Add(parameter1);
             DoSerialization(appointment);
         }
@@ -55,15 +58,30 @@ namespace Hospital
             return true;
         }
 
-        public bool CheckIfOverlap(Appointment appointment)
+        public bool CheckIfOverlap(DateTime startTime, DateTime endTime, string doctorID, ObservableCollection<MoveAppointment> option)
         {
             ObservableCollection<Appointment> appointments = GetAll();
 
             foreach(Appointment app in appointments)
             {
-                if (app.IDDoctor.Equals(appointment.IDDoctor))
-                    if (app.DateTime < appointment.DateTime.AddHours(appointment.DurationInHours) && appointment.DateTime < app.DateTime.AddHours(app.DurationInHours))
+                bool exisits = false;
+                if (app.IDDoctor.Equals(doctorID))
+                    if (app.DateTime < endTime && startTime < app.DateTime.AddHours(app.DurationInHours))
+                    {
+                        foreach(var op in option)
+                        {
+                            if (op.Appointment.IDAppointment.Equals(app.IDAppointment))
+                            {
+                                exisits = true;
+                                break;
+                            }
+                        }
+
+                        if (exisits)
+                            continue;
+
                         return true;
+                    }
             }
 
             return false;
@@ -98,6 +116,30 @@ namespace Hospital
             }
 
             return new Appointment();
+        }
+
+        public void RescheduleAppointments(ObservableCollection<MoveAppointment> option)
+        {
+            foreach (var moveAppointmnet in option)
+            {
+                RescheduleAppointment(moveAppointmnet.Appointment.IDAppointment, moveAppointmnet.ToTime);
+            }
+        }
+
+        public void RescheduleAppointment(string idAppointment, DateTime newTime)
+        {
+            ObservableCollection<Appointment> allAppointments = GetAll();
+            
+            foreach(var appointment in allAppointments)
+            {
+                if (appointment.IDAppointment.Equals(idAppointment))
+                {
+                    appointment.DateTime = newTime;
+                    break;
+                }
+            }
+
+            DoSerialization(allAppointments);
         }
 
         public ObservableCollection<Appointment> GetByPatient(String id)

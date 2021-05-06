@@ -90,7 +90,7 @@
                         <DataGridTextColumn Header="Ime" Width="*" Binding="{Binding Patient.FirstName}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
                         <DataGridTextColumn Header="Prezime" Width="*" Binding="{Binding Patient.LastName}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
                         <DataGridTextColumn Header="JMBG" Width="*" Binding="{Binding Patient.PersonalID}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
-                        <DataGridTextColumn Header="Broj zdravstvenog kartona" Width="*" Binding="{Binding MedicalRecordID}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                        <DataGridTextColumn Header="Datum rođenja" Width="*" Binding="{Binding Patient.DateOfBirth, StringFormat='{}{0: dd.MM.yyyy}'}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
                     </DataGrid.Columns>
                 </DataGrid>
 

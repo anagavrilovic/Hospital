@@ -6,6 +6,8 @@ namespace Hospital
    {
       examination,
       operation, 
+      urgentExamination,
+      urgentOperation,
       none
    }
 }

@@ -133,9 +133,9 @@ namespace Hospital.View.Secretary
         private void SetAppointmentDetails()
         {
             if (AppointmentType.SelectedIndex == 0)
-                NewUrgentAppointment.Type = Hospital.AppointmentType.examination;
+                NewUrgentAppointment.Type = Hospital.AppointmentType.urgentExamination;
             else
-                NewUrgentAppointment.type = Hospital.AppointmentType.operation;
+                NewUrgentAppointment.type = Hospital.AppointmentType.urgentOperation;
 
             NewUrgentAppointment.IDAppointment = new AppointmentStorage().GetNewID();
         }

@@ -26,6 +26,7 @@ namespace Hospital.View.Secretary
         public Appointment NewUrgentAppointment { get; set; }
         public DoctorSpecialty DoctorsSpecialty { get; set; }
         public ObservableCollection<OptionForRescheduling> Options { get; set; }
+        public OptionForRescheduling SelectedOption { get; set; }
 
         // Storage class properties
         public AppointmentStorage AppointmentStorage { get; set; }
@@ -42,11 +43,6 @@ namespace Hospital.View.Secretary
             this.DoctorsSpecialty = doctorsSpecialty;
             InitializeEmptyObjects();
             FindAllOptions();
-
-            /*MoveAppointment ma = new MoveAppointment(AppointmentStorage.GetByID("1"));
-            OptionForRescheduling ofr = new OptionForRescheduling();
-            ofr.Option.Add(ma);
-            Options.Add(ofr);*/
         }
 
         private void InitializeEmptyObjects()
@@ -87,6 +83,8 @@ namespace Hospital.View.Secretary
                     NewUrgentAppointment.DateTime = NewUrgentAppointment.DateTime.AddMinutes(30);
                 }
             }
+
+            SortOptions();
         }
 
         private void SetDateTimeForNewAppointment()
@@ -114,11 +112,16 @@ namespace Hospital.View.Secretary
                 return;
 
             foreach(OptionForRescheduling option in Options)
-            {
                 if (option.IsEqual(optionForRescheduling))
+                    return;
+
+            foreach(MoveAppointment moveAppointment in optionForRescheduling.Option)
+            {
+                if (moveAppointment.Appointment.Type.Equals(AppointmentType.urgentExamination) || moveAppointment.Appointment.Type.Equals(AppointmentType.urgentOperation))
                     return;
             }
 
+            optionForRescheduling.SetTimeForRescheduling(NewUrgentAppointment);
             Options.Add(optionForRescheduling);
         }
 
@@ -133,9 +136,33 @@ namespace Hospital.View.Secretary
             return false;
         }
 
+        private void SortOptions()
+        {
+            List<OptionForRescheduling> sortedList = Options.OrderBy(o => o.NewUrgentAppointmentTime).ToList();
+            Options.Clear();
+            Options = new ObservableCollection<OptionForRescheduling>(sortedList);
+        }
+
         private void BtnPotvrdiClick(object sender, RoutedEventArgs e)
         {
+            if (SelectedOption == null)
+                MessageBox.Show("Selektujte opciju za pomeranje već postojećih termina!");
 
+            ChangeTimeForNewUrgentAppointment(SelectedOption.NewUrgentAppointmentTime);
+            SetDoctorForNewAppointment(SelectedOption.Option[0].Doctor);
+
+            AppointmentStorage.RescheduleAppointments(SelectedOption.Option);
+            AppointmentStorage.Save(NewUrgentAppointment);
+
+            var urgentAppointmentDetails = new HitanPregledDetalji(NewUrgentAppointment);
+            urgentAppointmentDetails.Show();
+
+            NavigationService.Navigate(new HitanPregled());
+        }
+
+        private void ChangeTimeForNewUrgentAppointment(DateTime dateTime)
+        {
+            NewUrgentAppointment.DateTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, dateTime.Kind);
         }
 
         private void BtnOdustaniClick(object sender, RoutedEventArgs e)

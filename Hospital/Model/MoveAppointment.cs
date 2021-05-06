@@ -24,17 +24,5 @@ namespace Hospital
             this.Patient = new MedicalRecordStorage().GetByPatientID(appointment.IDpatient);
             this.ToTime = new DateTime();
         }
-
-        /*public void SetTimeForRescheduling()
-        {
-            AppointmentStorage appointmentStorage = new AppointmentStorage();
-            Appointment appointment = appointmentStorage.GetByID(AppointmentID);
-            ToTime = FromTime.AddHours(appointment.DurationInHours);
-
-            while (true)
-            {
-               // if(appointmentStorage.CheckIfOverlap())
-            }
-        }*/
     }
 }

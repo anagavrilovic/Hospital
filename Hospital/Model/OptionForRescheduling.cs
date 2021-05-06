@@ -10,6 +10,7 @@ namespace Hospital
     public class OptionForRescheduling
     {
         public ObservableCollection<MoveAppointment> Option { get; set; }
+        public DateTime NewUrgentAppointmentTime { get; set; }
 
         public OptionForRescheduling()
         {
@@ -35,6 +36,64 @@ namespace Hospital
             }
 
             return true;
+        }
+
+        public void SetTimeForRescheduling(Appointment newUrgentAppointment)
+        {
+            AppointmentStorage appointmentStorage = new AppointmentStorage();
+            SetTimeForNewUrgentAppointment(newUrgentAppointment.DateTime);
+            SortOption();
+
+            foreach(var moveAppointment in Option)
+            {
+                moveAppointment.ToTime = newUrgentAppointment.DateTime.AddHours(newUrgentAppointment.DurationInHours);
+
+                while (true)
+                {
+                    bool alreadyTaken = false;
+                    DateTime testStartTime = moveAppointment.ToTime;
+                    DateTime testEndTime = moveAppointment.ToTime.AddHours(moveAppointment.Appointment.DurationInHours);
+
+                    if (appointmentStorage.CheckIfOverlap(testStartTime, testEndTime, moveAppointment.Doctor.PersonalID, Option)) {
+                        moveAppointment.ToTime = moveAppointment.ToTime.AddMinutes(30);
+                        continue;
+                    }
+
+                    foreach(var existingMoveappointment in Option)
+                    {
+                        if (existingMoveappointment.ToTime.Equals(new DateTime()) || moveAppointment.Equals(existingMoveappointment))
+                            break;
+
+                        DateTime startTime = existingMoveappointment.ToTime;
+                        DateTime endTime = existingMoveappointment.ToTime.AddHours(existingMoveappointment.Appointment.DurationInHours);
+                        if (testStartTime < endTime && startTime < testEndTime)
+                        {
+                            alreadyTaken = true;
+                            break;
+                        }
+                    }
+
+                    if (alreadyTaken)
+                    {
+                        moveAppointment.ToTime = moveAppointment.ToTime.AddMinutes(30);
+                        continue;
+                    }
+
+                    break;
+                }
+            }
+        }
+
+        private void SetTimeForNewUrgentAppointment(DateTime dateTime)
+        {
+            this.NewUrgentAppointmentTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, dateTime.Kind);
+        }
+
+        private void SortOption()
+        {
+            List<MoveAppointment> sortedList = Option.OrderBy(o => o.Appointment.DateTime).ToList();
+            Option.Clear();
+            Option = new ObservableCollection<MoveAppointment>(sortedList);
         }
     }
 }
