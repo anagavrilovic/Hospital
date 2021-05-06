@@ -43,8 +43,8 @@ namespace Hospital.View
             }
             else if ((app.DateTime - currentTime).TotalDays >= 2)
             {
-                PatientChangeAppointment patientChangeAppointment = new PatientChangeAppointment(app);
-                patientChangeAppointment.Show();
+                PatientMakeAppointment patientMakeAppointment = new PatientMakeAppointment(app);
+                this.NavigationService.Navigate(patientMakeAppointment);
                 
             }
             else

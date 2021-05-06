@@ -158,6 +158,19 @@ namespace Hospital
             this.Type = AppointmentType.none;
         }
 
+        public Appointment(DateTime dateTime, AppointmentType type, string patientName, string patientSurname, string iDpatient, string iDDoctor, string iDAppointment, string doctrosNameSurname, Room room)
+        {
+            this.dateTime = dateTime;
+            this.type = type;
+            this.patientName = patientName;
+            this.patientSurname = patientSurname;
+            this.iDpatient = iDpatient;
+            this.iDDoctor = iDDoctor;
+            this.iDAppointment = iDAppointment;
+            this.doctrosNameSurname = doctrosNameSurname;
+            this.room = room;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string name)

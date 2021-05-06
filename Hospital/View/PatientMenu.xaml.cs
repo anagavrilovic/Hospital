@@ -93,8 +93,8 @@ namespace Hospital.View
                 MessageBox.Show("Previše puta ste zakazali/pomerili termin u kratkom vremenskom periodu.");
                 return;
             }
-            PatientChooseDatesForAnAppointment patientChooseDatesForAnAppointment = new PatientChooseDatesForAnAppointment();
-            patientChooseDatesForAnAppointment.Show();
+            PatientMakeAppointment patientMakeAppointment = new PatientMakeAppointment();
+            this.NavigationService.Navigate(patientMakeAppointment);
         }
 
     }

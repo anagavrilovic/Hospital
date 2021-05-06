@@ -80,6 +80,7 @@
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\NotificationStorage.cs" />
     <Compile Include="Model\NotificationsUsers.cs" />
+    <Compile Include="Model\PatientCalendarDTO.cs" />
     <Compile Include="Model\PatientNotificationsStorage.cs" />
     <Compile Include="Model\PatientSettings.cs" />
     <Compile Include="Model\PatientSettingsStorage.cs" />
@@ -209,6 +210,9 @@
     <Compile Include="View\PatientAppointments.xaml.cs">
       <DependentUpon>PatientAppointments.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PatientMakeAppointment.xaml.cs">
+      <DependentUpon>PatientMakeAppointment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PatientMenu.xaml.cs">
       <DependentUpon>PatientMenu.xaml</DependentUpon>
     </Compile>
@@ -254,15 +258,6 @@
     <Compile Include="View\Secretary\OdaberiPacijenta.xaml.cs">
       <DependentUpon>OdaberiPacijenta.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientChangeAppointment.xaml.cs">
-      <DependentUpon>PatientChangeAppointment.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\PatientChooseDatesForAnAppointment.xaml.cs">
-      <DependentUpon>PatientChooseDatesForAnAppointment.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\PatientRescheduleAppointment.xaml.cs">
-      <DependentUpon>PatientRescheduleAppointment.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Secretary\OtkazivanjeTermina.xaml.cs">
       <DependentUpon>OtkazivanjeTermina.xaml</DependentUpon>
     </Compile>
@@ -298,9 +293,6 @@
     </Compile>
     <Compile Include="View\PatientMain.xaml.cs">
       <DependentUpon>PatientMain.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\PatientMakeAnAppointment.xaml.cs">
-      <DependentUpon>PatientMakeAnAppointment.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\RoomsWindow.xaml.cs">
       <DependentUpon>RoomsWindow.xaml</DependentUpon>
@@ -457,6 +449,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\PatientMakeAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PatientMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -529,18 +525,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientChangeAppointment.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\PatientChooseDatesForAnAppointment.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\PatientRescheduleAppointment.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Secretary\OtkazivanjeTermina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -586,10 +570,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PatientMain.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\PatientMakeAnAppointment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
