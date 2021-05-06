@@ -150,7 +150,7 @@ namespace Hospital.View
             }
 
             AppointmentStorage aps = new AppointmentStorage();
-            bool ok = aps.SaveAndCheck(Appointment, Doktor);
+            bool ok = aps.SaveIfNotOvelapping(Appointment);
 
             if (!ok)
             {

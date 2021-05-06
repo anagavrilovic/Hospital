@@ -25,12 +25,13 @@ namespace Hospital.View.Secretary
         public MedicalRecord NewGuestPatient { get; set; }
         public ObservableCollection<MedicalRecord> Patients { get; set; }
         public ICollectionView PatientsCollection { get; set; }
-        public Appointment NewAppointment { get; set; }
+        public Appointment NewUrgentAppointment { get; set; }
         public DoctorSpecialty DoctorsSpecialty { get; set; }
 
         // Storage class properties
         public MedicalRecordStorage MedicalRecordStorage { get; set; }
         public AppointmentStorage AppointmentStorage { get; set; }
+        public Model.DoctorStorage DoctorStorage { get; set; }
 
 
         // Methods
@@ -48,9 +49,11 @@ namespace Hospital.View.Secretary
             Duration = new ObservableCollection<string>();
             SelectedPatient = new MedicalRecord();
             NewGuestPatient = new MedicalRecord();
-            NewAppointment = new Appointment();
+            NewUrgentAppointment = new Appointment();
             Patients = new ObservableCollection<MedicalRecord>();
             MedicalRecordStorage = new MedicalRecordStorage();
+            AppointmentStorage = new AppointmentStorage();
+            DoctorStorage = new Model.DoctorStorage();
         }
 
         private void ShowDurationInComboBox()
@@ -91,7 +94,7 @@ namespace Hospital.View.Secretary
             if (NewGuestPatient.Patient.IsGuest)
                 RegisterGuestPatient();
 
-            SetPatientForNewAppointment();
+            SetPatientForNewUrgentAppointment();
             SetAppointmentDetails();
 
             ScheduleUrgentAppointment();
@@ -114,7 +117,7 @@ namespace Hospital.View.Secretary
             MedicalRecordStorage.Save(NewGuestPatient);
         }
 
-        private void SetPatientForNewAppointment()
+        private void SetPatientForNewUrgentAppointment()
         {
             MedicalRecord newPatient;
             if (NewGuestPatient.Patient.IsGuest)
@@ -122,25 +125,75 @@ namespace Hospital.View.Secretary
             else
                 newPatient = SelectedPatient;            
 
-            NewAppointment.IDpatient = newPatient.Patient.PersonalID;
-            NewAppointment.PatientName = newPatient.Patient.FirstName;
-            NewAppointment.PatientSurname = newPatient.Patient.LastName;
+            NewUrgentAppointment.IDpatient = newPatient.Patient.PersonalID;
+            NewUrgentAppointment.PatientName = newPatient.Patient.FirstName;
+            NewUrgentAppointment.PatientSurname = newPatient.Patient.LastName;
         }
 
         private void SetAppointmentDetails()
         {
             if (AppointmentType.SelectedIndex == 0)
-                NewAppointment.Type = Hospital.AppointmentType.examination;
+                NewUrgentAppointment.Type = Hospital.AppointmentType.examination;
             else
-                NewAppointment.type = Hospital.AppointmentType.operation;
+                NewUrgentAppointment.type = Hospital.AppointmentType.operation;
 
-            NewAppointment.DateTime = DateTime.Today;
-            NewAppointment.IDAppointment = new AppointmentStorage().GetNewID();
+            NewUrgentAppointment.IDAppointment = new AppointmentStorage().GetNewID();
         }
 
         private void ScheduleUrgentAppointment()
         {
-            
+            if(IsScheduledWithoutReschedulingAppointments())
+            {
+                var urgentAppointmentWindow = new HitanPregledDetalji(NewUrgentAppointment);
+                urgentAppointmentWindow.Show();
+                NavigationService.Navigate(new HitanPregled());
+            } 
+            else
+            {
+                NavigationService.Navigate(new HitanPregledPomeranje(NewUrgentAppointment, DoctorsSpecialty));
+            }
+
+        }
+
+        private bool IsScheduledWithoutReschedulingAppointments()
+        {
+            SetDateTimeForNewAppointment();
+            ObservableCollection<Model.Doctor> possibleDoctors = DoctorStorage.GetDoctorsBySpecialty(DoctorsSpecialty);
+
+            for(int i = 0; i < 3; i++)
+            {
+                foreach (Model.Doctor doctor in possibleDoctors)
+                {
+                    SetDoctorForNewAppointment(doctor);
+                    if (AppointmentStorage.SaveIfNotOvelapping(NewUrgentAppointment))
+                        return true;
+                }
+                NewUrgentAppointment.DateTime = NewUrgentAppointment.DateTime.AddMinutes(30);
+            }
+            return false;
+        }
+
+        private void SetDateTimeForNewAppointment()
+        {
+            var currentDateTime = DateTime.Now;
+            NewUrgentAppointment.DateTime = new DateTime(currentDateTime.Year, currentDateTime.Month, currentDateTime.Day, currentDateTime.Hour,
+                currentDateTime.Minute, currentDateTime.Second, currentDateTime.Kind);
+            NewUrgentAppointment.DateTime = NewUrgentAppointment.DateTime.AddSeconds(-NewUrgentAppointment.DateTime.Second);
+
+            if (NewUrgentAppointment.DateTime.Minute >= 0 && NewUrgentAppointment.DateTime.Minute <= 15)
+                NewUrgentAppointment.DateTime = NewUrgentAppointment.DateTime.AddMinutes(-NewUrgentAppointment.DateTime.Minute);
+            else if (NewUrgentAppointment.DateTime.Minute > 15 && NewUrgentAppointment.DateTime.Minute < 30)
+                NewUrgentAppointment.DateTime = NewUrgentAppointment.DateTime.AddMinutes(30 - NewUrgentAppointment.DateTime.Minute);
+            else if (NewUrgentAppointment.DateTime.Minute >= 30 && NewUrgentAppointment.DateTime.Minute <= 45)
+                NewUrgentAppointment.DateTime = NewUrgentAppointment.DateTime.AddMinutes(-NewUrgentAppointment.DateTime.Minute + 30);
+            else
+                NewUrgentAppointment.DateTime = NewUrgentAppointment.DateTime.AddMinutes(60 - NewUrgentAppointment.DateTime.Minute);
+        }
+
+        private void SetDoctorForNewAppointment(Model.Doctor doctor)
+        {
+            NewUrgentAppointment.IDDoctor = doctor.PersonalID;
+            NewUrgentAppointment.DoctrosNameSurname = doctor.FirstName + " " + doctor.LastName;
         }
 
         private void BtnOdustaniClick(object sender, RoutedEventArgs e)

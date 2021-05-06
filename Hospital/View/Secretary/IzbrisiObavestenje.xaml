@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="IzbrisiObavestenje" Height="240" Width="520" AllowsTransparency="True" WindowStyle="None"
         Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" WindowStartupLocation="CenterScreen"
-        BorderBrush="#094f7a" BorderThickness="1">
+        BorderBrush="#094f7a" BorderThickness="1" Opacity="0.95">
     <Window.Resources>
         <ResourceDictionary Source="../../Resources/SecretaryResourceDictionary.xaml"/>
     </Window.Resources>

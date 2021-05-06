@@ -39,20 +39,65 @@ namespace Hospital
             DoSerialization(appointment);
         }
 
-        public bool SaveAndCheck(Appointment p, Doctor doctor)
+        public bool SaveIfNotOvelapping(Appointment period)
         {
-            ObservableCollection<Appointment> appointment = GetAll();
+            ObservableCollection<Appointment> appointments = GetAll();
 
-            foreach (Appointment ap in appointment)
+            foreach (Appointment existingPeriod in appointments)
             {
-                if(ap.IDDoctor.Equals(doctor.PersonalID))
-                    if (ap.DateTime < p.DateTime.AddHours(p.DurationInHours) && p.DateTime < ap.DateTime.AddHours(ap.DurationInHours))
+                if(existingPeriod.IDDoctor.Equals(period.IDDoctor))
+                    if (existingPeriod.DateTime < period.DateTime.AddHours(period.DurationInHours) && period.DateTime < existingPeriod.DateTime.AddHours(existingPeriod.DurationInHours))
                         return false;
             }
 
-            appointment.Add(p);
-            DoSerialization(appointment);
+            appointments.Add(period);
+            DoSerialization(appointments);
             return true;
+        }
+
+        public bool CheckIfOverlap(Appointment appointment)
+        {
+            ObservableCollection<Appointment> appointments = GetAll();
+
+            foreach(Appointment app in appointments)
+            {
+                if (app.IDDoctor.Equals(appointment.IDDoctor))
+                    if (app.DateTime < appointment.DateTime.AddHours(appointment.DurationInHours) && appointment.DateTime < app.DateTime.AddHours(app.DurationInHours))
+                        return true;
+            }
+
+            return false;
+        }
+
+        public ObservableCollection<Appointment> GetOverlappingAppointments(Appointment appointment)
+        {
+            ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
+            ObservableCollection<Appointment> allAppointmnets = GetAll();
+
+            foreach (Appointment app in allAppointmnets)
+            {
+                if (app.IDDoctor.Equals(appointment.IDDoctor))
+                    if (app.DateTime < appointment.DateTime.AddHours(appointment.DurationInHours) && appointment.DateTime < app.DateTime.AddHours(app.DurationInHours))
+                    {
+                        appointments.Add(app);
+                    }
+            }
+
+            return appointments;
+        }
+
+        public Appointment GetByID(String id)
+        {
+            ObservableCollection<Appointment> appointments = GetAll();
+            foreach(Appointment app in appointments)
+            {
+                if (app.IDAppointment.Equals(id))
+                {
+                    return app;
+                }
+            }
+
+            return new Appointment();
         }
 
         public ObservableCollection<Appointment> GetByPatient(String id)
@@ -212,6 +257,7 @@ namespace Hospital
 
             return number;
         }
+
 
     }
 }

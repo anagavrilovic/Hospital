@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Model
 {
-    class DoctorStorage
+    public class DoctorStorage
     {
         private String fileName;
 
@@ -75,6 +75,7 @@ namespace Hospital.Model
                 serializer.Serialize(file, doctors);
             }
         }
+
         public String GetByUsername(string username)
         {
             ObservableCollection<Doctor> doctors = GetAll();
@@ -104,7 +105,35 @@ namespace Hospital.Model
             return null;
         }
 
+        public ObservableCollection<Doctor> GetDoctorsBySpecialty(DoctorSpecialty requestedSpecialty)
+        {
+            ObservableCollection<Doctor> allDoctors = GetAll();
+            ObservableCollection<Doctor> doctorsWithRequestedSpecialty = new ObservableCollection<Doctor>();   
 
+            foreach(Doctor doctor in allDoctors)
+            {
+                if (doctor.Specialty.Equals(requestedSpecialty))
+                {
+                    doctorsWithRequestedSpecialty.Add(doctor);
+                }
+            }
+
+            return doctorsWithRequestedSpecialty;
+        }
+
+        public Doctor GetDoctorByID(string idDoctor)
+        {
+            ObservableCollection<Doctor> doctors = GetAll();
+            foreach (Doctor d in doctors)
+            {
+                if (d.PersonalID.Equals(idDoctor))
+                {
+                    return d;
+                }
+            }
+
+            return null;
+        }
 
 
     }

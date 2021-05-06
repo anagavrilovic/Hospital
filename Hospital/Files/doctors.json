@@ -1,6 +1,6 @@
 [
   {
-    "Specialty": 12,
+    "Specialty": 0,
     "RoomID": "532553252",
     "Username": "stefanljubovic",
     "Password": "ljuba",
@@ -25,7 +25,7 @@
     }
   },
   {
-    "Specialty": 12,
+    "Specialty": 0,
     "RoomID": "532553252",
     "Username": "a1",
     "Password": "a",
@@ -50,7 +50,7 @@
     }
   },
   {
-    "Specialty": 9,
+    "Specialty": 10,
     "RoomID": "532553252",
     "Username": "suks",
     "Password": "suks",

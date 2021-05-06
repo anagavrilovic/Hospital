@@ -77,9 +77,11 @@
     <Compile Include="Model\MedicineRevision.cs" />
     <Compile Include="Model\MedicineRevisionStorage.cs" />
     <Compile Include="Model\MedicineTherapy.cs" />
+    <Compile Include="Model\MoveAppointment.cs" />
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\NotificationStorage.cs" />
     <Compile Include="Model\NotificationsUsers.cs" />
+    <Compile Include="Model\OptionForRescheduling.cs" />
     <Compile Include="Model\PatientNotificationsStorage.cs" />
     <Compile Include="Model\PatientSettings.cs" />
     <Compile Include="Model\PatientSettingsStorage.cs" />
@@ -214,6 +216,12 @@
     </Compile>
     <Compile Include="View\Secretary\HitanPregled.xaml.cs">
       <DependentUpon>HitanPregled.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\HitanPregledDetalji.xaml.cs">
+      <DependentUpon>HitanPregledDetalji.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\HitanPregledPomeranje.xaml.cs">
+      <DependentUpon>HitanPregledPomeranje.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\IzbrisiObavestenje.xaml.cs">
       <DependentUpon>IzbrisiObavestenje.xaml</DependentUpon>
@@ -467,6 +475,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Secretary\HitanPregled.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\HitanPregledDetalji.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\HitanPregledPomeranje.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -805,6 +821,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\Secretary\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\Secretary\warningblue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\Secretary\ok.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

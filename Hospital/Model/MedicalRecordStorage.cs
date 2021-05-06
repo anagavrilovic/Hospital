@@ -85,7 +85,7 @@ namespace Hospital
             ObservableCollection<MedicalRecord> records = GetAll();
             foreach (MedicalRecord r in records)
             {
-                    if (r.Patient.PersonalID.Equals(id))
+                if (r.Patient.PersonalID.Equals(id))
                 {
                     return r;
                 }

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="OtkazivanjeTermina" Height="240" Width="520"
         Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" WindowStartupLocation="CenterScreen"
-        BorderBrush="#094f7a" BorderThickness="1" AllowsTransparency="True" WindowStyle="None">
+        BorderBrush="#094f7a" BorderThickness="1" AllowsTransparency="True" WindowStyle="None" Opacity="0.95">
     <Window.Resources>
         <ResourceDictionary Source="../../Resources/SecretaryResourceDictionary.xaml"/>
     </Window.Resources>
