@@ -36,12 +36,6 @@ namespace Hospital
        public void Save(MedicalSupply parameter1)
        {
             supplies = GetAll();
-
-            if(supplies == null)
-            {
-                supplies = new ObservableCollection<MedicalSupply>();
-            }
-
             supplies.Add(parameter1);
 
             doSerialization();
@@ -70,9 +64,7 @@ namespace Hospital
             foreach(MedicalSupply ms in supplies)
             {
                 if(ms.Id.Equals(id))
-                {
                     return ms;
-                }
             }
             
             return null;
@@ -83,9 +75,7 @@ namespace Hospital
             foreach (MedicalSupply ms in supplies)
             {
                 if (ms.Id.Equals(id) && ms.RoomID.Equals(roomId))
-                {
                     return ms;
-                }
             }
             return null;
         }
@@ -98,9 +88,7 @@ namespace Hospital
             foreach(MedicalSupply ms in supplies)
             {
                 if(ms.RoomID.Equals(id))
-                {
                     ret.Add(ms);
-                }
             }
 
             return ret;
@@ -108,13 +96,9 @@ namespace Hospital
    
        public void UpdateSupply(MedicalSupply fromFirstRoom, string secondRoomID, int quantity)
        {
-
             if (fromFirstRoom.RoomID.Equals(secondRoomID))
-            {
                 return;
-            }
-                
-
+          
             if (fromFirstRoom.Quantity >= quantity)
             {
                 ObservableCollection<MedicalSupply> supply = new ObservableCollection<MedicalSupply>();
@@ -146,17 +130,6 @@ namespace Hospital
                     supplies.Add(newItem);
                 }
             
-               if(!DynamicInventory.Supply.Equals(null))
-               {
-                    foreach (MedicalSupply ms in DynamicInventory.Supply)
-                    {
-                        if (ms.Id.Equals(fromFirstRoom.Id) && ms.RoomID.Equals(fromFirstRoom.RoomID))
-                        {
-                            ms.Quantity -= quantity;
-                        }
-                    }
-                }
-         
                 foreach (MedicalSupply ms in supplies)
                 {
                     if (ms.Id.Equals(fromFirstRoom.Id) && ms.RoomID.Equals(fromFirstRoom.RoomID))

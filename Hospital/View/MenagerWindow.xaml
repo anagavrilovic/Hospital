@@ -25,20 +25,23 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0"  Orientation="Horizontal" Background="#FF95C0F4">
+        <!--StackPanel Grid.Row="0"  Orientation="Horizontal" Background="#FF95C0F4" Margin="0,0,0,9.8">
             <Button  Background="#FF95C0F4" Click="back" BorderBrush="#FF95C0F4">
                 <Image  Source="/Icon/back.png"  Margin="10,8,5,5" />
             </Button>
-            <Image  Source="/Icon/logo.png"  Margin="140,5,5,5"/>
-        </StackPanel>
+            <Image  Source="/Icon/logo.png"  Margin="180,5,5,5.2"/>
+        </-->
 
-        <Label  Grid.Row="1" Content="Lider u inovaciji, na usluzi pacijenta" FontSize="20" Foreground="#FF4A83CB"  Margin="53,10.2,-30,79.8" Grid.RowSpan="2" />
+        <!--Label  Grid.Row="1" Content="Lider u inovaciji, na usluzi pacijenta" FontSize="20" Foreground="#FF4A83CB"  Margin="53,10.2,-30,79.8" Grid.RowSpan="2" />
 
         <Button x:Name="profil"         Content="PRIKAŽI PROFIL"              Grid.Row="2"  Margin="15,10"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20"/>
         <Button x:Name="rooms"          Content="SALE"                        Grid.Row="3"  Margin="15,10"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Click="getRooms" />
         <Button x:Name="employees"      Content="LEKOVI"                      Grid.Row="4"  Margin="15,10"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Click="getMedicines"/>
         <Button x:Name="notifications"  Content="OBAVEŠTENJA"                 Grid.Row="5"  Margin="15,10"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Click="getNotifications"/>
-        <Button x:Name="report"         Content="IZVEŠTAJ O STANJU OPREME"    Grid.Row="6"  Margin="15,10"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20"/>
+        <Button x:Name="report"         Content="IZVEŠTAJ O STANJU OPREME"    Grid.Row="6"  Margin="15,10"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20"/-->
 
+        <DockPanel Grid.Row="0" Grid.RowSpan="9" Width="423" Background="#FFDCE6ED" Margin="0">
+            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Source="ManagerMainPage.xaml" Width="423" Margin="0"/>
+        </DockPanel>
     </Grid>
 </Window>

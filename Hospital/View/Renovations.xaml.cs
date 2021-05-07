@@ -20,7 +20,7 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for Renovations.xaml
     /// </summary>
-    public partial class Renovations : Window, INotifyPropertyChanged
+    public partial class Renovations : Page, INotifyPropertyChanged
     {
         private RoomRenovationStorage roomRenovationStorage = new RoomRenovationStorage();
         private ObservableCollection<RoomRenovation> roomRenovations;
@@ -52,15 +52,13 @@ namespace Hospital.View
 
         private void back(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new RoomsWindow());
         }
 
         private void addNewRenovation(object sender, RoutedEventArgs e)
         {
              RenovateRoom renovateRoom = new RenovateRoom();
-             renovateRoom.Owner = Application.Current.MainWindow;
-             this.Close();
-             renovateRoom.Show();
+             NavigationService.Navigate(renovateRoom);
         }
 
         private void deleteRenovation(object sender, RoutedEventArgs e)

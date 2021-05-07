@@ -1,4 +1,4 @@
-﻿<Window x:Class="Hospital.View.PrebacivanjeInventara"
+﻿<Page x:Class="Hospital.View.PrebacivanjeInventara"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
@@ -7,8 +7,8 @@
         xmlns:local="clr-namespace:Hospital.View"
         xmlns:val="clr-namespace:Hospital.ValidationRulesManager"
         mc:Ignorable="d"
-        Title="Prebacivanje Inventara" Height="750" Width="430"
-        WindowStartupLocation="CenterOwner">
+        Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
+        Title="Prebacivanje inventara" Height="730" Width="420">
 
     <Grid>
 
@@ -34,22 +34,23 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="0" Grid.Column="0" Background="white" Click="back" BorderBrush="white" Margin="0,0,0,0.2" >
-            <Image  Source="/Icon/back.png" Margin="10,8,150,5"/>
-        </Button>
-        <Label Grid.Row="0" Grid.Column="1" Background="White" x:Name="Naslov"/>
-        <Image Source="/Icon/logo.png" Grid.Row="0" Grid.Column="1" Margin="72,5,5,2.2"/>
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4" Margin="0,0,0,48.8" Grid.RowSpan="2">
+            <Button  Click="back" Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
+                <Image  Source="/Icon/back.png" Height="37" Width="46"/>
+            </Button>
+            <Image Source="/Icon/logo.png"      Margin="250,0,25,-0.4" Width="114"/>
+        </StackPanel>
 
-        <Label Content="RAZMENA INVENTARA" Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="77,2.8,28,0.2" FontWeight="Bold"/>
+        <Label Content="RAZMENA INVENTARA" Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="64,0,41,4.8" FontWeight="Bold" Height="44" VerticalAlignment="Bottom"/>
 
-        <Label Content="Oznaka i naziv stavke:" Grid.Row="2"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,9.8,186,0.2"  Grid.ColumnSpan="2" />
-        <Label Content="Količina:"              Grid.Row="4"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,14.8,5,0.2" />
-        <Label Content="ID odredišne sale:"     Grid.Row="6"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,14.6,5,50.8"  Grid.RowSpan="2" />
-        <Label Content="Datum prebacivanja:"    Grid.Row="8"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,14.2,196,0"   Grid.ColumnSpan="2" />
-        <Label Content="Vreme prebacivanja:"    Grid.Row="10" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,14.8,186,0.2" Grid.ColumnSpan="2"/>
+        <Label Content="Oznaka i naziv stavke:" Grid.Row="2"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0.2,186,9.8"  Grid.ColumnSpan="2" />
+        <Label Content="Količina:"              Grid.Row="4"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0.2,5.4,14.6" />
+        <Label Content="ID odredišne sale:"     Grid.Row="6"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,3.4,5.4,9.6" />
+        <Label Content="Datum prebacivanja:"    Grid.Row="8"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0.4,196,13.6"   Grid.ColumnSpan="2" />
+        <Label Content="Vreme prebacivanja:"    Grid.Row="10" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0.4,186,14.6" Grid.ColumnSpan="2"/>
 
-        <TextBox x:Name="nazivTxt"      Grid.Row="3" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" IsReadOnly="True" />
-        <TextBox x:Name="kolicinaTxt"   Grid.Row="5" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C">
+        <TextBox x:Name="nazivTxt"      Grid.Row="3" Grid.ColumnSpan="2" Margin="30,0.2,28,14.8" BorderBrush="#FF26282C" IsReadOnly="True" />
+        <TextBox x:Name="kolicinaTxt"   Grid.Row="5" Grid.ColumnSpan="2" Margin="30,0.4,28,14.6" BorderBrush="#FF26282C">
             <TextBox.Text>
                 <Binding  Path="TransferItem.Quantity"  Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -76,24 +77,15 @@
             </Validation.ErrorTemplate>
         </TextBox>
 
-        <!--ComboBox x:Name="roomID"          Grid.Row="7" Grid.ColumnSpan="2" Margin="30,7,28,4.8" BorderThickness="1">
-            <ComboBoxItem                   Content="532553252"  Foreground="#FF2E83BF" FontSize="20" HorizontalContentAlignment="Center"/>
-            <ComboBoxItem IsSelected="True" Content="1"          Foreground="#FF2E83BF" FontSize="20" HorizontalContentAlignment="Center"/>
-            <ComboBoxItem                   Content="2"          Foreground="#FF2E83BF" FontSize="20" HorizontalContentAlignment="Center"/>
-            <ComboBoxItem                   Content="3"          Foreground="#FF2E83BF" FontSize="20" HorizontalContentAlignment="Center"/>
-            <ComboBoxItem                   Content="M1"         Foreground="#FF2E83BF" FontSize="20" HorizontalContentAlignment="Center"/>
-            <ComboBoxItem                   Content="M2"         Foreground="#FF2E83BF" FontSize="20" HorizontalContentAlignment="Center"/>
-        </ComboBox-->
-
-        <ComboBox x:Name="roomID" Grid.Row="7" Grid.ColumnSpan="2" Margin="30,7,28,4.8" BorderThickness="1"  Foreground="#FF2E83BF"
+        <ComboBox x:Name="roomID" Grid.Row="7" Grid.ColumnSpan="2" Margin="30,0.4,28,11.6" BorderThickness="1"  Foreground="#FF2E83BF"
                     IsSynchronizedWithCurrentItem="True"
                     ItemsSource="{Binding  RoomsIDs}"
                     SelectedItem="{Binding SomeBindingPropertySelectedCurrently, 
                     Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-        <DatePicker x:Name="datumPrebacivanja" DisplayDateStart="{x:Static sys:DateTime.Today}" Focusable="False" Grid.Row="9"  Grid.ColumnSpan="2" Margin="30,5,28,5.2"/>
+        <DatePicker x:Name="datumPrebacivanja" DisplayDateStart="{x:Static sys:DateTime.Today}" Focusable="False" Grid.Row="9"  Grid.ColumnSpan="2" Margin="30,0.4,28,10.6"/>
 
-        <TextBox    x:Name="vremePrebacivanja" Grid.Row="11" Grid.ColumnSpan="2" Margin="30,5,28,5.2">
+        <TextBox    x:Name="vremePrebacivanja" Grid.Row="10" Grid.ColumnSpan="2" Margin="30,51.4,28,10.6" Grid.RowSpan="2">
             <TextBox.Text>
                 <Binding  Path="TransferItem.Time"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -118,8 +110,8 @@
                 </ControlTemplate>
             </Validation.ErrorTemplate>
         </TextBox>
-      
-        <Button Grid.Column="0" Grid.Row="12"  Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,31.6,10,27.8" Click="accept">
+
+        <Button Grid.Column="0" Grid.Row="12"  Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,24.4,10.4,34.6" Click="accept">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="IsEnabled" Value="False"/>
@@ -135,7 +127,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button Grid.Column="1" Grid.Row="12"  Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="10,31.6,28,27.8" Click="cancel" />
+        <Button Grid.Column="1" Grid.Row="12"  Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="9.6,24.4,28,34.6" Click="cancel" />
 
     </Grid>
-</Window>
+</Page>

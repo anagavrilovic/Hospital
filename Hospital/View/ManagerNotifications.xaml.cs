@@ -18,9 +18,9 @@ using System.Windows.Shapes;
 namespace Hospital.View
 {
     /// <summary>
-    /// Interaction logic for ObaveštenjaUpravnik.xaml
+    /// Interaction logic for ManagerNotifications.xaml
     /// </summary>
-    public partial class ObaveštenjaUpravnik : Window, INotifyPropertyChanged
+    public partial class ManagerNotifications : Page, INotifyPropertyChanged
     {
         private ObservableCollection<Notification> notifications = new ObservableCollection<Notification>();
 
@@ -53,7 +53,7 @@ namespace Hospital.View
         }
 
 
-        public ObaveštenjaUpravnik()
+        public ManagerNotifications()
         {
             InitializeComponent();
             this.DataContext = this;
@@ -115,7 +115,7 @@ namespace Hospital.View
 
         private void back(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new ManagerMainPage());
         }
     }
 }

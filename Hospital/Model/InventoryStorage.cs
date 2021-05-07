@@ -17,15 +17,18 @@ namespace Hospital
     { 
         public InventoryStorage()
         {
-          this.fileName = "inventory.json";
+          this._fileName = "inventory.json";
         }
     
        public ObservableCollection<Inventory> GetAll()
        {   
-            using (StreamReader sr = File.OpenText(@"..\\..\\Files\\" + fileName))
+            using (StreamReader sr = File.OpenText(@"..\\..\\Files\\" + _fileName))
             {
                 inventory = JsonConvert.DeserializeObject<ObservableCollection<Inventory>>(sr.ReadToEnd());
             }
+
+            if (inventory == null)
+                inventory = new ObservableCollection<Inventory>();
 
             return inventory;
         }
@@ -33,12 +36,6 @@ namespace Hospital
        public void Save(Inventory parameter1)
        {
             inventory = GetAll();
-
-            if (inventory == null)
-            {
-                inventory = new ObservableCollection<Inventory>();
-            }
-
             inventory.Add(parameter1);
 
             doSerialization();
@@ -47,11 +44,11 @@ namespace Hospital
        public Boolean Delete(string id, string roomID)
        {
             inventory = GetAll();
-            foreach (Inventory i in inventory)
+            foreach (Inventory inv in inventory)
             {
-                if (i.Id.Equals(id) && i.RoomID.Equals(roomID))
+                if (inv.Id.Equals(id) && inv.RoomID.Equals(roomID))
                 {
-                    inventory.Remove(i);
+                    inventory.Remove(inv);
                     doSerialization();
                     return true;
                 }
@@ -61,39 +58,33 @@ namespace Hospital
    
        public Inventory GetOne(string id)
        {
-            foreach (Inventory i in inventory)
+            foreach (Inventory inv in inventory)
             {
-                if (i.Id.Equals(id))
-                {
-                    return i;
-                }
+                if (inv.Id.Equals(id))
+                    return inv;
             }
             return null;
         }
 
         public Inventory GetOneByRoom(string id, string roomId)
         {
-            foreach (Inventory i in inventory)
+            foreach (Inventory inv in inventory)
             {
-                if (i.Id.Equals(id) && i.RoomID.Equals(roomId))
-                {
-                    return i;
-                }
+                if (inv.Id.Equals(id) && inv.RoomID.Equals(roomId))
+                    return inv;
             }
             return null;
         }
 
         public ObservableCollection<Inventory> GetByRoomID(string id)
-       {
+        {
             inventory = GetAll();
             ObservableCollection<Inventory> ret = new ObservableCollection<Inventory>();
 
-            foreach (Inventory i in inventory)
+            foreach (Inventory inv in inventory)
             {
-                if (i.RoomID.Equals(id))
-                {
-                    ret.Add(i);
-                }
+                if (inv.RoomID.Equals(id))
+                    ret.Add(inv);
             }
 
             return ret;
@@ -102,7 +93,7 @@ namespace Hospital
       
         public void doSerialization()
         {
-            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
+            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + _fileName))
             {
                 JsonSerializer serializer = new JsonSerializer();
                 serializer.Serialize(file, inventory);
@@ -110,7 +101,7 @@ namespace Hospital
         }
 
         public static ObservableCollection<Inventory> inventory = new ObservableCollection<Inventory>();
-        public String fileName;
+        public String _fileName;
     }
 }
 

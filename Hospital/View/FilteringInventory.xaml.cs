@@ -16,10 +16,7 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for FilteringInventory.xaml
-    /// </summary>
-    public partial class FilteringInventory : Window, INotifyPropertyChanged
+    public partial class FilteringInventory : Page, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string name)
@@ -226,9 +223,8 @@ namespace Hospital.View
         private void doFiltering(object sender, RoutedEventArgs e)
         {
             filterDataGrid();
+            NavigationService.Navigate(new RoomsWindow());
             RoomsWindow.Rooms = Rooms;
-          
-            this.Close();
         }
 
         private void filterDataGrid()
@@ -242,12 +238,12 @@ namespace Hospital.View
 
         private void cancelFiltering(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new RoomsWindow());
         }
 
         private void back(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new RoomsWindow());
         }
     }
 }

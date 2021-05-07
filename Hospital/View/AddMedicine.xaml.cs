@@ -21,7 +21,7 @@ namespace Hospital.View
     /// <summary>
     /// Interaction logic for AddMedicine.xaml
     /// </summary>
-    public partial class AddMedicine : Window, INotifyPropertyChanged
+    public partial class AddMedicine : Page, INotifyPropertyChanged
     { 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string name)
@@ -177,7 +177,7 @@ namespace Hospital.View
             MedicineRevisionStorage medicineRevisionStorage = new MedicineRevisionStorage();
             medicineRevisionStorage.Save(MedicineRevision);
 
-            this.Close();
+            NavigationService.Navigate(new MedicinesWindow());
         }
 
         private void CheckUniquenessOfMedicineID()
@@ -196,12 +196,12 @@ namespace Hospital.View
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new MedicinesWindow());
         }
 
         private void BackToMenu(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new MedicinesWindow());
         }
     }
 }

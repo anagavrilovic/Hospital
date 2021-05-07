@@ -17,10 +17,7 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for EditRoom.xaml
-    /// </summary>
-    public partial class EditRoom : Window
+    public partial class EditRoom : Page
     {
         private Room room;
 
@@ -80,17 +77,17 @@ namespace Hospital.View
                  serializer.Serialize(file, RoomStorage.rooms);
             }
 
-            this.Close();
+            NavigationService.Navigate(new RoomsWindow());
         }
 
         private void cancelEdit(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new RoomsWindow());
         }
 
         private void back (object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new RoomsWindow());
         }
     }
 }

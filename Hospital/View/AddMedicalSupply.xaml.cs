@@ -15,77 +15,58 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for AddMedicalSupply.xaml
-    /// </summary>
-    public partial class AddMedicalSupply : Window
+    public partial class AddMedicalSupply : Page
     {
-        private MedicalSupply ms = new MedicalSupply();
-        private ObservableCollection<MedicalSupply> supply = new ObservableCollection<MedicalSupply>();
-
-        public MedicalSupply Ms
-        {
-            get { return ms;  }
-            set { ms = value; }
-        }
-
-        public ObservableCollection<MedicalSupply> Supply
-        {
-            get { return supply;  }
-            set { supply = value; }
-        }
+        public MedicalSupply MedicalSupplyItem  { get; set; }
+        private MedicalSupplyStorage _medicalSupplyStorage;
 
         public AddMedicalSupply(string id)
         {
             InitializeComponent();
             this.DataContext = this;
-            ms.RoomID = id;
+
+            this._medicalSupplyStorage = new MedicalSupplyStorage();
+            MedicalSupplyItem = new MedicalSupply();
+            MedicalSupplyItem.RoomID = id;
         }
 
-        private void accept(object o, RoutedEventArgs e)
+        private void AcceptAddingButtonClick(object o, RoutedEventArgs e)
         {
             switch (Units.SelectedIndex)
             {
-                case 0: Ms.Units = UnitsType.kutije;   break;
-                case 1: Ms.Units = UnitsType.trake;    break;
-                case 2: Ms.Units = UnitsType.flasice;  break;
+                case 0: MedicalSupplyItem.Units = UnitsType.kutije;   break;
+                case 1: MedicalSupplyItem.Units = UnitsType.trake;    break;
+                case 2: MedicalSupplyItem.Units = UnitsType.flasice;  break;
             }
 
-            supply.Add(ms);
-            MedicalSupplyStorage msStorage = new MedicalSupplyStorage();
-            bool found = false;
+            bool isItemIDUnique = CheckUniquenessOfNewItemID();
 
-            foreach (MedicalSupply sup in msStorage.GetByRoomID(ms.RoomID))
-            {
-                if (sup.Id.Equals(ms.Id))
-                {
-                    found = true;
-                    break;
-                }
-            }
-
-            if (!found)
-            {
-                msStorage.Save(ms);
-                DynamicInventory.Supply.Add(ms);
-            }
+            if (isItemIDUnique)
+                _medicalSupplyStorage.Save(MedicalSupplyItem);
             else
+                MessageBox.Show("Već postoji stavka sa unetom oznakom!");
+         
+            NavigationService.Navigate(new DynamicInventory(MedicalSupplyItem.RoomID));
+        }
+
+        private bool CheckUniquenessOfNewItemID()
+        {
+            foreach (MedicalSupply ms in _medicalSupplyStorage.GetByRoomID(MedicalSupplyItem.RoomID))
             {
-                MessageBox.Show("Vec postoji stavka sa unetom oznakom!");
+                if (ms.Id.Equals(MedicalSupplyItem.Id))
+                    return false;
             }
-
-
-            this.Close();
+            return true;
         }
 
-        private void cancel(object o, RoutedEventArgs e)
+        private void CancelButtonClick(object o, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new DynamicInventory(MedicalSupplyItem.RoomID));
         }
 
-        private void back(object sender, RoutedEventArgs e)
+        private void BackButtonClick(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new DynamicInventory(MedicalSupplyItem.RoomID));
         }
     }
 }

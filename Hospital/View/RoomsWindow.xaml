@@ -1,12 +1,17 @@
-﻿<Window x:Class="Hospital.View.RoomsWindow"
+﻿<Page x:Class="Hospital.View.RoomsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-         WindowStartupLocation="CenterOwner"
-        Title="Pregled Sala" Height="750" Width="430">
+        Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
+        Title="Pregled Sala" Height="730" Width="423">
+
+    <Page.Resources>
+        <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
+    </Page.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -31,7 +36,7 @@
                 <Image Source="/Icon/menu.png"  Margin="10,8,5,5"/>
             </Button>
             <Label Content="PRIKAZ SALA"    Margin="0,15,5,10.2" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" />
-            <Image Source="/Icon/logo.png"  Margin="40,8,0,10" MouseDown="refreshView"/>
+            <Image Source="/Icon/logo.png"  Margin="30,8,0,10" MouseDown="refreshView"/>
         </StackPanel>
 
         <Button x:Name="edit"             Content="IZMENI SALU"        Grid.Row="1" Grid.Column="0"   Margin="19,23,10,10" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="editRoom"/>
@@ -44,7 +49,8 @@
 
         <ScrollViewer Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="2" Background="Azure" VerticalScrollBarVisibility="Hidden" Margin="10,0.2,0,9.8">
             <DataGrid x:Name="dataGridRooms" ItemsSource="{Binding Path=Rooms, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" 
-                  SelectionMode="Single" AutoGenerateColumns="False" HorizontalAlignment="Left" 
+                  SelectionMode="Single" AutoGenerateColumns="False" HorizontalAlignment="Left" Style="{StaticResource dataGridMedicines}"
+                  HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden"
                   Background="#FFCADEED" FontFamily="Arial" Foreground="#FF536AA0" Grid.RowSpan="2" Width="404" Height="350">
                 <DataGrid.Columns>
                     <DataGridTextColumn     Header="Oznaka"                    Binding="{Binding Id}"    />
@@ -54,10 +60,11 @@
                     <DataGridTextColumn     Header="Tip"      Width="1.4*"     Binding="{Binding Type}"  />
                 </DataGrid.Columns>
             </DataGrid>
-   </ScrollViewer>
+        </ScrollViewer>
 
-        <Button x:Name="add"     Content="DODAJ SALU"    Grid.Row="9" Grid.Column="0"  Margin="19,0.2,10,19.8" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="addRoom"/>
-        <Button x:Name="delete"  Content="IZBRIŠI SALU"  Grid.Row="9" Grid.Column="1"  Margin="10,0.2,22,19.8" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="deleteRoom"/>
+        <Button x:Name="add"     Content="DODAJ SALU"    Grid.Row="9" Grid.Column="0"  Margin="19,0.2,10.2,30.6" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="addRoom"/>
+        <Button x:Name="delete"  Content="IZBRIŠI SALU"  Grid.Row="9" Grid.Column="1"  Margin="9.8,0.2,22.4,30.6" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="deleteRoom"/>
     </Grid>
 
-</Window>
+
+</Page>

@@ -17,10 +17,7 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for MedicinesWindow.xaml
-    /// </summary>
-    public partial class MedicinesWindow : Window, INotifyPropertyChanged
+    public partial class MedicinesWindow : Page, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -32,7 +29,7 @@ namespace Hospital.View
             }
         }
 
-        private MedicineStorage medicineStorage;
+        private MedicineStorage _medicineStorage;
 
         private ObservableCollection<Medicine> medicines;
         public ObservableCollection<Medicine> Medicines
@@ -45,31 +42,26 @@ namespace Hospital.View
             }
         }
 
-        private string searchstr;
-        private ICollectionView medicineCollection;
-        public ICollectionView MedicineCollection
-        {
-            get { return medicineCollection; }
-            set { medicineCollection = value; }
-        }
+        private string _searchCriterion;
+        public ICollectionView MedicineCollection { get; set; }
 
         public MedicinesWindow()
         {
             InitializeComponent();
             this.DataContext = this;
-            this.medicineStorage = new MedicineStorage();
-            Medicines = medicineStorage.GetAll();
+            this._medicineStorage = new MedicineStorage();
+
+            Medicines = _medicineStorage.GetAll();
             MedicineCollection = CollectionViewSource.GetDefaultView(Medicines);
         }
 
-        private void addMedicine(object sender, RoutedEventArgs e)
+        private void AddMedicineButtonClick(object sender, RoutedEventArgs e)
         {
             AddMedicine addMedicine = new AddMedicine();
-            addMedicine.Owner = Application.Current.MainWindow;
-            addMedicine.Show();
+            NavigationService.Navigate(addMedicine);
         }
 
-        private void editMedicine(object sender, RoutedEventArgs e)
+        private void EditMedicineButtonClick(object sender, RoutedEventArgs e)
         {
             Medicine selectedMedicine = (Medicine)dataGridMedicines.SelectedItem;
             MedicineRevision medicineRevision = new MedicineRevision();
@@ -79,42 +71,38 @@ namespace Hospital.View
             editMedicine.Show();*/
         }
 
-        private void deleteMedicine(object sender, RoutedEventArgs e)
+        private void DeleteMedicineButtonClick(object sender, RoutedEventArgs e)
         {
             Medicine selectedMedicine = (Medicine)dataGridMedicines.SelectedItem;
-
             if (selectedMedicine == null)
                 return;
 
             MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da izbrišete izabrani lek?",
-                                                          "Brisanje leka",
-                                                           MessageBoxButton.YesNo,
-                                                           MessageBoxImage.Question);
+                                                      "Brisanje leka", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)
             {
-                this.medicineStorage.Delete(selectedMedicine.ID);
+                this._medicineStorage.Delete(selectedMedicine.ID);
                 Medicines.Remove(selectedMedicine);
             }
         }
 
-        private void medicinesRevision(object sender, RoutedEventArgs e)
+        private void MedicinesRevision(object sender, RoutedEventArgs e)
         {
             MedicineRevisionWindow medicineRevisionWindow = new MedicineRevisionWindow();
-            medicineRevisionWindow.Owner = Application.Current.MainWindow;
-            medicineRevisionWindow.Show();
+            NavigationService.Navigate(medicineRevisionWindow);
         }
 
-        private void searchMedicine(object sender, RoutedEventArgs e)
+        private void SearchMedicine(object sender, RoutedEventArgs e)
         {
             TextBox textbox = sender as TextBox;
             if (textbox != null)
             {
-                this.searchstr = textbox.Text;
-                if (!string.IsNullOrEmpty(searchstr))
+                this._searchCriterion = textbox.Text;
+                if (!string.IsNullOrEmpty(_searchCriterion))
                 {
                     ICollectionView view = CollectionViewSource.GetDefaultView(dataGridMedicines.ItemsSource);
-                    view.Filter = new Predicate<object>(filter);
+                    view.Filter = new Predicate<object>(Filter);
                     this.MedicineCollection.Refresh();
                 }
                 else
@@ -125,23 +113,23 @@ namespace Hospital.View
             }
         }
 
-        private bool filter(object item)
+        private bool Filter(object item)
         {
-            if (((Medicine)item).Name.Contains(searchstr) || ((Medicine)item).ID.Contains(searchstr) || ((Medicine)item).Price.ToString().Contains(searchstr))
+            if (((Medicine)item).Name.Contains(_searchCriterion) || ((Medicine)item).ID.Contains(_searchCriterion) || ((Medicine)item).Price.ToString().Contains(_searchCriterion))
             {
                 return true;
             }
             return false;
         }
 
-        private void btnSearchMouseDown(object sender, RoutedEventArgs e)
+        private void ButtonSearchMouseDown(object sender, RoutedEventArgs e)
         {
             MedicineCollection.Refresh();
         }
 
-        private void back(object sender, RoutedEventArgs e)
+        private void BackButtonClick(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new ManagerMainPage());
         }
     }
 }

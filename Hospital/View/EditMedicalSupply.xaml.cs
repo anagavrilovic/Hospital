@@ -13,39 +13,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for EditMedicalSupply.xaml
-    /// </summary>
-    public partial class EditMedicalSupply : Window
+    public partial class EditMedicalSupply : Page
     {
-        private MedicalSupply ms;
-        private ObservableCollection<MedicalSupply> supply;
-
-        public MedicalSupply Ms
-        {
-            get { return ms;  }
-            set { ms = value; }
-        }
-
-        public ObservableCollection<MedicalSupply> Supply
-        {
-            get { return supply; }
-            set { supply = value; }
-        }
-
-
+        public MedicalSupply MedicalSupplyItem { get; set; }
 
         public EditMedicalSupply(MedicalSupply supply)
         {
             InitializeComponent();
             this.DataContext = this;
-            this.ms = supply;
+            MedicalSupplyItem = supply;
 
-            switch (ms.Units)
+            switch (MedicalSupplyItem.Units)
             {
                 case UnitsType.kutije:  units.SelectedItem = kutije;  break;
                 case UnitsType.trake:   units.SelectedItem = trake;   break;
@@ -53,7 +36,7 @@ namespace Hospital.View
             }
         }
 
-        private void accept(object sender, RoutedEventArgs e)
+        private void AcceptButtonClick(object sender, RoutedEventArgs e)
         {
             oznakaTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             nazivTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
@@ -62,28 +45,25 @@ namespace Hospital.View
 
             switch (units.SelectedIndex)
             {
-                case 0: Ms.Units = UnitsType.kutije;  break;
-                case 1: Ms.Units = UnitsType.trake;   break;
-                case 2: Ms.Units = UnitsType.flasice; break;
+                case 0: MedicalSupplyItem.Units = UnitsType.kutije;  break;
+                case 1: MedicalSupplyItem.Units = UnitsType.trake;   break;
+                case 2: MedicalSupplyItem.Units = UnitsType.flasice; break;
             }
 
+            MedicalSupplyStorage medicalSupplyStorage = new MedicalSupplyStorage();
+            medicalSupplyStorage.doSerialization();
 
-            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + "medicalSupply.json"))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, MedicalSupplyStorage.supplies);
-            }
-            this.Close();
+            NavigationService.Navigate(new DynamicInventory(MedicalSupplyItem.RoomID));
         }
 
-        private void cancel(object sender, RoutedEventArgs e)
+        private void CancelButtonClick(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new DynamicInventory(MedicalSupplyItem.RoomID));
         }
 
-        private void back(object sender, RoutedEventArgs e)
+        private void BackButtonClick(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NavigationService.Navigate(new DynamicInventory(MedicalSupplyItem.RoomID));
         }
     }
 }
