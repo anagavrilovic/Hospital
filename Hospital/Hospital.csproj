@@ -83,6 +83,8 @@
     <Compile Include="Model\NotificationsUsers.cs" />
     <Compile Include="Model\OptionForRescheduling.cs" />
     <Compile Include="Model\PatientCalendarDTO.cs" />
+    <Compile Include="Model\PatientComment.cs" />
+    <Compile Include="Model\PatientCommentsStorage.cs" />
     <Compile Include="Model\PatientNotificationsStorage.cs" />
     <Compile Include="Model\PatientSettings.cs" />
     <Compile Include="Model\PatientSettingsStorage.cs" />
@@ -224,8 +226,14 @@
     <Compile Include="View\PatientNotifications.xaml.cs">
       <DependentUpon>PatientNotifications.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PatientPassedAppointmentOptions.xaml.cs">
+      <DependentUpon>PatientPassedAppointmentOptions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PatientPassedAppointments.xaml.cs">
       <DependentUpon>PatientPassedAppointments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientRateDoctor.xaml.cs">
+      <DependentUpon>PatientRateDoctor.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PatientSettingsPage.xaml.cs">
       <DependentUpon>PatientSettingsPage.xaml</DependentUpon>
@@ -483,7 +491,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\PatientPassedAppointmentOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PatientPassedAppointments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientRateDoctor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

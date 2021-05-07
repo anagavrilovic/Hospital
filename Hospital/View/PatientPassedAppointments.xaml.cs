@@ -39,6 +39,25 @@ namespace Hospital.View
                 lista1.Add(examination.appointment);
             }
             Lista = new ObservableCollection<Appointment>(lista1);
+            dataGridApp.SelectedIndex = 0;
+
+            dataGridApp.Focus();
+        }
+
+        private void myTestKey(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                Appointment selectedItem = (Appointment)dataGridApp.SelectedItem;
+                PatientPassedAppointmentOptions patientPassedAppointmentOptions = new PatientPassedAppointmentOptions(selectedItem);
+                this.NavigationService.Navigate(patientPassedAppointmentOptions);
+
+            }
+
+            if (e.Key == Key.Escape)
+            {
+                this.NavigationService.GoBack();
+            }
         }
     }
 }
