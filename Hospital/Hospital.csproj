@@ -765,7 +765,6 @@
     <Resource Include="Icon\Secretary\plusdate.png" />
     <Resource Include="Icon\Secretary\search.png" />
     <Resource Include="Icon\Secretary\users.png" />
-    <Resource Include="Icon\Secretary\x.png" />
     <Resource Include="Icon\Secretary\xwhite.png" />
   </ItemGroup>
   <ItemGroup>
@@ -827,6 +826,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\Secretary\ok.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\Secretary\back.png" />
+    <Resource Include="Icon\Secretary\forward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\Secretary\x.png" />
+    <Resource Include="Icon\Secretary\xmain.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

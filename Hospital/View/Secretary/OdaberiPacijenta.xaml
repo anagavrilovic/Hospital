@@ -96,8 +96,8 @@
         </DataGrid>
 
         <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,30">
-            <Button Content="Potvrdi" Width="100" Margin="0,0,10,0" Style="{StaticResource ButtonPotvrdiStyle}" Click="PotvrdiClick" />
-            <Button Content="Odustani" Width="100" Margin="10,0,0,0" Style="{StaticResource ButtonOdustaniStyle}" Click="OdustaniClick"  />
+            <Button Content="Potvrdi" Width="100" Margin="0,0,40,0" Style="{StaticResource ButtonPotvrdiStyle}" Click="PotvrdiClick" />
+            <Button Content="Odustani" Width="100" Margin="40,0,0,0" Style="{StaticResource ButtonOdustaniStyle}" Click="OdustaniClick"  />
         </StackPanel>
     </Grid>
 </Window>
