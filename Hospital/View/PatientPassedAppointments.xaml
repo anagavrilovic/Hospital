@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Hospital.View"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PatientPassedAppointments">
+      Title="PatientPassedAppointments"
+      KeyDown="myTestKey">
 
     <Grid Background="White">
         <DataGrid x:Name="dataGridApp" ItemsSource="{Binding Lista}" IsReadOnly="True" 

@@ -23,9 +23,12 @@ namespace Hospital.View
     public partial class PatientMenu : Page
     {
         private PatientSettingsStorage patientSettingsStorage = new PatientSettingsStorage();
+        private PatientCommentsStorage patientCommentsStorage = new PatientCommentsStorage();
         public PatientMenu()
         {
+            
             InitializeComponent();
+            if (!patientCommentsStorage.IsTimeForHospitalRating()) RateButton.Visibility = Visibility.Collapsed;
             Boolean newNotification = false;
             PatientNotificationsStorage patientNotificationsStorage = new PatientNotificationsStorage();
             //  patientNotificationsStorage.SaveAll();
@@ -97,5 +100,15 @@ namespace Hospital.View
             this.NavigationService.Navigate(patientMakeAppointment);
         }
 
+        private void RateHospital(object sender, RoutedEventArgs e)
+        {
+            PatientRateDoctor patientRateDoctor = new PatientRateDoctor();
+            this.NavigationService.Navigate(patientRateDoctor);
+        }
+
+        public void Refresh()
+        { 
+            if (!patientCommentsStorage.IsTimeForHospitalRating()) RateButton.Visibility = Visibility.Collapsed;
+        }
     }
 }
