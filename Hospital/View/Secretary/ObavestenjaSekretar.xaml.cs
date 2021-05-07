@@ -57,9 +57,17 @@ namespace Hospital.View
         private void UcitajObavestenja()
         {
             NotificationList = Ns.GetAllNotifications();
+            SortNotificationList();
 
             NotificationCollection = CollectionViewSource.GetDefaultView(NotificationList);
             NotificationCollection.Filter = CustomFilterObavestenja;
+        }
+
+        private void SortNotificationList()
+        {
+            List<Notification> sortedList = NotificationList.OrderByDescending(n => n.Date).ToList();
+            NotificationList.Clear();
+            NotificationList = new ObservableCollection<Notification>(sortedList);
         }
 
         private bool CustomFilterObavestenja(object obj)

@@ -1,9 +1,10 @@
-using Hospital.Model;
+﻿using Hospital.Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Text;
 
 namespace Hospital
 {
@@ -134,12 +135,52 @@ namespace Hospital
             {
                 if (appointment.IDAppointment.Equals(idAppointment))
                 {
+                    GenerateNotification(appointment, newTime);
                     appointment.DateTime = newTime;
                     break;
                 }
             }
 
             DoSerialization(allAppointments);
+        }
+
+        private void GenerateNotification(Appointment appointment, DateTime newTime)
+        {
+            StringBuilder stringBuilder = new StringBuilder("");
+            string title = "";
+            string content = "";
+            
+            if (appointment.Type.Equals(AppointmentType.urgentExamination) || appointment.Type.Equals(AppointmentType.examination))
+            {
+                title = "Promena zakazanog termina pregleda";
+
+                stringBuilder.Append("Poštovani, ").AppendLine().AppendLine().Append("Obaveštavamo Vas da je Vaš pregled koji se trebao održati dana ").
+                    Append(appointment.DateTime.ToString("dd.MM.yyyy.")).Append(" u ").Append(appointment.DateTime.ToString(appointment.DateTime.ToString("HH:mm"))).
+                    Append(" časova, odložen na ").Append(newTime.ToString("dd.MM.yyyy.")).Append(" u ").Append(appointment.DateTime.ToString(newTime.ToString("HH:mm"))).
+                    Append(" časova, jer se u vreme Vašeg termina dogodio hitan slučaj.").AppendLine().AppendLine().
+                    Append("Za više informacija pozovite našeg sekretara na broj 06485625952 ili nam pišite e-mailom.").AppendLine().AppendLine().
+                    Append("Srdačan pozdrav, Vaša ZDRAVO bolnica");
+                content = stringBuilder.ToString();
+            }
+                
+            else if (appointment.Type.Equals(AppointmentType.urgentOperation) || appointment.Type.Equals(AppointmentType.operation))
+            {
+                title = "Promena zakazanog termina operacije";
+
+                stringBuilder.Append("Poštovani, ").AppendLine().AppendLine().Append("Obaveštavamo Vas da je Vaša operacija koja se trebala održati dana ").
+                    Append(appointment.DateTime.ToString("dd.MM.yyyy.")).Append(" u ").Append(appointment.DateTime.ToString(appointment.DateTime.ToString("HH:mm"))).
+                    Append(" časova, odložena na ").Append(newTime.ToString("dd.MM.yyyy.")).Append(" u ").Append(appointment.DateTime.ToString(newTime.ToString("HH:mm"))).
+                    Append(" časova, jer se u vreme Vašeg termina dogodio hitan slučaj.").AppendLine().AppendLine().
+                    Append("Za više informacija pozovite našeg sekretara na broj 06485625952 ili nam pišite e-mailom.").AppendLine().AppendLine().
+                    Append("Srdačan pozdrav, Vaša ZDRAVO bolnica");
+                content = stringBuilder.ToString();
+            }
+
+            Notification notification = new Notification(title, content);
+            NotificationsUsers notificationsUsers = new NotificationsUsers(notification.Id, new MedicalRecordStorage().GetUsernameByIDPatient(appointment.IDpatient));
+            NotificationStorage notificationStorage = new NotificationStorage();
+            notificationStorage.SaveNotification(notification);
+            notificationStorage.SaveNotificationUser(notificationsUsers);
         }
 
         public ObservableCollection<Appointment> GetByPatient(String id)

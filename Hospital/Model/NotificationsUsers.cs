@@ -31,5 +31,17 @@ namespace Hospital.Model
             get { return read; }
             set { read = value; }
         }
+
+        public NotificationsUsers()
+        {
+
+        }
+
+        public NotificationsUsers(string notificationID, string username)
+        {
+            this.NotificationID = notificationID;
+            this.Username = username;
+            this.Read = false;
+        }
     }
 }

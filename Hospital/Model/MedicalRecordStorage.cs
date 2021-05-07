@@ -131,5 +131,19 @@ namespace Hospital
             return null;
         }
 
+        public string GetUsernameByIDPatient(string id)
+        {
+            ObservableCollection<MedicalRecord> records = GetAll();
+            foreach (MedicalRecord r in records)
+            {
+                if (r.Patient.PersonalID.Equals(id))
+                {
+                    return r.Patient.Username;
+                }
+            }
+
+            return null;
+        }
+
     }
 }

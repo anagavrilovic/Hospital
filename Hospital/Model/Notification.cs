@@ -57,6 +57,22 @@ namespace Hospital.Model
             }
         }
 
+        public Notification()
+        {
+
+        }
+
+        public Notification(string title, string content)
+        {
+            this.Title = title;
+            this.Content = content;
+
+            var timeNow = DateTime.Now;
+            this.Date = new DateTime(timeNow.Year, timeNow.Month, timeNow.Day, timeNow.Hour, timeNow.Minute, timeNow.Second, timeNow.Kind);
+
+            this.Id = this.GetHashCode().ToString();
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string name)
