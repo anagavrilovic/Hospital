@@ -69,7 +69,7 @@
                             <TextBlock Grid.Row="0" Grid.Column="1"     Text="{Binding Medicine.ID,          Mode=OneWay}"  Margin="0,4,0,0"/>
                             <TextBlock Grid.Row="1" Grid.Column="1"     Text="{Binding Medicine.Name,        Mode=OneWay}"  Margin="0,4,0,0" />
                             <TextBlock Grid.Row="2" Grid.Column="1"     Text="{Binding Medicine.DosageInMg,  Mode=OneWay}"  Margin="0,4,0,0" />
-                            <TextBlock Grid.Row="3" Grid.Column="1"     Text="{Binding DoctorID,             Mode=OneWay}"  Margin="0,4,0,0" />
+                            <TextBlock x:Name="doctorTxt" Grid.Row="3" Grid.Column="1"     Text="{Binding DoctorID,             Mode=OneWay}"  Margin="0,4,0,0" />
                             <ScrollViewer Grid.Row="5" Grid.ColumnSpan="3" Margin="5,5,5,5" VerticalScrollBarVisibility="Hidden">
                                 <TextBlock Text="{Binding RevisionExplanation, Mode=OneWay}" TextWrapping="Wrap" />
                             </ScrollViewer>

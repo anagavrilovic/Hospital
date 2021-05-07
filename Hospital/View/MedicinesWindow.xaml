@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
         Title="Lekovi" Height="730" Width="420">
+
+    <Page.Resources>
+        <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
+    </Page.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -47,7 +52,7 @@
         <ScrollViewer Grid.Row="4" Grid.RowSpan="7" Grid.ColumnSpan="2" Background="Azure" VerticalScrollBarVisibility="Auto" Margin="10,0,0,10">
 
             <Grid MinWidth="200">
-                <DataGrid  x:Name ="dataGridMedicines" Grid.Row="4" Grid.RowSpan="7" Grid.ColumnSpan="2"  
+                <DataGrid  x:Name ="dataGridMedicines" Grid.Row="4" Grid.RowSpan="7" Grid.ColumnSpan="2"  Style="{StaticResource dataGridMedicines}"
                                IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" 
                                ItemsSource="{Binding Path=Medicines, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                Background="#FFCADEED" FontFamily="Arial" Foreground="#FF536AA0" Margin="0,0,10,0">

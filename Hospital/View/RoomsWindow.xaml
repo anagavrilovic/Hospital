@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
         Title="Pregled Sala" Height="730" Width="423">
+
+    <Page.Resources>
+        <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
+    </Page.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -44,7 +49,8 @@
 
         <ScrollViewer Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="2" Background="Azure" VerticalScrollBarVisibility="Hidden" Margin="10,0.2,0,9.8">
             <DataGrid x:Name="dataGridRooms" ItemsSource="{Binding Path=Rooms, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" 
-                  SelectionMode="Single" AutoGenerateColumns="False" HorizontalAlignment="Left" 
+                  SelectionMode="Single" AutoGenerateColumns="False" HorizontalAlignment="Left" Style="{StaticResource dataGridMedicines}"
+                  HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden"
                   Background="#FFCADEED" FontFamily="Arial" Foreground="#FF536AA0" Grid.RowSpan="2" Width="404" Height="350">
                 <DataGrid.Columns>
                     <DataGridTextColumn     Header="Oznaka"                    Binding="{Binding Id}"    />

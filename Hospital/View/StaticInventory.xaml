@@ -7,6 +7,11 @@
              mc:Ignorable="d" 
             Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
             Title="Statički inventar" Height="730" Width="420">
+
+    <Page.Resources>
+        <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
+    </Page.Resources>
+
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -46,7 +51,7 @@
         <ScrollViewer Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="2" Background="Azure" HorizontalScrollBarVisibility="Auto" Margin="0">
 
             <Grid MinWidth="200" Height="330">
-                <DataGrid  x:Name ="dataGridInventory"  
+                <DataGrid  x:Name ="dataGridInventory"  Style="{StaticResource dataGridMedicines}"
                                IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" 
                                ItemsSource="{Binding Path=Inventory, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                Background="#FFCADEED" FontFamily="Arial" Foreground="#FF536AA0" Margin="0,-9,0.2,0">
