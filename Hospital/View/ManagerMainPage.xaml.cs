@@ -56,7 +56,7 @@ namespace Hospital.View
 
         private void back(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new MenagerWindow());
+            NavigationService.Navigate(new ManagerMainPage());
         }
     }
 }
