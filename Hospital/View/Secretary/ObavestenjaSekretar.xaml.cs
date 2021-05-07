@@ -70,7 +70,9 @@ namespace Hospital.View
             }
             else
             {
-                return (obj.ToString().IndexOf(ObavestenjaFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+                return ((obj as Notification).Title.IndexOf(ObavestenjaFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                    ((obj as Notification).Content.IndexOf(ObavestenjaFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                    ((obj as Notification).Date.ToString("dd.MM.yyyy, HH:mm").IndexOf(ObavestenjaFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0);
             }
         }
 

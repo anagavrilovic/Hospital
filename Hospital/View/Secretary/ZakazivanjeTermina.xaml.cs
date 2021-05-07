@@ -122,7 +122,7 @@ namespace Hospital.View
         private void PrikaziTrajanje()
         {
             double t = 0;
-            while(t <= 20)
+            while (t <= 20)
             {
                 Trajanje.Add(t.ToString());
                 t += 0.5;
@@ -150,7 +150,7 @@ namespace Hospital.View
             }
 
             AppointmentStorage aps = new AppointmentStorage();
-            bool ok = aps.SaveAndCheck(Appointment, Doktor);
+            bool ok = aps.SaveIfNotOvelapping(Appointment);
 
             if (!ok)
             {

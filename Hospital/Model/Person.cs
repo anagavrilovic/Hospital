@@ -12,7 +12,7 @@ namespace Hospital
         private String personalID;
         private String phoneNumber;
         private String email;
-        private DateTime dateOfBirth;
+        private DateTime dateOfBirth = DateTime.Today;
         private String cardID;
         private MaritalStatus maritalStatus;
         private Genders gender;

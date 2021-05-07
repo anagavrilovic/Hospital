@@ -77,9 +77,11 @@
     <Compile Include="Model\MedicineRevision.cs" />
     <Compile Include="Model\MedicineRevisionStorage.cs" />
     <Compile Include="Model\MedicineTherapy.cs" />
+    <Compile Include="Model\MoveAppointment.cs" />
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\NotificationStorage.cs" />
     <Compile Include="Model\NotificationsUsers.cs" />
+    <Compile Include="Model\OptionForRescheduling.cs" />
     <Compile Include="Model\PatientCalendarDTO.cs" />
     <Compile Include="Model\PatientNotificationsStorage.cs" />
     <Compile Include="Model\PatientSettings.cs" />
@@ -239,6 +241,15 @@
     </Compile>
     <Compile Include="View\Secretary\DodajObavestenje.xaml.cs">
       <DependentUpon>DodajObavestenje.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\HitanPregled.xaml.cs">
+      <DependentUpon>HitanPregled.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\HitanPregledDetalji.xaml.cs">
+      <DependentUpon>HitanPregledDetalji.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\HitanPregledPomeranje.xaml.cs">
+      <DependentUpon>HitanPregledPomeranje.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\IzbrisiObavestenje.xaml.cs">
       <DependentUpon>IzbrisiObavestenje.xaml</DependentUpon>
@@ -496,6 +507,18 @@
     <Page Include="View\Doktor\Termin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Secretary\HitanPregled.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\HitanPregledDetalji.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\HitanPregledPomeranje.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Secretary\IzbrisiObavestenje.xaml">
       <SubType>Designer</SubType>
@@ -783,6 +806,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\DoctorIcons\cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\Secretary\back.png" />
+    <Resource Include="Icon\Secretary\del.png" />
+    <Resource Include="Icon\Secretary\forward.png" />
+    <Resource Include="Icon\Secretary\ok.png" />
+    <Resource Include="Icon\Secretary\warning.png" />
+    <Resource Include="Icon\Secretary\warningblue.png" />
+    <Resource Include="Icon\Secretary\xmain.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

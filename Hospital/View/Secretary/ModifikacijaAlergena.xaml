@@ -40,6 +40,11 @@
 
             <!-- Alergeni LEKOVI -->
             <Border Margin="30,15,30,5" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                </Border.Effect>
+            </Border>
+            <Border Margin="30,15,30,5" CornerRadius="10" Background="{StaticResource MainWhite}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -47,10 +52,10 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Margin="0,20,0,0">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,5">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,5" Height="25">
                             <TextBlock Text="Dodati lekovi:" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Center"/>
-                            <Button Style="{StaticResource ButtonPotvrdiStyle}" Height="30" Width="50" Margin="323,0,0,0" Click="LekoviUkloni">
-                                <TextBlock Text="Ukloni" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Button Style="{StaticResource ButtonPotvrdiStyle}" Height="20" Width="20" Margin="350,0,0,0" Click="LekoviUkloni">
+                                <Image Source="../../Icon/Secretary/del.png" Width="10" Height="10"/>
                             </Button>
                         </StackPanel>
                         <ListBox x:Name="DodatiLekovi" ItemsSource="{Binding Mr.Allergen.MedicineNames, Mode=TwoWay, UpdateSourceTrigger=Explicit}" 
@@ -61,12 +66,12 @@
 
                     <StackPanel Grid.Column="1" Margin="15,20,30,0">
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                            <Button Width="30" Height="30" Style="{StaticResource ButtonPotvrdiStyle}" Click="BtnPlusLekoviClick">
-                                <TextBlock Text="+" FontSize="14"/>
+                            <Button Width="20" Height="20" Style="{StaticResource ButtonPotvrdiStyle}" Click="BtnPlusLekoviClick">
+                                <Image Source="../../Icon/Secretary/plus.png" Width="10" Height="10"/>
                             </Button>
 
                             <!-- Search -->
-                            <Border Grid.Column="1" Width="250" Height="25" Style="{StaticResource TextBoxBorder}" Margin="137,0,0,0">
+                            <Border Grid.Column="1" Width="250" Height="25" Style="{StaticResource TextBoxBorder}" Margin="147,0,0,0">
                                 <StackPanel Margin="5" Orientation="Horizontal">
                                     <Image Source="../../Icon/Secretary/search.png" Height="13" VerticalAlignment="Center"/>
                                     <TextBox x:Name="LekoviFilter" TextChanged="LekoviFilterTextChanged" BorderThickness="0" Width="200" Height="23" Margin="10,0,0,0" Background="Transparent" FontSize="13" VerticalAlignment="Center"/>
@@ -82,6 +87,11 @@
 
             <!-- Alergeni SASTOJCI -->
             <Border Grid.Row="1" Margin="30,5" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                </Border.Effect>
+            </Border>
+            <Border Grid.Row="1" Margin="30,5" CornerRadius="10" Background="{StaticResource MainWhite}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -89,10 +99,10 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Margin="0,20,0,0">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,5">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,5" Height="25">
                             <TextBlock Text="Dodati sastojci:" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Center"/>
-                            <Button Style="{StaticResource ButtonPotvrdiStyle}" Height="30" Width="50" Margin="313,0,0,0" Click="SastojciUkloni">
-                                <TextBlock Text="Ukloni" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Button Style="{StaticResource ButtonPotvrdiStyle}" Height="20" Width="20" Margin="336,0,0,0" Click="SastojciUkloni">
+                                <Image Source="../../Icon/Secretary/del.png" Height="10" Width="10"/>
                             </Button>
                         </StackPanel>
                         <ListBox x:Name="DodatiSastojci" ItemsSource="{Binding Mr.Allergen.IngredientNames, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
@@ -103,12 +113,12 @@
 
                     <StackPanel Grid.Column="1" Margin="15,20,30,0">
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                            <Button Width="30" Height="30" Style="{StaticResource ButtonPotvrdiStyle}" Click="BtnPlusSastojciClick">
-                                <TextBlock Text="+" FontSize="14"/>
+                            <Button Width="20" Height="20" Style="{StaticResource ButtonPotvrdiStyle}" Click="BtnPlusSastojciClick">
+                                <Image Source="../../Icon/Secretary/plus.png" Width="10" Height="10"/>
                             </Button>
 
                             <!-- Search -->
-                            <Border Grid.Column="1" Width="250" Height="25" Style="{StaticResource TextBoxBorder}" Margin="137,0,0,0">
+                            <Border Grid.Column="1" Width="250" Height="25" Style="{StaticResource TextBoxBorder}" Margin="147,0,0,0">
                                 <StackPanel Margin="5" Orientation="Horizontal">
                                     <Image Source="../../Icon/Secretary/search.png" Height="13" VerticalAlignment="Center"/>
                                     <TextBox x:Name="SastojciFilter" TextChanged="SastojciFilterTextChanged" BorderThickness="0" Width="200" Height="23" Margin="10,0,0,0" Background="Transparent" FontSize="13" VerticalAlignment="Center"/>
@@ -123,6 +133,11 @@
             </Border>
 
             <!-- Ostali alergeni -->
+            <Border Grid.Row="2" Margin="30,5,30,0" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                </Border.Effect>
+            </Border>
             <Border Grid.Row="2" Margin="30,5,30,0" CornerRadius="10" Background="{StaticResource MainWhite}">
                 <StackPanel Width="950" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,30">
                     <TextBlock Text="Ostali alergeni:" Style="{StaticResource TextBlockStyle}" Margin="0"/>

@@ -4,25 +4,26 @@
 // Purpose: Definition of Enum DoctorSpecialty
 
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Hospital
 {
     public enum DoctorSpecialty
     {
-       cardiologist,
-       dermatologist,
-       neurologist,
-       cardiosurgeon,
-       neurosurgeon,
-       generalsurgeon,
-       anesthesiologist,
-       orthopedist,
-       pediatrician,
-       gynecologist,
-       urologist,
-       psyciatrist,
-       general,
-       none
+        general,
+        cardiologist,
+        dermatologist,
+        neurologist,
+        cardiosurgeon,
+        neurosurgeon,
+        generalsurgeon,
+        anesthesiologist,
+        orthopedist,
+        pediatrician,
+        gynecologist,
+        urologist,
+        psyciatrist,
+        none
     }
 }
 

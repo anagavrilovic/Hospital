@@ -59,9 +59,9 @@
                 <TextBox Text="{Binding Pacijent, Mode=OneWay}" Style="{StaticResource KartoniTextBox}" IsEnabled="False"
                          Grid.Row="2" Grid.Column="1" Height="22" Margin="3,10,40,10"/>
 
-                <ComboBox x:Name="Tip" Grid.Row="3" Grid.Column="1" Height="22" Margin="3,10,40,10" Style="{StaticResource cbTB}"> 
-                    <ComboBoxItem Content="pregled"/>
-                    <ComboBoxItem Content="operacija"/>
+                <ComboBox x:Name="Tip" Grid.Row="3" Grid.Column="1" Height="22" Margin="3,10,40,10" Style="{StaticResource cbTB}">
+                    <ComboBoxItem Content="Pregled"/>
+                    <ComboBoxItem Content="Operacija"/>
                 </ComboBox>
 
                 <ComboBox x:Name="Room" ItemsSource="{Binding Rooms}" SelectedItem="{Binding Appointment.Room}"  Style="{StaticResource cbTB}"

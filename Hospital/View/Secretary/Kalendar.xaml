@@ -91,19 +91,27 @@
                 <!-- Scheduler -->
                 <DataGrid x:Name="KalendarDataGrid" Grid.Row="1" ItemsSource="{Binding Tabela, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource Kalendar}" Margin="0,0,0,10" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="" Width="40" Binding="{Binding Vreme}"/>
+                        <DataGridTextColumn Header="" Width="40" Binding="{Binding Vreme}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
 
                         <DataGridTextColumn Header="Ponedeljak" Width="1*" Binding="{Binding Ponedeljak}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Ponedeljak.Type}" Value="0">
+                                            <Setter Property="Background" Value="#FFDCE594"/>
+                                            <Setter Property="ToolTip" Value="Pregled"/>
+                                        </DataTrigger>
                                         <DataTrigger Binding="{Binding Ponedeljak.Type}" Value="1">
                                             <Setter Property="Background" Value="#FFA3B9CD"/>
                                             <Setter Property="ToolTip" Value="Operacija"/>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding Ponedeljak.Type}" Value="0">
-                                            <Setter Property="Background" Value="#FFDCE594"/>
-                                            <Setter Property="ToolTip" Value="Pregled"/>
+                                        <DataTrigger Binding="{Binding Ponedeljak.Type}" Value="2">
+                                            <Setter Property="Background" Value="#FFFF9494"/>
+                                            <Setter Property="ToolTip" Value="Hitan pregled"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Ponedeljak.Type}" Value="3">
+                                            <Setter Property="Background" Value="#FFFF5C5C"/>
+                                            <Setter Property="ToolTip" Value="Hitna operacija"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -114,13 +122,21 @@
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Utorak.Type}" Value="0">
+                                            <Setter Property="Background" Value="#FFDCE594"/>
+                                            <Setter Property="ToolTip" Value="Pregled"/>
+                                        </DataTrigger>
                                         <DataTrigger Binding="{Binding Utorak.Type}" Value="1">
                                             <Setter Property="Background" Value="#FFA3B9CD"/>
                                             <Setter Property="ToolTip" Value="Operacija"/>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding Utorak.Type}" Value="0">
-                                            <Setter Property="Background" Value="#FFDCE594"/>
-                                            <Setter Property="ToolTip" Value="Pregled"/>
+                                        <DataTrigger Binding="{Binding Utorak.Type}" Value="2">
+                                            <Setter Property="Background" Value="#FFFF9494"/>
+                                            <Setter Property="ToolTip" Value="Hitan pregled"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Utorak.Type}" Value="3">
+                                            <Setter Property="Background" Value="#FFFF5C5C"/>
+                                            <Setter Property="ToolTip" Value="Hitna operacija"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -131,13 +147,21 @@
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Sreda.Type}" Value="0">
+                                            <Setter Property="Background" Value="#FFDCE594"/>
+                                            <Setter Property="ToolTip" Value="Pregled"/>
+                                        </DataTrigger>
                                         <DataTrigger Binding="{Binding Sreda.Type}" Value="1">
                                             <Setter Property="Background" Value="#FFA3B9CD"/>
                                             <Setter Property="ToolTip" Value="Operacija"/>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding Sreda.Type}" Value="0">
-                                            <Setter Property="Background" Value="#FFDCE594"/>
-                                            <Setter Property="ToolTip" Value="Pregled"/>
+                                        <DataTrigger Binding="{Binding Sreda.Type}" Value="2">
+                                            <Setter Property="Background" Value="#FFFF9494"/>
+                                            <Setter Property="ToolTip" Value="Hitan pregled"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Sreda.Type}" Value="3">
+                                            <Setter Property="Background" Value="#FFFF5C5C"/>
+                                            <Setter Property="ToolTip" Value="Hitna operacija"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -148,13 +172,21 @@
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Cetvrtak.Type}" Value="0">
+                                            <Setter Property="Background" Value="#FFDCE594"/>
+                                            <Setter Property="ToolTip" Value="Pregled"/>
+                                        </DataTrigger>
                                         <DataTrigger Binding="{Binding Cetvrtak.Type}" Value="1">
                                             <Setter Property="Background" Value="#FFA3B9CD"/>
                                             <Setter Property="ToolTip" Value="Operacija"/>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding Cetvrtak.Type}" Value="0">
-                                            <Setter Property="Background" Value="#FFDCE594"/>
-                                            <Setter Property="ToolTip" Value="Pregled"/>
+                                        <DataTrigger Binding="{Binding Cetvrtak.Type}" Value="2">
+                                            <Setter Property="Background" Value="#FFFF9494"/>
+                                            <Setter Property="ToolTip" Value="Hitan pregled"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Cetvrtak.Type}" Value="3">
+                                            <Setter Property="Background" Value="#FFFF5C5C"/>
+                                            <Setter Property="ToolTip" Value="Hitna operacija"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -165,13 +197,21 @@
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Petak.Type}" Value="0">
+                                            <Setter Property="Background" Value="#FFDCE594"/>
+                                            <Setter Property="ToolTip" Value="Pregled"/>
+                                        </DataTrigger>
                                         <DataTrigger Binding="{Binding Petak.Type}" Value="1">
                                             <Setter Property="Background" Value="#FFA3B9CD"/>
                                             <Setter Property="ToolTip" Value="Operacija"/>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding Petak.Type}" Value="0">
-                                            <Setter Property="Background" Value="#FFDCE594"/>
-                                            <Setter Property="ToolTip" Value="Pregled"/>
+                                        <DataTrigger Binding="{Binding Petak.Type}" Value="2">
+                                            <Setter Property="Background" Value="#FFFF9494"/>
+                                            <Setter Property="ToolTip" Value="Hitan pregled"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Petak.Type}" Value="3">
+                                            <Setter Property="Background" Value="#FFFF5C5C"/>
+                                            <Setter Property="ToolTip" Value="Hitna operacija"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -182,13 +222,21 @@
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Subota.Type}" Value="0">
+                                            <Setter Property="Background" Value="#FFDCE594"/>
+                                            <Setter Property="ToolTip" Value="Pregled"/>
+                                        </DataTrigger>
                                         <DataTrigger Binding="{Binding Subota.Type}" Value="1">
                                             <Setter Property="Background" Value="#FFA3B9CD"/>
                                             <Setter Property="ToolTip" Value="Operacija"/>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding Subota.Type}" Value="0">
-                                            <Setter Property="Background" Value="#FFDCE594"/>
-                                            <Setter Property="ToolTip" Value="Pregled"/>
+                                        <DataTrigger Binding="{Binding Subota.Type}" Value="2">
+                                            <Setter Property="Background" Value="#FFFF9494"/>
+                                            <Setter Property="ToolTip" Value="Hitan pregled"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Subota.Type}" Value="3">
+                                            <Setter Property="Background" Value="#FFFF5C5C"/>
+                                            <Setter Property="ToolTip" Value="Hitna operacija"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -199,13 +247,21 @@
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Nedelja.Type}" Value="0">
+                                            <Setter Property="Background" Value="#FFDCE594"/>
+                                            <Setter Property="ToolTip" Value="Pregled"/>
+                                        </DataTrigger>
                                         <DataTrigger Binding="{Binding Nedelja.Type}" Value="1">
                                             <Setter Property="Background" Value="#FFA3B9CD"/>
                                             <Setter Property="ToolTip" Value="Operacija"/>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding Nedelja.Type}" Value="0">
-                                            <Setter Property="Background" Value="#FFDCE594"/>
-                                            <Setter Property="ToolTip" Value="Pregled"/>
+                                        <DataTrigger Binding="{Binding Nedelja.Type}" Value="2">
+                                            <Setter Property="Background" Value="#FFFF9494"/>
+                                            <Setter Property="ToolTip" Value="Hitan pregled"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Nedelja.Type}" Value="3">
+                                            <Setter Property="Background" Value="#FFFF5C5C"/>
+                                            <Setter Property="ToolTip" Value="Hitna operacija"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>

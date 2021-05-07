@@ -97,7 +97,7 @@ namespace Hospital.View
 
         private void PopuniTermine()
         {
-            if(SelectedDoctor == null)
+            if (SelectedDoctor == null)
             {
                 return;
             }
@@ -120,7 +120,7 @@ namespace Hospital.View
                     {
                         case DayOfWeek.Monday:
                             tabela[NadjiVreme(app.DateTime.ToString("HH:mm"))].Ponedeljak = app;
-                            for(int i = 1; i < numberOfCells; i++)
+                            for (int i = 1; i < numberOfCells; i++)
                             {
                                 tabela[NadjiVreme(app.DateTime.ToString("HH:mm")) + i].Ponedeljak.Type = app.Type;
                             }
@@ -184,16 +184,14 @@ namespace Hospital.View
             DoctorStorage ds = new DoctorStorage();
             Doctors = ds.GetAll();
 
-            if(doctor != null)
+            if (doctor != null)
             {
-                foreach(Model.Doctor dr in Doctors)
+                foreach (Model.Doctor dr in Doctors)
                 {
                     if (dr.PersonalID.Equals(doctor.PersonalID))
                     {
-                        //MessageBox.Show(dr.ToString());  // ovde nadje dobrog
-                        DoctorComboBox.SelectedItem = dr;
-                        //MessageBox.Show(DoctorComboBox.SelectedItem.ToString()); //ovde kaze da je null
-                    }    
+                        SelectedDoctor = dr;
+                    }
                 }
             }
         }
@@ -206,8 +204,8 @@ namespace Hospital.View
             start = start.Date + ts;
             for (int i = 0; i < 48; i++)
             {
-                
-                if(start.ToString("HH:mm", CultureInfo.InvariantCulture).Equals(vreme))
+
+                if (start.ToString("HH:mm", CultureInfo.InvariantCulture).Equals(vreme))
                 {
                     return i;
                 }
@@ -260,14 +258,14 @@ namespace Hospital.View
 
         private void ZakaziClick(object sender, RoutedEventArgs e)
         {
-            if(KalendarDataGrid.SelectedCells.Count == 0)
+            if (KalendarDataGrid.SelectedCells.Count == 0)
             {
                 return;
             }
 
             int indexColumn = KalendarDataGrid.SelectedCells[0].Column.DisplayIndex;
             var vreme = ((Termini)KalendarDataGrid.SelectedCells[0].Item).Vreme;
-            
+
             NavigationService.Navigate(new ZakazivanjeTermina(SelectedDoctor, Patient, indexColumn, vreme, WeekBegin));
         }
 
@@ -287,7 +285,7 @@ namespace Hospital.View
                     case 1:
                         aps.Delete(Tabela[NadjiVreme(vreme)].Ponedeljak.IDAppointment);
                         trajanje = Tabela[NadjiVreme(vreme)].Ponedeljak.DurationInHours / 0.5;
-                        for(int i = 1; i < trajanje; i++)
+                        for (int i = 1; i < trajanje; i++)
                         {
                             Tabela[NadjiVreme(vreme) + i].Ponedeljak.Type = AppointmentType.none;
                         }
