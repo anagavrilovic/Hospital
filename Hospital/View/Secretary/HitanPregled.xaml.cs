@@ -167,7 +167,11 @@ namespace Hospital.View.Secretary
                 {
                     SetDoctorForNewAppointment(doctor);
                     if (AppointmentStorage.IsDoctorAvaliableForAppointment(NewUrgentAppointment))
+                    {
+                        AppointmentStorage.Save(NewUrgentAppointment);
                         return true;
+                    }
+                        
                 }
                 NewUrgentAppointment.DateTime = NewUrgentAppointment.DateTime.AddMinutes(30);
             }

@@ -18,7 +18,12 @@
         </Grid.RowDefinitions>
 
         <StackPanel>
-            <TextBlock Text="PACIJENTI > Alergeni" Style="{StaticResource TitleStyle}"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="PACIJENTI " Style="{StaticResource TitleStyle}"/>
+                <Image Source="../../Icon/Secretary/arrow.png" Width="10" Margin="0,20,0,5"/>
+                <TextBlock Text=" Alergeni" Style="{StaticResource TitleStyle}" Margin="0,20,0,5"/>
+            </StackPanel>
+            
             <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
                 <TextBlock Text="Pacijent: " Style="{StaticResource TextBlockStyle}"/>
                 <TextBlock Text="{Binding Mr.Patient.FirstName, Mode=OneWay}" Style="{StaticResource TextBlockStyle}"/>

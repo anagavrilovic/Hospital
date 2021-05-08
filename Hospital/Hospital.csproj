@@ -854,5 +854,8 @@
   <ItemGroup>
     <Resource Include="Icon\Secretary\plus.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\Secretary\arrow.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
