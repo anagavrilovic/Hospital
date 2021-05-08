@@ -21,74 +21,55 @@ namespace Hospital.View
     /// </summary>
     public partial class OdaberiPacijenta : Window
     {
-        private MedicalRecord patient = new MedicalRecord();
-        private ObservableCollection<MedicalRecord> pacijenti = new ObservableCollection<MedicalRecord>();
-        private ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
+        // Properties
+        public MedicalRecord PatientInCalendar { get; set; }
+        public MedicalRecord SelectedPatient { get; set; }
+        public ObservableCollection<MedicalRecord> Patients { get; set; }
+        public ObservableCollection<Appointment> PatientsAppointments { get; set; }
+        public MedicalRecordStorage MedicalRecordStorage { get; set; }
+        public AppointmentStorage AppointmentStorage { get; set; }
 
-        public ObservableCollection<Appointment> Appointments
-        {
-            get { return appointments; }
-            set { appointments = value; }
-        }
 
-        public ObservableCollection<MedicalRecord> Pacijenti
-        {
-            get { return pacijenti; }
-            set { pacijenti = value; }
-        }
+        public ICollectionView PatientsCollection { get; set; }
+        public ICollectionView PatientsAppointmentsCollection { get; set; }
 
-        public MedicalRecord Patient
-        {
-            get { return patient; }
-            set { patient = value; }
-        }
 
-        private ICollectionView pacijentiCollection;
-
-        public ICollectionView PacijentiCollection
-        {
-            get { return pacijentiCollection; }
-            set { pacijentiCollection = value; }
-        }
-
-        private ICollectionView terminiCollection;
-
-        public ICollectionView TerminiCollection
-        {
-            get { return terminiCollection; }
-            set { terminiCollection = value; }
-        }
-
-        public OdaberiPacijenta(MedicalRecord medicalRecord)
+        // Methods
+        public OdaberiPacijenta(MedicalRecord patient)
         {
             InitializeComponent();
+            InitializeAllPropeties();
+            LoadPatients();
+
             this.DataContext = this;
-            Patient = medicalRecord;
-            UcitajPacijente();
+            PatientInCalendar = patient;
         }
 
-        private void UcitajPacijente()
+        private void InitializeAllPropeties()
         {
-            MedicalRecordStorage mrs = new MedicalRecordStorage();
-            Pacijenti = mrs.GetAll();
-
-            PacijentiCollection = CollectionViewSource.GetDefaultView(Pacijenti);
-            PacijentiCollection.Filter = CustomFilterPacijenti;
+            Patients = new ObservableCollection<MedicalRecord>();
+            PatientsAppointments = new ObservableCollection<Appointment>();
+            MedicalRecordStorage = new MedicalRecordStorage();
+            AppointmentStorage = new AppointmentStorage();
         }
 
-        private bool CustomFilterPacijenti(object obj)
+        private void LoadPatients()
+        {
+            Patients = MedicalRecordStorage.GetAll();
+
+            PatientsCollection = CollectionViewSource.GetDefaultView(Patients);
+            PatientsCollection.Filter = CustomFilterPatients;
+        }
+
+        private bool CustomFilterPatients(object obj)
         {
             if (string.IsNullOrEmpty(PacijentiFilter.Text))
-            {
                 return true;
-            }
             else
-            {
                 return ((obj.ToString()).IndexOf(PacijentiFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0);
-            }
         }
 
-        private void PacijentiFilterTextChanged(object sender, TextChangedEventArgs e)
+        private void PatientsFilterTextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(ListBoxPacijenti.ItemsSource).Refresh();
         }
@@ -100,38 +81,14 @@ namespace Hospital.View
 
         private void PotvrdiClick(object sender, RoutedEventArgs e)
         {
-            PopuniPacijenta();
-            this.Close();
-        }
+            if(SelectedPatient == null)
+            {
+                MessageBox.Show("Selektujte pacijenta!");
+                return;
+            }
 
-        private void PopuniPacijenta()
-        {
-            MedicalRecord mr = (MedicalRecord)ListBoxPacijenti.SelectedItem;
-            Patient.Patient.FirstName = mr.Patient.FirstName;
-            Patient.Patient.LastName = mr.Patient.LastName;
-            Patient.Patient.Address.Street = mr.Patient.Address.Street;
-            Patient.Patient.Address.StreetNumber = mr.Patient.Address.StreetNumber;
-            Patient.Patient.CardID = mr.Patient.CardID;
-            Patient.Patient.Address.City.CityName = mr.Patient.Address.City.CityName;
-            Patient.Patient.Address.City.Country.CountryName = mr.Patient.Address.City.Country.CountryName;
-            Patient.Patient.DateOfBirth = mr.Patient.DateOfBirth;
-            Patient.Patient.Email = mr.Patient.Email;
-            Patient.Patient.Gender = mr.Patient.Gender;
-            Patient.Patient.IsGuest = mr.Patient.IsGuest;
-            Patient.Patient.MaritalStatus = mr.Patient.MaritalStatus;
-            Patient.Patient.Password = mr.Patient.Password;
-            Patient.Patient.PersonalID = mr.Patient.PersonalID;
-            Patient.Patient.PhoneNumber = mr.Patient.PhoneNumber;
-            Patient.Patient.Address.City.Township = mr.Patient.Address.City.Township;
-            Patient.Patient.Address.City.PostalCode = mr.Patient.Address.City.PostalCode;
-            Patient.Patient.Username = mr.Patient.Username;
-            Patient.Allergen = mr.Allergen;
-            Patient.Examination = mr.Examination;
-            Patient.HealthCardNumber = mr.HealthCardNumber;
-            Patient.IsInsured = mr.IsInsured;
-            Patient.MedicalRecordID = mr.MedicalRecordID;
-            Patient.ParentName = mr.ParentName;
-            Patient.BloodType = mr.BloodType;
+            PatientInCalendar.DeepCopy(SelectedPatient);
+            this.Close();
         }
 
         private void OdustaniClick(object sender, RoutedEventArgs e)
@@ -141,40 +98,38 @@ namespace Hospital.View
 
         private void ListBoxPacijenti_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Appointments.Clear();
+            PatientsAppointments.Clear();
 
-            MedicalRecord mr = (MedicalRecord)ListBoxPacijenti.SelectedItem;
-            if(mr != null)
+            if (SelectedPatient == null)
+                return;
+
+            GetSelectedPatientsAppointments();
+                
+            PatientsAppointmentsCollection = CollectionViewSource.GetDefaultView(PatientsAppointments);
+            PatientsAppointmentsCollection.Filter = CustomFilterAppointments;
+        }
+
+        private void GetSelectedPatientsAppointments()
+        {
+            ObservableCollection<Appointment> app = AppointmentStorage.GetAll();
+            foreach (Appointment ap in app)
             {
-                AppointmentStorage appointmentStorage = new AppointmentStorage();
-                ObservableCollection<Appointment> app = appointmentStorage.GetAll();
-
-                foreach (Appointment ap in app)
+                if (SelectedPatient.Patient.PersonalID.Equals(ap.IDpatient))
                 {
-                    if (mr.Patient.PersonalID.Equals(ap.IDpatient))
-                    {
-                        Appointments.Add(ap);
-                    }
+                    PatientsAppointments.Add(ap);
                 }
             }
-                
-            TerminiCollection = CollectionViewSource.GetDefaultView(Appointments);
-            TerminiCollection.Filter = CustomFilterTermini;
         }
 
-        private bool CustomFilterTermini(object obj)
+        private bool CustomFilterAppointments(object obj)
         {
             if (string.IsNullOrEmpty(TerminiFilter.Text))
-            {
                 return true;
-            }
             else
-            {
                 return ((obj.ToString()).IndexOf(TerminiFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0);
-            }
         }
 
-        private void TerminiFilterTextChanged(object sender, TextChangedEventArgs e)
+        private void AppointmentsFilterTextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(TabelaTermina.ItemsSource).Refresh();
         }

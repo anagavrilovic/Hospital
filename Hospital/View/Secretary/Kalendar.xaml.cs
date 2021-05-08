@@ -23,324 +23,336 @@ namespace Hospital.View
     /// </summary>
     public partial class Kalendar : Page
     {
-        private ObservableCollection<Termini> tabela = new ObservableCollection<Termini>();
-        private ObservableCollection<Model.Doctor> doctors = new ObservableCollection<Model.Doctor>();
-        private DateTime date = DateTime.Today;
-        private MedicalRecord patient = new MedicalRecord();
-        private Model.Doctor selectedDoctor;
+        public const int numberOfTimeSlotsPerDay = 48;
 
-        public Model.Doctor SelectedDoctor
-        {
-            get { return selectedDoctor; }
-            set { selectedDoctor = value; }
-        }
+        // Properties
+        public ObservableCollection<WeeklyCalendarRow> WeeklyCalendar { get; set; }
+        public ObservableCollection<Model.Doctor> AllDoctors { get; set; }
+        public DateTime ChosenDate { get; set; }
+        public DateTime WeekBegin { get; set; }
+        public DateTime WeekEnd { get; set; }
+        public MedicalRecord SelectedPatientForNewAppointment { get; set; }
+        public Model.Doctor SelectedDoctorForNewAppointment { get; set; }
 
-        private DateTime weekBegin;
-
-        public DateTime WeekBegin
-        {
-            get { return weekBegin; }
-            set { weekBegin = value; }
-        }
-
-        public MedicalRecord Patient
-        {
-            get { return patient; }
-            set { patient = value; }
-        }
-
-        public DateTime Date
-        {
-            get { return date; }
-            set { date = value; }
-        }
-
-        public ObservableCollection<Termini> Tabela
-        {
-            get { return tabela; }
-            set { tabela = value; }
-        }
-
-        public ObservableCollection<Hospital.Model.Doctor> Doctors
-        {
-            get { return doctors; }
-            set { doctors = value; }
-        }
+        // Storage class properties
+        public AppointmentStorage AppointmentStorage { get; set; }
 
 
-        public Kalendar(Model.Doctor doctor)
+        // Methods
+        public Kalendar(Model.Doctor doctorWhoseAppointmentsWillInitialyBeShown)
         {
             InitializeComponent();
             this.DataContext = this;
-            UcitajLekare(doctor);
-            OsveziKalendar();
+            InitializeAllProperties();
+            LoadAllDoctors();
+            SetSelectedDoctorIfNeeded(doctorWhoseAppointmentsWillInitialyBeShown);
+            RefreshWeeklyCalendar();
         }
 
-        private void OsveziKalendar()
+        private void InitializeAllProperties()
         {
-            Tabela.Clear();
-
-            DateTime start = new DateTime();
-            TimeSpan ts = new TimeSpan(7, 0, 0);
-            start = start.Date + ts;
-            for (int i = 0; i < 48; i++)
-            {
-                Termini termin = new Termini();
-                termin.Vreme = start.ToString("HH:mm", CultureInfo.InvariantCulture);
-                start = start.AddMinutes(30);
-                tabela.Add(termin);
-            }
-
-            if (SelectedDoctor != null)
-                PopuniTermine();
+            this.WeeklyCalendar = new ObservableCollection<WeeklyCalendarRow>();
+            this.AllDoctors = new ObservableCollection<Model.Doctor>();
+            this.ChosenDate = DateTime.Today;
+            this.SelectedPatientForNewAppointment = new MedicalRecord();
+            this.AppointmentStorage = new AppointmentStorage();
         }
 
-        private void PopuniTermine()
+        private void LoadAllDoctors()
         {
-            if (SelectedDoctor == null)
+            DoctorStorage doctorStorage = new DoctorStorage();
+            AllDoctors = doctorStorage.GetAll();
+        }
+
+        private void SetSelectedDoctorIfNeeded(Model.Doctor doctorWhoseAppointmentsWillInitialyBeShown)
+        {
+            if (doctorWhoseAppointmentsWillInitialyBeShown != null)
             {
-                return;
-            }
-
-            WeekBegin = GetWeekBegin(Date);
-            DateTime weekEnd = weekBegin.AddDays(6);
-
-            AppointmentStorage storage = new AppointmentStorage();
-            ObservableCollection<Appointment> appointments = storage.GetAll();
-
-            foreach (Appointment app in appointments)
-            {
-                if (app.DateTime.Date >= weekBegin.Date && app.DateTime.Date <= weekEnd.Date && app.IDDoctor.Equals(SelectedDoctor.PersonalID))
+                foreach (Model.Doctor doctor in AllDoctors)
                 {
-                    DayOfWeek dan = app.DateTime.DayOfWeek;
-
-                    double numberOfCells = app.DurationInHours / 0.5;
-
-                    switch (dan)
+                    if (doctor.IsEqualWith(doctorWhoseAppointmentsWillInitialyBeShown))
                     {
-                        case DayOfWeek.Monday:
-                            tabela[NadjiVreme(app.DateTime.ToString("HH:mm"))].Ponedeljak = app;
-                            for (int i = 1; i < numberOfCells; i++)
-                            {
-                                tabela[NadjiVreme(app.DateTime.ToString("HH:mm")) + i].Ponedeljak.Type = app.Type;
-                            }
-                            break;
-
-                        case DayOfWeek.Tuesday:
-                            tabela[NadjiVreme(app.DateTime.ToString("HH:mm"))].Utorak = app;
-                            for (int i = 1; i < numberOfCells; i++)
-                            {
-                                tabela[NadjiVreme(app.DateTime.ToString("HH:mm")) + i].Utorak.Type = app.Type;
-                            }
-                            break;
-
-                        case DayOfWeek.Wednesday:
-                            tabela[NadjiVreme(app.DateTime.ToString("HH:mm"))].Sreda = app;
-                            for (int i = 1; i < numberOfCells; i++)
-                            {
-                                tabela[NadjiVreme(app.DateTime.ToString("HH:mm")) + i].Sreda.Type = app.Type;
-                            }
-                            break;
-
-                        case DayOfWeek.Thursday:
-                            tabela[NadjiVreme(app.DateTime.ToString("HH:mm"))].Cetvrtak = app;
-                            for (int i = 1; i < numberOfCells; i++)
-                            {
-                                tabela[NadjiVreme(app.DateTime.ToString("HH:mm")) + i].Cetvrtak.Type = app.Type;
-                            }
-                            break;
-
-                        case DayOfWeek.Friday:
-                            tabela[NadjiVreme(app.DateTime.ToString("HH:mm"))].Petak = app;
-                            for (int i = 1; i < numberOfCells; i++)
-                            {
-                                tabela[NadjiVreme(app.DateTime.ToString("HH:mm")) + i].Petak.Type = app.Type;
-                            }
-                            break;
-
-                        case DayOfWeek.Saturday:
-                            tabela[NadjiVreme(app.DateTime.ToString("HH:mm"))].Subota = app;
-                            for (int i = 1; i < numberOfCells; i++)
-                            {
-                                tabela[NadjiVreme(app.DateTime.ToString("HH:mm")) + i].Subota.Type = app.Type;
-                            }
-                            break;
-
-                        case DayOfWeek.Sunday:
-                            tabela[NadjiVreme(app.DateTime.ToString("HH:mm"))].Nedelja = app;
-                            for (int i = 1; i < numberOfCells; i++)
-                            {
-                                tabela[NadjiVreme(app.DateTime.ToString("HH:mm")) + i].Nedelja.Type = app.Type;
-                            }
-                            break;
-                    }
-
-                }
-            }
-        }
-
-        private void UcitajLekare(Model.Doctor doctor)
-        {
-            DoctorStorage ds = new DoctorStorage();
-            Doctors = ds.GetAll();
-
-            if (doctor != null)
-            {
-                foreach (Model.Doctor dr in Doctors)
-                {
-                    if (dr.PersonalID.Equals(doctor.PersonalID))
-                    {
-                        SelectedDoctor = dr;
+                        SelectedDoctorForNewAppointment = doctor;
                     }
                 }
             }
         }
 
-        private int NadjiVreme(String vreme)
+        private void RefreshWeeklyCalendar()
         {
+            WeeklyCalendar.Clear();
 
-            DateTime start = new DateTime();
-            TimeSpan ts = new TimeSpan(7, 0, 0);
-            start = start.Date + ts;
-            for (int i = 0; i < 48; i++)
+            FillWeeklyCalendarWithEmptyTimeSlots(GetStartTimeForWeeklyCalendar());
+
+            if (SelectedDoctorForNewAppointment != null)
+                ShowSelectedDoctorsAppointments();
+        }
+
+        private DateTime GetStartTimeForWeeklyCalendar()
+        {
+            TimeSpan startTime = new TimeSpan(0, 0, 0);
+            return new DateTime().Date + startTime;
+        }
+
+        private void FillWeeklyCalendarWithEmptyTimeSlots(DateTime timeForRow)
+        {
+            for (int i = 0; i < numberOfTimeSlotsPerDay; i++)
             {
+                WeeklyCalendarRow newRow = new WeeklyCalendarRow();
+                newRow.TimeInRow = timeForRow.ToString("HH:mm", CultureInfo.InvariantCulture);
+                WeeklyCalendar.Add(newRow);
+                
+                timeForRow = timeForRow.AddMinutes(30);
+            }
+        }
 
-                if (start.ToString("HH:mm", CultureInfo.InvariantCulture).Equals(vreme))
+        private void ShowSelectedDoctorsAppointments()
+        {
+            ObservableCollection<Appointment> selectedDoctorsAppointments = AppointmentStorage.GetAppointmentsByDoctor(SelectedDoctorForNewAppointment.PersonalID);
+            ObservableCollection<Appointment> selectedDoctorsAppointmentsInChosenWeek = GetSelectedDoctorsAppointmentsInChosenWeek(selectedDoctorsAppointments);
+
+            LoadSelectedDoctorsAppointmentsIntoWeeklyCalendar(selectedDoctorsAppointmentsInChosenWeek);
+        }
+
+        private ObservableCollection<Appointment> GetSelectedDoctorsAppointmentsInChosenWeek(ObservableCollection<Appointment> selectedDoctorsAppointments)
+        {
+            SetFirstAndLastDateOfWeekInWhichChosenDateIs(ChosenDate);
+
+            ObservableCollection<Appointment> selectedDoctorsAppointmentsInChosenWeek = new ObservableCollection<Appointment>();
+            foreach (Appointment appointment in selectedDoctorsAppointments)
+                if (IsAppointmentInChosenWeek(appointment))
+                    selectedDoctorsAppointmentsInChosenWeek.Add(appointment);
+
+            return selectedDoctorsAppointmentsInChosenWeek;
+        }
+
+        private bool IsAppointmentInChosenWeek(Appointment appointment)
+        { 
+            return appointment.DateTime.Date >= WeekBegin.Date && appointment.DateTime.Date <= WeekEnd.Date;
+        }
+
+        private void LoadSelectedDoctorsAppointmentsIntoWeeklyCalendar(ObservableCollection<Appointment> selectedDoctorsAppointmentsInChosenWeek)
+        {
+            foreach (Appointment appointment in selectedDoctorsAppointmentsInChosenWeek)
+            {
+                DayOfWeek appointmentsDayOfWeek = appointment.GetAppointmentsDayOfWeek();
+
+                double numberOfCells = appointment.DurationInHours / 0.5;
+
+                switch (appointmentsDayOfWeek)
                 {
+                    case DayOfWeek.Monday:
+                        WeeklyCalendar[FindTimeRow(appointment.DateTime.ToString("HH:mm"))].Monday = appointment;
+                        for (int i = 1; i < numberOfCells; i++)
+                        {
+                            WeeklyCalendar[FindTimeRow(appointment.DateTime.ToString("HH:mm")) + i].Monday.Type = appointment.Type;
+                        }
+                        break;
+
+                    case DayOfWeek.Tuesday:
+                        WeeklyCalendar[FindTimeRow(appointment.DateTime.ToString("HH:mm"))].Tuesday = appointment;
+                        for (int i = 1; i < numberOfCells; i++)
+                        {
+                            WeeklyCalendar[FindTimeRow(appointment.DateTime.ToString("HH:mm")) + i].Tuesday.Type = appointment.Type;
+                        }
+                        break;
+
+                    case DayOfWeek.Wednesday:
+                        WeeklyCalendar[FindTimeRow(appointment.DateTime.ToString("HH:mm"))].Wednesday = appointment;
+                        for (int i = 1; i < numberOfCells; i++)
+                        {
+                            WeeklyCalendar[FindTimeRow(appointment.DateTime.ToString("HH:mm")) + i].Wednesday.Type = appointment.Type;
+                        }
+                        break;
+
+                    case DayOfWeek.Thursday:
+                        WeeklyCalendar[FindTimeRow(appointment.DateTime.ToString("HH:mm"))].Thursday = appointment;
+                        for (int i = 1; i < numberOfCells; i++)
+                        {
+                            WeeklyCalendar[FindTimeRow(appointment.DateTime.ToString("HH:mm")) + i].Thursday.Type = appointment.Type;
+                        }
+                        break;
+
+                    case DayOfWeek.Friday:
+                        WeeklyCalendar[FindTimeRow(appointment.DateTime.ToString("HH:mm"))].Friday = appointment;
+                        for (int i = 1; i < numberOfCells; i++)
+                        {
+                            WeeklyCalendar[FindTimeRow(appointment.DateTime.ToString("HH:mm")) + i].Friday.Type = appointment.Type;
+                        }
+                        break;
+
+                    case DayOfWeek.Saturday:
+                        WeeklyCalendar[FindTimeRow(appointment.DateTime.ToString("HH:mm"))].Saturday = appointment;
+                        for (int i = 1; i < numberOfCells; i++)
+                        {
+                            WeeklyCalendar[FindTimeRow(appointment.DateTime.ToString("HH:mm")) + i].Saturday.Type = appointment.Type;
+                        }
+                        break;
+
+                    case DayOfWeek.Sunday:
+                        WeeklyCalendar[FindTimeRow(appointment.DateTime.ToString("HH:mm"))].Sunday = appointment;
+                        for (int i = 1; i < numberOfCells; i++)
+                        {
+                            WeeklyCalendar[FindTimeRow(appointment.DateTime.ToString("HH:mm")) + i].Sunday.Type = appointment.Type;
+                        }
+                        break;
+                }
+            }
+        }
+
+        private int FindTimeRow(String time)
+        {
+            DateTime startTime = GetStartTimeForWeeklyCalendar();
+
+            for (int i = 0; i < numberOfTimeSlotsPerDay; i++)
+            {
+                if (startTime.ToString("HH:mm", CultureInfo.InvariantCulture).Equals(time))
                     return i;
-                }
 
-                start = start.AddMinutes(30);
+                startTime = startTime.AddMinutes(30);
             }
 
             return -1;
         }
 
-        public DateTime GetWeekBegin(DateTime dt)
+        public void SetFirstAndLastDateOfWeekInWhichChosenDateIs(DateTime chosenDate)
         {
-            int diff = (7 + (dt.DayOfWeek - DayOfWeek.Monday)) % 7;
-            return dt.AddDays(-1 * diff).Date;
+            int difference = (7 + (chosenDate.DayOfWeek - DayOfWeek.Monday)) % 7;
+            WeekBegin = chosenDate.AddDays(-1 * difference).Date;
+            WeekEnd = WeekBegin.AddDays(6);
         }
 
         private void ComboBoxDoctorEvent(object sender, SelectionChangedEventArgs e)
         {
-            OsveziKalendar();
+            RefreshWeeklyCalendar();
         }
 
         private void DateChanged(object sender, SelectionChangedEventArgs e)
         {
-            OsveziKalendar();
+            RefreshWeeklyCalendar();
         }
 
-        private void TrenutnaNedeljaClick(object sender, RoutedEventArgs e)
+        private void CurrentWeekClick(object sender, RoutedEventArgs e)
         {
-            Date = DateTime.Today;
-            OsveziKalendar();
+            ChosenDate = DateTime.Today;
+            RefreshWeeklyCalendar();
         }
 
         private void PreviousClick(object sender, RoutedEventArgs e)
         {
-            Date = Date.AddDays(-7);
-            OsveziKalendar();
+            ChosenDate = ChosenDate.AddDays(-7);
+            RefreshWeeklyCalendar();
         }
 
         private void NextClick(object sender, RoutedEventArgs e)
         {
-            Date = Date.AddDays(7);
-            OsveziKalendar();
+            ChosenDate = ChosenDate.AddDays(7);
+            RefreshWeeklyCalendar();
         }
 
-        private void OdaberiPacijentaClick(object sender, RoutedEventArgs e)
+        private void ChoosePatientClick(object sender, RoutedEventArgs e)
         {
-            var odabirPacijenta = new OdaberiPacijenta(Patient);
-            odabirPacijenta.Show();
+            OdaberiPacijenta choosePatientWindow = new OdaberiPacijenta(SelectedPatientForNewAppointment);
+            choosePatientWindow.Show();
         }
 
-        private void ZakaziClick(object sender, RoutedEventArgs e)
+        private void ScheduleAppointmentClick(object sender, RoutedEventArgs e)
         {
             if (KalendarDataGrid.SelectedCells.Count == 0)
             {
+                MessageBox.Show("Odaberite termin koji želite da zakažete.");
                 return;
             }
 
             int indexColumn = KalendarDataGrid.SelectedCells[0].Column.DisplayIndex;
-            var vreme = ((Termini)KalendarDataGrid.SelectedCells[0].Item).Vreme;
+            string time = ((WeeklyCalendarRow)KalendarDataGrid.SelectedCells[0].Item).TimeInRow;
+            DateTime dateTimeForNewAppointment = SetDateTimeForNewAppointment(indexColumn, time);
 
-            NavigationService.Navigate(new ZakazivanjeTermina(SelectedDoctor, Patient, indexColumn, vreme, WeekBegin));
+            NavigationService.Navigate(new ZakazivanjeTermina(SelectedDoctorForNewAppointment, SelectedPatientForNewAppointment, dateTimeForNewAppointment));
         }
 
-        private void OtkaziClick(object sender, RoutedEventArgs e)
+        private DateTime SetDateTimeForNewAppointment(int dayOfWeek, string time)
+        {
+            DateTime date = WeekBegin.AddDays(dayOfWeek - 1);
+
+            string[] vreme = time.Split(':');
+            TimeSpan ts = new TimeSpan(Int32.Parse(vreme[0]), Int32.Parse(vreme[1]), 0);
+            date = date.Date + ts;
+
+            return date;
+        }
+
+        private void CancelAppointmentClick(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Da li ste sigurni da želite da otkažete termin?",
                         "Potvrda", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                int indexColumn = KalendarDataGrid.SelectedCells[0].Column.DisplayIndex;
-                var vreme = ((Termini)KalendarDataGrid.SelectedCells[0].Item).Vreme;
+                int columnIndex = KalendarDataGrid.SelectedCells[0].Column.DisplayIndex;
+                var time = ((WeeklyCalendarRow)KalendarDataGrid.SelectedCells[0].Item).TimeInRow;
 
-                AppointmentStorage aps = new AppointmentStorage();
-                double trajanje;
+                double numberOfCells;
 
-                switch (indexColumn)
+                switch (columnIndex)
                 {
                     case 1:
-                        aps.Delete(Tabela[NadjiVreme(vreme)].Ponedeljak.IDAppointment);
-                        trajanje = Tabela[NadjiVreme(vreme)].Ponedeljak.DurationInHours / 0.5;
-                        for (int i = 1; i < trajanje; i++)
+                        AppointmentStorage.Delete(WeeklyCalendar[FindTimeRow(time)].Monday.IDAppointment);
+                        numberOfCells = WeeklyCalendar[FindTimeRow(time)].Monday.DurationInHours / 0.5;
+                        for (int i = 1; i < numberOfCells; i++)
                         {
-                            Tabela[NadjiVreme(vreme) + i].Ponedeljak.Type = AppointmentType.none;
+                            WeeklyCalendar[FindTimeRow(time) + i].Monday.Type = AppointmentType.none;
                         }
                         break;
                     case 2:
-                        aps.Delete(Tabela[NadjiVreme(vreme)].Utorak.IDAppointment);
-                        trajanje = Tabela[NadjiVreme(vreme)].Utorak.DurationInHours / 0.5;
-                        for (int i = 1; i < trajanje; i++)
+                        AppointmentStorage.Delete(WeeklyCalendar[FindTimeRow(time)].Tuesday.IDAppointment);
+                        numberOfCells = WeeklyCalendar[FindTimeRow(time)].Tuesday.DurationInHours / 0.5;
+                        for (int i = 1; i < numberOfCells; i++)
                         {
-                            Tabela[NadjiVreme(vreme) + i].Utorak.Type = AppointmentType.none;
+                            WeeklyCalendar[FindTimeRow(time) + i].Tuesday.Type = AppointmentType.none;
                         }
                         break;
                     case 3:
-                        aps.Delete(Tabela[NadjiVreme(vreme)].Sreda.IDAppointment);
-                        trajanje = Tabela[NadjiVreme(vreme)].Sreda.DurationInHours / 0.5;
-                        for (int i = 1; i < trajanje; i++)
+                        AppointmentStorage.Delete(WeeklyCalendar[FindTimeRow(time)].Wednesday.IDAppointment);
+                        numberOfCells = WeeklyCalendar[FindTimeRow(time)].Wednesday.DurationInHours / 0.5;
+                        for (int i = 1; i < numberOfCells; i++)
                         {
-                            Tabela[NadjiVreme(vreme) + i].Sreda.Type = AppointmentType.none;
+                            WeeklyCalendar[FindTimeRow(time) + i].Wednesday.Type = AppointmentType.none;
                         }
                         break;
                     case 4:
-                        aps.Delete(Tabela[NadjiVreme(vreme)].Cetvrtak.IDAppointment);
-                        trajanje = Tabela[NadjiVreme(vreme)].Cetvrtak.DurationInHours / 0.5;
-                        for (int i = 1; i < trajanje; i++)
+                        AppointmentStorage.Delete(WeeklyCalendar[FindTimeRow(time)].Thursday.IDAppointment);
+                        numberOfCells = WeeklyCalendar[FindTimeRow(time)].Thursday.DurationInHours / 0.5;
+                        for (int i = 1; i < numberOfCells; i++)
                         {
-                            Tabela[NadjiVreme(vreme) + i].Cetvrtak.Type = AppointmentType.none;
+                            WeeklyCalendar[FindTimeRow(time) + i].Thursday.Type = AppointmentType.none;
                         }
                         break;
                     case 5:
-                        aps.Delete(Tabela[NadjiVreme(vreme)].Petak.IDAppointment);
-                        trajanje = Tabela[NadjiVreme(vreme)].Petak.DurationInHours / 0.5;
-                        for (int i = 1; i < trajanje; i++)
+                        AppointmentStorage.Delete(WeeklyCalendar[FindTimeRow(time)].Friday.IDAppointment);
+                        numberOfCells = WeeklyCalendar[FindTimeRow(time)].Friday.DurationInHours / 0.5;
+                        for (int i = 1; i < numberOfCells; i++)
                         {
-                            Tabela[NadjiVreme(vreme) + i].Petak.Type = AppointmentType.none;
+                            WeeklyCalendar[FindTimeRow(time) + i].Friday.Type = AppointmentType.none;
                         }
                         break;
                     case 6:
-                        aps.Delete(Tabela[NadjiVreme(vreme)].Subota.IDAppointment);
-                        trajanje = Tabela[NadjiVreme(vreme)].Subota.DurationInHours / 0.5;
-                        for (int i = 1; i < trajanje; i++)
+                        AppointmentStorage.Delete(WeeklyCalendar[FindTimeRow(time)].Saturday.IDAppointment);
+                        numberOfCells = WeeklyCalendar[FindTimeRow(time)].Saturday.DurationInHours / 0.5;
+                        for (int i = 1; i < numberOfCells; i++)
                         {
-                            Tabela[NadjiVreme(vreme) + i].Subota.Type = AppointmentType.none;
+                            WeeklyCalendar[FindTimeRow(time) + i].Saturday.Type = AppointmentType.none;
                         }
                         break;
                     case 7:
-                        aps.Delete(Tabela[NadjiVreme(vreme)].Nedelja.IDAppointment);
-                        trajanje = Tabela[NadjiVreme(vreme)].Nedelja.DurationInHours / 0.5;
-                        for (int i = 1; i < trajanje; i++)
+                        AppointmentStorage.Delete(WeeklyCalendar[FindTimeRow(time)].Sunday.IDAppointment);
+                        numberOfCells = WeeklyCalendar[FindTimeRow(time)].Sunday.DurationInHours / 0.5;
+                        for (int i = 1; i < numberOfCells; i++)
                         {
-                            Tabela[NadjiVreme(vreme) + i].Nedelja.Type = AppointmentType.none;
+                            WeeklyCalendar[FindTimeRow(time) + i].Sunday.Type = AppointmentType.none;
                         }
                         break;
                 }
 
-                OsveziKalendar();
+                RefreshWeeklyCalendar();
             }
         }
     }

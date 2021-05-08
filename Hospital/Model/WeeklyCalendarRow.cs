@@ -8,100 +8,100 @@ using System.ComponentModel;
 
 namespace Hospital.Model
 {
-    public class Termini : INotifyPropertyChanged
+    public class WeeklyCalendarRow : INotifyPropertyChanged
     {
-        private string vreme;
-        private Appointment ponedeljak = new Appointment();
-        private Appointment utorak = new Appointment();
-        private Appointment sreda = new Appointment();
-        private Appointment cetvrtak = new Appointment();
-        private Appointment petak = new Appointment();
-        private Appointment subota = new Appointment();
-        private Appointment nedelja = new Appointment();
+        private string timeInRow;
+        private Appointment monday = new Appointment();
+        private Appointment tuesday = new Appointment();
+        private Appointment wednesday = new Appointment();
+        private Appointment thursday = new Appointment();
+        private Appointment friday = new Appointment();
+        private Appointment saturday = new Appointment();
+        private Appointment sunday = new Appointment();
 
-        public string Vreme
+        public string TimeInRow
         {
-            get { return vreme; }
+            get { return timeInRow; }
             set 
             { 
-                vreme = value;
+                timeInRow = value;
                 OnPropertyChanged("Vreme");
             }
         }
 
-        public Appointment Ponedeljak
+        public Appointment Monday
         {
-            get { return ponedeljak; }
+            get { return monday; }
             set 
             { 
-                ponedeljak = value;
+                monday = value;
                 OnPropertyChanged("Ponedeljak");
             }
         }
 
-        public Appointment Utorak
+        public Appointment Tuesday
         {
-            get { return utorak; }
+            get { return tuesday; }
             set 
             { 
-                utorak = value;
+                tuesday = value;
                 OnPropertyChanged("Utorak");
             }
         }
 
-        public Appointment Sreda
+        public Appointment Wednesday
         {
-            get { return sreda; }
+            get { return wednesday; }
             set 
             { 
-                sreda = value;
+                wednesday = value;
                 OnPropertyChanged("Sreda");
             }
         }
 
-        public Appointment Cetvrtak
+        public Appointment Thursday
         {
-            get { return cetvrtak; }
+            get { return thursday; }
             set 
             { 
-                cetvrtak = value;
+                thursday = value;
                 OnPropertyChanged("Cetvrtak");
             }
         }
 
-        public Appointment Petak
+        public Appointment Friday
         {
-            get { return petak; }
+            get { return friday; }
             set 
             { 
-                petak = value;
+                friday = value;
                 OnPropertyChanged("Petak");
             }
         }
 
-        public Appointment Subota
+        public Appointment Saturday
         {
-            get { return subota; }
+            get { return saturday; }
             set 
             { 
-                subota = value;
+                saturday = value;
                 OnPropertyChanged("Subota");
             }
         }
 
-        public Appointment Nedelja
+        public Appointment Sunday
         {
-            get { return nedelja; }
+            get { return sunday; }
             set 
             { 
-                nedelja = value;
+                sunday = value;
                 OnPropertyChanged("Nedelja");
             }
         }
 
-        public Termini()
+        public WeeklyCalendarRow()
         {
-            this.Vreme = "";
+            this.TimeInRow = "";
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

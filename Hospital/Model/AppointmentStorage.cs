@@ -43,20 +43,16 @@ namespace Hospital
             DoSerialization(appointment);
         }
 
-        public bool SaveIfNotOvelapping(Appointment period)
+        public bool IsOverlappingWithSomeAppointment(Appointment newAppointment)
         {
-            ObservableCollection<Appointment> appointments = GetAll();
-
-            foreach (Appointment existingPeriod in appointments)
+            ObservableCollection<Appointment> allAppointments = GetAll();
+            foreach (Appointment appointment in allAppointments)
             {
-                if (existingPeriod.IDDoctor.Equals(period.IDDoctor))
-                    if (existingPeriod.DateTime < period.DateTime.AddHours(period.DurationInHours) && period.DateTime < existingPeriod.DateTime.AddHours(existingPeriod.DurationInHours))
-                        return false;
+                if (appointment.IsOverlappingWith(newAppointment))
+                    return true;
             }
 
-            appointments.Add(period);
-            DoSerialization(appointments);
-            return true;
+            return false;
         }
 
         public bool CheckIfOverlap(DateTime startTime, DateTime endTime, string doctorID, ObservableCollection<MoveAppointment> option)
@@ -185,30 +181,16 @@ namespace Hospital
 
         public ObservableCollection<Appointment> GetByPatient(String id)
         {
-            ObservableCollection<Appointment> apps = GetAll();
-            ObservableCollection<Appointment> patientApps = new ObservableCollection<Appointment>();
-            Boolean found = false;
-            if (apps == null)
+            ObservableCollection<Appointment> allAppointments = GetAll();
+            ObservableCollection<Appointment> patientsApppointments = new ObservableCollection<Appointment>();
+            
+            foreach(Appointment appointment in allAppointments)
             {
-                return null;
-            }
-            foreach (Appointment app in apps)
-            {
-                if (app.IDpatient.Equals(id))
-                {
-                    found = true;
-                    patientApps.Add(app);
-                }
+                if (appointment.IDpatient.Equals(id))
+                    patientsApppointments.Add(appointment);
             }
 
-            if (found)
-            {
-                return patientApps;
-            }
-            else
-            {
-                return null;
-            }
+            return patientsApppointments;
         }
 
         public Boolean Delete(string id)
@@ -286,28 +268,16 @@ namespace Hospital
             return retVal.ToString();
         }
 
-        public ObservableCollection<Appointment> GetByDoctor(String id)
+        public ObservableCollection<Appointment> GetAppointmentsByDoctor(String requestedDoctorsID)
         {
-            ObservableCollection<Appointment> apps = GetAll();
-            ObservableCollection<Appointment> doctorApps = new ObservableCollection<Appointment>();
-            Boolean found = false;
-            foreach (Appointment app in apps)
-            {
-                if (app.IDDoctor.Equals(id))
-                {
-                    found = true;
-                    doctorApps.Add(app);
-                }
-            }
+            ObservableCollection<Appointment> allApointments = GetAll();
+            ObservableCollection<Appointment> appointmentsOfRequestedDoctor = new ObservableCollection<Appointment>();
 
-            if (found)
-            {
-                return doctorApps;
-            }
-            else
-            {
-                return null;
-            }
+            foreach(Appointment a in allApointments)
+                if (a.IsDoctorInAppointment(requestedDoctorsID))
+                    appointmentsOfRequestedDoctor.Add(a);
+
+            return appointmentsOfRequestedDoctor;
         }
 
         public Boolean ExistByTime(DateTime dt, String idDoctor)

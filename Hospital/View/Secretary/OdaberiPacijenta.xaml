@@ -55,12 +55,12 @@
                             Style="{StaticResource TextBoxBorder}">
                 <StackPanel Margin="5" Orientation="Horizontal" Height="25" VerticalAlignment="Center">
                     <Image Source="../../Icon/Secretary/search.png" Height="13"/>
-                    <TextBox x:Name="PacijentiFilter" TextChanged="PacijentiFilterTextChanged" BorderThickness="0" Width="150" Height="20" Margin="10,0,0,0" FontSize="12" Background="Transparent" VerticalAlignment="Center"/>
+                    <TextBox x:Name="PacijentiFilter" TextChanged="PatientsFilterTextChanged" BorderThickness="0" Width="150" Height="20" Margin="10,0,0,0" FontSize="12" Background="Transparent" VerticalAlignment="Center"/>
                 </StackPanel>
             </Border>
         </Grid>
 
-        <ListBox x:Name="ListBoxPacijenti" ItemsSource="{Binding Pacijenti}" Grid.Row="2" Margin="30,5,30,10" Height="90" 
+        <ListBox x:Name="ListBoxPacijenti" ItemsSource="{Binding Patients}" SelectedItem="{Binding SelectedPatient}" Grid.Row="2" Margin="30,5,30,10" Height="90" 
                  Style="{StaticResource ListBoxStyle}" SelectionChanged="ListBoxPacijenti_SelectionChanged"/>
 
         <Grid Grid.Row="3">
@@ -80,12 +80,13 @@
                             Style="{StaticResource TextBoxBorder}">
                 <StackPanel Margin="5" Orientation="Horizontal" Height="25" VerticalAlignment="Center">
                     <Image Source="../../Icon/Secretary/search.png" Height="13"/>
-                    <TextBox x:Name="TerminiFilter"  BorderThickness="0" Width="150" Height="20" Margin="10,0,0,0" FontSize="12" Background="Transparent" TextChanged="TerminiFilterTextChanged" VerticalAlignment="Center"/>
+                    <TextBox x:Name="TerminiFilter"  BorderThickness="0" Width="150" Height="20" Margin="10,0,0,0" FontSize="12" Background="Transparent" 
+                             TextChanged="AppointmentsFilterTextChanged" VerticalAlignment="Center"/>
                 </StackPanel>
             </Border>
         </Grid>
 
-        <DataGrid x:Name="TabelaTermina" ItemsSource="{Binding Appointments}" Grid.Row="4" Height="180" Margin="30,5,30,10"
+        <DataGrid x:Name="TabelaTermina" ItemsSource="{Binding PatientsAppointments}" Grid.Row="4" Height="180" Margin="30,5,30,10"
                   Style="{StaticResource PacijentiDataGrid}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Datum i vreme" Width="1*" Binding="{Binding DateTime}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
