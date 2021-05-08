@@ -185,13 +185,19 @@ namespace Hospital.View
 
         private void save_Click(object sender, RoutedEventArgs e)
         {
-            if (!SomeFieldsEmpty() && !AppointmentsOverlap())
+            if (!SomeFieldsEmpty())
             {
                 FillAppointmentProperties();
                 SetRoomAndRoomType();
-                appointmentStorage.Save(Appointment);
-                UpdateParentPage();
-                this.Close();
+                if (appointmentStorage.SaveIfNotOvelapping(Appointment))
+                {
+                    UpdateParentPage();
+                    this.Close();
+                }
+                else
+                {
+                    ErrorBox errorBox = new ErrorBox("Ovaj termin ima preklapanja");
+                }
             }
         }
 
@@ -225,40 +231,16 @@ namespace Hospital.View
                     if (storageRoom.Type.Equals(RoomType.OPERACIONA_SALA))
                     {
                         Appointment.Room = storageRoom;
-                        Appointment.Type = AppointmentType.operation;
+                        if(emergencyOperationCheckBox.IsChecked.Equals(false))
+                            Appointment.Type = AppointmentType.operation;
+                        else
+                            Appointment.Type = AppointmentType.urgentExamination;
                         break;
                     }
                 }
             }
         }
 
-        private bool AppointmentsOverlap()
-        {
-            double timeInMinutesDouble = double.Parse(DurationInMinutes);
-            Appointment.DurationInHours = timeInMinutesDouble / 60;
-            DateTime appointmentStart, appointmentEnd;
-            appointmentStart = DateOfAppointment.Date.Add(DateTime.Parse(timeOfAppointment).TimeOfDay);
-            appointmentEnd = appointmentStart.AddMinutes(double.Parse(DurationInMinutes));
-            return OverlapBool(appointmentStart, appointmentEnd);
-        }
-
-        private bool OverlapBool(DateTime appointmentStart, DateTime appointmentEnd)
-        {
-            foreach (Appointment storageAppointment in appointmentStorage.GetAll())
-            {
-                if (storageAppointment.IDDoctor.Equals(Doctor.PersonalID))
-                {
-                    double storageAppointmentTime = storageAppointment.DurationInHours * 60;
-                    bool overlap = storageAppointment.DateTime < appointmentEnd && appointmentStart < storageAppointment.DateTime.AddMinutes(storageAppointmentTime);
-                    if (overlap)
-                    {
-                        ErrorBox messageBox = new ErrorBox("Preklapaju se termini");
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
 
         private void FillAppointmentProperties()
         {
@@ -269,6 +251,8 @@ namespace Hospital.View
             Appointment.IDDoctor = Doctor.PersonalID;
             Appointment.DoctrosNameSurname = Doctor.FirstName + " " + Doctor.LastName;
             Appointment.IDAppointment = appointmentStorage.GetNewID();
+            double timeInMinutesDouble = double.Parse(DurationInMinutes);
+            Appointment.DurationInHours = timeInMinutesDouble / 60;
         }
 
         private bool SomeFieldsEmpty()
@@ -295,12 +279,13 @@ namespace Hospital.View
             }
         }
 
-        private void CheckBoxChanged(object sender, RoutedEventArgs e)
+        private void CheckBoxEmergency_Changed(object sender, RoutedEventArgs e)
         {
             if (emergencyOperationCheckBox.IsChecked.Equals(true))
             {
                 rdbPregled.IsEnabled = false;
                 rdbOperacija.IsChecked = true;
+                rdbOperacija.IsEnabled = true;
             }else 
             {
                 rdbPregled.IsEnabled = true;    
