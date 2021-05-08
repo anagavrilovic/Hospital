@@ -87,7 +87,7 @@
 
         <TextBox    x:Name="vremePrebacivanja" Grid.Row="10" Grid.ColumnSpan="2" Margin="30,51.4,28,10.6" Grid.RowSpan="2">
             <TextBox.Text>
-                <Binding  Path="TransferItem.Time"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                <Binding  Path="TransferItem.TransferTime"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <val:Time ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>

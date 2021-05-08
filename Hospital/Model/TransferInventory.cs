@@ -14,12 +14,14 @@ namespace Hospital.Model
 {
     public class TransferInventory : INotifyPropertyChanged
     {
-        private string itemID;
-        private int quantity;
-        private string firstRoomID;
-        private string secondRoomID;
-        private DateTime date;
-        private string time;
+        private string _itemID;
+        private int _quantity;
+        private string _firstRoomID;
+        private string _destinationRoomID;
+        private DateTime _transferDate;
+        private string _transferTime;
+
+        private InventoryStorage _inventoryStorage = new InventoryStorage();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -33,16 +35,13 @@ namespace Hospital.Model
 
         public string ItemID
         {
-            get
-            {
-                return itemID;
-            }
+            get => _itemID;
 
             set
             {
-                if (value != itemID)
+                if (value != _itemID)
                 {
-                    itemID = value;
+                    _itemID = value;
                     OnPropertyChanged("ItemID");
                 }
             }
@@ -50,16 +49,12 @@ namespace Hospital.Model
 
         public int Quantity
         {
-            get
-            {
-                return quantity;
-            }
-
+            get => _quantity;
             set
             {
-                if (value != quantity)
+                if (value != _quantity)
                 {
-                    quantity = value;
+                    _quantity = value;
                     OnPropertyChanged("Quantity");
                 }
             }
@@ -67,68 +62,58 @@ namespace Hospital.Model
 
         public string FirstRoomID
         {
-            get
-            {
-                return firstRoomID;
-            }
+            get => _firstRoomID;
 
             set
             {
-                if (value != firstRoomID)
+                if (value != _firstRoomID)
                 {
-                    firstRoomID = value;
+                    _firstRoomID = value;
                     OnPropertyChanged("FirstRoomID");
                 }
             }
         }
 
-        public string SecondRoomID
+        public string DestinationRoomID
         {
-            get
-            {
-                return secondRoomID;
-            }
+            get => _destinationRoomID;
 
             set
             {
-                if (value != secondRoomID)
+                if (value != _destinationRoomID)
                 {
-                    secondRoomID = value;
-                    OnPropertyChanged("SecondRoomID");
+                    _destinationRoomID = value;
+                    OnPropertyChanged("DestinationRoomID");
                 }
             }
         }
 
-        public DateTime Date
+        public DateTime TransferDate
         {
             get
             {
-                return date;
+                return _transferDate;
             }
 
             set
             {
-                if (value != date)
+                if (value != _transferDate)
                 {
-                    date = value;
-                    OnPropertyChanged("Date");
+                    _transferDate = value;
+                    OnPropertyChanged("TransferDate");
                 }
             }
         }
 
-        public string Time
+        public string TransferTime
         {
-            get
-            {
-                return time;
-            }
-
+            get => _transferTime;
             set
             {
-                if (value != time)
+                if (value != _transferTime)
                 {
-                    time = value;
-                    OnPropertyChanged("Time");
+                    _transferTime = value;
+                    OnPropertyChanged("TransferTime");
                 }
             }
         }
@@ -137,110 +122,88 @@ namespace Hospital.Model
 
         public TransferInventory(string itemId, int quantity, string firstRoomID, string secondRoomID, DateTime date)
         {
-            this.itemID = itemId;
-            this.quantity = quantity;
-            this.firstRoomID = firstRoomID;
-            this.secondRoomID = secondRoomID;
-            this.date = date;
+            this._itemID = itemId;
+            this._quantity = quantity;
+            this._firstRoomID = firstRoomID;
+            this._destinationRoomID = secondRoomID;
+            this._transferDate = date;
         }
 
-        public void doTransfer()
+        public void StartTransfer()
         {
-            Task task = new Task(() => this.waitUntilChosenDate());
+            Task task = new Task(() => this.WaitUntilTransferDate());
             task.Start();
         }
 
-        public void waitUntilChosenDate()
+        public void WaitUntilTransferDate()
         {
-            TimeSpan timeSpan = this.Date.Subtract(DateTime.Now);
+            TimeSpan timeSpan = this.TransferDate.Subtract(DateTime.Now);
 
-            if (Date > DateTime.Now)
-            {
+            if (TransferDate > DateTime.Now)
                 Thread.Sleep(timeSpan);
-            }
        
-            updateInventory();
+           FinishTransfer();
         }
 
-        public void updateInventory(bool doRefresh = true)
+        public void FinishTransfer()
         {
-            InventoryStorage inventoryStorage = new InventoryStorage();
-            Inventory inventoryItem = inventoryStorage.GetOneByRoom(itemID, firstRoomID);
+            UpdateInventory();
+            RemoveTransferRequest();
+        }
 
-            if (firstRoomID.Equals(secondRoomID))
+        public void UpdateInventory()
+        {
+            Inventory inventoryItem = _inventoryStorage.GetOneByRoom(_itemID, _firstRoomID);
+
+            if (inventoryItem.Quantity >= Quantity)
             {
-                return;
-            }
+                if (IsTransferingItemExistsInDestinationRoom())
+                    IncreaseItemQuantityInDestinationRoom();
+                else
+                    AddTransferingItemDestinationRoom();
 
-            if (inventoryItem.Quantity >= quantity)
-            {
-                ObservableCollection<Inventory> inventoryInSecondRoom = new ObservableCollection<Inventory>();
-                inventoryInSecondRoom = inventoryStorage.GetByRoomID(secondRoomID);
+                ReduceItemQuantitiyInFirstRoom();
 
-                bool found = false;
-
-                foreach (Inventory i in inventoryInSecondRoom)
-                {
-                    if (i.Name.ToLower().Equals(inventoryItem.Name.ToLower()))
-                    {
-                        i.Quantity += quantity;
-                        found = true;
-                        break;
-                    }
-                }
-
-                if (!found)
-                {
-                    Inventory newItem = new Inventory
-                    {
-                        Id = itemID,
-                        Name = inventoryItem.Name,
-                        Quantity = quantity,
-                        Price = inventoryItem.Price,
-                        RoomID = secondRoomID
-                    };
-                    InventoryStorage.inventory.Add(newItem);
-                }
-
-                if(doRefresh)
-                {
-                    refreshView();
-                }
-               
-                foreach (Inventory i in InventoryStorage.inventory)
-                {
-                    if (i.Id.Equals(itemID) && i.RoomID.Equals(firstRoomID))
-                    {
-                        i.Quantity -= quantity;
-                    }
-                }
-
-                inventoryStorage.doSerialization();
-                StaticInventoryView.Inventory = inventoryStorage.GetByRoomID(this.FirstRoomID);
-
-                TransferInventoryStorage transferStorage = new TransferInventoryStorage();
-                transferStorage.Delete(this);
-
-            }
-            else
-            {
-               // MessageBox.Show("Pogrešan unos količine!");
-               // return;
+                StaticInventoryView.Inventory = _inventoryStorage.GetByRoomID(this.FirstRoomID);
             }
         }
 
-        public void refreshView()
+        public void RemoveTransferRequest()
         {
-            if (!StaticInventoryView.Inventory.Equals(null))
+            TransferInventoryStorage transferStorage = new TransferInventoryStorage();
+            transferStorage.Delete(this);
+        }
+
+        private bool IsTransferingItemExistsInDestinationRoom()
+        {
+            foreach (Inventory item in _inventoryStorage.GetByRoomID(DestinationRoomID))
             {
-                foreach (Inventory i in StaticInventoryView.Inventory)
-                {
-                    if (i.Id.Equals(itemID) && i.RoomID.Equals(firstRoomID))
-                    {
-                        i.Quantity -= quantity;
-                    }
-                }
+                if (item.Id.Equals(ItemID))
+                    return true;
             }
+            return false;
+        }
+
+        private void IncreaseItemQuantityInDestinationRoom()
+        {
+            Inventory itemInDestinationRoom = _inventoryStorage.GetOneByRoom(ItemID, DestinationRoomID);
+            itemInDestinationRoom.Quantity += Quantity;
+            _inventoryStorage.EditItem(itemInDestinationRoom);
+        }
+
+        private void AddTransferingItemDestinationRoom()
+        {
+            Inventory itemFromFirstRoom = _inventoryStorage.GetOneByRoom(_itemID, _firstRoomID);
+            itemFromFirstRoom.Quantity = Quantity;
+            itemFromFirstRoom.RoomID = DestinationRoomID;
+            _inventoryStorage.Save(itemFromFirstRoom);
+        }
+
+        private void ReduceItemQuantitiyInFirstRoom()
+        {
+            Inventory itemInFirstRoom = _inventoryStorage.GetOneByRoom(ItemID, FirstRoomID);
+            itemInFirstRoom.Quantity -= _quantity;
+            _inventoryStorage.EditItem(itemInFirstRoom);
         }
     }
 }

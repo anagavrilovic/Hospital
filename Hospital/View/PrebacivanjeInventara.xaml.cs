@@ -88,13 +88,13 @@ namespace Hospital.View
             InventoryStorage istorage = new InventoryStorage();
             transferItem.ItemID = inventorySeleceted.Id;
             transferItem.FirstRoomID = inventorySeleceted.RoomID;
-            transferItem.SecondRoomID = roomID.Text;
-            transferItem.Date = datumPrebacivanja.SelectedDate.Value.Date;
+            transferItem.DestinationRoomID = roomID.Text;
+            transferItem.TransferDate = datumPrebacivanja.SelectedDate.Value.Date;
 
-            TimeSpan timeSpan = TimeSpan.ParseExact(transferItem.Time, "c", null);
-            transferItem.Date = transferItem.Date.Add(timeSpan);
+            TimeSpan timeSpan = TimeSpan.ParseExact(transferItem.TransferTime, "c", null);
+            transferItem.TransferDate = transferItem.TransferDate.Add(timeSpan);
 
-            if (transferItem.Date < DateTime.Now)
+            if (transferItem.TransferDate < DateTime.Now)
             {
                 MessageBox.Show("Niste ispravno uneli vreme!");
                 return;
@@ -111,42 +111,42 @@ namespace Hospital.View
                 {
                     totalQuantityForTransfer += ti.Quantity;
 
-                    if (ti.Date > lastTransferItem.Date)
+                    if (ti.TransferDate > lastTransferItem.TransferDate)
                     {
                         lastTransferItem = ti;
                     }
                 }
             }
 
-            if (totalQuantityForTransfer + transferItem.Quantity > inventorySeleceted.Quantity && lastTransferItem.Date > transferItem.Date)
+            if (totalQuantityForTransfer + transferItem.Quantity > inventorySeleceted.Quantity && lastTransferItem.TransferDate > transferItem.TransferDate)
             {
 
                 if (lastTransferItem.Quantity <= transferItem.Quantity)
                 {
                     transferStorage.Delete(lastTransferItem);
-                    lastTransferItem.FirstRoomID = transferItem.SecondRoomID;
+                    lastTransferItem.FirstRoomID = transferItem.DestinationRoomID;
                     transferStorage.Save(lastTransferItem);
                 }
                 else
                 {
                     int newQuantity = lastTransferItem.Quantity - transferItem.Quantity;
                     transferStorage.Delete(lastTransferItem);
-                    lastTransferItem.FirstRoomID = transferItem.SecondRoomID;
+                    lastTransferItem.FirstRoomID = transferItem.DestinationRoomID;
                     lastTransferItem.Quantity = transferItem.Quantity;
                     transferStorage.Save(lastTransferItem);
 
-                    TransferInventory newTransfer = new TransferInventory(lastTransferItem.ItemID, newQuantity, inventorySeleceted.RoomID, lastTransferItem.SecondRoomID, lastTransferItem.Date + new TimeSpan(0, 0, 2));
+                    TransferInventory newTransfer = new TransferInventory(lastTransferItem.ItemID, newQuantity, inventorySeleceted.RoomID, lastTransferItem.DestinationRoomID, lastTransferItem.TransferDate + new TimeSpan(0, 0, 2));
                     transferStorage.Save(newTransfer);
                 }
             }
-            else if (totalQuantityForTransfer + transferItem.Quantity > inventorySeleceted.Quantity && lastTransferItem.Date < transferItem.Date)
+            else if (totalQuantityForTransfer + transferItem.Quantity > inventorySeleceted.Quantity && lastTransferItem.TransferDate < transferItem.TransferDate)
             {
                 MessageBox.Show("Sala ne raspolaže traženom količinom stavke. \n Pokušajte sa manjom količinom ili pogledajte stanje u drugim salama.");
                 return;
             }
 
             transferStorage.Save(transferItem);
-            transferItem.doTransfer();
+            transferItem.StartTransfer();
 
             StaticInventoryView.Inventory = istorage.GetByRoomID(this.inventorySeleceted.RoomID);
 

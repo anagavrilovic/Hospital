@@ -66,9 +66,10 @@ namespace Hospital.View
             TransferInventoryStorage transferStorage = new TransferInventoryStorage();
             foreach(TransferInventory ti in transferStorage.GetAll())
             {
-                if(ti.Date < DateTime.Now)
+                if(ti.TransferDate < DateTime.Now)
                 {
-                    ti.doTransfer();
+                    // ti.StartTransfer();
+                    ti.WaitUntilTransferDate();
                 }
             }
         }

@@ -98,8 +98,7 @@ namespace Hospital.Model
             foreach (Inventory inventory in inventoryStorage.GetByRoomID(Room.Id))
             {
                 TransferInventory transfer = new TransferInventory(inventory.Id, inventory.Quantity, Room.Id, WareHouse.Id, DateTime.Now);
-                transfer.updateInventory(false);
-               // StaticInventory.Inventory = inventoryStorage.GetByRoomID(Room.Id);
+                transfer.UpdateInventory();
             }            
         }
 
