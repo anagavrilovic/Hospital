@@ -30,13 +30,13 @@ namespace Hospital.View
         public ObservableCollection<string> PossibleDuration { get; set; }
 
         public AppointmentStorage AppointmentStorage { get; set; }
+        public RoomStorage RoomStorage { get; set; }
 
 
         public ZakazivanjeTermina(Hospital.Model.Doctor selectedDoctor, MedicalRecord selectedPatient, DateTime dateTimeForNewAppointment)
         {
             InitializeComponent();
             InitializeAllProperties();
-            LoadAvaliableRooms();
             ShowPossibleDuration();
 
             this.DataContext = this;
@@ -51,12 +51,7 @@ namespace Hospital.View
             AvaliableRooms = new ObservableCollection<Room>();
             PossibleDuration = new ObservableCollection<string>();
             AppointmentStorage = new AppointmentStorage();
-        }
-
-        private void LoadAvaliableRooms()
-        {
-            RoomStorage roomStorage = new RoomStorage();
-            AvaliableRooms = roomStorage.GetAll();
+            RoomStorage = new RoomStorage();
         }
 
         private void ShowPossibleDuration()
@@ -73,11 +68,11 @@ namespace Hospital.View
         {
             InitializeNewAppointment();
 
-            if (AppointmentStorage.IsOverlappingWithSomeAppointment(NewAppointment))
-            {
-                MessageBox.Show("Termin se poklapa sa nekim drugim terminom. Promenite trajanje ili odaberite drugi termin!");
+            if (!IsDoctorAvaliable())
                 return;
-            }
+
+            if (!IsPatientAvaliable())
+                return;
 
             AppointmentStorage.Save(NewAppointment);
             NavigationService.Navigate(new Kalendar(Doctor));
@@ -88,7 +83,6 @@ namespace Hospital.View
             SetPatientForNewAppointment();
             SetDoctorForNewAppointment();
             SetIDForNewAppointment();
-            SetTypeForNewAppointment();
         }
 
         private void SetPatientForNewAppointment()
@@ -110,14 +104,49 @@ namespace Hospital.View
             NewAppointment.IDAppointment = NewAppointment.GetHashCode().ToString();
         }
 
-        private void SetTypeForNewAppointment()
+        private bool IsDoctorAvaliable()
         {
-            NewAppointment.Type = (AppointmentType) ComboBoxType.SelectedIndex;
+            if (!AppointmentStorage.IsDoctorAvaliableForAppointment(NewAppointment))
+            {
+                MessageBox.Show("Doktor je već zauzet u ovom terminu. Promenite trajanje ili odaberite drugi termin!");
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool IsPatientAvaliable()
+        {
+            if (!AppointmentStorage.IsPatientAvaliableForAppointment(NewAppointment))
+            {
+                MessageBox.Show("Ovaj pacijent već ima zakazan pregled/operaciju u ovom terminu!");
+                return false;
+            }
+
+            return true;
         }
 
         private void OdustaniClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Kalendar(Doctor));
         }
+
+        private void DurationSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            LoadAvaliableRooms();
+        }
+            
+        private void TypeSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            NewAppointment.Type = (AppointmentType)ComboBoxType.SelectedIndex;
+            LoadAvaliableRooms();
+        }
+
+        private void LoadAvaliableRooms()
+        {
+            AvaliableRooms = RoomStorage.GetAvaliableRooms(NewAppointment);
+            Room.ItemsSource = AvaliableRooms;
+        }
+        
     }
 }

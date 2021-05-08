@@ -43,16 +43,28 @@ namespace Hospital
             DoSerialization(appointment);
         }
 
-        public bool IsOverlappingWithSomeAppointment(Appointment newAppointment)
+        public bool IsDoctorAvaliableForAppointment(Appointment newAppointment)
         {
             ObservableCollection<Appointment> allAppointments = GetAll();
             foreach (Appointment appointment in allAppointments)
             {
-                if (appointment.IsOverlappingWith(newAppointment))
-                    return true;
+                if (!appointment.IsDoctorAvaliable(newAppointment))
+                    return false;
             }
 
-            return false;
+            return true;
+        }
+
+        public bool IsPatientAvaliableForAppointment(Appointment newAppointment)
+        {
+            ObservableCollection<Appointment> allAppointments = GetAll();
+            foreach (Appointment appointment in allAppointments)
+            {
+                if (!appointment.IsPatientAvaliable(newAppointment))
+                    return false;
+            }
+
+            return true;
         }
 
         public bool CheckIfOverlap(DateTime startTime, DateTime endTime, string doctorID, ObservableCollection<MoveAppointment> option)
@@ -174,6 +186,36 @@ namespace Hospital
 
             Notification notification = new Notification(title, content);
             NotificationsUsers notificationsUsers = new NotificationsUsers(notification.Id, new MedicalRecordStorage().GetUsernameByIDPatient(appointment.IDpatient));
+            NotificationStorage notificationStorage = new NotificationStorage();
+            notificationStorage.SaveNotification(notification);
+            notificationStorage.SaveNotificationUser(notificationsUsers);
+        }
+
+        public void NotifyDoctor(Appointment appointment)
+        {
+            StringBuilder stringBuilder = new StringBuilder("");
+            string title = "";
+            string content = "";
+
+            if (appointment.Type.Equals(AppointmentType.urgentExamination) || appointment.Type.Equals(AppointmentType.examination))
+            {
+                title = "HITAN PREGLED";
+
+                stringBuilder.Append("Imate hitan pregled u ").Append(appointment.DateTime.ToString("HH:mm")).Append(" , ordinacija \"").Append(appointment.Room.Name).Append("\".");
+                content = stringBuilder.ToString();
+            }
+
+            else if (appointment.Type.Equals(AppointmentType.urgentOperation) || appointment.Type.Equals(AppointmentType.operation))
+            {
+                title = "HITNA OPERACIJA";
+
+                stringBuilder.Append("Imate hitanu operaciju u ").Append(appointment.DateTime.ToString("HH:mm")).Append(" , sala \"").Append(appointment.Room.Name).Append("\".");
+                content = stringBuilder.ToString();
+            }
+
+            Notification notification = new Notification(title, content);
+            NotificationsUsers notificationsUsers = new NotificationsUsers(notification.Id, new DoctorStorage().GetUsernameByIDDoctor(appointment.IDDoctor));
+
             NotificationStorage notificationStorage = new NotificationStorage();
             notificationStorage.SaveNotification(notification);
             notificationStorage.SaveNotificationUser(notificationsUsers);

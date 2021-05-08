@@ -165,7 +165,7 @@ namespace Hospital.View.Secretary
                 foreach (Model.Doctor doctor in possibleDoctors)
                 {
                     SetDoctorForNewAppointment(doctor);
-                    if (AppointmentStorage.IsOverlappingWithSomeAppointment(NewUrgentAppointment))
+                    if (AppointmentStorage.IsDoctorAvaliableForAppointment(NewUrgentAppointment))
                         return true;
                 }
                 NewUrgentAppointment.DateTime = NewUrgentAppointment.DateTime.AddMinutes(30);

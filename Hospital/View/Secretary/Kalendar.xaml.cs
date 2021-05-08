@@ -258,21 +258,49 @@ namespace Hospital.View
 
         private void ScheduleAppointmentClick(object sender, RoutedEventArgs e)
         {
-            if (KalendarDataGrid.SelectedCells.Count == 0)
-            {
-                MessageBox.Show("Odaberite termin koji želite da zakažete.");
+            if(!IsEveryInformationForNewAppointmentChosen())
                 return;
-            }
 
-            int indexColumn = KalendarDataGrid.SelectedCells[0].Column.DisplayIndex;
-            string time = ((WeeklyCalendarRow)KalendarDataGrid.SelectedCells[0].Item).TimeInRow;
-            DateTime dateTimeForNewAppointment = SetDateTimeForNewAppointment(indexColumn, time);
+            DateTime dateTimeForNewAppointment = SetDateTimeForNewAppointment();
+            
+            if (IsChosenDateInPast(dateTimeForNewAppointment))
+                return;
 
             NavigationService.Navigate(new ZakazivanjeTermina(SelectedDoctorForNewAppointment, SelectedPatientForNewAppointment, dateTimeForNewAppointment));
         }
 
-        private DateTime SetDateTimeForNewAppointment(int dayOfWeek, string time)
+        private bool IsEveryInformationForNewAppointmentChosen()
         {
+            if(KalendarDataGrid.SelectedCells.Count == 0)
+            {
+                MessageBox.Show("Odaberite termin koji želite da zakažete.");
+                return false;
+            }
+            else if(SelectedDoctorForNewAppointment == null)
+            {
+                MessageBox.Show("Odaberite doktora kod kojeg želite da zakažete termin.");
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool IsChosenDateInPast(DateTime dateTimeForNewAppointment)
+        {
+            if(dateTimeForNewAppointment < DateTime.Now)
+            {
+                MessageBox.Show("Ne možete zakazati termin u prošlosti.");
+                return true;
+            }
+
+            return false;
+        }
+
+        private DateTime SetDateTimeForNewAppointment()
+        {
+            int dayOfWeek = KalendarDataGrid.SelectedCells[0].Column.DisplayIndex;
+            string time = ((WeeklyCalendarRow)KalendarDataGrid.SelectedCells[0].Item).TimeInRow;
+
             DateTime date = WeekBegin.AddDays(dayOfWeek - 1);
 
             string[] vreme = time.Split(':');
