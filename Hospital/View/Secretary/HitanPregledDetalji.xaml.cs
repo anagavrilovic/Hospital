@@ -55,9 +55,9 @@ namespace Hospital.View.Secretary
 
         private void LoadAppointmentType()
         {
-            if (Appointment.Type.Equals(AppointmentType.examination))
+            if (Appointment.Type.Equals(AppointmentType.urgentExamination))
                 Type = "pregled";
-            else if (Appointment.Type.Equals(AppointmentType.operation))
+            else if (Appointment.Type.Equals(AppointmentType.urgentOperation))
                 Type = "operacija";
         }
 

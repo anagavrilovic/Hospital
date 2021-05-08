@@ -52,6 +52,11 @@
         </Grid>
 
         <Border Grid.Row="2" Margin="15,5,15,15" CornerRadius="10" Background="{StaticResource MainWhite}">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+            </Border.Effect>
+        </Border>
+        <Border Grid.Row="2" Margin="15,5,15,15" CornerRadius="10" Background="{StaticResource MainWhite}">
             <Grid Margin="0,50,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition />

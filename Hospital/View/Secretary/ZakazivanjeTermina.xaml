@@ -24,6 +24,11 @@
         </StackPanel>
 
         <Border Grid.Row="1" Margin="15,30,0,15" Width="600" CornerRadius="10" Background="{StaticResource MainWhite}" HorizontalAlignment="Left">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+            </Border.Effect>
+        </Border>
+        <Border Grid.Row="1" Margin="15,30,0,15" Width="600" CornerRadius="10" Background="{StaticResource MainWhite}" HorizontalAlignment="Left">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>

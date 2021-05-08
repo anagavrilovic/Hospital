@@ -45,6 +45,11 @@
 
             <!-- Levi Grid -->
             <Border Margin="15,30,7.5,20" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                </Border.Effect>
+            </Border>
+            <Border Margin="15,30,7.5,20" CornerRadius="10" Background="{StaticResource MainWhite}">
                 <Grid Margin="0,30,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -99,6 +104,11 @@
 
 
             <!-- Desni Grid -->
+            <Border Grid.Column="1" Margin="7.5,30,15,20" Height="400" CornerRadius="10" Background="{StaticResource MainWhite}" VerticalAlignment="Top">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                </Border.Effect>
+            </Border>
             <Border Grid.Column="1" Margin="7.5,30,15,20" Height="400" CornerRadius="10" Background="{StaticResource MainWhite}" VerticalAlignment="Top">
                 <Grid Margin="0,30,0,40">
                     <Grid.RowDefinitions>

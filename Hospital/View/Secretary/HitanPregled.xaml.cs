@@ -144,6 +144,7 @@ namespace Hospital.View.Secretary
         {
             if (IsScheduledWithoutReschedulingAppointments())
             {
+                SetRoomForNewUrgentAppointment();
                 var urgentAppointmentWindow = new HitanPregledDetalji(NewUrgentAppointment);
                 urgentAppointmentWindow.Show();
                 NavigationService.Navigate(new HitanPregled());
@@ -171,6 +172,12 @@ namespace Hospital.View.Secretary
                 NewUrgentAppointment.DateTime = NewUrgentAppointment.DateTime.AddMinutes(30);
             }
             return false;
+        }
+
+        private void SetRoomForNewUrgentAppointment()
+        {
+            ObservableCollection<Room> avaliableRooms = new RoomStorage().GetAvaliableRooms(NewUrgentAppointment);
+            NewUrgentAppointment.Room = avaliableRooms[0];
         }
 
         private void SetDateTimeForNewAppointment()

@@ -35,6 +35,11 @@
             </Grid.ColumnDefinitions>
 
             <Border Margin="15,5,7,30" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                </Border.Effect>
+            </Border>
+            <Border Margin="15,5,7,30" CornerRadius="10" Background="{StaticResource MainWhite}">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,0">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Ime:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
@@ -139,6 +144,11 @@
                 </StackPanel>
             </Border>
 
+            <Border Grid.Column="1" Margin="7,5,15,30" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                </Border.Effect>
+            </Border>
             <Border Grid.Column="1" Margin="7,5,15,30" CornerRadius="10" Background="{StaticResource MainWhite}">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0">
                     <StackPanel Margin="0,20" >
