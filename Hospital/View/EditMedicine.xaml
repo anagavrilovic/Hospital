@@ -31,22 +31,17 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
-            <Button  Click="Back"   Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
-                <Image  Source="/Icon/back.png" Margin="10,8,0,5"/>
+            <Button  Click="BackButtonClick"   Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
+                <Image  Source="/Icon/back.png" Margin="10,0,0,0" Height="61" Width="56"/>
             </Button>
-            <Label Content="IZMENA LEKA" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" Margin="8,20,9,9.8"/>
-            <Image Source="/Icon/logo.png" Margin="50,5,23,9.8" Width="137"/>
+            <Label Content="IZMENA LEKA" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" Margin="8,25,9,9.8"/>
+            <Image Source="/Icon/logo.png" Margin="30,5,23,9.8" Width="137"/>
         </StackPanel>
 
-        <ScrollViewer Grid.Row="2" Grid.RowSpan="19" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Hidden" Margin="0,0,0,0">
+        <ScrollViewer Grid.Row="2" Grid.RowSpan="14" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Hidden" Margin="0,0,0,0">
             <Grid Grid.Row="0" Grid.RowSpan="16" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
@@ -85,67 +80,25 @@
                 <Label Content="Količina:" Grid.Row="6" Grid.Column="0"  Foreground="#FF1E49D9" FontSize="16" Margin="5,1,1,1" Grid.ColumnSpan="2" />
                 <Label Content="Cena:"     Grid.Row="8" Grid.Column="0"  Foreground="#FF1E49D9" FontSize="16" Margin="5,1,1,1" Grid.ColumnSpan="2" />
                 <Label Content="Sastojci:" Grid.Row="10" Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="5,1,1,1" Grid.ColumnSpan="2" />
-                <Label Content="Revidira:" Grid.Row="18" Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="5,1,1,1" Grid.ColumnSpan="2" />
 
-                <TextBox x:Name="idTxt"     Text="{Binding MedicineOnRevision.Medicine.ID,   Mode=TwoWay, UpdateSourceTrigger=Explicit}"    Grid.Row="1" Grid.ColumnSpan="2" Margin="30,0,28,21" BorderBrush="#FF26282C" IsEnabled="False"/>
-                <TextBox x:Name="nameTxt"   Text="{Binding MedicineOnRevision.Medicine.Name, Mode=TwoWay, UpdateSourceTrigger=Explicit}"    Grid.Row="3" Grid.ColumnSpan="2" Margin="30,4,28,21" BorderBrush="#FF26282C" />
-                <TextBox x:Name="dosageTxt" Text="{Binding MedicineOnRevision.Medicine.Price, Mode=TwoWay, UpdateSourceTrigger=Explicit}"   Grid.Row="5" Grid.ColumnSpan="2" Margin="30,4,28,20" BorderBrush="#FF26282C"/>
+                <TextBox x:Name="idTxt"     Text="{Binding Medicine.ID,         Mode=TwoWay,  UpdateSourceTrigger=Explicit}"    Grid.Row="1" Grid.ColumnSpan="2" Margin="30,0,28,21" BorderBrush="#FF26282C" IsEnabled="False"/>
+                <TextBox x:Name="nameTxt"   Text="{Binding Medicine.Name,       Mode=TwoWay,  UpdateSourceTrigger=Explicit}"    Grid.Row="3" Grid.ColumnSpan="2" Margin="30,4,28,21" BorderBrush="#FF26282C" IsEnabled="False"/>
+                <TextBox x:Name="dosageTxt" Text="{Binding Medicine.DosageInMg, Mode=TwoWay,  UpdateSourceTrigger=Explicit}"    Grid.Row="5" Grid.ColumnSpan="2" Margin="30,4,28,20" BorderBrush="#FF26282C" IsEnabled="False"/>
 
 
                 <TextBox x:Name="quantityTxt" Grid.Row="7" Grid.ColumnSpan="2" Margin="30,4,28,22" BorderBrush="#FF26282C">
                     <TextBox.Text>
-                        <Binding  Path="MedicineOnRevision.Medicine.Quantity"    Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                            <Binding.ValidationRules>
-                                <val:StringToInteger ValidationStep="RawProposedValue"/>
-                            </Binding.ValidationRules>
-                        </Binding>
+                        <Binding  Path="Medicine.Quantity"    Mode="TwoWay" UpdateSourceTrigger="Explicit"/>
                     </TextBox.Text>
-                    <Validation.ErrorTemplate>
-                        <ControlTemplate>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-
-                                <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="quantityTxt"/>
-                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
-                            </Grid>
-                        </ControlTemplate>
-                    </Validation.ErrorTemplate>
-                </TextBox>
+               </TextBox>
 
                 <TextBox x:Name="priceTxt" Grid.Row="9" Grid.ColumnSpan="2" Margin="30,4,28,20" BorderBrush="#FF26282C">
                     <TextBox.Text>
-                        <Binding  Path="MedicineOnRevision.Medicine.Price"    Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                            <Binding.ValidationRules>
-                                <val:StringToDouble ValidationStep="RawProposedValue"/>
-                                <val:MinValue       ValidationStep="ConvertedProposedValue" Min="0" />
-                            </Binding.ValidationRules>
-                        </Binding>
+                        <Binding  Path="Medicine.Price"    Mode="TwoWay" UpdateSourceTrigger="Explicit"/>
                     </TextBox.Text>
-                    <Validation.ErrorTemplate>
-                        <ControlTemplate>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-
-                                <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="priceTxt"/>
-                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
-                            </Grid>
-                        </ControlTemplate>
-                    </Validation.ErrorTemplate>
                 </TextBox>
 
-                <Border Grid.Row="11"  Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="30,4,28,5" CornerRadius="10">
+              <Border Grid.Row="11"  Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="30,4,28,5" CornerRadius="10">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
@@ -153,42 +106,13 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Margin="2,2,2,2">
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                <Button Width="30" Height="30"  Click="BtnPlusIngredients">
-                                    <Image Source="/Icon/plus.png"/>
-                                </Button>
-                                <Button Width="30" Height="30"  Click="BtnMinusIngredients" Margin="5,0,3,0">
-                                    <Image Source="/Icon/minus.png"/>
-                                </Button>
-                                <TextBox x:Name="search" TextChanged="SearchIngredients"  Margin="5,2,2,2" Width="244"/>
-                                <Image Source="/Icon/search-blue.png"  Margin="2,2,2,2" MouseDown="BtnSearchMouseDown" Height="30" Width="41"/>
-                            </StackPanel>
-                            <ListBox ItemsSource="{Binding Ingredients}" x:Name="allIngredientsList" Height="100" Margin="0,0,0.6,0" />
+                            <ListBox ItemsSource="{Binding Medicine.Ingredient, Mode=TwoWay, UpdateSourceTrigger=Explicit}" x:Name="ingredientsList" Height="100" Margin="0,0,0.6,0" />
                         </StackPanel>
                     </Grid>
                 </Border>
 
-                <Border Grid.Row="15"  Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="30,4,28,5" CornerRadius="10">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-
-                        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Margin="2,2,2,2">
-                            <ListBox ItemsSource="{Binding MedicineOnRevision.Medicine.Ingredient, Mode=TwoWay, UpdateSourceTrigger=Explicit}" x:Name="ingredientsList" Height="100" Margin="0,0,0.6,0" />
-                        </StackPanel>
-                    </Grid>
-                </Border>
-
-                <ComboBox Grid.Row="19" Grid.ColumnSpan="2" Margin="30,0,28,0" BorderThickness="1"
-                    IsSynchronizedWithCurrentItem="True" x:Name="doctorsCB"
-                    ItemsSource="{Binding DoctorsNameSurname}"
-                    SelectedItem="{Binding SomeBindingPropertySelectedCurrently, 
-                    Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                <Button x:Name="sendOnRevision" Content="POŠALJI NA REVIZIJU" Grid.Row="21" Grid.Column="0"  Margin="19,0,10,0" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="SendAgainOnRevision"/>
-                <Button x:Name="cancel"         Content="ODUSTANI"            Grid.Row="21" Grid.Column="1"  Margin="10,0,22,0" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="Cancel"/>
+                <Button x:Name="sendOnRevision" Content="POTVRDI"    Grid.Row="15" Grid.Column="0"  Margin="19,0,10,0" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="AcceptEditingMedicine"/>
+                <Button x:Name="cancel"         Content="ODUSTANI"   Grid.Row="15" Grid.Column="1"  Margin="10,0,22,0" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="CancelEditingMedicine"/>
 
             </Grid>
         </ScrollViewer>

@@ -18,6 +18,7 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -26,14 +27,14 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
-            <Button Background="#FF95C0F4" BorderBrush="#FF95C0F4" Click="back">
+            <Button Background="#FF95C0F4" BorderBrush="#FF95C0F4" Click="Back">
                 <Image Source="/Icon/back.png"  Margin="0,0,5,0" Height="63" Width="55"/>
             </Button>
             <Label Content="REVIZIJA LEKOVA"    Margin="0,25,5,18.6" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="18"  />
-            <Image Source="/Icon/logo.png"  Margin="60,20,6,18.6" Width="133"/>
+            <Image Source="/Icon/logo.png"  Margin="60,10,6,9.8" Width="131"/>
         </StackPanel>
 
-        <Button Grid.Row="1" Grid.ColumnSpan="2" Content="IZMENI LEK" Margin="10,18.4,10,19.2" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="editMedicine"/>
+        <Button Grid.Row="1" Grid.ColumnSpan="2" Content="IZMENI LEK" Margin="29,18.2,31,19.6" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="EditMedicine"/>
 
         <Grid Grid.Row="2" Grid.RowSpan="7" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
@@ -44,8 +45,9 @@
                          ScrollViewer.VerticalScrollBarVisibility="Hidden">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid Height="180" Width="400">
+                        <Grid Height="200" Width="400">
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -64,16 +66,18 @@
                             <Label     Grid.Row="1" Grid.Column="0" Content="Naziv leka:"          />
                             <Label     Grid.Row="2" Grid.Column="0" Content="Doza u miligramima:"  />
                             <Label     Grid.Row="3" Grid.Column="0" Content="Revidira:"            />
-                            <Label     Grid.Row="4" Grid.Column="0" Content="Komentar lekara:"     />
-                          
+                            <Label     Grid.Row="4" Grid.Column="0" Content="Status:"              />
+                            <Label     Grid.Row="5" Grid.Column="0" Content="Komentar lekara:"     />
+
                             <TextBlock Grid.Row="0" Grid.Column="1"     Text="{Binding Medicine.ID,          Mode=OneWay}"  Margin="0,4,0,0"/>
                             <TextBlock Grid.Row="1" Grid.Column="1"     Text="{Binding Medicine.Name,        Mode=OneWay}"  Margin="0,4,0,0" />
                             <TextBlock Grid.Row="2" Grid.Column="1"     Text="{Binding Medicine.DosageInMg,  Mode=OneWay}"  Margin="0,4,0,0" />
-                            <TextBlock x:Name="doctorTxt" Grid.Row="3" Grid.Column="1"     Text="{Binding DoctorID,             Mode=OneWay}"  Margin="0,4,0,0" />
-                            <ScrollViewer Grid.Row="5" Grid.ColumnSpan="3" Margin="5,5,5,5" VerticalScrollBarVisibility="Hidden">
+                            <TextBlock Grid.Row="3" Grid.Column="1"     Text="{Binding RevisionDoctor.FirstName,  Mode=OneWay}"  Margin="0,4,0,0" />
+                            <TextBlock Grid.Row="4" Grid.Column="1"     Text="{Binding RevisionStatus,       Mode=OneWay}"  Margin="0,4,0,0" />
+                            <ScrollViewer Grid.Row="6" Grid.ColumnSpan="3" Margin="15,5,5,5" VerticalScrollBarVisibility="Hidden">
                                 <TextBlock Text="{Binding RevisionExplanation, Mode=OneWay}" TextWrapping="Wrap" />
                             </ScrollViewer>
-                            <Separator Grid.Row="6" Grid.ColumnSpan="3"/>
+                            <Separator Grid.Row="7" Grid.ColumnSpan="3"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

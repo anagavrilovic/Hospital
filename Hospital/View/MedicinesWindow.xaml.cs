@@ -64,11 +64,8 @@ namespace Hospital.View
         private void EditMedicineButtonClick(object sender, RoutedEventArgs e)
         {
             Medicine selectedMedicine = (Medicine)dataGridMedicines.SelectedItem;
-            MedicineRevision medicineRevision = new MedicineRevision();
-            medicineRevision.Medicine = selectedMedicine;
-           /* EditMedicine editMedicine = new EditMedicine(medicineRevision);
-            editMedicine.Owner = Application.Current.MainWindow;
-            editMedicine.Show();*/
+            EditMedicine editMedicine = new EditMedicine(selectedMedicine);
+            NavigationService.Navigate(editMedicine);
         }
 
         private void DeleteMedicineButtonClick(object sender, RoutedEventArgs e)

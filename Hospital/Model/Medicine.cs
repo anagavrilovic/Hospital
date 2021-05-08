@@ -66,6 +66,17 @@ namespace Hospital
             }
         }
 
+        private int quantity;
+        public int Quantity
+        {
+            get => quantity;
+            set
+            {
+                quantity = value;
+                OnPropertyChanged("Quuantity");
+            }
+        }
+
         private double price;
         public double Price
         {

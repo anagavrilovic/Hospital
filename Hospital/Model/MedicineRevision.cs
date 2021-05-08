@@ -75,5 +75,20 @@ namespace Hospital.Model
                 OnPropertyChanged("IsMedicineRevised");
             }
         }
+
+        
+        private string revisionStatus;
+        [JsonIgnore]
+        public string RevisionStatus
+        {
+            get => revisionStatus;
+            set
+            {
+                revisionStatus = value;
+                OnPropertyChanged("RevisionStatus");
+            }
+        }
+
+
     }
 }

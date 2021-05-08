@@ -47,19 +47,45 @@ namespace Hospital.View
             this.DataContext = this;
             this._medicineRevisionStorage = new MedicineRevisionStorage();
             MedicinesOnRevision = _medicineRevisionStorage.GetAll();
+
+            SetRevisionStatusTextBlock();
+            SetRevisionDoctorTextBlock();
         }
 
-        private void editMedicine(object sender, RoutedEventArgs e)
+        private void SetRevisionDoctorTextBlock()
+        {
+            DoctorStorage doctorStorage = new DoctorStorage();
+
+            foreach(MedicineRevision mr in MedicinesOnRevision)
+            {
+                Hospital.Model.Doctor dr = doctorStorage.GetDoctorByID(mr.DoctorID);
+                mr.RevisionDoctor = dr;
+                mr.RevisionDoctor.FirstName = dr.ToString();
+            }
+        }
+
+        private void SetRevisionStatusTextBlock()
+        {
+            foreach(MedicineRevision mr in MedicinesOnRevision)
+            {
+                if (mr.IsMedicineRevised)
+                    mr.RevisionStatus = "Vracen sa revizije";
+                else
+                    mr.RevisionStatus = "Na reviziji";
+            }
+        }
+
+        private void EditMedicine(object sender, RoutedEventArgs e)
         {
             MedicineRevision selectedMedicineOnRevision = (MedicineRevision)listBoxMedicines.SelectedItem;
             if (selectedMedicineOnRevision == null)
                 return;
 
-            EditMedicine editMedicine = new EditMedicine(selectedMedicineOnRevision);
+            EditMedicineOnRevision editMedicine = new EditMedicineOnRevision(selectedMedicineOnRevision);
             NavigationService.Navigate(editMedicine);
         }
 
-        private void back(object sender, RoutedEventArgs e)
+        private void Back(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new MedicinesWindow());
         }

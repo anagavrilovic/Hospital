@@ -188,11 +188,14 @@
     <Compile Include="View\Doktor\Termin.xaml.cs">
       <DependentUpon>Termin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditMedicine.xaml.cs">
+      <DependentUpon>EditMedicine.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\FilteringInventory.xaml.cs">
       <DependentUpon>FilteringInventory.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditMedicine.xaml.cs">
-      <DependentUpon>EditMedicine.xaml</DependentUpon>
+    <Compile Include="View\EditMedicineOnRevision.xaml.cs">
+      <DependentUpon>EditMedicineOnRevision.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ManagerMainPage.xaml.cs">
       <DependentUpon>ManagerMainPage.xaml</DependentUpon>
@@ -435,11 +438,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\EditMedicine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\FilteringInventory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditMedicine.xaml">
+    <Page Include="View\EditMedicineOnRevision.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
