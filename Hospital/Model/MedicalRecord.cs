@@ -8,15 +8,14 @@ namespace Hospital
 {
     public class MedicalRecord : INotifyPropertyChanged
     {
-        private String healthCardNumber;
-        private String parentName;
-        private Boolean isInsured;
-        private String medicalRecordID;
+        private string healthCardNumber;
+        private string parentName;
+        private bool isInsured;
+        private string medicalRecordID;
         private Patient patient = new Patient();
         private List<Examination> examination = new List<Examination>();
         private Allergen allergen = new Allergen();
         private BloodType bloodType;
-
 
         public MedicalRecord() {}
 
@@ -44,7 +43,7 @@ namespace Hospital
             }
         }
 
-        public String HealthCardNumber
+        public string HealthCardNumber
         {
             get => healthCardNumber;
             set
@@ -54,7 +53,7 @@ namespace Hospital
             }
         }
 
-        public String ParentName
+        public string ParentName
         {
             get => parentName;
             set
@@ -64,7 +63,7 @@ namespace Hospital
             }
         }
 
-        public Boolean IsInsured
+        public bool IsInsured
         {
             get => isInsured;
             set
@@ -74,7 +73,7 @@ namespace Hospital
             }
         }
 
-        public String MedicalRecordID
+        public string MedicalRecordID
         {
             get => medicalRecordID;
             set
@@ -84,10 +83,6 @@ namespace Hospital
             }
         }
 
-        /// <summary>
-        /// Property for collection of Examination
-        /// </summary>
-        /// <pdGenerated>Default opposite class collection property</pdGenerated>
         public List<Examination> Examination
         {
             get
@@ -107,10 +102,6 @@ namespace Hospital
             }
         }
 
-        /// <summary>
-        /// Add a new Examination in the collection
-        /// </summary>
-        /// <pdGenerated>Default Add</pdGenerated>
         public void AddExamination(Examination newExamination)
         {
             if (newExamination == null)
@@ -121,10 +112,6 @@ namespace Hospital
                 this.examination.Add(newExamination);
         }
 
-        /// <summary>
-        /// Remove an existing Examination from the collection
-        /// </summary>
-        /// <pdGenerated>Default Remove</pdGenerated>
         public void RemoveExamination(Examination oldExamination)
         {
             if (oldExamination == null)
@@ -134,10 +121,6 @@ namespace Hospital
                     this.examination.Remove(oldExamination);
         }
 
-        /// <summary>
-        /// Remove all instances of Examination from the collection
-        /// </summary>
-        /// <pdGenerated>Default removeAll</pdGenerated>
         public void RemoveAllExamination()
         {
             if (examination != null)
@@ -157,14 +140,39 @@ namespace Hospital
         override
         public string ToString()
         {
-            StringBuilder sb = new StringBuilder("");
-            sb.Append(this.Patient.FirstName);
-            sb.Append(" ");
-            sb.Append(this.Patient.LastName);
-            sb.Append(" ");
-            sb.Append(this.Patient.PersonalID);
+            StringBuilder stringBuilder = new StringBuilder("");
+            stringBuilder.Append(this.Patient.FirstName).Append(" ").Append(this.Patient.LastName).Append(" | ").Append(this.Patient.PersonalID);
 
-            return sb.ToString();
+            return stringBuilder.ToString();
+        }
+
+        public void DeepCopy(MedicalRecord original)
+        {
+            this.Patient.FirstName = original.Patient.FirstName;
+            this.Patient.LastName = original.Patient.LastName;
+            this.Patient.Address.Street = original.Patient.Address.Street;
+            this.Patient.Address.StreetNumber = original.Patient.Address.StreetNumber;
+            this.Patient.CardID = original.Patient.CardID;
+            this.Patient.Address.City.CityName = original.Patient.Address.City.CityName;
+            this.Patient.Address.City.Country.CountryName = original.Patient.Address.City.Country.CountryName;
+            this.Patient.DateOfBirth = original.Patient.DateOfBirth;
+            this.Patient.Email = original.Patient.Email;
+            this.Patient.Gender = original.Patient.Gender;
+            this.Patient.IsGuest = original.Patient.IsGuest;
+            this.Patient.MaritalStatus = original.Patient.MaritalStatus;
+            this.Patient.Password = original.Patient.Password;
+            this.Patient.PersonalID = original.Patient.PersonalID;
+            this.Patient.PhoneNumber = original.Patient.PhoneNumber;
+            this.Patient.Address.City.Township = original.Patient.Address.City.Township;
+            this.Patient.Address.City.PostalCode = original.Patient.Address.City.PostalCode;
+            this.Patient.Username = original.Patient.Username;
+            this.Allergen = original.Allergen;
+            this.Examination = original.Examination;
+            this.HealthCardNumber = original.HealthCardNumber;
+            this.IsInsured = original.IsInsured;
+            this.MedicalRecordID = original.MedicalRecordID;
+            this.ParentName = original.ParentName;
+            this.BloodType = original.BloodType;
         }
     }
 }

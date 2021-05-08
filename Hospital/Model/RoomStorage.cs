@@ -40,9 +40,9 @@ namespace Hospital
             }
             else
             {
-                foreach(Room r in rooms)
+                foreach (Room r in rooms)
                 {
-                    if(r.Id.Equals(parameter1.Id))
+                    if (r.Id.Equals(parameter1.Id))
                     {
                         r.Name = parameter1.Name;
                         r.Floor = parameter1.Floor;
@@ -67,7 +67,7 @@ namespace Hospital
                     InventoryStorage.inventory = storage.GetAll();
                     foreach (Inventory i in InventoryStorage.inventory)
                     {
-                        if(i.RoomID.Equals(id))
+                        if (i.RoomID.Equals(id))
                             i.RoomID = "M1";
                     }
                     storage.doSerialization();
@@ -116,5 +116,32 @@ namespace Hospital
         public static ObservableCollection<Room> rooms = new ObservableCollection<Room>();
         public String fileName;
 
+        public ObservableCollection<Room> GetAvaliableRooms(Appointment appointment)
+        {
+            ObservableCollection<Room> allRooms = GetAllRoomsWithoutMagazines();
+            ObservableCollection<Room> avaliableRooms = new ObservableCollection<Room>();
+
+            foreach (Room room in allRooms)
+                if (room.IsRoomAvaliableInSelectedPeriod(appointment) && room.IsSuitableRoom(appointment.Type))
+                    avaliableRooms.Add(room);
+
+            return avaliableRooms;
+        }
+
+        public ObservableCollection<Room> GetAllRoomsWithoutMagazines()
+        {
+            ObservableCollection<Room> allRooms = GetAll();
+            ObservableCollection<Room> requestedRooms = new ObservableCollection<Room>();
+
+            foreach(Room room in allRooms)
+            {
+                if (!room.IsMagazine())
+                    requestedRooms.Add(room);
+            }
+
+            return requestedRooms;
+        }
+
     }
 }
+   

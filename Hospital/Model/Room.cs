@@ -2,6 +2,7 @@
 using Hospital.Model;
 using Newtonsoft.Json;
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace Hospital
@@ -147,6 +148,37 @@ namespace Hospital
         public string ToString()
         {
             return this.Name;
+        }
+
+        public bool IsMagazine()
+        {
+            return this.Type.Equals(RoomType.MAGACIN);
+        }
+
+        public bool IsRoomAvaliableInSelectedPeriod(Appointment appointment)
+        {
+            ObservableCollection<Appointment> allAppointments = new AppointmentStorage().GetAll();
+
+            foreach (Appointment a in allAppointments)
+            {
+                if (a.IsOverlappingWith(appointment) && this.Id.Equals(a.Room.Id))
+                    return false;
+            }
+
+            return true;
+        }
+
+        public bool IsSuitableRoom(AppointmentType appointmentType)
+        {
+            if (appointmentType.Equals(AppointmentType.examination) || appointmentType.Equals(AppointmentType.urgentExamination))
+                if (this.Type.Equals(RoomType.SALA_ZA_PREGLEDE))
+                    return true;
+
+            if (appointmentType.Equals(AppointmentType.operation) || appointmentType.Equals(AppointmentType.urgentOperation))
+                if (this.Type.Equals(RoomType.OPERACIONA_SALA))
+                    return true;
+
+            return false;
         }
     }
 }

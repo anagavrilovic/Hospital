@@ -32,6 +32,7 @@ namespace Hospital.View.Secretary
         public AppointmentStorage AppointmentStorage { get; set; }
         public MedicalRecordStorage MedicalRecordStorage { get; set; }
         public DoctorStorage DoctorStorage { get; set; }
+        public RoomStorage RoomStorage { get; set; }
 
 
         // Methods
@@ -51,6 +52,7 @@ namespace Hospital.View.Secretary
             AppointmentStorage = new AppointmentStorage();
             MedicalRecordStorage = new MedicalRecordStorage();
             DoctorStorage = new DoctorStorage();
+            RoomStorage = new RoomStorage();
         }
 
         private void FindAllOptions()
@@ -60,7 +62,7 @@ namespace Hospital.View.Secretary
             foreach (Model.Doctor doctor in possibleDoctors)
             {
                 SetDateTimeForNewAppointment();
-                SetDoctorForNewAppointment(doctor);
+                SetDoctorForNewUrgentAppointment(doctor);
 
                 for (int i = 0; i < 3; i++)
                 {
@@ -100,7 +102,7 @@ namespace Hospital.View.Secretary
                 NewUrgentAppointment.DateTime = NewUrgentAppointment.DateTime.AddMinutes(60 - NewUrgentAppointment.DateTime.Minute);
         }
 
-        private void SetDoctorForNewAppointment(Model.Doctor doctor)
+        private void SetDoctorForNewUrgentAppointment(Model.Doctor doctor)
         {
             NewUrgentAppointment.IDDoctor = doctor.PersonalID;
             NewUrgentAppointment.DoctrosNameSurname = doctor.FirstName + " " + doctor.LastName;
@@ -148,11 +150,14 @@ namespace Hospital.View.Secretary
             if (SelectedOption == null)
                 MessageBox.Show("Selektujte opciju za pomeranje već postojećih termina!");
 
-            ChangeTimeForNewUrgentAppointment(SelectedOption.NewUrgentAppointmentTime);
-            SetDoctorForNewAppointment(SelectedOption.Option[0].Doctor);
+            SetTimeForNewUrgentAppointment(SelectedOption.NewUrgentAppointmentTime);
+            SetDoctorForNewUrgentAppointment(SelectedOption.Option[0].Doctor);
 
             AppointmentStorage.RescheduleAppointments(SelectedOption.Option);
+            SetRoomForNewUrgentAppointment();
+
             AppointmentStorage.Save(NewUrgentAppointment);
+            AppointmentStorage.NotifyDoctor(NewUrgentAppointment);
 
             var urgentAppointmentDetails = new HitanPregledDetalji(NewUrgentAppointment);
             urgentAppointmentDetails.Show();
@@ -160,9 +165,15 @@ namespace Hospital.View.Secretary
             NavigationService.Navigate(new HitanPregled());
         }
 
-        private void ChangeTimeForNewUrgentAppointment(DateTime dateTime)
+        private void SetTimeForNewUrgentAppointment(DateTime dateTime)
         {
             NewUrgentAppointment.DateTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, dateTime.Kind);
+        }
+
+        private void SetRoomForNewUrgentAppointment()
+        {
+            ObservableCollection<Room> avaliableRooms = RoomStorage.GetAvaliableRooms(NewUrgentAppointment);
+            NewUrgentAppointment.Room = avaliableRooms[0];
         }
 
         private void BtnOdustaniClick(object sender, RoutedEventArgs e)

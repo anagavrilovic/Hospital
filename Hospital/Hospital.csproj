@@ -92,9 +92,9 @@
     <Compile Include="Model\RoomRenovation.cs" />
     <Compile Include="Model\RoomRenovationStorage.cs" />
     <Compile Include="Model\RoomStatus.cs" />
-    <Compile Include="Model\Termini.cs" />
     <Compile Include="Model\DynamicInventory.cs" />
     <Compile Include="Model\DynamicInventoryStorage.cs" />
+    <Compile Include="Model\WeeklyCalendarRow.cs" />
     <Compile Include="Model\Medicine.cs" />
     <Compile Include="Model\MedicineStorage.cs" />
     <Compile Include="Model\RegistratedUser.cs" />
