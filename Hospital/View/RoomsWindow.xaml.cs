@@ -147,7 +147,7 @@ namespace Hospital.View
             if (selectedItem == null)
                 return;
            
-            StaticInventory inv = new StaticInventory(selectedItem.Id);
+            StaticInventoryView inv = new StaticInventoryView(selectedItem.Id);
             NavigationService.Navigate(inv);
         }
 
@@ -158,7 +158,7 @@ namespace Hospital.View
             if (selectedItem == null)
                 return;
 
-            DynamicInventory inv = new DynamicInventory(selectedItem.Id);
+            DynamicInventoryView inv = new DynamicInventoryView(selectedItem.Id);
             NavigationService.Navigate(inv);
         }
 

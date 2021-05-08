@@ -17,16 +17,16 @@ namespace Hospital.View
 {
     public partial class AddMedicalSupply : Page
     {
-        public MedicalSupply MedicalSupplyItem  { get; set; }
-        private MedicalSupplyStorage _medicalSupplyStorage;
+        public DynamicInventory MedicalSupplyItem  { get; set; }
+        private DynamicInventoryStorage _medicalSupplyStorage;
 
         public AddMedicalSupply(string id)
         {
             InitializeComponent();
             this.DataContext = this;
 
-            this._medicalSupplyStorage = new MedicalSupplyStorage();
-            MedicalSupplyItem = new MedicalSupply();
+            this._medicalSupplyStorage = new DynamicInventoryStorage();
+            MedicalSupplyItem = new DynamicInventory();
             MedicalSupplyItem.RoomID = id;
         }
 
@@ -46,12 +46,12 @@ namespace Hospital.View
             else
                 MessageBox.Show("Već postoji stavka sa unetom oznakom!");
          
-            NavigationService.Navigate(new DynamicInventory(MedicalSupplyItem.RoomID));
+            NavigationService.Navigate(new DynamicInventoryView(MedicalSupplyItem.RoomID));
         }
 
         private bool CheckUniquenessOfNewItemID()
         {
-            foreach (MedicalSupply ms in _medicalSupplyStorage.GetByRoomID(MedicalSupplyItem.RoomID))
+            foreach (DynamicInventory ms in _medicalSupplyStorage.GetByRoomID(MedicalSupplyItem.RoomID))
             {
                 if (ms.Id.Equals(MedicalSupplyItem.Id))
                     return false;
@@ -61,12 +61,12 @@ namespace Hospital.View
 
         private void CancelButtonClick(object o, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new DynamicInventory(MedicalSupplyItem.RoomID));
+            NavigationService.Navigate(new DynamicInventoryView(MedicalSupplyItem.RoomID));
         }
 
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new DynamicInventory(MedicalSupplyItem.RoomID));
+            NavigationService.Navigate(new DynamicInventoryView(MedicalSupplyItem.RoomID));
         }
     }
 }

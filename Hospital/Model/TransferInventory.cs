@@ -216,7 +216,7 @@ namespace Hospital.Model
                 }
 
                 inventoryStorage.doSerialization();
-                StaticInventory.Inventory = inventoryStorage.GetByRoomID(this.FirstRoomID);
+                StaticInventoryView.Inventory = inventoryStorage.GetByRoomID(this.FirstRoomID);
 
                 TransferInventoryStorage transferStorage = new TransferInventoryStorage();
                 transferStorage.Delete(this);
@@ -231,9 +231,9 @@ namespace Hospital.Model
 
         public void refreshView()
         {
-            if (!StaticInventory.Inventory.Equals(null))
+            if (!StaticInventoryView.Inventory.Equals(null))
             {
-                foreach (Inventory i in StaticInventory.Inventory)
+                foreach (Inventory i in StaticInventoryView.Inventory)
                 {
                     if (i.Id.Equals(itemID) && i.RoomID.Equals(firstRoomID))
                     {

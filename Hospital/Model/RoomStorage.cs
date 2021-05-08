@@ -72,14 +72,14 @@ namespace Hospital
                     }
                     storage.doSerialization();
 
-                    MedicalSupplyStorage msStorage = new MedicalSupplyStorage();
-                    MedicalSupplyStorage.supplies = msStorage.GetAll();
-                    foreach(MedicalSupply ms in MedicalSupplyStorage.supplies)
+                    DynamicInventoryStorage msStorage = new DynamicInventoryStorage();
+                    DynamicInventoryStorage.DynamicInventory = msStorage.GetAll();
+                    foreach(DynamicInventory ms in DynamicInventoryStorage.DynamicInventory)
                     {
                         if (ms.RoomID.Equals(id))
                             ms.RoomID = "M1";
                     }
-                    msStorage.doSerialization();
+                    msStorage.DoSerialization();
 
                     rooms.Remove(r);
                     doSerialization();

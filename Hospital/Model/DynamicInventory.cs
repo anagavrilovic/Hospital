@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace Hospital
 {
-    public class MedicalSupply : INotifyPropertyChanged
+    public class DynamicInventory : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -20,26 +20,23 @@ namespace Hospital
             }
         }
 
-       private String id;
-       private String name;
-       private double price;
-       private int quantity;
-       private UnitsType units;
-       private string roomID;
+       private String _id;
+       private String _name;
+       private double _price;
+       private int _quantity;
+       private UnitsType _units;
+       private string _roomID;
 
         public string Id
         {
 
-            get
-            {
-                return id;
-            }
+            get => _id;
 
             set
             {
-                if (value != id)
+                if (value != _id)
                 {
-                    id = value;
+                    _id = value;
                     OnPropertyChanged("Id");
                 }
             }
@@ -49,33 +46,27 @@ namespace Hospital
         public String Name
         {
 
-            get
-            {
-                return name;
-            }
+            get => _name;
 
             set
             {
-                if (value != name)
+                if (value != _name)
                 {
-                    name = value;
+                    _name = value;
                     OnPropertyChanged("Name");
                 }
             }
         }
 
-        public double Price
+        public double Price 
         {
-            get
-            {
-                return price;
-            }
+            get => _price;
 
             set
             {
-                if (value != price)
+                if (value != _price)
                 {
-                    price = value;
+                    _price = value;
                     OnPropertyChanged("Price");
                 }
             }
@@ -84,16 +75,13 @@ namespace Hospital
 
         public int Quantity
         {
-            get
-            {
-                return quantity;
-            }
+            get => _quantity;
 
             set
             {
-                if (value != quantity)
+                if (value != _quantity)
                 {
-                    quantity = value;
+                    _quantity = value;
                     OnPropertyChanged("Quantity");
                 }
             }
@@ -101,16 +89,13 @@ namespace Hospital
 
         public UnitsType Units
         {
-            get
-            {
-                return units;
-            }
+            get => _units;
 
             set
             {
-                if(value != units)
+                if(value != _units)
                 {
-                    units = value;
+                    _units = value;
                     OnPropertyChanged("Units");
                 }
             }
@@ -118,22 +103,17 @@ namespace Hospital
 
         public string RoomID
         {
-            get
-            {
-                return roomID;
-            }
+            get => _roomID;
 
             set
             {
-                if (value != roomID)
+                if (value != _roomID)
                 {
-                    roomID = value;
+                    _roomID = value;
                     OnPropertyChanged("RoomID");
                 }
             }
         }
-
-
     }
 }
 

@@ -148,19 +148,19 @@ namespace Hospital.View
             transferStorage.Save(transferItem);
             transferItem.doTransfer();
 
-            StaticInventory.Inventory = istorage.GetByRoomID(this.inventorySeleceted.RoomID);
+            StaticInventoryView.Inventory = istorage.GetByRoomID(this.inventorySeleceted.RoomID);
 
-            NavigationService.Navigate(new StaticInventory(InventorySeleceted.RoomID));
+            NavigationService.Navigate(new StaticInventoryView(InventorySeleceted.RoomID));
         }
 
         private void cancel(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new StaticInventory(InventorySeleceted.RoomID));
+            NavigationService.Navigate(new StaticInventoryView(InventorySeleceted.RoomID));
         }
 
         private void back(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new StaticInventory(InventorySeleceted.RoomID));
+            NavigationService.Navigate(new StaticInventoryView(InventorySeleceted.RoomID));
         }
     }
 }
