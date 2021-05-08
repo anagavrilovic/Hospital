@@ -20,9 +20,9 @@ namespace Hospital.View
 {
     public partial class EditMedicalSupply : Page
     {
-        public MedicalSupply MedicalSupplyItem { get; set; }
+        public DynamicInventory MedicalSupplyItem { get; set; }
 
-        public EditMedicalSupply(MedicalSupply supply)
+        public EditMedicalSupply(DynamicInventory supply)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -50,20 +50,20 @@ namespace Hospital.View
                 case 2: MedicalSupplyItem.Units = UnitsType.flasice; break;
             }
 
-            MedicalSupplyStorage medicalSupplyStorage = new MedicalSupplyStorage();
-            medicalSupplyStorage.doSerialization();
+            DynamicInventoryStorage medicalSupplyStorage = new DynamicInventoryStorage();
+            medicalSupplyStorage.DoSerialization();
 
-            NavigationService.Navigate(new DynamicInventory(MedicalSupplyItem.RoomID));
+            NavigationService.Navigate(new DynamicInventoryView(MedicalSupplyItem.RoomID));
         }
 
         private void CancelButtonClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new DynamicInventory(MedicalSupplyItem.RoomID));
+            NavigationService.Navigate(new DynamicInventoryView(MedicalSupplyItem.RoomID));
         }
 
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new DynamicInventory(MedicalSupplyItem.RoomID));
+            NavigationService.Navigate(new DynamicInventoryView(MedicalSupplyItem.RoomID));
         }
     }
 }

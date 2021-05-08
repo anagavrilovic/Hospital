@@ -17,12 +17,12 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 { 
-    public partial class DynamicInventory : Page
+    public partial class DynamicInventoryView : Page
     {
         private string _roomID;
 
-        private static ObservableCollection<MedicalSupply> _supply;
-        public static ObservableCollection<MedicalSupply> Supply 
+        private static ObservableCollection<DynamicInventory> _supply;
+        public static ObservableCollection<DynamicInventory> Supply 
         {
             get => _supply;
             set
@@ -38,18 +38,18 @@ namespace Hospital.View
             StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(name));
         }
 
-        private MedicalSupplyStorage _medicalSupplyStorage;
+        private DynamicInventoryStorage _medicalSupplyStorage;
 
         private string _searchCriterion;
         public ICollectionView SupplyCollection { get; set; }
 
-        public DynamicInventory(string id)
+        public DynamicInventoryView(string id)
         {
             InitializeComponent();
             this.DataContext = this;
             this._roomID = id;
 
-            _medicalSupplyStorage = new MedicalSupplyStorage();
+            _medicalSupplyStorage = new DynamicInventoryStorage();
             Supply = _medicalSupplyStorage.GetByRoomID(id);
             SupplyCollection = CollectionViewSource.GetDefaultView(Supply);
         }
@@ -81,8 +81,8 @@ namespace Hospital.View
 
         private bool Filter(object item)
         {
-            if (((MedicalSupply)item).Name.Contains(_searchCriterion) || ((MedicalSupply)item).Id.Contains(_searchCriterion) || ((MedicalSupply)item).Price.ToString().Contains(_searchCriterion) ||
-                ((MedicalSupply)item).RoomID.Contains(_searchCriterion) || ((MedicalSupply)item).Quantity.ToString().Contains(_searchCriterion))
+            if (((DynamicInventory)item).Name.Contains(_searchCriterion) || ((DynamicInventory)item).Id.Contains(_searchCriterion) || ((DynamicInventory)item).Price.ToString().Contains(_searchCriterion) ||
+                ((DynamicInventory)item).RoomID.Contains(_searchCriterion) || ((DynamicInventory)item).Quantity.ToString().Contains(_searchCriterion))
             {
                 return true;
             }
@@ -97,7 +97,7 @@ namespace Hospital.View
 
         private void EditItemButtonClick(object o, RoutedEventArgs e)
         {
-            MedicalSupply selectedItem = (MedicalSupply)dataGridMedicalSupply.SelectedItem;
+            DynamicInventory selectedItem = (DynamicInventory)dataGridMedicalSupply.SelectedItem;
             if (selectedItem == null)
                 return;
 
@@ -107,7 +107,7 @@ namespace Hospital.View
 
         private void DeleteItemButtonClick(object o, RoutedEventArgs e)
         {
-            MedicalSupply selectedItem = (MedicalSupply) dataGridMedicalSupply.SelectedItem;
+            DynamicInventory selectedItem = (DynamicInventory) dataGridMedicalSupply.SelectedItem;
             if (selectedItem == null)
                 return;
 
@@ -122,11 +122,11 @@ namespace Hospital.View
 
         private void TransferItemButtonClick(object o, RoutedEventArgs e)
         {
-            MedicalSupply selectedItem = (MedicalSupply)dataGridMedicalSupply.SelectedItem;
+            DynamicInventory selectedItem = (DynamicInventory)dataGridMedicalSupply.SelectedItem;
             if (selectedItem == null)
                 return;
 
-            PrebacivanjeOpreme transfer = new PrebacivanjeOpreme(selectedItem);
+            TransferDynamicInventoryView transfer = new TransferDynamicInventoryView(selectedItem);
             transfer.nazivTxt.Text = selectedItem.Name;
             NavigationService.Navigate(transfer);
         }

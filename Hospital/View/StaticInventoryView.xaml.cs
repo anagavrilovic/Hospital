@@ -19,7 +19,7 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    public partial class StaticInventory : Page, INotifyPropertyChanged
+    public partial class StaticInventoryView : Page, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string name)
@@ -53,7 +53,7 @@ namespace Hospital.View
         private string _searchCriterion;
         public ICollectionView InventoryCollection { get; set; }
 
-        public StaticInventory (string id)
+        public StaticInventoryView (string id)
         {
             InitializeComponent();
             this.DataContext = this;

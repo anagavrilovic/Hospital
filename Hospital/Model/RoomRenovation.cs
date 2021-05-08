@@ -112,7 +112,7 @@ namespace Hospital.Model
         }
 
        private InventoryStorage inventoryStorage = new InventoryStorage();
-       private MedicalSupplyStorage medicalSupplyStorage = new MedicalSupplyStorage();
+       private DynamicInventoryStorage medicalSupplyStorage = new DynamicInventoryStorage();
        private TransferInventoryStorage transferInventoryStorage = new TransferInventoryStorage();
        private RoomStorage roomStorage = new RoomStorage();
        private RoomRenovationStorage roomRenovationStorage = new RoomRenovationStorage();
