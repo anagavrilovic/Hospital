@@ -27,7 +27,7 @@ namespace Hospital.View
 
         private void Back(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            this.NavigationService.Navigate(new PatientMenu());
         }
 
         private void PassedAppointments(object sender, RoutedEventArgs e)

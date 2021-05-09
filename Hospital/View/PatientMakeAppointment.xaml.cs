@@ -22,14 +22,18 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientMakeAppointment : Page
     {
-        PatientSettingsStorage patientSettingsStorage = new PatientSettingsStorage();
-        DoctorStorage doctorStorage = new DoctorStorage();
-        AppointmentStorage appointmentStorage = new AppointmentStorage();
-        MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
-        RoomStorage roomStorage = new RoomStorage();
-        DateTime FirstDayOfWeek;
-        Appointment AppointmentForDeleting = null;
-        public ObservableCollection<PatientCalendarDTO> Lista
+       private PatientSettingsStorage patientSettingsStorage = new PatientSettingsStorage();
+       private DoctorStorage doctorStorage = new DoctorStorage();
+       private AppointmentStorage appointmentStorage = new AppointmentStorage();
+       private MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
+       private RoomStorage roomStorage = new RoomStorage();
+       private DateTime FirstDayOfWeek;
+       private Appointment AppointmentForDeleting = null;
+       private const int MAXIMUM_DAYS_DIFFERENCE= 10;
+       private const int MINIMUM_DAYS_DIFFERENCE = 2;
+       private const int MAXIMUM_NUMBER_OF_TERMS_PER_DAY = 24; 
+
+        public ObservableCollection<PatientCalendarDTO> WeeklyTerms
         {
             get;
             set;
@@ -38,58 +42,27 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
-
+            WeeklyTerms = new ObservableCollection<PatientCalendarDTO>();
             FirstDayOfWeek = DateTime.Now;
             dataGridApp.Focus();
-            LetsMakeCalendar(FirstDayOfWeek);
+            GenerateCalendar(FirstDayOfWeek);
         }
 
-        public PatientMakeAppointment(Appointment AppointmentForDeleting)
+        public PatientMakeAppointment(Appointment AppointmentForDeleting) : this()
         {
-            InitializeComponent();
-            this.DataContext = this;
-
             this.AppointmentForDeleting = AppointmentForDeleting;
-            FirstDayOfWeek = DateTime.Now;
-            dataGridApp.Focus();
-            LetsMakeCalendar(FirstDayOfWeek);
         }
 
-        private void myTestKey(object sender, KeyEventArgs e)
+        private void KeyPress(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Space)
             {
-                
-                int currentColumnIndex=dataGridApp.CurrentCell.Column.DisplayIndex;
-                int currentRowIndex = dataGridApp.Items.IndexOf(dataGridApp.CurrentItem);
-                PatientCalendarDTO patientCalendarDTO = Lista.ElementAt(currentRowIndex);
-                if (String.IsNullOrEmpty(patientCalendarDTO.Days[currentColumnIndex-1]))
-                {
-                    return;
-                }
-
-                
-
-                Appointment appointment = new Appointment(patientCalendarDTO.Dates[currentColumnIndex-1],AppointmentType.examination, medicalRecordStorage.GetByPatientID(MainWindow.IDnumber).Patient.FirstName, medicalRecordStorage.GetByPatientID(MainWindow.IDnumber).Patient.LastName,MainWindow.IDnumber,patientCalendarDTO.Doctors[currentColumnIndex-1],appointmentStorage.GetNewID(), patientCalendarDTO.Days[currentColumnIndex-1].Substring(3),roomStorage.GetOne(doctorStorage.GetOne(patientCalendarDTO.Doctors[currentColumnIndex - 1]).RoomID));
-
-                if (AppointmentForDeleting != null)
-                {
-                    if (!IsReschedulingAllowed(appointment))
-                    {
-                        MessageBox.Show("Nije moguce toliko pomeriti termin");
-                        return;
-                    }
-                }
-                if ((appointment.DateTime - DateTime.Now).TotalDays < 2)
-                {
-                    MessageBox.Show("Nije moguće zakazati termin tako kasno.");
-                    return;
-                }
-
+                Appointment appointment = GetSelectedAppointment();
+                if (appointment == null || !IsChosenDateAcceptable(appointment)) return;
                 appointmentStorage.Save(appointment);
                 if (AppointmentForDeleting != null) appointmentStorage.Delete(AppointmentForDeleting.IDAppointment);
                 patientSettingsStorage.AddScheduling(DateTime.Now);
-                this.NavigationService.GoBack();
+                NavigateBack();
             }
 
             if (e.Key == Key.Escape)
@@ -99,77 +72,126 @@ namespace Hospital.View
 
             if(e.Key == Key.LeftCtrl)
             {
-                Lista.Clear();
-                FirstDayOfWeek = FirstDayOfWeek.AddDays(-7);
-                LetsMakeCalendar(FirstDayOfWeek);
-                dataGridApp.ItemsSource = null;
-                dataGridApp.ItemsSource = Lista;
+                int daysDifference = -7;
+                RefreshCalendar(daysDifference);
             }
 
             if (e.Key == Key.RightCtrl)
             {
-                Lista.Clear();
-                FirstDayOfWeek = FirstDayOfWeek.AddDays(7);
-                LetsMakeCalendar(FirstDayOfWeek);
-                dataGridApp.ItemsSource = null;
-                dataGridApp.ItemsSource = Lista;
+                int daysDifference = 7;
+                RefreshCalendar(daysDifference);
             }
         }
 
-        private void LetsMakeCalendar(DateTime dt)
+        private void NavigateBack()
         {
-            DateTime novoVreme;
-            int dan = (int)dt.DayOfWeek;
-            switch (dan)
+            PatientAppointments patientAppointments = new PatientAppointments();
+            patientAppointments.Refresh();
+            this.NavigationService.Navigate(patientAppointments);
+        }
+
+        private void GenerateCalendar(DateTime day)
+        {
+            DateTime MondayDay = SetDayToMonday(day);
+            label.Content = "Termini za nedelju: "+MondayDay.ToShortDateString() + " - " + MondayDay.AddDays(6).ToShortDateString();
+            for (int counter = 0, hour=8, minute=0; counter < MAXIMUM_NUMBER_OF_TERMS_PER_DAY; counter++)
             {
-                case 2:
-                    novoVreme = dt.AddDays(-1);
-                    break;
-                case 3:
-                    novoVreme = dt.AddDays(-2);
-                    break;
-                case 4:
-                    novoVreme = dt.AddDays(-3);
-                    break;
-                case 5:
-                    novoVreme = dt.AddDays(-4);
-                    break;
-                case 6:
-                    novoVreme = dt.AddDays(-5);
-                    break;
-                case 0:
-                    novoVreme = dt.AddDays(-6);
-                    break;
-                default:
-                    novoVreme = dt;
-                    break;
-            }
-            label.Content = "Termini za nedelju: "+novoVreme.ToShortDateString() + " - " + novoVreme.AddDays(6).ToShortDateString();
-            Lista = new ObservableCollection<PatientCalendarDTO>();
-            int i = 8;
-            int j = 0;
-            for (int x = 0; x < 25; x++)
-            {
-                if (x % 2 == 1) j = 30;
-                PatientCalendarDTO zaKalendar = new PatientCalendarDTO(i, j, novoVreme);
-                Lista.Add(zaKalendar);
-                if (x % 2 == 1)
+                if (counter % 2 == 1) minute = 30;
+                PatientCalendarDTO weeklyAppointmentsForTerm = new PatientCalendarDTO(hour, minute, MondayDay);
+                WeeklyTerms.Add(weeklyAppointmentsForTerm);
+                if (counter % 2 == 1)
                 {
-                    j = 0;
-                    i++;
+                    minute = 0;
+                    hour++;
                 }
 
             }
         }
 
-        private Boolean IsReschedulingAllowed(Appointment app)
+        private void RefreshCalendar(int daysDifference)
         {
-            if (Math.Abs((app.DateTime - AppointmentForDeleting.DateTime).TotalDays) > 10) return false;
-            return true;
-           
+            WeeklyTerms.Clear();
+            FirstDayOfWeek = FirstDayOfWeek.AddDays(daysDifference);
+            GenerateCalendar(FirstDayOfWeek);
+            dataGridApp.ItemsSource = null;
+            dataGridApp.ItemsSource = WeeklyTerms;
         }
 
-       
+        private Appointment GetSelectedAppointment()
+        {
+            int currentColumnIndex = dataGridApp.CurrentCell.Column.DisplayIndex;
+            int currentRowIndex = dataGridApp.Items.IndexOf(dataGridApp.CurrentItem);
+            PatientCalendarDTO patientCalendarDTO = WeeklyTerms.ElementAt(currentRowIndex);
+            if (String.IsNullOrEmpty(patientCalendarDTO.Doctors[currentColumnIndex - 1]))
+            {
+                return null;
+            }
+
+            return new Appointment(patientCalendarDTO.Dates[currentColumnIndex - 1], AppointmentType.examination, medicalRecordStorage.GetByPatientID(MainWindow.IDnumber).Patient.FirstName, medicalRecordStorage.GetByPatientID(MainWindow.IDnumber).Patient.LastName, MainWindow.IDnumber, patientCalendarDTO.DoctorsID[currentColumnIndex - 1], appointmentStorage.GetNewID(), patientCalendarDTO.Doctors[currentColumnIndex - 1].Substring(3), roomStorage.GetOne(doctorStorage.GetOne(patientCalendarDTO.DoctorsID[currentColumnIndex - 1]).RoomID));
+
+        }
+
+        private Boolean IsChosenDateAcceptable(Appointment appointment)
+        {
+            if (AppointmentForDeleting != null)
+            {
+                if (!IsDateAcceptableForRescheduling(appointment)) return false;
+            }
+            if (!IsDateAcceptableForScheduling(appointment)) return false;
+
+            return true;
+        }
+
+        private Boolean IsDateAcceptableForRescheduling(Appointment appointment)
+        {
+            if ((Math.Abs((appointment.DateTime - AppointmentForDeleting.DateTime).TotalDays) > MAXIMUM_DAYS_DIFFERENCE))
+            {
+                MessageBox.Show("Nije moguce toliko pomeriti termin");
+                return false;
+            }
+            return true;
+        }
+
+        private Boolean IsDateAcceptableForScheduling(Appointment appointment)
+        {
+            if ((appointment.DateTime - DateTime.Now).TotalDays < MINIMUM_DAYS_DIFFERENCE)
+            {
+                MessageBox.Show("Nije moguće zakazati termin tako kasno.");
+                return false;
+            }
+            return true;
+        }
+
+        private DateTime SetDayToMonday(DateTime day)
+        {
+            int auxiliaryDay = (int)day.DayOfWeek;
+            DateTime MondayDate;
+            switch (auxiliaryDay)
+            {
+                case 2:
+                    MondayDate = day.AddDays(-1);
+                    break;
+                case 3:
+                    MondayDate = day.AddDays(-2);
+                    break;
+                case 4:
+                    MondayDate = day.AddDays(-3);
+                    break;
+                case 5:
+                    MondayDate = day.AddDays(-4);
+                    break;
+                case 6:
+                    MondayDate = day.AddDays(-5);
+                    break;
+                case 0:
+                    MondayDate = day.AddDays(-6);
+                    break;
+                default:
+                    MondayDate = day;
+                    break;
+            }
+            return MondayDate;
+        }
 
     }
 }
