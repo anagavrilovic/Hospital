@@ -147,7 +147,7 @@ namespace Hospital.View
             if (selectedItem == null)
                 return;
 
-            PrebacivanjeInventara transfer = new PrebacivanjeInventara(selectedItem);
+            TransferStaticInventory transfer = new TransferStaticInventory(selectedItem);
             StringBuilder sb = new StringBuilder();
             sb.Append(selectedItem.Id);
             sb.Append("-");

@@ -90,10 +90,7 @@ namespace Hospital.Model
 
         public DateTime TransferDate
         {
-            get
-            {
-                return _transferDate;
-            }
+            get => _transferDate;
 
             set
             {
@@ -154,7 +151,6 @@ namespace Hospital.Model
         public void UpdateInventory()
         {
             Inventory inventoryItem = _inventoryStorage.GetOneByRoom(_itemID, _firstRoomID);
-
             if (inventoryItem.Quantity >= Quantity)
             {
                 if (IsTransferingItemExistsInDestinationRoom())
@@ -163,8 +159,6 @@ namespace Hospital.Model
                     AddTransferingItemDestinationRoom();
 
                 ReduceItemQuantitiyInFirstRoom();
-
-                StaticInventoryView.Inventory = _inventoryStorage.GetByRoomID(this.FirstRoomID);
             }
         }
 
