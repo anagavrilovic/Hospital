@@ -22,80 +22,113 @@
             <!--<Separator Margin="15,0"/>-->
         </StackPanel>
 
-        <Border Grid.Row="1" Margin="15" CornerRadius="10" Background="{StaticResource MainWhite}">
+        <Grid Grid.Row="1" Margin="15,10,15,15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <!-- Dugmici za opcije nad pacijentima -->
-                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <Button Style="{StaticResource BigButtons}" Margin="10,0,0,0" Click="NoviClick">
+                <!-- Dugmici za opcije nad pacijentima -->
+                <StackPanel Orientation="Horizontal" Height="55" VerticalAlignment="Center" Margin="0,0,0,10">
+                    <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="60">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                        </Border.Effect>
+                        <Button Style="{StaticResource BigButtons}" Click="NoviClick">
                             <StackPanel Orientation="Vertical">
-                                <Image Source="../../Icon/Secretary/adduser.png" Width="30"/>
+                                <Image Source="../../Icon/Secretary/adduser.png" Width="25"/>
                                 <TextBlock Text="Novi"/>
                             </StackPanel>
                         </Button>
+                    </Border>
 
+                    <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                        </Border.Effect>
                         <Button Style="{StaticResource BigButtons}" Click="IzmeniClick" >
                             <StackPanel Orientation="Vertical">
-                                <Image Source="../../Icon/Secretary/edit.png" Width="30"/>
+                                <Image Source="../../Icon/Secretary/edit.png" Width="25"/>
                                 <TextBlock Text="Izmeni"/>
                             </StackPanel>
                         </Button>
+                    </Border>
 
+                    <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                        </Border.Effect>
                         <Button Style="{StaticResource BigButtons}" Click="DetaljiClick" >
                             <StackPanel Orientation="Vertical">
-                                <Image Source="../../Icon/Secretary/info.png" Width="30"/>
+                                <Image Source="../../Icon/Secretary/info.png" Width="25"/>
                                 <TextBlock Text="Detalji"/>
                             </StackPanel>
                         </Button>
+                    </Border>
 
+                    <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                        </Border.Effect>
                         <Button Style="{StaticResource BigButtons}" Click="BrisanjeClick" >
                             <StackPanel Orientation="Vertical">
-                                <Image Source="../../Icon/Secretary/delete.png" Width="30"/>
+                                <Image Source="../../Icon/Secretary/delete.png" Width="25"/>
                                 <TextBlock Text="Brisanje"/>
                             </StackPanel>
                         </Button>
+                    </Border>
 
+                    <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                        </Border.Effect>
                         <Button Style="{StaticResource BigButtons}" Click="AlergeniClick" >
                             <StackPanel Orientation="Vertical">
-                                <Image Source="../../Icon/Secretary/alergies.png" Width="30"/>
+                                <Image Source="../../Icon/Secretary/alergies.png" Width="25"/>
                                 <TextBlock Text="Alergeni"/>
                             </StackPanel>
                         </Button>
-                    </StackPanel>
-
-                    <!-- Search -->
-                    <Border Grid.Column="1" Width="250" Height="30" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Bottom"
-                            Style="{StaticResource TextBoxBorder}">
-                        <StackPanel Margin="5" Orientation="Horizontal">
-                            <Image Source="../../Icon/Secretary/search.png" Height="13"/>
-                            <TextBox BorderThickness="0" Width="200" Height="20" Margin="10,0,0,0" Background="Transparent"/>
-                        </StackPanel>
                     </Border>
+                </StackPanel>
 
-                </Grid>
-
-                <!-- Tabela sa prikazom svih pacijenata -->
-                <DataGrid x:Name="PacijentiTable" Grid.Row="1" Margin="0,10" ItemsSource="{Binding Pacijenti}" Style="{StaticResource PacijentiDataGrid}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Ime" Width="*" Binding="{Binding Patient.FirstName}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
-                        <DataGridTextColumn Header="Prezime" Width="*" Binding="{Binding Patient.LastName}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
-                        <DataGridTextColumn Header="JMBG" Width="*" Binding="{Binding Patient.PersonalID}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
-                        <DataGridTextColumn Header="Datum rođenja" Width="*" Binding="{Binding Patient.DateOfBirth, StringFormat='{}{0: dd.MM.yyyy}'}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <!-- Search -->
+                <Border Grid.Column="1" Width="250" Height="30" HorizontalAlignment="Right" Margin="0,10" VerticalAlignment="Bottom"
+                            Style="{StaticResource TextBoxBorder}" BorderThickness="0">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                    </Border.Effect>
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <Image Source="../../Icon/Secretary/search.png" Height="13"/>
+                        <TextBox BorderThickness="0" Width="200" Height="20" Margin="10,0,0,0" Background="Transparent"/>
+                    </StackPanel>
+                </Border>
 
             </Grid>
-        </Border>
+
+            <Border Grid.Row="1" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                </Border.Effect>
+            </Border>
+            <Border Grid.Row="1" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <!-- Tabela sa prikazom svih pacijenata -->
+                <DataGrid x:Name="PacijentiTable" Grid.Row="1" Margin="5" ItemsSource="{Binding Pacijenti}" Style="{StaticResource PacijentiDataGrid}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Ime" Width="*" Binding="{Binding Patient.FirstName}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
+                        <DataGridTextColumn Header="Prezime" Width="*" Binding="{Binding Patient.LastName}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
+                        <DataGridTextColumn Header="JMBG" Width="*" Binding="{Binding Patient.PersonalID}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
+                        <DataGridTextColumn Header="Datum rođenja" Width="*" Binding="{Binding Patient.DateOfBirth, StringFormat='{}{0: dd.MM.yyyy}'}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+
+        </Grid>
 
     </Grid>
 </Page>

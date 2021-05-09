@@ -19,10 +19,19 @@
         </Grid.RowDefinitions>
 
         <StackPanel>
-            <TextBlock Text="RASPORED PREGLEDA I OPERACIJA > Zakazati termin?" Style="{StaticResource TitleStyle}"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="RASPORED PREGLEDA I OPERACIJA " Style="{StaticResource TitleStyle}"/>
+                <Image Source="../../Icon/Secretary/arrow.png" Width="10" Margin="0,20,0,5"/>
+                <TextBlock Text=" Zakazati termin?" Style="{StaticResource TitleStyle}" Margin="0,20,0,5"/>
+            </StackPanel>
             <!--<Separator Margin="15,0"/>-->
         </StackPanel>
 
+        <Border Grid.Row="1" Margin="15,30,0,15" Width="600" CornerRadius="10" Background="{StaticResource MainWhite}" HorizontalAlignment="Left">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+            </Border.Effect>
+        </Border>
         <Border Grid.Row="1" Margin="15,30,0,15" Width="600" CornerRadius="10" Background="{StaticResource MainWhite}" HorizontalAlignment="Left">
             <Grid>
                 <Grid.RowDefinitions>

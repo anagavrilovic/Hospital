@@ -66,6 +66,11 @@
                         <TextBlock Text="{Binding NewUrgentAppointmentTime, StringFormat='{}{0: HH:mm}'}" Style="{StaticResource TitleStyle}" Margin="0,30,20,0"/>
 
                         <Border Grid.Column="1" Background="{StaticResource MainWhite}" CornerRadius="15" Margin="0,3">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                            </Border.Effect>
+                        </Border>
+                        <Border Grid.Column="1" Background="{StaticResource MainWhite}" CornerRadius="15" Margin="0,3">
                             <Grid>
                                 <ListBox x:Name="ListBoxOption" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ItemsSource="{Binding Option}" 
                                          Background="Transparent" Height="100" Width="920" BorderThickness="0">

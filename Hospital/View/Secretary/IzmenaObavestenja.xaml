@@ -18,7 +18,11 @@
         </Grid.RowDefinitions>
 
         <StackPanel>
-            <TextBlock Text="OBAVEŠTENJA > Izmena obveštenja" Style="{StaticResource TitleStyle}"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="OBAVEŠTENJA " Style="{StaticResource TitleStyle}"/>
+                <Image Source="../../Icon/Secretary/arrow.png" Width="10" Margin="0,20,0,5"/>
+                <TextBlock Text=" Izmena obaveštenja" Style="{StaticResource TitleStyle}" Margin="0,20,0,5"/>
+            </StackPanel>
             <!--<Separator Margin="15,0"/>-->
         </StackPanel>
 
@@ -29,6 +33,11 @@
             </Grid.ColumnDefinitions>
 
             <!-- Naslov i sadrzaj obavestenja -->
+            <Border Margin="15,25,7,15" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                </Border.Effect>
+            </Border>
             <Border Margin="15,25,7,15" CornerRadius="10" Background="{StaticResource MainWhite}">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -66,6 +75,11 @@
 
 
             <!-- Za koga je obavestenje namenjeno -->
+            <Border Grid.Column="1" Margin="7,25,20,120" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                </Border.Effect>
+            </Border>
             <Border Grid.Column="1" Margin="7,25,20,120" CornerRadius="10" Background="{StaticResource MainWhite}">
                 <StackPanel Margin="0,35,0,0" HorizontalAlignment="Center">
                     <TextBlock Text="Za koga je namenjeno obaveštenje?" Style="{StaticResource TextBlockStyle}" FontSize="15"/>

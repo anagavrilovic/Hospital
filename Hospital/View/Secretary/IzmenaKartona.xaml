@@ -19,7 +19,11 @@
         </Grid.RowDefinitions>
 
         <StackPanel>
-            <TextBlock Text="PACIJENTI > Izmena pacijenta" Style="{StaticResource TitleStyle}"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="PACIJENTI " Style="{StaticResource TitleStyle}"/>
+                <Image Source="../../Icon/Secretary/arrow.png" Width="10" Margin="0,20,0,5"/>
+                <TextBlock Text=" Izmena pacijenta" Style="{StaticResource TitleStyle}" Margin="0,20,0,5"/>
+            </StackPanel>
             <!--<Separator Margin="15,0"/>-->
         </StackPanel>
 
@@ -49,6 +53,11 @@
 
         </Grid>
 
+        <Border Grid.Row="2" Margin="15,5,15,15" CornerRadius="10" Background="{StaticResource MainWhite}">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+            </Border.Effect>
+        </Border>
         <Border Grid.Row="2" Margin="15,5,15,15" CornerRadius="10" Background="{StaticResource MainWhite}">
             <Grid Margin="0,50,0,0">
                 <Grid.RowDefinitions>
