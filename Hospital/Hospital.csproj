@@ -299,8 +299,8 @@
     <Compile Include="View\Secretary\ModifikacijaAlergena.xaml.cs">
       <DependentUpon>ModifikacijaAlergena.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PrebacivanjeInventara.xaml.cs">
-      <DependentUpon>PrebacivanjeInventara.xaml</DependentUpon>
+    <Compile Include="View\TransferStaticInventory.xaml.cs">
+      <DependentUpon>TransferStaticInventory.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\StaticInventoryView.xaml.cs">
       <DependentUpon>StaticInventoryView.xaml</DependentUpon>
@@ -603,7 +603,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PrebacivanjeInventara.xaml">
+    <Page Include="View\TransferStaticInventory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

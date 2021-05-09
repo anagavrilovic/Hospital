@@ -66,9 +66,10 @@ namespace Hospital.View
             TransferInventoryStorage transferStorage = new TransferInventoryStorage();
             foreach(TransferInventory ti in transferStorage.GetAll())
             {
-                if(ti.Date < DateTime.Now)
+                if(ti.TransferDate < DateTime.Now)
                 {
-                    ti.doTransfer();
+                    // ti.StartTransfer();
+                    ti.WaitUntilTransferDate();
                 }
             }
         }
@@ -146,7 +147,7 @@ namespace Hospital.View
             if (selectedItem == null)
                 return;
 
-            PrebacivanjeInventara transfer = new PrebacivanjeInventara(selectedItem);
+            TransferStaticInventory transfer = new TransferStaticInventory(selectedItem);
             StringBuilder sb = new StringBuilder();
             sb.Append(selectedItem.Id);
             sb.Append("-");
