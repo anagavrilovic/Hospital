@@ -9,8 +9,8 @@
       Title="PatientAppointmentOptions">
 
     <Grid Background="White">
-        <Button Content="Izmeni termin" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="354,65,0,0" Click="Izmeni"/>
-        <Button Content="Nazad" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="354,294,0,0" Click="Nazad"/>
-        <Button Content="Otkaži termin" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="354,180,0,0" Click="Otkazi"/>
+        <Button Content="Izmeni termin" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="354,65,0,0" Click="Reschedule"/>
+        <Button Content="Nazad" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="354,294,0,0" Click="Back"/>
+        <Button Content="Otkaži termin" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="354,180,0,0" Click="Cancel"/>
     </Grid>
 </Page>

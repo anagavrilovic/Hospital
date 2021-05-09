@@ -49,8 +49,14 @@ namespace Hospital.View
 
             if (e.Key == Key.Escape)
             {
-                this.NavigationService.GoBack();
+                this.NavigationService.Navigate(new PatientAppointmentMenu());
             }
+        }
+
+        public void Refresh()
+        {
+            dataGridApp.ItemsSource = null;
+            dataGridApp.ItemsSource = Lista;
         }
     }
 }

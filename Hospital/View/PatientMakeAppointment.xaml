@@ -7,14 +7,14 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PatientMakeAppointment"
-      KeyDown="myTestKey">
+      KeyDown="KeyPress">
 
     <Grid Background="White">
-        <DataGrid x:Name="dataGridApp" ItemsSource="{Binding Lista}" IsReadOnly="True" 
+        <DataGrid x:Name="dataGridApp" ItemsSource="{Binding WeeklyTerms}" IsReadOnly="True" 
                   SelectionMode="Single" AutoGenerateColumns="False" Margin="0,45,0,79" SelectionUnit="Cell" Background="White">
             <DataGrid.Columns>
-                <DataGridTextColumn  Header="Vreme" Binding="{Binding Vremena}" Width="*"/>
-                <DataGridTextColumn  Header="Ponedeljak" Binding="{Binding Days[0]}" Width="*">
+                <DataGridTextColumn  Header="Vreme" Binding="{Binding Term}" Width="*"/>
+                <DataGridTextColumn  Header="Ponedeljak" Binding="{Binding Doctors[0]}" Width="*">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Background" Value="LightGreen"/>
@@ -26,7 +26,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn  Header="Utorak" Binding="{Binding Days[1]}" Width="*">
+                <DataGridTextColumn  Header="Utorak" Binding="{Binding Doctors[1]}" Width="*">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Background" Value="LightGreen"/>
@@ -38,7 +38,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn  Header="Sreda" Binding="{Binding Days[2]}" Width="*">
+                <DataGridTextColumn  Header="Sreda" Binding="{Binding Doctors[2]}" Width="*">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Background" Value="LightGreen"/>
@@ -50,7 +50,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn  Header="Cetvrtak" Binding="{Binding Days[3]}" Width="*">
+                <DataGridTextColumn  Header="Cetvrtak" Binding="{Binding Doctors[3]}" Width="*">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Background" Value="LightGreen"/>
@@ -62,7 +62,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn  Header="Petak" Binding="{Binding Days[4]}" Width="*">
+                <DataGridTextColumn  Header="Petak" Binding="{Binding Doctors[4]}" Width="*">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Background" Value="LightGreen"/>
@@ -74,7 +74,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn  Header="Subota" Binding="{Binding Days[5]}" Width="*">
+                <DataGridTextColumn  Header="Subota" Binding="{Binding Doctors[5]}" Width="*">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Background" Value="LightGreen"/>
@@ -86,7 +86,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn  Header="Nedelja" Binding="{Binding Days[6]}" Width="*">
+                <DataGridTextColumn  Header="Nedelja" Binding="{Binding Doctors[6]}" Width="*">
                 <DataGridTextColumn.ElementStyle>
                     <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Background" Value="LightGreen"/>
