@@ -5,30 +5,20 @@ namespace Hospital.Model
 {
    public class Doctor : User
    {
-        private DoctorSpecialty specialty;
-        private string roomID;
-        public DoctorSpecialty Specialty
+        public DoctorSpecialty Specialty { get; set; }
+        public string RoomID { get; set; }
+
+        public bool IsEqualWith(Doctor doctorForComparing)
         {
-            get { return specialty; }
-            set { specialty = value; }
+            return this.PersonalID.Equals(doctorForComparing.PersonalID);
         }
 
-        public string RoomID
+        public override string ToString()
         {
-            get { return roomID; }
-            set { roomID = value; }
-        }
-
-        override
-        public string ToString()
-        {
-            StringBuilder sb = new StringBuilder("");
-            sb.Append("dr ");
-            sb.Append(this.FirstName);
-            sb.Append(" ");
-            sb.Append(this.LastName);
-
-            return sb.ToString();
+            StringBuilder stringBuilder = new StringBuilder("");
+            stringBuilder.Append("dr ").Append(this.FirstName).Append(" ").Append(this.LastName);
+   
+            return stringBuilder.ToString();
         }
     }
 }

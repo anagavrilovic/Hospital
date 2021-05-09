@@ -38,17 +38,17 @@ namespace Hospital.View
             InventoryStorage inventoryStorage = new InventoryStorage();
             inventoryStorage.doSerialization();
 
-            NavigationService.Navigate(new StaticInventory(Inv.RoomID));
+            NavigationService.Navigate(new StaticInventoryView(Inv.RoomID));
         }
 
         private void CancelButtonClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new StaticInventory(Inv.RoomID));
+            NavigationService.Navigate(new StaticInventoryView(Inv.RoomID));
         }
 
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new StaticInventory(Inv.RoomID));
+            NavigationService.Navigate(new StaticInventoryView(Inv.RoomID));
         }
     }
 }

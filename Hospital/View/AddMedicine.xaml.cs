@@ -172,7 +172,11 @@ namespace Hospital.View
             MedicineRevision.RevisionDoctor = doctorStorage.GetOne(MedicineRevision.DoctorID);
             MedicineRevision.IsMedicineRevised = false;
 
-            CheckUniquenessOfMedicineID();
+            if (!isMedicineIDUnique())
+            {
+                MessageBox.Show("Vec postoji lek sa unetom oznakom!");
+                return;
+            }
 
             MedicineRevisionStorage medicineRevisionStorage = new MedicineRevisionStorage();
             medicineRevisionStorage.Save(MedicineRevision);
@@ -180,7 +184,7 @@ namespace Hospital.View
             NavigationService.Navigate(new MedicinesWindow());
         }
 
-        private void CheckUniquenessOfMedicineID()
+        private bool isMedicineIDUnique()
         {
             MedicineStorage medicineStorage = new MedicineStorage();
             ObservableCollection<Medicine> medicines = medicineStorage.GetAll();
@@ -188,10 +192,10 @@ namespace Hospital.View
             {
                 if (medicine.ID.Equals(MedicineRevision.Medicine.ID))
                 {
-                    MessageBox.Show("Vec postoji lek sa unetom oznakom!");
-                    return;
+                    return false;
                 }
             }
+            return true;
         }
 
         private void Cancel(object sender, RoutedEventArgs e)

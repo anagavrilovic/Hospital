@@ -21,61 +21,74 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientAppointmentOptions : Page
     {
-        private Appointment app;
+        private Appointment selectedAppointment;
         private PatientSettingsStorage patientSettingsStorage = new PatientSettingsStorage();
-        public PatientAppointmentOptions(Appointment app)
+        private DoctorStorage doctorStorage = new DoctorStorage();
+        private AppointmentStorage appointmentStorage = new AppointmentStorage();
+        private const int MINIMUM_DAYS_DIFFERENCE = 2;
+
+        public PatientAppointmentOptions(Appointment selectedAppointment)
         {
             InitializeComponent();
-            this.app = app;
+            this.selectedAppointment = selectedAppointment;
         }
-        private void Izmeni(object sender, RoutedEventArgs e)
+
+        private void Reschedule(object sender, RoutedEventArgs e)
         {
-            DateTime currentTime = DateTime.Now;
-            DoctorStorage doctorStorage = new DoctorStorage();
-            Hospital.Model.Doctor d = doctorStorage.GetOne(app.IDDoctor);
-            if (d.Specialty != DoctorSpecialty.general)
+            if (!IsGPAppointment())
             {
-                MessageBox.Show("Nije moguce pomeriti termin kod specijaliste");
+                MessageBox.Show("Moguće je pomeriti samo termine kod opšte prakse.");
             }
-            else if (!patientSettingsStorage.isSchedulingAllowed())
+            else if (patientSettingsStorage.IsAntiTrollTriggered())
             {
                 MessageBox.Show("Previše puta ste zakazali / pomerili termin u kratkom vremenskom periodu.");
             }
-            else if ((app.DateTime - currentTime).TotalDays >= 2)
+            else if (IsTooLateForAppointmentChange())
             {
-                PatientMakeAppointment patientMakeAppointment = new PatientMakeAppointment(app);
-                this.NavigationService.Navigate(patientMakeAppointment);
-                
+                MessageBox.Show("Nije moguce otkazati termin tako kasno");
+
             }
             else
             {
-                MessageBox.Show("Nije moguce otkazati termin tako kasno");
+                PatientMakeAppointment patientMakeAppointment = new PatientMakeAppointment(selectedAppointment);
+                this.NavigationService.Navigate(patientMakeAppointment);
             }
-
-
         }
 
-        private void Nazad(object sender, RoutedEventArgs e)
+        private void Back(object sender, RoutedEventArgs e)
         {
             this.NavigationService.GoBack();
         }
 
-        private void Otkazi(object sender, RoutedEventArgs e)
+        private void Cancel(object sender, RoutedEventArgs e)
         {
-            AppointmentStorage aps = new AppointmentStorage();
-
-            if ((app.DateTime - DateTime.Now).TotalDays >= 2)
+            if (!IsTooLateForAppointmentChange())
             {
-                aps.Delete(app.IDAppointment);
-                this.NavigationService.GoBack();
+                appointmentStorage.Delete(selectedAppointment.IDAppointment);
+                NavigateBack();
             }
             else
             {
                 MessageBox.Show("Nije moguce otkazati termin");
             }
+        }
 
+        private Boolean IsGPAppointment()
+        {
+            Hospital.Model.Doctor doctor = doctorStorage.GetOne(selectedAppointment.IDDoctor);
+            return (doctor.Specialty == DoctorSpecialty.general);
+        }
 
+        private Boolean IsTooLateForAppointmentChange()
+        {
+            return !((selectedAppointment.DateTime - DateTime.Now).TotalDays >= MINIMUM_DAYS_DIFFERENCE);
+        }
 
+        private void NavigateBack()
+        {
+            PatientAppointments patientAppointments = new PatientAppointments();
+            patientAppointments.Refresh();
+            this.NavigationService.Navigate(patientAppointments);
         }
     }
 }

@@ -9,119 +9,113 @@ namespace Hospital.Model
 {
    public class PatientCalendarDTO
     {
-        public TimeSpan Vremena { get; set; }
+        public TimeSpan Term { get; set; }
 
-        public List<String> Days { get; set; }
-        public List<DateTime> Dates { get; set; }
         public List<String> Doctors { get; set; }
+        public List<DateTime> Dates { get; set; }
+        public List<String> DoctorsID { get; set; }
 
         private PatientSettingsStorage patientSettingsStorage = new PatientSettingsStorage();
         private PatientSettings patientSettings;
         private AppointmentStorage appointmentStorage = new AppointmentStorage();
         private DoctorStorage doctorStorage = new DoctorStorage();
-        /*  public String Ponedeljak { get; set; }
-          public String Utorak { get; set; }
-          public String Sreda { get; set; }
-          public String Cetvrtak { get; set; }
-          public String Petak { get; set; }
-          public String Subota { get; set; }
-          public String Nedelja { get; set; }
-          DateTime PonedeljakVreme { get; set; }
-          DateTime UtorakVreme { get; set; }
-          DateTime SredaVreme { get; set; }
-          DateTime CetvrtakVreme { get; set; }
-          DateTime PetakVreme { get; set; }
-          DateTime SubotaVreme { get; set; }
-          DateTime NedeljaVreme { get; set; }*/
-        public PatientCalendarDTO(int i, int j, DateTime mondayTime)
+        private const int NUMBER_OF_DAYS_IN_WEEK = 7;
+        private DateTime trackedDateTime;
+
+
+        public PatientCalendarDTO(int hour, int minute, DateTime mondayTime)
         {
             patientSettings = patientSettingsStorage.getByID(MainWindow.IDnumber);
-            Days = new List<string>(new string[7]);
-            Dates = new List<DateTime>(new DateTime[7]);
             Doctors = new List<string>(new string[7]);
-            var start = i.ToString() + ":" + j.ToString() + ":" + "00";   //"17:05:11";
-            var startTime = DateTime.Parse(start);
-            //Vremena = startTime;
-            Vremena = startTime.TimeOfDay;
-            mondayTime = mondayTime.Date + Vremena;
-            for (int br = 0; br < 7; br++)
-            {
-                
-                   
-                        if (mondayTime < DateTime.Now)
-                        {
-                            Days[br] = "";
-                            Dates[br] = mondayTime;
-                            mondayTime = mondayTime.AddDays(1);
-                            continue;
-                        }
-                        if (IsDoctorIrrelevant())
-                        {
-                            if (IsAppointmentFreeForAnyDoctor(mondayTime) == null)
-                            {
-                                Days[br] = "";
-                            }
-                            else
-                            {
-                                Days[br] = "dr "+ IsAppointmentFreeForAnyDoctor(mondayTime);
-                                Doctors[br] = doctorStorage.GetIDByNameSurname(IsAppointmentFreeForAnyDoctor(mondayTime));
-                    }
-                        }
-                        else
-                        {
-                            if(appointmentStorage.ExistByTime(mondayTime, doctorStorage.GetIDByNameSurname(patientSettings.ChosenDoctor)))
-                            {
-                                Days[br] = "";
-                                
-                            }
-                            else
-                            {
-                                Days[br] = "dr "+ patientSettings.ChosenDoctor;
-                                Doctors[br] = doctorStorage.GetIDByNameSurname(patientSettings.ChosenDoctor);
-                            }
-                        }
-                        
-                        Dates[br] = mondayTime;
-                        mondayTime = mondayTime.AddDays(1);
-                        
-                   }
+            Dates = new List<DateTime>(new DateTime[7]);
+            DoctorsID = new List<string>(new string[7]);
+            var term = hour.ToString() + ":" + minute.ToString() + ":" + "00";   
+            Term = TimeSpan.Parse(term);
+            trackedDateTime = mondayTime.Date + Term;
+            SetAppointmentsForTerm();
             }
-        private Boolean IsDoctorIrrelevant()
-        {
-            if (patientSettings.ChosenDoctor.Equals("Nije mi bitno")) return true;
-            return false;
 
+        private void SetAppointmentsForTerm()
+        {
+            for (int day = 0; day < NUMBER_OF_DAYS_IN_WEEK; day++)
+            {
+                if (HasAppointmentPassed(day)) continue;
+                if (IsDoctorIrrelevant())
+                {
+                    SetAppointmentIfDoctorIsIrrelevant(day);
+                }
+                else
+                {
+                    SetAppointmentIfDoctorIsRelevant(day);
+                }
+            }
         }
 
-        private String IsAppointmentFreeForAnyDoctor(DateTime varVreme)
+        public void SetAppointmentIfDoctorIsRelevant(int day)
+        {  
+            Doctors[day] = "";
+            if (!appointmentStorage.ExistByTime(trackedDateTime, doctorStorage.GetIDByNameSurname(patientSettings.ChosenDoctor)))
+                {
+                    Doctors[day] = "dr " + patientSettings.ChosenDoctor;
+                    DoctorsID[day] = doctorStorage.GetIDByNameSurname(patientSettings.ChosenDoctor);
+                }
+            Dates[day] = trackedDateTime;
+            trackedDateTime = trackedDateTime.AddDays(1);
+        }
+
+        public void SetAppointmentIfDoctorIsIrrelevant(int day)
+        {
+           
+            Doctors[day] = "";
+            SetAvailableDoctorForAppointment(day);
+            Dates[day] = trackedDateTime;
+            trackedDateTime = trackedDateTime.AddDays(1);
+        }
+
+        private Boolean HasAppointmentPassed(int day)
+        {
+            if (trackedDateTime < DateTime.Now)
+            {
+                Doctors[day] = "";
+                Dates[day] = trackedDateTime;
+                trackedDateTime = trackedDateTime.AddDays(1);
+                return true;
+            }
+            return false;
+        }
+
+        private Boolean IsDoctorIrrelevant()
+        {
+            return patientSettings.ChosenDoctor.Equals("Nije mi bitno");  
+        }
+
+        private void SetAvailableDoctorForAppointment(int day)
         {
             ObservableCollection<Hospital.Model.Doctor> doctors = doctorStorage.GetAll();
             Boolean first = true;
-            String nameSurname=null;
-            String IDdoctor=null;
 
-            foreach (Hospital.Model.Doctor d in doctors)
+            foreach (Hospital.Model.Doctor doctor in doctors)
             {
-                if (d.Specialty != DoctorSpecialty.general) continue;
-                if (appointmentStorage.ExistByTime(varVreme, d.PersonalID)) continue;
+                if ((doctor.Specialty != DoctorSpecialty.general) || (appointmentStorage.ExistByTime(trackedDateTime, doctor.PersonalID))) continue;
                 if (first)
                 {
-                    IDdoctor = d.PersonalID;
-                    nameSurname = d.FirstName + " " + d.LastName;
+                    SetDoctor(day, doctor);
                     first = false;
                 }
                 else
                 {
-                    if (appointmentStorage.GetNumberOfAppointmentsForDoctor(IDdoctor) > appointmentStorage.GetNumberOfAppointmentsForDoctor(d.PersonalID))
+                    if (appointmentStorage.GetNumberOfAppointmentsForDoctor(DoctorsID[day]) > appointmentStorage.GetNumberOfAppointmentsForDoctor(doctor.PersonalID))
                     {
-                        IDdoctor = d.PersonalID;
-                        nameSurname = d.FirstName + " " + d.LastName;
-                        
-
+                        SetDoctor(day, doctor);  
                     }
                 }
             }
-            return nameSurname;
+        }
+
+        private void SetDoctor(int day,Doctor doctor)
+        {
+            Doctors[day] = "dr " + doctor.FirstName + " " + doctor.LastName;
+            DoctorsID[day] = doctor.PersonalID;
         }
     }
 }

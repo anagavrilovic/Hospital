@@ -17,154 +17,136 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for ZakazivanjeTermina.xaml
-    /// </summary>
     public partial class ZakazivanjeTermina : Page
     {
-        private Hospital.Model.Doctor doktor = new Hospital.Model.Doctor();
-        private MedicalRecord pacijent = new MedicalRecord();
-        private string time;
-        private int danUNedelji;
-        private string datumString;
-        private DateTime datum;
-        private Appointment appointment = new Appointment();
-        private ObservableCollection<Room> rooms = new ObservableCollection<Room>();
-        private ObservableCollection<string> trajanje = new ObservableCollection<string>();
+        private const double minDurationForAppointment = 0.5;
+        private const double maxDurationForAppointment = 24;
+        private const double timeSlot = 0.5;
 
-        public ObservableCollection<string> Trajanje
-        {
-            get { return trajanje; }
-            set { trajanje = value; }
-        }
+        public Model.Doctor Doctor { get; set; }
+        public MedicalRecord Patient { get; set; }
+        public Appointment NewAppointment { get; set; }
+        public ObservableCollection<Room> AvaliableRooms { get; set; }
+        public ObservableCollection<string> PossibleDuration { get; set; }
 
-        public ObservableCollection<Room> Rooms
-        {
-            get { return rooms; }
-            set { rooms = value; }
-        }
+        public AppointmentStorage AppointmentStorage { get; set; }
+        public RoomStorage RoomStorage { get; set; }
 
 
-        public Appointment Appointment
-        {
-            get { return appointment; }
-            set { appointment = value; }
-        }
-
-
-        public DateTime Datum
-        {
-            get { return datum; }
-            set { datum = value; }
-        }
-
-
-        public string DatumString
-        {
-            get { return datumString; }
-            set { datumString = value; }
-        }
-
-        public string Time
-        {
-            get { return time; }
-            set { time = value; }
-        }
-
-        public int DanUNedelji
-        {
-            get { return danUNedelji; }
-            set { danUNedelji = value; }
-        }
-
-        public MedicalRecord Pacijent
-        {
-            get { return pacijent; }
-            set { pacijent = value; }
-        }
-
-        public Hospital.Model.Doctor Doktor
-        {
-            get { return doktor; }
-            set { doktor = value; }
-        }
-
-        public ZakazivanjeTermina(Hospital.Model.Doctor d, MedicalRecord mr, int dan, string vreme, DateTime weekBegin)
+        public ZakazivanjeTermina(Hospital.Model.Doctor selectedDoctor, MedicalRecord selectedPatient, DateTime dateTimeForNewAppointment)
         {
             InitializeComponent();
+            InitializeAllProperties();
+            ShowPossibleDuration();
+
             this.DataContext = this;
-            this.Doktor = d;
-            this.Pacijent = mr;
-            this.Time = vreme;
-            this.DanUNedelji = dan;
-            OdrediDatumVreme(weekBegin);
-            UcitajSobe();
-            PrikaziTrajanje();
+            this.Doctor = selectedDoctor;
+            this.Patient = selectedPatient;
+            NewAppointment.DateTime = dateTimeForNewAppointment;
         }
 
-        private void OdrediDatumVreme(DateTime weekBegin)
+        private void InitializeAllProperties()
         {
-            Datum = weekBegin.AddDays(DanUNedelji - 1);
-
-            string[] vreme = Time.Split(':');
-            TimeSpan ts = new TimeSpan(Int32.Parse(vreme[0]), Int32.Parse(vreme[1]), 0);
-            Datum = Datum.Date + ts;
-
-            DatumString = Datum.ToString("dd.MM.yyyy.");
+            NewAppointment = new Appointment();
+            AvaliableRooms = new ObservableCollection<Room>();
+            PossibleDuration = new ObservableCollection<string>();
+            AppointmentStorage = new AppointmentStorage();
+            RoomStorage = new RoomStorage();
         }
 
-        private void UcitajSobe()
+        private void ShowPossibleDuration()
         {
-            RoomStorage rs = new RoomStorage();
-            Rooms = rs.GetAll();
-        }
-
-        private void PrikaziTrajanje()
-        {
-            double t = 0;
-            while (t <= 20)
+            double duration = minDurationForAppointment;
+            while (duration <= maxDurationForAppointment)
             {
-                Trajanje.Add(t.ToString());
-                t += 0.5;
+                PossibleDuration.Add(duration.ToString());
+                duration += timeSlot;
             }
         }
 
         private void PotvrdiClick(object sender, RoutedEventArgs e)
         {
-            Appointment.DateTime = Datum;
-            Appointment.PatientName = Pacijent.Patient.FirstName;
-            Appointment.PatientSurname = Pacijent.Patient.LastName;
-            Appointment.IDpatient = Pacijent.Patient.PersonalID;
-            Appointment.IDDoctor = Doktor.PersonalID;
-            Appointment.IDAppointment = Appointment.GetHashCode().ToString();
+            InitializeNewAppointment();
 
-            StringBuilder sb = new StringBuilder(Doktor.FirstName);
-            sb.Append(" ");
-            sb.Append(Doktor.LastName);
-            Appointment.DoctrosNameSurname = sb.ToString();
-
-            switch (Tip.SelectedIndex)
-            {
-                case 0: Appointment.Type = AppointmentType.examination; break;
-                case 1: Appointment.Type = AppointmentType.operation; break;
-            }
-
-            AppointmentStorage aps = new AppointmentStorage();
-            bool ok = aps.SaveIfNotOvelapping(Appointment);
-
-            if (!ok)
-            {
-                MessageBox.Show("Termin se poklapa sa nekim drugim terminom!");
+            if (!IsDoctorAvaliable())
                 return;
+
+            if (!IsPatientAvaliable())
+                return;
+
+            AppointmentStorage.Save(NewAppointment);
+            NavigationService.Navigate(new Kalendar(Doctor));
+        }
+
+        private void InitializeNewAppointment()
+        {
+            SetPatientForNewAppointment();
+            SetDoctorForNewAppointment();
+            SetIDForNewAppointment();
+        }
+
+        private void SetPatientForNewAppointment()
+        {
+            NewAppointment.IDpatient = Patient.Patient.PersonalID;
+            NewAppointment.PatientName = Patient.Patient.FirstName;
+            NewAppointment.PatientSurname = Patient.Patient.LastName; 
+        }
+
+        private void SetDoctorForNewAppointment()
+        {
+            NewAppointment.IDDoctor = Doctor.PersonalID;
+            StringBuilder sb = new StringBuilder(Doctor.FirstName).Append(" ").Append(Doctor.LastName);
+            NewAppointment.DoctrosNameSurname = sb.ToString();
+        }
+
+        private void SetIDForNewAppointment()
+        {
+            NewAppointment.IDAppointment = NewAppointment.GetHashCode().ToString();
+        }
+
+        private bool IsDoctorAvaliable()
+        {
+            if (!AppointmentStorage.IsDoctorAvaliableForAppointment(NewAppointment))
+            {
+                MessageBox.Show("Doktor je već zauzet u ovom terminu. Promenite trajanje ili odaberite drugi termin!");
+                return false;
             }
 
-            NavigationService.Navigate(new Kalendar(Doktor));
+            return true;
+        }
 
+        private bool IsPatientAvaliable()
+        {
+            if (!AppointmentStorage.IsPatientAvaliableForAppointment(NewAppointment))
+            {
+                MessageBox.Show("Ovaj pacijent već ima zakazan pregled/operaciju u ovom terminu!");
+                return false;
+            }
+
+            return true;
         }
 
         private void OdustaniClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Kalendar(Doktor));
+            NavigationService.Navigate(new Kalendar(Doctor));
         }
+
+        private void DurationSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            LoadAvaliableRooms();
+        }
+            
+        private void TypeSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            NewAppointment.Type = (AppointmentType)ComboBoxType.SelectedIndex;
+            LoadAvaliableRooms();
+        }
+
+        private void LoadAvaliableRooms()
+        {
+            AvaliableRooms = RoomStorage.GetAvaliableRooms(NewAppointment);
+            Room.ItemsSource = AvaliableRooms;
+        }
+        
     }
 }

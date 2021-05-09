@@ -81,22 +81,28 @@ namespace Hospital.Model
             return false;
         }
 
-        public Boolean isSchedulingAllowed()
+        public Boolean IsAntiTrollTriggered()
         {
             PatientSettings patientSettings = getByID(MainWindow.IDnumber);
-            if ((patientSettings.LatestScheduledAppointmentsTime == null) || (patientSettings.LatestScheduledAppointmentsTime.Count<3))
-            {
-                return true;
-            }
 
-            foreach(DateTime dts in patientSettings.LatestScheduledAppointmentsTime)
+            if ((patientSettings.LatestScheduledAppointmentsTime != null) && (patientSettings.LatestScheduledAppointmentsTime.Count == 3))
+            {
+
+                if (AreAppointmentsWithinTenDays(patientSettings.LatestScheduledAppointmentsTime)) return true;
+            }
+            return false;
+        }
+
+        private Boolean AreAppointmentsWithinTenDays(List<DateTime>appointmentsDates)
+        {
+            foreach (DateTime dts in appointmentsDates)
             {
                 if ((DateTime.Now - dts).TotalDays > 10)
                 {
-                    return true;
+                    return false;
                 }
             }
-            return false;
+            return true;
         }
 
         public void AddScheduling(DateTime dt)

@@ -55,8 +55,22 @@ namespace Hospital
             }
             return false;
         }
-   
-       public Inventory GetOne(string id)
+
+        public void EditItem(Inventory editedItem)
+        {
+            foreach (Inventory item in inventory)
+            {
+                if (item.Id.Equals(editedItem.Id) && item.RoomID.Equals(editedItem.RoomID))
+                {
+                    inventory.Remove(item);
+                    inventory.Add(editedItem);
+                    doSerialization();
+                    break;
+                }
+            }
+        }
+
+        public Inventory GetOne(string id)
        {
             foreach (Inventory inv in inventory)
             {

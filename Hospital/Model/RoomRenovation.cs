@@ -98,8 +98,7 @@ namespace Hospital.Model
             foreach (Inventory inventory in inventoryStorage.GetByRoomID(Room.Id))
             {
                 TransferInventory transfer = new TransferInventory(inventory.Id, inventory.Quantity, Room.Id, WareHouse.Id, DateTime.Now);
-                transfer.updateInventory(false);
-               // StaticInventory.Inventory = inventoryStorage.GetByRoomID(Room.Id);
+                transfer.UpdateInventory();
             }            
         }
 
@@ -112,7 +111,7 @@ namespace Hospital.Model
         }
 
        private InventoryStorage inventoryStorage = new InventoryStorage();
-       private MedicalSupplyStorage medicalSupplyStorage = new MedicalSupplyStorage();
+       private DynamicInventoryStorage medicalSupplyStorage = new DynamicInventoryStorage();
        private TransferInventoryStorage transferInventoryStorage = new TransferInventoryStorage();
        private RoomStorage roomStorage = new RoomStorage();
        private RoomRenovationStorage roomRenovationStorage = new RoomRenovationStorage();

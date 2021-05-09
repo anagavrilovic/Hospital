@@ -39,7 +39,7 @@ namespace Hospital.View
             else
                 MessageBox.Show("Već postoji stavka sa unetom oznakom!");
 
-            NavigationService.Navigate(new StaticInventory(Inv.RoomID));
+            NavigationService.Navigate(new StaticInventoryView(Inv.RoomID));
         }
 
         private bool CheckUniquenessOfNewItemID()
@@ -54,12 +54,12 @@ namespace Hospital.View
 
         private void CancelButtonClick(object o, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new StaticInventory(Inv.RoomID));
+            NavigationService.Navigate(new StaticInventoryView(Inv.RoomID));
         }
 
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new StaticInventory(Inv.RoomID));
+            NavigationService.Navigate(new StaticInventoryView(Inv.RoomID));
         }
     }
 }

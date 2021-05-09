@@ -91,7 +91,7 @@ namespace Hospital.View
 
         private void MakeAppointment(object sender, RoutedEventArgs e)
         {
-            if (!patientSettingsStorage.isSchedulingAllowed())
+            if (patientSettingsStorage.IsAntiTrollTriggered())
             {
                 MessageBox.Show("Previše puta ste zakazali/pomerili termin u kratkom vremenskom periodu.");
                 return;

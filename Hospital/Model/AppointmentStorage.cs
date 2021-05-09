@@ -43,19 +43,27 @@ namespace Hospital
             DoSerialization(appointment);
         }
 
-        public bool SaveIfNotOvelapping(Appointment period)
+        public bool IsDoctorAvaliableForAppointment(Appointment newAppointment)
         {
-            ObservableCollection<Appointment> appointments = GetAll();
-
-            foreach (Appointment existingPeriod in appointments)
+            ObservableCollection<Appointment> allAppointments = GetAll();
+            foreach (Appointment appointment in allAppointments)
             {
-                if (existingPeriod.IDDoctor.Equals(period.IDDoctor))
-                    if (existingPeriod.DateTime < period.DateTime.AddHours(period.DurationInHours) && period.DateTime < existingPeriod.DateTime.AddHours(existingPeriod.DurationInHours))
-                        return false;
+                if (!appointment.IsDoctorAvaliable(newAppointment))
+                    return false;
             }
 
-            appointments.Add(period);
-            DoSerialization(appointments);
+            return true;
+        }
+
+        public bool IsPatientAvaliableForAppointment(Appointment newAppointment)
+        {
+            ObservableCollection<Appointment> allAppointments = GetAll();
+            foreach (Appointment appointment in allAppointments)
+            {
+                if (!appointment.IsPatientAvaliable(newAppointment))
+                    return false;
+            }
+
             return true;
         }
 
@@ -183,32 +191,48 @@ namespace Hospital
             notificationStorage.SaveNotificationUser(notificationsUsers);
         }
 
-        public ObservableCollection<Appointment> GetByPatient(String id)
+        public void NotifyDoctor(Appointment appointment)
         {
-            ObservableCollection<Appointment> apps = GetAll();
-            ObservableCollection<Appointment> patientApps = new ObservableCollection<Appointment>();
-            Boolean found = false;
-            if (apps == null)
+            StringBuilder stringBuilder = new StringBuilder("");
+            string title = "";
+            string content = "";
+
+            if (appointment.Type.Equals(AppointmentType.urgentExamination) || appointment.Type.Equals(AppointmentType.examination))
             {
-                return null;
-            }
-            foreach (Appointment app in apps)
-            {
-                if (app.IDpatient.Equals(id))
-                {
-                    found = true;
-                    patientApps.Add(app);
-                }
+                title = "HITAN PREGLED";
+
+                stringBuilder.Append("Imate hitan pregled u ").Append(appointment.DateTime.ToString("HH:mm")).Append(" , ordinacija \"").Append(appointment.Room.Name).Append("\".");
+                content = stringBuilder.ToString();
             }
 
-            if (found)
+            else if (appointment.Type.Equals(AppointmentType.urgentOperation) || appointment.Type.Equals(AppointmentType.operation))
             {
-                return patientApps;
+                title = "HITNA OPERACIJA";
+
+                stringBuilder.Append("Imate hitanu operaciju u ").Append(appointment.DateTime.ToString("HH:mm")).Append(" , sala \"").Append(appointment.Room.Name).Append("\".");
+                content = stringBuilder.ToString();
             }
-            else
+
+            Notification notification = new Notification(title, content);
+            NotificationsUsers notificationsUsers = new NotificationsUsers(notification.Id, new DoctorStorage().GetUsernameByIDDoctor(appointment.IDDoctor));
+
+            NotificationStorage notificationStorage = new NotificationStorage();
+            notificationStorage.SaveNotification(notification);
+            notificationStorage.SaveNotificationUser(notificationsUsers);
+        }
+
+        public ObservableCollection<Appointment> GetByPatient(String id)
+        {
+            ObservableCollection<Appointment> allAppointments = GetAll();
+            ObservableCollection<Appointment> patientsApppointments = new ObservableCollection<Appointment>();
+            
+            foreach(Appointment appointment in allAppointments)
             {
-                return null;
+                if (appointment.IDpatient.Equals(id))
+                    patientsApppointments.Add(appointment);
             }
+
+            return patientsApppointments;
         }
 
         public Boolean Delete(string id)
@@ -286,28 +310,16 @@ namespace Hospital
             return retVal.ToString();
         }
 
-        public ObservableCollection<Appointment> GetByDoctor(String id)
+        public ObservableCollection<Appointment> GetAppointmentsByDoctor(String requestedDoctorsID)
         {
-            ObservableCollection<Appointment> apps = GetAll();
-            ObservableCollection<Appointment> doctorApps = new ObservableCollection<Appointment>();
-            Boolean found = false;
-            foreach (Appointment app in apps)
-            {
-                if (app.IDDoctor.Equals(id))
-                {
-                    found = true;
-                    doctorApps.Add(app);
-                }
-            }
+            ObservableCollection<Appointment> allApointments = GetAll();
+            ObservableCollection<Appointment> appointmentsOfRequestedDoctor = new ObservableCollection<Appointment>();
 
-            if (found)
-            {
-                return doctorApps;
-            }
-            else
-            {
-                return null;
-            }
+            foreach(Appointment a in allApointments)
+                if (a.IsDoctorInAppointment(requestedDoctorsID))
+                    appointmentsOfRequestedDoctor.Add(a);
+
+            return appointmentsOfRequestedDoctor;
         }
 
         public Boolean ExistByTime(DateTime dt, String idDoctor)

@@ -28,7 +28,7 @@ namespace Hospital.View
         }
 
         private InventoryStorage inventoryStorage;
-        private MedicalSupplyStorage medicalSupplyStorage;
+        private DynamicInventoryStorage medicalSupplyStorage;
         private RoomStorage roomStorage;
 
         private ObservableCollection<string> staticInventoryItems;
@@ -69,7 +69,7 @@ namespace Hospital.View
             InitializeComponent();
             this.DataContext = this;
             this.inventoryStorage = new InventoryStorage();
-            this.medicalSupplyStorage = new MedicalSupplyStorage();
+            this.medicalSupplyStorage = new DynamicInventoryStorage();
             this.roomStorage = new RoomStorage();
             Rooms = roomStorage.GetAll();
             
@@ -96,7 +96,7 @@ namespace Hospital.View
         {
             DynamicInventoryItems = new ObservableCollection<string>();
 
-            foreach (MedicalSupply medicalSupply in medicalSupplyStorage.GetAll())
+            foreach (DynamicInventory medicalSupply in medicalSupplyStorage.GetAll())
             {
                 StringBuilder sb = new StringBuilder();
                 sb.Append(medicalSupply.Id);
@@ -202,7 +202,7 @@ namespace Hospital.View
                 }
                 else if(dynamicInventoryCB.SelectedItem != null)
                 {
-                    MedicalSupply itemSelected = medicalSupplyStorage.GetOneByRoom(dynamicInventoryCB.Text.Split("-".ToCharArray())[0], room.Id);
+                    DynamicInventory itemSelected = medicalSupplyStorage.GetOneByRoom(dynamicInventoryCB.Text.Split("-".ToCharArray())[0], room.Id);
                     bool condition;
                     if (maxQuantityFilter == 0)
                     {

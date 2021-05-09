@@ -92,13 +92,14 @@
     <Compile Include="Model\RoomRenovation.cs" />
     <Compile Include="Model\RoomRenovationStorage.cs" />
     <Compile Include="Model\RoomStatus.cs" />
-    <Compile Include="Model\Termini.cs" />
-    <Compile Include="Model\MedicalSupply.cs" />
-    <Compile Include="Model\MedicalSupplyStorage.cs" />
+    <Compile Include="Model\DynamicInventory.cs" />
+    <Compile Include="Model\DynamicInventoryStorage.cs" />
+    <Compile Include="Model\WeeklyCalendarRow.cs" />
     <Compile Include="Model\Medicine.cs" />
     <Compile Include="Model\MedicineStorage.cs" />
     <Compile Include="Model\RegistratedUser.cs" />
     <Compile Include="Model\RegistratedUserStorage.cs" />
+    <Compile Include="Model\TransferDynamicInventory.cs" />
     <Compile Include="Model\TransferInventory.cs" />
     <Compile Include="Model\TransferInventoryStorage.cs" />
     <Compile Include="Model\UnitsType.cs" />
@@ -190,11 +191,14 @@
     <Compile Include="View\Doktor\Termin.xaml.cs">
       <DependentUpon>Termin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditMedicine.xaml.cs">
+      <DependentUpon>EditMedicine.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\FilteringInventory.xaml.cs">
       <DependentUpon>FilteringInventory.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditMedicine.xaml.cs">
-      <DependentUpon>EditMedicine.xaml</DependentUpon>
+    <Compile Include="View\EditMedicineOnRevision.xaml.cs">
+      <DependentUpon>EditMedicineOnRevision.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ManagerMainPage.xaml.cs">
       <DependentUpon>ManagerMainPage.xaml</DependentUpon>
@@ -286,8 +290,8 @@
     <Compile Include="View\Secretary\PrikazObavestenja.xaml.cs">
       <DependentUpon>PrikazObavestenja.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PrebacivanjeOpreme.xaml.cs">
-      <DependentUpon>PrebacivanjeOpreme.xaml</DependentUpon>
+    <Compile Include="View\TransferDynamicInventoryView.xaml.cs">
+      <DependentUpon>TransferDynamicInventoryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EditInventory.xaml.cs">
       <DependentUpon>EditInventory.xaml</DependentUpon>
@@ -295,14 +299,14 @@
     <Compile Include="View\Secretary\ModifikacijaAlergena.xaml.cs">
       <DependentUpon>ModifikacijaAlergena.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PrebacivanjeInventara.xaml.cs">
-      <DependentUpon>PrebacivanjeInventara.xaml</DependentUpon>
+    <Compile Include="View\TransferStaticInventory.xaml.cs">
+      <DependentUpon>TransferStaticInventory.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\StaticInventory.xaml.cs">
-      <DependentUpon>StaticInventory.xaml</DependentUpon>
+    <Compile Include="View\StaticInventoryView.xaml.cs">
+      <DependentUpon>StaticInventoryView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DynamicInventory.xaml.cs">
-      <DependentUpon>StaticInventory.xaml</DependentUpon>
+    <Compile Include="View\DynamicInventoryView.xaml.cs">
+      <DependentUpon>DynamicInventoryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AddRoom.xaml.cs">
       <DependentUpon>AddRoom.xaml</DependentUpon>
@@ -443,11 +447,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\EditMedicine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\FilteringInventory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditMedicine.xaml">
+    <Page Include="View\EditMedicineOnRevision.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -583,7 +591,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PrebacivanjeOpreme.xaml">
+    <Page Include="View\TransferDynamicInventoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -595,15 +603,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PrebacivanjeInventara.xaml">
+    <Page Include="View\TransferStaticInventory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\StaticInventory.xaml">
+    <Page Include="View\StaticInventoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DynamicInventory.xaml">
+    <Page Include="View\DynamicInventoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

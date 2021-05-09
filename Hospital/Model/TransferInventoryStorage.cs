@@ -42,7 +42,7 @@ namespace Hospital.Model
 
             transferInventory.Add(parameter1);
 
-            doSerialization();
+            DoSerialization();
         }
 
         public void Delete(TransferInventory transfer)
@@ -52,17 +52,31 @@ namespace Hospital.Model
           
             foreach(TransferInventory ti in transferInventory)
             {
-                if(ti.ItemID.Equals(transfer.ItemID) && ti.FirstRoomID.Equals(transfer.FirstRoomID) && ti.SecondRoomID.Equals(transfer.SecondRoomID))
+                if(ti.ItemID.Equals(transfer.ItemID) && ti.FirstRoomID.Equals(transfer.FirstRoomID) && ti.DestinationRoomID.Equals(transfer.DestinationRoomID))
                 {
                     transferInventory.Remove(ti);
                     break;
                 }
             }
             
-            doSerialization();
+            DoSerialization();
         }
 
-        public void doSerialization()
+        public void EditTransfer(TransferInventory editedTransfer)
+        {
+            foreach (TransferInventory transfer in transferInventory)
+            {
+                if (transfer.ItemID.Equals(editedTransfer.ItemID) && transfer.FirstRoomID.Equals(editedTransfer.FirstRoomID) && transfer.DestinationRoomID.Equals(editedTransfer.DestinationRoomID))
+                {
+                    transferInventory.Remove(transfer);
+                    transferInventory.Add(editedTransfer);
+                    DoSerialization();
+                    break;
+                }
+            }
+        }
+
+        public void DoSerialization()
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {
