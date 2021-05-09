@@ -63,6 +63,27 @@ namespace Hospital.View
             AllRoomsIDs = GetAllRoomsIDs();
         }
 
+        private void AcceptButtonClick(object sender, RoutedEventArgs e)
+        {
+            InitializeTransferRequest();
+
+            if (!IsTransferAttributesValid())
+                return;
+
+            if (NotEnoughItemForNewTransfer() && IsTransferDateBeforeFirstReservedTransferDate())
+                ScheduleTemporaryTransferBeforeFirstReservedTransfer();
+            
+            else if (NotEnoughItemForNewTransfer() && IsTransferDateAfterFirstReservedTransferDate())
+            {
+                TransferCantBeExecuted();
+                return;
+            }
+
+            SaveTransfer(TransferRequest);
+
+            NavigationService.Navigate(new StaticInventoryView(ItemForTransfer.RoomID));
+        }
+
         private void InitializeTransferRequest()
         {
             TransferRequest.ItemID = ItemForTransfer.Id;
@@ -74,22 +95,23 @@ namespace Hospital.View
             TransferRequest.TransferDate = TransferRequest.TransferDate.Add(timeSpan);
         }
 
-        private bool IsTransferTimeValid()
+        private bool IsTransferAttributesValid()
         {
             if (TransferRequest.TransferDate < DateTime.Now)
+            {
+                MessageBox.Show("Niste ispravno uneli vreme!");
                 return false;
+            }
+
+           else if (ItemForTransfer.Quantity < TransferRequest.Quantity)
+            {
+                MessageBox.Show("Pogrešan unos količine!");
+                return false;
+            }
 
             return true;
         }
-
-        private bool IsTransferItemQuantityValid()
-        {
-            if (ItemForTransfer.Quantity < TransferRequest.Quantity)
-                return false;
-
-            return true;
-        }
-
+     
         private int getTotalQuantityForEachTransferOfItem()
         {
             int totalQuantityForTransfer = 0;
@@ -147,54 +169,31 @@ namespace Hospital.View
         {
             if (_firstReservedTransfer.Quantity <= TransferRequest.Quantity)
             {
-                _transferInventoryStorage.Delete(_firstReservedTransfer);
                 _firstReservedTransfer.FirstRoomID = TransferRequest.DestinationRoomID;
-                _transferInventoryStorage.Save(_firstReservedTransfer);
+                _transferInventoryStorage.EditTransfer(_firstReservedTransfer);
             }
             else
             {
                 int newQuantity = _firstReservedTransfer.Quantity - TransferRequest.Quantity;
-                _transferInventoryStorage.Delete(_firstReservedTransfer);
                 _firstReservedTransfer.FirstRoomID = TransferRequest.DestinationRoomID;
                 _firstReservedTransfer.Quantity = TransferRequest.Quantity;
-                _transferInventoryStorage.Save(_firstReservedTransfer);
+                _transferInventoryStorage.EditTransfer(_firstReservedTransfer);
 
                 TransferInventory newTransfer = new TransferInventory(_firstReservedTransfer.ItemID, newQuantity, ItemForTransfer.RoomID, _firstReservedTransfer.DestinationRoomID, _firstReservedTransfer.TransferDate + new TimeSpan(0, 0, 2));
-                _transferInventoryStorage.Save(newTransfer);
-                newTransfer.StartTransfer();
+                SaveTransfer(newTransfer);
             }
         }
 
-        private void AcceptButtonClick(object sender, RoutedEventArgs e)
+        private void TransferCantBeExecuted()
         {
-            InitializeTransferRequest();
+            MessageBox.Show("Sala ne raspolaže traženom količinom stavke. \n Pokušajte sa manjom količinom ili pogledajte stanje u drugim salama.");
+            return;
+        }
 
-            if (!IsTransferItemQuantityValid())
-            {
-                MessageBox.Show("Pogrešan unos količine!");
-                return;
-            }
-            
-            if (!IsTransferTimeValid())
-            {
-                MessageBox.Show("Niste ispravno uneli vreme!");
-                return;
-            }
-
-            if (NotEnoughItemForNewTransfer() && IsTransferDateBeforeFirstReservedTransferDate())
-            {
-                ScheduleTemporaryTransferBeforeFirstReservedTransfer();
-            }
-            else if (NotEnoughItemForNewTransfer() && IsTransferDateAfterFirstReservedTransferDate())
-            {
-                MessageBox.Show("Sala ne raspolaže traženom količinom stavke. \n Pokušajte sa manjom količinom ili pogledajte stanje u drugim salama.");
-                return;
-            }
-
-            _transferInventoryStorage.Save(TransferRequest);
-            TransferRequest.StartTransfer();
-
-            NavigationService.Navigate(new StaticInventoryView(ItemForTransfer.RoomID));
+        private void SaveTransfer(TransferInventory transfer)
+        {
+            _transferInventoryStorage.Save(transfer);
+            transfer.StartTransfer();
         }
 
         private ObservableCollection<string> GetAllRoomsIDs()
