@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.View.Doktor;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -102,7 +103,7 @@ namespace Hospital.View
         {
             MedicsCollection = CollectionViewSource.GetDefaultView(Medics);
             MedicsCollection.Filter = filterMedics;
-            ICollectionView view = GetPretraga();
+            ICollectionView view = GetSearch();
             view.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
             view.SortDescriptions.Add(new SortDescription("ID", ListSortDirection.Ascending));
         }
@@ -145,7 +146,7 @@ namespace Hospital.View
             CollectionViewSource.GetDefaultView(listBox.ItemsSource).Refresh();
         }
 
-        public ICollectionView GetPretraga()
+        public ICollectionView GetSearch()
         {
             return CollectionViewSource.GetDefaultView(Medics);
         }
@@ -168,7 +169,7 @@ namespace Hospital.View
             {
                 if (medicineName.Equals(medicToBeAdded.Name))
                 {
-                    MessageBox.Show("Pacijent je alergican na dati lek");
+                    ErrorBox errorBox=new ErrorBox("Pacijent je alergican na dati lek");
                     return true;
                 }
             }
@@ -182,7 +183,7 @@ namespace Hospital.View
             {
                 if (medicineAddedToTherapy.MedicineID.Equals(medicine.ID))
                 {
-                    MessageBox.Show("Vec ste dodali ovaj lek");
+                    ErrorBox errorBox = new ErrorBox("Vec ste dodali ovaj lek");
                     return true;
                 }
             }

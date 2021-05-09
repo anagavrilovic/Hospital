@@ -189,7 +189,7 @@ namespace Hospital.View
             {
                 FillAppointmentProperties();
                 SetRoomAndRoomType();
-                if (appointmentStorage.SaveIfNotOvelapping(Appointment))
+                if (    SaveIfNotOvelapping())
                 {
                     UpdateParentPage();
                     this.Close();
@@ -199,6 +199,36 @@ namespace Hospital.View
                     ErrorBox errorBox = new ErrorBox("Ovaj termin ima preklapanja");
                 }
             }
+        }
+
+        private bool SaveIfNotOvelapping()
+        {
+            if (IsDoctorAvaliable() && IsPatientAvaliable())
+                return true;
+            else
+                return false;
+        }
+
+        private bool IsDoctorAvaliable()
+        {
+            if (!appointmentStorage.IsDoctorAvaliableForAppointment(Appointment))
+            {
+                ErrorBox errorBox = new ErrorBox("Doktor je već zauzet u ovom terminu. Promenite trajanje ili odaberite drugi termin!");
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool IsPatientAvaliable()
+        {
+            if (!appointmentStorage.IsPatientAvaliableForAppointment(Appointment))
+            {
+                ErrorBox errorBox = new ErrorBox("Ovaj pacijent već ima zakazan pregled/operaciju u ovom terminu!");
+                return false;
+            }
+
+            return true;
         }
 
         private void UpdateParentPage()
@@ -288,7 +318,13 @@ namespace Hospital.View
                 rdbOperacija.IsEnabled = true;
             }else 
             {
-                rdbPregled.IsEnabled = true;    
+                rdbPregled.IsEnabled = true;
+                if (!((Doctor_Examination)Window.GetWindow(this.Owner)).LoggedInDoctor.PersonalID.Equals
+               (((Hospital.Model.Doctor)doctorComboBox.SelectedItem).PersonalID))
+                {
+                    rdbOperacija.IsEnabled = false;
+                    rdbPregled.IsChecked = true; 
+                }
             }
         }
     }
