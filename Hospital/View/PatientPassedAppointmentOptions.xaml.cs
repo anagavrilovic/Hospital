@@ -27,6 +27,7 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.app = app;
+            RateDoctorButton.Focus();
         }
 
         private void Back(object sender, RoutedEventArgs e)

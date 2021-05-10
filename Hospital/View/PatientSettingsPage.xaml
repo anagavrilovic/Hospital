@@ -9,7 +9,7 @@
       Title="PatientSettingsPage">
 
     <Grid Background="White">
-        <Button Content="Nazad" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="338,373,0,0" Click="Nazad"/>
+        <Button Name="BackButton" Content="Nazad" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="338,373,0,0" Click="Nazad"/>
         <Label Content="Preferiran lekar:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,101,0,0"/>
         <RadioButton Name="lekar1" Content="Stefan Ljubovic" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="620,115,0,0" GroupName="grupa1"/>
         <RadioButton Name="lekar2" Content="Aleksa Aleksic" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="620,166,0,0" GroupName="grupa1"/>

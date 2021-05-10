@@ -9,7 +9,7 @@
       Title="PatientPassedAppointmentOptions">
 
     <Grid Background="White">
-        <Button Content="Oceni doktora" HorizontalAlignment="Left" Height="43" Margin="251,82,0,0" VerticalAlignment="Top" Width="285" Click="RateDoctor"/>
+        <Button Name="RateDoctorButton" Content="Oceni doktora" HorizontalAlignment="Left" Height="43" Margin="251,82,0,0" VerticalAlignment="Top" Width="285" Click="RateDoctor"/>
         <Button Content="Nazad" HorizontalAlignment="Left" Height="43" Margin="251,322,0,0" VerticalAlignment="Top" Width="285" Click="Back"/>
 
     </Grid>

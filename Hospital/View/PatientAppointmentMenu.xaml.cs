@@ -23,6 +23,7 @@ namespace Hospital.View
         public PatientAppointmentMenu()
         {
             InitializeComponent();
+            DoneAppointmentsButton.Focus();
         }
 
         private void Back(object sender, RoutedEventArgs e)

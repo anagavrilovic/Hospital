@@ -12,7 +12,7 @@
         <Button Content="Izlaz" HorizontalAlignment="Left" Height="43" Margin="251,367,0,0" VerticalAlignment="Top" Width="316" Click="Exit"/>
         <Button Content="Moji pregledi/operacije" HorizontalAlignment="Left" Height="43" Margin="251,240,0,0" VerticalAlignment="Top" Width="316" Click="Appointments"/>
         <Button Content="Zakaži pregled" HorizontalAlignment="Left" Height="43" Margin="251,177,0,0" VerticalAlignment="Top" Width="316" Click="MakeAppointment"/>
-        <Button Content="Obaveštenja" HorizontalAlignment="Left" Height="43" Margin="251,34,0,0" VerticalAlignment="Top" Width="316" Click="Notifications"/>
+        <Button Name="NotificationButton" Content="Obaveštenja" HorizontalAlignment="Left" Height="43" Margin="251,34,0,0" VerticalAlignment="Top" Width="316" Click="Notifications"/>
         <Button Content="Podešavanja" HorizontalAlignment="Left" Height="43" Margin="251,304,0,0" VerticalAlignment="Top" Width="316" Click="Settings"/>
         <Button Name="RateButton" Content="Oceni bolnicu" HorizontalAlignment="Left" Height="43" Margin="251,106,0,0" VerticalAlignment="Top" Width="316" Click="RateHospital" />
 

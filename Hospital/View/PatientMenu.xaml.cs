@@ -66,6 +66,7 @@ namespace Hospital.View
                     MessageBox.Show("Imate novo obavestenje!");
                 }
             }
+            NotificationButton.Focus();
         }
 
         private void Exit(object sender, RoutedEventArgs e)

@@ -42,6 +42,7 @@ namespace Hospital.View
             {
                 lekar3.IsChecked = true;
             }
+            BackButton.Focus();
         }
 
 

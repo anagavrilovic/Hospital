@@ -857,5 +857,9 @@
   <ItemGroup>
     <Resource Include="Icon\Secretary\arrow.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\esc.png" />
+    <Resource Include="Images\space-key.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

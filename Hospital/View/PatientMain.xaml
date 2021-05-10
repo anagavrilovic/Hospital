@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterScreen"
         >
     <Grid>
-        <Frame Name="frame" NavigationUIVisibility="Hidden" Content="Frame" HorizontalAlignment="Left" Height="442" VerticalAlignment="Top" Width="792"/>
+        <Frame Name="frame" NavigationUIVisibility="Hidden" Content="Frame" HorizontalAlignment="Left" Height="442" VerticalAlignment="Top" Width="792" Focusable="False"/>
 
 
     </Grid>

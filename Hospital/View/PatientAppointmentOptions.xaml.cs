@@ -31,6 +31,7 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.selectedAppointment = selectedAppointment;
+            ChangeAppointmentButton.Focus();
         }
 
         private void Reschedule(object sender, RoutedEventArgs e)
