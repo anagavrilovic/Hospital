@@ -33,6 +33,7 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
+            Record.MedicalRecordID = Record.GetHashCode().ToString();
         }
 
         private void BtnPotvrdiClick(object sender, RoutedEventArgs e)

@@ -34,21 +34,13 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <CheckBox x:Name="Gost" Content="GOSTUJUĆI PACIJENT" Style="{StaticResource CheckBoxStyle}" Margin="15,40,0,0" 
+            <CheckBox x:Name="Gost" Content="GOSTUJUĆI PACIJENT" Style="{StaticResource CheckBoxStyle}" Margin="20,40,0,0" 
                       IsChecked="{Binding Path=Record.Patient.IsGuest, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
            
 
-            <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,40,15,0">
+            <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,40,20,0">
                 <TextBlock Text="Broj zdravstvenog kartona*:" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Center"/>
-                <TextBox x:Name="KartonText" Width="100" Height="20" Margin="15,0,0,0" Style="{StaticResource TextBoxStyle}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
-                    <TextBox.Text>
-                        <Binding Path="Record.MedicalRecordID" Mode="TwoWay" UpdateSourceTrigger="Explicit">
-                            <Binding.ValidationRules>
-                                <val:OnlyDigitsValidationRuleRecordID ValidationStep="RawProposedValue"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
+                <TextBlock x:Name="KartonText" Margin="10,0,0,0" Style="{StaticResource TextBlockStyle}" Text="{Binding Record.MedicalRecordID}"/>
             </StackPanel>
 
         </Grid>
