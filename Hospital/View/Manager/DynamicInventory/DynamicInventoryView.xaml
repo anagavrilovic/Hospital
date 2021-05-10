@@ -63,9 +63,9 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Oznaka"             Binding="{Binding Id}"          Width="70"/>
                         <DataGridTextColumn Header="Naziv"              Binding="{Binding Name}"        Width="100"/>
-                        <DataGridTextColumn Header="Cena"               Binding="{Binding Price}"       Width="60"/>
+                        <DataGridTextColumn Header="Cena"               Binding="{Binding Price}"       Width="55"/>
                         <DataGridTextColumn Header="Količina"           Binding="{Binding Quantity}"    Width="70"/>
-                        <DataGridTextColumn Header="Merna jedinica"     Binding="{Binding Units}"       Width="90"/>
+                        <DataGridTextColumn Header="Merna jedinica"     Binding="{Binding Units}"       Width="95"/>
                     </DataGrid.Columns>
 
                 </DataGrid>

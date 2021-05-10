@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
+        xmlns:val="clr-namespace:Hospital.ValidationRulesManager"
         mc:Ignorable="d"
         Background="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" 
         Title="Izmena sale" Height="730" Width="420">
@@ -58,7 +59,7 @@
         <Label Content="Status:"           Grid.Row="8"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0.6,5.4,10"/>
         <Label Content="Tip:"              Grid.Row="10" Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0.4,5.4,10.2"/>
 
-        <TextBox x:Name="idTxt"            Grid.Row="3"  Grid.ColumnSpan="2" Margin="30,0.2,28,14.8" BorderBrush="#FF26282C" >
+        <TextBox x:Name="idTxt"            Grid.Row="3"  Grid.ColumnSpan="2" Margin="30,0.2,28,14.8" BorderBrush="#FF26282C" Text="{Binding Path=EditedRoom.Id,   Mode=TwoWay, UpdateSourceTrigger=Explicit}" IsEnabled="False">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -74,6 +75,29 @@
                     <Setter Property="Padding" Value="2"/>
                 </Style>
             </TextBox.Resources>
+            <TextBox.Text>
+                <Binding  Path="EditedRoom.Name"    Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                    <Binding.ValidationRules>
+                        <val:EmptyField ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="nameTxt"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
         </TextBox>
         
         <TextBox x:Name="floorTxt"         Grid.Row="7"  Grid.ColumnSpan="2" Margin="30,0.4,28,14.6" BorderBrush="#FF26282C" >
@@ -83,6 +107,29 @@
                     <Setter Property="Padding" Value="2"/>
                 </Style>
             </TextBox.Resources>
+            <TextBox.Text>
+                <Binding  Path="EditedRoom.Floor"    Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                    <Binding.ValidationRules>
+                        <val:EmptyField ValidationStep="RawProposedValue"/>
+                        <val:StringToInteger ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="floorTxt"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
         </TextBox>
 
         <ComboBox x:Name="statusCB"        Grid.Row="9"   Grid.ColumnSpan="2" Margin="30,0.4,28,11.6"    BorderThickness="1">
@@ -98,7 +145,32 @@
             <ComboBoxItem                   Content="MAGACIN"             Foreground="#FF2E83BF"/>
         </ComboBox>
 
-        <Button Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,10.4,10.4,43.6" Style="{StaticResource RoundButtonStyle}" Click="acceptEdit"/>
+        <Button Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,10.4,10.4,43.6"  Click="acceptEdit">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderThickness="1">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=idTxt}"       Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=nameTxt}"     Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=floorTxt}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
         <Button Grid.Row="12" Grid.Column="1" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="9.6,10.4,28,43.6"  Style="{StaticResource RoundButtonStyle}" Click="cancelEdit"/>
 
     </Grid>

@@ -112,7 +112,7 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="idTxt"/>
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="nameTxt"/>
                         <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
                     </Grid>
                 </ControlTemplate>

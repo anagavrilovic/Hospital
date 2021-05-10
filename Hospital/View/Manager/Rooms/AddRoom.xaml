@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:val="clr-namespace:Hospital.ValidationRulesManager"
         xmlns:local="clr-namespace:Hospital"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
@@ -66,7 +67,30 @@
                     <Setter Property="Padding" Value="2"/>
                 </Style>
             </TextBox.Resources>
+            <TextBox.Text>
+                <Binding  Path="NewRoom.Id"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:EmptyField ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="idTxt"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
         </TextBox>
+        
         <TextBox x:Name="nameTxt"          Grid.Row="5"  Grid.ColumnSpan="2" Margin="30,0.4,28,10" BorderBrush="#FF26282C" >
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -74,7 +98,31 @@
                     <Setter Property="Padding" Value="2"/>
                 </Style>
             </TextBox.Resources>
+            <TextBox.Text>
+                <Binding  Path="NewRoom.Name"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:EmptyField ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="nameTxt"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
         </TextBox>
+        
         <TextBox x:Name="floorTxt"         Grid.Row="7"  Grid.ColumnSpan="2" Margin="30,0.2,28,10" BorderBrush="#FF26282C" >
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -82,6 +130,30 @@
                     <Setter Property="Padding" Value="2"/>
                 </Style>
             </TextBox.Resources>
+            <TextBox.Text>
+                <Binding  Path="NewRoom.Floor"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:EmptyField ValidationStep="RawProposedValue"/>
+                        <val:StringToInteger ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="floorTxt"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
         </TextBox>
 
         <ComboBox x:Name="statusCB"        Grid.Row="9"   Grid.ColumnSpan="2" Margin="30,0,28,9.8"    BorderThickness="1">
@@ -109,6 +181,17 @@
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=idTxt}"       Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=nameTxt}"     Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=floorTxt}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
                 </Style>
             </Button.Style>
         </Button>

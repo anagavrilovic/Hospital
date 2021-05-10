@@ -17,23 +17,39 @@ namespace Hospital.View
 {
     public partial class AddRoom : Page
     {
+        private RoomStorage _roomStorage;
+        public Room NewRoom { get; set; }
+
         public AddRoom()
         {
             InitializeComponent();
+            this.DataContext = this;
+
+            NewRoom = new Room();
+            _roomStorage = new RoomStorage();
         }
 
         private void AcceptAddingButtonClick(object sender, RoutedEventArgs e)
         {
-            string tempId = idTxt.Text;
-            String tempName = nameTxt.Text;
-            int tempFloor = int.Parse(floorTxt.Text);
-            RoomType tempType = (RoomType)Enum.Parse(typeof(RoomType), typeCB.Text);
-            RoomStatus tempStatus = (RoomStatus)Enum.Parse(typeof(RoomStatus), statusCB.Text);
+            NewRoom.Type = (RoomType)Enum.Parse(typeof(RoomType), typeCB.Text);
+            NewRoom.Status = (RoomStatus)Enum.Parse(typeof(RoomStatus), statusCB.Text);
 
-            RoomStorage roomStorage = new RoomStorage();
-            roomStorage.Save(new Room { Id = tempId, Name = tempName, Floor = tempFloor, Status = tempStatus, Type = tempType});
+            if (CheckUniquenessOfNewRoomID())
+                _roomStorage.Save(NewRoom);
+            else
+                MessageBox.Show("Već postoji sala sa unetom oznakom!");
 
             NavigationService.Navigate(new RoomsWindow());
+        }
+
+        private bool CheckUniquenessOfNewRoomID()
+        {
+            foreach (Room room in _roomStorage.GetAll())
+            {
+                if (room.Id.Equals(NewRoom.Id))
+                    return false;
+            }
+            return true;
         }
 
         private void CancelAddingButtonClick(object sender, RoutedEventArgs e)

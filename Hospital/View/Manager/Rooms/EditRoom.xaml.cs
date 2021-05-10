@@ -19,63 +19,38 @@ namespace Hospital.View
 {
     public partial class EditRoom : Page
     {
-        private Room room;
+        public Room EditedRoom { get; set; }
+        private RoomStorage _roomStorage;
 
         public EditRoom(Room room)
         {
             InitializeComponent();
-            this.room = room;
+            this.DataContext = this;
+
+            EditedRoom = room;
+            _roomStorage = new RoomStorage();
         }
 
         private void acceptEdit(object sender, RoutedEventArgs e)
-        {  
-            string tempId = idTxt.Text;
-            String tempName = nameTxt.Text;
-            int tempFloor = int.Parse(floorTxt.Text);
-            RoomType tempType = (RoomType)Enum.Parse(typeof(RoomType), "SALA_ZA_PREGLEDE");
+        {
+            idTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            nameTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            floorTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+
+            EditedRoom.Type = (RoomType)Enum.Parse(typeof(RoomType), "SALA_ZA_PREGLEDE");
 
             if (typeCB.SelectedItem != null)
             {
-                tempType = (RoomType)Enum.Parse(typeof(RoomType), typeCB.Text);
+                EditedRoom.Type = (RoomType)Enum.Parse(typeof(RoomType), typeCB.Text);
             }
 
-            RoomStatus tempStatus = (RoomStatus)Enum.Parse(typeof(RoomStatus), "SLOBODNA");
+            EditedRoom.Status = (RoomStatus)Enum.Parse(typeof(RoomStatus), "SLOBODNA");
             if (statusCB.SelectedItem != null)
             {
-                tempStatus = (RoomStatus)Enum.Parse(typeof(RoomStatus), statusCB.Text);
+                EditedRoom.Status = (RoomStatus)Enum.Parse(typeof(RoomStatus), statusCB.Text);
             }
 
-            this.room = new Room { Name = tempName, Floor = tempFloor, Status = tempStatus, Type = tempType, SerializeInfo = true};
-
-            foreach(Room r in RoomsWindow.Rooms)
-            {
-                if(r.Id.Equals(tempId))
-                {
-                    r.Name = tempName;
-                    r.Floor = tempFloor;
-                    r.Status = tempStatus;
-                    r.Type = tempType;
-                    r.SerializeInfo = true;
-                }
-            }
-
-            foreach (Room r in RoomStorage.rooms)
-            {
-                if (r.Id.Equals(tempId))
-                {
-                    r.Name = tempName;
-                    r.Floor = tempFloor;
-                    r.Status = tempStatus;
-                    r.Type = tempType;
-                    r.SerializeInfo = true;
-                }
-            }
-
-            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + "rooms.json"))
-            {
-                 JsonSerializer serializer = new JsonSerializer();
-                 serializer.Serialize(file, RoomStorage.rooms);
-            }
+            _roomStorage.doSerialization();
 
             NavigationService.Navigate(new RoomsWindow());
         }
