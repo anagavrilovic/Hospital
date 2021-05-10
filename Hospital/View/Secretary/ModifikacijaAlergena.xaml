@@ -151,7 +151,6 @@
             </Border>
 
             <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,30">
-
                 <Button x:Name="btnPotvrdi" Content="Potvrdi" Style="{StaticResource ButtonPotvrdiStyle}" Click="BtnPotvrdiClick" >
                     <Button.Effect>
                         <DropShadowEffect BlurRadius="7" ShadowDepth="2" Color="LightGray"/>

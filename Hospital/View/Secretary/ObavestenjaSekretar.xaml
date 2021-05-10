@@ -22,38 +22,78 @@
             <!--<Separator Margin="15,0"/>-->
         </StackPanel>
 
-        <Grid Grid.Row="1" Margin="15">
+        <Grid Grid.Row="1" Margin="15,5,15,15">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
             <!-- Dugmici za CRUD nad obavestenjima -->
-            <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,0,0">
-                <Button Height="50" Width="50" Margin="0,50,0,0" Style="{StaticResource BigButtons}" Click="NovoObavestenjeClick">
-                    <StackPanel Orientation="Vertical">
-                        <Image Source="../../Icon/Secretary/new.png" Width="30"/>
-                        <TextBlock Text="Novo"/>
-                    </StackPanel>
-                </Button>
-                <Button Height="50" Width="50" Margin="0,30,0,0" Style="{StaticResource BigButtons}" Click="IzmenaObavestenjaClick">
-                    <StackPanel Orientation="Vertical">
-                        <Image Source="../../Icon/Secretary/edit.png" Width="30"/>
-                        <TextBlock Text="Izmeni"/>
-                    </StackPanel>
-                </Button>
-                <Button Height="50" Width="60" Margin="0,30,0,0" Style="{StaticResource BigButtons}" Click="PrikazObavestenjaClick">
-                    <StackPanel Orientation="Vertical">
-                        <Image Source="../../Icon/Secretary/info.png" Width="30"/>
-                        <TextBlock Text="Pregledaj"/>
-                    </StackPanel>
-                </Button>
-                <Button Height="50" Width="50" Margin="0,30,0,0" Style="{StaticResource BigButtons}" Click="BrisanjeObavestenjaClick">
-                    <StackPanel Orientation="Vertical">
-                        <Image Source="../../Icon/Secretary/delete.png" Width="30"/>
-                        <TextBlock Text="Izbriši"/>
-                    </StackPanel>
-                </Button>
+            <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0">
+                <Grid>
+                    <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="60" Height="60" Margin="0,45,0,0">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                        </Border.Effect>
+                    </Border>
+                    <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="60" Height="60" Margin="0,45,0,0">
+                        <Button Style="{StaticResource BigButtons}" Click="NovoObavestenjeClick">
+                            <StackPanel Orientation="Vertical">
+                                <Image Source="../../Icon/Secretary/new.png" Width="25"/>
+                                <TextBlock Text="Novo"/>
+                            </StackPanel>
+                        </Button>
+                    </Border>
+                </Grid>
+
+                <Grid>
+                    <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="60" Height="60" Margin="0,23,0,0">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                        </Border.Effect>
+                    </Border>
+                    <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="60" Height="60" Margin="0,23,0,0">
+                        <Button Style="{StaticResource BigButtons}" Click="IzmenaObavestenjaClick">
+                            <StackPanel Orientation="Vertical">
+                                <Image Source="../../Icon/Secretary/edit.png" Width="25"/>
+                                <TextBlock Text="Izmeni"/>
+                            </StackPanel>
+                        </Button>
+                    </Border>
+                </Grid>
+
+                <Grid>
+                    <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="60" Height="60" Margin="0,23,0,0">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                        </Border.Effect>
+                    </Border>
+                    <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="60" Height="60" Margin="0,23,0,0">
+                        <Button Style="{StaticResource BigButtons}" Click="PrikazObavestenjaClick">
+                            <StackPanel Orientation="Vertical">
+                                <Image Source="../../Icon/Secretary/info.png" Width="25"/>
+                                <TextBlock Text="Pregledaj"/>
+                            </StackPanel>
+                        </Button>
+                    </Border>
+                </Grid>
+
+                <Grid>
+                    <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="60" Height="60" Margin="0,23,0,0">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                        </Border.Effect>
+                    </Border>
+                    <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="60" Height="60" Margin="0,23,0,0">
+                        <Button  Style="{StaticResource BigButtons}" Click="BrisanjeObavestenjaClick">
+                            <StackPanel Orientation="Vertical">
+                                <Image Source="../../Icon/Secretary/delete.png" Width="25"/>
+                                <TextBlock Text="Izbriši"/>
+                            </StackPanel>
+                        </Button>
+                    </Border>
+                </Grid>
+                
             </StackPanel>
 
             <Grid Grid.Column="1">

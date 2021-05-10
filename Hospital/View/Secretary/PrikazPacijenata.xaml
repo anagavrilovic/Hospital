@@ -36,65 +36,86 @@
 
                 <!-- Dugmici za opcije nad pacijentima -->
                 <StackPanel Orientation="Horizontal" Height="55" VerticalAlignment="Center" Margin="0,0,0,10">
-                    <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="60">
-                        <Border.Effect>
-                            <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
-                        </Border.Effect>
-                        <Button Style="{StaticResource BigButtons}" Click="NoviClick">
-                            <StackPanel Orientation="Vertical">
-                                <Image Source="../../Icon/Secretary/adduser.png" Width="25"/>
-                                <TextBlock Text="Novi"/>
-                            </StackPanel>
-                        </Button>
-                    </Border>
+                    <Grid>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="60">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                            </Border.Effect>
+                        </Border>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="60">
+                            <Button Style="{StaticResource BigButtons}" Click="NoviClick">
+                                <StackPanel Orientation="Vertical">
+                                    <Image Source="../../Icon/Secretary/adduser.png" Width="25"/>
+                                    <TextBlock Text="Novi"/>
+                                </StackPanel>
+                            </Button>
+                        </Border>
+                    </Grid>
 
-                    <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
-                        <Border.Effect>
-                            <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
-                        </Border.Effect>
-                        <Button Style="{StaticResource BigButtons}" Click="IzmeniClick" >
-                            <StackPanel Orientation="Vertical">
-                                <Image Source="../../Icon/Secretary/edit.png" Width="25"/>
-                                <TextBlock Text="Izmeni"/>
-                            </StackPanel>
-                        </Button>
-                    </Border>
+                    <Grid>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                            </Border.Effect>
+                        </Border>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
+                            <Button Style="{StaticResource BigButtons}" Click="IzmeniClick" >
+                                <StackPanel Orientation="Vertical">
+                                    <Image Source="../../Icon/Secretary/edit.png" Width="25"/>
+                                    <TextBlock Text="Izmeni"/>
+                                </StackPanel>
+                            </Button>
+                        </Border>
+                    </Grid>
 
-                    <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
-                        <Border.Effect>
-                            <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
-                        </Border.Effect>
-                        <Button Style="{StaticResource BigButtons}" Click="DetaljiClick" >
-                            <StackPanel Orientation="Vertical">
-                                <Image Source="../../Icon/Secretary/info.png" Width="25"/>
-                                <TextBlock Text="Detalji"/>
-                            </StackPanel>
-                        </Button>
-                    </Border>
+                    <Grid>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                            </Border.Effect>
+                        </Border>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
+                            <Button Style="{StaticResource BigButtons}" Click="DetaljiClick" >
+                                <StackPanel Orientation="Vertical">
+                                    <Image Source="../../Icon/Secretary/info.png" Width="25"/>
+                                    <TextBlock Text="Detalji"/>
+                                </StackPanel>
+                            </Button>
+                        </Border>
+                    </Grid>
 
-                    <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
-                        <Border.Effect>
-                            <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
-                        </Border.Effect>
-                        <Button Style="{StaticResource BigButtons}" Click="BrisanjeClick" >
-                            <StackPanel Orientation="Vertical">
-                                <Image Source="../../Icon/Secretary/delete.png" Width="25"/>
-                                <TextBlock Text="Brisanje"/>
-                            </StackPanel>
-                        </Button>
-                    </Border>
+                    <Grid>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                            </Border.Effect>
+                        </Border>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
+                            <Button Style="{StaticResource BigButtons}" Click="BrisanjeClick" >
+                                <StackPanel Orientation="Vertical">
+                                    <Image Source="../../Icon/Secretary/delete.png" Width="25"/>
+                                    <TextBlock Text="Brisanje"/>
+                                </StackPanel>
+                            </Button>
+                        </Border>
+                    </Grid>
 
-                    <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
-                        <Border.Effect>
-                            <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
-                        </Border.Effect>
-                        <Button Style="{StaticResource BigButtons}" Click="AlergeniClick" >
-                            <StackPanel Orientation="Vertical">
-                                <Image Source="../../Icon/Secretary/alergies.png" Width="25"/>
-                                <TextBlock Text="Alergeni"/>
-                            </StackPanel>
-                        </Button>
-                    </Border>
+                    <Grid>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                            </Border.Effect>
+                        </Border>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
+                            <Button Style="{StaticResource BigButtons}" Click="AlergeniClick" >
+                                <StackPanel Orientation="Vertical">
+                                    <Image Source="../../Icon/Secretary/alergies.png" Width="25"/>
+                                    <TextBlock Text="Alergeni"/>
+                                </StackPanel>
+                            </Button>
+                        </Border>
+                    </Grid>
+                    
                 </StackPanel>
 
                 <!-- Search -->
