@@ -119,22 +119,22 @@
     <Compile Include="ValidationRulesManager\StringToDouble.cs" />
     <Compile Include="ValidationRulesManager\StringToInteger.cs" />
     <Compile Include="ValidationRulesManager\Time.cs" />
-    <Compile Include="View\AddInventory.xaml.cs">
+    <Compile Include="View\Manager\StaticInventory\AddInventory.xaml.cs">
       <DependentUpon>AddInventory.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\AddMedicalSupply.xaml.cs">
+    <Compile Include="View\Manager\DynamicInventory\AddMedicalSupply.xaml.cs">
       <DependentUpon>AddMedicalSupply.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\AddMedicine.xaml.cs">
+    <Compile Include="View\Manager\Medicines\AddMedicine.xaml.cs">
       <DependentUpon>AddMedicine.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DeleteInventory.xaml.cs">
+    <Compile Include="View\Manager\StaticInventory\DeleteInventory.xaml.cs">
       <DependentUpon>DeleteInventory.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DeleteMedicine.xaml.cs">
+    <Compile Include="View\Manager\Medicines\DeleteMedicine.xaml.cs">
       <DependentUpon>DeleteMedicine.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DeleteRoom.xaml.cs">
+    <Compile Include="View\Manager\Rooms\DeleteRoom.xaml.cs">
       <DependentUpon>DeleteRoom.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Doktor\Anamnesis.xaml.cs">
@@ -170,7 +170,7 @@
     <Compile Include="View\Doktor\ValidnostLeka.xaml.cs">
       <DependentUpon>ValidnostLeka.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditMedicalSupply.xaml.cs">
+    <Compile Include="View\Manager\DynamicInventory\EditMedicalSupply.xaml.cs">
       <DependentUpon>EditMedicalSupply.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Doktor\KalendarTermini.xaml.cs">
@@ -200,25 +200,25 @@
     <Compile Include="View\Doktor\Termin.xaml.cs">
       <DependentUpon>Termin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditMedicine.xaml.cs">
+    <Compile Include="View\Manager\Medicines\EditMedicine.xaml.cs">
       <DependentUpon>EditMedicine.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\FilteringInventory.xaml.cs">
+    <Compile Include="View\Manager\Rooms\FilteringInventory.xaml.cs">
       <DependentUpon>FilteringInventory.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditMedicineOnRevision.xaml.cs">
+    <Compile Include="View\Manager\Medicines\EditMedicineOnRevision.xaml.cs">
       <DependentUpon>EditMedicineOnRevision.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ManagerMainPage.xaml.cs">
+    <Compile Include="View\Manager\ManagerMainPage.xaml.cs">
       <DependentUpon>ManagerMainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MedicineRevisionWindow.xaml.cs">
+    <Compile Include="View\Manager\Medicines\MedicineRevisionWindow.xaml.cs">
       <DependentUpon>MedicineRevisionWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MedicinesWindow.xaml.cs">
+    <Compile Include="View\Manager\Medicines\MedicinesWindow.xaml.cs">
       <DependentUpon>MedicinesWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ManagerNotifications.xaml.cs">
+    <Compile Include="View\Manager\ManagerNotifications.xaml.cs">
       <DependentUpon>ManagerNotifications.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PatientAppointmentMenu.xaml.cs">
@@ -245,7 +245,7 @@
     <Compile Include="View\PatientPassedAppointments.xaml.cs">
       <DependentUpon>PatientPassedAppointments.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientRateDoctor.xaml.cs">
+    <Compile Include="View\Manager\Medicines\PatientRateDoctor.xaml.cs">
       <DependentUpon>PatientRateDoctor.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PatientSettingsPage.xaml.cs">
@@ -254,10 +254,10 @@
     <Compile Include="View\PatientTherapy.xaml.cs">
       <DependentUpon>PatientTherapy.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\RenovateRoom.xaml.cs">
+    <Compile Include="View\Manager\Rooms\RenovateRoom.xaml.cs">
       <DependentUpon>RenovateRoom.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Renovations.xaml.cs">
+    <Compile Include="View\Manager\Rooms\Renovations.xaml.cs">
       <DependentUpon>Renovations.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\DetaljiKarton.xaml.cs">
@@ -299,37 +299,37 @@
     <Compile Include="View\Secretary\PrikazObavestenja.xaml.cs">
       <DependentUpon>PrikazObavestenja.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TransferDynamicInventoryView.xaml.cs">
+    <Compile Include="View\Manager\DynamicInventory\TransferDynamicInventoryView.xaml.cs">
       <DependentUpon>TransferDynamicInventoryView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditInventory.xaml.cs">
+    <Compile Include="View\Manager\StaticInventory\EditInventory.xaml.cs">
       <DependentUpon>EditInventory.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\ModifikacijaAlergena.xaml.cs">
       <DependentUpon>ModifikacijaAlergena.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TransferStaticInventory.xaml.cs">
+    <Compile Include="View\Manager\StaticInventory\TransferStaticInventory.xaml.cs">
       <DependentUpon>TransferStaticInventory.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\StaticInventoryView.xaml.cs">
+    <Compile Include="View\Manager\StaticInventory\StaticInventoryView.xaml.cs">
       <DependentUpon>StaticInventoryView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DynamicInventoryView.xaml.cs">
+    <Compile Include="View\Manager\DynamicInventory\DynamicInventoryView.xaml.cs">
       <DependentUpon>DynamicInventoryView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\AddRoom.xaml.cs">
+    <Compile Include="View\Manager\Rooms\AddRoom.xaml.cs">
       <DependentUpon>AddRoom.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditRoom.xaml.cs">
+    <Compile Include="View\Manager\Rooms\EditRoom.xaml.cs">
       <DependentUpon>EditRoom.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MenagerWindow.xaml.cs">
+    <Compile Include="View\Manager\MenagerWindow.xaml.cs">
       <DependentUpon>MenagerWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PatientMain.xaml.cs">
       <DependentUpon>PatientMain.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\RoomsWindow.xaml.cs">
+    <Compile Include="View\Manager\Rooms\RoomsWindow.xaml.cs">
       <DependentUpon>RoomsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Genders.cs" />
@@ -372,27 +372,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AddInventory.xaml">
+    <Page Include="View\Manager\StaticInventory\AddInventory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AddMedicalSupply.xaml">
+    <Page Include="View\Manager\DynamicInventory\AddMedicalSupply.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AddMedicine.xaml">
+    <Page Include="View\Manager\Medicines\AddMedicine.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DeleteInventory.xaml">
+    <Page Include="View\Manager\StaticInventory\DeleteInventory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DeleteMedicine.xaml">
+    <Page Include="View\Manager\Medicines\DeleteMedicine.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DeleteRoom.xaml">
+    <Page Include="View\Manager\Rooms\DeleteRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -468,31 +468,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditMedicine.xaml">
+    <Page Include="View\Manager\Medicines\EditMedicine.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\FilteringInventory.xaml">
+    <Page Include="View\Manager\Rooms\FilteringInventory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditMedicineOnRevision.xaml">
+    <Page Include="View\Manager\Medicines\EditMedicineOnRevision.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ManagerMainPage.xaml">
+    <Page Include="View\Manager\ManagerMainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MedicineRevisionWindow.xaml">
+    <Page Include="View\Manager\Medicines\MedicineRevisionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MedicinesWindow.xaml">
+    <Page Include="View\Manager\Medicines\MedicinesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ManagerNotifications.xaml">
+    <Page Include="View\Manager\ManagerNotifications.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -528,7 +528,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientRateDoctor.xaml">
+    <Page Include="View\Manager\Medicines\PatientRateDoctor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -540,11 +540,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\RenovateRoom.xaml">
+    <Page Include="View\Manager\Rooms\RenovateRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Renovations.xaml">
+    <Page Include="View\Manager\Rooms\Renovations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -588,7 +588,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditMedicalSupply.xaml">
+    <Page Include="View\Manager\DynamicInventory\EditMedicalSupply.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -612,11 +612,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\TransferDynamicInventoryView.xaml">
+    <Page Include="View\Manager\DynamicInventory\TransferDynamicInventoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditInventory.xaml">
+    <Page Include="View\Manager\StaticInventory\EditInventory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -624,27 +624,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\TransferStaticInventory.xaml">
+    <Page Include="View\Manager\StaticInventory\TransferStaticInventory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\StaticInventoryView.xaml">
+    <Page Include="View\Manager\StaticInventory\StaticInventoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DynamicInventoryView.xaml">
+    <Page Include="View\Manager\DynamicInventory\DynamicInventoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AddRoom.xaml">
+    <Page Include="View\Manager\Rooms\AddRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditRoom.xaml">
+    <Page Include="View\Manager\Rooms\EditRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MenagerWindow.xaml">
+    <Page Include="View\Manager\MenagerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -652,7 +652,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\RoomsWindow.xaml">
+    <Page Include="View\Manager\Rooms\RoomsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
