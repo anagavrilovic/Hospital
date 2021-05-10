@@ -9,6 +9,16 @@
         <Setter Property="BorderBrush" Value="#DDDDDD" />
         <Setter Property="HorizontalGridLinesBrush" Value="#DDDDDD" />
         <Setter Property="VerticalGridLinesBrush" Value="#DDDDDD" />
+        <Setter Property="CanUserAddRows" Value="False"/>
+        <Setter Property="CanUserResizeColumns" Value="False"/>
+        <Setter Property="CanUserResizeRows" Value="False"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Hidden"/>
+        <Setter Property="HorizontalScrollBarVisibility" Value="Hidden"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="SelectionMode" Value="Single"/>
+        <Setter Property="AutoGenerateColumns" Value="False"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="FontFamily" Value="Arial"/>
 
         <Setter Property="RowStyle">
             <Setter.Value>
@@ -67,6 +77,15 @@
         </Setter>
     </Style>
 
+    <!-- DataGridColumnHeader style -->
+    <Style x:Key="ColumnHeaderStyle" TargetType="DataGridColumnHeader">
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Background" Value="#FFA7D8E8"/>
+        <Setter Property="Foreground" Value="#FF1A2366"/>
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    </Style>
+
 
     <Style x:Key="dataGridRooms" TargetType="DataGrid">
         <!-- Make the border and grid lines a little less imposing -->
@@ -89,6 +108,54 @@
                 <Setter Property="Background" Value="#FF333333"/>
             </Trigger>
         </Style.Triggers>
+    </Style>
+
+    <Style x:Key="RoundButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="#FFAAD0E0"/>
+        <Setter Property="Foreground" Value="#FF051D6E"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderThickness="2">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="cbTB" TargetType="{x:Type Control}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=Gost, Path=IsChecked}" Value="True">
+                <Setter Property="TextBox.IsEnabled" Value="False"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ElementName=Gost, Path=IsChecked}" Value="False">
+                <Setter Property="TextBox.IsEnabled" Value="True"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ButtonsWithLogos" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource BackgroundGray}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 </ResourceDictionary>

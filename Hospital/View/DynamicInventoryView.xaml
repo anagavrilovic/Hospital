@@ -37,23 +37,29 @@
                 <Image  Source="/Icon/back.png" Margin="10,8,0,5"/>
             </Button>
             <Label Content="OPREMA" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" Margin="0,15,5,10.2"/>
-            <Image Source="/Icon/logo.png" Margin="60,5,5,9.8" Width="166"/>
+            <Image Source="/Icon/logo.png" Margin="80,15,5,9.8" Width="166"/>
         </StackPanel>
 
-        <Button x:Name="edit"     Content="IZMENI STAVKU"    Grid.Row="1" Grid.Column="0" Margin="10,23,10.2,10" Background="#FFBBD7F9" Foreground="#FF051D6E" Click="EditItemButtonClick" />
-        <Button x:Name="delete"   Content="IZBRIŠI STAVKU"   Grid.Row="1" Grid.Column="1" Margin="10,23,10.2,10" Background="#FFBBD7F9" Foreground="#FF051D6E" Click="DeleteItemButtonClick"/>
-        <Button x:Name="transfer" Content="PREBACI STAVKU"   Grid.Row="2" Grid.Column="0" Margin="10,10,10.2,23" Background="#FFBBD7F9" Foreground="#FF051D6E" Click="TransferItemButtonClick"/>
-        <Button x:Name="report"   Content="KREIRAJ IZVEŠTAJ" Grid.Row="2" Grid.Column="1" Margin="10,10,10.2,23" Background="#FFBBD7F9" Foreground="#FF051D6E" Click="CreateReportButtonClick"/>
+        <Button x:Name="edit"     Content="IZMENI STAVKU"    Grid.Row="1" Grid.Column="0" Margin="10,16.2,7.4,9.6" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="EditItemButtonClick" FontSize="14" />
+        <Button x:Name="delete"   Content="IZBRIŠI STAVKU"   Grid.Row="1" Grid.Column="1" Margin="6.6,16.2,10,9.6" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="DeleteItemButtonClick" FontSize="14"/>
+        <Button x:Name="transfer" Content="PREBACI STAVKU"   Grid.Row="2" Grid.Column="0" Margin="10,0.4,7.4,23.4" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="TransferItemButtonClick" FontSize="14"/>
+        <Button x:Name="report"   Content="KREIRAJ IZVEŠTAJ" Grid.Row="2" Grid.Column="1" Margin="6.6,0.4,10,23.4" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="CreateReportButtonClick" FontSize="14"/>
 
-        <TextBox x:Name="search"  TextChanged="SearchMedicalSupply" Grid.Row="2" Grid.ColumnSpan="2" Margin="10,72.4,62,31" Grid.RowSpan="2" />
+        <TextBox x:Name="search"  TextChanged="SearchMedicalSupply" Grid.Row="2" Grid.ColumnSpan="2" Margin="10,72.4,62,31" Grid.RowSpan="2" >
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
         <Image Source="/Icon/search-blue.png" Grid.Row="2" Grid.Column="1" Margin="154.6,72.4,15,31" MouseDown="ButtonSearchMouseDown" Grid.RowSpan="2"/>
 
         <ScrollViewer Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="2" Background="Azure" HorizontalScrollBarVisibility="Auto" Margin="10,0,0,0">
             <Grid MinWidth="200" Height="330">
-                <DataGrid  x:Name ="dataGridMedicalSupply"  Style="{StaticResource dataGridMedicines}"
-                               IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" 
+                <DataGrid  x:Name ="dataGridMedicalSupply"  Style="{StaticResource dataGridMedicines}" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}"
                                ItemsSource="{Binding Path=Supply, UpdateSourceTrigger=PropertyChanged}"
-                               Background="#FFCADEED" FontFamily="Arial" Foreground="#FF536AA0" Margin="0">
+                               Background="#FFCADEED"  Foreground="#FF536AA0" Margin="0">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Oznaka"             Binding="{Binding Id}"          Width="70"/>
                         <DataGridTextColumn Header="Naziv"              Binding="{Binding Name}"        Width="100"/>
@@ -66,7 +72,7 @@
             </Grid>
         </ScrollViewer>
 
-        <Button x:Name="add"    Content="DODAJ STAVKU"  Grid.Row="9" Grid.ColumnSpan="2" Margin="10,0.2,15,28.6" Background="#FFBBD7F9" Foreground="#FF051D6E" Click="AddItemButtonClick" />
+        <Button x:Name="add"    Content="DODAJ STAVKU"  Grid.Row="9" Grid.ColumnSpan="2" Margin="10,0.2,15,25.6" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="AddItemButtonClick" FontSize="14" />
 
     </Grid>
 </Page>

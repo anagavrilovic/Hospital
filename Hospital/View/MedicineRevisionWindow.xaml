@@ -7,6 +7,11 @@
         mc:Ignorable="d"
        Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
        Title="Lekovi na reviziji" Height="730" Width="420">
+
+    <Page.Resources>
+        <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
+    </Page.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -34,7 +39,7 @@
             <Image Source="/Icon/logo.png"  Margin="60,10,6,9.8" Width="131"/>
         </StackPanel>
 
-        <Button Grid.Row="1" Grid.ColumnSpan="2" Content="IZMENI LEK" Margin="29,18.2,31,19.6" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="EditMedicine"/>
+        <Button Grid.Row="1" Grid.ColumnSpan="2" Content="IZMENI LEK" Margin="29,18.2,31,9.6" Background="#FFAAD0E0" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="EditMedicine" FontSize="14"/>
 
         <Grid Grid.Row="2" Grid.RowSpan="7" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>

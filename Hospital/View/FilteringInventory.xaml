@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-          Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
+          Background="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" 
         Title="Filtriranje opreme" Height="730" Width="420">
+    
+    <Page.Resources>
+        <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
+    </Page.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -79,8 +84,8 @@
             <ComboBoxItem             Content=">100"            Foreground="#FF2E83BF" FontSize="14" HorizontalContentAlignment="Center"/>
         </ComboBox>
 
-        <Button Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="35,10.4,0.4,46.6" Click="doFiltering"/>
-        <Button Grid.Row="12" Grid.Column="1" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="4.6,10.4,28,46.6" Click="cancelFiltering"/>
+        <Button Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="35,10.4,0.4,46.6" Style="{StaticResource RoundButtonStyle}" Click="doFiltering"/>
+        <Button Grid.Row="12" Grid.Column="1" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="4.6,10.4,28,46.6" Style="{StaticResource RoundButtonStyle}" Click="cancelFiltering"/>
 
     </Grid>
 </Page>

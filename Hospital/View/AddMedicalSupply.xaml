@@ -6,19 +6,11 @@
         xmlns:local="clr-namespace:Hospital.View"
         xmlns:val="clr-namespace:Hospital.ValidationRulesManager"
         mc:Ignorable="d"
-        Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
+        Background="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" 
         Title="Unos opreme" Height="730" Width="420">
+
     <Page.Resources>
-        <Style x:Key="cbTB" TargetType="{x:Type Control}">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=Gost, Path=IsChecked}" Value="True">
-                    <Setter Property="TextBox.IsEnabled" Value="False"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding ElementName=Gost, Path=IsChecked}" Value="False">
-                    <Setter Property="TextBox.IsEnabled" Value="True"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
+        <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
     </Page.Resources>
 
     <Grid>
@@ -45,14 +37,22 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
-            <Button  Click="BackButtonClick" Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
-                <Image  Source="/Icon/back.png" Margin="0,8,0,5"/>
-            </Button>
-            <Image Source="/Icon/logo.png"      Margin="260,0,25,-0.4" Width="114"/>
-        </StackPanel>
-
-        <Label Content="UNOS OPREME" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="100,46,138,45.4" FontWeight="Bold" Grid.RowSpan="3"/>
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Grid Grid.Row="0" Background="#FF95C0F4" Margin="0,0,0,38.8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="101*"/>
+                    <ColumnDefinition Width="41*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="200*"/>
+                    <ColumnDefinition Width="70*"/>
+                </Grid.ColumnDefinitions>
+                <Button  Click="BackButtonClick" Background="#FF95C0F4" BorderBrush="#FF95C0F4" Margin="10,7,35,5" Grid.Column="0">
+                    <Image  Source="/Icon/back.png" Height="44"  Width="56"/>
+                </Button>
+                <Image Source="/Icon/logo.png"      Margin="124.8,0,10,-0.4" Grid.Column="3" Grid.ColumnSpan="2"/>
+            </Grid>
+            <Label Content="UNOS INVENTARA" Foreground="#FF4B72F6" FontSize="24" Margin="91,66,96,-0.2" FontWeight="Bold"/>
+        </Grid>
 
         <Label Content="Oznaka:"           Grid.Row="2"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0.2,5.4,10.4"/>
         <Label Content="Naziv:"            Grid.Row="4"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5.4,10.6"/>
@@ -61,6 +61,12 @@
         <Label Content="Merna jedinica:"   Grid.Row="10" Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0.4,5.4,10.2"/>
 
         <TextBox x:Name="idTxt" Grid.Row="3" Grid.ColumnSpan="2" Margin="30,0.6,28,14" BorderBrush="#FF26282C">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+            </TextBox.Resources>
             <TextBox.Text>
                 <Binding  Path="MedicalSupplyItem.Id"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -87,6 +93,12 @@
         </TextBox>
 
         <TextBox x:Name="nameTxt" Grid.Row="5" Grid.ColumnSpan="2" Margin="30,0.4,28,14.2" BorderBrush="#FF26282C">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+            </TextBox.Resources>
             <TextBox.Text>
                 <Binding  Path="MedicalSupplyItem.Name"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -114,6 +126,12 @@
 
 
         <TextBox x:Name="cenaTxt" Grid.Row="7" Grid.ColumnSpan="2" Margin="30,0.2,28,14.4" BorderBrush="#FF26282C">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+            </TextBox.Resources>
             <TextBox.Text>
                 <Binding  Path="MedicalSupplyItem.Price"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -141,6 +159,12 @@
         </TextBox>
 
         <TextBox x:Name="kolicinaTxt" Grid.Row="9" Grid.ColumnSpan="2" Margin="30,0,28,14.6" BorderBrush="#FF26282C">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+            </TextBox.Resources>
             <TextBox.Text>
                 <Binding  Path="MedicalSupplyItem.Quantity"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -173,9 +197,18 @@
             <ComboBoxItem>FLAŠICE</ComboBoxItem>
         </ComboBox>
 
-        <Button Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,10.4,5.4,43.6" Click="AcceptAddingButtonClick">
+        <Button Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,10.4,5.4,43.6" Click="AcceptAddingButtonClick" FontSize="16">
             <Button.Style>
                 <Style TargetType="Button">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderThickness="1">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
                     <Setter Property="IsEnabled" Value="False"/>
                     <Style.Triggers>
                         <MultiDataTrigger>
@@ -192,7 +225,7 @@
             </Button.Style>
         </Button>
 
-        <Button Grid.Row="12" Grid.Column="1" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="4.6,9.4,28,43.6" Click="CancelButtonClick"/>
+        <Button Grid.Row="12" Grid.Column="1" Grid.RowSpan="2" Content="ODUSTANI" Background="white"   Foreground="#FF1E49D9" Margin="4.6,9.4,28,43.6" Style="{StaticResource RoundButtonStyle}" Click="CancelButtonClick" FontSize="16"/>
 
     </Grid>
 </Page>

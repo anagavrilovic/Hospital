@@ -6,11 +6,14 @@
         xmlns:val="clr-namespace:Hospital.ValidationRulesManager"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-        Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
+        Background="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" 
         Title="Dodavanje inventara" Height="730" Width="420">
 
-    <Grid>
+    <Page.Resources>
+        <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
+    </Page.Resources>
 
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -31,14 +34,22 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
-            <Button  Click="BackButtonClick" Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
-                <Image  Source="/Icon/back.png" Margin="0,8,0,5"/>
-            </Button>
-            <Image Source="/Icon/logo.png"      Margin="250,0,25,-0.4" Width="114"/>
-        </StackPanel>
-
-        <Label Content=" UNOS INVENTARA"  Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="100,10.2,5,60.4" FontWeight="Bold" Grid.RowSpan="2"/>
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Grid Grid.Row="0" Background="#FF95C0F4" Margin="0,0,0,45">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="101*"/>
+                    <ColumnDefinition Width="41*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="200*"/>
+                    <ColumnDefinition Width="70*"/>
+                </Grid.ColumnDefinitions>
+                <Button  Click="BackButtonClick" Height="60" Background="#FF95C0F4" BorderBrush="#FF95C0F4" Margin="5,10,34,6" Grid.Column="0">
+                    <Image  Source="/Icon/back.png" Height="57"  Width="76"/>
+                </Button>
+                <Image Source="/Icon/logo.png"      Margin="124.8,0,10,-0.4" Grid.Column="3" Grid.ColumnSpan="2"/>
+            </Grid>
+            <Label Content="UNOS INVENTARA" Foreground="#FF4B72F6" FontSize="24" Margin="91,77,96,-0.4" FontWeight="Bold"/>
+        </Grid>
 
         <Label Content="Oznaka:"   Grid.Row="2" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,4.8,5.4,9.8" />
         <Label Content="Naziv:"    Grid.Row="4" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0.4,5.4,10.2" />
@@ -46,6 +57,12 @@
         <Label Content="Količina:" Grid.Row="8" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5.4,20.6" />
 
         <TextBox x:Name="idTxt" Grid.Row="3" Grid.ColumnSpan="2" Margin="30,0,28,14.6" BorderBrush="#FF26282C">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+            </TextBox.Resources>
             <TextBox.Text>
                 <Binding  Path="Inv.Id"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -63,7 +80,6 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-
                         <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="idTxt"/>
                         <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
                     </Grid>
@@ -72,6 +88,12 @@
         </TextBox>
 
         <TextBox x:Name="nameTxt" Grid.Row="4" Grid.ColumnSpan="2" Margin="30,53.4,28,14.8" BorderBrush="#FF26282C" Grid.RowSpan="2">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+            </TextBox.Resources>
             <TextBox.Text>
                 <Binding  Path="Inv.Name"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -98,6 +120,12 @@
         </TextBox>
 
         <TextBox x:Name="cenaTxt" Grid.Row="7" Grid.ColumnSpan="2" Margin="30,0.6,28,14" BorderBrush="#FF26282C">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+            </TextBox.Resources>
             <TextBox.Text>
                 <Binding  Path="Inv.Price"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -125,6 +153,12 @@
         </TextBox>
 
         <TextBox x:Name="kolicinaTxt" Grid.Row="9" Grid.ColumnSpan="2" Margin="30,0.2,28,14.4" BorderBrush="#FF26282C">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+            </TextBox.Resources>
             <TextBox.Text>
                 <Binding  Path="Inv.Quantity"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -151,9 +185,18 @@
             </Validation.ErrorTemplate>
         </TextBox>
 
-        <Button Grid.Column="0" Grid.Row="10" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,31.2,10,39.8" Click="AcceptAddingButtonClick" >
+        <Button Grid.Column="0" Grid.Row="10" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,31.2,10,39.8" Click="AcceptAddingButtonClick" FontSize="16" >
             <Button.Style>
                 <Style TargetType="Button">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderThickness="1">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
                     <Setter Property="IsEnabled" Value="False"/>
                     <Style.Triggers>
                         <MultiDataTrigger>
@@ -169,7 +212,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button Grid.Column="1" Grid.Row="10" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="10,31.2,28,39.8" Click="CancelButtonClick" />
+        <Button Grid.Column="1" Grid.Row="10" Grid.RowSpan="2" Content="ODUSTANI" Background="White"     Foreground="#FF1E49D9" Margin="10,31.2,28,39.8" Style="{StaticResource RoundButtonStyle}" Click="CancelButtonClick" FontSize="16"/>
 
     </Grid>
 </Page>

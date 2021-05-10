@@ -73,15 +73,8 @@ namespace Hospital.View
             Medicine selectedMedicine = (Medicine)dataGridMedicines.SelectedItem;
             if (selectedMedicine == null)
                 return;
-
-            MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da izbrišete izabrani lek?",
-                                                      "Brisanje leka", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            if (result == MessageBoxResult.Yes)
-            {
-                this._medicineStorage.Delete(selectedMedicine.ID);
-                Medicines.Remove(selectedMedicine);
-            }
+     
+            NavigationService.Navigate(new DeleteMedicine(selectedMedicine));
         }
 
         private void MedicinesRevision(object sender, RoutedEventArgs e)

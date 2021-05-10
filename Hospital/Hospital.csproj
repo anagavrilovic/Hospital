@@ -128,6 +128,15 @@
     <Compile Include="View\AddMedicine.xaml.cs">
       <DependentUpon>AddMedicine.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DeleteInventory.xaml.cs">
+      <DependentUpon>DeleteInventory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeleteMedicine.xaml.cs">
+      <DependentUpon>DeleteMedicine.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DeleteRoom.xaml.cs">
+      <DependentUpon>DeleteRoom.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Doktor\Anamnesis.xaml.cs">
       <DependentUpon>Anamnesis.xaml</DependentUpon>
     </Compile>
@@ -372,6 +381,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddMedicine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DeleteInventory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DeleteMedicine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DeleteRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

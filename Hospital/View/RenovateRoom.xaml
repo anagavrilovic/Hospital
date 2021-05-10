@@ -6,8 +6,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-      Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
+      Background="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" 
         Title="Zakazivanje renoviranja" Height="730" Width="420">
+
+    <Page.Resources>
+        <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
+    </Page.Resources>
+
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -34,19 +39,28 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
-            <Button  Click="back" Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
-                <Image  Source="/Icon/back.png" Height="36" Width="45"/>
-            </Button>
-            <Image Source="/Icon/logo.png"      Margin="220,0,25,0" Width="131"/>
-        </StackPanel>
-        <Label Content="ZAKAZIVANJE RENOVIRANJA" Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="30,2.4,28,40.8" FontWeight="Bold" Grid.RowSpan="2"/>
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Grid Grid.Row="0" Background="#FF95C0F4" Margin="0,0,0,31.2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="101*"/>
+                    <ColumnDefinition Width="41*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="200*"/>
+                    <ColumnDefinition Width="70*"/>
+                </Grid.ColumnDefinitions>
+                <Button  Click="back" Background="#FF95C0F4" BorderBrush="#FF95C0F4" Margin="10,0,27.8,0" Grid.Column="0">
+                    <Image  Source="/Icon/back.png" Height="60"  Width="53"/>
+                </Button>
+                <Image Source="/Icon/logo.png"      Margin="124.8,0,10,-0.4" Grid.Column="3" Grid.ColumnSpan="2"/>
+            </Grid>
+            <Label Content="ZAKAZIVANJE RENOVIRANJA" Foreground="#FF4B72F6" FontSize="24" Margin="40,60,29,-5.8" FontWeight="Bold"/>
+        </Grid>
 
-        <Label Content="Oznaka sale:"         Grid.Row="1"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,45.4,186,9.8"  Grid.ColumnSpan="2" Grid.RowSpan="2" />
-        <Label Content="Datum početka:"       Grid.Row="3"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,45.2,186,10"  Grid.ColumnSpan="2" Grid.RowSpan="2" />
-        <Label Content="Datum završetka:"     Grid.Row="6"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,0.4,5,15.2"   Grid.ColumnSpan="2"/>
+        <Label Content="Oznaka sale:"         Grid.Row="2"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,4.8,186,4.8"  Grid.ColumnSpan="2" />
+        <Label Content="Datum početka:"       Grid.Row="4"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,4.6,186,5"  Grid.ColumnSpan="2" />
+        <Label Content="Datum završetka:"     Grid.Row="6"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,5.4,5,10.2"   Grid.ColumnSpan="2"/>
         <Label Content="Magacin za privremeno skladištenje opreme:" Grid.Row="8" Foreground="#FF1E49D9" FontSize="16" Margin="30,2.2,5,10.4" Grid.ColumnSpan="2" />
-        <Label Content="Opis:"                Grid.Row="9"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,38.6,5.4,21.6" Grid.RowSpan="2" />
+        <Label Content="Opis:"                Grid.Row="10"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,0,5.4,14.6" />
 
         <ComboBox x:Name="roomCB"        Grid.Row="3" Grid.ColumnSpan="2" Margin="30,0.2,28,11.4" BorderThickness="1" Foreground="#FF2E83BF"
                     IsSynchronizedWithCurrentItem="True"
@@ -64,10 +78,17 @@
                     SelectedItem="{Binding SomeBindingPropertySelectedCurrently, 
                     Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.RowSpan="2" />
 
-        <TextBox    x:Name="description"  Grid.Row="10" Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="30,45,28,10.4" Text="{Binding Path=RoomRenovation.Description, Mode=OneWayToSource}" BorderBrush="#FF26282C" TextWrapping="Wrap"/>
+        <TextBox    x:Name="description"  Grid.Row="10" Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="30,45,28,10.4" Text="{Binding Path=RoomRenovation.Description, Mode=OneWayToSource}" BorderBrush="#FF26282C" TextWrapping="Wrap">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
 
-        <Button Grid.Column="0" Grid.Row="14"  Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,9.6,10.4,36.6" Click="accept"/>
-        <Button Grid.Column="1" Grid.Row="14"  Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="9.6,9.6,28,36.6" Click="cancel" />
+        <Button Grid.Column="0" Grid.Row="14"  Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,9.6,10.4,36.6" Style="{StaticResource RoundButtonStyle}" Click="accept"/>
+        <Button Grid.Column="1" Grid.Row="14"  Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="9.6,9.6,28,36.6"  Style="{StaticResource RoundButtonStyle}" Click="cancel" />
 
     </Grid>
 </Page>

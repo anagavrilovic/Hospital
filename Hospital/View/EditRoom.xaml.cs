@@ -85,7 +85,7 @@ namespace Hospital.View
             NavigationService.Navigate(new RoomsWindow());
         }
 
-        private void back (object sender, RoutedEventArgs e)
+        private void BackButtonClick (object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RoomsWindow());
         }

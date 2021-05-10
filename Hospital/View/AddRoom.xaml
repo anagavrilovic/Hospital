@@ -6,8 +6,12 @@
         xmlns:local="clr-namespace:Hospital"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
+        Background="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" 
         Title="Dodavanje sale" Height="730" Width="420">
+
+    <Page.Resources>
+        <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
+    </Page.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -32,14 +36,22 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4" Margin="0,0,0,46.8" Grid.RowSpan="2">
-            <Button Grid.Column="0" Background="#FF95C0F4" BorderBrush="#FF95C0F4" Click="BackButtonClick">
-                <Image Source="/Icon/back.png"  Margin="10,8,5,5"/>
-            </Button>
-            <Image Source="/Icon/logo.png"  Margin="240,8,0,10.4"/>
-        </StackPanel>
-
-        <Label Content="UNOS SALE"         Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="135,5,5,0" FontWeight="Bold"/>
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Grid Grid.Row="0" Background="#FF95C0F4" Margin="0,0,0,39.8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="101*"/>
+                    <ColumnDefinition Width="41*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="200*"/>
+                    <ColumnDefinition Width="70*"/>
+                </Grid.ColumnDefinitions>
+                <Button  Click="BackButtonClick" Background="#FF95C0F4" BorderBrush="#FF95C0F4" Margin="10,0,27.8,0" Grid.Column="0">
+                    <Image  Source="/Icon/back.png" Height="60"  Width="53"/>
+                </Button>
+                <Image Source="/Icon/logo.png"      Margin="124.8,0,10,-0.4" Grid.Column="3" Grid.ColumnSpan="2"/>
+            </Grid>
+            <Label Content="UNOS SALE" Foreground="#FF4B72F6" FontSize="24" Margin="131,65,143,-0.2" FontWeight="Bold"/>
+        </Grid>
 
         <Label Content="Oznaka:"           Grid.Row="2"   Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5,8"/>
         <Label Content="Naziv:"            Grid.Row="4"   Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5,8"/>
@@ -47,9 +59,30 @@
         <Label Content="Status:"           Grid.Row="7"   Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,45.2,0.4,8" Grid.RowSpan="2"/>
         <Label Content="Tip:"              Grid.Row="10"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5,8"/>
 
-        <TextBox x:Name="idTxt"            Grid.Row="3"  Grid.ColumnSpan="2" Margin="30,0.2,28,9.8" BorderBrush="#FF26282C" />
-        <TextBox x:Name="nameTxt"          Grid.Row="5"  Grid.ColumnSpan="2" Margin="30,0.4,28,10" BorderBrush="#FF26282C" />
-        <TextBox x:Name="floorTxt"         Grid.Row="7"  Grid.ColumnSpan="2" Margin="30,0.2,28,10" BorderBrush="#FF26282C" />
+        <TextBox x:Name="idTxt"            Grid.Row="3"  Grid.ColumnSpan="2" Margin="30,0.2,28,9.8" BorderBrush="#FF26282C" >
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="nameTxt"          Grid.Row="5"  Grid.ColumnSpan="2" Margin="30,0.4,28,10" BorderBrush="#FF26282C" >
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="floorTxt"         Grid.Row="7"  Grid.ColumnSpan="2" Margin="30,0.2,28,10" BorderBrush="#FF26282C" >
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
 
         <ComboBox x:Name="statusCB"        Grid.Row="9"   Grid.ColumnSpan="2" Margin="30,0,28,9.8"    BorderThickness="1">
             <ComboBoxItem IsSelected="True" Content="SLOBODNA"            Foreground="#FF2E83BF"/>
@@ -64,8 +97,22 @@
             <ComboBoxItem                   Content="MAGACIN"            Foreground="#FF2E83BF"/>
         </ComboBox>
 
-        <Button Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,10.4,10.4,41.6" Click="AcceptAddingButtonClick"/>
-        <Button Grid.Row="12" Grid.Column="1" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="9.6,10.4,28,41.6"  Click="CancelAddingButtonClick"/>
+        <Button Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,10.4,10.4,41.6" Click="AcceptAddingButtonClick" FontSize="16">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderThickness="1">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Grid.Row="12" Grid.Column="1" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="9.6,10.4,28,41.6" Style="{StaticResource RoundButtonStyle}" Click="CancelAddingButtonClick" FontSize="16"/>
 
     </Grid>
 

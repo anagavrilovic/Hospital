@@ -132,12 +132,8 @@ namespace Hospital.View
 
             if (selectedItem == null)
                 return;
-            
-            MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da uklonite izabranu salu",
-                                      "Brisanje sale", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-           if (result == MessageBoxResult.Yes)
-               roomStorage.Delete(selectedItem.Id);
+   
+            NavigationService.Navigate(new DeleteRoom (selectedItem));
         }
 
         private void viewStaticInventory(object sender, RoutedEventArgs e)

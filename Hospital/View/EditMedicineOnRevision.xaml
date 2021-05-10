@@ -6,8 +6,13 @@
         xmlns:local="clr-namespace:Hospital.View"
         xmlns:val="clr-namespace:Hospital.ValidationRulesManager"
         mc:Ignorable="d"
-       Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
+       Background="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" 
        Title="Izmena leka" Height="730" Width="420">
+
+    <Page.Resources>
+        <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
+    </Page.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -43,7 +48,7 @@
                 <Image  Source="/Icon/back.png" Margin="10,8,0,5"/>
             </Button>
             <Label Content="IZMENA LEKA" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" Margin="8,20,9,9.8"/>
-            <Image Source="/Icon/logo.png" Margin="50,5,23,9.8" Width="137"/>
+            <Image Source="/Icon/logo.png" Margin="30,5,23,9.8" Width="137"/>
         </StackPanel>
 
         <ScrollViewer Grid.Row="2" Grid.RowSpan="19" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Hidden" Margin="0,0,0,0">
@@ -79,20 +84,48 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Label Content="Oznaka:"   Grid.Row="0" Grid.Column="0"  Foreground="#FF1E49D9" FontSize="16" Margin="10,5,5,5" Grid.ColumnSpan="2" />
-                <Label Content="Naziv:"    Grid.Row="2" Grid.Column="0"  Foreground="#FF1E49D9" FontSize="16" Margin="5,1,1,1" Grid.ColumnSpan="2" />
-                <Label Content="Gramaža:"  Grid.Row="4" Grid.Column="0"  Foreground="#FF1E49D9" FontSize="16" Margin="5,1,1,1" Grid.ColumnSpan="2" />
-                <Label Content="Količina:" Grid.Row="6" Grid.Column="0"  Foreground="#FF1E49D9" FontSize="16" Margin="5,1,1,1" Grid.ColumnSpan="2" />
-                <Label Content="Cena:"     Grid.Row="8" Grid.Column="0"  Foreground="#FF1E49D9" FontSize="16" Margin="5,1,1,1" Grid.ColumnSpan="2" />
-                <Label Content="Sastojci:" Grid.Row="10" Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="5,1,1,1" Grid.ColumnSpan="2" />
-                <Label Content="Revidira:" Grid.Row="18" Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="5,1,1,1" Grid.ColumnSpan="2" />
-
-                <TextBox x:Name="idTxt"     Text="{Binding MedicineOnRevision.Medicine.ID,         Mode=TwoWay, UpdateSourceTrigger=Explicit}"    Grid.Row="1" Grid.ColumnSpan="2" Margin="30,0,28,21" BorderBrush="#FF26282C" IsEnabled="False"/>
-                <TextBox x:Name="nameTxt"   Text="{Binding MedicineOnRevision.Medicine.Name,       Mode=TwoWay, UpdateSourceTrigger=Explicit}"    Grid.Row="3" Grid.ColumnSpan="2" Margin="30,4,28,21" BorderBrush="#FF26282C" />
-                <TextBox x:Name="dosageTxt" Text="{Binding MedicineOnRevision.Medicine.DosageInMg, Mode=TwoWay, UpdateSourceTrigger=Explicit}"   Grid.Row="5" Grid.ColumnSpan="2" Margin="30,4,28,20" BorderBrush="#FF26282C"/>
-
+                <Label Content="Oznaka:"   Grid.Row="0" Grid.Column="0"  Foreground="#FF1E49D9" FontSize="16" Margin="30,5,5,5" Grid.ColumnSpan="2" />
+                <Label Content="Naziv:"    Grid.Row="2" Grid.Column="0"  Foreground="#FF1E49D9" FontSize="16" Margin="30,1,1,1" Grid.ColumnSpan="2" />
+                <Label Content="Gramaža:"  Grid.Row="4" Grid.Column="0"  Foreground="#FF1E49D9" FontSize="16" Margin="30,1,1,1" Grid.ColumnSpan="2" />
+                <Label Content="Količina:" Grid.Row="6" Grid.Column="0"  Foreground="#FF1E49D9" FontSize="16" Margin="30,1,1,1" Grid.ColumnSpan="2" />
+                <Label Content="Cena:"     Grid.Row="8" Grid.Column="0"  Foreground="#FF1E49D9" FontSize="16" Margin="30,1,1,1" Grid.ColumnSpan="2" />
+                <Label Content="Sastojci:" Grid.Row="10" Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,1,1,1" Grid.ColumnSpan="2" />
+                <Label Content="Revidira:" Grid.Row="18" Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,1,1,1" Grid.ColumnSpan="2" />
+              
+                <TextBox x:Name="idTxt"     Text="{Binding MedicineOnRevision.Medicine.ID,         Mode=TwoWay, UpdateSourceTrigger=Explicit}"    Grid.Row="1" Grid.ColumnSpan="2" Margin="30,0,28,21" BorderBrush="#FF26282C" IsEnabled="False">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="Padding" Value="2"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+                
+                <TextBox x:Name="nameTxt"   Text="{Binding MedicineOnRevision.Medicine.Name,       Mode=TwoWay, UpdateSourceTrigger=Explicit}"    Grid.Row="3" Grid.ColumnSpan="2" Margin="30,4,28,21" BorderBrush="#FF26282C">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="Padding" Value="2"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+                
+                <TextBox x:Name="dosageTxt" Text="{Binding MedicineOnRevision.Medicine.DosageInMg, Mode=TwoWay, UpdateSourceTrigger=Explicit}"   Grid.Row="5" Grid.ColumnSpan="2" Margin="30,4,28,20" BorderBrush="#FF26282C">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="Padding" Value="2"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
 
                 <TextBox x:Name="quantityTxt" Grid.Row="7" Grid.ColumnSpan="2" Margin="30,4,28,22" BorderBrush="#FF26282C">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="Padding" Value="2"/>
+                        </Style>
+                    </TextBox.Resources>
                     <TextBox.Text>
                         <Binding  Path="MedicineOnRevision.Medicine.Quantity"    Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>
@@ -119,6 +152,12 @@
                 </TextBox>
 
                 <TextBox x:Name="priceTxt" Grid.Row="9" Grid.ColumnSpan="2" Margin="30,4,28,20" BorderBrush="#FF26282C">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="Padding" Value="2"/>
+                        </Style>
+                    </TextBox.Resources>
                     <TextBox.Text>
                         <Binding  Path="MedicineOnRevision.Medicine.Price"    Mode="TwoWay" UpdateSourceTrigger="Explicit">
                             <Binding.ValidationRules>
@@ -187,8 +226,8 @@
                     SelectedItem="{Binding SomeBindingPropertySelectedCurrently, 
                     Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-                <Button x:Name="sendOnRevision" Content="POŠALJI NA REVIZIJU" Grid.Row="21" Grid.Column="0"  Margin="19,0,10,0" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="SendAgainOnRevision"/>
-                <Button x:Name="cancel"         Content="ODUSTANI"            Grid.Row="21" Grid.Column="1"  Margin="10,0,22,0" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="Cancel"/>
+                <Button x:Name="sendOnRevision" Content="POŠALJI NA REVIZIJU" Grid.Row="21" Grid.Column="0"  Margin="19,0,10,0" Background="#FFAAD0E0" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="SendAgainOnRevision"/>
+                <Button x:Name="cancel"         Content="ODUSTANI"            Grid.Row="21" Grid.Column="1"  Margin="10,0,22,0" Background="White"     Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="Cancel"/>
 
             </Grid>
         </ScrollViewer>

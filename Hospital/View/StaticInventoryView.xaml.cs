@@ -132,13 +132,7 @@ namespace Hospital.View
             if (selectedItem == null)
                 return;
 
-            MessageBoxResult result = MessageBox.Show("Da li ste sigurni da želite da izbrišete izabranu stavku",
-                                                      "Brisanje stavke", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
-            {                    
-                 Inventory.Remove(selectedItem);
-                _inventoryStorage.Delete(selectedItem.Id, selectedItem.RoomID);
-            }
+            NavigationService.Navigate(new DeleteInventory(selectedItem));
         }
 
         private void TransferButtonClick(object o, RoutedEventArgs e)
