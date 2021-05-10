@@ -32,36 +32,39 @@ namespace Hospital.View
             Boolean newNotification = false;
             PatientNotificationsStorage patientNotificationsStorage = new PatientNotificationsStorage();
             //  patientNotificationsStorage.SaveAll();
-            ObservableCollection<PatientTherapyMedicineNotification> lista = patientNotificationsStorage.GetAll();
-            foreach (PatientTherapyMedicineNotification ptm in lista)
+            ObservableCollection<PatientTherapyMedicineNotification> lista = patientNotificationsStorage.GetByIDPatient(MainWindow.IDnumber);
+            if (lista != null)
             {
-                if ((ptm.FromDate.Date <= DateTime.Now.Date) && (ptm.ToDate.Date >= DateTime.Now.Date))
+                foreach (PatientTherapyMedicineNotification ptm in lista)
                 {
-                    if (ptm.LastRead.Date <= DateTime.Now.Date)
+                    if ((ptm.FromDate.Date <= DateTime.Now.Date) && (ptm.ToDate.Date >= DateTime.Now.Date))
                     {
-                        string[] times = ptm.Times.Split(' ');
-                        for (int i = 0; i < times.Length - 1; i += 2)
+                        if (ptm.LastRead.Date <= DateTime.Now.Date)
                         {
-
-                            TimeSpan ts = TimeSpan.Parse(times[i]);
-
-
-                            DateTime dt = DateTime.Now.Date + ts;
-                            if (times[i + 1].Equals("PM")) dt = dt.AddHours(12);
-                            if ((ptm.LastRead < dt) && (dt <= DateTime.Now))
+                            string[] times = ptm.Times.Split(' ');
+                            for (int i = 0; i < times.Length - 1; i += 2)
                             {
-                                newNotification = true;
-                                ptm.Read = false;
-                                patientNotificationsStorage.Delete(ptm.ID);
-                                patientNotificationsStorage.Save(ptm);
+
+                                TimeSpan ts = TimeSpan.Parse(times[i]);
+
+
+                                DateTime dt = DateTime.Now.Date + ts;
+                                if (times[i + 1].Equals("PM")) dt = dt.AddHours(12);
+                                if ((ptm.LastRead < dt) && (dt <= DateTime.Now))
+                                {
+                                    newNotification = true;
+                                    ptm.Read = false;
+                                    patientNotificationsStorage.Delete(ptm.ID);
+                                    patientNotificationsStorage.Save(ptm);
+                                }
                             }
                         }
                     }
                 }
-            }
-            if (newNotification)
-            {
-                MessageBox.Show("Imate novo obavestenje!");
+                if (newNotification)
+                {
+                    MessageBox.Show("Imate novo obavestenje!");
+                }
             }
         }
 

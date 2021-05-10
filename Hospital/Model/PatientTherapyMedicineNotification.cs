@@ -14,6 +14,8 @@ namespace Hospital.Model
 
         public string ID { get; set; }
 
+        public string IDpatient { get; set; }
+
         public DateTime LastRead { get; set; }
 
         public bool Active { get; set; }

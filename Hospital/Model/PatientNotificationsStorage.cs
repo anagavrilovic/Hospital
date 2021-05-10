@@ -134,6 +134,65 @@ namespace Hospital.Model
             return false;
         }
 
+        public void SaveFirst(Examination e)
+        {
+            MedicineStorage medicineStorage = new MedicineStorage();
+            ObservableCollection<PatientTherapyMedicineNotification> patientNotifications = GetAll();
+            if (patientNotifications == null)
+            {
+                patientNotifications = new ObservableCollection<PatientTherapyMedicineNotification>();
+            }
+            int x = 0;
+            foreach (MedicineTherapy med in e.therapy.Medicine)
+            {
+                x++;
+                PatientTherapyMedicineNotification patientTherapyMedicineNotification = new PatientTherapyMedicineNotification();
+                patientTherapyMedicineNotification.Name = e.therapy.name + ": " + medicineStorage.GetOne(med.MedicineID).Name;
+                for (int i = 0; i < med.TimesPerDay; i++)
+                {
+                    TimeSpan ts = new TimeSpan(i * 3 + 10, 0, 0);
+                    DateTime dateTime = DateTime.Now.Date + ts;
+                    patientTherapyMedicineNotification.updateTimes(dateTime);
+                }
+                patientTherapyMedicineNotification.Read = false;
+                DateTime date1 = e.appointment.DateTime;
+                DateTime date2 = date1.AddDays(med.DurationInDays);
+                patientTherapyMedicineNotification.FromDate = date1;
+                patientTherapyMedicineNotification.ToDate = date2;
+                patientTherapyMedicineNotification.updateDuration();
+                if ((date1.Date <= DateTime.Now) && (date2.Date >= DateTime.Now))
+                {
+                    patientTherapyMedicineNotification.Active = true;
+                }
+                else
+                {
+                    patientTherapyMedicineNotification.Active = false;
+                }
+                patientTherapyMedicineNotification.ID = x.ToString();
+                patientTherapyMedicineNotification.Description = e.therapy.description;
+                patientTherapyMedicineNotification.IDpatient = e.appointment.IDpatient;
+                patientNotifications.Add(patientTherapyMedicineNotification);
+            }
+            DoSerialization(patientNotifications);
+
+        }
+
+        public ObservableCollection<PatientTherapyMedicineNotification> GetByIDPatient(string id)
+        {
+            ObservableCollection<PatientTherapyMedicineNotification> patientTherapyMedicineNotifications = GetAll();
+            if (patientTherapyMedicineNotifications == null) return null;
+            ObservableCollection<PatientTherapyMedicineNotification> retVal = new ObservableCollection<PatientTherapyMedicineNotification>();
+            foreach (PatientTherapyMedicineNotification a in patientTherapyMedicineNotifications)
+            {
+                if (a.IDpatient.Equals(id))
+                {
+                    retVal.Add(a);
+                }
+            }
+
+            return retVal;
+        }
+
 
     }
 }

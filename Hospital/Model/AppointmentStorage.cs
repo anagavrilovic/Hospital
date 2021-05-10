@@ -224,6 +224,7 @@ namespace Hospital
         public ObservableCollection<Appointment> GetByPatient(String id)
         {
             ObservableCollection<Appointment> allAppointments = GetAll();
+            if (allAppointments == null) return null;
             ObservableCollection<Appointment> patientsApppointments = new ObservableCollection<Appointment>();
             
             foreach(Appointment appointment in allAppointments)
