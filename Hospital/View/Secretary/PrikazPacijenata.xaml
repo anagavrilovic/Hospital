@@ -139,7 +139,7 @@
             </Border>
             <Border Grid.Row="1" CornerRadius="10" Background="{StaticResource MainWhite}">
                 <!-- Tabela sa prikazom svih pacijenata -->
-                <DataGrid x:Name="PacijentiTable" Grid.Row="1" Margin="5" ItemsSource="{Binding Pacijenti}" Style="{StaticResource PacijentiDataGrid}">
+                <DataGrid x:Name="PacijentiTable" Grid.Row="1" Margin="5" Width="1038" ItemsSource="{Binding Pacijenti}" Style="{StaticResource PacijentiDataGrid}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Ime" Width="*" Binding="{Binding Patient.FirstName}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
                         <DataGridTextColumn Header="Prezime" Width="*" Binding="{Binding Patient.LastName}" HeaderStyle="{StaticResource GridHeaderStyle}"/>

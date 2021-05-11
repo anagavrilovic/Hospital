@@ -22,85 +22,120 @@
             <!--<Separator Margin="15,0"/>-->
         </StackPanel>
 
-        <Border Grid.Row="1" Margin="15" CornerRadius="10" Background="{StaticResource MainWhite}">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
-            </Border.Effect>
-        </Border>
-        <Border Grid.Row="1" Margin="15" CornerRadius="10" Background="{StaticResource MainWhite}">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-                <Grid Margin="0,10,0,5" >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
+            <Grid Margin="15,5,15,0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
 
-                    <!-- Doctor ComboBox -->
-                    <ComboBox x:Name="DoctorComboBox" Width="160" Height="25" Margin="5" Style="{StaticResource cbTB}"
-                              ItemsSource="{Binding AllDoctors}" SelectedItem="{Binding SelectedDoctorForNewAppointment}" SelectionChanged="ComboBoxDoctorEvent"/>
+                <!-- Doctor ComboBox -->
+                <ComboBox x:Name="DoctorComboBox" Width="160" Height="25" Margin="5" Style="{StaticResource cbTB}"
+                              ItemsSource="{Binding AllDoctors}" SelectedItem="{Binding SelectedDoctorForNewAppointment}" SelectionChanged="ComboBoxDoctorEvent">
+                    <ComboBox.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </ComboBox.Resources>
+                </ComboBox>
 
-                    <!-- Prozor za odabir pacijenta -->
-                    <Button x:Name="Pacijent" Grid.Column="1" Content="Odaberi pacijenta" Margin="5" Width="120" Height="25" 
-                            Style="{StaticResource ButtonCalendar}" Click="ChoosePatientClick"/>
+                <!-- Prozor za odabir pacijenta -->
+                <Button x:Name="Pacijent" Grid.Column="1" Content="Odaberi pacijenta" Margin="5" Width="120" Height="25" 
+                            Style="{StaticResource ButtonCalendar}" Click="ChoosePatientClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
 
-                    <!-- Dugmad za zakazivanje i otkazivanje pregleda -->
-                    <Button x:Name="Zakazi" Grid.Column="2" Height="25" Width="25" Margin="5" Style="{StaticResource ButtonCalendar}" Click="ScheduleAppointmentClick">
-                        <Image Source="../../Icon/Secretary/plusdate.png" Width="15" Height="25"/>
-                    </Button>
-                    <Button x:Name="Otkazi" Grid.Column="3" Height="25" Width="25" Margin="5" Style="{StaticResource ButtonCalendar}" Click="CancelAppointmentClick">
-                        <Image Source="../../Icon/Secretary/minusdate.png" Width="15" Height="25"/>
-                    </Button>
+                <!-- Dugmad za zakazivanje i otkazivanje pregleda -->
+                <Button x:Name="Zakazi" Grid.Column="2" Height="25" Width="25" Margin="5" Style="{StaticResource ButtonCalendar}" Click="ScheduleAppointmentClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="11"/>
+                        </Style>
+                    </Button.Resources>
+                    <Image Source="../../Icon/Secretary/plusdate.png" Width="15" Height="15"/>
+                </Button>
+                <Button x:Name="Otkazi" Grid.Column="3" Height="25" Width="25" Margin="5" Style="{StaticResource ButtonCalendar}" Click="CancelAppointmentClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="11"/>
+                        </Style>
+                    </Button.Resources>
+                    <Image Source="../../Icon/Secretary/minusdate.png" Width="15" Height="25"/>
+                </Button>
 
-                    <!-- Odabir datuma prikaza  -->
-                    <DatePicker x:Name="Datum" Grid.Column="6" Focusable="False" Width="30" Height="25" Margin="5" 
+                <!-- Odabir datuma prikaza  -->
+                <DatePicker x:Name="Datum" Grid.Column="6" Focusable="False" Width="30" Height="25" Margin="5" 
                                 SelectedDate="{Binding ChosenDate}" FirstDayOfWeek="Monday" SelectedDateChanged="DateChanged"/>
-                    <Button x:Name="CurrentWeek" Grid.Column="7" Height="25" Width="110" Content="Trenutna nedelja" Margin="5" 
-                            Style="{StaticResource ButtonCalendar}" Click="CurrentWeekClick" />
+                <Button x:Name="CurrentWeek" Grid.Column="7" Height="25" Width="120" Content="Trenutna nedelja" Margin="5" 
+                            Style="{StaticResource ButtonCalendar}" Click="CurrentWeekClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
 
-                    <!-- Previous week -->
-                    <Button x:Name="Previous" Grid.Column="8" Width="25" Height="25" Margin="5" Style="{StaticResource ButtonCalendar}" Click="PreviousClick">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="25"/>
-                            </Style>
-                        </Button.Resources>
-                        <Image Source="../../Icon/Secretary/1.png" Width="15" Height="25"/>
-                    </Button>
+                <!-- Previous week -->
+                <Button x:Name="Previous" Grid.Column="8" Width="25" Height="25" Margin="5" Style="{StaticResource ButtonCalendar}" Click="PreviousClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="25"/>
+                        </Style>
+                    </Button.Resources>
+                    <Image Source="../../Icon/Secretary/1.png" Width="15" Height="25"/>
+                </Button>
 
-                    <!-- Next week -->
-                    <Button x:Name="Next" Grid.Column="9" Width="25" Height="25" Margin="5" Style="{StaticResource ButtonCalendar}" Click="NextClick">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="25"/>
-                            </Style>
-                        </Button.Resources>
-                        <Image Source="../../Icon/Secretary/11.png" Width="15" Height="25"/>
-                    </Button>
+                <!-- Next week -->
+                <Button x:Name="Next" Grid.Column="9" Width="25" Height="25" Margin="5" Style="{StaticResource ButtonCalendar}" Click="NextClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="25"/>
+                        </Style>
+                    </Button.Resources>
+                    <Image Source="../../Icon/Secretary/11.png" Width="15" Height="25"/>
+                </Button>
 
-                </Grid>
+            </Grid>
 
-
+            <Border Grid.Row="1" Margin="15,5,15,10" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                </Border.Effect>
+            </Border>
+            <Border Grid.Row="1" Margin="15,5,15,10" CornerRadius="10" Background="{StaticResource MainWhite}" Width="1053  ">
                 <!-- Scheduler -->
-                <DataGrid x:Name="KalendarDataGrid" Grid.Row="1" ItemsSource="{Binding WeeklyCalendar, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource Kalendar}" Margin="0,0,0,10" >
+                <DataGrid x:Name="KalendarDataGrid" Grid.Row="1" ItemsSource="{Binding WeeklyCalendar, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource Kalendar}" Margin="5" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="" Width="40" Binding="{Binding TimeInRow}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
 
-                        <DataGridTextColumn Header="Ponedeljak" Width="1*" Binding="{Binding Monday}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                        <DataGridTextColumn Width="1*" Binding="{Binding Monday}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                            <DataGridTextColumn.Header>
+                                <StackPanel>
+                                    <TextBlock Text="Ponedeljak"/>
+                                    <TextBlock Text="{Binding DatesInWeeklyCalendar.Monday, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type local:Kalendar}}}"
+                                               HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </DataGridTextColumn.Header>
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
+                                    <Setter Property="BorderThickness" Value="0"/>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding Monday.Type}" Value="0">
                                             <Setter Property="Background" Value="#FFDCE594"/>
@@ -118,14 +153,31 @@
                                             <Setter Property="Background" Value="#FFFF5C5C"/>
                                             <Setter Property="ToolTip" Value="Hitna operacija"/>
                                         </DataTrigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource SelectionColor}" />
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                            <Setter Property="BorderBrush" Value="{StaticResource SelectionColor}"/>
+                                            <Setter Property="Foreground" Value="{StaticResource MainDarkBlue}"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource HoverGreen}" />
+                                        </Trigger>
                                     </Style.Triggers>
                                 </Style>
                             </DataGridTextColumn.CellStyle>
                         </DataGridTextColumn>
 
-                        <DataGridTextColumn Header="Utorak" Width="1*" Binding="{Binding Tuesday}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                        <DataGridTextColumn Width="1*" Binding="{Binding Tuesday}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                            <DataGridTextColumn.Header>
+                                <StackPanel>
+                                    <TextBlock Text="Utorak"/>
+                                    <TextBlock Text="{Binding DatesInWeeklyCalendar.Tuesday, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type local:Kalendar}}}"
+                                               HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </DataGridTextColumn.Header>
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
+                                    <Setter Property="BorderThickness" Value="0"/>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding Tuesday.Type}" Value="0">
                                             <Setter Property="Background" Value="#FFDCE594"/>
@@ -143,14 +195,31 @@
                                             <Setter Property="Background" Value="#FFFF5C5C"/>
                                             <Setter Property="ToolTip" Value="Hitna operacija"/>
                                         </DataTrigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource SelectionColor}" />
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                            <Setter Property="BorderBrush" Value="{StaticResource SelectionColor}"/>
+                                            <Setter Property="Foreground" Value="{StaticResource MainDarkBlue}"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource HoverGreen}" />
+                                        </Trigger>
                                     </Style.Triggers>
                                 </Style>
                             </DataGridTextColumn.CellStyle>
                         </DataGridTextColumn>
 
-                        <DataGridTextColumn Header="Sreda" Width="1*" Binding="{Binding Wednesday}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                        <DataGridTextColumn Width="1*" Binding="{Binding Wednesday}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                            <DataGridTextColumn.Header>
+                                <StackPanel>
+                                    <TextBlock Text="Sreda"/>
+                                    <TextBlock Text="{Binding DatesInWeeklyCalendar.Wednesday, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type local:Kalendar}}}"
+                                               HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </DataGridTextColumn.Header>
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
+                                    <Setter Property="BorderThickness" Value="0"/>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding Wednesday.Type}" Value="0">
                                             <Setter Property="Background" Value="#FFDCE594"/>
@@ -168,14 +237,31 @@
                                             <Setter Property="Background" Value="#FFFF5C5C"/>
                                             <Setter Property="ToolTip" Value="Hitna operacija"/>
                                         </DataTrigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource SelectionColor}" />
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                            <Setter Property="BorderBrush" Value="{StaticResource SelectionColor}"/>
+                                            <Setter Property="Foreground" Value="{StaticResource MainDarkBlue}"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource HoverGreen}" />
+                                        </Trigger>
                                     </Style.Triggers>
                                 </Style>
                             </DataGridTextColumn.CellStyle>
                         </DataGridTextColumn>
 
-                        <DataGridTextColumn Header="Cetvrtak" Width="1*" Binding="{Binding Thursday}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                        <DataGridTextColumn Width="1*" Binding="{Binding Thursday}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                            <DataGridTextColumn.Header>
+                                <StackPanel>
+                                    <TextBlock Text="Cetvrtak"/>
+                                    <TextBlock Text="{Binding DatesInWeeklyCalendar.Thursday, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type local:Kalendar}}}"
+                                               HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </DataGridTextColumn.Header>
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
+                                    <Setter Property="BorderThickness" Value="0"/>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding Thursday.Type}" Value="0">
                                             <Setter Property="Background" Value="#FFDCE594"/>
@@ -193,14 +279,31 @@
                                             <Setter Property="Background" Value="#FFFF5C5C"/>
                                             <Setter Property="ToolTip" Value="Hitna operacija"/>
                                         </DataTrigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource SelectionColor}" />
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                            <Setter Property="BorderBrush" Value="{StaticResource SelectionColor}"/>
+                                            <Setter Property="Foreground" Value="{StaticResource MainDarkBlue}"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource HoverGreen}" />
+                                        </Trigger>
                                     </Style.Triggers>
                                 </Style>
                             </DataGridTextColumn.CellStyle>
                         </DataGridTextColumn>
 
-                        <DataGridTextColumn Header="Petak" Width="1*" Binding="{Binding Friday}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                        <DataGridTextColumn Width="1*" Binding="{Binding Friday}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                            <DataGridTextColumn.Header>
+                                <StackPanel>
+                                    <TextBlock Text="Petak"/>
+                                    <TextBlock Text="{Binding DatesInWeeklyCalendar.Friday, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type local:Kalendar}}}"
+                                               HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </DataGridTextColumn.Header>
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
+                                    <Setter Property="BorderThickness" Value="0"/>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding Friday.Type}" Value="0">
                                             <Setter Property="Background" Value="#FFDCE594"/>
@@ -218,14 +321,31 @@
                                             <Setter Property="Background" Value="#FFFF5C5C"/>
                                             <Setter Property="ToolTip" Value="Hitna operacija"/>
                                         </DataTrigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource SelectionColor}" />
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                            <Setter Property="BorderBrush" Value="{StaticResource SelectionColor}"/>
+                                            <Setter Property="Foreground" Value="{StaticResource MainDarkBlue}"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource HoverGreen}" />
+                                        </Trigger>
                                     </Style.Triggers>
                                 </Style>
                             </DataGridTextColumn.CellStyle>
                         </DataGridTextColumn>
 
-                        <DataGridTextColumn Header="Subota" Width="1*" Binding="{Binding Saturday}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                        <DataGridTextColumn Width="1*" Binding="{Binding Saturday}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                            <DataGridTextColumn.Header>
+                                <StackPanel>
+                                    <TextBlock Text="Subota"/>
+                                    <TextBlock Text="{Binding DatesInWeeklyCalendar.Saturday, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type local:Kalendar}}}"
+                                               HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </DataGridTextColumn.Header>
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
+                                    <Setter Property="BorderThickness" Value="0"/>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding Saturday.Type}" Value="0">
                                             <Setter Property="Background" Value="#FFDCE594"/>
@@ -243,14 +363,31 @@
                                             <Setter Property="Background" Value="#FFFF5C5C"/>
                                             <Setter Property="ToolTip" Value="Hitna operacija"/>
                                         </DataTrigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource SelectionColor}" />
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                            <Setter Property="BorderBrush" Value="{StaticResource SelectionColor}"/>
+                                            <Setter Property="Foreground" Value="{StaticResource MainDarkBlue}"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource HoverGreen}" />
+                                        </Trigger>
                                     </Style.Triggers>
                                 </Style>
                             </DataGridTextColumn.CellStyle>
                         </DataGridTextColumn>
 
-                        <DataGridTextColumn Header="Nedelja" Width="1*" Binding="{Binding Sunday}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                        <DataGridTextColumn Width="1*" Binding="{Binding Sunday}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                            <DataGridTextColumn.Header>
+                                <StackPanel>
+                                    <TextBlock Text="Nedelja"/>
+                                    <TextBlock Text="{Binding DatesInWeeklyCalendar.Sunday, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type local:Kalendar}}}"
+                                               HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </DataGridTextColumn.Header>
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
+                                    <Setter Property="BorderThickness" Value="0"/>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding Sunday.Type}" Value="0">
                                             <Setter Property="Background" Value="#FFDCE594"/>
@@ -268,6 +405,15 @@
                                             <Setter Property="Background" Value="#FFFF5C5C"/>
                                             <Setter Property="ToolTip" Value="Hitna operacija"/>
                                         </DataTrigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource SelectionColor}" />
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                            <Setter Property="BorderBrush" Value="{StaticResource SelectionColor}"/>
+                                            <Setter Property="Foreground" Value="{StaticResource MainDarkBlue}"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource HoverGreen}" />
+                                        </Trigger>
                                     </Style.Triggers>
                                 </Style>
                             </DataGridTextColumn.CellStyle>
@@ -275,7 +421,7 @@
                     </DataGrid.Columns>
 
                 </DataGrid>
-            </Grid>
-        </Border>
+            </Border>
+        </Grid>
     </Grid>
 </Page>

@@ -69,6 +69,7 @@
     <Compile Include="Model\BoolToStringConverter.cs" />
     <Compile Include="Model\City.cs" />
     <Compile Include="Model\Country.cs" />
+    <Compile Include="Model\DatesInWeeklyCalendar.cs" />
     <Compile Include="Model\DoctorSpecialty.cs" />
     <Compile Include="Model\DoctorStorage.cs" />
     <Compile Include="Model\Ingredient.cs" />

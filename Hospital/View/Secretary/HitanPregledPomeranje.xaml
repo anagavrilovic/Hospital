@@ -54,7 +54,8 @@
         </Grid>
 
         <ListBox Grid.Row="4" Margin="10,0" Background="Transparent" ItemsSource="{Binding Options}" Style="{StaticResource ListBoxStyle}" SelectedItem="{Binding SelectedOption}"
-                 ScrollViewer.HorizontalScrollBarVisibility="Hidden" x:Name="ListBoxOptions" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                 ScrollViewer.HorizontalScrollBarVisibility="Hidden" x:Name="ListBoxOptions" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                 Width="1058" ItemContainerStyle="{StaticResource ListBoxItemStyle}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>

@@ -90,7 +90,7 @@
                     </Border>
 
                     <ListBox x:Name="ListBoxPatients" ItemsSource="{Binding Patients}" Style="{StaticResource ListBoxStyle}" SelectedItem="{Binding SelectedPatient}"
-                             Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="40,0,40,20">
+                             Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="40,0,40,20"  ItemContainerStyle="{StaticResource ListBoxItemStyle}">
 
                     </ListBox>
 

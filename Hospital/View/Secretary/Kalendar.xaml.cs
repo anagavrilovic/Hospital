@@ -33,6 +33,7 @@ namespace Hospital.View
         public DateTime WeekEnd { get; set; }
         public MedicalRecord SelectedPatientForNewAppointment { get; set; }
         public Model.Doctor SelectedDoctorForNewAppointment { get; set; }
+        public DatesInWeeklyCalendar DatesInWeeklyCalendar { get; set; }
 
         // Storage class properties
         public AppointmentStorage AppointmentStorage { get; set; }
@@ -45,6 +46,7 @@ namespace Hospital.View
             this.DataContext = this;
             InitializeAllProperties();
             LoadAllDoctors();
+            SetDatesForWeeklyCalendar();
             SetSelectedDoctorIfNeeded(doctorWhoseAppointmentsWillInitialyBeShown);
             RefreshWeeklyCalendar();
         }
@@ -54,6 +56,7 @@ namespace Hospital.View
             this.WeeklyCalendar = new ObservableCollection<WeeklyCalendarRow>();
             this.AllDoctors = new ObservableCollection<Model.Doctor>();
             this.ChosenDate = DateTime.Today;
+            this.DatesInWeeklyCalendar = new DatesInWeeklyCalendar();
             this.SelectedPatientForNewAppointment = new MedicalRecord();
             this.AppointmentStorage = new AppointmentStorage();
         }
@@ -62,6 +65,25 @@ namespace Hospital.View
         {
             DoctorStorage doctorStorage = new DoctorStorage();
             AllDoctors = doctorStorage.GetAll();
+        }
+
+        private void SetDatesForWeeklyCalendar()
+        {
+            SetFirstAndLastDateOfWeekInWhichChosenDateIs();
+            
+            for(int i = 0; i < 7; i++)
+            {
+                switch (i)
+                {
+                    case 0: DatesInWeeklyCalendar.Monday = WeekBegin.AddDays(i).ToString("dd.MM."); break;
+                    case 1: DatesInWeeklyCalendar.Tuesday = WeekBegin.AddDays(i).ToString("dd.MM."); break;
+                    case 2: DatesInWeeklyCalendar.Wednesday = WeekBegin.AddDays(i).ToString("dd.MM."); break;
+                    case 3: DatesInWeeklyCalendar.Thursday = WeekBegin.AddDays(i).ToString("dd.MM."); break;
+                    case 4: DatesInWeeklyCalendar.Friday = WeekBegin.AddDays(i).ToString("dd.MM."); break;
+                    case 5: DatesInWeeklyCalendar.Saturday = WeekBegin.AddDays(i).ToString("dd.MM."); break;
+                    case 6: DatesInWeeklyCalendar.Sunday = WeekBegin.AddDays(i).ToString("dd.MM."); break;
+                }
+            }
         }
 
         private void SetSelectedDoctorIfNeeded(Model.Doctor doctorWhoseAppointmentsWillInitialyBeShown)
@@ -80,8 +102,8 @@ namespace Hospital.View
 
         private void RefreshWeeklyCalendar()
         {
+            SetDatesForWeeklyCalendar();
             WeeklyCalendar.Clear();
-
             FillWeeklyCalendarWithEmptyTimeSlots(GetStartTimeForWeeklyCalendar());
 
             if (SelectedDoctorForNewAppointment != null)
@@ -116,7 +138,7 @@ namespace Hospital.View
 
         private ObservableCollection<Appointment> GetSelectedDoctorsAppointmentsInChosenWeek(ObservableCollection<Appointment> selectedDoctorsAppointments)
         {
-            SetFirstAndLastDateOfWeekInWhichChosenDateIs(ChosenDate);
+            SetFirstAndLastDateOfWeekInWhichChosenDateIs();
 
             ObservableCollection<Appointment> selectedDoctorsAppointmentsInChosenWeek = new ObservableCollection<Appointment>();
             foreach (Appointment appointment in selectedDoctorsAppointments)
@@ -215,10 +237,10 @@ namespace Hospital.View
             return -1;
         }
 
-        public void SetFirstAndLastDateOfWeekInWhichChosenDateIs(DateTime chosenDate)
+        public void SetFirstAndLastDateOfWeekInWhichChosenDateIs()
         {
-            int difference = (7 + (chosenDate.DayOfWeek - DayOfWeek.Monday)) % 7;
-            WeekBegin = chosenDate.AddDays(-1 * difference).Date;
+            int difference = (7 + (ChosenDate.DayOfWeek - DayOfWeek.Monday)) % 7;
+            WeekBegin = ChosenDate.AddDays(-1 * difference).Date;
             WeekEnd = WeekBegin.AddDays(6);
         }
 

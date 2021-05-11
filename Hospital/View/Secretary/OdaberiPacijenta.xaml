@@ -61,7 +61,7 @@
         </Grid>
 
         <ListBox x:Name="ListBoxPacijenti" ItemsSource="{Binding Patients}" SelectedItem="{Binding SelectedPatient}" Grid.Row="2" Margin="30,5,30,10" Height="90" 
-                 Style="{StaticResource ListBoxStyle}" SelectionChanged="ListBoxPacijenti_SelectionChanged"/>
+                 Style="{StaticResource ListBoxStyle}" SelectionChanged="ListBoxPacijenti_SelectionChanged" Width="652" ItemContainerStyle="{StaticResource ListBoxItemStyle}"/>
 
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
@@ -86,7 +86,7 @@
             </Border>
         </Grid>
 
-        <DataGrid x:Name="TabelaTermina" ItemsSource="{Binding PatientsAppointments}" Grid.Row="4" Height="180" Margin="30,5,30,10"
+        <DataGrid x:Name="TabelaTermina" ItemsSource="{Binding PatientsAppointments}" Grid.Row="4" Height="180" Width="652" Margin="30,5,30,10"
                   Style="{StaticResource PacijentiDataGrid}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Datum i vreme" Width="1*" Binding="{Binding DateTime}" HeaderStyle="{StaticResource GridHeaderStyle}"/>

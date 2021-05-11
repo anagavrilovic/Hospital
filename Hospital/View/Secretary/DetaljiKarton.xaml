@@ -158,7 +158,7 @@
                     <StackPanel Margin="0,20" >
                         <TextBlock Text="Alergičan na lek:" Style="{StaticResource KartoniTextBlock}"/>
                         <ListBox x:Name="LekoviListBox" ItemsSource="{Binding Record.Allergen.MedicineNames}" Margin="40,0" Width="430" Height="100"
-                                 Style="{StaticResource ListBoxStyle}">
+                                 Style="{StaticResource ListBoxStyle}" ItemContainerStyle="{StaticResource ListBoxItemStyle}">
 
                         </ListBox>
                     </StackPanel>
@@ -166,7 +166,7 @@
                     <StackPanel Margin="0,20" >
                         <TextBlock Text="Alergičan na sastojak:" Style="{StaticResource KartoniTextBlock}"/>
                         <ListBox x:Name="SastojciListBox" ItemsSource="{Binding Record.Allergen.IngredientNames}" Margin="40,0" Width="430" Height="100"
-                                 Style="{StaticResource ListBoxStyle}">
+                                 Style="{StaticResource ListBoxStyle}" ItemContainerStyle="{StaticResource ListBoxItemStyle}">
 
                         </ListBox>
                     </StackPanel>

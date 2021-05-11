@@ -117,18 +117,18 @@
                 </Border>
 
                 <!-- Prikaz obavestenja -->
-                <ListBox x:Name="ListBoxNotifications" ItemsSource="{Binding NotificationList, Mode=TwoWay}" Grid.Row="1" Margin="15,0,10,15"
-                            ScrollViewer.HorizontalScrollBarVisibility="Hidden" Style="{StaticResource ListBoxStyle}" Background="Transparent" Width="925" 
-                            BorderThickness="0">
+                <ListBox x:Name="ListBoxNotifications" ItemsSource="{Binding NotificationList, Mode=TwoWay}" Grid.Row="1" Margin="10,0,10,15"
+                            ScrollViewer.HorizontalScrollBarVisibility="Hidden" Style="{StaticResource ListBoxStyle}" Background="Transparent" Width="930" 
+                            BorderThickness="0" ItemContainerStyle="{StaticResource ListBoxItemStyle}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
-                                <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="0,5,5,5" Padding="10">
+                                <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="5" Padding="10">
                                     <Border.Effect>
                                         <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
                                     </Border.Effect>
                                 </Border>
-                                <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="0,5,5,5" Padding="10">
+                                <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="5" Padding="10">
                                     <Grid Height="125" >
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>

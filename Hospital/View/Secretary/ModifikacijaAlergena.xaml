@@ -64,7 +64,7 @@
                             </Button>
                         </StackPanel>
                         <ListBox x:Name="DodatiLekovi" ItemsSource="{Binding Mr.Allergen.MedicineNames, Mode=TwoWay, UpdateSourceTrigger=Explicit}" 
-                                 Style="{StaticResource ListBoxStyle}" Height="100" Margin="30,0,15,25">
+                                 Style="{StaticResource ListBoxStyle}" Height="100" Margin="30,0,15,25" ItemContainerStyle="{StaticResource ListBoxItemStyle}">
 
                         </ListBox>
                     </StackPanel>
@@ -83,7 +83,7 @@
                                 </StackPanel>
                             </Border>
                         </StackPanel>
-                        <ListBox ItemsSource="{Binding Lekovi}" x:Name="LekoviLista" Height="100" Style="{StaticResource ListBoxStyle}">
+                        <ListBox ItemsSource="{Binding Lekovi}" x:Name="LekoviLista" Height="100" Style="{StaticResource ListBoxStyle}"  ItemContainerStyle="{StaticResource ListBoxItemStyle}">
 
                         </ListBox>
                     </StackPanel>
@@ -111,7 +111,7 @@
                             </Button>
                         </StackPanel>
                         <ListBox x:Name="DodatiSastojci" ItemsSource="{Binding Mr.Allergen.IngredientNames, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
-                                 Style="{StaticResource ListBoxStyle}" Height="100" Margin="30,0,15,25">
+                                 Style="{StaticResource ListBoxStyle}" Height="100" Margin="30,0,15,25"  ItemContainerStyle="{StaticResource ListBoxItemStyle}">
 
                         </ListBox>
                     </StackPanel>
@@ -130,7 +130,7 @@
                                 </StackPanel>
                             </Border>
                         </StackPanel>
-                        <ListBox ItemsSource="{Binding Sastojci}" x:Name="SastojciLista" Height="100" Style="{StaticResource ListBoxStyle}" >
+                        <ListBox ItemsSource="{Binding Sastojci}" x:Name="SastojciLista" Height="100" Style="{StaticResource ListBoxStyle}"  ItemContainerStyle="{StaticResource ListBoxItemStyle}">
 
                         </ListBox>
                     </StackPanel>
