@@ -18,7 +18,7 @@ namespace Hospital.View.Secretary
     /// <summary>
     /// Interaction logic for IzbrisiPacijenta.xaml
     /// </summary>
-    public partial class IzbrisiPacijenta : Window
+    public partial class ConfirmBox : Window
     {
         private MedicalRecord record;
 
@@ -34,7 +34,7 @@ namespace Hospital.View.Secretary
             }
         }
 
-        public IzbrisiPacijenta(MedicalRecord record, ObservableCollection<MedicalRecord> records)
+        public ConfirmBox(MedicalRecord record, ObservableCollection<MedicalRecord> records)
         {
             InitializeComponent();
             this.Record = record;

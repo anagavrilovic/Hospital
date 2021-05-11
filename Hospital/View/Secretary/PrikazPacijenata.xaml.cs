@@ -67,7 +67,7 @@ namespace Hospital.View
                 return;
             }
 
-            var obrisi = new IzbrisiPacijenta((MedicalRecord)PacijentiTable.SelectedItem, Pacijenti);
+            var obrisi = new ConfirmBox((MedicalRecord)PacijentiTable.SelectedItem, Pacijenti);
             obrisi.Show();
         }
 

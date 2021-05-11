@@ -270,8 +270,8 @@
     <Compile Include="View\Secretary\IzbrisiObavestenje.xaml.cs">
       <DependentUpon>IzbrisiObavestenje.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\IzbrisiPacijenta.xaml.cs">
-      <DependentUpon>IzbrisiPacijenta.xaml</DependentUpon>
+    <Compile Include="View\Secretary\ConfirmBox.xaml.cs">
+      <DependentUpon>ConfirmBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\IzmenaObavestenja.xaml.cs">
       <DependentUpon>IzmenaObavestenja.xaml</DependentUpon>
@@ -560,7 +560,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\IzbrisiPacijenta.xaml">
+    <Page Include="View\Secretary\ConfirmBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -108,7 +108,7 @@
                             </StackPanel>
                         </Border>
 
-                        <Button x:Name="Dodaj" Style="{StaticResource ButtonWebToolbar}" Click="DodajPacijentaClick" >
+                        <Button x:Name="Dodaj" Style="{StaticResource ButtonPotvrdiStyle}" Click="DodajPacijentaClick" Height="20" Width="20" Margin="0">
                             <Image Source="../../Icon/Secretary/plus.png" Width="10"/>
                         </Button>
                     </StackPanel>

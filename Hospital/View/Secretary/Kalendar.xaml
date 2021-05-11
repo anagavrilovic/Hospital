@@ -153,14 +153,14 @@
                                             <Setter Property="Background" Value="#FFFF5C5C"/>
                                             <Setter Property="ToolTip" Value="Hitna operacija"/>
                                         </DataTrigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource HoverGreen}" />
+                                        </Trigger>
                                         <Trigger Property="IsSelected" Value="True">
                                             <Setter Property="Background" Value="{StaticResource SelectionColor}" />
                                             <Setter Property="BorderThickness" Value="0"/>
                                             <Setter Property="BorderBrush" Value="{StaticResource SelectionColor}"/>
                                             <Setter Property="Foreground" Value="{StaticResource MainDarkBlue}"/>
-                                        </Trigger>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="{StaticResource HoverGreen}" />
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
@@ -195,14 +195,14 @@
                                             <Setter Property="Background" Value="#FFFF5C5C"/>
                                             <Setter Property="ToolTip" Value="Hitna operacija"/>
                                         </DataTrigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource HoverGreen}" />
+                                        </Trigger>
                                         <Trigger Property="IsSelected" Value="True">
                                             <Setter Property="Background" Value="{StaticResource SelectionColor}" />
                                             <Setter Property="BorderThickness" Value="0"/>
                                             <Setter Property="BorderBrush" Value="{StaticResource SelectionColor}"/>
                                             <Setter Property="Foreground" Value="{StaticResource MainDarkBlue}"/>
-                                        </Trigger>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="{StaticResource HoverGreen}" />
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
@@ -237,14 +237,14 @@
                                             <Setter Property="Background" Value="#FFFF5C5C"/>
                                             <Setter Property="ToolTip" Value="Hitna operacija"/>
                                         </DataTrigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource HoverGreen}" />
+                                        </Trigger>
                                         <Trigger Property="IsSelected" Value="True">
                                             <Setter Property="Background" Value="{StaticResource SelectionColor}" />
                                             <Setter Property="BorderThickness" Value="0"/>
                                             <Setter Property="BorderBrush" Value="{StaticResource SelectionColor}"/>
                                             <Setter Property="Foreground" Value="{StaticResource MainDarkBlue}"/>
-                                        </Trigger>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="{StaticResource HoverGreen}" />
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
@@ -279,14 +279,14 @@
                                             <Setter Property="Background" Value="#FFFF5C5C"/>
                                             <Setter Property="ToolTip" Value="Hitna operacija"/>
                                         </DataTrigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource HoverGreen}" />
+                                        </Trigger>
                                         <Trigger Property="IsSelected" Value="True">
                                             <Setter Property="Background" Value="{StaticResource SelectionColor}" />
                                             <Setter Property="BorderThickness" Value="0"/>
                                             <Setter Property="BorderBrush" Value="{StaticResource SelectionColor}"/>
                                             <Setter Property="Foreground" Value="{StaticResource MainDarkBlue}"/>
-                                        </Trigger>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="{StaticResource HoverGreen}" />
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
@@ -321,14 +321,14 @@
                                             <Setter Property="Background" Value="#FFFF5C5C"/>
                                             <Setter Property="ToolTip" Value="Hitna operacija"/>
                                         </DataTrigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource HoverGreen}" />
+                                        </Trigger>
                                         <Trigger Property="IsSelected" Value="True">
                                             <Setter Property="Background" Value="{StaticResource SelectionColor}" />
                                             <Setter Property="BorderThickness" Value="0"/>
                                             <Setter Property="BorderBrush" Value="{StaticResource SelectionColor}"/>
                                             <Setter Property="Foreground" Value="{StaticResource MainDarkBlue}"/>
-                                        </Trigger>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="{StaticResource HoverGreen}" />
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
@@ -363,14 +363,14 @@
                                             <Setter Property="Background" Value="#FFFF5C5C"/>
                                             <Setter Property="ToolTip" Value="Hitna operacija"/>
                                         </DataTrigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource HoverGreen}" />
+                                        </Trigger>
                                         <Trigger Property="IsSelected" Value="True">
                                             <Setter Property="Background" Value="{StaticResource SelectionColor}" />
                                             <Setter Property="BorderThickness" Value="0"/>
                                             <Setter Property="BorderBrush" Value="{StaticResource SelectionColor}"/>
                                             <Setter Property="Foreground" Value="{StaticResource MainDarkBlue}"/>
-                                        </Trigger>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="{StaticResource HoverGreen}" />
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
@@ -405,14 +405,14 @@
                                             <Setter Property="Background" Value="#FFFF5C5C"/>
                                             <Setter Property="ToolTip" Value="Hitna operacija"/>
                                         </DataTrigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource HoverGreen}" />
+                                        </Trigger>
                                         <Trigger Property="IsSelected" Value="True">
                                             <Setter Property="Background" Value="{StaticResource SelectionColor}" />
                                             <Setter Property="BorderThickness" Value="0"/>
                                             <Setter Property="BorderBrush" Value="{StaticResource SelectionColor}"/>
                                             <Setter Property="Foreground" Value="{StaticResource MainDarkBlue}"/>
-                                        </Trigger>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="{StaticResource HoverGreen}" />
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
