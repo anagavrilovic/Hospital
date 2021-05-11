@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.View.Secretary;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -295,12 +296,14 @@ namespace Hospital.View
         {
             if(KalendarDataGrid.SelectedCells.Count == 0)
             {
-                MessageBox.Show("Odaberite termin koji želite da zakažete.");
+                InformationBox informationBox = new InformationBox("Odaberite termin koji želite da zakažete.");
+                informationBox.ShowDialog();
                 return false;
             }
             else if(SelectedDoctorForNewAppointment == null)
             {
-                MessageBox.Show("Odaberite doktora kod kojeg želite da zakažete termin.");
+                InformationBox informationBox = new InformationBox("Odaberite doktora kod kojeg želite da zakažete termin.");
+                informationBox.ShowDialog();
                 return false;
             }
 
@@ -311,7 +314,8 @@ namespace Hospital.View
         {
             if(dateTimeForNewAppointment < DateTime.Now)
             {
-                MessageBox.Show("Ne možete zakazati termin u prošlosti.");
+                InformationBox informationBox = new InformationBox("Ne možete zakazati termin u prošlosti.");
+                informationBox.ShowDialog();
                 return true;
             }
 
@@ -334,8 +338,8 @@ namespace Hospital.View
 
         private void CancelAppointmentClick(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Da li ste sigurni da želite da otkažete termin?",
-                        "Potvrda", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            ConfirmBox confirmBox = new ConfirmBox("da želite da otkažete termin?");
+            if ((bool)confirmBox.ShowDialog())
             {
                 int columnIndex = KalendarDataGrid.SelectedCells[0].Column.DisplayIndex;
                 var time = ((WeeklyCalendarRow)KalendarDataGrid.SelectedCells[0].Item).TimeInRow;

@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.View.Secretary;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -108,7 +109,8 @@ namespace Hospital.View
         {
             if (!AppointmentStorage.IsDoctorAvaliableForAppointment(NewAppointment))
             {
-                MessageBox.Show("Doktor je već zauzet u ovom terminu. Promenite trajanje ili odaberite drugi termin!");
+                InformationBox informationBox = new InformationBox("Doktor je već zauzet u ovom terminu. Promenite trajanje ili odaberite drugi termin!");
+                informationBox.ShowDialog();
                 return false;
             }
 
@@ -119,7 +121,8 @@ namespace Hospital.View
         {
             if (!AppointmentStorage.IsPatientAvaliableForAppointment(NewAppointment))
             {
-                MessageBox.Show("Ovaj pacijent već ima zakazan pregled/operaciju u ovom terminu!");
+                InformationBox informationBox = new InformationBox("Ovaj pacijent već ima zakazan pregled/operaciju u ovom terminu!");
+                informationBox.ShowDialog();
                 return false;
             }
 

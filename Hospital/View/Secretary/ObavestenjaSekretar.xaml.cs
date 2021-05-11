@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.View.Secretary;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -101,28 +102,26 @@ namespace Hospital.View
         {
             if (ListBoxNotifications.SelectedItem == null)
             {
-                MessageBox.Show("Selektujte obaveštenje koje želite da izbrišete!");
+                InformationBox informationBox = new InformationBox("Selektujte obaveštenje koje želite da izbrišete!");
+                informationBox.ShowDialog();
                 return;
             }
 
-            if (MessageBox.Show("Da li ste sigurni da želite da izbrišete obaveštenje?",
-                        "Potvrda", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            ConfirmBox confirmBox = new ConfirmBox("da želite da izbrišete obaveštenje?");
+            if ((bool)confirmBox.ShowDialog())
             {
-
                 Ns.ClearNotificationsUsersByNotificationID(((Notification)ListBoxNotifications.SelectedItem).Id);
                 NotificationList.Remove((Notification)ListBoxNotifications.SelectedItem);
                 Ns.SerializeNotifications(NotificationList);
             }
-
-            /*var izbrisi = new IzbrisiObavestenje();
-            izbrisi.Show();*/
         }
 
         private void IzmenaObavestenjaClick(object sender, RoutedEventArgs e)
         {
             if (ListBoxNotifications.SelectedItem == null)
             {
-                MessageBox.Show("Selektujte obaveštenje koje želite da izmenite!");
+                InformationBox informationBox = new InformationBox("Selektujte obaveštenje koje želite da izmenite!");
+                informationBox.ShowDialog();
                 return;
             }
 
@@ -133,7 +132,8 @@ namespace Hospital.View
         {
             if (ListBoxNotifications.SelectedItem == null)
             {
-                MessageBox.Show("Selektujte obaveštenje koje želite da pregledate!");
+                InformationBox informationBox = new InformationBox("Selektujte obaveštenje koje želite da pregledate!");
+                informationBox.ShowDialog();
                 return;
             }
 

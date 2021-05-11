@@ -44,6 +44,8 @@ namespace Hospital.View
         {
             if (PacijentiTable.SelectedItem == null)
             {
+                InformationBox informationBox = new InformationBox("Selektujte pacijenta kojeg želite da izmenite!");
+                informationBox.ShowDialog();
                 return;
             }
 
@@ -54,6 +56,8 @@ namespace Hospital.View
         {
             if (PacijentiTable.SelectedItem == null)
             {
+                InformationBox informationBox = new InformationBox("Selektujte pacijenta čije informacije želite da pregledate!");
+                informationBox.ShowDialog();
                 return;
             }
 
@@ -64,17 +68,25 @@ namespace Hospital.View
         {
             if (PacijentiTable.SelectedItem == null)
             {
+                InformationBox informationBox = new InformationBox("Selektujte pacijenta kojeg želite da izbrišete!");
+                informationBox.ShowDialog();
                 return;
             }
 
-            var obrisi = new ConfirmBox((MedicalRecord)PacijentiTable.SelectedItem, Pacijenti);
-            obrisi.Show();
+            ConfirmBox confirmBox = new ConfirmBox("da želite da izbrišete pacijenta?");
+            if ((bool)confirmBox.ShowDialog())
+            {
+                Pacijenti.Remove((MedicalRecord)PacijentiTable.SelectedItem);
+                mrs.DoSerialization(Pacijenti);
+            }
         }
 
         private void AlergeniClick(object sender, RoutedEventArgs e)
         {
             if (PacijentiTable.SelectedItem == null)
             {
+                InformationBox informationBox = new InformationBox("Selektujte pacijenta čije alergene želite da izmenite!");
+                informationBox.ShowDialog();
                 return;
             }
 

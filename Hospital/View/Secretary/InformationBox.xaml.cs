@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -17,9 +16,9 @@ using System.Windows.Shapes;
 namespace Hospital.View.Secretary
 {
     /// <summary>
-    /// Interaction logic for IzbrisiPacijenta.xaml
+    /// Interaction logic for InformationBox.xaml
     /// </summary>
-    public partial class ConfirmBox : Window, INotifyPropertyChanged
+    public partial class InformationBox : Window, INotifyPropertyChanged
     {
         private string message;
 
@@ -33,22 +32,17 @@ namespace Hospital.View.Secretary
             }
         }
 
-        public ConfirmBox(string message)
+
+        public InformationBox(string message)
         {
             InitializeComponent();
             this.DataContext = this;
             this.Message = message;
         }
 
-        private void BtnPotvrdiClick(object sender, RoutedEventArgs e)
-        {
-            DialogResult = true;
-            this.Close();
-        }
 
-        private void BtnOdustaniClick(object sender, RoutedEventArgs e)
+        private void BtnNazadClick(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
             this.Close();
         }
 

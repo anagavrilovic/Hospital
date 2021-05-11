@@ -148,7 +148,11 @@ namespace Hospital.View.Secretary
         private void BtnPotvrdiClick(object sender, RoutedEventArgs e)
         {
             if (SelectedOption == null)
-                MessageBox.Show("Selektujte opciju za pomeranje već postojećih termina!");
+            {
+                InformationBox informationBox = new InformationBox("Selektujte opciju za pomeranje već postojećih termina!");
+                informationBox.ShowDialog();
+                return;
+            }
 
             SetTimeForNewUrgentAppointment(SelectedOption.NewUrgentAppointmentTime);
             SetDoctorForNewUrgentAppointment(SelectedOption.Option[0].Doctor);

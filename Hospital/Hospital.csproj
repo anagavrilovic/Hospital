@@ -267,8 +267,8 @@
     <Compile Include="View\Secretary\HitanPregledPomeranje.xaml.cs">
       <DependentUpon>HitanPregledPomeranje.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\IzbrisiObavestenje.xaml.cs">
-      <DependentUpon>IzbrisiObavestenje.xaml</DependentUpon>
+    <Compile Include="View\Secretary\InformationBox.xaml.cs">
+      <DependentUpon>InformationBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\ConfirmBox.xaml.cs">
       <DependentUpon>ConfirmBox.xaml</DependentUpon>
@@ -284,9 +284,6 @@
     </Compile>
     <Compile Include="View\Secretary\OdaberiPacijenta.xaml.cs">
       <DependentUpon>OdaberiPacijenta.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Secretary\OtkazivanjeTermina.xaml.cs">
-      <DependentUpon>OtkazivanjeTermina.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\PrikazObavestenja.xaml.cs">
       <DependentUpon>PrikazObavestenja.xaml</DependentUpon>
@@ -556,7 +553,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\IzbrisiObavestenje.xaml">
+    <Page Include="View\Secretary\InformationBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -581,10 +578,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Secretary\OdaberiPacijenta.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Secretary\OtkazivanjeTermina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
