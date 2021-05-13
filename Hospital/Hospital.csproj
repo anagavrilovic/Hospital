@@ -245,7 +245,7 @@
     <Compile Include="View\PatientPassedAppointments.xaml.cs">
       <DependentUpon>PatientPassedAppointments.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Manager\Medicines\PatientRateDoctor.xaml.cs">
+    <Compile Include="View\PatientRateDoctor.xaml.cs">
       <DependentUpon>PatientRateDoctor.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PatientSettingsPage.xaml.cs">
@@ -528,7 +528,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Manager\Medicines\PatientRateDoctor.xaml">
+    <Page Include="View\PatientRateDoctor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
