@@ -1,0 +1,51 @@
+﻿<Page x:Class="Hospital.View.ManagerMainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hospital.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="423"
+      Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
+      Title="Početna stranica">
+
+    <Page.Resources>
+        <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
+    </Page.Resources>
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0"  Orientation="Horizontal" Background="#FF95C0F4" Margin="0,0,0,9.8">
+            <Button  Background="#FF95C0F4" Click="back" BorderBrush="#FF95C0F4">
+                <Image  Source="/Icon/menu.png"  Margin="10,8,5,5" />
+            </Button>
+            <Image  Source="/Icon/logo.png"  Margin="160,5,5,5.2"/>
+        </StackPanel>
+
+        <Label  Grid.Row="1" Content="Lider u inovaciji, na usluzi pacijenta" FontSize="20" Foreground="#FF4A83CB"  Margin="53,10.2,-30,79.8" Grid.RowSpan="2" />
+
+        <Button x:Name="profil"         Content="PROFIL"                      Grid.Row="2"  Margin="15,6,25,6"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Style="{StaticResource RoundButtonStyle}"/>
+        <Button x:Name="rooms"          Content="SALE"                        Grid.Row="3"  Margin="15,6,25,6"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Style="{StaticResource RoundButtonStyle}" Click="getRooms" />
+        <Button x:Name="employees"      Content="LEKOVI"                      Grid.Row="4"  Margin="15,6,25,6"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Style="{StaticResource RoundButtonStyle}" Click="getMedicines"/>
+        <Button x:Name="notifications"  Content="OBAVEŠTENJA"                 Grid.Row="5"  Margin="15,6,25,6"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Style="{StaticResource RoundButtonStyle}" Click="getNotifications"/>
+        <Button x:Name="tutorial"       Content="TUTORIJAL"                   Grid.Row="6"  Margin="15,6,25,6"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Style="{StaticResource RoundButtonStyle}"/>
+        <Button x:Name="report"         Content="IZVEŠTAJ O STANJU LEKOVA"    Grid.Row="7"  Margin="15,6,25,6"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Style="{StaticResource RoundButtonStyle}"/>
+
+    </Grid>
+</Page>

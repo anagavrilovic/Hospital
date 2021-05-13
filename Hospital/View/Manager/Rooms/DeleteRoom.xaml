@@ -1,0 +1,34 @@
+﻿<Page x:Class="Hospital.View.DeleteRoom"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hospital.View"
+      mc:Ignorable="d"
+      Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"
+      Title="DeletePage" Width="410" Height="280">
+
+    <Page.Resources>
+        <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="BRISANJE SALE"  HorizontalAlignment="Center" Foreground="#FF051D6E" FontSize="22" Margin="114,0,124.6,62.8" Width="171" FontWeight="Bold"/>
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="Da li ste sigurni da želite da izbrišete izabranu salu?" HorizontalAlignment="Center" Foreground="#FF051D6E" FontSize="16"/>
+
+        <Button Grid.Row="2" Grid.Column="0"  Content="POTVRDI"  Background="#FFC2E2F0" Foreground="#FF0A1E62" Margin="30,10.6,10.8,34" Style="{StaticResource RoundButtonStyle}" Click="AcceptDeleting" FontSize="14"/>
+        <Button Grid.Row="2" Grid.Column="1"  Content="ODUSTANI" Background="white"     Foreground="#FF0A1E62" Margin="9.2,10.6,27.6,34"  Style="{StaticResource RoundButtonStyle}" Click="CancelDeleting" FontSize="14"/>
+
+    </Grid>
+</Page>

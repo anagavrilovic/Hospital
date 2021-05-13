@@ -1,0 +1,165 @@
+﻿<Page x:Class="Hospital.View.TransferStaticInventory"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.View"
+        xmlns:val="clr-namespace:Hospital.ValidationRulesManager"
+        mc:Ignorable="d"
+        Background="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" 
+        Title="Prebacivanje inventara" Height="730" Width="420">
+
+    <Page.Resources>
+        <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4" Margin="0,0,0,48.8" Grid.RowSpan="2">
+            <Button  Click="BackButtonClick" Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
+                <Image  Source="/Icon/back.png" Height="37" Width="46"/>
+            </Button>
+            <Image Source="/Icon/logo.png"      Margin="250,0,25,-0.4" Width="114"/>
+        </StackPanel>
+
+        <Label Content="RAZMENA INVENTARA" Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="64,0,41,4.8" FontWeight="Bold" Height="44" VerticalAlignment="Bottom"/>
+
+        <Label Content="Oznaka i naziv stavke:" Grid.Row="2"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0.2,186,9.8"  Grid.ColumnSpan="2" />
+        <Label Content="Količina:"              Grid.Row="4"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0.2,5.4,14.6" />
+        <Label Content="ID odredišne sale:"     Grid.Row="6"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,3.4,5.4,9.6" />
+        <Label Content="Datum prebacivanja:"    Grid.Row="8"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0.4,196,13.6"   Grid.ColumnSpan="2" />
+        <Label Content="Vreme prebacivanja:"    Grid.Row="10" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0.4,186,14.6" Grid.ColumnSpan="2"/>
+
+        <TextBox x:Name="nazivTxt"      Grid.Row="3" Grid.ColumnSpan="2" Margin="30,0.2,28,14.8" BorderBrush="#FF26282C" IsReadOnly="True" >
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        
+        <TextBox x:Name="kolicinaTxt"   Grid.Row="5" Grid.ColumnSpan="2" Margin="30,0.4,28,14.6" BorderBrush="#FF26282C">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+            </TextBox.Resources>
+            <TextBox.Text>
+                <Binding  Path="TransferRequest.Quantity"  Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:StringToInteger ValidationStep="RawProposedValue"/>
+                        <val:MinValue        ValidationStep="ConvertedProposedValue" Min="0"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="kolicinaTxt"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+
+        <ComboBox x:Name="roomID" Grid.Row="7" Grid.ColumnSpan="2" Margin="30,0.4,28,11.6" BorderThickness="1"  Foreground="#FF2E83BF"
+                    IsSynchronizedWithCurrentItem="True"
+                    ItemsSource="{Binding  AllRoomsIDs}"
+                    SelectedItem="{Binding SomeBindingPropertySelectedCurrently, 
+                    Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+        <DatePicker x:Name="datumPrebacivanja" DisplayDateStart="{x:Static sys:DateTime.Today}" Focusable="False" Grid.Row="9"  Grid.ColumnSpan="2" Margin="30,0.4,28,10.6"/>
+
+        <TextBox    x:Name="vremePrebacivanja" Grid.Row="10" Grid.ColumnSpan="2" Margin="30,51.4,28,10.6" Grid.RowSpan="2">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+            </TextBox.Resources>
+            <TextBox.Text>
+                <Binding  Path="TransferRequest.TransferTime"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:Time ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="vremePrebacivanja"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+
+        <Button Grid.Column="0" Grid.Row="12"  Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,24.4,10.4,34.6" Click="AcceptButtonClick" FontSize="14">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderThickness="1">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=kolicinaTxt}"       Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=vremePrebacivanja}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Grid.Column="1" Grid.Row="12"  Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="9.6,24.4,28,34.6" Style="{StaticResource RoundButtonStyle}" Click="CancelButtonClick" FontSize="14" />
+
+    </Grid>
+</Page>
