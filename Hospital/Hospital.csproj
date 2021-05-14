@@ -72,6 +72,8 @@
     <Compile Include="Model\DatesInWeeklyCalendar.cs" />
     <Compile Include="Model\DoctorSpecialty.cs" />
     <Compile Include="Model\DoctorStorage.cs" />
+    <Compile Include="Model\HospitalTreatment.cs" />
+    <Compile Include="Model\HospitalTreatmentStorage.cs" />
     <Compile Include="Model\Ingredient.cs" />
     <Compile Include="Model\Inventory.cs" />
     <Compile Include="Model\InventoryStorage.cs" />
@@ -140,6 +142,9 @@
     </Compile>
     <Compile Include="View\Doktor\Anamnesis.xaml.cs">
       <DependentUpon>Anamnesis.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Doktor\BolnickoLecenje.xaml.cs">
+      <DependentUpon>BolnickoLecenje.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Doktor\ConfirmBox.xaml.cs">
       <DependentUpon>ConfirmBox.xaml</DependentUpon>
@@ -397,6 +402,10 @@
     <Page Include="View\Doktor\Anamnesis.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Doktor\BolnickoLecenje.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Doktor\ConfirmBox.xaml">
       <SubType>Designer</SubType>
@@ -875,6 +884,9 @@
   <ItemGroup>
     <Resource Include="Images\esc.png" />
     <Resource Include="Images\space-key.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\lecenje.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -50,7 +50,7 @@ namespace Hospital.View
             Karton = mStorage.GetOne(id);
             this.pregled = pregled;
             sacuvaj.Visibility = Visibility.Collapsed;
-
+            hospitalTreatmentButton.Visibility = Visibility.Collapsed;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -68,6 +68,13 @@ namespace Hospital.View
             mStorage.EditRecord(Karton);
             AppointmentStorage a = new AppointmentStorage();
             a.Delete(pregled.IDAppointment);
+        }
+
+        private void hospitalTreatmentButton_Click(object sender, RoutedEventArgs e)
+        {
+            ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = 6;
+            ((Doctor_Examination)Window.GetWindow(this)).hospitalTreatmentTab.IsEnabled = true;
+            ((Doctor_Examination)Window.GetWindow(this)).TreatmentLabel.Foreground = Brushes.White;
         }
     }
 }

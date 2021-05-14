@@ -155,12 +155,27 @@ namespace Hospital.View
         {
             Medicine medicToBeAdded = ((Medicine)listBox.SelectedItem);
             MedicineTherapy medicineTherapy = FillMedicine(medicToBeAdded);
-            if (!AlreadyAddedToTherapy(medicToBeAdded) && !AllergicToMedic(medicToBeAdded))
+            if (!AlreadyAddedToTherapy(medicToBeAdded) && !AllergicToMedic(medicToBeAdded) && !AlergicToIngredients(medicToBeAdded))
             {
                     parentWindow.MedicineView.Add(medicToBeAdded);
                     parentWindow.Medics.Add(medicineTherapy);
                     this.Close();
             }
+        }
+
+        private bool AlergicToIngredients(Medicine medicToBeAdded)
+        {
+            foreach(string ingredient in medicalRecord.Allergen.IngredientNames)
+            {
+                foreach(Ingredient medicToBeAddedIngredients in medicToBeAdded.Ingredient)
+                {
+                    if (ingredient.Equals(medicToBeAddedIngredients.Name))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         private bool AllergicToMedic(Medicine medicToBeAdded)

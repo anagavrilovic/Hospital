@@ -1,4 +1,5 @@
-﻿using Hospital.View.Doktor;
+﻿using Hospital.Model;
+using Hospital.View.Doktor;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

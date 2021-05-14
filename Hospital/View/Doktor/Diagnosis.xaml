@@ -30,7 +30,7 @@
                     <Image Source="../../Icon/DoctorIcons/save.png" Width="20"/>
                     <TextBlock Text="Sačuvaj dijagnozu"/>
                 </StackPanel>
-            </Button>
+                </Button>
         </StackPanel>
     </Grid>
 </Page>
