@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.View.Doktor;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -32,11 +33,13 @@ namespace Hospital.View
         private Frame frameDiagnosis;
         private Frame frameAppointment;
         private Frame frameTherapy;
+        private Frame frameHospitalTreatment;
         private KartonDoktorStranica kDS;
         private Anamnesis ana;
         private Diagnosis dia;
         private MakeApointment ma;
         private Terapija th;
+        private BolnickoLecenje hospitalTreatment;
         public Hospital.Model.Doctor LoggedInDoctor
         {
             get { return doktor; }
@@ -97,6 +100,9 @@ namespace Hospital.View
             frameTherapy = new Frame();
             th = new Terapija();
             frameTherapy.Content = th;
+            frameHospitalTreatment = new Frame();
+            hospitalTreatment = new BolnickoLecenje(appointment.IDpatient);
+            frameHospitalTreatment.Content = hospitalTreatment;
         }
 
         private void tab_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -110,6 +116,7 @@ namespace Hospital.View
                     DiagnozaLabela.Foreground = Brushes.Black;
                     TerminiLabela.Foreground = Brushes.Black;
                     TerapijaLabela.Foreground = Brushes.Black;
+                    TreatmentLabel.Foreground = Brushes.Black;
                     break;
                 case 2:
                     Anamneza.Content = frameAnamnesis;
@@ -122,12 +129,21 @@ namespace Hospital.View
                     break;
                 case 4:
                     Dijagnoza.Content = frameDiagnosis;
-                    kDS.sacuvaj.Visibility = Visibility.Visible;    
+                    kDS.sacuvaj.Visibility = Visibility.Visible;
+                    kDS.hospitalTreatmentButton.Visibility = Visibility.Visible;
                     KartonLabela.Foreground = Brushes.Black;
                     break;
                 case 5:
                     Termini.Content = frameAppointment;
                     kDS.sacuvaj.Visibility = Visibility.Visible;
+                    kDS.hospitalTreatmentButton.Visibility = Visibility.Visible;
+                    KartonLabela.Foreground = Brushes.Black;
+                    break;
+                case 6:
+                    hospitalTreatmentTab.Content = frameHospitalTreatment;
+                    kDS.sacuvaj.Visibility = Visibility.Visible;
+                    kDS.hospitalTreatmentButton.IsEnabled = false;
+                    kDS.hospitalTreatmentButton.Visibility = Visibility.Visible;
                     KartonLabela.Foreground = Brushes.Black;
                     break;
             }

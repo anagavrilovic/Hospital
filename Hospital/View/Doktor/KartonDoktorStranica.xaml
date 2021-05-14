@@ -126,6 +126,12 @@
                         <TextBlock Text="Sačuvaj terapiju"/>
                     </StackPanel>
                 </Button>
+                <Button x:Name="hospitalTreatmentButton" Click="hospitalTreatmentButton_Click" Margin="10,0,0,0" Style="{DynamicResource ImageButtonsHorizontal}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../../Icon/DoctorIcons/save.png" Width="20"/>
+                        <TextBlock Text="Bolničko lečenje"/>
+                    </StackPanel>
+                </Button>
             </StackPanel>
         </StackPanel>
     </Grid>

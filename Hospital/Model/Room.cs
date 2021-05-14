@@ -19,7 +19,7 @@ namespace Hospital
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
-
+        private int freeBeds;
         private string id;
         private string name;
         private int floor;
@@ -116,6 +116,23 @@ namespace Hospital
                 {
                     type = value;
                     OnPropertyChanged("Type");
+                }
+            }
+        }
+        public int FreeBeds
+        {
+
+            get
+            {
+                return freeBeds;
+            }
+
+            set
+            {
+                if (value != freeBeds)
+                {
+                    freeBeds = value;
+                    OnPropertyChanged("freeBeds");
                 }
             }
         }

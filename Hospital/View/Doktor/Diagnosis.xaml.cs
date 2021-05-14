@@ -72,7 +72,6 @@ namespace Hospital.View
                 ((Doctor_Examination)Window.GetWindow(this)).Pregled.diagnosis=Test1;            
             ((Doctor_Examination)Window.GetWindow(this)).Dijagnoza.IsEnabled = false;
             ((Doctor_Examination)Window.GetWindow(this)).DiagnozaLabela.Foreground = Brushes.Black;
-
         }
     }
 }

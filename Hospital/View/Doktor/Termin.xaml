@@ -62,6 +62,14 @@
                     </StackPanel>
                 </TabItem.Header>
             </TabItem >
+            <TabItem x:Name="hospitalTreatmentTab" IsEnabled="False">
+                <TabItem.Header>
+                    <StackPanel Orientation="Vertical">
+                        <Image x:Name="TreatmentPicture" Source="/Icon/DoctorIcons/lecenje.png" Width="100" Height="30"/>
+                        <Label x:Name="TreatmentLabel" Content="Bolničko lečenje" HorizontalAlignment="Center" FontSize="15"></Label>
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
         </TabControl>
         
         
