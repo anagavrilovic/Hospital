@@ -126,7 +126,12 @@ namespace Hospital.View
             if (string.IsNullOrEmpty(TerminiFilter.Text))
                 return true;
             else
-                return ((obj.ToString()).IndexOf(TerminiFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+                return ((obj as Appointment).DateTime.ToString("dd.MM.yyyy., HH:mm").IndexOf(TerminiFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                       (obj.ToString().IndexOf(TerminiFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                       ("pregled".IndexOf(TerminiFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0) &&
+                                    ((obj as Appointment).Type.Equals(AppointmentType.examination) || (obj as Appointment).Type.Equals(AppointmentType.urgentExamination)) ||
+                       ("operacija".IndexOf(TerminiFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0) &&
+                                    ((obj as Appointment).Type.Equals(AppointmentType.operation) || (obj as Appointment).Type.Equals(AppointmentType.urgentOperation));
         }
 
         private void AppointmentsFilterTextChanged(object sender, TextChangedEventArgs e)

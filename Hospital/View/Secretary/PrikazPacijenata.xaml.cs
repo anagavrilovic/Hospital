@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,14 +27,44 @@ namespace Hospital.View
 
         private ObservableCollection<MedicalRecord> _pacijenti = new ObservableCollection<MedicalRecord>();
         public ObservableCollection<MedicalRecord> Pacijenti { get => _pacijenti; set => _pacijenti = value; }
-        
+
+        private ICollectionView patientCollection;
+
+        public ICollectionView PatientCollection
+        {
+            get { return patientCollection; }
+            set { patientCollection = value; }
+        }
 
         public PrikazPacijenata()
         {
             InitializeComponent();
             this.DataContext = this;   
             Pacijenti = mrs.GetAll();
-        }    
+            PatientCollection = CollectionViewSource.GetDefaultView(Pacijenti);
+            PatientCollection.Filter = CustomFilterPatients;
+        }
+
+        private bool CustomFilterPatients(object obj)
+        {
+            if (string.IsNullOrEmpty(PatientsFilter.Text))
+            {
+                return true;
+            }
+            else
+            {
+                return ((obj as MedicalRecord).Patient.FirstName.IndexOf(PatientsFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                       ((obj as MedicalRecord).Patient.LastName.IndexOf(PatientsFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                       ((obj as MedicalRecord).Patient.DateOfBirth.ToString("dd.MM.yyyy, HH:mm").IndexOf(PatientsFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                       ((obj as MedicalRecord).Patient.PersonalID.IndexOf(PatientsFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                       ("blokirani".IndexOf(PatientsFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0 && ((obj as MedicalRecord).Patient.IsBlocked));
+            }
+        }
+
+        private void PatientsFilterTextChanged(object sender, TextChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(PacijentiTable.ItemsSource).Refresh();
+        }
 
         private void NoviClick(object sender, RoutedEventArgs e)
         {
@@ -91,6 +122,18 @@ namespace Hospital.View
             }
 
             NavigationService.Navigate(new ModifikacijaAlergena((MedicalRecord)PacijentiTable.SelectedItem, Pacijenti));
+        }
+
+        private void IsBlockedUnchecked(object sender, RoutedEventArgs e)
+        {
+            MedicalRecordStorage mrs = new MedicalRecordStorage();
+            mrs.DoSerialization(Pacijenti);
+        }
+
+        private void IsBlockedChecked(object sender, RoutedEventArgs e)
+        {
+            MedicalRecordStorage mrs = new MedicalRecordStorage();
+            mrs.DoSerialization(Pacijenti);
         }
     }
 }

@@ -89,7 +89,7 @@
         <DataGrid x:Name="TabelaTermina" ItemsSource="{Binding PatientsAppointments}" Grid.Row="4" Height="180" Width="652" Margin="30,5,30,10"
                   Style="{StaticResource PacijentiDataGrid}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Datum i vreme" Width="1*" Binding="{Binding DateTime}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
+                <DataGridTextColumn Header="Datum i vreme" Width="1*" Binding="{Binding DateTime, StringFormat='{}{0: dd.MM.yyyy, HH:mm}'}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
                 <DataGridTextColumn Header="Lekar" Width="1*" Binding="{Binding DoctrosNameSurname}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
                 <DataGridTextColumn Header="Prostorija" Width="1*" Binding="{Binding Room.Name}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
                 <DataGridTextColumn Header="Tip" Width="0.7*" Binding="{Binding Type}" HeaderStyle="{StaticResource GridHeaderStyle}"/>

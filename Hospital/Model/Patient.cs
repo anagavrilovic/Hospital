@@ -2,10 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Hospital
 {
-    public class Patient : User
+    public class Patient : User, INotifyPropertyChanged
     {
         private bool isGuest = false;
         private bool isBlocked = false;
@@ -18,13 +19,18 @@ namespace Hospital
             set
             {
                 isGuest = value;
+                OnPropertyChanged("IsGuest");
             }
         }
 
         public bool IsBlocked
         {
             get { return isBlocked; }
-            set { isBlocked = value; }
+            set 
+            { 
+                isBlocked = value;
+                OnPropertyChanged("IsBlocked");
+            }
         }
 
         override

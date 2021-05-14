@@ -126,7 +126,8 @@
                     </Border.Effect>
                     <StackPanel Margin="5" Orientation="Horizontal">
                         <Image Source="../../Icon/Secretary/search.png" Height="13"/>
-                        <TextBox BorderThickness="0" Width="200" Height="20" Margin="10,0,0,0" Background="Transparent"/>
+                        <TextBox x:Name="PatientsFilter" BorderThickness="0" Width="200" Height="20" Margin="10,0,0,0" Background="Transparent"
+                                 TextChanged="PatientsFilterTextChanged"/>
                     </StackPanel>
                 </Border>
 
@@ -145,9 +146,16 @@
                         <DataGridTextColumn Header="Prezime" Width="*" Binding="{Binding Patient.LastName}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
                         <DataGridTextColumn Header="JMBG" Width="*" Binding="{Binding Patient.PersonalID}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
                         <DataGridTextColumn Header="Datum rođenja" Width="*" Binding="{Binding Patient.DateOfBirth, StringFormat='{}{0: dd.MM.yyyy}'}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
-                        <DataGridTextColumn Header="Blokiran" Width="0.5*" HeaderStyle="{StaticResource GridHeaderStyle}">
-                            
-                        </DataGridTextColumn>
+
+                        <DataGridTemplateColumn Width="0.5*" IsReadOnly="False" Header="Blokiran" HeaderStyle="{StaticResource GridHeaderStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Path=Patient.IsBlocked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="25,3,0,0" 
+                                              HorizontalAlignment="Left" VerticalAlignment="Center" Unchecked="IsBlockedUnchecked" Checked="IsBlockedChecked"
+                                              Style="{StaticResource IsBlockedCheckBoxStyle}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Border>
