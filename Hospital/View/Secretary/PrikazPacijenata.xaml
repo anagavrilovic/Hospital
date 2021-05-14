@@ -142,15 +142,15 @@
                 <!-- Tabela sa prikazom svih pacijenata -->
                 <DataGrid x:Name="PacijentiTable" Grid.Row="1" Margin="5" Width="1038" ItemsSource="{Binding Pacijenti}" Style="{StaticResource PacijentiDataGrid}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Ime" Width="*" Binding="{Binding Patient.FirstName}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
+                        <DataGridTextColumn Header="Ime" Width="0.85*" Binding="{Binding Patient.FirstName}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
                         <DataGridTextColumn Header="Prezime" Width="*" Binding="{Binding Patient.LastName}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
                         <DataGridTextColumn Header="JMBG" Width="*" Binding="{Binding Patient.PersonalID}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
-                        <DataGridTextColumn Header="Datum rođenja" Width="*" Binding="{Binding Patient.DateOfBirth, StringFormat='{}{0: dd.MM.yyyy}'}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
+                        <DataGridTextColumn Header="Datum rođenja" Width="0.9*" Binding="{Binding Patient.DateOfBirth, StringFormat='{}{0: dd.MM.yyyy}'}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
 
-                        <DataGridTemplateColumn Width="0.5*" IsReadOnly="False" Header="Blokiran" HeaderStyle="{StaticResource GridHeaderStyle}">
+                        <DataGridTemplateColumn Width="8    0" IsReadOnly="False" Header="Status" HeaderStyle="{StaticResource GridHeaderStyle}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <CheckBox IsChecked="{Binding Path=Patient.IsBlocked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="25,3,0,0" 
+                                    <CheckBox IsChecked="{Binding Path=Patient.IsBlocked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="15,3,0,0" 
                                               HorizontalAlignment="Left" VerticalAlignment="Center" Unchecked="IsBlockedUnchecked" Checked="IsBlockedChecked"
                                               Style="{StaticResource IsBlockedCheckBoxStyle}"/>
                                 </DataTemplate>
