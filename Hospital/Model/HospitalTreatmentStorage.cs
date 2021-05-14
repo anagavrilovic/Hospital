@@ -38,7 +38,7 @@ namespace Hospital.Model
             DoSerialization(hospitalTreatments);
         }
 
-        public Boolean DeleteByPatientId(int id)
+        public Boolean DeleteByPatientId(string id)
         {
               ObservableCollection<HospitalTreatment> hospitalTreatments = GetAll();
               foreach(HospitalTreatment treatment in hospitalTreatments)

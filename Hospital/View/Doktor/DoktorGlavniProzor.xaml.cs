@@ -49,6 +49,17 @@ namespace Hospital.View
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 3 / 4);
             Main.Content =new DoktorGlavnaStranica(doctorId);
+            checkHospitalTreatmentDates();
+        }
+
+        private void checkHospitalTreatmentDates()
+        {
+            HospitalTreatmentStorage hospitalTreatmentStorage = new HospitalTreatmentStorage();
+            foreach(HospitalTreatment hospitalTreatment in hospitalTreatmentStorage.GetAll())
+            {
+                if (hospitalTreatment.EndOfTreatment.Date < DateTime.Today)
+                    hospitalTreatmentStorage.DeleteByPatientId(hospitalTreatment.PatientId);
+            }
         }
 
         private void Logo(object sender, RoutedEventArgs e)

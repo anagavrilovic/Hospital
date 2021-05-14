@@ -1,4 +1,5 @@
 ﻿using Hospital.View.Doctor;
+using Hospital.View.Doktor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,11 @@ namespace Hospital.View
         private void Lekovi(object sender, RoutedEventArgs e)
         {
             ((DoktorGlavniProzor)Window.GetWindow(this)).Main.Content = new Lekovi();
+        }
+
+        private void Hospitalized_Click(object sender, RoutedEventArgs e)
+        {
+            ((DoktorGlavniProzor)Window.GetWindow(this)).Main.Navigate(new HospitalizovaniPacijenti());
         }
     }
 }

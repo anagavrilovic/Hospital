@@ -380,5 +380,13 @@
                 </StackPanel>
             </Button.Content>
         </Button>
+        <Button Margin="40,40,0,0" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom" Style="{StaticResource GelButton}" Click="Hospitalized_Click">
+            <Button.Content>
+                <StackPanel Orientation="Vertical" Height="180">
+                    <Image Source="/Icon/DoctorIcons/lecenje.png" Width="150" Height="50" VerticalAlignment="Center" RenderTransformOrigin="0.526,1.409"/>
+                    <Label FontSize="19" Content="Hospitalizovani" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Button.Content>
+        </Button>
     </Grid>
 </Page>
