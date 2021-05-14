@@ -7,11 +7,12 @@ namespace Hospital
 {
     public class Patient : User
     {
-        private Boolean isGuest;
+        private bool isGuest = false;
+        private bool isBlocked = false;
 
         public Patient() {}
 
-        public Boolean IsGuest
+        public bool IsGuest
         {
             get => isGuest;
             set
@@ -20,11 +21,16 @@ namespace Hospital
             }
         }
 
+        public bool IsBlocked
+        {
+            get { return isBlocked; }
+            set { isBlocked = value; }
+        }
+
         override
         public string ToString()
         {
-            return FirstName + " "+LastName + " " + PersonalID;
+            return FirstName + " " + LastName + " " + PersonalID;
         }
     }
-    class Pretraga : ObservableCollection<Patient> { }
 }

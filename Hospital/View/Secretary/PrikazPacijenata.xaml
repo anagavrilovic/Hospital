@@ -145,6 +145,9 @@
                         <DataGridTextColumn Header="Prezime" Width="*" Binding="{Binding Patient.LastName}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
                         <DataGridTextColumn Header="JMBG" Width="*" Binding="{Binding Patient.PersonalID}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
                         <DataGridTextColumn Header="Datum rođenja" Width="*" Binding="{Binding Patient.DateOfBirth, StringFormat='{}{0: dd.MM.yyyy}'}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
+                        <DataGridTextColumn Header="Blokiran" Width="0.5*" HeaderStyle="{StaticResource GridHeaderStyle}">
+                            
+                        </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Border>
