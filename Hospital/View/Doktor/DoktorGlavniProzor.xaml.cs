@@ -26,7 +26,8 @@ namespace Hospital.View
     {
     
         private string doctorId;
-
+        private Model.Doctor doctor = new Model.Doctor();
+        private DoctorStorage doctorStorage = new DoctorStorage();
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
         {
@@ -39,6 +40,7 @@ namespace Hospital.View
         public DoktorGlavniProzor(string doctorId)
         { 
             this.doctorId = doctorId;
+            doctor = doctorStorage.GetDoctorByID(doctorId);
             InitializeComponent();
             this.DataContext = this;
             InitProperties();
@@ -49,6 +51,17 @@ namespace Hospital.View
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 3 / 4);
             Main.Content =new DoktorGlavnaStranica(doctorId);
+            checkHospitalTreatmentDates();
+        }
+
+        private void checkHospitalTreatmentDates()
+        {
+            HospitalTreatmentStorage hospitalTreatmentStorage = new HospitalTreatmentStorage();
+            foreach(HospitalTreatment hospitalTreatment in hospitalTreatmentStorage.GetAll())
+            {
+                if (hospitalTreatment.EndOfTreatment.Date < DateTime.Today)
+                    hospitalTreatmentStorage.DeleteByPatientId(hospitalTreatment.PatientId);
+            }
         }
 
         private void Logo(object sender, RoutedEventArgs e)
@@ -68,6 +81,11 @@ namespace Hospital.View
         {
             //obavestenje.Source = new BitmapImage(new Uri("pack://application:,,,/Icon/announcment.png", UriKind.Absolute));
             Main.Content = new DoktorObavestenja(doctorId);
+        }
+
+        private void Revision_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Navigate(new ValidnostLeka(doctor));
         }
     }
 }

@@ -77,6 +77,10 @@
                 VerticalAlignment="Top" Margin="0,5,0,0">
                 <Image x:Name="obavestenje" Source="/Icon/notification.png" Width="60" Height="20"/>
             </Button>
+            <Button Style="{DynamicResource NoChromeButton}" HorizontalAlignment="Right"
+                VerticalAlignment="Top" Margin="0,5,0,0" Click="Revision_Click">
+                <Image x:Name="pills" Source="/Icon/DoctorIcons/pills.png" Width="60" Height="20"/>
+            </Button>
             <Button HorizontalAlignment="Right" 
                 VerticalAlignment="Top" Background="White" Click="SignOut">
                 <Button.Content>

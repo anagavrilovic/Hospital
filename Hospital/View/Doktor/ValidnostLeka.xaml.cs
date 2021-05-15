@@ -83,29 +83,30 @@ namespace Hospital.View.Doktor
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
-        }
-
-        private void Notifications_Click(object sender, RoutedEventArgs e)
-        {
-            ((DoktorGlavniProzor)Window.GetWindow(this)).Main.Navigate(new DoktorObavestenja(doctor.PersonalID));
-        }
+        }   
 
         private void ConfirmMedicine_Click(object sender, RoutedEventArgs e)
         {
-            ConfirmBox confirmBox = new ConfirmBox("Da li ste sigurni da odobravate lek?");
-            if ((bool)confirmBox.ShowDialog())
+            if (ListBoxRevisions.SelectedIndex != -1)
             {
-                medicineRevisionStorage.Delete(((MedicineRevision)ListBoxRevisions.SelectedItem).Medicine.ID);
-                MedicineStorage medicineStorage = new MedicineStorage();
-                medicineStorage.Save(((MedicineRevision)ListBoxRevisions.SelectedItem).Medicine);
-                MedicineRevisions.Remove(((MedicineRevision)ListBoxRevisions.SelectedItem));
+                ConfirmBox confirmBox = new ConfirmBox("Da li ste sigurni da odobravate lek?");
+                if ((bool)confirmBox.ShowDialog())
+                {
+                    medicineRevisionStorage.Delete(((MedicineRevision)ListBoxRevisions.SelectedItem).Medicine.ID);
+                    MedicineStorage medicineStorage = new MedicineStorage();
+                    medicineStorage.Save(((MedicineRevision)ListBoxRevisions.SelectedItem).Medicine);
+                    MedicineRevisions.Remove(((MedicineRevision)ListBoxRevisions.SelectedItem));
+                }
             }
         }
 
         private void RejectMedicine_Click(object sender, RoutedEventArgs e)
         {
-            OdbijeniLekoviKomentar dialog = new OdbijeniLekoviKomentar(((MedicineRevision)ListBoxRevisions.SelectedItem),this);
-            dialog.Show();
+            if (ListBoxRevisions.SelectedIndex != -1)
+            {
+                OdbijeniLekoviKomentar dialog = new OdbijeniLekoviKomentar(((MedicineRevision)ListBoxRevisions.SelectedItem), this);
+                dialog.Show();
+            }
         }
     }
 }

@@ -63,6 +63,7 @@ BorderThickness="3" CornerRadius="10" BorderBrush="{StaticResource HoverBlue}">
     <Style x:Key="Label" TargetType="Label">
         <Setter Property="Foreground" Value="{StaticResource DarkBlue}"/>
         <Setter Property="FontFamily" Value="Yu Gothic"/>
+        <Setter Property="FontSize" Value="14"/>
     </Style>
 
     <Style x:Key="LabelDark" TargetType="Label">
@@ -244,7 +245,6 @@ BorderThickness="3" CornerRadius="10" BorderBrush="{StaticResource HoverBlue}">
         <Setter Property="SelectionMode" Value="Single"/>
         <Setter Property="SelectionUnit" Value="FullRow"/>
         <Setter Property="IsReadOnly" Value="True"/>
-        <Setter Property="Foreground" Value="{StaticResource MainDarkBlue}"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Visible"/>
         <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource MediumGray}"/>
         <Setter Property="ColumnHeaderHeight" Value="25"/>

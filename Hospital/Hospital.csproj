@@ -72,6 +72,7 @@
     <Compile Include="Model\DatesInWeeklyCalendar.cs" />
     <Compile Include="Model\DoctorSpecialty.cs" />
     <Compile Include="Model\DoctorStorage.cs" />
+    <Compile Include="Model\HospitalizedPatient.cs" />
     <Compile Include="Model\HospitalTreatment.cs" />
     <Compile Include="Model\HospitalTreatmentStorage.cs" />
     <Compile Include="Model\Ingredient.cs" />
@@ -122,6 +123,9 @@
     <Compile Include="ValidationRulesManager\StringToDouble.cs" />
     <Compile Include="ValidationRulesManager\StringToInteger.cs" />
     <Compile Include="ValidationRulesManager\Time.cs" />
+    <Compile Include="View\Doktor\HospitalizovaniPacijenti.xaml.cs">
+      <DependentUpon>HospitalizovaniPacijenti.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Manager\StaticInventory\AddInventory.xaml.cs">
       <DependentUpon>AddInventory.xaml</DependentUpon>
     </Compile>
@@ -372,6 +376,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\SecretaryResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Doktor\HospitalizovaniPacijenti.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -887,6 +895,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\DoctorIcons\lecenje.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\pills.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

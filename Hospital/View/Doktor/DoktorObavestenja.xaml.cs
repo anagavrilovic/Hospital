@@ -128,11 +128,6 @@ namespace Hospital.View
             var prikaz = new PrikazObavestenja((Notification)ListBoxNotifications.SelectedItem);
             prikaz.Show();
         }
-
-        private void MedicRevision_Click(object sender, RoutedEventArgs e)
-        {
-         ((DoktorGlavniProzor)Window.GetWindow(this)).Main.Navigate(new ValidnostLeka(doctor));
-        }
     }
 
 }
