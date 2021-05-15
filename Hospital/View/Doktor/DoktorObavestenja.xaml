@@ -25,7 +25,6 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Dugmici za CRUD nad obavestenjima -->
                 <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,50,0,0">
                     <Button Height="50" Width="60" Margin="0,30,0,0" Style="{DynamicResource ImageButtons}" Click="PrikazObavestenjaClick">
                         <StackPanel Orientation="Vertical">
@@ -37,18 +36,6 @@
                         <StackPanel Orientation="Vertical">
                             <Image Source="../../Icon/Secretary/delete.png" Width="30"/>
                             <TextBlock Text="Izbriši"/>
-                        </StackPanel>
-                    </Button>
-                    <Button Height="50" Width="50" Margin="0,30,0,0" Style="{DynamicResource ImageButtons}" Click="MedicRevision_Click">
-                        <StackPanel Orientation="Vertical">
-                            <Image Source="../../Icon/DoctorIcons/medicine.png" Width="30"/>
-                            <TextBlock Text="Revizija"/>
-                        </StackPanel>
-                    </Button>
-                    <Button Height="50" Width="80" Margin="0,30,0,0" Style="{DynamicResource ImageButtons}">
-                        <StackPanel Orientation="Vertical">
-                            <Image Source="../../Icon/DoctorIcons/notification.png" Width="30"/>
-                            <TextBlock Text="Obaveštenja"/>
                         </StackPanel>
                     </Button>
                 </StackPanel>

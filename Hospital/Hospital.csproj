@@ -896,5 +896,8 @@
   <ItemGroup>
     <Resource Include="Icon\DoctorIcons\lecenje.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\pills.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
