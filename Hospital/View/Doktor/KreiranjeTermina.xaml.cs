@@ -189,7 +189,7 @@ namespace Hospital.View
             {
                 FillAppointmentProperties();
                 SetRoomAndRoomType();
-                if (    SaveIfNotOvelapping())
+                if (SaveIfNotOvelapping())
                 {
                     UpdateParentPage();
                     this.Close();
@@ -204,7 +204,10 @@ namespace Hospital.View
         private bool SaveIfNotOvelapping()
         {
             if (IsDoctorAvaliable() && IsPatientAvaliable())
+            {
+                appointmentStorage.Save(Appointment);
                 return true;
+            }   
             else
                 return false;
         }
@@ -241,8 +244,9 @@ namespace Hospital.View
                 {
                     list.Add(a);
                 }
-            }
+            }  
             parentWindow.dataGridPregledi.ItemsSource = list;
+            parentWindow.dataGridPregledi.Items.Refresh();
             parentWindow.ComboBox.SelectedIndex=(int)(doctorStorage.GetOne(Appointment.IDDoctor).Specialty);
         }
 

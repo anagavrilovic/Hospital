@@ -55,10 +55,6 @@ namespace Hospital.View
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void nazad_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
 
         private void sacuvaj_Click(object sender, RoutedEventArgs e)
         {

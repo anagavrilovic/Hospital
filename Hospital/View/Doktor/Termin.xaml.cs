@@ -130,13 +130,19 @@ namespace Hospital.View
                 case 4:
                     Dijagnoza.Content = frameDiagnosis;
                     kDS.sacuvaj.Visibility = Visibility.Visible;
-                    kDS.hospitalTreatmentButton.Visibility = Visibility.Visible;
+                    if (!AlreadyHospitalized())
+                    {
+                        kDS.hospitalTreatmentButton.Visibility = Visibility.Visible;
+                    }
                     KartonLabela.Foreground = Brushes.Black;
                     break;
                 case 5:
                     Termini.Content = frameAppointment;
                     kDS.sacuvaj.Visibility = Visibility.Visible;
-                    kDS.hospitalTreatmentButton.Visibility = Visibility.Visible;
+                    if (!AlreadyHospitalized())
+                    {
+                        kDS.hospitalTreatmentButton.Visibility = Visibility.Visible;
+                    }
                     KartonLabela.Foreground = Brushes.Black;
                     break;
                 case 6:
@@ -147,6 +153,17 @@ namespace Hospital.View
                     KartonLabela.Foreground = Brushes.Black;
                     break;
             }
+        }
+
+        private bool AlreadyHospitalized()
+        {
+            HospitalTreatmentStorage hospitalTreatmentStorage = new HospitalTreatmentStorage();
+            foreach(HospitalTreatment hospitalTreatment in hospitalTreatmentStorage.GetAll())
+            {
+                if (hospitalTreatment.PatientId.Equals(appointment.IDpatient))
+                    return true;
+            }
+            return false;
         }
     }
     }
