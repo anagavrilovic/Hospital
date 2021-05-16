@@ -24,34 +24,34 @@ namespace Hospital.View.Doctor
     /// </summary>
     public partial class Lekovi : Page,INotifyPropertyChanged
     {
-        private MedicineStorage mStorage = new MedicineStorage();
-        private Medicine lek=new Medicine();
-        public Medicine Lek
+        private MedicineStorage medicineStorage = new MedicineStorage();
+        private Medicine medicine=new Medicine();
+        public Medicine Medicine
         {
-            get { return lek; }
+            get { return medicine; }
             set
             {
-                lek = value;
+                medicine = value;
                 OnPropertyChanged();
             }
         }
-        private ObservableCollection<Medicine> lekoviZaPrikaz;
-        public ObservableCollection<Medicine> LekoviZaPrikaz
+        private ObservableCollection<Medicine> medicineForDisplay;
+        public ObservableCollection<Medicine> MedicineForDisplay
         {
-            get { return lekoviZaPrikaz; }
+            get { return medicineForDisplay; }
             set
             {
-                lekoviZaPrikaz = value;
+                medicineForDisplay = value;
                 OnPropertyChanged();
             }
         }
-        private ObservableCollection<Medicine> zamenskiLekovi=new ObservableCollection<Medicine>();
-        public ObservableCollection<Medicine> ZamenskiLekovi
+        private ObservableCollection<Medicine> substituteDrugs=new ObservableCollection<Medicine>();
+        public ObservableCollection<Medicine> SubstituteDrugs
         {
-            get { return zamenskiLekovi; }
+            get { return substituteDrugs; }
             set
             {
-                zamenskiLekovi = value;
+                substituteDrugs = value;
                 OnPropertyChanged();
             }
         }
@@ -67,12 +67,12 @@ namespace Hospital.View.Doctor
             }
         }
 
-        private ICollectionView lekoviCollection;
+        private ICollectionView medicineCollection;
 
-        public ICollectionView LekoviCollection
+        public ICollectionView MedicineCollection
         {
-            get { return lekoviCollection; }
-            set { lekoviCollection = value; }
+            get { return medicineCollection; }
+            set { medicineCollection = value; }
         }
 
         private ICollectionView ingredientCollection;
@@ -93,12 +93,12 @@ namespace Hospital.View.Doctor
 
         private void SetProperites()
         {
-            sastojci.ItemsSource = Lek.Ingredient;
-            lekoviZaPrikaz = mStorage.GetAll();
-            listBox.ItemsSource = lekoviZaPrikaz;
+            medicineIngredientsListBox.ItemsSource = Medicine.Ingredient;
+            medicineForDisplay = medicineStorage.GetAll();
+            allDrugsListBox.ItemsSource = medicineForDisplay;
             SetReplacementMedicine();
             ReadIngredients();
-            listIngredients.ItemsSource = Ingredients;
+            allIngredientsListBox.ItemsSource = Ingredients;
         }
 
         private void ReadIngredients()
@@ -114,10 +114,10 @@ namespace Hospital.View.Doctor
 
         private void AddFilterAndSorter()
         {
-            LekoviCollection = CollectionViewSource.GetDefaultView(LekoviZaPrikaz);
+            MedicineCollection = CollectionViewSource.GetDefaultView(MedicineForDisplay);
             IngredientCollection = CollectionViewSource.GetDefaultView(Ingredients);
             IngredientCollection.Filter = filterIngredients;
-            LekoviCollection.Filter = filterMedics;
+            MedicineCollection.Filter = filterMedics;
             ICollectionView view = GetPretraga();
             view.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
             view.SortDescriptions.Add(new SortDescription("ID", ListSortDirection.Ascending));
@@ -149,93 +149,93 @@ namespace Hospital.View.Doctor
 
         private void SetReplacementMedicine()
         {
-            if (Lek != null)
+            if (Medicine != null)
             {
-                ZamenskiLekovi.Clear();
-                foreach (string medicID in Lek.ReplacementMedicineIDs)
+                SubstituteDrugs.Clear();
+                foreach (string medicID in Medicine.ReplacementMedicineIDs)
                 {
-                    ZamenskiLekovi.Add(mStorage.GetOne(medicID));
+                    SubstituteDrugs.Add(medicineStorage.GetOne(medicID));
                 }
-                listaZamena.ItemsSource = ZamenskiLekovi;
+                replacementDrugsListBox.ItemsSource = SubstituteDrugs;
             }
         }
 
         private void LekoviFilterTextChanged(object sender, TextChangedEventArgs e)
         {
-            CollectionViewSource.GetDefaultView(listBox.ItemsSource).Refresh();
+            CollectionViewSource.GetDefaultView(allDrugsListBox.ItemsSource).Refresh();
         }
 
 
         public ICollectionView GetPretraga()
         {
-            return CollectionViewSource.GetDefaultView(LekoviZaPrikaz);
+            return CollectionViewSource.GetDefaultView(MedicineForDisplay);
         }
 
         private void SelctedMedicChanged(object sender, SelectionChangedEventArgs e)
         {
-            if ((Medicine)listBox.SelectedItem != null)
+            if ((Medicine)allDrugsListBox.SelectedItem != null)
             {
                 if (sacuvaj.IsEnabled.Equals(false))
                 {
-                    Lek = (Medicine)listBox.SelectedItem;
+                    Medicine = (Medicine)allDrugsListBox.SelectedItem;
                     SetReplacementMedicine();
-                    sastojci.ItemsSource = Lek.Ingredient;
-                    sastojci.Items.Refresh();
+                    medicineIngredientsListBox.ItemsSource = Medicine.Ingredient;
+                    medicineIngredientsListBox.Items.Refresh();
                 }
             }
         }
 
-        private void EditMedic(object sender, RoutedEventArgs e)
+        private void EditMedic_Click(object sender, RoutedEventArgs e)
         {
-            listaZamena.IsEnabled = true;
+            replacementDrugsListBox.IsEnabled = true;
             doza.IsEnabled = true;
             dodajZamenu.IsEnabled = true;
             izbaciZamenu.IsEnabled = true;
             sacuvaj.IsEnabled = true;
             izbaciSastojak.IsEnabled = true;
             dodajSastojak.IsEnabled = true;
-            sastojci.IsEnabled = true;
+            medicineIngredientsListBox.IsEnabled = true;
             izmeni.IsEnabled = false;
         }
 
-        private void AddIngridient(object sender, RoutedEventArgs e)
+        private void AddIngridient_Click(object sender, RoutedEventArgs e)
         {
-            if (listIngredients.SelectedItem !=null)
+            if (allIngredientsListBox.SelectedItem !=null)
             {
-                Ingredient i =(Ingredient)listIngredients.SelectedItem;
-                Lek.AddIngredient(i); 
-                sastojci.ItemsSource = Lek.Ingredient;
-                sastojci.Items.Refresh();
+                Ingredient i =(Ingredient)allIngredientsListBox.SelectedItem;
+                Medicine.AddIngredient(i); 
+                medicineIngredientsListBox.ItemsSource = Medicine.Ingredient;
+                medicineIngredientsListBox.Items.Refresh();
             }
         }
 
-        private void RemoveIngridient(object sender, RoutedEventArgs e)
+        private void RemoveIngridient_Click(object sender, RoutedEventArgs e)
         {
-            if (sastojci.SelectedItem != null)
+            if (medicineIngredientsListBox.SelectedItem != null)
             {
-                Lek.RemoveIngredient((Ingredient)sastojci.SelectedItem);
-                sastojci.ItemsSource = Lek.Ingredient;
-                sastojci.Items.Refresh();
+                Medicine.RemoveIngredient((Ingredient)medicineIngredientsListBox.SelectedItem);
+                medicineIngredientsListBox.ItemsSource = Medicine.Ingredient;
+                medicineIngredientsListBox.Items.Refresh();
             }
         }
 
-        private void AddReplacement(object sender, RoutedEventArgs e)
+        private void AddReplacement_Click(object sender, RoutedEventArgs e)
         {
-            if (!Lek.ID.Equals(((Medicine)listBox.SelectedItem).ID))
+            if (!Medicine.ID.Equals(((Medicine)allDrugsListBox.SelectedItem).ID))
             {
-                Lek.AddMedicineID(((Medicine)listBox.SelectedItem).ID);
-                ZamenskiLekovi.Add((Medicine)listBox.SelectedItem);
-                listaZamena.ItemsSource = ZamenskiLekovi;
-                listaZamena.Items.Refresh();
+                Medicine.AddMedicineID(((Medicine)allDrugsListBox.SelectedItem).ID);
+                SubstituteDrugs.Add((Medicine)allDrugsListBox.SelectedItem);
+                replacementDrugsListBox.ItemsSource = SubstituteDrugs;
+                replacementDrugsListBox.Items.Refresh();
             }
         }
 
-        private void RemoveReplacement(object sender, RoutedEventArgs e)
+        private void RemoveReplacement_Click(object sender, RoutedEventArgs e)
         {
-            Lek.RemoveMedicineID(((Medicine)listBox.SelectedItem).ID);
-            ZamenskiLekovi.Remove((Medicine)listBox.SelectedItem);
-            listaZamena.ItemsSource = ZamenskiLekovi;
-            listaZamena.Items.Refresh();
+            Medicine.RemoveMedicineID(((Medicine)allDrugsListBox.SelectedItem).ID);
+            SubstituteDrugs.Remove((Medicine)allDrugsListBox.SelectedItem);
+            replacementDrugsListBox.ItemsSource = SubstituteDrugs;
+            replacementDrugsListBox.Items.Refresh();
         }
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)
@@ -248,32 +248,32 @@ namespace Hospital.View.Doctor
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void SaveChanges(object sender, RoutedEventArgs e)
+        private void SaveChanges_Click(object sender, RoutedEventArgs e)
         {
-            foreach(Medicine medicine in ZamenskiLekovi)
+            foreach(Medicine medicine in SubstituteDrugs)
             {
-                Lek.AddMedicineID(medicine.ID);
+                Medicine.AddMedicineID(medicine.ID);
             }
-            mStorage.EditMedicine(Lek);
+            medicineStorage.EditMedicine(Medicine);
             SavedChangesVisibilities();
         }
 
         private void SavedChangesVisibilities()
         {
-            listaZamena.IsEnabled = false;
+            replacementDrugsListBox.IsEnabled = false;
             doza.IsEnabled = false;
             dodajZamenu.IsEnabled = false;
             izbaciZamenu.IsEnabled = false;
             sacuvaj.IsEnabled = false;
             izbaciSastojak.IsEnabled = false;
             dodajSastojak.IsEnabled = false;
-            sastojci.IsEnabled = false;
+            medicineIngredientsListBox.IsEnabled = false;
             izmeni.IsEnabled = true;
         }
 
         private void SearchIngredientFilter(object sender, TextChangedEventArgs e)
         {
-            CollectionViewSource.GetDefaultView(listIngredients.ItemsSource).Refresh();
+            CollectionViewSource.GetDefaultView(allIngredientsListBox.ItemsSource).Refresh();
         }
     }
 }

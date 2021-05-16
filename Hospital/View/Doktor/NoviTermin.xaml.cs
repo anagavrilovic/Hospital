@@ -226,8 +226,8 @@ namespace Hospital.View.Doktor
                     list.Add(a);
                 }
             }
-            parentWindow.dataGridPregledi.ItemsSource = list;
-            parentWindow.dataGridPregledi.Items.Refresh();
+            parentWindow.dataGridAppointments.ItemsSource = list;
+            parentWindow.dataGridAppointments.Items.Refresh();
         }
         private void SetRoomAndRoomType()
         {

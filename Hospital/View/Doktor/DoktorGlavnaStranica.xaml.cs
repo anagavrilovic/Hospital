@@ -22,16 +22,16 @@ namespace Hospital.View
     /// </summary>
     public partial class DoktorGlavnaStranica : Page
     {
-        private string IDnumber;
+        private string doctorId;
 
-        public DoktorGlavnaStranica(string id)
+        public DoktorGlavnaStranica(string doctorId)
         {
             InitializeComponent();
-            IDnumber = id;
+           this.doctorId = doctorId;
         }
         private void Pregled(object sender, RoutedEventArgs e)
         {
-            ((DoktorGlavniProzor)Window.GetWindow(this)).Main.Content = new KalendarTermini(IDnumber);
+            ((DoktorGlavniProzor)Window.GetWindow(this)).Main.Content = new KalendarTermini(doctorId);
             
           
         }

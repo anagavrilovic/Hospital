@@ -24,25 +24,25 @@ namespace Hospital.View
     /// </summary>
     public partial class DoktorObavestenja : Page,INotifyPropertyChanged
     {
-        private ObservableCollection<Notification> obavestenja = new ObservableCollection<Notification>();
+        private ObservableCollection<Notification> notifications = new ObservableCollection<Notification>();
         private DoctorStorage doctorStorage = new DoctorStorage();
         private Hospital.Model.Doctor doctor=new Model.Doctor();
-        public ObservableCollection<Notification> Obavestenja
+        public ObservableCollection<Notification> Notifications
         {
             get
             {
-                return obavestenja;
+                return notifications;
             }
             set
             {
-                if (value != obavestenja)
+                if (value != notifications)
                 {
-                    obavestenja = value;
-                    OnPropertyChanged("Obavestenja");
+                    notifications = value;
+                    OnPropertyChanged("Notifications");
                 }
             }
         }
-        private NotificationStorage nStorage = new NotificationStorage();
+        private NotificationStorage notificationStorage = new NotificationStorage();
         private ICollectionView notificationCollection;
 
         public ICollectionView NotificationCollection
@@ -55,21 +55,26 @@ namespace Hospital.View
             InitializeComponent();
             this.DataContext = this;
             doctor = doctorStorage.GetOne(doctorId);
-            initProperties();
+            SetNotificationsProperty();
+            SetFilterProperties();
         }
 
-        private void initProperties()
+        private void SetNotificationsProperty()
         {
-            foreach(NotificationsUsers notificationsUser in nStorage.GetAllNotificationsUsers())
+            foreach (NotificationsUsers notificationsUser in notificationStorage.GetAllNotificationsUsers())
             {
                 if (notificationsUser.Username.Equals(doctor.Username))
                 {
-                    Obavestenja.Add(nStorage.GetOne(notificationsUser.NotificationID));
+                    Notifications.Add(notificationStorage.GetOne(notificationsUser.NotificationID));
                 }
-                       
+
             }
-            NotificationCollection = CollectionViewSource.GetDefaultView(Obavestenja);
-            NotificationCollection.Filter = CustomFilterObavestenja;
+        }
+
+        private void SetFilterProperties()
+        {
+            NotificationCollection = CollectionViewSource.GetDefaultView(Notifications);
+            NotificationCollection.Filter = CustomFilterNotifications;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -81,7 +86,7 @@ namespace Hospital.View
             }
         }
 
-        private bool CustomFilterObavestenja(object obj)
+        private bool CustomFilterNotifications(object obj)
         {
             if (string.IsNullOrEmpty(ObavestenjaFilter.Text))
             {
@@ -97,7 +102,7 @@ namespace Hospital.View
             CollectionViewSource.GetDefaultView(ListBoxNotifications.ItemsSource).Refresh();
         }
 
-        private void BrisanjeObavestenjaClick(object sender, RoutedEventArgs e)
+        private void DeleteNotification_Click(object sender, RoutedEventArgs e)
         {
             if (ListBoxNotifications.SelectedItem == null)
             {
@@ -109,15 +114,13 @@ namespace Hospital.View
                         "Potvrda", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
 
-                nStorage.ClearNotificationsUsersByNotificationID(((Notification)ListBoxNotifications.SelectedItem).Id);
-                Obavestenja.Remove((Notification)ListBoxNotifications.SelectedItem);
-                nStorage.SerializeNotifications(Obavestenja);
+                notificationStorage.ClearNotificationsUsersByNotificationID(((Notification)ListBoxNotifications.SelectedItem).Id);
+                Notifications.Remove((Notification)ListBoxNotifications.SelectedItem);
+                notificationStorage.SerializeNotifications(Notifications);
             }
 
-            /*var izbrisi = new IzbrisiObavestenje();
-            izbrisi.Show();*/
         }
-        private void PrikazObavestenjaClick(object sender, RoutedEventArgs e)
+        private void ShowNotification_Click(object sender, RoutedEventArgs e)
         {
             if (ListBoxNotifications.SelectedItem == null)
             {
@@ -125,8 +128,8 @@ namespace Hospital.View
                 return;
             }
 
-            var prikaz = new PrikazObavestenja((Notification)ListBoxNotifications.SelectedItem);
-            prikaz.Show();
+            var displayNotification = new PrikazObavestenja((Notification)ListBoxNotifications.SelectedItem);
+            displayNotification.Show();
         }
     }
 

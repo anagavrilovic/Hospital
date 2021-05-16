@@ -24,39 +24,40 @@ namespace Hospital.View
 
     public partial class Doctor_Examination : Window, INotifyPropertyChanged
     {
-        private Examination pregled;
-
-        private Hospital.Model.Doctor doktor;
+        private MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
+        private Examination examination;
+        private static int MEDICAL_RECORD_REVIEW_TAB = 1;
+        private Model.Doctor loggedInDoctor;
         public Appointment appointment;
-        private Frame frameKarton;
+        private Frame frameMedicalRecordReview;
         private Frame frameAnamnesis;
         private Frame frameDiagnosis;
         private Frame frameAppointment;
         private Frame frameTherapy;
         private Frame frameHospitalTreatment;
-        private KartonDoktorStranica kDS;
-        private Anamnesis ana;
-        private Diagnosis dia;
-        private MakeApointment ma;
-        private Terapija th;
+        private KartonDoktorStranica medicalRecordReview;
+        private Anamnesis anamnesis;
+        private Diagnosis diagnosis;
+        private MakeApointment makeAppointment;
+        private Terapija therapy;
         private BolnickoLecenje hospitalTreatment;
         public Hospital.Model.Doctor LoggedInDoctor
         {
-            get { return doktor; }
+            get { return loggedInDoctor; }
             set
             {
-                doktor = value;
+                loggedInDoctor = value;
                 OnPropertyChanged();
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
-        private DoctorStorage dStorage = new DoctorStorage();
-        public Examination Pregled
+        private DoctorStorage doctorStorage = new DoctorStorage();
+        public Examination Examintaion
         {
-            get { return pregled; }
+            get { return examination; }
             set
             {
-                pregled = value;
+                examination = value;
                 OnPropertyChanged();
             }
         }
@@ -67,12 +68,12 @@ namespace Hospital.View
                 this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
             }
         }
-        public Doctor_Examination(Appointment a)
+        public Doctor_Examination(Appointment appointment)
         {
-            appointment = a;
-            pregled = new Examination();
+            this.appointment = appointment;
+            examination = new Examination();
             LoggedInDoctor = new Hospital.Model.Doctor();
-            LoggedInDoctor = dStorage.GetOne(a.IDDoctor);
+            LoggedInDoctor = doctorStorage.GetOne(appointment.IDDoctor);
             
             InitializeComponent();
             intiProperties();
@@ -80,29 +81,64 @@ namespace Hospital.View
 
         private void intiProperties()
         {
-            tab.SelectedIndex = 1;
+            tab.SelectedIndex = MEDICAL_RECORD_REVIEW_TAB;
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 3 / 4);
-            frameKarton = new Frame();
-            MedicalRecordStorage mStorage = new MedicalRecordStorage();
-            kDS = new KartonDoktorStranica((mStorage.GetByPatientID(appointment.IDpatient)).MedicalRecordID,appointment);
-            frameKarton.Content = kDS;
-            Karton.Content = frameKarton;
-            frameAnamnesis = new Frame();
-            ana = new Anamnesis();
-            frameAnamnesis.Content = ana;
-            frameAppointment = new Frame();
-            ma = new MakeApointment(doktor, (mStorage.GetByPatientID(appointment.IDpatient)).Patient.PersonalID);
-            frameAppointment.Content = ma;
-            frameDiagnosis = new Frame();
-            dia = new Diagnosis();
-            frameDiagnosis.Content = dia;
-            frameTherapy = new Frame();
-            th = new Terapija();
-            frameTherapy.Content = th;
+            SetFramesAndTheirContext();
+        }
+
+        private void SetFramesAndTheirContext()
+        {
+            SetMedicalRecordReview();
+            SetAnamnesis();
+            SetAppointment();
+            SetDiagnosis();
+            SetTherapy();
+            SetHospitalTreatment();
+        }
+
+        private void SetHospitalTreatment()
+        {
             frameHospitalTreatment = new Frame();
             hospitalTreatment = new BolnickoLecenje(appointment.IDpatient);
             frameHospitalTreatment.Content = hospitalTreatment;
+        }
+
+        private void SetTherapy()
+        {
+            frameTherapy = new Frame();
+            therapy = new Terapija();
+            frameTherapy.Content = therapy;
+        }
+
+        private void SetDiagnosis()
+        {
+            frameDiagnosis = new Frame();
+            diagnosis = new Diagnosis();
+            frameDiagnosis.Content = diagnosis;
+        }
+
+        private void SetAppointment()
+        {
+            frameAppointment = new Frame();
+            makeAppointment = new MakeApointment(loggedInDoctor, (medicalRecordStorage.GetByPatientID(appointment.IDpatient)).Patient.PersonalID);
+            frameAppointment.Content = makeAppointment;
+        }
+
+        private void SetAnamnesis()
+        {
+            frameAnamnesis = new Frame();
+            anamnesis = new Anamnesis();
+            frameAnamnesis.Content = anamnesis;
+        }
+
+        private void SetMedicalRecordReview()
+        {
+            frameMedicalRecordReview = new Frame();
+            medicalRecordStorage = new MedicalRecordStorage();
+            medicalRecordReview = new KartonDoktorStranica((medicalRecordStorage.GetByPatientID(appointment.IDpatient)).MedicalRecordID, appointment);
+            frameMedicalRecordReview.Content = medicalRecordReview;
+            medicalRecordReviewTab.Content = frameMedicalRecordReview;
         }
 
         private void tab_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -110,47 +146,51 @@ namespace Hospital.View
             switch (tab.SelectedIndex)
             {
                 case 1:
-                    Karton.Content = frameKarton;
-                    KartonLabela.Foreground = Brushes.White;
-                    AnamnezaLabela.Foreground = Brushes.Black;
-                    DiagnozaLabela.Foreground = Brushes.Black;
-                    TerminiLabela.Foreground = Brushes.Black;
-                    TerapijaLabela.Foreground = Brushes.Black;
+                    medicalRecordReviewTab.Content = frameMedicalRecordReview;
+                    medicalRecordReviewLabel.Foreground = Brushes.White;
+                    AnamnesisLabel.Foreground = Brushes.Black;
+                    DiagnosisLabel.Foreground = Brushes.Black;
+                    AppointmentLabel.Foreground = Brushes.Black;
+                    TherapyLabel.Foreground = Brushes.Black;
                     TreatmentLabel.Foreground = Brushes.Black;
                     break;
                 case 2:
-                    Anamneza.Content = frameAnamnesis;
-                    KartonLabela.Foreground = Brushes.Black;
-                    AnamnezaLabela.Foreground = Brushes.White;
+                    AnamnesisTab.Content = frameAnamnesis;
+                    medicalRecordReviewLabel.Foreground = Brushes.Black;
+                    AnamnesisLabel.Foreground = Brushes.White;
                     break;
                 case 3:
-                    Terapija.Content = frameTherapy;
-                    KartonLabela.Foreground = Brushes.Black;
+                    TherapyTab.Content = frameTherapy;
+                    medicalRecordReviewLabel.Foreground = Brushes.Black;
+                    TherapyLabel.Foreground = Brushes.White;
                     break;
                 case 4:
-                    Dijagnoza.Content = frameDiagnosis;
-                    kDS.sacuvaj.Visibility = Visibility.Visible;
+                    DiagnosisTab.Content = frameDiagnosis;
+                    medicalRecordReview.saveButton.Visibility = Visibility.Visible;
                     if (!AlreadyHospitalized())
                     {
-                        kDS.hospitalTreatmentButton.Visibility = Visibility.Visible;
+                        medicalRecordReview.hospitalTreatmentButton.Visibility = Visibility.Visible;
                     }
-                    KartonLabela.Foreground = Brushes.Black;
+                    medicalRecordReviewLabel.Foreground = Brushes.Black;
+                    DiagnosisLabel.Foreground = Brushes.White;
                     break;
                 case 5:
-                    Termini.Content = frameAppointment;
-                    kDS.sacuvaj.Visibility = Visibility.Visible;
+                    AppointmentTab.Content = frameAppointment;
+                    medicalRecordReview.saveButton.Visibility = Visibility.Visible;
                     if (!AlreadyHospitalized())
                     {
-                        kDS.hospitalTreatmentButton.Visibility = Visibility.Visible;
+                        medicalRecordReview.hospitalTreatmentButton.Visibility = Visibility.Visible;
                     }
-                    KartonLabela.Foreground = Brushes.Black;
+                    medicalRecordReviewLabel.Foreground = Brushes.Black;
+                    AppointmentLabel.Foreground = Brushes.White;
                     break;
                 case 6:
                     hospitalTreatmentTab.Content = frameHospitalTreatment;
-                    kDS.sacuvaj.Visibility = Visibility.Visible;
-                    kDS.hospitalTreatmentButton.IsEnabled = false;
-                    kDS.hospitalTreatmentButton.Visibility = Visibility.Visible;
-                    KartonLabela.Foreground = Brushes.Black;
+                    medicalRecordReview.saveButton.Visibility = Visibility.Visible;
+                    medicalRecordReview.hospitalTreatmentButton.IsEnabled = false;
+                    medicalRecordReview.hospitalTreatmentButton.Visibility = Visibility.Visible;
+                    medicalRecordReviewLabel.Foreground = Brushes.Black;
+                    medicalRecordReviewLabel.Foreground = Brushes.White;
                     break;
             }
         }

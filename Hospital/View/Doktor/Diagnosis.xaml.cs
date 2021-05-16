@@ -22,23 +22,24 @@ namespace Hospital.View
 
     public partial class Diagnosis : Page, INotifyPropertyChanged
     {
-
-        private string _test1;
+        private static int APPOINTMENTS_TAB = 5;
+        private static int MEDICAL_RECORD_TAB = 1;
+        private string diagnosisDescription;
 
         public event PropertyChangedEventHandler PropertyChanged;
         
-        public string Test1
+        public string DiagnosisDescription
         {
             get
             {
-                return _test1;
+                return diagnosisDescription;
             }
             set
             {
-                if (value != _test1)
+                if (value != diagnosisDescription)
                 {
-                    _test1 = value;
-                    OnPropertyChanged("Test1");
+                    diagnosisDescription = value;
+                    OnPropertyChanged("DiagnosisDescription");
                 }
             }
         }
@@ -58,20 +59,25 @@ namespace Hospital.View
 
         private void Sacuvaj(object sender, RoutedEventArgs e)
         {
+            ChangeUI();
+            ((Doctor_Examination)Window.GetWindow(this)).Examintaion.diagnosis = DiagnosisDescription;
+        }
+
+        private void ChangeUI()
+        {
+            ((Doctor_Examination)Window.GetWindow(this)).DiagnosisTab.IsEnabled = false;
+            ((Doctor_Examination)Window.GetWindow(this)).DiagnosisLabel.Foreground = Brushes.Black;
             ConfirmBox confirmBox = new ConfirmBox("Da li je potreban termin ?");
             if ((bool)confirmBox.ShowDialog())
             {
-                ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = 5;
-                ((Doctor_Examination)Window.GetWindow(this)).TerminiLabela.Foreground = Brushes.White;
-                ((Doctor_Examination)Window.GetWindow(this)).Termini.IsEnabled = true;
+                ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = APPOINTMENTS_TAB;
+                ((Doctor_Examination)Window.GetWindow(this)).AppointmentLabel.Foreground = Brushes.White;
+                ((Doctor_Examination)Window.GetWindow(this)).AppointmentTab.IsEnabled = true;
             }
             else
             {
-                ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = 1;
+                ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = MEDICAL_RECORD_TAB;
             }
-                ((Doctor_Examination)Window.GetWindow(this)).Pregled.diagnosis=Test1;            
-            ((Doctor_Examination)Window.GetWindow(this)).Dijagnoza.IsEnabled = false;
-            ((Doctor_Examination)Window.GetWindow(this)).DiagnozaLabela.Foreground = Brushes.Black;
         }
     }
 }

@@ -236,7 +236,7 @@ namespace Hospital.View
 
         private void UpdateParentPage()
         {
-            ((Doctor_Examination)Window.GetWindow(this.Owner)).Pregled.appointment = Appointment;
+            ((Doctor_Examination)Window.GetWindow(this.Owner)).Examintaion.appointment = Appointment;
             ObservableCollection<Appointment> list = new ObservableCollection<Appointment>();
             foreach (Appointment a in appointmentStorage.GetAll())
             {

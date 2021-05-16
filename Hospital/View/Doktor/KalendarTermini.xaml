@@ -41,8 +41,8 @@
                 </Button>
             </StackPanel>
         </DockPanel>
-        <DataGrid x:Name="dataGridPregledi" ItemsSource="{Binding Path=Appointments}" Style="{DynamicResource PacijentiDataGrid}"
-               SelectionMode="Single" IsReadOnly="True" Margin="30,30,30,50" AutoGenerateColumns="False" MouseDoubleClick="dataGridPregledi_MouseDoubleClick">
+        <DataGrid x:Name="dataGridAppointments" ItemsSource="{Binding Path=Appointments}" Style="{DynamicResource PacijentiDataGrid}"
+               SelectionMode="Single" IsReadOnly="True" Margin="30,30,30,50" AutoGenerateColumns="False" MouseDoubleClick="dataGridAppointments_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Ime Pacijent" Width="0.25*" Binding="{Binding PatientName}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
                 <DataGridTextColumn Header="Prezime pacijenta" Width="0.25*" Binding="{Binding PatientSurname}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>

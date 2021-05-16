@@ -790,4 +790,81 @@ BorderThickness="3" CornerRadius="10" BorderBrush="{StaticResource HoverBlue}">
         </Setter>
     </Style>
 
+    <LinearGradientBrush x:Key="GradientBlueBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="#404077"/>
+        <GradientStop Offset="1" Color="#4040ef"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="GradientBrushCyan" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="#007777"/>
+        <GradientStop Offset="1" Color="#00efef"/>
+    </LinearGradientBrush>
+
+    <Style TargetType="Button" x:Key="GelButton">
+        <Setter Property="Background" Value="{StaticResource GradientBlueBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="RootElement">
+                        <!-- drop shadow - needs to be blurred for correct effect -->
+                        <Rectangle Fill="#40000000" Margin="1,1,0,0" RadiusX="6" RadiusY="6">
+                            <Rectangle.BitmapEffect>
+                                <BlurBitmapEffect Radius="3" />
+                            </Rectangle.BitmapEffect>
+                        </Rectangle>
+                        <Grid x:Name="mainButton"
+                                Margin="0,0,1,1"
+                                RenderTransformOrigin="0.5,0.5">
+                            <Grid.RenderTransform>
+                                <TransformGroup>
+                                    <TranslateTransform X="0.0" Y="0.0"/>
+                                    <ScaleTransform ScaleX="1.0" ScaleY="1.0" />
+                                </TransformGroup>
+                            </Grid.RenderTransform>
+                            <Rectangle x:Name="mainRect" Fill="{TemplateBinding Background}" RadiusX="6" RadiusY="6">
+                            </Rectangle>
+
+                            <!-- transparent rect -->
+                            <Rectangle x:Name="glowRect" Margin="1,1,1,1" RadiusX="5" RadiusY="5">
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Offset="0" Color="#EFFFFFFF"/>
+                                        <GradientStop Offset="1" Color="#00FFFFFF"/>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+
+                            <ContentPresenter HorizontalAlignment="Center"
+                             Margin="4,0,4,0"
+                             Content="{TemplateBinding Content}"
+                             VerticalAlignment="Center" />
+
+                        </Grid>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="mainButton" Property="RenderTransform" >
+                                <Setter.Value>
+                                    <TransformGroup>
+                                        <TranslateTransform X="0.0" Y="0.0"/>
+                                        <ScaleTransform ScaleX="1.03" ScaleY="1.03" />
+                                    </TransformGroup>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Foreground" Value="#FF4788c8" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="mainButton" Property="RenderTransform" >
+                                <Setter.Value>
+                                    <TransformGroup>
+                                        <TranslateTransform X="1" Y="1"/>
+                                        <ScaleTransform ScaleX="1.03" ScaleY="1.03" />
+                                    </TransformGroup>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

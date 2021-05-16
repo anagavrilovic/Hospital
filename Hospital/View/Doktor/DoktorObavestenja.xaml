@@ -26,13 +26,13 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,50,0,0">
-                    <Button Height="50" Width="60" Margin="0,30,0,0" Style="{DynamicResource ImageButtons}" Click="PrikazObavestenjaClick">
+                    <Button Height="50" Width="60" Margin="0,30,0,0" Style="{DynamicResource ImageButtons}" Click="ShowNotification_Click">
                         <StackPanel Orientation="Vertical">
                             <Image Source="../../Icon/Secretary/info.png" Width="30"/>
                             <TextBlock Text="Pregledaj"/>
                         </StackPanel>
                     </Button>
-                    <Button Height="50" Width="50" Margin="0,30,0,0" Style="{DynamicResource ImageButtons}" Click="BrisanjeObavestenjaClick">
+                    <Button Height="50" Width="50" Margin="0,30,0,0" Style="{DynamicResource ImageButtons}" Click="DeleteNotification_Click">
                         <StackPanel Orientation="Vertical">
                             <Image Source="../../Icon/Secretary/delete.png" Width="30"/>
                             <TextBlock Text="Izbriši"/>
@@ -56,7 +56,7 @@
                     </Border>
 
                     <!-- Prikaz obavestenja -->
-                    <ListBox x:Name="ListBoxNotifications" ItemsSource="{Binding Obavestenja, Mode=TwoWay}" Grid.Row="1" Margin="20,5,20,15"
+                    <ListBox x:Name="ListBoxNotifications" ItemsSource="{Binding Notifications, Mode=TwoWay}" Grid.Row="1" Margin="20,5,20,15"
                                 ScrollViewer.HorizontalScrollBarVisibility="Hidden" Style="{StaticResource ListBoxStyle}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>

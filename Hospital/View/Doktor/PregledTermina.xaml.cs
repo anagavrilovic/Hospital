@@ -65,14 +65,18 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
+            InitProperties(doctor, patientId);
+            dataGridPregledi.Loaded += SetDataGridColumnWidth;
+        }
+
+        private void InitProperties(Model.Doctor doctor, string patientId)
+        {
             this.patientId = patientId;
             ComboBox.ItemsSource = Enum.GetValues(typeof(DoctorSpecialty)).Cast<DoctorSpecialty>();
-            ComboBox.SelectedIndex =(int)doctor.Specialty ;
-            dataGridPregledi.Loaded += setMinWidths;
+            ComboBox.SelectedIndex = (int)doctor.Specialty;
         }
-        
 
-        private void setMinWidths(object sender, RoutedEventArgs e)
+        private void SetDataGridColumnWidth(object sender, RoutedEventArgs e)
         {
             foreach (var column in dataGridPregledi.Columns)
             {
@@ -93,13 +97,13 @@ namespace Hospital.View
         {
             Appointments.Clear();
             Doctors.Clear();
-            foreach (Appointment a in appointmentStorage.GetAll())
+            foreach (Appointment appointmentToAdd in appointmentStorage.GetAll())
             {
-                Hospital.Model.Doctor d = doctorStorage.GetOne(a.IDDoctor);
-                if (d.Specialty.Equals((DoctorSpecialty)ComboBox.SelectedItem))
+                Model.Doctor doctor = doctorStorage.GetOne(appointmentToAdd.IDDoctor);
+                if (doctor.Specialty.Equals((DoctorSpecialty)ComboBox.SelectedItem))
                 {
-                    Doctors.Add(doctorStorage.GetOne(d.PersonalID));
-                    Appointments.Add(a);
+                    Doctors.Add(doctorStorage.GetOne(doctor.PersonalID));
+                    Appointments.Add(appointmentToAdd);
                 }
             }
         }

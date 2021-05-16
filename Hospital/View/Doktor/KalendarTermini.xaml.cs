@@ -25,7 +25,7 @@ namespace Hospital.View
     /// </summary>
     public partial class KalendarTermini : Page, INotifyPropertyChanged
     {
-        private DoctorStorage dStorage = new DoctorStorage();
+        private DoctorStorage doctorStorage = new DoctorStorage();
         private AppointmentStorage appointmentStorage = new AppointmentStorage();
         private Hospital.Model.Doctor doctor = new Hospital.Model.Doctor();
         public Hospital.Model.Doctor Doctor
@@ -64,7 +64,7 @@ namespace Hospital.View
             this.DataContext = this;
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 3 / 4);
-            Doctor=dStorage.GetOne(IDnumber);
+            Doctor=doctorStorage.GetOne(IDnumber);
             InitAppointments();
         }
 
@@ -80,23 +80,23 @@ namespace Hospital.View
             
         }
 
-        private void dataGridPregledi_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void dataGridAppointments_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (dataGridPregledi.SelectedItem != null)
+            if (dataGridAppointments.SelectedItem != null)
             {
-                DetaljiPregleda d = new DetaljiPregleda((Appointment)dataGridPregledi.SelectedItem);
-                d.Owner = Window.GetWindow(this);
-                d.Show();
+                DetaljiPregleda review = new DetaljiPregleda((Appointment)dataGridAppointments.SelectedItem);
+                review.Owner = Window.GetWindow(this);
+                review.Show();
                 Window.GetWindow(this).Hide();
             }
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            if(dataGridPregledi.SelectedIndex != -1)
+            if(dataGridAppointments.SelectedIndex != -1)
             {
-                appointmentStorage.Delete(((Appointment)dataGridPregledi.SelectedItem).IDAppointment);
-                appointments.Remove((Appointment)dataGridPregledi.SelectedItem);
+                appointmentStorage.Delete(((Appointment)dataGridAppointments.SelectedItem).IDAppointment);
+                appointments.Remove((Appointment)dataGridAppointments.SelectedItem);
             }
         }
 

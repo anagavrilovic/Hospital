@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Hospital.View" 
       xmlns:val="clr-namespace:Hospital.ValidacijeLekar"
       mc:Ignorable="d"
-        Title="Diagnosis" Background="#FFDCE6ED">
+        Title="Diagnosis" Background="{DynamicResource BackgroundGray}">
     <Page.Resources>
         <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
     </Page.Resources>
@@ -17,7 +17,7 @@
                       Width="600" Height="400" Margin="30,10,30,20" Style="{DynamicResource TextBox}"
                      Validation.ErrorTemplate="{DynamicResource ValidationErrorTemplate}">
                 <TextBox.Text>
-                    <Binding Path="Test1"  Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="DiagnosisDescription"  Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <val:EmptyStringValidationRule ValidationStep="RawProposedValue" ValidatesOnTargetUpdated="True"/>
                         </Binding.ValidationRules>

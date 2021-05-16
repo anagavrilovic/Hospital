@@ -61,6 +61,11 @@ namespace Hospital.View.Doktor
             InitializeComponent();
             this.DataContext = this;
             FillTable();
+            InitProperties();
+        }
+
+        private void InitProperties()
+        {
             DateTime startDate = DateTime.Today;
             calendar.DisplayDateStart = startDate;
         }
@@ -91,8 +96,8 @@ namespace Hospital.View.Doktor
         private void edit_Click(object sender, RoutedEventArgs e)
         {
             calendarPanel.Visibility = Visibility.Visible;
-            sacuvaj.IsEnabled = true;
-            izmeni.IsEnabled = false;
+            saveButton.IsEnabled = true;
+            editButton.IsEnabled = false;
         }
 
         private void save_Click(object sender, RoutedEventArgs e)
@@ -100,8 +105,8 @@ namespace Hospital.View.Doktor
             if(calendar.SelectedDate != null)
             {
                 calendarPanel.Visibility = Visibility.Collapsed;
-                sacuvaj.IsEnabled = false;
-                izmeni.IsEnabled = true;
+                saveButton.IsEnabled = false;
+                editButton.IsEnabled = true;
                 BindingExpression be = calendar.GetBindingExpression(Calendar.SelectedDateProperty);
                 be.UpdateSource();
                 SaveHospitalizedTreatment();

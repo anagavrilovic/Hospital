@@ -30,7 +30,7 @@
                 <TextBlock Text="Sačuvaj reviziju"/>
             </StackPanel>
         </Button>
-            <Button VerticalAlignment="Top" Margin="30,0,0,0" Click="Nazad" Style="{DynamicResource ImageButtonsHorizontal}">
+            <Button VerticalAlignment="Top" Margin="30,0,0,0" Click="Back_Click" Style="{DynamicResource ImageButtonsHorizontal}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../../Icon/DoctorIcons/back.png" Width="20"/>
                     <TextBlock Text="Nazad"/>

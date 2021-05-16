@@ -39,18 +39,18 @@ namespace Hospital.View
 
         public DoktorGlavniProzor(string doctorId)
         { 
-            this.doctorId = doctorId;
-            doctor = doctorStorage.GetDoctorByID(doctorId);
             InitializeComponent();
             this.DataContext = this;
-            InitProperties();
+            InitProperties(doctorId);
         }
 
-        private void InitProperties()
+        private void InitProperties(string doctorId)
         {
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 3 / 4);
             Main.Content =new DoktorGlavnaStranica(doctorId);
+            this.doctorId = doctorId;
+            doctor = doctorStorage.GetDoctorByID(doctorId);
             checkHospitalTreatmentDates();
         }
 
@@ -69,15 +69,15 @@ namespace Hospital.View
             Main.Content = new DoktorGlavnaStranica (doctorId);
         }
 
-        private void SignOut(object sender, RoutedEventArgs e)
+        private void SignOut_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow m = new MainWindow();
-            Application.Current.MainWindow = m;
-            m.Show();
+            MainWindow mainWindow = new MainWindow();
+            Application.Current.MainWindow = mainWindow;
+            mainWindow.Show();
             this.Close();
         }
 
-        private void Announcment(object sender, RoutedEventArgs e)
+        private void Announcment_Click(object sender, RoutedEventArgs e)
         {
             //obavestenje.Source = new BitmapImage(new Uri("pack://application:,,,/Icon/announcment.png", UriKind.Absolute));
             Main.Content = new DoktorObavestenja(doctorId);

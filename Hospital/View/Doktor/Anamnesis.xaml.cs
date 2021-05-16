@@ -21,22 +21,23 @@ namespace Hospital.View
 
     public partial class Anamnesis : Page, INotifyPropertyChanged
     {
-        private string _test1;
-
+        private string anamnesisDescription;
+        private static int THERAPY_TAB = 3;
+        private static int DIAGNOSIS_TAB = 4;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string Test1
+        public string AnamnesisDescription
         {
             get
             {
-                return _test1;
+                return anamnesisDescription;
             }
             set
             {
-                if (value != _test1)
+                if (value != anamnesisDescription)
                 {
-                    _test1 = value;
-                    OnPropertyChanged("Test1");
+                    anamnesisDescription = value;
+                    OnPropertyChanged("AnamnesisDescription");
                 }
             }
         }
@@ -54,23 +55,28 @@ namespace Hospital.View
             this.DataContext = this;
         }
 
-        private void Sacuvaj(object sender, RoutedEventArgs e)
+        private void SaveChanges_Click(object sender, RoutedEventArgs e)
         {
-            ((Doctor_Examination)Window.GetWindow(this)).Pregled.anamnesis = Test1;
-            ((Doctor_Examination)Window.GetWindow(this)).AnamnezaLabela.Foreground = Brushes.Black;
-            ((Doctor_Examination)Window.GetWindow(this)).Anamneza.IsEnabled = false;
+            ((Doctor_Examination)Window.GetWindow(this)).Examintaion.anamnesis = AnamnesisDescription;
+            ChangeUI();
+        }
+
+        private void ChangeUI()
+        {
+            ((Doctor_Examination)Window.GetWindow(this)).AnamnesisLabel.Foreground = Brushes.Black;
+            ((Doctor_Examination)Window.GetWindow(this)).AnamnesisTab.IsEnabled = false;
             ConfirmBox confirmBox = new ConfirmBox("Da li je potrebna terapija?");
             if ((bool)confirmBox.ShowDialog())
-            {                
-                ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = 3;
-                ((Doctor_Examination)Window.GetWindow(this)).Terapija.IsEnabled = true;
-                ((Doctor_Examination)Window.GetWindow(this)).TerapijaLabela.Foreground = Brushes.White;
+            {
+                ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = THERAPY_TAB;
+                ((Doctor_Examination)Window.GetWindow(this)).TherapyTab.IsEnabled = true;
+                ((Doctor_Examination)Window.GetWindow(this)).TherapyLabel.Foreground = Brushes.White;
             }
             else
             {
-                ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = 4;
-                ((Doctor_Examination)Window.GetWindow(this)).Dijagnoza.IsEnabled = true;
-                ((Doctor_Examination)Window.GetWindow(this)).DiagnozaLabela.Foreground = Brushes.White;
+                ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = DIAGNOSIS_TAB;
+                ((Doctor_Examination)Window.GetWindow(this)).DiagnosisTab.IsEnabled = true;
+                ((Doctor_Examination)Window.GetWindow(this)).DiagnosisLabel.Foreground = Brushes.White;
             }
         }
     }

@@ -17,14 +17,14 @@
                          Validation.ErrorTemplate="{DynamicResource ValidationErrorTemplate}" Width="600" Height="400" Margin="30,10,30,20"
                       Style="{DynamicResource TextBox}">
                 <TextBox.Text>
-                    <Binding Path="Test1"  Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="AnamnesisDescription"  Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <val:EmptyStringValidationRule ValidationStep="RawProposedValue" ValidatesOnTargetUpdated="True"/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-            <Button  Margin="200,5,20,0" VerticalAlignment="Top" Click="Sacuvaj" HorizontalAlignment="Left" Style="{DynamicResource ButtonWithValidation}">
+            <Button  Margin="200,5,20,0" VerticalAlignment="Top" Click="SaveChanges_Click" HorizontalAlignment="Left" Style="{DynamicResource ButtonWithValidation}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="../../Icon/DoctorIcons/save.png" Width="20"/>
                         <TextBlock Text="Sačuvaj anamnezu"/>

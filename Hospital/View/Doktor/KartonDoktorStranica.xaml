@@ -25,67 +25,67 @@
             <Label FontSize="24" Content="PACIJENTI: Detalji o pacijentu" Style="{DynamicResource Label}"/>
             <StackPanel Orientation="Horizontal" Margin="20,40,0,0">
                 <Label FontSize="13" Content="Ime:" Style="{DynamicResource Label}"/>
-                <Label FontSize="13" Content="{Binding Karton.Patient.FirstName}" Style="{DynamicResource Label}"/>
+                <Label FontSize="13" Content="{Binding MedicalRecord.Patient.FirstName}" Style="{DynamicResource Label}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
                 <Label FontSize="13" Content="Ime jednog roditelja:" Style="{DynamicResource Label}"/>
-                <Label FontSize="13" Content="{Binding Karton.ParentName}" Style="{DynamicResource Label}"/>
+                <Label FontSize="13" Content="{Binding MedicalRecord.ParentName}" Style="{DynamicResource Label}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
                 <Label FontSize="13" Content="Prezime:" Style="{DynamicResource Label}"/>
-                <Label FontSize="13" Content="{Binding Karton.Patient.LastName}" Style="{DynamicResource Label}"/>
+                <Label FontSize="13" Content="{Binding MedicalRecord.Patient.LastName}" Style="{DynamicResource Label}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
                 <Label FontSize="13" Content="Datum rođenja:" Style="{DynamicResource Label}"/>
-                <Label FontSize="13" Content="{Binding Karton.Patient.DateOfBirth}" Style="{DynamicResource Label}"/>
+                <Label FontSize="13" Content="{Binding MedicalRecord.Patient.DateOfBirth}" Style="{DynamicResource Label}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
                 <Label FontSize="13" Content="Ulica stanovanja:" Style="{DynamicResource Label}"/>
-                <Label FontSize="13" Content="{Binding Karton.Patient.Address.Street}" Style="{DynamicResource Label}"/>
+                <Label FontSize="13" Content="{Binding MedicalRecord.Patient.Address.Street}" Style="{DynamicResource Label}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
                 <Label FontSize="13" Content="Mesto stanovanja:" Style="{DynamicResource Label}"/>
-                <Label FontSize="13" Content="{Binding Karton.Patient.Address.City.CityName}" Style="{DynamicResource Label}"/>
+                <Label FontSize="13" Content="{Binding MedicalRecord.Patient.Address.City.CityName}" Style="{DynamicResource Label}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
                 <Label FontSize="13" Content="Poštanski broj:" Style="{DynamicResource Label}"/>
-                <Label FontSize="13" Style="{DynamicResource Label}" Content="{Binding Karton.Patient.Address.City.PostalCode}"/>
+                <Label FontSize="13" Style="{DynamicResource Label}" Content="{Binding MedicalRecord.Patient.Address.City.PostalCode}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
                 <Label FontSize="13" Content="Opština:" Style="{DynamicResource Label}"/>
-                <Label FontSize="13" Content="{Binding Karton.Patient.Address.City.Township}" Style="{DynamicResource Label}"/>
+                <Label FontSize="13" Content="{Binding MedicalRecord.Patient.Address.City.Township}" Style="{DynamicResource Label}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
                 <Label FontSize="13" Content="Država:" Style="{DynamicResource Label}"/>
-                <Label FontSize="13" Content="{Binding Karton.Patient.Address.City.Country.CountryName }" Style="{DynamicResource Label}"/>
+                <Label FontSize="13" Content="{Binding MedicalRecord.Patient.Address.City.Country.CountryName }" Style="{DynamicResource Label}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
                 <Label FontSize="13" Content="Broj zdravstvene knjižice:" Style="{DynamicResource Label}"/>
-                <Label FontSize="13" Content="{Binding Karton.HealthCardNumber }" Style="{DynamicResource Label}"/>
+                <Label FontSize="13" Content="{Binding MedicalRecord.HealthCardNumber }" Style="{DynamicResource Label}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
                 <Label FontSize="13" Content="Broj lične karte:" Style="{DynamicResource Label}"/>
-                <Label FontSize="13" Content="{Binding Karton.Patient.PersonalID }" Style="{DynamicResource Label}"/>
+                <Label FontSize="13" Content="{Binding MedicalRecord.Patient.PersonalID }" Style="{DynamicResource Label}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
                 <Label FontSize="13" Content="JMBG:" Style="{DynamicResource Label}"/>
-                <Label FontSize="13" Content="{Binding Karton.Patient.CardID }" Style="{DynamicResource Label}"/>
+                <Label FontSize="13" Content="{Binding MedicalRecord.Patient.CardID }" Style="{DynamicResource Label}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
                 <Label FontSize="13" Content="Kontakt telefon:" Style="{DynamicResource Label}"/>
-                <Label FontSize="13" Content="{Binding Karton.Patient.PhoneNumber }" Style="{DynamicResource Label}"/>
+                <Label FontSize="13" Content="{Binding MedicalRecord.Patient.PhoneNumber }" Style="{DynamicResource Label}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
                 <Label FontSize="13" Content="E-mail:" Style="{DynamicResource Label}"/>
-                <Label FontSize="13" Content="{Binding Karton.Patient.Email }" Style="{DynamicResource Label}"/>
+                <Label FontSize="13" Content="{Binding MedicalRecord.Patient.Email }" Style="{DynamicResource Label}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
                 <Label FontSize="13" Content="Bračno stanje:" Style="{DynamicResource Label}"/>
-                <Label FontSize="13" Content="{Binding Karton.Patient.MaritalStatus }" Style="{DynamicResource Label}"/>
+                <Label FontSize="13" Content="{Binding MedicalRecord.Patient.MaritalStatus }" Style="{DynamicResource Label}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
                 <Label FontSize="13" Content="Pol:" Style="{DynamicResource Label}"/>
-                <Label FontSize="13" Content="{Binding Karton.Patient.Gender }" Style="{DynamicResource Label}"/>
+                <Label FontSize="13" Content="{Binding MedicalRecord.Patient.Gender }" Style="{DynamicResource Label}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
                 <Label FontSize="13" Content="Krvna grupa:" Style="{DynamicResource Label}"/>
@@ -93,34 +93,34 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
                 <Label FontSize="13" Content="Osiguran:" Style="{DynamicResource Label}"/>
-                <Label x:Name="Bool" FontSize="13" Content="{Binding Karton.IsInsured , 
+                <Label x:Name="Bool" FontSize="13" Content="{Binding MedicalRecord.IsInsured , 
                     Converter={StaticResource BoolToString }}" Style="{DynamicResource Label}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
                 <Label FontSize="13" Content="Korisničko ime:" Style="{DynamicResource Label}"/>
-                <Label FontSize="13" Content="{Binding Karton.Patient.Username }" Style="{DynamicResource Label}"/>
+                <Label FontSize="13" Content="{Binding MedicalRecord.Patient.Username }" Style="{DynamicResource Label}"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="1">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,30,30,0">
                 <Label FontSize="15" Content="Broj zdravstvenog kartona:" Style="{DynamicResource Label}"/>
-                <Label FontSize="15" Content="{Binding Karton.MedicalRecordID }" Style="{DynamicResource Label}"/>
+                <Label FontSize="15" Content="{Binding MedicalRecord.MedicalRecordID }" Style="{DynamicResource Label}"/>
             </StackPanel>
             <Label HorizontalAlignment="Right" Margin="0,10,275,0" Content="Alergičan na lek:" Style="{DynamicResource Label}"/>
             <ScrollViewer CanContentScroll="True" Margin="0,0,40,0">
                 <ListBox HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Visible" Style="{DynamicResource ListBoxStyle}"
-                  Height="100" Width="310" ScrollViewer.CanContentScroll="True" ItemsSource="{Binding Karton.Allergen.MedicineNames}"></ListBox>
+                  Height="100" Width="310" ScrollViewer.CanContentScroll="True" ItemsSource="{Binding MedicalRecord.Allergen.MedicineNames}"></ListBox>
             </ScrollViewer>
             <Label HorizontalAlignment="Right" Margin="0,10,247,0" Content="Alergičan na sastojak:" Style="{DynamicResource Label}"/>
             <ScrollViewer CanContentScroll="True" Margin="0,0,40,0">
                 <ListBox HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Visible" Style="{DynamicResource ListBoxStyle}"
-                  Height="100" Width="310" ScrollViewer.CanContentScroll="True" ItemsSource="{Binding Karton.Allergen.IngredientNames}"></ListBox>
+                  Height="100" Width="310" ScrollViewer.CanContentScroll="True" ItemsSource="{Binding MedicalRecord.Allergen.IngredientNames}"></ListBox>
             </ScrollViewer>
             <Label HorizontalAlignment="Right" Margin="0,10,285,0" Content="Ostali alergeni:" Style="{DynamicResource Label}"/>
             <TextBox HorizontalAlignment="Right" Height="100" Width="330" Margin="0,0,40,0"
-                     Text="{Binding Karton.Allergen.Other}" IsEnabled="False"></TextBox>
+                     Text="{Binding MedicalRecord.Allergen.Other}" IsEnabled="False"></TextBox>
             <StackPanel Orientation="Horizontal" Margin="0,20,40,0" HorizontalAlignment="Right">
-                <Button x:Name="sacuvaj" Click="sacuvaj_Click" Margin="10,0,0,0" Style="{DynamicResource ImageButtonsHorizontal}">
+                <Button x:Name="saveButton" Click="Save_Click" Margin="10,0,0,0" Style="{DynamicResource ImageButtonsHorizontal}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="../../Icon/DoctorIcons/save.png" Width="20"/>
                         <TextBlock Text="Sačuvaj terapiju"/>

@@ -40,7 +40,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,20,20,0">
             <Button x:Name="zapocniPregled" FontSize="18" 
-                  Margin="50,0,40,0" Click="zapocniTermin" Style="{DynamicResource ImageButtonsHorizontal}">
+                  Margin="50,0,40,0" Click="startExamination_Click" Style="{DynamicResource ImageButtonsHorizontal}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../../Icon/DoctorIcons/start.jpg" Width="20"/>
                     <TextBlock Text="Započni pregled"/>
@@ -53,7 +53,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Label FontSize="17" Margin="0,0,10,0" FontFamily="Yu Gothic">Trajanje u minutama:</Label>
-            <Label FontSize="17" x:Name="trajanje" Content="{Binding TrajanjeUMinutima, Mode=OneWay}" FontFamily="Yu Gothic"></Label>
+            <Label FontSize="17" x:Name="trajanje" Content="{Binding DurationInMinutes, Mode=OneWay}" FontFamily="Yu Gothic"></Label>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Label FontSize="17" Margin="0,0,10,0" FontFamily="Yu Gothic">Tip pregleda/operacije:</Label>
@@ -65,7 +65,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" >
 
-            <Button x:Name="karton" FontSize="18"  Click="pregledKartona"
+            <Button x:Name="karton" FontSize="18"  Click="MedicalRecordReview"
                   Margin="0,0,40,0" Style="{DynamicResource ImageButtonsHorizontal}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../../Icon/DoctorIcons/view.png" Width="20"/>

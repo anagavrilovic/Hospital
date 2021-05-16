@@ -22,14 +22,14 @@ namespace Hospital.View
     public partial class DoktorKarton : Window, INotifyPropertyChanged
     {
 
-        private MedicalRecord karton;
-        private MedicalRecordStorage mStorage;
-        public MedicalRecord Karton
+        private MedicalRecord medicalRecordReview;
+        private MedicalRecordStorage medicalRecordStorage;
+        public MedicalRecord MedicalRecordReview
         {
-            get { return karton; }
+            get { return medicalRecordReview; }
             set
             {
-                karton = value;
+                medicalRecordReview = value;
             }
         }
 
@@ -46,14 +46,19 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
-            mStorage = new MedicalRecordStorage();
-           Karton= mStorage.GetOne(id);
-            
+            initProperties(id);
+
+        }
+
+        private void initProperties(string id)
+        {
+            medicalRecordStorage = new MedicalRecordStorage();
+            MedicalRecordReview = medicalRecordStorage.GetOne(id);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void nazad_Click(object sender, RoutedEventArgs e)
+        private void back_Click(object sender, RoutedEventArgs e)
         {
             Window.GetWindow(this.Owner).Show();
             this.Close();

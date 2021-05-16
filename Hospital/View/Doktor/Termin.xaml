@@ -22,43 +22,43 @@
                     <Image Source="/Icon/logo.png"/>
                 </TabItem.Header>
             </TabItem >
-            <TabItem x:Name="Karton">
+            <TabItem x:Name="medicalRecordReviewTab">
                 <TabItem.Header>
                     <StackPanel Orientation="Vertical">
                         <Image x:Name="KartonSlika" Source="/Icon/document.png" Width="100" Height="30"/>
-                        <Label x:Name="KartonLabela" Content="Karton" HorizontalAlignment="Center" FontSize="15"></Label>
+                        <Label x:Name="medicalRecordReviewLabel" Content="Karton" HorizontalAlignment="Center" FontSize="15"></Label>
                     </StackPanel>
                 </TabItem.Header>
             </TabItem>
-            <TabItem x:Name="Anamneza">
+            <TabItem x:Name="AnamnesisTab">
                 <TabItem.Header>
                     <StackPanel Orientation="Vertical">
                         <Image x:Name="AnamnezaSlika" Source="/Icon/pen.png" Width="100" Height="30"/>
-                        <Label x:Name="AnamnezaLabela" Content="Anamneza" HorizontalAlignment="Center" FontSize="15"></Label>
+                        <Label x:Name="AnamnesisLabel" Content="Anamneza" HorizontalAlignment="Center" FontSize="15"></Label>
                     </StackPanel>
                 </TabItem.Header>
             </TabItem>
-            <TabItem x:Name="Terapija" IsEnabled="False">
+            <TabItem x:Name="TherapyTab" IsEnabled="False">
                 <TabItem.Header>
                     <StackPanel Orientation="Vertical">
                         <Image x:Name="TerapijaSlika" Source="/Icon/plusSquare.png" Width="100" Height="30"/>
-                        <Label x:Name="TerapijaLabela" Content="Terapija" HorizontalAlignment="Center" FontSize="15"></Label>
+                        <Label x:Name="TherapyLabel" Content="Terapija" HorizontalAlignment="Center" FontSize="15"></Label>
                     </StackPanel>
                 </TabItem.Header>
             </TabItem>
-            <TabItem x:Name="Dijagnoza" IsEnabled="False">
+            <TabItem x:Name="DiagnosisTab" IsEnabled="False">
                 <TabItem.Header>
                     <StackPanel Orientation="Vertical">
                         <Image x:Name="DijagnozaSlika" Source="/Icon/penPaper.png" Width="100" Height="30"/>
-                        <Label x:Name="DiagnozaLabela" Content="Dijagnoza" HorizontalAlignment="Center" FontSize="15"></Label>
+                        <Label x:Name="DiagnosisLabel" Content="Dijagnoza" HorizontalAlignment="Center" FontSize="15"></Label>
                     </StackPanel>
                 </TabItem.Header>
             </TabItem>
-            <TabItem x:Name="Termini" IsEnabled="False">
+            <TabItem x:Name="AppointmentTab" IsEnabled="False">
                 <TabItem.Header>
                     <StackPanel Orientation="Vertical">
                         <Image x:Name="SlikaTermin" Source="/Icon/calender.png" Width="100" Height="30"/>
-                        <Label x:Name="TerminiLabela" Content="Termini" HorizontalAlignment="Center" FontSize="15"></Label>
+                        <Label x:Name="AppointmentLabel" Content="Termini" HorizontalAlignment="Center" FontSize="15"></Label>
                     </StackPanel>
                 </TabItem.Header>
             </TabItem >

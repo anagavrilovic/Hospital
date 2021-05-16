@@ -34,13 +34,13 @@ namespace Hospital.View
                 OnPropertyChanged();
             }
         }
-        private string trajanjeUMinutima;
-        public string TrajanjeUMinutima
+        private string durationInMinutes;
+        public string DurationInMinutes
         {
-            get { return trajanjeUMinutima; }
+            get { return durationInMinutes; }
             set
             {
-                trajanjeUMinutima = value;
+                durationInMinutes = value;
                 OnPropertyChanged();
             }
         }
@@ -58,7 +58,7 @@ namespace Hospital.View
         private void InitFields()
         {
            double dur= Appointment.DurationInHours * 60;
-            trajanjeUMinutima = dur.ToString() +" minuta";
+            durationInMinutes = dur.ToString() +" minuta";
         }
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)
@@ -69,20 +69,20 @@ namespace Hospital.View
             }
         }
 
-        private void pregledKartona(object sender, RoutedEventArgs e)
+        private void MedicalRecordReview(object sender, RoutedEventArgs e)
         {
-            MedicalRecordStorage m = new MedicalRecordStorage();
-            DoktorKarton d = new DoktorKarton((m.GetByPatientID(Appointment.IDpatient)).MedicalRecordID);
-            d.Owner = this;
+            MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
+            DoktorKarton review = new DoktorKarton((medicalRecordStorage.GetByPatientID(Appointment.IDpatient)).MedicalRecordID);
+            review.Owner = this;
             this.Hide();
-            d.Show();
+            review.Show();
         }
 
-        private void zapocniTermin(object sender, RoutedEventArgs e)
+        private void startExamination_Click(object sender, RoutedEventArgs e)
         {
-            Doctor_Examination d = new Doctor_Examination(appointment);
-            d.Show();
-            d.Owner=(Window.GetWindow(this) ).Owner;
+            Doctor_Examination examination = new Doctor_Examination(appointment);
+            examination.Show();
+            examination.Owner=(Window.GetWindow(this) ).Owner;
             this.Close();
 
         }

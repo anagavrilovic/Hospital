@@ -26,7 +26,7 @@
                     </StackPanel>
                 </Border>
             </StackPanel>
-            <ListBox Name="listBox" IsSynchronizedWithCurrentItem="True" Margin="0,20,0,20"
+            <ListBox Name="allDrugsListBox" IsSynchronizedWithCurrentItem="True" Margin="0,20,0,20"
                      SelectionChanged="SelctedMedicChanged" Height="225" Style="{DynamicResource ListBoxStyle}">
             </ListBox>
             
@@ -40,7 +40,7 @@
                     </StackPanel>
                 </Border>
             </StackPanel>
-            <ListBox Name="listIngredients" IsSynchronizedWithCurrentItem="True" Margin="0,20,0,20"
+            <ListBox Name="allIngredientsListBox" IsSynchronizedWithCurrentItem="True" Margin="0,20,0,20"
                       Height="180" Style="{DynamicResource ListBoxStyle}">
             </ListBox>
         </StackPanel>
@@ -48,14 +48,14 @@
         
         <StackPanel Orientation="Vertical" Grid.Column="1" Margin="20,10,20,0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="izmeni" Click="EditMedic" Style="{DynamicResource ImageButtonsHorizontal}" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Button x:Name="izmeni" Click="EditMedic_Click" Style="{DynamicResource ImageButtonsHorizontal}" HorizontalAlignment="Right" VerticalAlignment="Center">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="../../Icon/DoctorIcons/edit.png" Width="20"/>
                         <TextBlock Text="Izmeni"/>
                     </StackPanel>
                 </Button>
                 <Button x:Name="sacuvaj" Margin="20,0,0,0" 
-                            IsEnabled="False" Click="SaveChanges" Style="{DynamicResource ImageButtonsHorizontal}">
+                            IsEnabled="False" Click="SaveChanges_Click" Style="{DynamicResource ImageButtonsHorizontal}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="../../Icon/DoctorIcons/addDark.png" Width="20"/>
                         <TextBlock Text="Sacuvaj izmene"/>
@@ -66,7 +66,7 @@
                 <Label x:Name="lekLabel" HorizontalAlignment="Left" FontSize="20" Style="{DynamicResource Label}">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text=" Lek: "/>
-                        <TextBlock Text="{Binding Lek.Name}"/>
+                        <TextBlock Text="{Binding Medicine.Name}"/>
                     </StackPanel>
                 </Label>
             </StackPanel>
@@ -75,19 +75,19 @@
             
             <Label Content="Zamenski lekovi:" Margin="0,10,0,10" FontSize="15" Style="{DynamicResource Label}"/>
             <StackPanel Orientation="Horizontal" Background="{DynamicResource MainWhite}">
-                <ListBox x:Name="listaZamena" Height="150" IsSynchronizedWithCurrentItem="True" Width="300" IsEnabled="False"
+                <ListBox x:Name="replacementDrugsListBox" Height="150" IsSynchronizedWithCurrentItem="True" Width="300" IsEnabled="False"
                          Style="{DynamicResource ListBoxStyle}"></ListBox>
                 <StackPanel Orientation="Vertical" Margin="30,0,0,0">
                     <Label Style="{DynamicResource Label}" Content="Dodaj ili izbaci zamenu:"/>
                     <Button x:Name="dodajZamenu" Margin="15,10,0,0"
-                           IsEnabled="False" Click="AddReplacement" Style="{DynamicResource ImageButtons}">
+                           IsEnabled="False" Click="AddReplacement_Click" Style="{DynamicResource ImageButtons}">
                         <StackPanel Orientation="Vertical">
                             <Image Source="../../Icon/DoctorIcons/addDark.png" Width="30"/>
                             <TextBlock Text="Dodaj"/>
                         </StackPanel>
                     </Button>
                     <Button x:Name="izbaciZamenu" Margin="15,20,0,0"
-                         IsEnabled="False" Click="RemoveReplacement" Style="{DynamicResource ImageButtons}">
+                         IsEnabled="False" Click="RemoveReplacement_Click" Style="{DynamicResource ImageButtons}">
                         <StackPanel Orientation="Vertical">
                             <Image Source="../../Icon/DoctorIcons/minus.png" Width="30"/>
                             <TextBlock Text="Izbaci"/>
@@ -104,19 +104,19 @@
 
             <Label Margin="0,10,0,0" FontSize="15" Content="Sastojci:" Style="{DynamicResource Label}" />
             <StackPanel Orientation="Horizontal" Background="{DynamicResource MainWhite}">
-                    <ListBox x:Name="sastojci" Height="150" IsSynchronizedWithCurrentItem="True" Width="300" Margin="0,0,30,0" IsEnabled="False"
+                    <ListBox x:Name="medicineIngredientsListBox" Height="150" IsSynchronizedWithCurrentItem="True" Width="300" Margin="0,0,30,0" IsEnabled="False"
                          Style="{DynamicResource ListBoxStyle}"></ListBox>
                     <StackPanel Orientation="Vertical">
                     <Label x:Name="sastojakLabela" Content="Dodaj ili izbaci sastojak:" Margin="15,0,0,0" Style="{DynamicResource Label}"/>
                     <Button  x:Name="dodajSastojak" Margin="15,10,0,0" IsEnabled="False"
-                             Click="AddIngridient" Style="{DynamicResource ImageButtons}">
+                             Click="AddIngridient_Click" Style="{DynamicResource ImageButtons}">
                         <StackPanel Orientation="Vertical">
                             <Image Source="../../Icon/DoctorIcons/addDark.png" Width="30"/>
                             <TextBlock Text="Dodaj"/>
                         </StackPanel>
                     </Button>
                     <Button  x:Name="izbaciSastojak" Margin="15,10,0,0" IsEnabled="False" 
-                         Click="RemoveIngridient" Style="{DynamicResource ImageButtons}">
+                         Click="RemoveIngridient_Click" Style="{DynamicResource ImageButtons}">
                         <StackPanel Orientation="Vertical">
                             <Image Source="../../Icon/DoctorIcons/minus.png" Width="30"/>
                             <TextBlock Text="Izbaci"/>

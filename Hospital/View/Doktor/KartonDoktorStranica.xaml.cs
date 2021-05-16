@@ -21,16 +21,16 @@ namespace Hospital.View
     /// </summary>
     public partial class KartonDoktorStranica : Page, INotifyPropertyChanged
     {
-
-        private MedicalRecord karton;
-        private MedicalRecordStorage mStorage;
-        private Appointment pregled=new Appointment();
-        public MedicalRecord Karton
+        private static int HOSPITAL_TREATMENT_TAB=6;
+        private MedicalRecord medicalRecord;
+        private MedicalRecordStorage medicalRecordStorage;
+        private Appointment appointment=new Appointment();
+        public MedicalRecord MedicalRecord
         {
-            get { return karton; }
+            get { return medicalRecord; }
             set
             {
-                karton = value;
+                medicalRecord = value;
             }
         }
 
@@ -46,29 +46,44 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
-            mStorage = new MedicalRecordStorage();
-            Karton = mStorage.GetOne(id);
-            this.pregled = pregled;
-            sacuvaj.Visibility = Visibility.Collapsed;
+            InitProperties(id, pregled);
+        }
+
+        private void InitProperties(string id, Appointment pregled)
+        {
+            medicalRecordStorage = new MedicalRecordStorage();
+            MedicalRecord = medicalRecordStorage.GetOne(id);
+            this.appointment = pregled;
+            saveButton.Visibility = Visibility.Collapsed;
             hospitalTreatmentButton.Visibility = Visibility.Collapsed;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        private void sacuvaj_Click(object sender, RoutedEventArgs e)
+        private void Save_Click(object sender, RoutedEventArgs e)
         {
-            Karton.AddExamination(((Doctor_Examination)Window.GetWindow(this)).Pregled);
             Window.GetWindow(this).Close();
-            (Window.GetWindow(((Doctor_Examination)Window.GetWindow(this))).Owner).Show();           
-            mStorage.EditRecord(Karton);
-            AppointmentStorage a = new AppointmentStorage();
-            a.Delete(pregled.IDAppointment);
+            (Window.GetWindow(((Doctor_Examination)Window.GetWindow(this))).Owner).Show();
+            SaveExamination();
+            DeleteAppointmentOfExamination();
+        }
+
+        private void DeleteAppointmentOfExamination()
+        {
+            AppointmentStorage appointmentStorage = new AppointmentStorage();
+            appointmentStorage.Delete(appointment.IDAppointment);
+        }
+
+        private void SaveExamination()
+        {
+            MedicalRecord.AddExamination(((Doctor_Examination)Window.GetWindow(this)).Examintaion);
+            medicalRecordStorage.EditRecord(MedicalRecord);
         }
 
         private void hospitalTreatmentButton_Click(object sender, RoutedEventArgs e)
         {
-            ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = 6;
+            ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = HOSPITAL_TREATMENT_TAB;
             ((Doctor_Examination)Window.GetWindow(this)).hospitalTreatmentTab.IsEnabled = true;
             ((Doctor_Examination)Window.GetWindow(this)).TreatmentLabel.Foreground = Brushes.White;
         }

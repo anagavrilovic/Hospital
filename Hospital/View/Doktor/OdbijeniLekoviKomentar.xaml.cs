@@ -57,7 +57,7 @@ namespace Hospital.View.Doktor
             this.validateMedicine = validateMedicine;
         }
 
-        private void Nazad(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

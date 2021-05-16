@@ -23,16 +23,16 @@ namespace Hospital.View
     /// </summary>
     public partial class PacijentListBox : Window, INotifyPropertyChanged
     {
-        ObservableCollection<Patient> pacijenti = new ObservableCollection<Patient>();
-        MedicalRecordStorage mStorage = new MedicalRecordStorage();
+        ObservableCollection<Patient> patients = new ObservableCollection<Patient>();
+        MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
         public event PropertyChangedEventHandler PropertyChanged;
         private NoviTermin parentWindow;
-        ObservableCollection<Patient> Pacijenti
+        ObservableCollection<Patient> Patients
         {
-            get { return pacijenti; }
+            get { return patients; }
             set
             {
-                pacijenti = value;
+                patients = value;
                 OnPropertyChanged();
             }
 
@@ -48,14 +48,19 @@ namespace Hospital.View
 
         public PacijentListBox(NoviTermin parentWindow)
         {
-            foreach (MedicalRecord record in mStorage.GetAll())
+            foreach (MedicalRecord record in medicalRecordStorage.GetAll())
             {
-                Pacijenti.Add(record.Patient);
+                Patients.Add(record.Patient);
             }
             InitializeComponent();
             this.DataContext = this;
             this.parentWindow = parentWindow;
-            this.listBox.ItemsSource = Pacijenti;
+            this.listBox.ItemsSource = Patients;
+            SetSorterAndFilter();
+        }
+
+        private void SetSorterAndFilter()
+        {
             ICollectionView view = GetPretraga();
             view.SortDescriptions.Add(new SortDescription("FirstName", ListSortDirection.Ascending));
             view.SortDescriptions.Add(new SortDescription("LastName", ListSortDirection.Ascending));
@@ -69,7 +74,7 @@ namespace Hospital.View
         }
         public ICollectionView GetPretraga()
         {
-            return CollectionViewSource.GetDefaultView(pacijenti);
+            return CollectionViewSource.GetDefaultView(patients);
         }
 
         private void filterPatients(object sender, RoutedEventArgs e)

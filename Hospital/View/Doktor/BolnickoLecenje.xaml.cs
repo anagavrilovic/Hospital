@@ -21,6 +21,7 @@ namespace Hospital.View.Doktor
     
     public partial class BolnickoLecenje : Page,INotifyPropertyChanged
     {
+        private static int MEDICAL_RECORD_TAB = 1;
         private RoomStorage roomStorage = new RoomStorage();
         private HospitalTreatment hospitalTreatment = new HospitalTreatment();
         private Room selectedRoom = new Room();
@@ -128,7 +129,7 @@ namespace Hospital.View.Doktor
 
         private void changeUI()
         {
-            ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = 1;
+            ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = MEDICAL_RECORD_TAB;
             ((Doctor_Examination)Window.GetWindow(this)).hospitalTreatmentTab.IsEnabled = false;
             ((Doctor_Examination)Window.GetWindow(this)).TreatmentLabel.Foreground = Brushes.Black;
         }

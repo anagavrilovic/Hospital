@@ -24,7 +24,6 @@ namespace Hospital.View
     public partial class Terapija : Page, INotifyPropertyChanged
     {
         private ObservableCollection<MedicineTherapy> medics = new ObservableCollection<MedicineTherapy>();
-        public int dani;
         private MedicalRecordStorage medicineStorage = new MedicalRecordStorage();
         public event PropertyChangedEventHandler PropertyChanged;
         public ObservableCollection<MedicineTherapy> Medics
@@ -94,17 +93,17 @@ namespace Hospital.View
         {
             Therapy therapy = new Therapy();
             FillTherapy(therapy);
-            ((Doctor_Examination)Window.GetWindow(this)).Pregled.therapy = therapy;
+            ((Doctor_Examination)Window.GetWindow(this)).Examintaion.therapy = therapy;
             SetTabColors();
         }
 
         private void SetTabColors()
         {
             ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = 4;
-            ((Doctor_Examination)Window.GetWindow(this)).Terapija.IsEnabled = false;
-            ((Doctor_Examination)Window.GetWindow(this)).TerapijaLabela.Foreground = Brushes.Black;
-            ((Doctor_Examination)Window.GetWindow(this)).DiagnozaLabela.Foreground = Brushes.White;
-            ((Doctor_Examination)Window.GetWindow(this)).Dijagnoza.IsEnabled = true;
+            ((Doctor_Examination)Window.GetWindow(this)).TherapyTab.IsEnabled = false;
+            ((Doctor_Examination)Window.GetWindow(this)).TherapyLabel.Foreground = Brushes.Black;
+            ((Doctor_Examination)Window.GetWindow(this)).DiagnosisLabel.Foreground = Brushes.White;
+            ((Doctor_Examination)Window.GetWindow(this)).DiagnosisTab.IsEnabled = true;
         }
 
         private void FillTherapy(Therapy therapy)
