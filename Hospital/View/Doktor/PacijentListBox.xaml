@@ -7,18 +7,27 @@
         mc:Ignorable="d"
         Title="PacijentListBox" Height="450" Width="450" WindowStartupLocation="CenterOwner"
         Background="#FFDCE6ED">
+    <Window.Resources>
+        <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
+    </Window.Resources>
     <DockPanel>
         <DockPanel DockPanel.Dock="Top">
             <WrapPanel>
-                <TextBox x:Name="pretrazi" Margin="40,20,20,20" Height="30" Width="230" BorderThickness="1"></TextBox>
-                <Button Name="image" Margin="0,20,20,20" Width="60" Height="30" Click="filterPatients">
+                <Border Width="200" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="40,0,0,0"
+                            Style="{StaticResource TextBoxBorder}">
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <Image Source="../../Icon/Secretary/search.png" Height="13"/>
+                        <TextBox  x:Name="pretrazi" Width="150" Height="20" BorderThickness="0" Style="{DynamicResource SearchBox}" Margin="10,0,0,0" />
+                    </StackPanel>
+                </Border>
+                <Button Name="image" Margin="5,20,20,0" Width="60" Height="30" Click="filterPatients" Style="{DynamicResource ImageButtons}">
                     <Button.Content>
-                        <Image Source="/Icon/search.png" />
+                        <Image Source="../../Icon/DoctorIcons/search.png" />
                     </Button.Content>
                 </Button>
             </WrapPanel>
         </DockPanel>
-        <ListBox Name="listBox" Margin="40,40,40,40" MouseDoubleClick="listBox_MouseDoubleClick"></ListBox>
+        <ListBox Name="listBox" Margin="40,40,40,40" MouseDoubleClick="listBox_MouseDoubleClick" Style="{DynamicResource ListBoxStyle}"></ListBox>
 
     </DockPanel>
 </Window>

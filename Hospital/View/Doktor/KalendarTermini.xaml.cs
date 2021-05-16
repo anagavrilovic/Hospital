@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.View.Doktor;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,7 +26,7 @@ namespace Hospital.View
     public partial class KalendarTermini : Page, INotifyPropertyChanged
     {
         private DoctorStorage dStorage = new DoctorStorage();
-        private AppointmentStorage aStorage = new AppointmentStorage();
+        private AppointmentStorage appointmentStorage = new AppointmentStorage();
         private Hospital.Model.Doctor doctor = new Hospital.Model.Doctor();
         public Hospital.Model.Doctor Doctor
         {
@@ -69,7 +70,7 @@ namespace Hospital.View
 
         private void InitAppointments()
         {
-            foreach(Appointment a in aStorage.GetAll())
+            foreach(Appointment a in appointmentStorage.GetAll())
             {
                 if (a.IDDoctor.Equals(Doctor.PersonalID))
                 {
@@ -88,6 +89,21 @@ namespace Hospital.View
                 d.Show();
                 Window.GetWindow(this).Hide();
             }
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            if(dataGridPregledi.SelectedIndex != -1)
+            {
+                appointmentStorage.Delete(((Appointment)dataGridPregledi.SelectedItem).IDAppointment);
+                appointments.Remove((Appointment)dataGridPregledi.SelectedItem);
+            }
+        }
+
+        private void addAppointment_Click(object sender, RoutedEventArgs e)
+        {
+            NoviTermin newAppointment =new NoviTermin(this, doctor.PersonalID);
+            newAppointment.Show();
         }
     }
 }

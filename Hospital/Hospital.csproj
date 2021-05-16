@@ -126,6 +126,9 @@
     <Compile Include="View\Doktor\HospitalizovaniPacijenti.xaml.cs">
       <DependentUpon>HospitalizovaniPacijenti.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Doktor\NoviTermin.xaml.cs">
+      <DependentUpon>NoviTermin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Manager\StaticInventory\AddInventory.xaml.cs">
       <DependentUpon>AddInventory.xaml</DependentUpon>
     </Compile>
@@ -380,6 +383,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Doktor\HospitalizovaniPacijenti.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Doktor\NoviTermin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -898,6 +905,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\DoctorIcons\pills.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\search.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

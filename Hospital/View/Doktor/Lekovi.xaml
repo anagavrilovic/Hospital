@@ -79,7 +79,7 @@
                          Style="{DynamicResource ListBoxStyle}"></ListBox>
                 <StackPanel Orientation="Vertical" Margin="30,0,0,0">
                     <Label Style="{DynamicResource Label}" Content="Dodaj ili izbaci zamenu:"/>
-                    <Button x:Name="dodajZamenu" Margin="15,10,0,0" 
+                    <Button x:Name="dodajZamenu" Margin="15,10,0,0"
                            IsEnabled="False" Click="AddReplacement" Style="{DynamicResource ImageButtons}">
                         <StackPanel Orientation="Vertical">
                             <Image Source="../../Icon/DoctorIcons/addDark.png" Width="30"/>
@@ -108,14 +108,14 @@
                          Style="{DynamicResource ListBoxStyle}"></ListBox>
                     <StackPanel Orientation="Vertical">
                     <Label x:Name="sastojakLabela" Content="Dodaj ili izbaci sastojak:" Margin="15,0,0,0" Style="{DynamicResource Label}"/>
-                    <Button  x:Name="dodajSastojak" Margin="15,15,0,0" IsEnabled="False" 
+                    <Button  x:Name="dodajSastojak" Margin="15,10,0,0" IsEnabled="False"
                              Click="AddIngridient" Style="{DynamicResource ImageButtons}">
                         <StackPanel Orientation="Vertical">
                             <Image Source="../../Icon/DoctorIcons/addDark.png" Width="30"/>
                             <TextBlock Text="Dodaj"/>
                         </StackPanel>
                     </Button>
-                    <Button  x:Name="izbaciSastojak" Margin="15,10,0,0" IsEnabled="False"
+                    <Button  x:Name="izbaciSastojak" Margin="15,10,0,0" IsEnabled="False" 
                          Click="RemoveIngridient" Style="{DynamicResource ImageButtons}">
                         <StackPanel Orientation="Vertical">
                             <Image Source="../../Icon/DoctorIcons/minus.png" Width="30"/>

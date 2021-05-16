@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.View.Doktor;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -25,7 +26,7 @@ namespace Hospital.View
         ObservableCollection<Patient> pacijenti = new ObservableCollection<Patient>();
         MedicalRecordStorage mStorage = new MedicalRecordStorage();
         public event PropertyChangedEventHandler PropertyChanged;
-        private KreiranjeTermina parentWindow;
+        private NoviTermin parentWindow;
         ObservableCollection<Patient> Pacijenti
         {
             get { return pacijenti; }
@@ -45,7 +46,7 @@ namespace Hospital.View
             }
         }
 
-        public PacijentListBox(KreiranjeTermina parentWindow)
+        public PacijentListBox(NoviTermin parentWindow)
         {
             foreach (MedicalRecord record in mStorage.GetAll())
             {

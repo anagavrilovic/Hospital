@@ -26,6 +26,19 @@
                     </TextBlock>
                 </Label.Content>
             </Label>
+                <Button x:Name="addAppointment" Margin="15,0,0,0" Style="{DynamicResource ImageButtons}" Background="{DynamicResource BackgroundGray}" Click="addAppointment_Click"> 
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="../../Icon/DoctorIcons/addDark.png" Width="30"/>
+                        <TextBlock Text="Dodaj"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="izbaciZamenu" Margin="15,0,0,0" Style="{DynamicResource ImageButtons}"
+                        Background="{DynamicResource BackgroundGray}" Click="Delete_Click">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="../../Icon/DoctorIcons/minus.png" Width="30"/>
+                        <TextBlock Text="Obriši"/>
+                    </StackPanel>
+                </Button>
             </StackPanel>
         </DockPanel>
         <DataGrid x:Name="dataGridPregledi" ItemsSource="{Binding Path=Appointments}" Style="{DynamicResource PacijentiDataGrid}"
