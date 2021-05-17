@@ -108,6 +108,7 @@
     <Compile Include="Model\TransferInventoryStorage.cs" />
     <Compile Include="Model\UnitsType.cs" />
     <Compile Include="Model\UserType.cs" />
+    <Compile Include="Repositories\IFileRepository.cs" />
     <Compile Include="ValidacijeLekar\EmptyStringValidationRule.cs" />
     <Compile Include="ValidacijeSekretar\EmailValidationRule.cs" />
     <Compile Include="ValidacijeSekretar\OnlyDigitsValidationRuleCardID.cs" />
