@@ -15,11 +15,11 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Path=HospitalizedPatients}" Grid.Column="0" SelectedValue="{Binding HospitalizedPatient, UpdateSourceTrigger=Explicit}"
+        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Path=HospitalTreatments}" Grid.Column="0" SelectedValue="{Binding HospitalTreatment, UpdateSourceTrigger=Explicit}"
                SelectionMode="Single" SelectionChanged="dataGrid_SelectionChanged" IsReadOnly="True" Margin="30,30,30,30" AutoGenerateColumns="False" Style="{DynamicResource PacijentiDataGrid}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Ime Pacijent" Width="0.25*" Binding="{Binding Patient.FirstName}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="Prezime pacijenta" Width="0.25*" Binding="{Binding Patient.LastName}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Ime Pacijent" Width="0.25*" Binding="{Binding PatientsRecord.Patient.FirstName}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Prezime pacijenta" Width="0.25*" Binding="{Binding PatientsRecord.Patient.LastName}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
                 <DataGridTextColumn Header="Soba" Width="0.25*" Binding="{Binding Room.Name}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
                 <DataGridTextColumn Header="Datum" Width="0.25*" Binding="{Binding StartOfTreatment, StringFormat=dd-MM-yyyy}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
                 <DataGridTextColumn Header="Tip termina" Width="0.25*" Binding="{Binding EndOfTreatment, StringFormat=dd-MM-yyyy}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
@@ -29,26 +29,26 @@
             <Label Style="{DynamicResource Label}" Margin="0,0,5,0">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text=" Pacijent: "/>
-                    <TextBlock Text="{Binding HospitalizedPatient.Patient.FirstName}"/>
-                    <TextBlock Text="{Binding HospitalizedPatient.Patient.LastName}" Margin="5,0,0,0"/>
+                    <TextBlock Text="{Binding HospitalTreatment.PatientsRecord.Patient.FirstName}"/>
+                    <TextBlock Text="{Binding HospitalTreatment.PatientsRecord.Patient.LastName}" Margin="5,0,0,0"/>
                 </StackPanel>
             </Label>
             <Label Style="{DynamicResource Label}" Margin="0,0,5,0">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text=" Soba: "/>
-                    <TextBlock Text="{Binding HospitalizedPatient.Room.Name}"/>
+                    <TextBlock Text="{Binding HospitalTreatment.Room.Name}"/>
                 </StackPanel>
             </Label>
             <Label Style="{DynamicResource Label}" Margin="0,0,5,0">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text=" Početak bolničkog lečenja: "/>
-                    <TextBlock Text="{Binding HospitalizedPatient.StartOfTreatment, StringFormat=dd-MM-yyyy}"/>
+                    <TextBlock Text="{Binding HospitalTreatment.StartOfTreatment, StringFormat=dd-MM-yyyy}"/>
                 </StackPanel>
             </Label>
             <Label Style="{DynamicResource Label}" Margin="0,0,5,0">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text=" Kraj bolničkog lečenja: "/>
-                    <TextBlock Text="{Binding HospitalizedPatient.EndOfTreatment, StringFormat=dd-MM-yyyy}"/>
+                    <TextBlock Text="{Binding HospitalTreatment.EndOfTreatment, StringFormat=dd-MM-yyyy}"/>
                 </StackPanel>
             </Label>
             <Button x:Name="editButton" Style="{DynamicResource ImageButtonsHorizontal}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10,10,0" Click="edit_Click">
@@ -66,7 +66,7 @@
             </Button>
             <StackPanel Orientation="Vertical" Margin="0,20,0,0" Visibility="Collapsed" x:Name="calendarPanel">
                 <Label Content="Zavrsetak bolničkog lečenja: " Style="{DynamicResource Label}" HorizontalAlignment="Left"/>
-                <Calendar x:Name="calendar" HorizontalAlignment="Center" SelectedDate="{Binding HospitalizedPatient.EndOfTreatment, StringFormat=dd-MM-yyyy, UpdateSourceTrigger=Explicit}"/>
+                <Calendar x:Name="calendar" HorizontalAlignment="Center" SelectedDate="{Binding HospitalTreatment.EndOfTreatment, StringFormat=dd-MM-yyyy, UpdateSourceTrigger=Explicit}"/>
             </StackPanel>
 
         </StackPanel>

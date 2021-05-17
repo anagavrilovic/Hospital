@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Model
 {
-    class HospitalTreatment
+    public class HospitalTreatment
     {
         private string patientId;
         private DateTime startOfTreatment;

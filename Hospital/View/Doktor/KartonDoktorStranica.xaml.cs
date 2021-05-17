@@ -63,8 +63,11 @@ namespace Hospital.View
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
+            DoktorGlavniProzor doctorMainWindow = new DoktorGlavniProzor((((Doctor_Examination)Window.GetWindow(this)).LoggedInDoctor).PersonalID);
+            doctorMainWindow.Show();
+            Application.Current.MainWindow = doctorMainWindow;
+            doctorMainWindow.Main.Navigate(new KalendarTermini((((Doctor_Examination)Window.GetWindow(this)).LoggedInDoctor).PersonalID));
             Window.GetWindow(this).Close();
-            (Window.GetWindow(((Doctor_Examination)Window.GetWindow(this))).Owner).Show();
             SaveExamination();
             DeleteAppointmentOfExamination();
         }

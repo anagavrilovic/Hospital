@@ -99,6 +99,16 @@ namespace Hospital.View
             if(dataGridAppointments.SelectedIndex != -1)
             {
                 appointmentStorage.Delete(((Appointment)dataGridAppointments.SelectedItem).IDAppointment);
+                MedicalRecord medicalRecord=medicalRecordStorage.GetByPatientID(((Appointment)dataGridAppointments.SelectedItem).IDpatient);
+                foreach(Examination examination in medicalRecord.Examination)
+                {
+                    if (examination.appointment.IDAppointment.Equals(((Appointment)dataGridAppointments.SelectedItem).IDAppointment))
+                    {
+                        medicalRecord.RemoveExamination(examination);
+                        break;
+                    }
+                }
+                medicalRecordStorage.EditRecord(medicalRecord);
                 appointments.Remove((Appointment)dataGridAppointments.SelectedItem);
             }
         }
