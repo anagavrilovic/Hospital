@@ -69,7 +69,8 @@ namespace Hospital.View
 
         private void listBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            parentWindow.Patient= (Patient)listBox.SelectedItem;
+            parentWindow.Appointment.PatientsRecord = medicalRecordStorage.GetByPatientID(((Patient)listBox.SelectedItem).PersonalID);
+            parentWindow.pacijentIme.Content = parentWindow.Appointment.PatientsRecord.Patient.FirstName + " " + parentWindow.Appointment.PatientsRecord.Patient.LastName;
             Close();
         }
         public ICollectionView GetPretraga()

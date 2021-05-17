@@ -28,8 +28,8 @@
                     <TextBlock>
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0}  {1}">
-                                <Binding Path="Patient.FirstName" />
-                                <Binding Path="Patient.LastName" />
+                                <Binding Path="Appointment.PatientsRecord.Patient.FirstName" />
+                                <Binding Path="Appointment.PatientsRecord.Patient.LastName" />
                             </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>
@@ -43,7 +43,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center">
             <Label FontSize="17"  Width="76" Content="Doktor:" Margin="0,0,10,0"  HorizontalAlignment="Left" Style="{DynamicResource Label}"/>
-            <ComboBox x:Name="doctorComboBox" Width="150" Height="30" SelectedValue="{Binding Doctor}" 
+            <ComboBox x:Name="doctorComboBox" Width="150" Height="30" SelectedValue="{Binding Appointment.Doctor}" 
                       ItemsSource="{Binding Doctors, Mode=TwoWay}" VerticalAlignment="Top" Margin="0,0,5,0" SelectionChanged="SelectedDoctorChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>

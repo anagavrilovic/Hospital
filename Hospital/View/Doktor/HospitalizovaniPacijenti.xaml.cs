@@ -20,31 +20,31 @@ namespace Hospital.View.Doktor
 {
     public partial class HospitalizovaniPacijenti : Page,INotifyPropertyChanged
     {
-        private ObservableCollection<HospitalizedPatient> hospitalizedPatients = new ObservableCollection<HospitalizedPatient>();
+        private ObservableCollection<HospitalTreatment> hospitalTreatments = new ObservableCollection<HospitalTreatment>();
         private HospitalTreatmentStorage hospitalTreatmentStorage = new HospitalTreatmentStorage();
         private RoomStorage roomStorage = new RoomStorage();
-        private HospitalizedPatient hospitalizedPatient = new HospitalizedPatient();
+        private HospitalTreatment hospitalTreatment = new HospitalTreatment();
         private MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ObservableCollection<HospitalizedPatient> HospitalizedPatients
+        public ObservableCollection<HospitalTreatment> HospitalTreatments
         {
-            get { return hospitalizedPatients; }
-            set { hospitalizedPatients = value; }
+            get { return hospitalTreatments; }
+            set { hospitalTreatments = value; }
         }
-        public HospitalizedPatient HospitalizedPatient
+        public HospitalTreatment HospitalTreatment
         {
             get
             {
-                return hospitalizedPatient;
+                return hospitalTreatment;
             }
             set
             {
-                if (value != hospitalizedPatient)
+                if (value != null)
                 {
-                    hospitalizedPatient = value;
-                    OnPropertyChanged("hospitalizedPatient");
+                    hospitalTreatment = value;
+                    OnPropertyChanged("HospitalTreatment");
                 }
             }
         }
@@ -72,14 +72,11 @@ namespace Hospital.View.Doktor
 
         private void FillTable()
         {
-            foreach (HospitalTreatment hospitalTreatment in hospitalTreatmentStorage.GetAll())
+            foreach(HospitalTreatment hospitalTreatmentFromStorage in hospitalTreatmentStorage.GetAll())
             {
-                HospitalizedPatient hospitalizedPatient = new HospitalizedPatient();
-                hospitalizedPatient.Patient=((medicalRecordStorage.GetByPatientID(hospitalTreatment.PatientId)).Patient);
-                hospitalizedPatient.Room = (roomStorage.GetOne(hospitalTreatment.RoomId));
-                hospitalizedPatient.EndOfTreatment = hospitalTreatment.EndOfTreatment;
-                hospitalizedPatient.StartOfTreatment = hospitalTreatment.StartOfTreatment;
-                hospitalizedPatients.Add(hospitalizedPatient);
+                hospitalTreatmentFromStorage.PatientsRecord = medicalRecordStorage.GetByPatientID(hospitalTreatmentFromStorage.PatientId);
+                hospitalTreatmentFromStorage.Room = roomStorage.GetOne(hospitalTreatmentFromStorage.RoomId);
+                hospitalTreatments.Add(hospitalTreatmentFromStorage);
             }
         }
 
@@ -115,12 +112,7 @@ namespace Hospital.View.Doktor
 
         private void SaveHospitalizedTreatment()
         {
-            HospitalTreatment hospitalTreatment = new HospitalTreatment();
-            hospitalTreatment.EndOfTreatment = hospitalizedPatient.EndOfTreatment;
-            hospitalTreatment.StartOfTreatment = hospitalizedPatient.StartOfTreatment;
-            hospitalTreatment.PatientId = hospitalizedPatient.Patient.PersonalID;
-            hospitalTreatment.RoomId = hospitalizedPatient.Room.Id;
-            hospitalTreatmentStorage.DeleteByPatientId(hospitalizedPatient.Patient.PersonalID);
+            hospitalTreatmentStorage.DeleteByPatientId(hospitalTreatment.PatientId);
             hospitalTreatmentStorage.Save(hospitalTreatment);
         }
     }

@@ -27,6 +27,7 @@ namespace Hospital.View
     {
         private DoctorStorage doctorStorage = new DoctorStorage();
         private AppointmentStorage appointmentStorage = new AppointmentStorage();
+        private MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
         private Hospital.Model.Doctor doctor = new Hospital.Model.Doctor();
         public Hospital.Model.Doctor Doctor
         {
@@ -74,6 +75,8 @@ namespace Hospital.View
             {
                 if (a.IDDoctor.Equals(Doctor.PersonalID))
                 {
+                    a.Doctor = doctorStorage.GetOne(a.IDDoctor);
+                    a.PatientsRecord = medicalRecordStorage.GetByPatientID(a.IDpatient);
                     Appointments.Add(a);
                 }
             }
@@ -96,6 +99,16 @@ namespace Hospital.View
             if(dataGridAppointments.SelectedIndex != -1)
             {
                 appointmentStorage.Delete(((Appointment)dataGridAppointments.SelectedItem).IDAppointment);
+                MedicalRecord medicalRecord=medicalRecordStorage.GetByPatientID(((Appointment)dataGridAppointments.SelectedItem).IDpatient);
+                foreach(Examination examination in medicalRecord.Examination)
+                {
+                    if (examination.appointment.IDAppointment.Equals(((Appointment)dataGridAppointments.SelectedItem).IDAppointment))
+                    {
+                        medicalRecord.RemoveExamination(examination);
+                        break;
+                    }
+                }
+                medicalRecordStorage.EditRecord(medicalRecord);
                 appointments.Remove((Appointment)dataGridAppointments.SelectedItem);
             }
         }

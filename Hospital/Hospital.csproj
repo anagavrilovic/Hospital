@@ -72,7 +72,6 @@
     <Compile Include="Model\DatesInWeeklyCalendar.cs" />
     <Compile Include="Model\DoctorSpecialty.cs" />
     <Compile Include="Model\DoctorStorage.cs" />
-    <Compile Include="Model\HospitalizedPatient.cs" />
     <Compile Include="Model\HospitalTreatment.cs" />
     <Compile Include="Model\HospitalTreatmentStorage.cs" />
     <Compile Include="Model\Ingredient.cs" />

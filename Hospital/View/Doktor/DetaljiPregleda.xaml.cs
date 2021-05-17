@@ -22,7 +22,7 @@ namespace Hospital.View
     public partial class DetaljiPregleda : Window,INotifyPropertyChanged
     {
         Appointment appointment = new Appointment();
-
+        MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Appointment Appointment
@@ -59,6 +59,7 @@ namespace Hospital.View
         {
            double dur= Appointment.DurationInHours * 60;
             durationInMinutes = dur.ToString() +" minuta";
+           appointment.PatientsRecord= medicalRecordStorage.GetByPatientID(Appointment.IDpatient);
         }
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)
@@ -71,7 +72,6 @@ namespace Hospital.View
 
         private void MedicalRecordReview(object sender, RoutedEventArgs e)
         {
-            MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
             DoktorKarton review = new DoktorKarton((medicalRecordStorage.GetByPatientID(Appointment.IDpatient)).MedicalRecordID);
             review.Owner = this;
             this.Hide();
@@ -82,8 +82,9 @@ namespace Hospital.View
         {
             Doctor_Examination examination = new Doctor_Examination(appointment);
             examination.Show();
-            examination.Owner=(Window.GetWindow(this) ).Owner;
+            Application.Current.MainWindow = examination;
             this.Close();
+            Window.GetWindow(this.Owner).Close();
 
         }
 

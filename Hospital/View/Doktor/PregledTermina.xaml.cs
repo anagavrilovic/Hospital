@@ -39,6 +39,7 @@ namespace Hospital.View
                 _durationInHours = value; 
             }
         }
+        MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
         private ObservableCollection<Model.Doctor> doctors = new ObservableCollection<Model.Doctor>();
         public ObservableCollection<Model.Doctor> Doctors
         {
@@ -103,6 +104,7 @@ namespace Hospital.View
                 if (doctor.Specialty.Equals((DoctorSpecialty)ComboBox.SelectedItem))
                 {
                     Doctors.Add(doctorStorage.GetOne(doctor.PersonalID));
+                    appointmentToAdd.PatientsRecord = medicalRecordStorage.GetByPatientID(appointmentToAdd.IDpatient);
                     Appointments.Add(appointmentToAdd);
                 }
             }

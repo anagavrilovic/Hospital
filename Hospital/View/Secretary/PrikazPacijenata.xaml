@@ -147,7 +147,7 @@
                         <DataGridTextColumn Header="JMBG" Width="*" Binding="{Binding Patient.PersonalID}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
                         <DataGridTextColumn Header="Datum rođenja" Width="0.9*" Binding="{Binding Patient.DateOfBirth, StringFormat='{}{0: dd.MM.yyyy}'}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
 
-                        <DataGridTemplateColumn Width="8    0" IsReadOnly="False" Header="Status" HeaderStyle="{StaticResource GridHeaderStyle}">
+                        <DataGridTemplateColumn Width="80" IsReadOnly="False" Header="Status" HeaderStyle="{StaticResource GridHeaderStyle}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <CheckBox IsChecked="{Binding Path=Patient.IsBlocked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="15,3,0,0" 
