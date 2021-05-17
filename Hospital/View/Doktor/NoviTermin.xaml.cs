@@ -24,7 +24,14 @@ namespace Hospital.View.Doktor
     public partial class NoviTermin : Window,INotifyPropertyChanged
     {
         private Appointment appointment;
-        public Appointment Appointment { get => appointment; set => appointment = value; }
+        public Appointment Appointment {
+            get { return appointment; }
+            set
+            {
+                appointment = value;
+                OnPropertyChanged();
+            }
+        }
         private Room room;
         public Room Room
         {
@@ -54,28 +61,6 @@ namespace Hospital.View.Doktor
             set
             {
                 dateOfAppointment = value;
-                OnPropertyChanged();
-            }
-
-        }
-        private Hospital.Model.Doctor doctor;
-        public Hospital.Model.Doctor Doctor
-        {
-            get { return doctor; }
-            set
-            {
-                doctor = value;
-                OnPropertyChanged();
-            }
-
-        }
-        private Patient patient = new Patient();
-        public Patient Patient
-        {
-            get { return patient; }
-            set
-            {
-                patient = value;
                 OnPropertyChanged();
             }
 
@@ -136,16 +121,15 @@ namespace Hospital.View.Doktor
 
         private void InitProperties(string doctorId)
         {
-            Patient = new Patient();
+
             Appointment = new Appointment();
-            Doctor = new Hospital.Model.Doctor();
-            Doctor = doctorStorage.GetDoctorByID(doctorId);
+            Appointment.Doctor = doctorStorage.GetDoctorByID(doctorId);
             SetDoctorListAndRadioButtons();
         }
 
         private void SetDoctorListAndRadioButtons()
         {
-            if (Doctor.Specialty == (int)DoctorSpecialty.general)
+            if (Appointment.Doctor.Specialty == (int)DoctorSpecialty.general)
             {
                 rdbOperacija.Visibility = Visibility.Hidden;
                 rdbPregled.IsChecked = true;
@@ -221,8 +205,10 @@ namespace Hospital.View.Doktor
             ObservableCollection<Appointment> list = new ObservableCollection<Appointment>();
             foreach (Appointment a in appointmentStorage.GetAll())
             {
-                if (doctorStorage.GetOne(a.IDDoctor).PersonalID.Equals(Doctor.PersonalID))
+                if (doctorStorage.GetOne(a.IDDoctor).PersonalID.Equals(Appointment.Doctor.PersonalID))
                 {
+                    a.PatientsRecord = medicalRecordStorage.GetByPatientID(a.IDpatient);
+                    a.Doctor = doctorStorage.GetOne(a.IDDoctor);
                     list.Add(a);
                 }
             }
@@ -233,7 +219,7 @@ namespace Hospital.View.Doktor
         {
             foreach (Room storageRoom in roomStorage.GetAll())
             {
-                if (rdbPregled.IsChecked.Equals(true) && Doctor.RoomID.Equals(storageRoom.Id))
+                if (rdbPregled.IsChecked.Equals(true) && Appointment.Doctor.RoomID.Equals(storageRoom.Id))
                 {
                     Appointment.Room = storageRoom;
                     Appointment.Type = AppointmentType.examination;
@@ -255,12 +241,9 @@ namespace Hospital.View.Doktor
         }
         private void FillAppointmentProperties()
         {
-            //Appointment.patientName = Patient.FirstName;
-            Appointment.IDpatient = Patient.PersonalID;
-            //Appointment.patientSurname = Patient.LastName;
+            Appointment.IDpatient = Appointment.PatientsRecord.Patient.PersonalID;
             Appointment.DateTime = DateOfAppointment.Date.Add(DateTime.Parse(timeOfAppointment).TimeOfDay);
-            Appointment.IDDoctor = Doctor.PersonalID;
-            //Appointment.DoctrosNameSurname = Doctor.FirstName + " " + Doctor.LastName;
+            Appointment.IDDoctor = Appointment.Doctor.PersonalID;
             Appointment.IDAppointment = appointmentStorage.GetNewID();
             double timeInMinutesDouble = double.Parse(DurationInMinutes);
             Appointment.DurationInHours = timeInMinutesDouble / 60;

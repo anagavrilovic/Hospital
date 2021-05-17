@@ -27,6 +27,7 @@ namespace Hospital.View
     {
         private DoctorStorage doctorStorage = new DoctorStorage();
         private AppointmentStorage appointmentStorage = new AppointmentStorage();
+        private MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
         private Hospital.Model.Doctor doctor = new Hospital.Model.Doctor();
         public Hospital.Model.Doctor Doctor
         {
@@ -74,6 +75,8 @@ namespace Hospital.View
             {
                 if (a.IDDoctor.Equals(Doctor.PersonalID))
                 {
+                    a.Doctor = doctorStorage.GetOne(a.IDDoctor);
+                    a.PatientsRecord = medicalRecordStorage.GetByPatientID(a.IDpatient);
                     Appointments.Add(a);
                 }
             }

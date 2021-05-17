@@ -23,8 +23,8 @@ namespace Hospital.View
   
     public partial class KreiranjeTermina : Window,INotifyPropertyChanged
     {
-        private ObservableCollection<Hospital.Model.Doctor> doktori;
-        private Appointment appointment;
+        private ObservableCollection<Hospital.Model.Doctor> doctors;
+        private Appointment appointment=new Appointment();
         public Appointment Appointment { get => appointment; set => appointment = value; } 
         private Room room;
         public Room Room
@@ -59,33 +59,11 @@ namespace Hospital.View
             }
 
         }
-        private Hospital.Model.Doctor doctor;
-        public Hospital.Model.Doctor Doctor
-        {
-            get { return doctor; }
-            set
-            {
-                doctor = value;
-                OnPropertyChanged();
-            }
-
-        }
-        private Patient patient=new Patient();
-        public Patient Patient
-        {
-            get { return patient; }
-            set
-            {
-                patient = value;
-                OnPropertyChanged();
-            }
-
-        }
         public ObservableCollection<Hospital.Model.Doctor> Doctors  
             {
-                get{ return doktori;}
+                get{ return doctors;}
                 set {
-                doktori = value;
+                doctors = value;
                 OnPropertyChanged();
             }
 
@@ -131,10 +109,7 @@ namespace Hospital.View
 
         private void InitProperties(string id)
         {
-            Patient = new Patient();
-            Patient = (medicalRecordStorage.GetByPatientID(id)).Patient;
-            Appointment = new Appointment();
-            Doctor = new Hospital.Model.Doctor();
+            Appointment.PatientsRecord = (medicalRecordStorage.GetByPatientID(id));
             SetDoctorListAndRadioButtons();
         }
 
@@ -240,8 +215,9 @@ namespace Hospital.View
             ObservableCollection<Appointment> list = new ObservableCollection<Appointment>();
             foreach (Appointment a in appointmentStorage.GetAll())
             {
-                if (doctorStorage.GetOne(a.IDDoctor).Specialty.Equals(Doctor.Specialty))
+                if (doctorStorage.GetOne(a.IDDoctor).Specialty.Equals(Appointment.Doctor.Specialty))
                 {
+                    a.PatientsRecord = medicalRecordStorage.GetByPatientID(a.IDpatient);
                     list.Add(a);
                 }
             }  
@@ -254,7 +230,7 @@ namespace Hospital.View
         {
             foreach (Room storageRoom in roomStorage.GetAll())
             {
-                if (rdbPregled.IsChecked.Equals(true) && Doctor.RoomID.Equals(storageRoom.Id))
+                if (rdbPregled.IsChecked.Equals(true) && Appointment.Doctor.RoomID.Equals(storageRoom.Id))
                 {
                     Appointment.Room = storageRoom;
                     Appointment.Type = AppointmentType.examination;
@@ -278,12 +254,9 @@ namespace Hospital.View
 
         private void FillAppointmentProperties()
         {
-            //Appointment.patientName = Patient.FirstName;
-            Appointment.IDpatient = Patient.PersonalID;
-            //Appointment.patientSurname = Patient.LastName;
+            Appointment.IDpatient = Appointment.PatientsRecord.Patient.PersonalID;
             Appointment.DateTime = DateOfAppointment.Date.Add(DateTime.Parse(timeOfAppointment).TimeOfDay);
-            Appointment.IDDoctor = Doctor.PersonalID;
-            //Appointment.DoctrosNameSurname = Doctor.FirstName + " " + Doctor.LastName;
+            Appointment.IDDoctor = Appointment.Doctor.PersonalID;
             Appointment.IDAppointment = appointmentStorage.GetNewID();
             double timeInMinutesDouble = double.Parse(DurationInMinutes);
             Appointment.DurationInHours = timeInMinutesDouble / 60;

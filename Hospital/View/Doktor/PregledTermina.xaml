@@ -33,8 +33,8 @@
         <DataGrid x:Name="dataGridPregledi" ItemsSource="{Binding Path=Appointments}"
                SelectionMode="Single" IsReadOnly="True" Margin="30,30,30,30" AutoGenerateColumns="False" Style="{DynamicResource PacijentiDataGrid}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Ime Pacijent" Width="0.25*" Binding="{Binding PatientName}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="Prezime pacijenta" Width="0.25*" Binding="{Binding PatientSurname}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Ime Pacijent" Width="0.25*" Binding="{Binding PatientsRecord.Patient.FirstName}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="Prezime pacijenta" Width="0.25*" Binding="{Binding PatientsRecord.Patient.LastName}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
                 <DataGridTextColumn Header="Duzina trajanja" Width="0.25*" Binding="{Binding DurationInHours}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
                 <DataGridTextColumn Header="Datum" Width="0.25*" Binding="{Binding DateTime}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
                 <DataGridTextColumn Header="Tip termina" Width="0.25*" Binding="{Binding Type}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>

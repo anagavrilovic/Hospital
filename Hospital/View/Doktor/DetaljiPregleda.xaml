@@ -29,8 +29,8 @@
                     <TextBlock>
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0}  {1}">
-                                <Binding Path="Appointment.PatientSurname" />
-                                <Binding Path="Appointment.PatientName" />
+                                <Binding Path="Appointment.PatientsRecord.Patient.FirstName" />
+                                <Binding Path="Appointment.PatientsRecord.Patient.LastName" />
                             </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>
