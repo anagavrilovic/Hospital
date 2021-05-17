@@ -4,11 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View" 
-      xmlns:val="clr-namespace:Hospital.ValidacijeLekar"
+      xmlns:val="clr-namespace:Hospital.ValidacijeLekar" 
+      xmlns:ViewModels="clr-namespace:Hospital.ViewModels"
       mc:Ignorable="d"
         Title="Diagnosis" Background="{DynamicResource BackgroundGray}">
     <Page.Resources>
-        <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <ViewModels:DiagnosisViewModel x:Key="vm"/>
+        </ResourceDictionary>
     </Page.Resources>
     <Grid>
         <StackPanel Orientation="Vertical">
@@ -24,8 +30,8 @@
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-                    <Button  Style="{DynamicResource ButtonWithValidation}"
-                             Margin="200,5,20,0" VerticalAlignment="Top" Click="Sacuvaj" HorizontalAlignment="Left">
+            <Button  Style="{DynamicResource ButtonWithValidation}" Command="{Binding SaveDiagnosisCommand, Source={StaticResource vm}}"
+                             Margin="200,5,20,0" VerticalAlignment="Top" HorizontalAlignment="Left">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../../Icon/DoctorIcons/save.png" Width="20"/>
                     <TextBlock Text="Sačuvaj dijagnozu"/>
