@@ -108,7 +108,39 @@
     <Compile Include="Model\TransferInventoryStorage.cs" />
     <Compile Include="Model\UnitsType.cs" />
     <Compile Include="Model\UserType.cs" />
+    <Compile Include="Repositories\AppointmentFileRepository.cs" />
+    <Compile Include="Repositories\DynamicInventoryFileRepository.cs" />
+    <Compile Include="Repositories\HospitalTreatmentFileRepository.cs" />
     <Compile Include="Repositories\IFileRepository.cs" />
+    <Compile Include="Repositories\MedicalRecordFileRepository.cs" />
+    <Compile Include="Repositories\MedicineFileRepository.cs" />
+    <Compile Include="Repositories\MedicineRevisionFileRepository.cs" />
+    <Compile Include="Repositories\NotificationFileRepository.cs" />
+    <Compile Include="Repositories\NotificationsUsersFileRepository.cs" />
+    <Compile Include="Repositories\PatientCommentsFileRepository.cs" />
+    <Compile Include="Repositories\PatientNotificationsFileRepository.cs" />
+    <Compile Include="Repositories\PatientSettingsFileRepository.cs" />
+    <Compile Include="Repositories\RegistratedUserFileRepository.cs" />
+    <Compile Include="Repositories\RoomFileRepository.cs" />
+    <Compile Include="Repositories\RoomRenovationFileRepository.cs" />
+    <Compile Include="Repositories\StaticInventoryFileRepository.cs" />
+    <Compile Include="Repositories\TransferInventoryFileRepository.cs" />
+    <Compile Include="Services\AppointmentService.cs" />
+    <Compile Include="Services\DynamicInventoryService.cs" />
+    <Compile Include="Services\HospitalTreatmentService.cs" />
+    <Compile Include="Services\MedicalRecordService.cs" />
+    <Compile Include="Services\MedicineRevisionService.cs" />
+    <Compile Include="Services\MedicineService.cs" />
+    <Compile Include="Services\NotificationService.cs" />
+    <Compile Include="Services\NotificationsUsersService.cs" />
+    <Compile Include="Services\PatientCommentsService.cs" />
+    <Compile Include="Services\PatientNotificationService.cs" />
+    <Compile Include="Services\PatientSettingsService.cs" />
+    <Compile Include="Services\RegistratedUserService.cs" />
+    <Compile Include="Services\RoomRenovationService.cs" />
+    <Compile Include="Services\RoomService.cs" />
+    <Compile Include="Services\StaticInventoryService.cs" />
+    <Compile Include="Services\TransferInventoryService.cs" />
     <Compile Include="ValidacijeLekar\EmptyStringValidationRule.cs" />
     <Compile Include="ValidacijeSekretar\EmailValidationRule.cs" />
     <Compile Include="ValidacijeSekretar\OnlyDigitsValidationRuleCardID.cs" />
@@ -912,5 +944,6 @@
   <ItemGroup>
     <Resource Include="Icon\DoctorIcons\search.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

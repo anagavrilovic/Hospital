@@ -12,7 +12,7 @@ namespace Hospital.Repositories
     {
         ObservableCollection<T> GetAll();
         void Save(T parameter);
-        bool Delete(string id);
+        void Delete(string id);
         T GetByID(string id);
         void Serialize(ObservableCollection<T> parameter);
 

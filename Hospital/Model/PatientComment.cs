@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Model
 {
-    class PatientComment
+    public class PatientComment
     {
        public String IDPatient { get; set; }
        public String IDAppointment { get; set; }
