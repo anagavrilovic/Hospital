@@ -3,6 +3,7 @@
 // Created: Wednesday, March 24, 2021 3:04:22 PM
 // Purpose: Definition of Class Inventory
 
+using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
 
@@ -114,5 +115,8 @@ namespace Hospital
                 }
             }
         }
+
+        [JsonIgnore]
+        public Room Room { get; set; }
     }
 }

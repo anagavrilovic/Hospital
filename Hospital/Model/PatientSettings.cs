@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,8 @@ namespace Hospital.Model
         public String IDPatient { get; set; }
 
         public List<DateTime> LatestScheduledAppointmentsTime { get; set; }
+
+        [JsonIgnore]
+        public MedicalRecord PatientsRecord { get; set; }
     }
 }

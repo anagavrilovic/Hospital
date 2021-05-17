@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
 using System.Text;
@@ -51,36 +52,6 @@ namespace Hospital
             }
         }
 
-        public string patientName;
-
-        public string PatientName
-        {
-            get
-            {
-                return patientName;
-            }
-            set
-            {
-                patientName = value;
-                OnPropertyChanged("PatientName");
-            }
-        }
-
-        public string patientSurname;
-
-        public string PatientSurname
-        {
-            get
-            {
-                return patientSurname;
-            }
-            set
-            {
-                patientSurname = value;
-                OnPropertyChanged("PatientSurname");
-            }
-        }
-
         private string iDpatient;
 
         public string IDpatient 
@@ -124,19 +95,6 @@ namespace Hospital
             } 
         }
 
-        private string doctrosNameSurname;
-        public string DoctrosNameSurname 
-        {
-            get
-            {
-                return doctrosNameSurname;
-            }
-            set
-            {
-                doctrosNameSurname = value;
-                OnPropertyChanged("DoctrosNameSurname");
-            } 
-        }
       
         private Room room = new Room();
       
@@ -153,9 +111,16 @@ namespace Hospital
             }
         }
 
+        [JsonIgnore]
+        public MedicalRecord PatientsRecord { get; set; }
+        [JsonIgnore]
+        public Model.Doctor Doctor { get; set; }
+
         public Appointment()
         {
             this.Type = AppointmentType.none;
+            this.PatientsRecord = new MedicalRecord();
+            this.Doctor = new Model.Doctor();
         }
 
         public Appointment(DateTime dateTime, AppointmentType type, string patientName, string patientSurname, string iDpatient, string iDDoctor, string iDAppointment, 
@@ -163,12 +128,9 @@ namespace Hospital
         {
             this.dateTime = dateTime;
             this.type = type;
-            this.patientName = patientName;
-            this.patientSurname = patientSurname;
             this.iDpatient = iDpatient;
             this.iDDoctor = iDDoctor;
             this.iDAppointment = iDAppointment;
-            this.doctrosNameSurname = doctrosNameSurname;
             this.room = room;
         }
 
@@ -235,9 +197,9 @@ namespace Hospital
             else
             {
                 StringBuilder stringBuilder = new StringBuilder("");
-                stringBuilder.Append(this.patientName).Append(" ").Append(this.patientSurname);
+                stringBuilder.Append(this.PatientsRecord.Patient.FirstName).Append(" ").Append(this.PatientsRecord.Patient.LastName);
                 stringBuilder.AppendLine();
-                stringBuilder.Append(this.DoctrosNameSurname);
+                stringBuilder.Append(this.Doctor.ToString());
                 stringBuilder.AppendLine();
                 stringBuilder.Append(this.Room.Name);
 

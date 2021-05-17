@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -64,5 +65,8 @@ namespace Hospital.Model
             String s = FromDate.ToShortDateString();
             duration = FromDate.ToShortDateString() + " - " + ToDate.ToShortDateString();
         }
+
+        [JsonIgnore]
+        public MedicalRecord PatientsRecord { get; set; }
     }
 }

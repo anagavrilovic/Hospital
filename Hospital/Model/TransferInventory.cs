@@ -115,6 +115,11 @@ namespace Hospital.Model
             }
         }
 
+        [JsonIgnore]
+        public Room FirstRoom { get; set; }
+        [JsonIgnore]
+        public Room DestinationRoom { get; set; }
+
         public TransferInventory() {}
 
         public TransferInventory(string itemId, int quantity, string firstRoomID, string secondRoomID, DateTime date)

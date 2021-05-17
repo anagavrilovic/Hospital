@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,5 +44,10 @@ namespace Hospital.Model
             this.Username = username;
             this.Read = false;
         }
+
+        [JsonIgnore]
+        public Notification Notification { get; set; }
+        [JsonIgnore]
+        public Patient Patient { get; set; }
     }
 }

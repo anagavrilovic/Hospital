@@ -78,7 +78,7 @@ namespace Hospital.View
             }
             else
             {
-                patientComment = new PatientComment(MainWindow.IDnumber, app.IDAppointment, CommentArea.Text, Int32.Parse((String)GradeButton.Content), app.DoctrosNameSurname, DateTime.Now);
+                patientComment = new PatientComment(MainWindow.IDnumber, app.IDAppointment, CommentArea.Text, Int32.Parse((String)GradeButton.Content), "string", DateTime.Now);
             }
             patientCommentsStorage.Save(patientComment);
             if (app == null)

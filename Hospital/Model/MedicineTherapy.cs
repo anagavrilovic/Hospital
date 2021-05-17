@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -62,5 +63,8 @@ namespace Hospital.Model
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
+
+        [JsonIgnore]
+        public Medicine Medicine { get; set; }
     }
 }

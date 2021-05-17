@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,5 +40,10 @@ namespace Hospital.Model
             DoctorsNameSurname = "";
             DateWhenRated = dateWhenRated;
         }
+
+        [JsonIgnore]
+        public Appointment Appointment { get; set; }
+        [JsonIgnore]
+        public MedicalRecord PatientsRecord { get; set; }
     }
 }

@@ -105,7 +105,7 @@ namespace Hospital.View.Secretary
         private void SetDoctorForNewUrgentAppointment(Model.Doctor doctor)
         {
             NewUrgentAppointment.IDDoctor = doctor.PersonalID;
-            NewUrgentAppointment.DoctrosNameSurname = doctor.FirstName + " " + doctor.LastName;
+            //NewUrgentAppointment.DoctrosNameSurname = doctor.FirstName + " " + doctor.LastName;
         }
 
         private void InsertIfOptionDoesntExist(OptionForRescheduling optionForRescheduling)

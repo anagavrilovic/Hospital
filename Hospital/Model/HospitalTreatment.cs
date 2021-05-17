@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,5 +33,10 @@ namespace Hospital.Model
             get { return endOfTreatment; }
             set { endOfTreatment = value; }
         }
+
+        [JsonIgnore]
+        public MedicalRecord PatientsRecord { get; set; }
+        [JsonIgnore]
+        public Room Room { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -81,6 +82,11 @@ namespace Hospital.Model
                 }
             }
         }
+
+        [JsonIgnore]
+        public Room FirstRoom { get; set; }
+        [JsonIgnore]
+        public Room DestinationRoom { get; set; }
 
         public TransferDynamicInventory() { }
 

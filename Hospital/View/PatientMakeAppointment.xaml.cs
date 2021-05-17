@@ -127,8 +127,8 @@ namespace Hospital.View
                 return null;
             }
 
-            return new Appointment(patientCalendarDTO.Dates[currentColumnIndex - 1], AppointmentType.examination, medicalRecordStorage.GetByPatientID(MainWindow.IDnumber).Patient.FirstName, medicalRecordStorage.GetByPatientID(MainWindow.IDnumber).Patient.LastName, MainWindow.IDnumber, patientCalendarDTO.DoctorsID[currentColumnIndex - 1], appointmentStorage.GetNewID(), patientCalendarDTO.Doctors[currentColumnIndex - 1].Substring(3), roomStorage.GetOne(doctorStorage.GetOne(patientCalendarDTO.DoctorsID[currentColumnIndex - 1]).RoomID));
-
+            //return new Appointment(patientCalendarDTO.Dates[currentColumnIndex - 1], AppointmentType.examination, medicalRecordStorage.GetByPatientID(MainWindow.IDnumber).Patient.FirstName, medicalRecordStorage.GetByPatientID(MainWindow.IDnumber).Patient.LastName, MainWindow.IDnumber, patientCalendarDTO.DoctorsID[currentColumnIndex - 1], appointmentStorage.GetNewID(), patientCalendarDTO.Doctors[currentColumnIndex - 1].Substring(3), roomStorage.GetOne(doctorStorage.GetOne(patientCalendarDTO.DoctorsID[currentColumnIndex - 1]).RoomID));
+            return new Appointment();
         }
 
         private Boolean IsChosenDateAcceptable(Appointment appointment)

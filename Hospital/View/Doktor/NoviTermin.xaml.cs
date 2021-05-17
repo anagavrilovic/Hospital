@@ -255,12 +255,12 @@ namespace Hospital.View.Doktor
         }
         private void FillAppointmentProperties()
         {
-            Appointment.patientName = Patient.FirstName;
+            //Appointment.patientName = Patient.FirstName;
             Appointment.IDpatient = Patient.PersonalID;
-            Appointment.patientSurname = Patient.LastName;
+            //Appointment.patientSurname = Patient.LastName;
             Appointment.DateTime = DateOfAppointment.Date.Add(DateTime.Parse(timeOfAppointment).TimeOfDay);
             Appointment.IDDoctor = Doctor.PersonalID;
-            Appointment.DoctrosNameSurname = Doctor.FirstName + " " + Doctor.LastName;
+            //Appointment.DoctrosNameSurname = Doctor.FirstName + " " + Doctor.LastName;
             Appointment.IDAppointment = appointmentStorage.GetNewID();
             double timeInMinutesDouble = double.Parse(DurationInMinutes);
             Appointment.DurationInHours = timeInMinutesDouble / 60;

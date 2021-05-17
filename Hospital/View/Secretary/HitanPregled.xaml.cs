@@ -126,8 +126,8 @@ namespace Hospital.View.Secretary
                 newPatient = SelectedPatient;
 
             NewUrgentAppointment.IDpatient = newPatient.Patient.PersonalID;
-            NewUrgentAppointment.PatientName = newPatient.Patient.FirstName;
-            NewUrgentAppointment.PatientSurname = newPatient.Patient.LastName;
+            //NewUrgentAppointment.PatientName = newPatient.Patient.FirstName;
+            //NewUrgentAppointment.PatientSurname = newPatient.Patient.LastName;
         }
 
         private void SetAppointmentDetails()
@@ -204,7 +204,7 @@ namespace Hospital.View.Secretary
         private void SetDoctorForNewAppointment(Model.Doctor doctor)
         {
             NewUrgentAppointment.IDDoctor = doctor.PersonalID;
-            NewUrgentAppointment.DoctrosNameSurname = doctor.FirstName + " " + doctor.LastName;
+            //NewUrgentAppointment.DoctrosNameSurname = doctor.FirstName + " " + doctor.LastName;
         }
 
         private void BtnOdustaniClick(object sender, RoutedEventArgs e)
