@@ -54,6 +54,18 @@ namespace Hospital.View
             checkHospitalTreatmentDates();
         }
 
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var app = (App)Application.Current;
+            if (languageComboBox.SelectedIndex == 0)
+            {
+                app.ChangeLanguage("sr-LATN");
+            }
+            else
+            {
+                app.ChangeLanguage("en-US");
+            }
+        }
         private void checkHospitalTreatmentDates()
         {
             HospitalTreatmentStorage hospitalTreatmentStorage = new HospitalTreatmentStorage();

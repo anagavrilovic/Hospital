@@ -141,6 +141,7 @@
     <Compile Include="Services\RoomService.cs" />
     <Compile Include="Services\StaticInventoryService.cs" />
     <Compile Include="Services\TransferInventoryService.cs" />
+    <Compile Include="TranslationSource.cs" />
     <Compile Include="ValidacijeLekar\EmptyStringValidationRule.cs" />
     <Compile Include="ValidacijeSekretar\EmailValidationRule.cs" />
     <Compile Include="ValidacijeSekretar\OnlyDigitsValidationRuleCardID.cs" />

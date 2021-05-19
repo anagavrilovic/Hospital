@@ -4,67 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
+        xmlns:ns="clr-namespace:Hospital"
         mc:Ignorable="d"
         Title="DoktorGlavniProzor"
         WindowStartupLocation="CenterScreen" 
         Background="{DynamicResource BackgroundGray}">
     <Window.Resources>
-        <Style x:Key="NoChromeButton" TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid x:Name="Chrome" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Foreground" Value="#ADADAD"/>
-                                <Setter Property="Opacity" TargetName="Chrome" Value="0.5"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Cursor" Value="Hand"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-        <LinearGradientBrush x:Key="GreenGradientBrush" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Offset="0" Color="#006700"/>
-            <GradientStop Offset="1" Color="#00ef00"/>
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="RedGradientBrush" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Offset="0" Color="#774040"/>
-            <GradientStop Offset="1" Color="#ef4040"/>
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="BlueGradientBrush" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Offset="0" Color="#404077"/>
-            <GradientStop Offset="1" Color="#4040ef"/>
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="CyanGradientBrush" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Offset="0" Color="#007777"/>
-            <GradientStop Offset="1" Color="#00efef"/>
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="YellowGradientBrush" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Offset="0" Color="#777740"/>
-            <GradientStop Offset="1" Color="Yellow"/>
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="MagentaGradientBrush" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Offset="0" Color="#770077"/>
-            <GradientStop Offset="1" Color="#ef00ef"/>
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="OrangeGradientBrush" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Offset="0" Color="DarkOrange"/>
-            <GradientStop Offset="1" Color="Orange"/>
-        </LinearGradientBrush>
+        <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
     </Window.Resources>
     <Grid>
         <Frame x:Name="Main" NavigationUIVisibility="Hidden"/>
@@ -73,6 +19,11 @@
             <Image Source="/Icon/logo.png" Width="120" Height="40" />
         </Button>
         <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0,10,10,0">
+            <Label Content="{ns:Loc languageLabel}" Style="{DynamicResource Label}"/>
+            <ComboBox x:Name="languageComboBox" Margin="0,5,0,0" Width="130" Height="25" VerticalAlignment="Top" SelectionChanged="ComboBox_SelectionChanged">
+                <ComboBoxItem>Srpski jezik</ComboBoxItem>
+                <ComboBoxItem>Engleski jezik</ComboBoxItem>
+            </ComboBox>
             <Button Style="{DynamicResource NoChromeButton}" HorizontalAlignment="Right" Click="Announcment_Click"
                 VerticalAlignment="Top" Margin="0,5,0,0">
                 <Image x:Name="obavestenje" Source="/Icon/notification.png" Width="60" Height="20"/>
