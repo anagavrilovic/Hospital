@@ -118,276 +118,270 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="acceptButton" xml:space="preserve">
-    <value>Accept</value>
+    <value>Potvrdi</value>
   </data>
   <data name="addButton" xml:space="preserve">
-    <value>Add</value>
+    <value>Dodaj</value>
   </data>
   <data name="addOrRemoveIngredientLabel" xml:space="preserve">
-    <value>Add or remove ingredient:</value>
+    <value>Dodaj ili izbaci sastojak:</value>
   </data>
   <data name="addOrRemoveReplacement" xml:space="preserve">
-    <value>Add or remove replacement:</value>
+    <value>Dodaj ili izbaci zamenu:</value>
   </data>
   <data name="allergicToIngredientLabel" xml:space="preserve">
-    <value>Allergic to ingredients:</value>
+    <value>Alergičan na sastojke:</value>
   </data>
   <data name="allergicToMedicineLabel" xml:space="preserve">
-    <value>Allergic to medicine:</value>
+    <value>Alergičan na lekove:</value>
   </data>
   <data name="anamnesisButton" xml:space="preserve">
-    <value>Save anamnesis</value>
+    <value>Sačuvaj anamnezu</value>
   </data>
   <data name="anamnesisLabel" xml:space="preserve">
-    <value>Anamnesis:</value>
+    <value>Anamneza:</value>
   </data>
   <data name="appointmentAtLabel" xml:space="preserve">
-    <value>Appointment at: </value>
+    <value>Termin kod: </value>
   </data>
   <data name="appointmentsLabel" xml:space="preserve">
-    <value>Appointments</value>
+    <value>Termini</value>
   </data>
   <data name="appointmentTypeLabel" xml:space="preserve">
-    <value>Appointment type</value>
+    <value>Tip termina</value>
   </data>
   <data name="backButton" xml:space="preserve">
-    <value>Back</value>
+    <value>Nazad:</value>
   </data>
   <data name="bloodLabel" xml:space="preserve">
-    <value>Blood type:</value>
+    <value>Krvna grupa:</value>
   </data>
   <data name="cityLabel" xml:space="preserve">
-    <value>City:</value>
+    <value>Opština:</value>
   </data>
   <data name="consumptionLabel" xml:space="preserve">
-    <value>Way of consumption:</value>
+    <value>Način upotrebe leka:</value>
   </data>
   <data name="countryLabel" xml:space="preserve">
-    <value>Country:</value>
+    <value>Država:</value>
   </data>
   <data name="dailyIntakeLabel" xml:space="preserve">
-    <value>Daily intake:</value>
+    <value>Dnevni unos leka:</value>
   </data>
   <data name="dateAndTime" xml:space="preserve">
-    <value>Date and time of examination:</value>
-  </data>
-  <data name="dateLabel" xml:space="preserve">
-    <value>Datum:</value>
+    <value>Datum i vreme terimna:</value>
   </data>
   <data name="dateOfBirthLabel" xml:space="preserve">
-    <value>Date of birth:</value>
+    <value>Datum rođenja:</value>
   </data>
   <data name="daysForConsumptionLabel" xml:space="preserve">
-    <value>Days for consumption:</value>
+    <value>Dana za konzumiranje:</value>
   </data>
   <data name="declineButton" xml:space="preserve">
-    <value>Decline</value>
+    <value>Odustani</value>
   </data>
   <data name="deleteButton" xml:space="preserve">
-    <value>Delete</value>
+    <value>Obriši</value>
   </data>
   <data name="diagnosisButton" xml:space="preserve">
-    <value>Save diagnosis</value>
+    <value>Sačuvaj dijagnozu</value>
   </data>
   <data name="diagnosisLabel" xml:space="preserve">
-    <value>Diagnosis:</value>
+    <value>Dijagnoza:</value>
   </data>
   <data name="doctorColonLabel" xml:space="preserve">
-    <value>Doctor:</value>
+    <value>Doktor:</value>
   </data>
   <data name="doctorLabel" xml:space="preserve">
-    <value>Doctor</value>
+    <value>Doktor</value>
   </data>
   <data name="dosageInMgLabel" xml:space="preserve">
-    <value>Dosage in miligrams:</value>
+    <value>Doza u miligramima:</value>
   </data>
   <data name="durationLabel" xml:space="preserve">
-    <value>Duration:</value>
+    <value>Trajanje:</value>
   </data>
   <data name="editButton" xml:space="preserve">
-    <value>Edit</value>
+    <value>Izmeni</value>
   </data>
   <data name="emergencyOperationLabel" xml:space="preserve">
-    <value>Emergency operation</value>
+    <value>Hitna operacija</value>
   </data>
   <data name="endOfTreatmentLabel" xml:space="preserve">
-    <value>End of hospital treatment:</value>
+    <value>Kraj bolničkog lečenja:</value>
   </data>
   <data name="errorrLabel" xml:space="preserve">
-    <value>Error</value>
+    <value>Greška</value>
   </data>
   <data name="examinationLabel" xml:space="preserve">
-    <value>examination</value>
+    <value>pregled</value>
   </data>
   <data name="explanationLabel" xml:space="preserve">
-    <value>Explanation:</value>
+    <value>Obrazloženje:</value>
   </data>
   <data name="freeBedsTB" xml:space="preserve">
-    <value>Free beds:</value>
+    <value>Slobodnih kreveta:</value>
   </data>
   <data name="genderLabel" xml:space="preserve">
-    <value>Gender:</value>
+    <value>Pol:</value>
   </data>
   <data name="healthCardLabel" xml:space="preserve">
-    <value>Health card number:</value>
+    <value>Broj zdravstvene lične karte:</value>
   </data>
   <data name="hospitalDatePicker" xml:space="preserve">
-    <value>Duration of hospital treatment:</value>
+    <value>Datum trajanja bolničkog lečenja:</value>
   </data>
   <data name="hospitalizedLabel" xml:space="preserve">
-    <value>Hospitalized</value>
+    <value>Hospitalizovani</value>
   </data>
   <data name="hospitalTreatmentButton" xml:space="preserve">
-    <value>Hospital treatment</value>
+    <value>Bolničko lečenje</value>
   </data>
   <data name="idCardLabel" xml:space="preserve">
-    <value>ID card:</value>
+    <value>Broj lične karte:</value>
   </data>
   <data name="ingredientsLabel" xml:space="preserve">
-    <value>Ingredients:</value>
+    <value>Sastojci:</value>
   </data>
   <data name="insuredLabel" xml:space="preserve">
-    <value>Insured:</value>
+    <value>Osiguran:</value>
   </data>
   <data name="inventoryLabel" xml:space="preserve">
-    <value>Inventory</value>
+    <value>Inventar</value>
   </data>
   <data name="languageLabel" xml:space="preserve">
-    <value>Select language:</value>
+    <value>Izaberite jezik:</value>
   </data>
   <data name="maritialLabel" xml:space="preserve">
-    <value>Maritial status:</value>
-  </data>
-  <data name="medicalRecordIdLabel" xml:space="preserve">
-    <value>Medical record id: </value>
+    <value>Bračno stanje:</value>
   </data>
   <data name="medicalRecordLabel" xml:space="preserve">
-    <value>Medical record</value>
+    <value>Pregled kartona</value>
   </data>
   <data name="medicineButton" xml:space="preserve">
-    <value>Medicine</value>
+    <value>Lekovi</value>
   </data>
   <data name="medicineTB" xml:space="preserve">
-    <value> Medicine:</value>
+    <value> Lek:</value>
   </data>
   <data name="nameLabel" xml:space="preserve">
-    <value>Name:</value>
+    <value>Ime:</value>
   </data>
   <data name="namePatientLabel" xml:space="preserve">
-    <value>Patient name:</value>
+    <value>Ime pacijenta:</value>
   </data>
   <data name="newButton" xml:space="preserve">
-    <value>New</value>
+    <value>Novi</value>
   </data>
   <data name="noButton" xml:space="preserve">
-    <value>No</value>
+    <value>Ne</value>
   </data>
   <data name="operationLabel" xml:space="preserve">
-    <value>operation</value>
+    <value>operacija</value>
   </data>
   <data name="otherAllergiesLabel" xml:space="preserve">
-    <value>Other allergies:</value>
+    <value>Ostali alergeni:</value>
   </data>
   <data name="parentLabel" xml:space="preserve">
-    <value>Parent name:</value>
+    <value>Ime jednog roditelja:</value>
   </data>
   <data name="patient" xml:space="preserve">
-    <value>Patient:</value>
+    <value>Pacijent:</value>
   </data>
   <data name="patientLabel" xml:space="preserve">
-    <value>Patient:</value>
+    <value>Pacijent:</value>
   </data>
   <data name="patientTitleLabel" xml:space="preserve">
-    <value>PATIENTS: patient details</value>
+    <value>PACIJENTI: detalji o pacijentu</value>
   </data>
   <data name="phoneLabel" xml:space="preserve">
-    <value>Phone number:</value>
+    <value>Kontakt telefon:</value>
   </data>
   <data name="placeLabel" xml:space="preserve">
-    <value>Place of living:</value>
+    <value>Mesto stanovanja:</value>
   </data>
   <data name="postalCodeLabel" xml:space="preserve">
-    <value>Zip code:</value>
+    <value>Poštanski broj:</value>
   </data>
   <data name="prescribedMedicineLabel" xml:space="preserve">
-    <value>Prescribed medicine:</value>
+    <value>Propisani lekovi:</value>
   </data>
   <data name="removeButton" xml:space="preserve">
-    <value>Remove</value>
+    <value>Izbaci</value>
   </data>
   <data name="requestLabel" xml:space="preserve">
-    <value>Request for</value>
+    <value>Zahtev za</value>
   </data>
   <data name="returnLabel" xml:space="preserve">
-    <value>Return</value>
+    <value>Vrati</value>
   </data>
   <data name="reviewButton" xml:space="preserve">
-    <value>Review</value>
+    <value>Pregledaj</value>
   </data>
   <data name="roomLabel" xml:space="preserve">
-    <value>Room:</value>
+    <value>Soba:</value>
   </data>
   <data name="saveChangesButton" xml:space="preserve">
-    <value>Save changes</value>
+    <value>Sačuvaj izmene</value>
   </data>
   <data name="saveExaminationButton" xml:space="preserve">
-    <value>Save examination</value>
+    <value>Sačuvaj pregled</value>
   </data>
   <data name="saveRevisionTB" xml:space="preserve">
-    <value>Save revision</value>
+    <value>Sačuvaj reviziju</value>
   </data>
   <data name="saveTherapyButton" xml:space="preserve">
-    <value>Save therapy</value>
+    <value>Sačuvaj terapiju</value>
   </data>
   <data name="searchIngredientLabel" xml:space="preserve">
-    <value>Search for ingredient:</value>
+    <value>Pretraži sastojak:</value>
   </data>
   <data name="searchMedicineLabel" xml:space="preserve">
-    <value>Search for medicine:</value>
+    <value>Pretraži lek:</value>
   </data>
   <data name="signOutLabel" xml:space="preserve">
-    <value>Sign Out</value>
+    <value>Odjavi se</value>
   </data>
   <data name="startExaminationTB" xml:space="preserve">
-    <value>Start examination</value>
+    <value>Započni pregled</value>
   </data>
   <data name="startOfTreatmentLabel" xml:space="preserve">
-    <value>Start of hospital treatment:</value>
+    <value>Početak bolničkog lečenja:</value>
   </data>
   <data name="streetLabel" xml:space="preserve">
-    <value>Street:</value>
+    <value>Ulica stanovanja:</value>
   </data>
   <data name="supstitutionMedicineLabel" xml:space="preserve">
-    <value>Supstitution medicines:</value>
+    <value>Zamenski lekovi:</value>
   </data>
   <data name="surnameLabel" xml:space="preserve">
-    <value>Surname:</value>
+    <value>Prezime:</value>
   </data>
   <data name="surnamePatientLabel" xml:space="preserve">
-    <value>Patient surname:</value>
+    <value>Prezime pacijenta:</value>
   </data>
   <data name="therapyDescriptionLabel" xml:space="preserve">
-    <value>Therapy description:</value>
+    <value>Opis terapije:</value>
   </data>
   <data name="therapyLabel" xml:space="preserve">
-    <value>Therapy</value>
+    <value>Terapija</value>
   </data>
   <data name="therapyNameLabel" xml:space="preserve">
-    <value>Therapy name:</value>
+    <value>Naziv terapije:</value>
   </data>
   <data name="typeExaminationLabel" xml:space="preserve">
-    <value>Type of examination/operation</value>
+    <value>Tip pregleda/operacije</value>
   </data>
   <data name="usernameLabel" xml:space="preserve">
-    <value>Username:</value>
+    <value>Korisničko ime:</value>
   </data>
   <data name="vacationLabel" xml:space="preserve">
-    <value>Vacation</value>
+    <value>goišnji odmor</value>
   </data>
   <data name="validateLabel" xml:space="preserve">
-    <value>Validate</value>
+    <value>Odobri</value>
   </data>
   <data name="yesButton" xml:space="preserve">
-    <value>Yes</value>
+    <value>Da</value>
   </data>
 </root>

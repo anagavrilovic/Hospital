@@ -37,7 +37,7 @@
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Icon/person.png" Width="25" Height="20" />
-                        <Label Content="Sign out"/>
+                        <Label Content="{ns:Loc signOutLabel}"/>
                     </StackPanel>
                 </Button.Content>
             </Button>

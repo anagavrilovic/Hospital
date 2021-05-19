@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ns="clr-namespace:Hospital" 
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
         Title="Termin" WindowStartupLocation="CenterScreen" 
@@ -26,7 +27,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Vertical">
                         <Image x:Name="KartonSlika" Source="/Icon/document.png" Width="100" Height="30"/>
-                        <Label x:Name="medicalRecordReviewLabel" Content="Karton" HorizontalAlignment="Center" FontSize="15"></Label>
+                        <Label x:Name="medicalRecordReviewLabel" Content="{ns:Loc medicalRecordLabel}" HorizontalAlignment="Center" FontSize="15"></Label>
                     </StackPanel>
                 </TabItem.Header>
             </TabItem>
@@ -34,7 +35,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Vertical">
                         <Image x:Name="AnamnezaSlika" Source="/Icon/pen.png" Width="100" Height="30"/>
-                        <Label x:Name="AnamnesisLabel" Content="Anamneza" HorizontalAlignment="Center" FontSize="15"></Label>
+                        <Label x:Name="AnamnesisLabel" Content="{ns:Loc anamnesisLabel}" HorizontalAlignment="Center" FontSize="15"></Label>
                     </StackPanel>
                 </TabItem.Header>
             </TabItem>
@@ -42,7 +43,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Vertical">
                         <Image x:Name="TerapijaSlika" Source="/Icon/plusSquare.png" Width="100" Height="30"/>
-                        <Label x:Name="TherapyLabel" Content="Terapija" HorizontalAlignment="Center" FontSize="15"></Label>
+                        <Label x:Name="TherapyLabel" Content="{ns:Loc therapyLabel}" HorizontalAlignment="Center" FontSize="15"></Label>
                     </StackPanel>
                 </TabItem.Header>
             </TabItem>
@@ -50,7 +51,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Vertical">
                         <Image x:Name="DijagnozaSlika" Source="/Icon/penPaper.png" Width="100" Height="30"/>
-                        <Label x:Name="DiagnosisLabel" Content="Dijagnoza" HorizontalAlignment="Center" FontSize="15"></Label>
+                        <Label x:Name="DiagnosisLabel" Content="{ns:Loc diagnosisLabel}" HorizontalAlignment="Center" FontSize="15"></Label>
                     </StackPanel>
                 </TabItem.Header>
             </TabItem>
@@ -58,15 +59,15 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Vertical">
                         <Image x:Name="SlikaTermin" Source="/Icon/calender.png" Width="100" Height="30"/>
-                        <Label x:Name="AppointmentLabel" Content="Termini" HorizontalAlignment="Center" FontSize="15"></Label>
+                        <Label x:Name="AppointmentLabel" Content="{ns:Loc appointmentsLabel}" HorizontalAlignment="Center" FontSize="15"></Label>
                     </StackPanel>
-                </TabItem.Header>
+                </TabItem.Header> 
             </TabItem >
             <TabItem x:Name="hospitalTreatmentTab" IsEnabled="False">
                 <TabItem.Header>
                     <StackPanel Orientation="Vertical">
                         <Image x:Name="TreatmentPicture" Source="/Icon/DoctorIcons/lecenje.png" Width="100" Height="30"/>
-                        <Label x:Name="TreatmentLabel" Content="Bolničko lečenje" HorizontalAlignment="Center" FontSize="15"></Label>
+                        <Label x:Name="TreatmentLabel" Content="{ns:Loc hospitalTreatmentButton}" HorizontalAlignment="Center" FontSize="15"></Label>
                     </StackPanel>
                 </TabItem.Header>
             </TabItem>

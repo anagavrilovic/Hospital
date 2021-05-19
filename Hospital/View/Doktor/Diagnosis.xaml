@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View" 
+       xmlns:ns="clr-namespace:Hospital" 
       xmlns:val="clr-namespace:Hospital.ValidacijeLekar" 
       xmlns:ViewModels="clr-namespace:Hospital.ViewModels"
       mc:Ignorable="d"
@@ -18,7 +19,7 @@
     </Page.Resources>
     <Grid>
         <StackPanel Orientation="Vertical">
-            <Label FontSize="25" Content="Dijagnoza:" Margin="60,0,0,0" Style="{DynamicResource Label}"></Label>
+            <Label FontSize="25" Content="{ns:Loc diagnosisLabel}" Margin="60,0,0,0" Style="{DynamicResource Label}"></Label>
             <TextBox Name="txtName" TextWrapping="Wrap" FontSize="15" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"
                       Width="600" Height="400" Margin="30,10,30,20" Style="{DynamicResource TextBox}"
                      Validation.ErrorTemplate="{DynamicResource ValidationErrorTemplate}">
@@ -34,7 +35,7 @@
                              Margin="200,5,20,0" VerticalAlignment="Top" HorizontalAlignment="Left">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../../Icon/DoctorIcons/save.png" Width="20"/>
-                    <TextBlock Text="Sačuvaj dijagnozu"/>
+                    <TextBlock Text="{ns:Loc diagnosisButton}"/>
                 </StackPanel>
                 </Button>
         </StackPanel>

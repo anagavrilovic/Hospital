@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View.Doktor"
+        xmlns:ns="clr-namespace:Hospital" 
         mc:Ignorable="d"
          Height="200" Width="400" WindowStartupLocation="CenterScreen" Background="Transparent"
         AllowsTransparency="True" WindowStyle="None"
@@ -19,12 +20,12 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Label Style="{DynamicResource Label}" FontSize="18" Content="Greška" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1">
+                <Label Style="{DynamicResource Label}" FontSize="18" Content="{ns:Loc errorrLabel}" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1">
                 </Label>
             </Grid>
 
             <DockPanel DockPanel.Dock="Bottom">
-                <Button VerticalAlignment="Center" HorizontalAlignment="Center" Content="Ok" Width="50" Style="{DynamicResource ImageButtonsHorizontal}" Click="Close">
+                <Button VerticalAlignment="Center" HorizontalAlignment="Center" Content="{ns:Loc yesButton}" Width="50" Style="{DynamicResource ImageButtonsHorizontal}" Click="Close">
                 </Button>
             </DockPanel>
             <StackPanel Orientation="Horizontal">

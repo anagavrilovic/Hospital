@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       xmlns:local="clr-namespace:Hospital.View.Doktor"
+      xmlns:ns="clr-namespace:Hospital"
       mc:Ignorable="d" 
       Title="BolnickoLecenje" Background="{DynamicResource BackgroundGray}">
     <Page.Resources>
@@ -39,12 +40,12 @@
             </StackPanel>
             <Label x:Name="bedNumberLabel" HorizontalAlignment="Left" Margin="0,0,0,15" FontSize="14" Style="{DynamicResource Label}">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text=" Slobodnih kreveta: "/>
+                    <TextBlock Text="{ns:Loc freeBedsTB}"/>
                     <TextBlock Text="{Binding SelectedRoom.FreeBeds}"/>
                 </StackPanel>
             </Label>
             <StackPanel Orientation="Horizontal">
-                <Label x:Name="dateLabel" Content="Datum trajanja bolničkog lečenja: " HorizontalAlignment="Left" Margin="5,0,5,15" FontSize="14" Style="{DynamicResource Label}"></Label>
+                <Label x:Name="dateLabel" Content="{ns:Loc hospitalDatePicker}" HorizontalAlignment="Left" Margin="5,0,5,15" FontSize="14" Style="{DynamicResource Label}"></Label>
             <DatePicker x:Name="datePicker" Width="150" Height="25"  DisplayDateStart="{x:Static sys:DateTime.Today}"
                         SelectedDate="{Binding PatientsStayDuration, Mode=OneWayToSource}" FirstDayOfWeek="Monday" Margin="10,0,0,15"/>
             </StackPanel>
@@ -52,13 +53,13 @@
                 <Button  Style="{DynamicResource ImageButtonsHorizontal}" Click="Save_Click">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="../../Icon/DoctorIcons/save.png" Width="20"/>
-                        <TextBlock Text="Potvrdi"/>
+                        <TextBlock Text="{ns:Loc acceptButton}"/>
                     </StackPanel>
                 </Button>
                 <Button  Style="{DynamicResource ImageButtonsHorizontal}" Click="Back_Click">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="../../Icon/DoctorIcons/cancel.png" Width="20"/>
-                        <TextBlock Text="Odustani"/>
+                        <TextBlock Text="{ns:Loc declineButton}"/>
                     </StackPanel>
                 </Button>
             </StackPanel>

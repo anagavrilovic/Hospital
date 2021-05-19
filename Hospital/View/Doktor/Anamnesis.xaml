@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View" 
+      xmlns:ns="clr-namespace:Hospital" 
       xmlns:val="clr-namespace:Hospital.ValidacijeLekar"
       mc:Ignorable="d"
         Title="Anamnesis" Background="{DynamicResource BackgroundGray}" >
@@ -12,7 +13,7 @@
     </Page.Resources>
     <Grid>
         <StackPanel Orientation="Vertical">
-            <Label FontSize="25" Content="Anamneza:" Margin="60,0,0,0" Style="{DynamicResource Label}"></Label>
+            <Label FontSize="25" Content="{ns:Loc anamnesisLabel}" Margin="60,0,0,0" Style="{DynamicResource Label}"></Label>
             <TextBox Name="txtName" TextWrapping="Wrap" FontSize="15" AcceptsReturn="True"
                          Validation.ErrorTemplate="{DynamicResource ValidationErrorTemplate}" Width="600" Height="400" Margin="30,10,30,20"
                       Style="{DynamicResource TextBox}">
@@ -27,7 +28,7 @@
             <Button  Margin="200,5,20,0" VerticalAlignment="Top" Click="SaveChanges_Click" HorizontalAlignment="Left" Style="{DynamicResource ButtonWithValidation}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="../../Icon/DoctorIcons/save.png" Width="20"/>
-                        <TextBlock Text="Sačuvaj anamnezu"/>
+                    <TextBlock Text="{ns:Loc anamnesisButton}"/>
                     </StackPanel>
                 </Button>
         </StackPanel>

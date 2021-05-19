@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
+        xmlns:ns="clr-namespace:Hospital"
         mc:Ignorable="d"
         Title="DetaljiPregleda"
         Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" WindowStartupLocation="CenterScreen">
@@ -23,7 +24,7 @@
         <Frame x:Name="Main" NavigationUIVisibility="Hidden"/>
         
             <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <Label FontSize="17" Width="77" Margin="0,0,10,0" Content="Pacijent:" FontFamily="Yu Gothic"/>
+            <Label FontSize="17" Width="77" Margin="0,0,10,0" Content="{ns:Loc patientLabel}" FontFamily="Yu Gothic"/>
             <Label x:Name="DoktorLabel" FontSize="17" FontFamily="Yu Gothic">
                 <Label.Content>
                     <TextBlock>
@@ -43,24 +44,24 @@
                   Margin="50,0,40,0" Click="startExamination_Click" Style="{DynamicResource ImageButtonsHorizontal}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../../Icon/DoctorIcons/start.jpg" Width="20"/>
-                    <TextBlock Text="Započni pregled"/>
+                    <TextBlock Text="{ns:Loc startExaminationTB}"/>
                 </StackPanel>
             </Button>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1">
-            <Label Content="Datum i vreme termina:" FontSize="17" FontFamily="Yu Gothic"/>
+            <Label Content="{ns:Loc dateAndTime}" FontSize="17" FontFamily="Yu Gothic"/>
             <Label x:Name="Datum" FontSize="17" Content="{Binding Appointment.DateTime, StringFormat=d}" FontFamily="Yu Gothic"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <Label FontSize="17" Margin="0,0,10,0" FontFamily="Yu Gothic">Trajanje u minutama:</Label>
+            <Label FontSize="17" Margin="0,0,10,0" Content="{ns:Loc durationLabel}" FontFamily="Yu Gothic"></Label>
             <Label FontSize="17" x:Name="trajanje" Content="{Binding DurationInMinutes, Mode=OneWay}" FontFamily="Yu Gothic"></Label>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <Label FontSize="17" Margin="0,0,10,0" FontFamily="Yu Gothic">Tip pregleda/operacije:</Label>
+            <Label FontSize="17" Margin="0,0,10,0" Content="{ns:Loc typeExaminationLabel}" FontFamily="Yu Gothic"></Label>
             <Label FontSize="17" Name="novac" IsEnabled="False" FontFamily="Yu Gothic">Text</Label>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <Label FontSize="17" FontFamily="Yu Gothic">Sala:</Label>
+            <Label FontSize="17" FontFamily="Yu Gothic"  Content="{ns:Loc roomLabel}"></Label>
             <Label x:Name="salalab" FontSize="17" Content="{Binding Appointment.Room.Name}" FontFamily="Yu Gothic"></Label>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" >
@@ -69,14 +70,14 @@
                   Margin="0,0,40,0" Style="{DynamicResource ImageButtonsHorizontal}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../../Icon/DoctorIcons/view.png" Width="20"/>
-                    <TextBlock Text="Pregled kartona"/>
+                    <TextBlock Text="{ns:Loc medicalRecordLabel}"/>
                 </StackPanel>
             </Button>
             <Button x:Name="cancel"  FontSize="18" Style="{DynamicResource ImageButtonsHorizontal}"
                 Click="cancel_Click">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../../Icon/DoctorIcons/back.png" Width="20"/>
-                    <TextBlock Text="Nazad"/>
+                    <TextBlock Text="{ns:Loc declineButton}"/>
                 </StackPanel>
             </Button>
         </StackPanel>

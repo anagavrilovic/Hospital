@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:ns="clr-namespace:Hospital" 
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
         Title="KreiranjeTermina"
@@ -22,7 +23,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Left">
-            <Label FontSize="17" Width="77" Margin="0,0,10,0" HorizontalAlignment="Left" Content="Pacijent:" VerticalAlignment="Center" Style="{DynamicResource Label}"/>
+            <Label FontSize="17" Width="77" Margin="0,0,10,0" HorizontalAlignment="Left" Content="{ns:Loc patient}" VerticalAlignment="Center" Style="{DynamicResource Label}"/>
             <Label x:Name="pacijentIme" FontSize="17" HorizontalAlignment="Left" Margin="0,30,5,0" Style="{DynamicResource Label}">
                 <Label.Content>
                     <TextBlock>
@@ -37,12 +38,12 @@
             </Label>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Margin="0,20,20,0">
-            <Label x:Name="emergencyOperationLabel" Content="Hitna operacija:" FontSize="17" Style="{DynamicResource Label}" />
+            <Label x:Name="emergencyOperationLabel" Content="{ns:Loc emergencyOperationLabel}" FontSize="17" Style="{DynamicResource Label}" />
             <CheckBox x:Name="emergencyOperationCheckBox" IsChecked="False"  Style="{DynamicResource CircleCheckbox}"
                       Width="20" Height="20" Margin="0,-35,0,0" Checked="CheckBoxEmergency_Changed" Unchecked="CheckBoxEmergency_Changed"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center">
-            <Label FontSize="17"  Width="76" Content="Doktor:" Margin="0,0,10,0"  HorizontalAlignment="Left" Style="{DynamicResource Label}"/>
+            <Label FontSize="17"  Width="76" Content="{ns:Loc doctorColonLabel}" Margin="0,0,10,0"  HorizontalAlignment="Left" Style="{DynamicResource Label}"/>
             <ComboBox x:Name="doctorComboBox" Width="150" Height="30" SelectedValue="{Binding Appointment.Doctor}" 
                       ItemsSource="{Binding Doctors, Mode=TwoWay}" VerticalAlignment="Top" Margin="0,0,5,0" SelectionChanged="SelectedDoctorChanged">
                 <ComboBox.ItemTemplate>
@@ -54,35 +55,35 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <RadioButton GroupName="tipTermina" x:Name="rdbPregled" FontSize="17"  Content="pregled" IsChecked="False"/>
-            <RadioButton GroupName="tipTermina" x:Name="rdbOperacija" FontSize="17"  Content="operacija" IsChecked="False"/>
+            <RadioButton GroupName="tipTermina" x:Name="rdbPregled" FontSize="17"  Content="{ns:Loc examinationLabel}" IsChecked="False"/>
+            <RadioButton GroupName="tipTermina" x:Name="rdbOperacija" FontSize="17"  Content="{ns:Loc operationLabel}" IsChecked="False"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" >
-            <Label FontSize="17"  Width="190" Content="Datum i vreme termina:" Style="{DynamicResource Label}"/>
+            <Label FontSize="17"  Width="190" Content="{ns:Loc dateAndTime}" Style="{DynamicResource Label}"/>
             <DatePicker x:Name="datePicker" Width="150" Height="25"  DisplayDateStart="{x:Static sys:DateTime.Today}"
                         SelectedDate="{Binding DateOfAppointment, Mode=OneWayToSource}" FirstDayOfWeek="Monday" Margin="10,0,5,0"/>
             <ComboBox x:Name="timeComboBox" Width="20" Height="25" SelectedValue="{Binding TimeOfAppointment
                 ,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <Label FontSize="17" Margin="0,0,10,0" Style="{DynamicResource Label}">Trajanje u minutama:</Label>
+            <Label FontSize="17" Margin="0,0,10,0" Content="{ns:Loc durationLabel}" Style="{DynamicResource Label}"></Label>
             <ComboBox FontSize="17" x:Name="durationInMinutesComboBox" Width="150" Height="25" SelectedValue="{Binding DurationInMinutes, Mode=OneWayToSource}"></ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <Label FontSize="17" Margin="0,0,10,0" Style="{DynamicResource Label}">Tip pregleda/operacije:</Label>
+            <Label FontSize="17" Margin="0,0,10,0" Content="{ns:Loc typeExaminationLabel}" Style="{DynamicResource Label}"></Label>
             <TextBox FontSize="17" Name="sale" Width="150" Height="25" IsEnabled="False">Text</TextBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Top">
             <Button x:Name="save" FontSize="18" Click="save_Click" Margin="0,0,40,0" Style="{DynamicResource ImageButtonsHorizontal}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../../Icon/DoctorIcons/save.png" Width="20"/>
-                    <TextBlock Text="Potvrdi"/>
+                    <TextBlock Text="{ns:Loc acceptButton}"/>
                 </StackPanel>
             </Button>
             <Button x:Name="cancel"  FontSize="18" Click="cancel_Click" Style="{DynamicResource ImageButtonsHorizontal}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../../Icon/DoctorIcons/back.png" Width="20"/>
-                    <TextBlock Text="Odustani"/>
+                    <TextBlock Text="{ns:Loc declineButton}"/>
                 </StackPanel>
             </Button>
         </StackPanel>

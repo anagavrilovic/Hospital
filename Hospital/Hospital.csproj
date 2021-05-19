@@ -766,6 +766,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.sr-LATN.resx" />
     <None Include=".editorconfig" />
     <None Include="Files\appointments.json" />
     <None Include="Files\doctors.json" />

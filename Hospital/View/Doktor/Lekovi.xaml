@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Hospital.View.Doctor"
+      xmlns:ns="clr-namespace:Hospital" 
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Lekovi" Background="{DynamicResource BackgroundGray}">
@@ -17,7 +18,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0" Margin="20,20,0,0">
             <StackPanel Orientation="Horizontal">
-                <Label Content="Pretraži lek:" FontSize="18" Style="{DynamicResource Label}"/>
+                <Label Content="{ns:Loc searchMedicineLabel}" FontSize="18" Style="{DynamicResource Label}"/>
                 <Border Width="250" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom"
                             Style="{StaticResource TextBoxBorder}">
                     <StackPanel Margin="5" Orientation="Horizontal">
@@ -31,7 +32,7 @@
             </ListBox>
             
             <StackPanel Orientation="Horizontal">
-                <Label Content="Pretraži sastojak:" FontSize="18" Style="{DynamicResource Label}"/>
+                <Label Content="{ns:Loc searchIngredientLabel}" FontSize="18" Style="{DynamicResource Label}"/>
                 <Border Width="250" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom"
                             Style="{StaticResource TextBoxBorder}">
                     <StackPanel Margin="5" Orientation="Horizontal">
@@ -51,75 +52,75 @@
                 <Button x:Name="izmeni" Click="EditMedic_Click" Style="{DynamicResource ImageButtonsHorizontal}" HorizontalAlignment="Right" VerticalAlignment="Center">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="../../Icon/DoctorIcons/edit.png" Width="20"/>
-                        <TextBlock Text="Izmeni"/>
+                        <TextBlock Text="{ns:Loc editButton}" />
                     </StackPanel>
                 </Button>
                 <Button x:Name="sacuvaj" Margin="20,0,0,0" 
                             IsEnabled="False" Click="SaveChanges_Click" Style="{DynamicResource ImageButtonsHorizontal}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="../../Icon/DoctorIcons/addDark.png" Width="20"/>
-                        <TextBlock Text="Sacuvaj izmene"/>
+                        <TextBlock Text="{ns:Loc saveChangesButton}" />
                     </StackPanel>
                 </Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label x:Name="lekLabel" HorizontalAlignment="Left" FontSize="20" Style="{DynamicResource Label}">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text=" Lek: "/>
+                        <TextBlock Text="{ns:Loc medicineTB}"/>
                         <TextBlock Text="{Binding Medicine.Name}"/>
                     </StackPanel>
                 </Label>
             </StackPanel>
-            
-            
-            
-            <Label Content="Zamenski lekovi:" Margin="0,10,0,10" FontSize="15" Style="{DynamicResource Label}"/>
+
+
+
+            <Label Content="{ns:Loc supstitutionMedicineLabel}" Margin="0,10,0,10" FontSize="15" Style="{DynamicResource Label}"/>
             <StackPanel Orientation="Horizontal" Background="{DynamicResource MainWhite}">
                 <ListBox x:Name="replacementDrugsListBox" Height="150" IsSynchronizedWithCurrentItem="True" Width="300" IsEnabled="False"
                          Style="{DynamicResource ListBoxStyle}"></ListBox>
                 <StackPanel Orientation="Vertical" Margin="30,0,0,0">
-                    <Label Style="{DynamicResource Label}" Content="Dodaj ili izbaci zamenu:"/>
+                    <Label Style="{DynamicResource Label}" Content="{ns:Loc addOrRemoveReplacement}"/>
                     <Button x:Name="dodajZamenu" Margin="15,10,0,0"
                            IsEnabled="False" Click="AddReplacement_Click" Style="{DynamicResource ImageButtons}">
                         <StackPanel Orientation="Vertical">
                             <Image Source="../../Icon/DoctorIcons/addDark.png" Width="30"/>
-                            <TextBlock Text="Dodaj"/>
+                            <TextBlock Text="{ns:Loc addButton}"/>
                         </StackPanel>
                     </Button>
                     <Button x:Name="izbaciZamenu" Margin="15,20,0,0"
                          IsEnabled="False" Click="RemoveReplacement_Click" Style="{DynamicResource ImageButtons}">
                         <StackPanel Orientation="Vertical">
                             <Image Source="../../Icon/DoctorIcons/minus.png" Width="30"/>
-                            <TextBlock Text="Izbaci"/>
+                            <TextBlock Text="{ns:Loc removeButton}"/>
                         </StackPanel>
                     </Button>
                 </StackPanel>
             </StackPanel>
             
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                <Label Content="Doza u miligramima:" FontSize="15" Style="{DynamicResource Label}"/>
+                <Label Content="{ns:Loc dosageInMgLabel}" FontSize="15" Style="{DynamicResource Label}"/>
                 <TextBox x:Name="doza" Width="40" Height="25" Text="{Binding Lek.DosageInMg}" IsEnabled="False"/>
             </StackPanel>
 
 
-            <Label Margin="0,10,0,0" FontSize="15" Content="Sastojci:" Style="{DynamicResource Label}" />
+            <Label Margin="0,10,0,0" FontSize="15" Content="{ns:Loc ingredientsLabel}" Style="{DynamicResource Label}" />
             <StackPanel Orientation="Horizontal" Background="{DynamicResource MainWhite}">
                     <ListBox x:Name="medicineIngredientsListBox" Height="150" IsSynchronizedWithCurrentItem="True" Width="300" Margin="0,0,30,0" IsEnabled="False"
                          Style="{DynamicResource ListBoxStyle}"></ListBox>
                     <StackPanel Orientation="Vertical">
-                    <Label x:Name="sastojakLabela" Content="Dodaj ili izbaci sastojak:" Margin="15,0,0,0" Style="{DynamicResource Label}"/>
+                    <Label x:Name="sastojakLabela" Content="{ns:Loc addOrRemoveIngredientLabel}" Margin="15,0,0,0" Style="{DynamicResource Label}"/>
                     <Button  x:Name="dodajSastojak" Margin="15,10,0,0" IsEnabled="False"
                              Click="AddIngridient_Click" Style="{DynamicResource ImageButtons}">
                         <StackPanel Orientation="Vertical">
                             <Image Source="../../Icon/DoctorIcons/addDark.png" Width="30"/>
-                            <TextBlock Text="Dodaj"/>
+                            <TextBlock Text="{ns:Loc addButton}"/>
                         </StackPanel>
                     </Button>
                     <Button  x:Name="izbaciSastojak" Margin="15,10,0,0" IsEnabled="False" 
                          Click="RemoveIngridient_Click" Style="{DynamicResource ImageButtons}">
                         <StackPanel Orientation="Vertical">
                             <Image Source="../../Icon/DoctorIcons/minus.png" Width="30"/>
-                            <TextBlock Text="Izbaci"/>
+                            <TextBlock Text="{ns:Loc removeButton}"/>
                         </StackPanel>
                     </Button>
                 </StackPanel>

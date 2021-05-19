@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
+      xmlns:ns="clr-namespace:Hospital" 
         mc:Ignorable="d"
         Title="PregledTermina" Background="{DynamicResource BackgroundGray}">
     <Page.Resources>
@@ -18,13 +19,13 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Orientation="Horizontal">
-                    <Label FontSize="17" Content="Termin kod:" Margin="30,20,0,0" Style="{DynamicResource Label}"/>
+                    <Label FontSize="17" Content="{ns:Loc appointmentAtLabel}" Margin="30,20,0,0" Style="{DynamicResource Label}"/>
                     <ComboBox x:Name="ComboBox"  Margin="10,30,0,20" HorizontalAlignment="Left" SelectionChanged="SetAppointmentsInDataGrid"/>
                 </StackPanel>
                 <Button x:Name="addButton" Margin="0,20,30,20" Click="AddAppointment" Grid.Column="2" HorizontalAlignment="Right" Style="{DynamicResource ImageButtonsHorizontal}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="../../Icon/DoctorIcons/addDark.png" Width="20"/>
-                        <TextBlock Text="Novi termin"/>
+                        <TextBlock Text="{ns:Loc newButton}"/>
                     </StackPanel>
                 </Button>
             </Grid>
@@ -33,12 +34,12 @@
         <DataGrid x:Name="dataGridPregledi" ItemsSource="{Binding Path=Appointments}"
                SelectionMode="Single" IsReadOnly="True" Margin="30,30,30,30" AutoGenerateColumns="False" Style="{DynamicResource PacijentiDataGrid}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Ime Pacijent" Width="0.25*" Binding="{Binding PatientsRecord.Patient.FirstName}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="Prezime pacijenta" Width="0.25*" Binding="{Binding PatientsRecord.Patient.LastName}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="Duzina trajanja" Width="0.25*" Binding="{Binding DurationInHours}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="Datum" Width="0.25*" Binding="{Binding DateTime}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="Tip termina" Width="0.25*" Binding="{Binding Type}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="Sala" Width="0.25*" Binding="{Binding Room.Name}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="{ns:Loc namePatientLabel}" Width="0.25*" Binding="{Binding PatientsRecord.Patient.FirstName}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="{ns:Loc surnamePatientLabel}" Width="0.25*" Binding="{Binding PatientsRecord.Patient.LastName}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="{ns:Loc durationLabel}" Width="0.25*" Binding="{Binding DurationInHours}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="{ns:Loc dateLabel}" Width="0.25*" Binding="{Binding DateTime}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="{ns:Loc appointmentTypeLabel}" Width="0.25*" Binding="{Binding Type}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="{ns:Loc roomLabel}" Width="0.25*" Binding="{Binding Room.Name}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>

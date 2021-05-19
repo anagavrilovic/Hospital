@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Hospital.View.Doktor" 
+      xmlns:ns="clr-namespace:Hospital" 
       xmlns:converters="clr-namespace:Hospital.DoktorConverters"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -36,13 +37,13 @@
                     <Button Height="50" Width="100" Margin="0,30,0,0" Style="{DynamicResource ImageButtons}" Click="ConfirmMedicine_Click">
                         <StackPanel Orientation="Vertical">
                             <Image Source="../../Icon/DoctorIcons/confirm.png" Width="30"/>
-                            <TextBlock Text="Odobri lek"/>
+                            <TextBlock Text="{ns:Loc validateLabel}"/>
                         </StackPanel>
                     </Button>
-                    <Button Height="50" Width="110" Margin="0,30,-10,0" Style="{DynamicResource ImageButtons}" Click="RejectMedicine_Click">
+                    <Button Height="50" Width="100" Margin="0,30,0,0" Style="{DynamicResource ImageButtons}" Click="RejectMedicine_Click">
                         <StackPanel Orientation="Vertical">
                             <Image Source="../../Icon/DoctorIcons/cancel.png" Width="30"/>
-                            <TextBlock Text="Vrati na izmenu"/>
+                            <TextBlock Text="{ns:Loc returnLabel}"/>
                         </StackPanel>
                     </Button>
                 </StackPanel>

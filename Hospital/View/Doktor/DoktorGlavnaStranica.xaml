@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Hospital.View"
+      xmlns:ns="clr-namespace:Hospital" 
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DoktorGlavnaStranica">
@@ -28,7 +29,7 @@
             <Button.Content>
                 <StackPanel Orientation="Vertical">
                     <Image Source="/Icon/calender.png" Width="150" Height="50"/>
-                    <Label FontSize="19" Content="Termini" HorizontalAlignment="Center"/>
+                    <Label FontSize="19" Content="{ns:Loc appointmentsLabel}" HorizontalAlignment="Center"/>
                 </StackPanel>
             </Button.Content>
         </Button>
@@ -36,7 +37,7 @@
             <Button.Content>
                 <StackPanel Orientation="Vertical">
                     <Image Source="/Icon/medicals.jpg" Width="150" Height="50"/>
-                    <Label FontSize="19" Content="Lekovi" HorizontalAlignment="Center"/>
+                    <Label FontSize="19" Content="{ns:Loc medicineButton}" HorizontalAlignment="Center"/>
                 </StackPanel>
             </Button.Content>
         </Button>
@@ -44,8 +45,8 @@
             <Button.Content>
                 <StackPanel Orientation="Vertical">
                     <Image Source="/Icon/odmor.png" Width="150" Height="50"/>
-                    <Label FontSize="19" Content="Zahtev za" HorizontalAlignment="Center"/>
-                    <Label FontSize="17" Content="godišnji odmor" HorizontalAlignment="Center"/>
+                    <Label FontSize="19" Content="{ns:Loc requestLabel}" HorizontalAlignment="Center"/>
+                    <Label FontSize="17" Content="{ns:Loc vacationLabel}" HorizontalAlignment="Center"/>
                 </StackPanel>
             </Button.Content>
         </Button>
@@ -53,7 +54,7 @@
             <Button.Content>
                 <StackPanel Orientation="Vertical" Height="180">
                     <Image Source="/Icon/inventory.png" Width="150" Height="50" VerticalAlignment="Center" RenderTransformOrigin="0.526,1.409"/>
-                    <Label FontSize="19" Content="Inventar" HorizontalAlignment="Center"/>
+                    <Label FontSize="19" Content="{ns:Loc inventoryLabel}"  HorizontalAlignment="Center"/>
                 </StackPanel>
             </Button.Content>
         </Button>
@@ -61,7 +62,7 @@
             <Button.Content>
                 <StackPanel Orientation="Vertical" Height="180">
                     <Image Source="/Icon/DoctorIcons/lecenje.png" Width="150" Height="50" VerticalAlignment="Center" RenderTransformOrigin="0.526,1.409"/>
-                    <Label FontSize="19" Content="Hospitalizovani" HorizontalAlignment="Center"/>
+                    <Label FontSize="19" Content="{ns:Loc hospitalizedLabel}" HorizontalAlignment="Center"/>
                 </StackPanel>
             </Button.Content>
         </Button>

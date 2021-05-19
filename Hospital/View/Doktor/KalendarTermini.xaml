@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
+      xmlns:ns="clr-namespace:Hospital" 
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="KalendarTermini" Background="{DynamicResource BackgroundGray}">
@@ -13,7 +14,7 @@
     <DockPanel>
         <DockPanel DockPanel.Dock="Top">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="20,50,0,0">
-                <Label Content="Doktor:" FontSize="20" Style="{DynamicResource Label}"></Label>
+                <Label Content="{ns:Loc doctorLabel}" FontSize="20" Style="{DynamicResource Label}"></Label>
                 <Label x:Name="DoktorLabel" HorizontalAlignment="Left" FontSize="20" Style="{DynamicResource Label}">
                 <Label.Content>
                     <TextBlock>
@@ -29,14 +30,14 @@
                 <Button x:Name="addAppointment" Margin="15,0,0,0" Style="{DynamicResource ImageButtons}" Background="{DynamicResource BackgroundGray}" Click="addAppointment_Click"> 
                     <StackPanel Orientation="Vertical">
                         <Image Source="../../Icon/DoctorIcons/addDark.png" Width="30"/>
-                        <TextBlock Text="Dodaj"/>
+                        <TextBlock Text="{ns:Loc newButton}"/>
                     </StackPanel>
                 </Button>
-                <Button x:Name="izbaciZamenu" Margin="15,0,0,0" Style="{DynamicResource ImageButtons}"
+                <Button Margin="15,0,0,0" Style="{DynamicResource ImageButtons}"
                         Background="{DynamicResource BackgroundGray}" Click="Delete_Click">
                     <StackPanel Orientation="Vertical">
                         <Image Source="../../Icon/DoctorIcons/minus.png" Width="30"/>
-                        <TextBlock Text="Obriši"/>
+                        <TextBlock Text="{ns:Loc deleteButton}"/>
                     </StackPanel>
                 </Button>
             </StackPanel>
@@ -44,12 +45,12 @@
         <DataGrid x:Name="dataGridAppointments" ItemsSource="{Binding Path=Appointments}" Style="{DynamicResource PacijentiDataGrid}"
                SelectionMode="Single" IsReadOnly="True" Margin="30,30,30,50" AutoGenerateColumns="False" MouseDoubleClick="dataGridAppointments_MouseDoubleClick">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Ime Pacijent" Width="0.25*" Binding="{Binding PatientsRecord.Patient.FirstName}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="Prezime pacijenta" Width="0.25*" Binding="{Binding PatientsRecord.Patient.LastName}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="Duzina trajanja" Width="0.25*" Binding="{Binding DurationInHours}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="Datum" Width="0.25*" Binding="{Binding DateTime}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="Tip termina" Width="0.25*" Binding="{Binding Type}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="Sala" Width="0.25*" Binding="{Binding Room.Name}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="{ns:Loc namePatientLabel}" Width="0.25*" Binding="{Binding PatientsRecord.Patient.FirstName}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="{ns:Loc surnamePatientLabel}" Width="0.25*" Binding="{Binding PatientsRecord.Patient.LastName}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="{ns:Loc durationLabel}" Width="0.25*" Binding="{Binding DurationInHours}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="{ns:Loc dateLabel}" Width="0.25*" Binding="{Binding DateTime}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="{ns:Loc appointmentTypeLabel}" Width="0.25*" Binding="{Binding Type}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="{ns:Loc roomLabel}" Width="0.25*" Binding="{Binding Room.Name}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View.Doktor"
+        xmlns:ns="clr-namespace:Hospital" 
         mc:Ignorable="d"
         Height="200" Width="400" WindowStartupLocation="CenterScreen" Background="Transparent"
         AllowsTransparency="True" WindowStyle="None" 
@@ -18,15 +19,15 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Label Style="{DynamicResource Label}" FontSize="18" Content="Potvrdi" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1">
+                <Label Style="{DynamicResource Label}" FontSize="18" Content="{ns:Loc acceptButton}" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1">
                 </Label>
             </Grid>
 
             <DockPanel DockPanel.Dock="Bottom">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Margin="0,0,20,0" Content="Da" Width="50" Style="{DynamicResource ImageButtonsHorizontal}" Click="Yes_Click">
+                    <Button Margin="0,0,20,0" Content="{ns:Loc noButton}" Width="50" Style="{DynamicResource ImageButtonsHorizontal}" Click="Yes_Click">
                     </Button>
-                    <Button Content="Ne" Width="50" Style="{DynamicResource ImageButtonsHorizontal}" Click="No_Click">
+                    <Button Content="{ns:Loc noButton}" Width="50" Style="{DynamicResource ImageButtonsHorizontal}" Click="No_Click">
                     </Button>
                 </StackPanel>
             </DockPanel>
