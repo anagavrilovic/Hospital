@@ -7,9 +7,8 @@
         xmlns:val="clr-namespace:Hospital.ValidacijeLekar"
         xmlns:ns="clr-namespace:Hospital"
         mc:Ignorable="d"
-        Title="OdbijeniLekoviKomentar" Height="450" Width="800" WindowStartupLocation="CenterScreen" Background="{DynamicResource BackgroundGray}">
+        Title="OdbijeniLekoviKomentar" Height="450" Width="800" WindowStartupLocation="CenterScreen" Background="{DynamicResource Background}">
     <Window.Resources>
-        <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
     </Window.Resources>
     <StackPanel Orientation="Vertical">
         <Label FontSize="22" Content="{ns:Loc explanationLabel}" Margin="60,0,0,0" Style="{DynamicResource Label}"></Label>

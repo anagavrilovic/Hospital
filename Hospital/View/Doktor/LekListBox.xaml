@@ -7,9 +7,8 @@
         xmlns:ns="clr-namespace:Hospital"
         mc:Ignorable="d"
         Title="LekListBox"
-        Background="{DynamicResource BackgroundGray}" WindowStartupLocation="CenterOwner">
+        Background="{DynamicResource Background}" WindowStartupLocation="CenterOwner">
     <Window.Resources>
-        <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
     </Window.Resources>
     <DockPanel>
         <DockPanel DockPanel.Dock="Top">

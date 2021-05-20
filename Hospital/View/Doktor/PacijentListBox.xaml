@@ -6,9 +6,8 @@
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
         Title="PacijentListBox" Height="450" Width="450" WindowStartupLocation="CenterOwner"
-        Background="#FFDCE6ED">
+        Background="{Binding Background}">
     <Window.Resources>
-        <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
     </Window.Resources>
     <DockPanel>
         <DockPanel DockPanel.Dock="Top">

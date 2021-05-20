@@ -7,9 +7,8 @@
       xmlns:ns="clr-namespace:Hospital" 
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="KalendarTermini" Background="{DynamicResource BackgroundGray}">
+        Title="KalendarTermini" Background="{DynamicResource Background}">
     <Page.Resources>
-        <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
     </Page.Resources>
     <DockPanel>
         <DockPanel DockPanel.Dock="Top">
@@ -27,17 +26,17 @@
                     </TextBlock>
                 </Label.Content>
             </Label>
-                <Button x:Name="addAppointment" Margin="15,0,0,0" Style="{DynamicResource ImageButtons}" Background="{DynamicResource BackgroundGray}" Click="addAppointment_Click"> 
+                <Button x:Name="addAppointment" Margin="15,0,0,0" Style="{DynamicResource NoChromeButton}" Click="addAppointment_Click"> 
                     <StackPanel Orientation="Vertical">
                         <Image Source="../../Icon/DoctorIcons/addDark.png" Width="30"/>
-                        <TextBlock Text="{ns:Loc newButton}"/>
+                        <TextBlock Text="{ns:Loc newButton}" Style="{DynamicResource TextBlockStyle}"/>
                     </StackPanel>
                 </Button>
-                <Button Margin="15,0,0,0" Style="{DynamicResource ImageButtons}"
-                        Background="{DynamicResource BackgroundGray}" Click="Delete_Click">
+                <Button Margin="15,0,0,0" Style="{DynamicResource NoChromeButton}"
+                        Click="Delete_Click">
                     <StackPanel Orientation="Vertical">
                         <Image Source="../../Icon/DoctorIcons/minus.png" Width="30"/>
-                        <TextBlock Text="{ns:Loc deleteButton}"/>
+                        <TextBlock Text="{ns:Loc deleteButton}" Style="{DynamicResource TextBlockStyle}"/>
                     </StackPanel>
                 </Button>
             </StackPanel>

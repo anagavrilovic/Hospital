@@ -187,14 +187,12 @@ namespace Hospital.View.Doctor
 
         private void EditMedic_Click(object sender, RoutedEventArgs e)
         {
-            replacementDrugsListBox.IsEnabled = true;
             doza.IsEnabled = true;
             dodajZamenu.IsEnabled = true;
             izbaciZamenu.IsEnabled = true;
             sacuvaj.IsEnabled = true;
             izbaciSastojak.IsEnabled = true;
             dodajSastojak.IsEnabled = true;
-            medicineIngredientsListBox.IsEnabled = true;
             izmeni.IsEnabled = false;
         }
 
@@ -260,14 +258,12 @@ namespace Hospital.View.Doctor
 
         private void SavedChangesVisibilities()
         {
-            replacementDrugsListBox.IsEnabled = false;
             doza.IsEnabled = false;
             dodajZamenu.IsEnabled = false;
             izbaciZamenu.IsEnabled = false;
             sacuvaj.IsEnabled = false;
             izbaciSastojak.IsEnabled = false;
             dodajSastojak.IsEnabled = false;
-            medicineIngredientsListBox.IsEnabled = false;
             izmeni.IsEnabled = true;
         }
 

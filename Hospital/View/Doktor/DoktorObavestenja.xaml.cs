@@ -57,6 +57,22 @@ namespace Hospital.View
             doctor = doctorStorage.GetOne(doctorId);
             SetNotificationsProperty();
             SetFilterProperties();
+            SetIcons();
+        }
+
+        private void SetIcons()
+        {
+            var app = (App)Application.Current;
+            if (app.DarkTheme)
+            {
+                deleteButton.Source = new BitmapImage(new Uri("pack://application:,,,/Icon/DoctorIcons/delete-16 (1).png", UriKind.Absolute));
+                infoButton.Source = new BitmapImage(new Uri("pack://application:,,,/Icon/DoctorIcons/info-5-16 (1).png", UriKind.Absolute));
+            }
+            else
+            {
+               // infoButton.Source = new BitmapImage(new Uri("pack://application:,,,/Icon/Secretary/deletete.png", UriKind.Absolute));
+                //  deleteButton.Source = new BitmapImage(new Uri("pack://application:,,,/Icon/Secretary/deletete.png", UriKind.Absolute));
+            }
         }
 
         private void SetNotificationsProperty()

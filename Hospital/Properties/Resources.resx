@@ -366,6 +366,9 @@
   <data name="surnamePatientLabel" xml:space="preserve">
     <value>Patient surname:</value>
   </data>
+  <data name="themeLabel" xml:space="preserve">
+    <value>Theme</value>
+  </data>
   <data name="therapyDescriptionLabel" xml:space="preserve">
     <value>Therapy description:</value>
   </data>

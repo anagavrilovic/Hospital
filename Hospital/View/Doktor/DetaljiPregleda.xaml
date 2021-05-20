@@ -9,7 +9,6 @@
         Title="DetaljiPregleda"
         Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" WindowStartupLocation="CenterScreen">
     <Window.Resources>
-        <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
     </Window.Resources>
     <Grid Margin="10,20,0,0">
         

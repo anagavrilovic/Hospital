@@ -50,23 +50,11 @@ namespace Hospital.View
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 3 / 4);
             Main.Content =new DoktorGlavnaStranica(doctorId);
             this.doctorId = doctorId;
-            languageComboBox.SelectedIndex = 1;
             doctor = doctorStorage.GetDoctorByID(doctorId);
             checkHospitalTreatmentDates();
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var app = (App)Application.Current;
-            if (languageComboBox.SelectedIndex == 0)
-            {
-                app.ChangeLanguage("sr-LATN");
-            }
-            else
-            {
-                app.ChangeLanguage("en-US");
-            }
-        }
+     
         private void checkHospitalTreatmentDates()
         {
             HospitalTreatmentStorage hospitalTreatmentStorage = new HospitalTreatmentStorage();
@@ -100,5 +88,7 @@ namespace Hospital.View
         {
             Main.Navigate(new ValidnostLeka(doctor));
         }
+
+
     }
 }

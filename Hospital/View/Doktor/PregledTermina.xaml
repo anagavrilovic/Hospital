@@ -6,9 +6,8 @@
         xmlns:local="clr-namespace:Hospital.View"
       xmlns:ns="clr-namespace:Hospital" 
         mc:Ignorable="d"
-        Title="PregledTermina" Background="{DynamicResource BackgroundGray}">
+        Title="PregledTermina" Background="{DynamicResource Background}">
     <Page.Resources>
-        <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
     </Page.Resources>
     <DockPanel>
         <DockPanel DockPanel.Dock="Top">

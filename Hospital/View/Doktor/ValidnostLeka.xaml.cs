@@ -64,6 +64,20 @@ namespace Hospital.View.Doktor
             this.DataContext = this;
             this.doctor = doctor;
             initProperties();
+            SetIcons();
+        }
+        private void SetIcons()
+        {
+            var app = (App)Application.Current;
+            if (app.DarkTheme)
+            {
+                okButton.Source = new BitmapImage(new Uri("pack://application:,,,/Icon/DoctorIcons/ok-16 (1).png", UriKind.Absolute));
+                cancelButton.Source = new BitmapImage(new Uri("pack://application:,,,/Icon/DoctorIcons/x-mark-3-16 (1).png", UriKind.Absolute));
+            }
+            else
+            {
+                okButton.Source = new BitmapImage(new Uri("pack://application:,,,/Icon/Secretary/ok.png", UriKind.Absolute));
+            }
         }
 
         private void initProperties()

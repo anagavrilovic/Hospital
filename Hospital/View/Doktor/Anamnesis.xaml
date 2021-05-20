@@ -7,9 +7,8 @@
       xmlns:ns="clr-namespace:Hospital" 
       xmlns:val="clr-namespace:Hospital.ValidacijeLekar"
       mc:Ignorable="d"
-        Title="Anamnesis" Background="{DynamicResource BackgroundGray}" >
+        Title="Anamnesis" Background="{DynamicResource Background}" >
     <Page.Resources>
-        <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
     </Page.Resources>
     <Grid>
         <StackPanel Orientation="Vertical">

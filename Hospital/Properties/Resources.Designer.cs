@@ -808,6 +808,15 @@ namespace Hospital.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Theme.
+        /// </summary>
+        internal static string themeLabel {
+            get {
+                return ResourceManager.GetString("themeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Therapy description:.
         /// </summary>
         internal static string therapyDescriptionLabel {

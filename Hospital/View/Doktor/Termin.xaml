@@ -9,7 +9,6 @@
         Title="Termin" WindowStartupLocation="CenterScreen" 
         Background="{DynamicResource MainBlue}">
     <Window.Resources>
-        <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
     </Window.Resources>
     <Grid>
         <Frame x:Name="Main" NavigationUIVisibility="Hidden"/>

@@ -12,7 +12,6 @@
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <converters:ListToStringConverter x:Key="ListToStringConverter"/>
         </ResourceDictionary>
@@ -25,7 +24,7 @@
         </Grid.RowDefinitions>
 
 
-        <Border Grid.Row="1" Margin="15,80,15,15" CornerRadius="10" Background="{DynamicResource MainWhite}">
+        <Border Grid.Row="1" Margin="15,80,15,15" CornerRadius="10" Background="{DynamicResource SecondBackground}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
@@ -34,16 +33,16 @@
 
                 <!-- Dugmici za CRUD nad obavestenjima -->
                 <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,50,0,0">
-                    <Button Height="50" Width="100" Margin="0,30,0,0" Style="{DynamicResource ImageButtons}" Click="ConfirmMedicine_Click">
+                    <Button Height="50" Width="100" Margin="0,30,0,0" Style="{DynamicResource NoChromeButton}" Click="ConfirmMedicine_Click">
                         <StackPanel Orientation="Vertical">
-                            <Image Source="../../Icon/DoctorIcons/confirm.png" Width="30"/>
-                            <TextBlock Text="{ns:Loc validateLabel}"/>
+                            <Image Source="../../Icon/DoctorIcons/confirm.png" x:Name="okButton" Width="30"/>
+                            <TextBlock Text="{ns:Loc validateLabel}" Style="{DynamicResource TextBlockStyle}"/>
                         </StackPanel>
                     </Button>
-                    <Button Height="50" Width="100" Margin="0,30,0,0" Style="{DynamicResource ImageButtons}" Click="RejectMedicine_Click">
+                    <Button Height="50" Width="100" Margin="0,30,0,0" Style="{DynamicResource NoChromeButton}" Click="RejectMedicine_Click">
                         <StackPanel Orientation="Vertical">
-                            <Image Source="../../Icon/DoctorIcons/cancel.png" Width="30"/>
-                            <TextBlock Text="{ns:Loc returnLabel}"/>
+                            <Image Source="../../Icon/DoctorIcons/cancel.png" x:Name="cancelButton" Width="30"/>
+                            <TextBlock Text="{ns:Loc returnLabel}" Style="{DynamicResource TextBlockStyle}"/>
                         </StackPanel>
                     </Button>
                 </StackPanel>

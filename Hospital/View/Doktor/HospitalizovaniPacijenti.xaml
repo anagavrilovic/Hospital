@@ -9,7 +9,6 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HospitalizovaniPacijenti">
     <Page.Resources>
-        <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
     </Page.Resources>
     <Grid Margin="0,30,0,0">
         <Grid.ColumnDefinitions>
@@ -26,7 +25,7 @@
                 <DataGridTextColumn Header="{ns:Loc appointmentTypeLabel}" Width="0.25*" Binding="{Binding EndOfTreatment, StringFormat=dd-MM-yyyy}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel x:Name="patientInfo" Orientation="Vertical" Margin="30,30,30,30" Visibility="Collapsed" Background="{DynamicResource MainWhite}" Grid.Column="1">
+        <StackPanel x:Name="patientInfo" Orientation="Vertical" Margin="30,30,30,30" Visibility="Collapsed" Background="{DynamicResource SecondBackground}" Grid.Column="1">
             <Label Style="{DynamicResource Label}" Margin="0,0,5,0">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{ns:Loc patientLabel}"/>

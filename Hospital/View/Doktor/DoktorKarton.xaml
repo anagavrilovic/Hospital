@@ -11,11 +11,10 @@
       d:DesignHeight="450" d:DesignWidth="800"
       WindowStartupLocation="CenterScreen" 
       Title="DoktorKarton"
-      Background="{DynamicResource BackgroundGray}">
+      Background="{DynamicResource Background}">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <converters:BoolToStringConverter x:Key="BoolToString"/>
         </ResourceDictionary>
@@ -26,7 +25,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Vertical" Margin="20,20,0,0" Grid.Column="0" Background="{DynamicResource MainWhite}">
+        <StackPanel Orientation="Vertical" Margin="20,20,0,0" Grid.Column="0" Background="{DynamicResource SecondBackground}">
             <Label FontSize="24" Content="{ns:Loc patientTitleLabel}" Style="{DynamicResource Label}"/>
             <StackPanel Orientation="Horizontal" Margin="20,20,0,0">
                 <Label FontSize="13" Content="{ns:Loc nameLabel}" Style="{DynamicResource Label}"/>
@@ -113,13 +112,13 @@
             </StackPanel>
             <Label HorizontalAlignment="Right" Margin="0,10,275,0" Content="{ns:Loc allergicToMedicineLabel}" Style="{DynamicResource Label}"/>
             <ScrollViewer CanContentScroll="True" Margin="0,0,40,0">
-                <ListBox HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Visible" Style="{DynamicResource ListBoxStyle}"
+                <ListBox HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Style="{DynamicResource ListBoxStyle}"
                   Height="100" Width="310" ScrollViewer.CanContentScroll="True" ItemsSource="{Binding MedicalRecordReview.Allergen.MedicineNames}"></ListBox>
             </ScrollViewer>
             <Label HorizontalAlignment="Right" Margin="0,10,247,0" Content="{ns:Loc allergicToIngredientLabel}" Style="{DynamicResource Label}"/>
             <ScrollViewer CanContentScroll="True" Margin="0,0,40,0">
-                <ListBox HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Visible" Style="{DynamicResource ListBoxStyle}"
-                  Height="100" Width="310" ScrollViewer.CanContentScroll="True" ItemsSource="{Binding MedicalRecordReview.Allergen.IngredientNames}"></ListBox>
+                <ListBox HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Style="{DynamicResource ListBoxStyle}"
+                  Height="100" Width="310"  ScrollViewer.CanContentScroll="True" ItemsSource="{Binding MedicalRecordReview.Allergen.IngredientNames}"></ListBox>
             </ScrollViewer>
             <Label HorizontalAlignment="Right" Margin="0,10,285,0" Content="{ns:Loc otherAllergiesLabel}" Style="{DynamicResource Label}"/>
             <TextBox HorizontalAlignment="Right" Height="100" Width="330" Margin="0,0,40,0"

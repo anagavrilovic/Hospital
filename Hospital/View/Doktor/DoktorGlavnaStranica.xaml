@@ -9,7 +9,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DoktorGlavnaStranica">
     <Page.Resources>
-        <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
+        
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -66,5 +66,16 @@
                 </StackPanel>
             </Button.Content>
         </Button>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="4" Margin="10,0,0,10">
+            <Label Content="{ns:Loc themeLabel}" Style="{DynamicResource Label}" Margin="0,0,5,0"/>
+            <CheckBox IsChecked="False" VerticalAlignment="Center" Checked="ThemeChanged" Unchecked="ThemeChanged" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0">
+            <Label Content="{ns:Loc languageLabel}" Style="{DynamicResource Label}"/>
+        <ComboBox x:Name="languageComboBox" Margin="0,5,0,0" Width="130" Height="25" VerticalAlignment="Top" SelectionChanged="ComboBox_SelectionChanged">
+            <ComboBoxItem>Srpski jezik</ComboBoxItem>
+            <ComboBoxItem>Engleski jezik</ComboBoxItem>
+        </ComboBox>
+        </StackPanel>
     </Grid>
 </Page>

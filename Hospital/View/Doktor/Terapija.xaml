@@ -8,7 +8,6 @@
       mc:Ignorable="d"
         Title="Terapija" Background="{DynamicResource BackgroundGray}">
     <Page.Resources>
-        <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>

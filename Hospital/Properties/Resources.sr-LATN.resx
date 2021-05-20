@@ -360,6 +360,9 @@
   <data name="surnamePatientLabel" xml:space="preserve">
     <value>Prezime pacijenta:</value>
   </data>
+  <data name="themeLabel" xml:space="preserve">
+    <value>Tema</value>
+  </data>
   <data name="therapyDescriptionLabel" xml:space="preserve">
     <value>Opis terapije:</value>
   </data>

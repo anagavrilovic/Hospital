@@ -10,7 +10,6 @@
         AllowsTransparency="True" WindowStyle="None" 
         ResizeMode="NoResize">
     <Window.Resources>
-        <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
     </Window.Resources>
     <Border CornerRadius="55" BorderBrush="White" BorderThickness="5"  Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}">
         <DockPanel>

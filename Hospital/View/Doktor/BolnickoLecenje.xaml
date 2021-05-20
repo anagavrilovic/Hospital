@@ -7,16 +7,15 @@
       xmlns:local="clr-namespace:Hospital.View.Doktor"
       xmlns:ns="clr-namespace:Hospital"
       mc:Ignorable="d" 
-      Title="BolnickoLecenje" Background="{DynamicResource BackgroundGray}">
+      Title="BolnickoLecenje" Background="{DynamicResource Background}">
     <Page.Resources>
-        <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Vertical" Margin="50,50,0,50" Background="{DynamicResource MainWhite}" Grid.Column="0">
+        <StackPanel Orientation="Vertical" Margin="50,50,0,50" Background="{DynamicResource SecondBackground}" Grid.Column="0">
             <Label x:Name="patientLabel" HorizontalAlignment="Left" Margin="0,0,0,15" FontSize="14" Style="{DynamicResource Label}">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text=" Pacijent: "/>

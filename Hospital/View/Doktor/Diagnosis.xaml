@@ -8,11 +8,10 @@
       xmlns:val="clr-namespace:Hospital.ValidacijeLekar" 
       xmlns:ViewModels="clr-namespace:Hospital.ViewModels"
       mc:Ignorable="d"
-        Title="Diagnosis" Background="{DynamicResource BackgroundGray}">
+        Title="Diagnosis" Background="{DynamicResource Background}">
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../Resources/DoctorResourceDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <ViewModels:DiagnosisViewModel x:Key="vm"/>
         </ResourceDictionary>
