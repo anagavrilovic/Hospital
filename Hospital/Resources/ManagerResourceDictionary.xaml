@@ -126,15 +126,10 @@
         </Setter>
     </Style>
 
-    <Style x:Key="cbTB" TargetType="{x:Type Control}">
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding ElementName=Gost, Path=IsChecked}" Value="True">
-                <Setter Property="TextBox.IsEnabled" Value="False"/>
-            </DataTrigger>
-            <DataTrigger Binding="{Binding ElementName=Gost, Path=IsChecked}" Value="False">
-                <Setter Property="TextBox.IsEnabled" Value="True"/>
-            </DataTrigger>
-        </Style.Triggers>
+    <Style x:Key="cbStyle" TargetType="{x:Type ComboBox}">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="#FF2E83BF"/>
     </Style>
 
     <Style x:Key="ButtonsWithLogos" TargetType="Button">

@@ -57,26 +57,29 @@
         </Grid>
 
         <Label Content="Oznaka sale:"         Grid.Row="2"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,4.8,186,4.8"  Grid.ColumnSpan="2" />
-        <Label Content="Datum početka:"       Grid.Row="4"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,4.6,186,5"  Grid.ColumnSpan="2" />
+        <Label Content="Datum početka:"       Grid.Row="4"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,4.6,186,5"    Grid.ColumnSpan="2" />
         <Label Content="Datum završetka:"     Grid.Row="6"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,5.4,5,10.2"   Grid.ColumnSpan="2"/>
         <Label Content="Magacin za privremeno skladištenje opreme:" Grid.Row="8" Foreground="#FF1E49D9" FontSize="16" Margin="30,2.2,5,10.4" Grid.ColumnSpan="2" />
         <Label Content="Opis:"                Grid.Row="10"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,0,5.4,14.6" />
 
         <ComboBox x:Name="roomCB"        Grid.Row="3" Grid.ColumnSpan="2" Margin="30,0.2,28,11.4" BorderThickness="1" Foreground="#FF2E83BF"
-                    IsSynchronizedWithCurrentItem="True"
+                    IsSynchronizedWithCurrentItem="True" 
                     ItemsSource="{Binding   RoomIDs}"
                     SelectedItem="{Binding SomeBindingPropertySelectedCurrently, 
                     Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
 
-        <DatePicker x:Name="dateStart"    Grid.Row="5" Grid.ColumnSpan="2" Margin="30,0,28,10.6" SelectedDate="{Binding Path=RoomRenovation.StartDate, Mode=OneWayToSource, TargetNullValue={x:Static sys:DateTime.Now}}" DisplayDateStart="{x:Static sys:DateTime.Today}" Focusable="False"/>
-        <DatePicker x:Name="dateEnd"      Grid.Row="6" Grid.ColumnSpan="2" Margin="30,45.4,28,9.8" SelectedDate="{Binding Path=RoomRenovation.EndDate,   Mode=OneWayToSource, TargetNullValue={x:Static sys:DateTime.Now}}" DisplayDateStart="{x:Static sys:DateTime.Today}" Focusable="False" Grid.RowSpan="2"/>
+        <DatePicker x:Name="dateStart"    Grid.Row="5" Grid.ColumnSpan="2" Margin="30,0,28,10.6"  SelectedDate="{Binding Path=RoomRenovation.StartDate, Mode=OneWayToSource, TargetNullValue={x:Static sys:DateTime.Now}}" DisplayDateStart="{x:Static sys:DateTime.Today}" Focusable="False"/>
+        <DatePicker x:Name="dateEnd"      Grid.Row="6" Grid.ColumnSpan="2" Margin="30,45.4,28,10" SelectedDate="{Binding Path=RoomRenovation.EndDate,   Mode=OneWayToSource, TargetNullValue={x:Static sys:DateTime.Now}}" DisplayDateStart="{x:Static sys:DateTime.Today}" Focusable="False" Grid.RowSpan="2"/>
 
         <ComboBox x:Name="magacinCB"     Grid.Row="8" Grid.ColumnSpan="2" Margin="30,45.2,28,12" BorderThickness="1" Foreground="#FF2E83BF"
-                    IsSynchronizedWithCurrentItem="True"
-                    ItemsSource="{Binding   WarehousesIDs}"
+                    IsSynchronizedWithCurrentItem="True" 
+                    ItemsSource="{Binding   WarehousesIDs}" 
                     SelectedItem="{Binding SomeBindingPropertySelectedCurrently, 
-                    Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.RowSpan="2" />
+                    Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.RowSpan="2" >
+        </ComboBox>
+
+        <Button Grid.Column="1" Grid.Row="10" Content="IZMENA PLANA PROSTORIJA" Background="#FFB9DDED" Foreground="#FF061031" Style="{StaticResource RoundButtonStyle}" Margin="9.6,0,28,5.6" Click="EditRoomsOrganization"/>
 
         <TextBox    x:Name="description"  Grid.Row="10" Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="30,45,28,10.4" Text="{Binding Path=RoomRenovation.Description, Mode=OneWayToSource}" BorderBrush="#FF26282C" TextWrapping="Wrap">
             <TextBox.Resources>

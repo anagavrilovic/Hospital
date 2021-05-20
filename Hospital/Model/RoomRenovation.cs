@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,8 @@ namespace Hospital.Model
         private DateTime startDate;
         private DateTime endDate;
         private string description;
+        private ObservableCollection<Room> _roomsDestroyedDuringRenovation;
+        private ObservableCollection<Room> _roomsCreatedDuringRenovation;
 
         public DateTime StartDate
         {
@@ -53,6 +56,26 @@ namespace Hospital.Model
             {
                 description = value;
                 OnPropertyChanged("Description");
+            }
+        }
+
+        public ObservableCollection<Room> RoomsDestroyedDuringRenovation
+        {
+            get => _roomsDestroyedDuringRenovation;
+            set
+            {
+                _roomsDestroyedDuringRenovation = value;
+                OnPropertyChanged("RoomsDestroyedDuringRenovation");
+            }
+        }
+
+        public ObservableCollection<Room> RoomsCreatedDuringRenovation
+        {
+            get => _roomsCreatedDuringRenovation;
+            set
+            {
+                _roomsCreatedDuringRenovation = value;
+                OnPropertyChanged("RoomsCreatedDuringRenovation");
             }
         }
 

@@ -1,0 +1,114 @@
+﻿<Page x:Class="Hospital.View.Manager.Rooms.ChangingRoomsPlan"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hospital.View.Manager.Rooms"
+      mc:Ignorable="d" 
+      Background="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" 
+     Title="Izmena plana prostorija" Height="730" Width="420">
+
+    <Page.Resources>
+        <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Grid Grid.Row="0" Background="#FF95C0F4" Margin="0,0,0,31.2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="101*"/>
+                    <ColumnDefinition Width="41*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="200*"/>
+                    <ColumnDefinition Width="70*"/>
+                </Grid.ColumnDefinitions>
+                <Button  Click="Back" Background="#FF95C0F4" BorderBrush="#FF95C0F4" Margin="10,0,27.8,0" Grid.Column="0">
+                    <Image  Source="/Icon/back.png" Height="60"  Width="63"/>
+                </Button>
+                <Image Source="/Icon/logo.png"      Margin="119.8,0,10,0.4" Grid.Column="3" Grid.ColumnSpan="2"/>
+            </Grid>
+            <Label Content="ZAKAZIVANJE RENOVIRANJA" Foreground="#FF4B72F6" FontSize="20" Margin="56,81,19,-26" FontWeight="Bold"/>
+        </Grid>
+
+
+        <Label     Grid.Row="2" Grid.ColumnSpan="2" Content="Spajanje prostorije sa nekom od sledećih:" Foreground="#FF1E49D9" FontSize="18" Margin="10,12,-5,52" Grid.RowSpan="2"/>
+        <Label     Grid.Row="8" Grid.ColumnSpan="2" Content="Podela postojeće prostorije na nove:"      Foreground="#FF1E49D9" FontSize="18" Margin="10,10.4,-5,9.4"/>
+
+        <Border Grid.Row="3"  Grid.ColumnSpan="2" Grid.RowSpan="3" Margin="30,4,28,5" CornerRadius="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Margin="2,2,2,2">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <Button Width="30" Height="30"  Click="BtnAddRoomForMerge">
+                            <Image Source="/Icon/plus.png"/>
+                        </Button>
+                        <Button Width="30" Height="30"  Click="BtnDeleteRoomForMerge" Margin="5,0,3,0">
+                            <Image Source="/Icon/minus.png"/>
+                        </Button>
+                    </StackPanel>
+                    <ListBox ItemsSource="{Binding RoomsFromSameFloor}" x:Name="allRoomsFromSameFloorList" Height="100" Margin="0,0,0.6,0" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="6"  Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="30,4,28,5" CornerRadius="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Margin="2,2,2,2">
+                    <ListBox ItemsSource="{Binding RoomRenovation.RoomsDestroyedDuringRenovation, Mode=TwoWay, UpdateSourceTrigger=Explicit}" x:Name="ingredientsList" Height="110" Margin="0,0,0.4,0" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="9"  Grid.ColumnSpan="2" Grid.RowSpan="3" Margin="30,4,28,5" CornerRadius="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Margin="2,2,2,2">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <Button Width="30" Height="30"  Click="AddNewRoom">
+                            <Image Source="/Icon/plus.png"/>
+                        </Button>
+                    </StackPanel>
+                    <ListBox ItemsSource="{Binding RoomRenovation.RoomsCreatedDuringRenovation, Mode=TwoWay, UpdateSourceTrigger=Explicit}" x:Name="NewRoomsList" Height="100" Margin="0,0,0.6,0" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Button Grid.Column="0" Grid.Row="11"   Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,42.4,10.4,24.6" Style="{StaticResource RoundButtonStyle}" Click="Accept" Grid.RowSpan="2"/>
+        <Button Grid.Column="1" Grid.Row="11"   Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="9.6,42.4,28,24.6"  Style="{StaticResource RoundButtonStyle}" Click="Cancel" Grid.RowSpan="2" />
+
+    </Grid>
+</Page>

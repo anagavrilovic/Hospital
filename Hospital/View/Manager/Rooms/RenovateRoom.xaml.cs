@@ -134,6 +134,15 @@ namespace Hospital.View
             }
         }
 
+        private void EditRoomsOrganization(object sender, RoutedEventArgs e)
+        {
+            if (roomCB.SelectedItem == null)
+                return;
+
+            View.Manager.Rooms.ChangingRoomsPlan plan = new View.Manager.Rooms.ChangingRoomsPlan(roomStorage.GetOne(roomCB.Text));
+            NavigationService.Navigate(plan);
+        }
+
         private void cancel(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Renovations());
