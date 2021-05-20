@@ -10,7 +10,8 @@
     <SolidColorBrush x:Key="TextGray">#FF777777</SolidColorBrush>
     <SolidColorBrush x:Key="MediumGray">#FFA8A9A9</SolidColorBrush>
     <SolidColorBrush x:Key="MainBlue">#FF0B6298</SolidColorBrush>
-    <SolidColorBrush x:Key="MainGreen">#FF98B53D</SolidColorBrush>
+    <SolidColorBrush x:Key="MainGreen">#FF98B53D</SolidColorBrush> 
+    <SolidColorBrush x:Key="TabBlue">#6DC9E7</SolidColorBrush>
     <SolidColorBrush x:Key="SecondBlue">#FF4F6D99</SolidColorBrush>
     <SolidColorBrush x:Key="HoverBlue">#2272a3</SolidColorBrush>
     <SolidColorBrush x:Key="MainDarkBlue">#094f7a</SolidColorBrush>
@@ -56,7 +57,7 @@ BorderThickness="3" CornerRadius="10" BorderBrush="{StaticResource HoverBlue}">
 
     <!-- Search box style -->
     <Style x:Key="SearchBox" TargetType="TextBox">
-        <Setter Property="Foreground" Value="{StaticResource MainBlue}"/>
+        <Setter Property="Foreground" Value="{StaticResource DarkBlue}"/>
         <Setter Property="Background" Value="{StaticResource MainWhite}"/>
         <Setter Property="FontFamily" Value="Yu Gothic"/>
     </Style>
@@ -72,11 +73,6 @@ BorderThickness="3" CornerRadius="10" BorderBrush="{StaticResource HoverBlue}">
         <Setter Property="Foreground" Value="{StaticResource DarkBlue}"/>
         <Setter Property="FontFamily" Value="Yu Gothic"/>
         <Setter Property="FontSize" Value="14"/>
-    </Style>
-
-    <Style x:Key="LabelDark" TargetType="Label">
-        <Setter Property="Foreground" Value="{StaticResource MainDarkBlue}"/>
-        <Setter Property="FontFamily" Value="Yu Gothic"/>
     </Style>
 
     <!-- Template za validacije -->
@@ -120,7 +116,7 @@ BorderThickness="3" CornerRadius="10" BorderBrush="{StaticResource HoverBlue}">
     <!-- List box style -->
     <Style x:Key="ListBoxStyle" TargetType="ListBox">
         <Setter Property="Background" Value="White"/>
-        <Setter Property="Foreground" Value="{StaticResource MainBlue}"/>
+        <Setter Property="Foreground" Value="{StaticResource DarkBlue}"/>
         <Setter Property="FontFamily" Value="Yu Gothic"/>
         <Setter Property="FontSize" Value="13.5"/>
     </Style>
@@ -306,7 +302,7 @@ BorderThickness="3" CornerRadius="10" BorderBrush="{StaticResource HoverBlue}">
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Panel.ZIndex" Value="100" />
-                            <Setter TargetName="Border" Property="Background" Value="{StaticResource MainDarkBlue}" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource TabBlue}" />
                             <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,0" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">

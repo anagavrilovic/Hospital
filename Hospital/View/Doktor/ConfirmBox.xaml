@@ -11,7 +11,7 @@
         ResizeMode="NoResize">
     <Window.Resources>
     </Window.Resources>
-    <Border CornerRadius="55" BorderBrush="White" BorderThickness="5"  Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}">
+    <Border CornerRadius="55" BorderBrush="White" BorderThickness="5"  Background="{DynamicResource Background}">
         <DockPanel>
             <Grid DockPanel.Dock="Top" >
                 <Grid.RowDefinitions>
@@ -24,7 +24,7 @@
 
             <DockPanel DockPanel.Dock="Bottom">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Margin="0,0,20,0" Content="{ns:Loc noButton}" Width="50" Style="{DynamicResource ImageButtonsHorizontal}" Click="Yes_Click">
+                    <Button Margin="0,0,20,0" Content="{ns:Loc yesButton}" Width="50" Style="{DynamicResource ImageButtonsHorizontal}" Click="Yes_Click">
                     </Button>
                     <Button Content="{ns:Loc noButton}" Width="50" Style="{DynamicResource ImageButtonsHorizontal}" Click="No_Click">
                     </Button>
@@ -32,7 +32,7 @@
             </DockPanel>
             <StackPanel Orientation="Horizontal">
                 <Image Source="../../Icon/DoctorIcons/error.png" Width="40" HorizontalAlignment="Left" Margin="10,-50,0,0"/>
-                <TextBlock Text="{Binding Description}"  FontSize="16" TextWrapping="Wrap" Height="100" Width="300" Margin="20,0,10,0"/>
+                <TextBlock Text="{Binding Description}"  FontSize="16" TextWrapping="Wrap" Height="100" Width="300" Margin="20,0,10,0" Style="{StaticResource TextBlockStyle    }"/>
             </StackPanel>
         </DockPanel>
     </Border>

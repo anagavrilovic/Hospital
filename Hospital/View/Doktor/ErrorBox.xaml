@@ -11,7 +11,7 @@
         ResizeMode="NoResize">
     <Window.Resources>
     </Window.Resources>
-    <Border CornerRadius="55" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" BorderThickness="5"  Background="{DynamicResource MainWhite}">
+    <Border CornerRadius="55" BorderBrush="{DynamicResource Background}" BorderThickness="5"  Background="{DynamicResource MainWhite}">
         <DockPanel>
             <!-- Web toolbar -->
             <Grid DockPanel.Dock="Top" >

@@ -848,9 +848,6 @@
     <Resource Include="Icon\menu.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icon\medicals.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Icon\add.png" />
   </ItemGroup>
   <ItemGroup>
@@ -890,13 +887,7 @@
     <Resource Include="Icon\DoctorIcons\back.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icon\DoctorIcons\start.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Icon\DoctorIcons\view.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Icon\DoctorIcons\save.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\DoctorIcons\error.png" />
@@ -967,6 +958,18 @@
     <Resource Include="Icon\DoctorIcons\info-5-16 %281%29.png" />
     <Resource Include="Icon\DoctorIcons\ok-16 %281%29.png" />
     <Resource Include="Icon\DoctorIcons\x-mark-3-16 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\start.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\medicals.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\medicals.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

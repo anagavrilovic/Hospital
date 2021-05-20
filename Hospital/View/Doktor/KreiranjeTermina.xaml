@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="KreiranjeTermina"
         WindowStartupLocation="CenterScreen"
-        Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}">
+        Background="{DynamicResource Background}">
     <Grid Margin="30,20,0,0">
         <Grid.RowDefinitions>
             <RowDefinition/>

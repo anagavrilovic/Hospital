@@ -70,8 +70,8 @@ namespace Hospital.View
             }
             else
             {
-               // infoButton.Source = new BitmapImage(new Uri("pack://application:,,,/Icon/Secretary/deletete.png", UriKind.Absolute));
-                //  deleteButton.Source = new BitmapImage(new Uri("pack://application:,,,/Icon/Secretary/deletete.png", UriKind.Absolute));
+                 // infoButton.Source = new BitmapImage(new Uri("pack://application:,,,/Icon/Secretary/deletete.png", UriKind.Absolute));
+                   //deleteButton.Source = new BitmapImage(new Uri("pack://application:,,,/Icon/Secretary/deletete.png", UriKind.Absolute));
             }
         }
 

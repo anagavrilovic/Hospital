@@ -23,11 +23,12 @@ namespace Hospital.View
     public partial class DoktorGlavnaStranica : Page
     {
         private string doctorId;
-
         public DoktorGlavnaStranica(string doctorId)
         {
             InitializeComponent();
            this.doctorId = doctorId;
+           var app = (App)Application.Current;
+            themeCheckBox.IsChecked = app.DarkTheme;
             languageComboBox.SelectedIndex = 1;
         }
         private void Pregled(object sender, RoutedEventArgs e)
@@ -55,7 +56,6 @@ namespace Hospital.View
             else
                 app.ChangeTheme(new Uri("Resources/DoctorResourceDictionary.xaml", UriKind.Relative));
             SetIcons(app);
-
         }
 
         private void SetIcons(App app)

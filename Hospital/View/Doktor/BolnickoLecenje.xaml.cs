@@ -131,7 +131,6 @@ namespace Hospital.View.Doktor
         {
             ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = MEDICAL_RECORD_TAB;
             ((Doctor_Examination)Window.GetWindow(this)).hospitalTreatmentTab.IsEnabled = false;
-            ((Doctor_Examination)Window.GetWindow(this)).TreatmentLabel.Foreground = Brushes.Black;
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)

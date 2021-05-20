@@ -147,22 +147,12 @@ namespace Hospital.View
             {
                 case 1:
                     medicalRecordReviewTab.Content = frameMedicalRecordReview;
-                    medicalRecordReviewLabel.Foreground = Brushes.White;
-                    AnamnesisLabel.Foreground = Brushes.Black;
-                    DiagnosisLabel.Foreground = Brushes.Black;
-                    AppointmentLabel.Foreground = Brushes.Black;
-                    TherapyLabel.Foreground = Brushes.Black;
-                    TreatmentLabel.Foreground = Brushes.Black;
                     break;
                 case 2:
                     AnamnesisTab.Content = frameAnamnesis;
-                    medicalRecordReviewLabel.Foreground = Brushes.Black;
-                    AnamnesisLabel.Foreground = Brushes.White;
                     break;
                 case 3:
                     TherapyTab.Content = frameTherapy;
-                    medicalRecordReviewLabel.Foreground = Brushes.Black;
-                    TherapyLabel.Foreground = Brushes.White;
                     break;
                 case 4:
                     DiagnosisTab.Content = frameDiagnosis;
@@ -171,8 +161,6 @@ namespace Hospital.View
                     {
                         medicalRecordReview.hospitalTreatmentButton.Visibility = Visibility.Visible;
                     }
-                    medicalRecordReviewLabel.Foreground = Brushes.Black;
-                    DiagnosisLabel.Foreground = Brushes.White;
                     break;
                 case 5:
                     AppointmentTab.Content = frameAppointment;
@@ -181,16 +169,12 @@ namespace Hospital.View
                     {
                         medicalRecordReview.hospitalTreatmentButton.Visibility = Visibility.Visible;
                     }
-                    medicalRecordReviewLabel.Foreground = Brushes.Black;
-                    AppointmentLabel.Foreground = Brushes.White;
                     break;
                 case 6:
                     hospitalTreatmentTab.Content = frameHospitalTreatment;
                     medicalRecordReview.saveButton.Visibility = Visibility.Visible;
                     medicalRecordReview.hospitalTreatmentButton.IsEnabled = false;
                     medicalRecordReview.hospitalTreatmentButton.Visibility = Visibility.Visible;
-                    medicalRecordReviewLabel.Foreground = Brushes.Black;
-                    medicalRecordReviewLabel.Foreground = Brushes.White;
                     break;
             }
         }

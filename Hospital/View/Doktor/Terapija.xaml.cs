@@ -101,8 +101,6 @@ namespace Hospital.View
         {
             ((Doctor_Examination)Window.GetWindow(this)).tab.SelectedIndex = 4;
             ((Doctor_Examination)Window.GetWindow(this)).TherapyTab.IsEnabled = false;
-            ((Doctor_Examination)Window.GetWindow(this)).TherapyLabel.Foreground = Brushes.Black;
-            ((Doctor_Examination)Window.GetWindow(this)).DiagnosisLabel.Foreground = Brushes.White;
             ((Doctor_Examination)Window.GetWindow(this)).DiagnosisTab.IsEnabled = true;
         }
 

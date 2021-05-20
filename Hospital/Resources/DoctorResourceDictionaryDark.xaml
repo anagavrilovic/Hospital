@@ -7,11 +7,13 @@
     <SolidColorBrush x:Key="MainPink">#BB86FC</SolidColorBrush>
     <SolidColorBrush x:Key="MainPurple">#3700B3</SolidColorBrush>
     <SolidColorBrush x:Key="Error">#CF6679</SolidColorBrush>
-    <SolidColorBrush x:Key="MainGreenDark">#03DAC6</SolidColorBrush>
+    <SolidColorBrush x:Key="DarkerPink">#F187C9</SolidColorBrush>
+    <SolidColorBrush x:Key="MainGreenDark">#03DA97</SolidColorBrush>
     <SolidColorBrush x:Key="LighterGray">#FFEDEDED</SolidColorBrush>
+    <SolidColorBrush x:Key="pera">#03DAC6</SolidColorBrush>
     <SolidColorBrush x:Key="TextGray">#FF777777</SolidColorBrush>
     <SolidColorBrush x:Key="MediumGray">#FFA8A9A9</SolidColorBrush>
-    <SolidColorBrush x:Key="MainBlue">#FF0B6298</SolidColorBrush>
+    <SolidColorBrush x:Key="MainBlue">#FF3E3E40</SolidColorBrush>
     <SolidColorBrush x:Key="MainGreen">#FF98B53D</SolidColorBrush>
     <SolidColorBrush x:Key="SecondBlue">#FF4F6D99</SolidColorBrush>
     <SolidColorBrush x:Key="HoverBlue">#2272a3</SolidColorBrush>
@@ -25,7 +27,7 @@
         <Setter Property="Height" Value="30"/>
         <Setter Property="Width" Value="160 "/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Background" Value="{StaticResource MainPink}"/>
+        <Setter Property="Background" Value="{StaticResource MainWhite}"/>
         <Setter Property="Foreground" Value="{StaticResource Background}"/>
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="Margin" Value="20,0,0,0"/>
@@ -38,8 +40,8 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource Background}"/>
-                            <Setter Property="Foreground" Value="{StaticResource MainPink}"/>
+                            <Setter Property="Background" Value="{StaticResource MainPink}"/>
+                            <Setter Property="Foreground" Value="{StaticResource Background}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -269,11 +271,13 @@
     <!-- Rounder textbox style -->
     <Style x:Key="TextBox" TargetType="TextBox">
         <Setter Property="FontFamily" Value="Yu Gothic"/>
+        <Setter Property="Background" Value="{StaticResource SecondBackground}"/>
+        <Setter Property="Foreground" Value="{StaticResource MainWhite}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate >
                     <Border Background="{TemplateBinding Background}" x:Name="Bd" 
-BorderThickness="3" CornerRadius="10" BorderBrush="{StaticResource HoverBlue}">
+BorderThickness="3" CornerRadius="10" BorderBrush="{StaticResource MainPink}">
                         <ScrollViewer x:Name="PART_ContentHost" />
                     </Border>
                 </ControlTemplate>
@@ -369,8 +373,8 @@ BorderThickness="3" CornerRadius="10" BorderBrush="{StaticResource HoverBlue}">
     <!--Text box for anamnesis-->
     <Style x:Key="TextBoxStyle" TargetType="TextBox">
         <Setter Property="BorderBrush" Value="{StaticResource MediumGray}"/>
-        <Setter Property="Foreground" Value="{StaticResource DarkBlue}"/>
-        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="{StaticResource MainWhite}"/>
+        <Setter Property="Background" Value="{StaticResource SecondBackground}"/>
         <Setter Property="FontFamily" Value="Yu Gothic"/>
         <Setter Property="FontSize" Value="15"/>
     </Style>
@@ -394,7 +398,7 @@ BorderThickness="3" CornerRadius="10" BorderBrush="{StaticResource HoverBlue}">
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource HoverBlue}" />
+                            <Setter Property="Background" Value="{StaticResource MainPink}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -462,7 +466,7 @@ BorderThickness="3" CornerRadius="10" BorderBrush="{StaticResource HoverBlue}">
                         <Border 
                                 Name="Border"
                                 Margin="0,0,-4,0" 
-                                Background="White"
+                                Background="{StaticResource DarkerPink}"
                                 BorderBrush="{StaticResource  SolidBorderBrush}" 
                                 BorderThickness="1,1,1,1" 
                                 CornerRadius="2,12,0,0" >
@@ -477,7 +481,7 @@ BorderThickness="3" CornerRadius="10" BorderBrush="{StaticResource HoverBlue}">
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Panel.ZIndex" Value="100" />
-                            <Setter TargetName="Border" Property="Background" Value="{StaticResource MainDarkBlue}" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource MainPink}" />
                             <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,0" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">

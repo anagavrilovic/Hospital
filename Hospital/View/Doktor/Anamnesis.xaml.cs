@@ -63,7 +63,6 @@ namespace Hospital.View
 
         private void ChangeUI()
         {
-            ((Doctor_Examination)Window.GetWindow(this)).AnamnesisLabel.Foreground = Brushes.Black;
             ((Doctor_Examination)Window.GetWindow(this)).AnamnesisTab.IsEnabled = false;
             ConfirmBox confirmBox = new ConfirmBox("Da li je potrebna terapija?");
             if ((bool)confirmBox.ShowDialog())

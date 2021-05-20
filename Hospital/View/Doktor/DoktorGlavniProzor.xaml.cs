@@ -24,7 +24,9 @@ namespace Hospital.View
     /// </summary>
     public partial class DoktorGlavniProzor : Window, INotifyPropertyChanged
     {
-    
+
+        private Frame frameMainPage;
+        private DoktorGlavnaStranica mainPage;
         private string doctorId;
         private Model.Doctor doctor = new Model.Doctor();
         private DoctorStorage doctorStorage = new DoctorStorage();
@@ -42,15 +44,19 @@ namespace Hospital.View
             InitializeComponent();
             this.DataContext = this;
             InitProperties(doctorId);
+
         }
 
         private void InitProperties(string doctorId)
         {
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 3 / 4);
-            Main.Content =new DoktorGlavnaStranica(doctorId);
             this.doctorId = doctorId;
             doctor = doctorStorage.GetDoctorByID(doctorId);
+            frameMainPage = new Frame();
+            mainPage = new DoktorGlavnaStranica(doctorId);
+            frameMainPage.Content = mainPage;
+            Main.Content = frameMainPage;
             checkHospitalTreatmentDates();
         }
 
@@ -67,7 +73,7 @@ namespace Hospital.View
 
         private void Logo(object sender, RoutedEventArgs e)
         {
-            Main.Content = new DoktorGlavnaStranica (doctorId);
+            Main.Content = frameMainPage;
         }
 
         private void SignOut_Click(object sender, RoutedEventArgs e)

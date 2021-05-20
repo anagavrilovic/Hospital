@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Hospital.View" xmlns:val="clr-namespace:Hospital.ValidacijeLekar"
        xmlns:ns="clr-namespace:Hospital" 
       mc:Ignorable="d"
-        Title="Terapija" Background="{DynamicResource BackgroundGray}">
+        Title="Terapija" Background="{DynamicResource Background}">
     <Page.Resources>
     </Page.Resources>
     <Grid>
@@ -52,16 +52,16 @@
                     </ListBox>
                 </ScrollViewer>
                 <StackPanel Orientation="Vertical">
-                    <Button Margin="10,5,20,0" VerticalAlignment="Top" Click="AddMedicine" Style="{DynamicResource ImageButtons}">
+                    <Button Margin="10,5,20,0" VerticalAlignment="Top" Click="AddMedicine" Style="{DynamicResource NoChromeButton}">
                         <StackPanel Orientation="Vertical">
                             <Image Source="../../Icon/DoctorIcons/addDark.png" Width="30"/>
-                            <TextBlock Text="{ns:Loc addButton }"/>
+                            <TextBlock Text="{ns:Loc addButton }" Style="{StaticResource TextBlockStyle}"/>
                         </StackPanel>
                     </Button>
-                    <Button Margin="10,20,20,0" VerticalAlignment="Top" Click="RemoveMedicineFromList" Style="{DynamicResource ImageButtons}">
+                    <Button Margin="10,20,20,0" VerticalAlignment="Top" Click="RemoveMedicineFromList" Style="{DynamicResource NoChromeButton}">
                         <StackPanel Orientation="Vertical">
                             <Image Source="../../Icon/DoctorIcons/minus.png" Width="30"/>
-                            <TextBlock Text="{ns:Loc removeButton }"/>
+                            <TextBlock Text="{ns:Loc removeButton }" Style="{StaticResource TextBlockStyle}"/>
                         </StackPanel>
                     </Button>
                 </StackPanel>
