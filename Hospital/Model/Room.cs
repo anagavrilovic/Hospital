@@ -158,6 +158,12 @@ namespace Hospital
           
         }
 
+        public bool ShouldSerializeFreeBeds()
+        {
+            return this.SerializeInfo;
+
+        }
+
         [JsonIgnore]
         public bool SerializeInfo { get; set; }
 

@@ -37,10 +37,19 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <Grid Grid.Row="0" Background="#FF95C0F4" Margin="0,0,0,31.2">
+            <Grid Grid.Row="0" Background="#FF95C0F4" Margin="0,0,0,-0.8">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="101*"/>
                     <ColumnDefinition Width="41*"/>
@@ -56,42 +65,134 @@
             <Label Content="ZAKAZIVANJE RENOVIRANJA" Foreground="#FF4B72F6" FontSize="24" Margin="40,60,29,-5.8" FontWeight="Bold"/>
         </Grid>
 
-        <Label Content="Oznaka sale:"         Grid.Row="2"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,4.8,186,4.8"  Grid.ColumnSpan="2" />
-        <Label Content="Datum početka:"       Grid.Row="4"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,4.6,186,5"    Grid.ColumnSpan="2" />
-        <Label Content="Datum završetka:"     Grid.Row="6"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,5.4,5,10.2"   Grid.ColumnSpan="2"/>
-        <Label Content="Magacin za privremeno skladištenje opreme:" Grid.Row="8" Foreground="#FF1E49D9" FontSize="16" Margin="30,2.2,5,10.4" Grid.ColumnSpan="2" />
-        <Label Content="Opis:"                Grid.Row="10"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,0,5.4,14.6" />
+        <ScrollViewer Grid.Row="2" Grid.RowSpan="23" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Hidden" Margin="0,0,0,0">
+            <Grid Grid.Row="0" Grid.RowSpan="16" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
 
-        <ComboBox x:Name="roomCB"        Grid.Row="3" Grid.ColumnSpan="2" Margin="30,0.2,28,11.4" BorderThickness="1" Foreground="#FF2E83BF"
-                    IsSynchronizedWithCurrentItem="True" 
-                    ItemsSource="{Binding   RoomIDs}"
-                    SelectedItem="{Binding SomeBindingPropertySelectedCurrently, 
-                    Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Oznaka sale:"         Grid.Row="0"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="16,0,200,10"  Grid.ColumnSpan="2" />
+                <Label Content="Datum početka:"       Grid.Row="2"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="16,0.6,200,5"    Grid.ColumnSpan="2" Grid.RowSpan="2" />
+                <Label Content="Datum završetka:"     Grid.Row="4"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="16,9,19,10"   Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                <Label Content="Magacin za privremeno skladištenje opreme:" Grid.Row="6" Foreground="#FF1E49D9" FontSize="16" Margin="16,5,19,0" Grid.ColumnSpan="2" />
+                <Label Content="Opis:"                Grid.Row="8"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="16,14,19.4,29" Grid.RowSpan="2" />
+                <Label   Grid.Row="12" Grid.ColumnSpan="2" Content="Spajanje prostorije sa nekom od sledećih:" Foreground="#FF1E49D9" FontSize="16" Margin="20,0,-15,0" />
+                <Label   Grid.Row="18" Grid.ColumnSpan="2" Content="Podela postojeće prostorije na nove:"      Foreground="#FF1E49D9" FontSize="16" Margin="20,0,-15,0"/>
+
+                <ComboBox x:Name="roomCB"        Grid.Row="1" Margin="30,1,28,39" BorderThickness="1" Foreground="#FF2E83BF"
+                            IsSynchronizedWithCurrentItem="True" 
+                            ItemsSource="{Binding   RoomIDs}"
+                            SelectedItem="{Binding SomeBindingPropertySelectedCurrently, 
+                            Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" Grid.RowSpan="2" />
 
 
-        <DatePicker x:Name="dateStart"    Grid.Row="5" Grid.ColumnSpan="2" Margin="30,0,28,10.6"  SelectedDate="{Binding Path=RoomRenovation.StartDate, Mode=OneWayToSource, TargetNullValue={x:Static sys:DateTime.Now}}" DisplayDateStart="{x:Static sys:DateTime.Today}" Focusable="False"/>
-        <DatePicker x:Name="dateEnd"      Grid.Row="6" Grid.ColumnSpan="2" Margin="30,45.4,28,10" SelectedDate="{Binding Path=RoomRenovation.EndDate,   Mode=OneWayToSource, TargetNullValue={x:Static sys:DateTime.Now}}" DisplayDateStart="{x:Static sys:DateTime.Today}" Focusable="False" Grid.RowSpan="2"/>
+                <DatePicker x:Name="dateStart"    Grid.Row="3" Grid.ColumnSpan="2" Margin="30,1,28,5"  SelectedDate="{Binding Path=RoomRenovation.StartDate, Mode=OneWayToSource, TargetNullValue={x:Static sys:DateTime.Now}}" DisplayDateStart="{x:Static sys:DateTime.Today}" Focusable="False"/>
+                <DatePicker x:Name="dateEnd"      Grid.Row="5" Grid.ColumnSpan="2" Margin="30,10,28,0" SelectedDate="{Binding Path=RoomRenovation.EndDate,   Mode=OneWayToSource, TargetNullValue={x:Static sys:DateTime.Now}}" DisplayDateStart="{x:Static sys:DateTime.Today}" Focusable="False"/>
 
-        <ComboBox x:Name="magacinCB"     Grid.Row="8" Grid.ColumnSpan="2" Margin="30,45.2,28,12" BorderThickness="1" Foreground="#FF2E83BF"
-                    IsSynchronizedWithCurrentItem="True" 
-                    ItemsSource="{Binding   WarehousesIDs}" 
-                    SelectedItem="{Binding SomeBindingPropertySelectedCurrently, 
-                    Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.RowSpan="2" >
-        </ComboBox>
+                <ComboBox x:Name="magacinCB"     Grid.Row="7" Grid.ColumnSpan="2" Margin="30,10,28,31" BorderThickness="1" Foreground="#FF2E83BF"
+                            IsSynchronizedWithCurrentItem="True" 
+                            ItemsSource="{Binding   WarehousesIDs}" 
+                            SelectedItem="{Binding SomeBindingPropertySelectedCurrently, 
+                            Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.RowSpan="2" />
 
-        <Button Grid.Column="1" Grid.Row="10" Content="IZMENA PLANA PROSTORIJA" Background="#FFB9DDED" Foreground="#FF061031" Style="{StaticResource RoundButtonStyle}" Margin="9.6,0,28,5.6" Click="EditRoomsOrganization"/>
+                <Button Grid.Column="1" Grid.Row="8" Content="IZMENA PLANA PROSTORIJA" Background="#FFB9DDED" Foreground="#FF061031" Style="{StaticResource RoundButtonStyle}" Margin="9.6,14,28,53" Click="EditRoomsOrganization" RenderTransformOrigin="0.458,1.15" Grid.RowSpan="2" />
 
-        <TextBox    x:Name="description"  Grid.Row="10" Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="30,45,28,10.4" Text="{Binding Path=RoomRenovation.Description, Mode=OneWayToSource}" BorderBrush="#FF26282C" TextWrapping="Wrap">
-            <TextBox.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="10"/>
-                    <Setter Property="Padding" Value="2"/>
-                </Style>
-            </TextBox.Resources>
-        </TextBox>
+                <TextBox    x:Name="description"  Grid.Row="9" Grid.ColumnSpan="2" Grid.RowSpan="3" Margin="30,12,28,21" Text="{Binding Path=RoomRenovation.Description, Mode=OneWayToSource}" BorderBrush="#FF26282C" TextWrapping="Wrap">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="Padding" Value="2"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
 
-        <Button Grid.Column="0" Grid.Row="14"  Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,9.6,10.4,36.6" Style="{StaticResource RoundButtonStyle}" Click="accept"/>
-        <Button Grid.Column="1" Grid.Row="14"  Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="9.6,9.6,28,36.6"  Style="{StaticResource RoundButtonStyle}" Click="cancel" />
+                <Border Grid.Row="13"  Grid.ColumnSpan="2" Grid.RowSpan="3" Margin="30,4,28,5" CornerRadius="10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
 
+                        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Margin="2,2,2,2">
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                <Button Width="30" Height="30"  Click="BtnAddRoomForMerge">
+                                    <Image Source="/Icon/plus.png"/>
+                                </Button>
+                                <Button Width="30" Height="30"  Click="BtnDeleteRoomForMerge" Margin="5,0,3,0">
+                                    <Image Source="/Icon/minus.png"/>
+                                </Button>
+                                <Button Width="30" Height="30"  Click="BtnRefrehRoomsForMerge" Margin="250,0,3,0">
+                                    <Image Source="/Icon/refresh.png" RenderTransformOrigin="3.132,0.551"/>
+                                </Button>
+                            </StackPanel>
+                            <ListBox ItemsSource="{Binding RoomsFromSameFloor}" x:Name="allRoomsFromSameFloorList" Height="79" Margin="0,0,0.4,0" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="16"  Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="30,4,28,5" CornerRadius="10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Margin="2,2,2,2">
+                            <ListBox ItemsSource="{Binding RoomRenovation.RoomsDestroyedDuringRenovation, Mode=TwoWay, UpdateSourceTrigger=Explicit}" x:Name="ingredientsList" Height="110" Margin="0,0,0.4,0" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="19"  Grid.ColumnSpan="2" Grid.RowSpan="3" Margin="30,4,28,5" CornerRadius="10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Margin="2,2,2,2">
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                <Button Width="30" Height="30"  Click="AddNewRoom">
+                                    <Image Source="/Icon/plus.png"/>
+                                </Button>
+                            </StackPanel>
+                            <ListBox ItemsSource="{Binding RoomRenovation.RoomsCreatedDuringRenovation, Mode=TwoWay, UpdateSourceTrigger=Explicit}" x:Name="NewRoomsList" Height="100" Margin="0,0,0.6,0" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <Button Grid.Column="0" Grid.Row="22" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="20,9.8,20.4,20" Style="{StaticResource RoundButtonStyle}" Click="accept" Grid.RowSpan="2"/>
+                <Button Grid.Row="22" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="210,9.8,38,20"  Style="{StaticResource RoundButtonStyle}" Click="cancel" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>

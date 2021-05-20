@@ -81,6 +81,14 @@ namespace Hospital.Model
 
         public Room Room { get; set; }
         public Room WareHouse { get; set; }
+
+        public  RoomRenovation()
+        {
+            RoomsCreatedDuringRenovation = new ObservableCollection<Room>();
+            RoomsDestroyedDuringRenovation = new ObservableCollection<Room>();
+            Room = new Room();
+            WareHouse = new Room();
+        }
        
 
         public void startRenovation()
@@ -130,7 +138,24 @@ namespace Hospital.Model
             Room room = roomStorage.GetOne(Room.Id);
             room.Status = RoomStatus.SLOBODNA;
             roomStorage.Save(room);
+            FinishSeparatingRooms();
+            FinishMergingRooms();
             roomRenovationStorage.Delete(this);
+        }
+
+        private void FinishSeparatingRooms()
+        {
+            foreach (Room r in RoomsCreatedDuringRenovation)
+            {
+                r.Status = RoomStatus.SLOBODNA;
+                roomStorage.Save(r);
+            }
+        }
+
+        private void FinishMergingRooms()
+        {
+            foreach (Room r in RoomsDestroyedDuringRenovation)
+                roomStorage.Delete(r.Id);
         }
 
        private InventoryStorage inventoryStorage = new InventoryStorage();
