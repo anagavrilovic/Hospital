@@ -30,15 +30,15 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
-            <Button Background="#FF95C0F4" BorderBrush="#FF95C0F4" Click="back" >
+            <Button Background="#FF95C0F4" BorderBrush="#FF95C0F4" Click="BackButtonClick" >
                 <Image Source="/Icon/back.png"  Margin="0,0,5,0" Height="63" Width="55"/>
             </Button>
             <Label Content="ZAKAZANA RENOVIRANJA"    Margin="0,27,5,28.4" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="18"  />
             <Image Source="/Icon/logo.png"  Margin="0,19,6,18.2" Width="115"/>
         </StackPanel>
 
-        <Button Grid.Row="1" Grid.Column="0" Content="ZAKAŽI RENOVIRANJE" Margin="10,18.4,10,19.2" Background="#FFAAD0E0" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="addNewRenovation" FontSize="14"/>
-        <Button Grid.Row="1" Grid.Column="1" Content="OTKAŽI RENOVIRANJE" Margin="10,18.4,10,19.2" Background="#FFAAD0E0" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="deleteRenovation" FontSize="14"/>
+        <Button Grid.Row="1" Grid.Column="0" Content="ZAKAŽI RENOVIRANJE" Margin="10,18.4,10,19.2" Background="#FFAAD0E0" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="ScheduleNewRenovation" FontSize="14"/>
+        <Button Grid.Row="1" Grid.Column="1" Content="OTKAŽI RENOVIRANJE" Margin="10,18.4,10,19.2" Background="#FFAAD0E0" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="CancelRenovation" FontSize="14"/>
 
         <Grid Grid.Row="2" Grid.RowSpan="6" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>

@@ -31,25 +31,33 @@ namespace Hospital.View
 
         private void AcceptAddingButtonClick(object sender, RoutedEventArgs e)
         {
-            NewRoom.Type = (RoomType)Enum.Parse(typeof(RoomType), typeCB.Text);
-            NewRoom.Status = (RoomStatus)Enum.Parse(typeof(RoomStatus), statusCB.Text);
+            InitializeNewRoom();
 
-            if (CheckUniquenessOfNewRoomID())
-                _roomStorage.Save(NewRoom);
-            else
-                MessageBox.Show("Već postoji sala sa unetom oznakom!");
+            if (!IsNewRoomIdUnique())
+                return;
 
+            _roomStorage.Save(NewRoom);
+         
             NavigationService.Navigate(new RoomsWindow());
         }
 
-        private bool CheckUniquenessOfNewRoomID()
+        private bool IsNewRoomIdUnique()
         {
             foreach (Room room in _roomStorage.GetAll())
             {
                 if (room.Id.Equals(NewRoom.Id))
+                {
+                    MessageBox.Show("Već postoji sala sa unetom oznakom!");
                     return false;
+                }
             }
             return true;
+        }
+
+        private void InitializeNewRoom()
+        {
+            NewRoom.Type = (RoomType)Enum.Parse(typeof(RoomType), typeCB.Text);
+            NewRoom.Status = (RoomStatus)Enum.Parse(typeof(RoomStatus), statusCB.Text);
         }
 
         private void CancelAddingButtonClick(object sender, RoutedEventArgs e)

@@ -59,7 +59,7 @@
 
             <Grid MinWidth="200" Height="330">
                 <DataGrid  x:Name ="dataGridInventory"  Style="{StaticResource dataGridMedicines}" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}"
-                               ItemsSource="{Binding Path=Inventory, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                               ItemsSource="{Binding Path=InventoryInRoom, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                Background="#FFCADEED" Foreground="#FF536AA0" Margin="10,-9,0,0" Width="393">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Oznaka"   Binding="{Binding Id}"          Width="70"/>

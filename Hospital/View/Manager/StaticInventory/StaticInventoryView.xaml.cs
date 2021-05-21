@@ -19,26 +19,17 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    public partial class StaticInventoryView : Page, INotifyPropertyChanged
+    public partial class StaticInventoryView : Page
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
         private string _roomID;
 
-        private static ObservableCollection<Inventory> _inventory;
-        public static ObservableCollection<Inventory> Inventory 
+        private static ObservableCollection<Inventory> _inventoryInRoom;
+        public static ObservableCollection<Inventory> InventoryInRoom 
         {
-            get => _inventory; 
+            get => _inventoryInRoom; 
             set
             {
-                _inventory = value;
+                _inventoryInRoom = value;
                 NotifyStaticPropertyChanged();
             }
         }
@@ -60,15 +51,14 @@ namespace Hospital.View
             this._roomID = id;
 
             _inventoryStorage = new InventoryStorage();
-            Inventory = _inventoryStorage.GetByRoomID(id);
-            InventoryCollection = CollectionViewSource.GetDefaultView(Inventory);
+            InventoryInRoom = _inventoryStorage.GetByRoomID(id);
+            InventoryCollection = CollectionViewSource.GetDefaultView(InventoryInRoom);
 
             TransferInventoryStorage transferStorage = new TransferInventoryStorage();
             foreach(TransferInventory ti in transferStorage.GetAll())
             {
                 if(ti.TransferDate < DateTime.Now)
                 {
-                    // ti.StartTransfer();
                     ti.WaitUntilTransferDate();
                 }
             }
@@ -89,7 +79,7 @@ namespace Hospital.View
             }
             else
             {
-                 ICollectionView view = CollectionViewSource.GetDefaultView(Inventory);
+                 ICollectionView view = CollectionViewSource.GetDefaultView(InventoryInRoom);
                  InventoryCollection.Refresh();
             }
         }
@@ -98,8 +88,7 @@ namespace Hospital.View
         {
             this.InventoryCollection.Refresh();
         }
-
-      
+  
         private bool Filter(object item)
         {
             if (((Inventory)item).Name.Contains(_searchCriterion) || ((Inventory)item).Id.Contains(_searchCriterion) || ((Inventory)item).Price.ToString().Contains(_searchCriterion) ||
@@ -152,7 +141,7 @@ namespace Hospital.View
 
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new RoomsWindow());
+            NavigationService.GoBack();
         }
 
     }

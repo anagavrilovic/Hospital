@@ -17,7 +17,7 @@ namespace Hospital.View
 {
     public partial class AddInventory : Page
     {
-        public  Inventory Inv { get; set;  }
+        public  Inventory InventoryItem { get; set;  }
         private InventoryStorage _inventoryStorage;
 
         public AddInventory(string id)
@@ -25,41 +25,42 @@ namespace Hospital.View
             InitializeComponent();
             this.DataContext = this;
 
-            Inv = new Inventory();
-            Inv.RoomID = id;
+            InventoryItem = new Inventory();
+            InventoryItem.RoomID = id;
             this._inventoryStorage = new InventoryStorage();
         }
 
         private void AcceptAddingButtonClick(object o, RoutedEventArgs e)
-        {          
-            bool isItemIDUnique = CheckUniquenessOfNewItemID();
+        {   
+            if (!CheckUniquenessOfNewItemID())
+                return;
 
-            if(isItemIDUnique)
-                _inventoryStorage.Save(Inv);
-            else
-                MessageBox.Show("Već postoji stavka sa unetom oznakom!");
-
-            NavigationService.Navigate(new StaticInventoryView(Inv.RoomID));
+            _inventoryStorage.Save(InventoryItem);
+         
+            NavigationService.Navigate(new StaticInventoryView(InventoryItem.RoomID));
         }
 
         private bool CheckUniquenessOfNewItemID()
         {
-            foreach (Inventory inv in _inventoryStorage.GetByRoomID(Inv.RoomID))
+            foreach (Inventory inv in _inventoryStorage.GetByRoomID(InventoryItem.RoomID))
             {
-                if (inv.Id.Equals(Inv.Id))
+                if (inv.Id.Equals(InventoryItem.Id))
+                {
+                    MessageBox.Show("Već postoji stavka sa unetom oznakom!");
                     return false;
+                }
             }
             return true;
         }
 
         private void CancelButtonClick(object o, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new StaticInventoryView(Inv.RoomID));
+            NavigationService.Navigate(new StaticInventoryView(InventoryItem.RoomID));
         }
 
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new StaticInventoryView(Inv.RoomID));
+            NavigationService.Navigate(new StaticInventoryView(InventoryItem.RoomID));
         }
     }
 }

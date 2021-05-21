@@ -33,6 +33,14 @@ namespace Hospital.View
 
         private void acceptEdit(object sender, RoutedEventArgs e)
         {
+            SaveEditedProperties();
+            _roomStorage.doSerialization();
+
+            NavigationService.Navigate(new RoomsWindow());
+        }
+
+        private void SaveEditedProperties()
+        {
             idTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             nameTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             floorTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
@@ -49,13 +57,9 @@ namespace Hospital.View
             {
                 EditedRoom.Status = (RoomStatus)Enum.Parse(typeof(RoomStatus), statusCB.Text);
             }
-
-            _roomStorage.doSerialization();
-
-            NavigationService.Navigate(new RoomsWindow());
         }
 
-        private void cancelEdit(object sender, RoutedEventArgs e)
+        private void CancelEdit(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RoomsWindow());
         }

@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace Hospital.View.Manager.Rooms
 {
-    /// <summary>
-    /// Interaction logic for AddNewRoomDuringRenovation.xaml
-    /// </summary>
     public partial class AddNewRoomDuringRenovation : Page
     {
         public Room NewRoom { get; set; }
@@ -41,20 +38,23 @@ namespace Hospital.View.Manager.Rooms
         {
             NewRoom.Type = (RoomType)Enum.Parse(typeof(RoomType), typeCB.Text);
 
-            if (CheckUniquenessOfNewRoomID())
-                RoomRenovation.RoomsCreatedDuringRenovation.Add(NewRoom);
-            else
-                MessageBox.Show("Već postoji sala sa unetom oznakom!");
+            if (!IsNewRoomIdUnique())
+                return;
+
+            RoomRenovation.RoomsCreatedDuringRenovation.Add(NewRoom);
 
             NavigationService.GoBack();
         }
 
-        private bool CheckUniquenessOfNewRoomID()
+        private bool IsNewRoomIdUnique()
         {
             foreach (Room room in _roomStorage.GetAll())
             {
                 if (room.Id.Equals(NewRoom.Id))
+                {
+                    MessageBox.Show("Već postoji sala sa unetom oznakom!");
                     return false;
+                }
             }
             return true;
         }
