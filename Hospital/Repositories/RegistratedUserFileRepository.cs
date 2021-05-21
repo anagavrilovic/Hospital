@@ -17,9 +17,18 @@ namespace Hospital.Repositories
 
         public RegistratedUserFileRepository() { }
 
-        public void Delete(string id)
+        public void Delete(string username)
         {
-            throw new NotImplementedException();
+            ObservableCollection<RegistratedUser> users = GetAll();
+            foreach (RegistratedUser user in users)
+            {
+                if (user.Username.Equals(username))
+                {
+                    users.Remove(user);
+                    Serialize(users);
+                    return;
+                }
+            }
         }
 
         public ObservableCollection<RegistratedUser> GetAll()
@@ -37,9 +46,25 @@ namespace Hospital.Repositories
             return users;
         }
 
-        public RegistratedUser GetByID(string id)
+        public RegistratedUser GetByID(string username)
         {
-            throw new NotImplementedException();
+            ObservableCollection<RegistratedUser> registratedUsers = GetAll();
+
+            foreach (RegistratedUser user in registratedUsers)
+                if (user.Username.Equals(username))
+                    return user;
+
+            return null;
+        }
+
+        public bool IsUsernameUnique(string username)
+        {
+            ObservableCollection<RegistratedUser> registratedUsers = GetAll();
+            foreach (RegistratedUser user in registratedUsers)
+                if (user.Username.Equals(username))
+                    return false;
+
+            return true;
         }
 
         public void Save(RegistratedUser user)

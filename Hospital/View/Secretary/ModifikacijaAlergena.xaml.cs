@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Services;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -17,159 +18,79 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for ModifikacijaAlergena.xaml
-    /// </summary>
     public partial class ModifikacijaAlergena : Page
-    {
-        private ObservableCollection<string> lekovi = new ObservableCollection<string>();
-        private ObservableCollection<string> sastojci = new ObservableCollection<string>();
-        private string ostalo;
+    {  
+        public MedicalRecord PatientsRecord { get; set; }
 
-        private MedicalRecord mr;
-        private ObservableCollection<MedicalRecord> pacijenti;
+        public ObservableCollection<string> AllMedicines { get; set; }
+        public ObservableCollection<string> AllIngredients { get; set; }
+        public ICollectionView MedicineCollection { get; set; }
+        public ICollectionView IngredientsCollection { get; set; }
 
-        private List<string> stariLekovi = new List<string>();
+        public string SelectedMedicine { get; set; }
+        public string SelectedIngredient { get; set; }
 
-        public List<string> StariLekovi
-        {
-            get { return stariLekovi; }
-            set { stariLekovi = value; }
-        }
-
-        private List<string> stariSastojci = new List<string>();
-
-        public List<string> StariSastojci
-        {
-            get { return stariSastojci; }
-            set { stariSastojci = value; }
-        }
-
-        public ObservableCollection<MedicalRecord> Pacijenti
-        {
-            get { return pacijenti; }
-            set { pacijenti = value; }
-        }
+        private MedicalRecordService MedicalRecordService;
+        private MedicineService MedicineService;
 
 
-        public MedicalRecord Mr
-        {
-            get { return mr; }
-            set { mr = value; }
-        }
-
-
-        public string Ostalo
-        {
-            get { return ostalo; }
-            set { ostalo = value; }
-        }
-
-        public ObservableCollection<string> Sastojci
-        {
-            get { return sastojci; }
-            set { sastojci = value; }
-        }
-
-        public ObservableCollection<string> Lekovi
-        {
-            get { return lekovi; }
-            set { lekovi = value; }
-        }
-
-        private ICollectionView lekoviCollection;
-
-        public ICollectionView LekoviCollection
-        {
-            get { return lekoviCollection; }
-            set { lekoviCollection = value; }
-        }
-
-        private ICollectionView sastojciCollection;
-
-        public ICollectionView SastojciCollection
-        {
-            get { return sastojciCollection; }
-            set { sastojciCollection = value; }
-        }
-
-        public ModifikacijaAlergena(MedicalRecord mr, ObservableCollection<MedicalRecord> p)
+        public ModifikacijaAlergena(MedicalRecord selectedRecord)
         {
             InitializeComponent();
             this.DataContext = this;
-            this.Mr = mr;
-            this.Pacijenti = p;
-            this.ReadDrugsAndIngredients();
+            InitializeEmptyProperties();
+            ReadAllMedicines();
+            ReadAllIngredients();
+            this.PatientsRecord = selectedRecord;
+        }
 
-            foreach (string lek in Mr.Allergen.MedicineNames)
-                StariLekovi.Add(lek);
+        private void InitializeEmptyProperties()
+        {
+            MedicalRecordService = new MedicalRecordService();
+            MedicineService = new MedicineService();
+        }
 
-            foreach (string sastojak in Mr.Allergen.IngredientNames)
-                StariSastojci.Add(sastojak);
+        private void ReadAllMedicines()
+        {
+            AllMedicines = MedicineService.GetAllMedicines();
 
+            MedicineCollection = CollectionViewSource.GetDefaultView(AllMedicines);
+            MedicineCollection.Filter = CustomFilterLekovi;
+        }
+
+        private void ReadAllIngredients()
+        {
+            AllIngredients = MedicineService.GetAllIngredients();
+
+            IngredientsCollection = CollectionViewSource.GetDefaultView(AllIngredients);
+            IngredientsCollection.Filter = CustomFilterSastojci;
         }
 
         private void BtnPotvrdiClick(object sender, RoutedEventArgs e)
         {
-            OstaloTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-
-            MedicalRecordStorage mrs = new MedicalRecordStorage();
-            mrs.DoSerialization(Pacijenti);
+            MedicalRecordService.UpdateMedicalRecord(PatientsRecord);
             NavigationService.Navigate(new PrikazPacijenata());
         }
 
         private void BtnOtkaziClick(object sender, RoutedEventArgs e)
         {
-            foreach(string lek in Mr.Allergen.MedicineNames.ToList<string>())
-                if (!StariLekovi.Contains(lek))
-                    Mr.Allergen.MedicineNames.Remove(lek);
-
-            foreach (string sastojak in Mr.Allergen.IngredientNames.ToList<string>())
-                if (!StariSastojci.Contains(sastojak))
-                    Mr.Allergen.IngredientNames.Remove(sastojak);
-
             NavigationService.Navigate(new PrikazPacijenata());
-        }
-
-        private void ReadDrugsAndIngredients()
-        {
-            string[] lines = File.ReadAllLines("..\\..\\Files\\drugs.txt");
-            foreach (string line in lines)
-                Lekovi.Add(line);
-
-            LekoviCollection = CollectionViewSource.GetDefaultView(Lekovi);
-            LekoviCollection.Filter = CustomFilterLekovi;
-
-            string[] lines2 = File.ReadAllLines("..\\..\\Files\\ingredients.txt");
-            foreach (string line in lines2)
-                Sastojci.Add(line);
-
-            SastojciCollection = CollectionViewSource.GetDefaultView(Sastojci);
-            SastojciCollection.Filter = CustomFilterSastojci;
         }
 
         private bool CustomFilterLekovi(object obj)
         {
             if (string.IsNullOrEmpty(LekoviFilter.Text))
-            {
                 return true;
-            }
             else
-            {
                 return (obj.ToString().IndexOf(LekoviFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0);
-            }
         }
 
         private bool CustomFilterSastojci(object obj)
         {
             if (string.IsNullOrEmpty(SastojciFilter.Text))
-            {
                 return true;
-            }
             else
-            {
                 return (obj.ToString().IndexOf(SastojciFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0);
-            }
         }
 
         private void LekoviFilterTextChanged(object sender, TextChangedEventArgs e)
@@ -184,26 +105,26 @@ namespace Hospital.View
 
         private void BtnPlusLekoviClick(object sender, RoutedEventArgs e)
         {
-            string selektovaniLek = (string)LekoviLista.SelectedItem;
-            if (!Mr.Allergen.MedicineNames.Contains(selektovaniLek))
-                Mr.Allergen.MedicineNames.Add(selektovaniLek);
+            if (SelectedMedicine != null)
+                if(!PatientsRecord.Allergen.MedicineNames.Contains(SelectedMedicine))
+                    PatientsRecord.Allergen.MedicineNames.Add(SelectedMedicine);
         }
 
         private void BtnPlusSastojciClick(object sender, RoutedEventArgs e)
         {
-            string selektovaniSastojak = (string)SastojciLista.SelectedItem;
-            if (!Mr.Allergen.IngredientNames.Contains(selektovaniSastojak))
-                Mr.Allergen.IngredientNames.Add(selektovaniSastojak);
+            if (SelectedIngredient != null)
+                if(!PatientsRecord.Allergen.IngredientNames.Contains(SelectedIngredient))
+                    PatientsRecord.Allergen.IngredientNames.Add(SelectedIngredient);
         }
 
         private void LekoviUkloni(object sender, RoutedEventArgs e)
         {
-            Mr.Allergen.MedicineNames.Remove((string)DodatiLekovi.SelectedItem);
+            PatientsRecord.Allergen.MedicineNames.Remove((string)DodatiLekovi.SelectedItem);
         }
 
         private void SastojciUkloni(object sender, RoutedEventArgs e)
         {
-            Mr.Allergen.IngredientNames.Remove((string)DodatiSastojci.SelectedItem);
+            PatientsRecord.Allergen.IngredientNames.Remove((string)DodatiSastojci.SelectedItem);
         }
     }
 }

@@ -63,7 +63,7 @@
                                 <Image Source="../../Icon/Secretary/del.png" Width="10" Height="10"/>
                             </Button>
                         </StackPanel>
-                        <ListBox x:Name="DodatiLekovi" ItemsSource="{Binding Mr.Allergen.MedicineNames, Mode=TwoWay, UpdateSourceTrigger=Explicit}" 
+                        <ListBox x:Name="DodatiLekovi" ItemsSource="{Binding PatientsRecord.Allergen.MedicineNames, Mode=TwoWay, UpdateSourceTrigger=Explicit}" 
                                  Style="{StaticResource ListBoxStyle}" Height="100" Margin="30,0,15,25" ItemContainerStyle="{StaticResource ListBoxItemStyle}">
 
                         </ListBox>
@@ -83,7 +83,8 @@
                                 </StackPanel>
                             </Border>
                         </StackPanel>
-                        <ListBox ItemsSource="{Binding Lekovi}" x:Name="LekoviLista" Height="100" Style="{StaticResource ListBoxStyle}"  ItemContainerStyle="{StaticResource ListBoxItemStyle}">
+                        <ListBox ItemsSource="{Binding AllMedicines}" x:Name="LekoviLista" Height="100" Style="{StaticResource ListBoxStyle}" 
+                                 ItemContainerStyle="{StaticResource ListBoxItemStyle}" SelectedItem="{Binding SelectedMedicine}">
 
                         </ListBox>
                     </StackPanel>
@@ -110,7 +111,7 @@
                                 <Image Source="../../Icon/Secretary/del.png" Height="10" Width="10"/>
                             </Button>
                         </StackPanel>
-                        <ListBox x:Name="DodatiSastojci" ItemsSource="{Binding Mr.Allergen.IngredientNames, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
+                        <ListBox x:Name="DodatiSastojci" ItemsSource="{Binding PatientsRecord.Allergen.IngredientNames, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
                                  Style="{StaticResource ListBoxStyle}" Height="100" Margin="30,0,15,25"  ItemContainerStyle="{StaticResource ListBoxItemStyle}">
 
                         </ListBox>
@@ -130,7 +131,8 @@
                                 </StackPanel>
                             </Border>
                         </StackPanel>
-                        <ListBox ItemsSource="{Binding Sastojci}" x:Name="SastojciLista" Height="100" Style="{StaticResource ListBoxStyle}"  ItemContainerStyle="{StaticResource ListBoxItemStyle}">
+                        <ListBox ItemsSource="{Binding AllIngredients}" x:Name="SastojciLista" Height="100" Style="{StaticResource ListBoxStyle}" 
+                                 ItemContainerStyle="{StaticResource ListBoxItemStyle}" SelectedItem="{Binding SelectedIngredient}">
 
                         </ListBox>
                     </StackPanel>
@@ -146,7 +148,7 @@
             <Border Grid.Row="2" Margin="30,5,30,0" CornerRadius="10" Background="{StaticResource MainWhite}">
                 <StackPanel Width="950" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,30">
                     <TextBlock Text="Ostali alergeni:" Style="{StaticResource TextBlockStyle}" Margin="0"/>
-                    <TextBox x:Name="OstaloTxt" Text="{Binding Mr.Allergen.Other, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Style="{StaticResource TextBoxStyle}" Height="40"/>
+                    <TextBox x:Name="OstaloTxt" Text="{Binding PatientsRecord.Allergen.Other, Mode=TwoWay}" Style="{StaticResource TextBoxStyle}" Height="40"/>
                 </StackPanel>
             </Border>
 

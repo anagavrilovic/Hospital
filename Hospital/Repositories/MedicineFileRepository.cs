@@ -70,5 +70,27 @@ namespace Hospital.Repositories
                 serializer.Serialize(file, medicines);
             }
         }
+
+        public ObservableCollection<string> GetAllMedicines()
+        {
+            ObservableCollection<string> allMedicines = new ObservableCollection<string>();
+
+            string[] medicines = File.ReadAllLines("..\\..\\Files\\drugs.txt");
+            foreach (string medicine in medicines)
+                allMedicines.Add(medicine);
+
+            return allMedicines;
+        }
+
+        public ObservableCollection<string> GetAllIngredients()
+        {
+            ObservableCollection<string> allIngredients = new ObservableCollection<string>();
+
+            string[] lines2 = File.ReadAllLines("..\\..\\Files\\ingredients.txt");
+            foreach (string line in lines2)
+                allIngredients.Add(line);
+
+            return allIngredients;
+        }
     }
 }

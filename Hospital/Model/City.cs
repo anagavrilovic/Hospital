@@ -21,18 +21,6 @@ namespace Hospital.Model
             }
         }
 
-        private string township;
-
-        public string Township
-        {
-            get { return township; }
-            set 
-            { 
-                township = value;
-                OnPropertyChanged("Township");
-            }
-        }
-
         private string postalCode;
 
         public string PostalCode

@@ -48,10 +48,6 @@ namespace Hospital.View
         }
 
 
-
-        /// <summary>
-        /// Eventi za dugmice za navigacioni bar
-        /// </summary>
         private void ButtonPocetnaClick(object sender, RoutedEventArgs e)
         {
 

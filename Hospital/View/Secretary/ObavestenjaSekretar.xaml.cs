@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using Hospital.View.Secretary;
 using System;
 using System.Collections.Generic;
@@ -18,127 +19,122 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for ObavestenjaSekretar.xaml
-    /// </summary>
     public partial class ObavestenjaSekretar : Page
     {
-        private ObservableCollection<Notification> notificationList = new ObservableCollection<Notification>();
-        private NotificationStorage ns = new NotificationStorage();
+        public ObservableCollection<Notification> AllNotifications { get; set; }
+        public Notification SelectedNotification { get; set; }
+        public ICollectionView NotificationCollection { get; set; }
 
-        public NotificationStorage Ns
-        {
-            get { return ns; }
-            set { ns = value; }
-        }
-
-        public ObservableCollection<Notification> NotificationList
-        {
-            get { return notificationList; }
-            set { notificationList = value; }
-        }
-
-        private ICollectionView notificationCollection;
-
-        public ICollectionView NotificationCollection
-        {
-            get { return notificationCollection; }
-            set { notificationCollection = value; }
-        }
-
+        public NotificationService NotificationService { get; set; }
+        public NotificationStorage Ns { get; set; }
 
         public ObavestenjaSekretar()
         {
             InitializeComponent();
             this.DataContext = this;
-            UcitajObavestenja();
+            InitializeEmptyProperties();
+            LoadAllNotifications();
         }
 
-
-        private void UcitajObavestenja()
+        private void InitializeEmptyProperties()
         {
-            NotificationList = Ns.GetAllNotifications();
+            Ns = new NotificationStorage();
+            AllNotifications = new ObservableCollection<Notification>();
+            NotificationService = new NotificationService();
+        }
+
+        private void LoadAllNotifications()
+        {
+            AllNotifications = NotificationService.GetAllNotifications();
             SortNotificationList();
 
-            NotificationCollection = CollectionViewSource.GetDefaultView(NotificationList);
+            NotificationCollection = CollectionViewSource.GetDefaultView(AllNotifications);
             NotificationCollection.Filter = CustomFilterObavestenja;
         }
 
         private void SortNotificationList()
         {
-            List<Notification> sortedList = NotificationList.OrderByDescending(n => n.Date).ToList();
-            NotificationList.Clear();
-            NotificationList = new ObservableCollection<Notification>(sortedList);
+            List<Notification> sortedList = AllNotifications.OrderByDescending(n => n.Date).ToList();
+            AllNotifications.Clear();
+            AllNotifications = new ObservableCollection<Notification>(sortedList);
         }
-
-        private bool CustomFilterObavestenja(object obj)
-        {
-            if (string.IsNullOrEmpty(ObavestenjaFilter.Text))
-            {
-                return true;
-            }
-            else
-            {
-                return ((obj as Notification).Title.IndexOf(ObavestenjaFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0) ||
-                    ((obj as Notification).Content.IndexOf(ObavestenjaFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0) ||
-                    ((obj as Notification).Date.ToString("dd.MM.yyyy, HH:mm").IndexOf(ObavestenjaFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0);
-            }
-        }
-
-
-        private void ObavestenjaFilterTextChanged(object sender, TextChangedEventArgs e)
-        {
-            CollectionViewSource.GetDefaultView(ListBoxNotifications.ItemsSource).Refresh();
-        }
-
 
         private void NovoObavestenjeClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new DodajObavestenje());
         }
 
-
         private void BrisanjeObavestenjaClick(object sender, RoutedEventArgs e)
         {
-            if (ListBoxNotifications.SelectedItem == null)
-            {
-                InformationBox informationBox = new InformationBox("Selektujte obaveštenje koje želite da izbrišete!");
-                informationBox.ShowDialog();
+            if (!IsNotificationSelected(GetNotificationNotSelectedForDeletingErrorMessage()))
                 return;
-            }
 
             ConfirmBox confirmBox = new ConfirmBox("da želite da izbrišete obaveštenje?");
             if ((bool)confirmBox.ShowDialog())
             {
                 Ns.ClearNotificationsUsersByNotificationID(((Notification)ListBoxNotifications.SelectedItem).Id);
-                NotificationList.Remove((Notification)ListBoxNotifications.SelectedItem);
-                Ns.SerializeNotifications(NotificationList);
+                AllNotifications.Remove((Notification)ListBoxNotifications.SelectedItem);
+                Ns.SerializeNotifications(AllNotifications);
             }
         }
 
         private void IzmenaObavestenjaClick(object sender, RoutedEventArgs e)
         {
-            if (ListBoxNotifications.SelectedItem == null)
-            {
-                InformationBox informationBox = new InformationBox("Selektujte obaveštenje koje želite da izmenite!");
-                informationBox.ShowDialog();
+            if (!IsNotificationSelected(GetNotificationNotSelectedForUpdatingErrorMessage()))
                 return;
-            }
 
-            NavigationService.Navigate(new IzmenaObavestenja((Notification)ListBoxNotifications.SelectedItem, NotificationList));
+            NavigationService.Navigate(new IzmenaObavestenja(SelectedNotification, AllNotifications));
         }
 
-        private void PrikazObavestenjaClick(object sender, RoutedEventArgs e)
+        private void ShowNotificationClick(object sender, RoutedEventArgs e)
         {
-            if (ListBoxNotifications.SelectedItem == null)
-            {
-                InformationBox informationBox = new InformationBox("Selektujte obaveštenje koje želite da pregledate!");
-                informationBox.ShowDialog();
+            if (!IsNotificationSelected(GetNotificationNotSelectedForShowingErrorMessage()))
                 return;
+
+            PrikazObavestenja viewNotification = new PrikazObavestenja(SelectedNotification);
+            viewNotification.Show();
+        }
+
+        private bool IsNotificationSelected(string errorMessage)
+        {
+            if (SelectedNotification == null)
+            {
+                InformationBox informationBox = new InformationBox(errorMessage);
+                informationBox.ShowDialog();
+                return false;
             }
 
-            var prikaz = new PrikazObavestenja((Notification)ListBoxNotifications.SelectedItem);
-            prikaz.Show();
+            return true;
+        }
+
+        private string GetNotificationNotSelectedForShowingErrorMessage()
+        {
+            return "Selektujte obaveštenje koje želite da pregledate!";
+        }
+
+        private string GetNotificationNotSelectedForUpdatingErrorMessage()
+        {
+            return "Selektujte obaveštenje koje želite da izmenite!";
+        }
+
+        private string GetNotificationNotSelectedForDeletingErrorMessage()
+        {
+            return "Selektujte obaveštenje koje želite da izbrišete!";
+        }
+
+        private bool CustomFilterObavestenja(object obj)
+        {
+            if (string.IsNullOrEmpty(ObavestenjaFilter.Text))
+                return true;
+            else
+                return ((obj as Notification).Title.IndexOf(ObavestenjaFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                    ((obj as Notification).Content.IndexOf(ObavestenjaFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                    ((obj as Notification).Date.ToString("dd.MM.yyyy, HH:mm").IndexOf(ObavestenjaFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+        }
+
+        private void ObavestenjaFilterTextChanged(object sender, TextChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(ListBoxNotifications.ItemsSource).Refresh();
         }
     }
 }
