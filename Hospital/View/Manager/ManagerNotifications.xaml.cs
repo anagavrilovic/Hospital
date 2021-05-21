@@ -22,41 +22,31 @@ namespace Hospital.View
     /// </summary>
     public partial class ManagerNotifications : Page, INotifyPropertyChanged
     {
-        private ObservableCollection<Notification> notifications = new ObservableCollection<Notification>();
-
+        private ObservableCollection<Notification> _notifications = new ObservableCollection<Notification>();
         public ObservableCollection<Notification> Notifications
         {
-            get
-            {
-                return notifications;
-            }
+            get => _notifications;
             set
             {
-                if(value!=notifications)
+                if(value!=_notifications)
                 {
-                    notifications = value;
+                    _notifications = value;
                     OnPropertyChanged("Notifications");
                 }
             }
         }
 
-        private NotificationStorage notificationStorage = new NotificationStorage();
+        private NotificationStorage _notificationStorage;
+        private string _searchCriterion;
 
-        private string searchstr;
-
-        private ICollectionView notificationCollection;
-
-        public ICollectionView NotificationCollection
-        {
-            get { return notificationCollection; }
-            set { notificationCollection = value; }
-        }
+        public ICollectionView NotificationCollection { get; set; }
 
 
         public ManagerNotifications()
         {
             InitializeComponent();
             this.DataContext = this;
+            _notificationStorage = new NotificationStorage();
 
             /*foreach(Notification n in notificationStorage.GetAll())
             {
@@ -69,16 +59,16 @@ namespace Hospital.View
             NotificationCollection = CollectionViewSource.GetDefaultView(Notifications);
         }
 
-        private void searchNotifications(object sender, TextChangedEventArgs e)
+        private void SearchNotifications(object sender, TextChangedEventArgs e)
         {
             TextBox textbox = sender as TextBox;
             if (textbox != null)
             {
-                this.searchstr = textbox.Text;
-                if (!string.IsNullOrEmpty(searchstr))
+                this._searchCriterion = textbox.Text;
+                if (!string.IsNullOrEmpty(_searchCriterion))
                 {
                     ICollectionView view = CollectionViewSource.GetDefaultView(listBoxNotifications.ItemsSource);
-                    view.Filter = new Predicate<object>(filter);
+                    view.Filter = new Predicate<object>(Filter);
                     this.NotificationCollection.Refresh();
                 }
                 else
@@ -89,20 +79,25 @@ namespace Hospital.View
             }
         }
 
-        private void btnSearchMouseDown(object sender, RoutedEventArgs e)
+        private void BtnSearchMouseDown(object sender, RoutedEventArgs e)
         {
             this.NotificationCollection.Refresh();
         }
 
-
-        private bool filter(object item)
+        private bool Filter(object item)
         {
-            if (((Notification)item).Id.Contains(searchstr) || ((Notification)item).Title.Contains(searchstr) || ((Notification)item).Date.ToString().Contains(searchstr))
+            if (((Notification)item).Id.Contains(_searchCriterion) || ((Notification)item).Title.Contains(_searchCriterion) || ((Notification)item).Date.ToString().Contains(_searchCriterion))
             {
                 return true;
             }
             return false;
         }
+
+        private void BackButtonClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ManagerMainPage());
+        }
+    
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
@@ -111,11 +106,6 @@ namespace Hospital.View
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
-        }
-
-        private void back(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new ManagerMainPage());
         }
     }
 }

@@ -191,7 +191,7 @@
             </Validation.ErrorTemplate>
         </TextBox>
 
-        <ComboBox x:Name="Units" Grid.Row="11" Grid.ColumnSpan="2" BorderThickness="1" Margin="30,1.8,28,9.8" Style="{StaticResource cbTB}">
+        <ComboBox x:Name="Units" Grid.Row="11" Grid.ColumnSpan="2" BorderThickness="1" Margin="30,1.8,28,9.8">
             <ComboBoxItem IsSelected="True">KUTIJE</ComboBoxItem>
             <ComboBoxItem>TRAKE</ComboBoxItem>
             <ComboBoxItem>FLAŠICE</ComboBoxItem>

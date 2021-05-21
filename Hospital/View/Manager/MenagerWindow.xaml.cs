@@ -25,42 +25,9 @@ namespace Hospital.View
         public MenagerWindow()
         {
             InitializeComponent();
-            /*
-            RoomRenovationStorage roomRenovationStorage = new RoomRenovationStorage();
-            foreach (RoomRenovation renovation in roomRenovationStorage.GetAll())
-            {
-                if (renovation.StartDate < DateTime.Now)
-                {
-                    //renovation.Room = rs.GetOne(renovation.Room.Id);
-                    renovation.Room.SerializeInfo = false;
-                    renovation.WareHouse.SerializeInfo = false;
-                    renovation.startRenovation();
-                }
-            }
-            */
-        }
-        /*
-        private void getRooms(object sender, RoutedEventArgs e)
-        {
-            RoomsWindow rw = new RoomsWindow();
-            MainFrame.Navigate(new RoomsWindow());
         }
 
-        private void getNotifications(object sender, RoutedEventArgs e)
-        {
-            ManagerNotifications obavestenja = new ManagerNotifications();
-            obavestenja.Owner = Application.Current.MainWindow;
-            obavestenja.Show();
-        }
-
-        private void getMedicines(object sender, RoutedEventArgs e)
-        {
-            MedicinesWindow medicinesWindow = new MedicinesWindow();
-            medicinesWindow.Owner = Application.Current.MainWindow;
-            medicinesWindow.Show();
-        }
-        */
-        private void back(object sender, RoutedEventArgs e)
+        private void BackButtonClick(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

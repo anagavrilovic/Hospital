@@ -24,14 +24,14 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
-            <Button Background="#FF95C0F4" BorderBrush="#FF95C0F4" Click="back">
+            <Button Background="#FF95C0F4" BorderBrush="#FF95C0F4" Click="BackButtonClick">
                 <Image Source="/Icon/back.png"  Margin="0,0,5,0" Height="72" Width="59"/>
             </Button>
             <Label Content="OBAVEŠTENJA"    Margin="0,25,0,10.2" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" />
             <Image Source="/Icon/logo.png"  Margin="60,18,100,22.4" Width="132"/>
         </StackPanel>
 
-        <TextBox x:Name="search" TextChanged="searchNotifications"  Grid.Row="1" Margin="10,19.6,60.4,28.8">
+        <TextBox x:Name="search" TextChanged="SearchNotifications"  Grid.Row="1" Margin="10,19.6,60.4,28.8">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -39,7 +39,7 @@
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <Image Source="/Icon/search-blue.png" Grid.Row="1" Margin="375,19.6,13.4,28.8" MouseDown="btnSearchMouseDown" RenderTransformOrigin="-0.351,0.389"/>
+        <Image Source="/Icon/search-blue.png" Grid.Row="1" Margin="375,19.6,13.4,28.8" MouseDown="BtnSearchMouseDown" RenderTransformOrigin="-0.351,0.389"/>
 
 
         <Grid Grid.Row="2" Grid.RowSpan="6">

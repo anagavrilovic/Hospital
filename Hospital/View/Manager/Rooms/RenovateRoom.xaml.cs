@@ -32,31 +32,23 @@ namespace Hospital.View
             }
         }
 
-        private ObservableCollection<string> warehousesIDs;
+        private ObservableCollection<string> _warehousesIDs;
         public ObservableCollection<string> WarehousesIDs
         {
-            get
-            {
-                return warehousesIDs;
-            }
-
+            get => _warehousesIDs;
             set
             {
-                warehousesIDs = value;
+                _warehousesIDs = value;
                 OnPropertyChanged("WarehousesIDs");
             }
         }
-        private ObservableCollection<string> roomIDs;
+        private ObservableCollection<string> _roomIDs;
         public ObservableCollection<string> RoomIDs
         {
-            get
-            {
-                return roomIDs;
-            }
-
+            get => _roomIDs;
             set
             {
-                roomIDs = value;
+                _roomIDs = value;
                 OnPropertyChanged("RoomIDs");
             }
         }
@@ -72,84 +64,80 @@ namespace Hospital.View
             }
         }
 
-        //private Room room;
-        private RoomRenovation roomRenovation;
-        private RoomStorage roomStorage;
-
-        public RoomRenovation RoomRenovation
-        {
-            get { return roomRenovation;  }
-            set { roomRenovation = value; }
-        }
-
+        private RoomRenovationStorage _roomRenovationStorage;
+        private AppointmentStorage _appointmentStorage;
+        private RoomStorage _roomStorage;
+        public RoomRenovation RoomRenovation { get; set; }
 
         public RenovateRoom()
         {
             InitializeComponent();
             this.DataContext = this;
-            // this.room = room;
-            this.roomRenovation = new RoomRenovation();
-            this.roomStorage = new RoomStorage();
+          
+            RoomRenovation = new RoomRenovation();
+            this._roomStorage = new RoomStorage();
+            this._appointmentStorage = new AppointmentStorage();
+            this._roomRenovationStorage = new RoomRenovationStorage();
 
             FindRoomsFromSameFloor();
-            WarehousesIDs = new ObservableCollection<string>();
-            RoomIDs = new ObservableCollection<string>();
-            foreach (Room room in roomStorage.GetAll())
-            {
-                RoomIDs.Add(room.Id);
-                if (room.Type == RoomType.MAGACIN)
-                    WarehousesIDs.Add(room.Id);
-            }
+            InitializeComboBoxes();
         }
 
-        private void accept(object sender, RoutedEventArgs e)
-        { 
-            roomRenovation.Room = roomStorage.GetOne(roomCB.Text);
-            roomRenovation.Room.SerializeInfo = false;
-            roomRenovation.WareHouse = roomStorage.GetOne(magacinCB.Text);
-            roomRenovation.WareHouse.SerializeInfo = false;
+        private void AcceptButtonClick(object sender, RoutedEventArgs e)
+        {
+            InitializeRenovation();
 
-            if (roomRenovation.Room.Status == RoomStatus.RENOVIRA_SE)
+            if (!IsRenovationAttributesValid())
+                return;
+
+            if (IsAnyAppointmentInRoomDuringRenovationPeriod())
+                return;
+
+            _roomRenovationStorage.Save(RoomRenovation);
+            NavigationService.Navigate(new Renovations());
+        }
+
+
+        private void InitializeRenovation()
+        {
+            RoomRenovation.Room = _roomStorage.GetOne(roomCB.Text);
+            RoomRenovation.Room.SerializeInfo = false;
+            RoomRenovation.WareHouse = _roomStorage.GetOne(magacinCB.Text);
+            RoomRenovation.WareHouse.SerializeInfo = false;
+            SaveNewRooms();
+        }
+
+        private bool IsRenovationAttributesValid()
+        {
+            if (RoomRenovation.Room.Status == RoomStatus.RENOVIRA_SE)
             {
                 MessageBox.Show("Izabrana sala se trenutno renovira!");
+                return false;
             }
 
-            if (roomRenovation.StartDate >= roomRenovation.EndDate)
+            if (RoomRenovation.StartDate >= RoomRenovation.EndDate)
             {
                 MessageBox.Show("Pogrešan izbor datuma renoviranja!");
-                return;
+                return false;
             }
 
-            SaveNewRoomsInfo();
-
-            AppointmentStorage appointmentStorage = new AppointmentStorage();
-
-            bool isAnyAppointmentInRenovationPeriod = false;
-
-            foreach(Appointment appointment in appointmentStorage.GetAll())
-            {
-                if(appointment.DateTime > roomRenovation.StartDate && appointment.DateTime < roomRenovation.EndDate + new TimeSpan(23,59,59) && appointment.Room.Id.Equals(roomRenovation.Room.Id))
-                {
-                    isAnyAppointmentInRenovationPeriod = true;
-                    break;
-                }
-            }
-
-            if(!isAnyAppointmentInRenovationPeriod)
-            {
-                RoomRenovationStorage storage = new RoomRenovationStorage();
-                storage.Save(roomRenovation);
-
-                NavigationService.Navigate(new Renovations());
-            }
-            else 
-            {
-                MessageBox.Show("U izabranom periodu postoje zakazani termini pa nije moguće zakazati renoviranje!");
-                return;
-            }
+            return true;
         }
 
-        private void SaveNewRoomsInfo()
+        private bool IsAnyAppointmentInRoomDuringRenovationPeriod()
+        {
+            foreach (Appointment appointment in _appointmentStorage.GetAll())
+            {
+                if (appointment.DateTime > RoomRenovation.StartDate && appointment.DateTime < RoomRenovation.EndDate + new TimeSpan(23, 59, 59) && appointment.Room.Id.Equals(RoomRenovation.Room.Id))
+                {
+                    MessageBox.Show("U izabranom periodu postoje zakazani termini pa nije moguće zakazati renoviranje!");
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void SaveNewRooms()
         {
             foreach(Room r in RoomRenovation.RoomsCreatedDuringRenovation)
             {
@@ -163,7 +151,7 @@ namespace Hospital.View
             if (roomCB.SelectedItem == null)
                 return;
 
-            View.Manager.Rooms.ChangingRoomsPlan plan = new View.Manager.Rooms.ChangingRoomsPlan(roomStorage.GetOne(roomCB.Text));
+            View.Manager.Rooms.ChangingRoomsPlan plan = new View.Manager.Rooms.ChangingRoomsPlan(_roomStorage.GetOne(roomCB.Text));
             NavigationService.Navigate(plan);
         }
 
@@ -185,7 +173,6 @@ namespace Hospital.View
             if (selectedRoom == null)
                 return;
 
-            selectedRoom.SerializeInfo = false;
             RoomRenovation.RoomsDestroyedDuringRenovation.Remove(selectedRoom);
         }
 
@@ -198,7 +185,7 @@ namespace Hospital.View
             String[] splitedStr = str.Split('-');
             String roomID = splitedStr[0];
 
-            return roomStorage.GetOne(roomID);
+            return _roomStorage.GetOne(roomID);
         }
 
         private void BtnRefrehRoomsForMerge(object sender, RoutedEventArgs e)
@@ -207,7 +194,7 @@ namespace Hospital.View
             allRoomsFromSameFloorList.Items.Refresh();
         }
 
-        private void AddNewRoom(object sender, RoutedEventArgs e)
+        private void SeparateRoomDuringRenovation(object sender, RoutedEventArgs e)
         {
             AddNewRoomDuringRenovation newRoom = new AddNewRoomDuringRenovation(RoomRenovation);
             NavigationService.Navigate(newRoom);
@@ -219,25 +206,37 @@ namespace Hospital.View
 
             if (roomCB.SelectedItem != null)
             {
-                Room RenovatingRoom = roomStorage.GetOne(roomCB.Text);
-                foreach (Room r in roomStorage.GetAll())
+                Room RenovatingRoom = _roomStorage.GetOne(roomCB.Text);
+                foreach (Room r in _roomStorage.GetAll())
                     if (r.Floor == RenovatingRoom.Floor && !r.Id.Equals(RenovatingRoom.Id))
                         RoomsFromSameFloor.Add(r.Id + "-" + r.Name); 
             }
             else
             {
-                foreach (Room r in roomStorage.GetAll())
+                foreach (Room r in _roomStorage.GetAll())
                     RoomsFromSameFloor.Add(r.Id + "-" + r.Name);
             }
             return RoomsFromSameFloor;
         }
 
-        private void cancel(object sender, RoutedEventArgs e)
+        private void InitializeComboBoxes()
+        {
+            WarehousesIDs = new ObservableCollection<string>();
+            RoomIDs = new ObservableCollection<string>();
+            foreach (Room room in _roomStorage.GetAll())
+            {
+                RoomIDs.Add(room.Id);
+                if (room.Type == RoomType.MAGACIN)
+                    WarehousesIDs.Add(room.Id);
+            }
+        }
+
+        private void CancelButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Renovations());
         }
 
-        private void back(object sender, RoutedEventArgs e)
+        private void BackButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Renovations());
         }

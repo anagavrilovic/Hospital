@@ -57,7 +57,7 @@
                     <ColumnDefinition Width="200*"/>
                     <ColumnDefinition Width="70*"/>
                 </Grid.ColumnDefinitions>
-                <Button  Click="back" Background="#FF95C0F4" BorderBrush="#FF95C0F4" Margin="10,0,27.8,0" Grid.Column="0">
+                <Button  Click="BackButtonClick" Background="#FF95C0F4" BorderBrush="#FF95C0F4" Margin="10,0,27.8,0" Grid.Column="0">
                     <Image  Source="/Icon/back.png" Height="60"  Width="53"/>
                 </Button>
                 <Image Source="/Icon/logo.png"      Margin="124.8,0,10,-0.4" Grid.Column="3" Grid.ColumnSpan="2"/>
@@ -181,7 +181,7 @@
 
                         <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Margin="2,2,2,2">
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                <Button Width="30" Height="30"  Click="AddNewRoom">
+                                <Button Width="30" Height="30"  Click="SeparateRoomDuringRenovation">
                                     <Image Source="/Icon/plus.png"/>
                                 </Button>
                             </StackPanel>
@@ -190,8 +190,8 @@
                     </Grid>
                 </Border>
 
-                <Button Grid.Column="0" Grid.Row="22" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="20,9.8,20.4,20" Style="{StaticResource RoundButtonStyle}" Click="accept" Grid.RowSpan="2"/>
-                <Button Grid.Row="22" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="210,9.8,38,20"  Style="{StaticResource RoundButtonStyle}" Click="cancel" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+                <Button Grid.Column="0" Grid.Row="22" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="20,9.8,20,20" Style="{StaticResource RoundButtonStyle}" Click="AcceptButtonClick" Grid.RowSpan="2"/>
+                <Button Grid.Column="1" Grid.Row="22" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="20,9.8,20,20"  Style="{StaticResource RoundButtonStyle}" Click="CancelButtonClick" Grid.RowSpan="2" />
             </Grid>
         </ScrollViewer>
     </Grid>

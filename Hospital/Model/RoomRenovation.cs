@@ -23,38 +23,38 @@ namespace Hospital.Model
             }
         }
 
-        private DateTime startDate;
-        private DateTime endDate;
-        private string description;
+        private DateTime _startDate;
+        private DateTime _endDate;
+        private string _description;
         private ObservableCollection<Room> _roomsDestroyedDuringRenovation;
         private ObservableCollection<Room> _roomsCreatedDuringRenovation;
 
         public DateTime StartDate
         {
-            get => startDate;
+            get => _startDate;
             set
             {
-                startDate = value;
+                _startDate = value;
                 OnPropertyChanged("StartDate");
             }
         }
 
         public DateTime EndDate
         {
-            get => endDate;
+            get => _endDate;
             set
             {
-                endDate = value;
+                _endDate = value;
                 OnPropertyChanged("EndDate");
             }
         }
 
         public string Description
         {
-            get => description;
+            get => _description;
             set
             {
-                description = value;
+                _description = value;
                 OnPropertyChanged("Description");
             }
         }
@@ -91,13 +91,13 @@ namespace Hospital.Model
         }
        
 
-        public void startRenovation()
+        public void StartRenovation()
         {
-            Task task = new Task(() => waitUntilEndDate());
+            Task task = new Task(() => WaitUntilEndDate());
             task.Start();
         }
 
-        public void waitUntilEndDate()
+        public void WaitUntilEndDate()
         {
             Room r = roomStorage.GetOne(Room.Id);
 
@@ -111,7 +111,7 @@ namespace Hospital.Model
                 TimeSpan timeSpan = EndDate.Subtract(DateTime.Now);
                 if (r.Status != RoomStatus.RENOVIRA_SE)
                 {
-                    transferInventoryToWarehouse();
+                    TransferInventoryToWarehouse();
                     r.Status = RoomStatus.RENOVIRA_SE;
                     roomStorage.Save(r);
                 }
@@ -120,11 +120,11 @@ namespace Hospital.Model
             }
             else 
             {
-                finishRenovation();
+                FinishRenovation();
             }
         }
 
-        private void transferInventoryToWarehouse()
+        private void TransferInventoryToWarehouse()
         {
             foreach (Inventory inventory in inventoryStorage.GetByRoomID(Room.Id))
             {
@@ -133,7 +133,7 @@ namespace Hospital.Model
             }            
         }
 
-        private void finishRenovation()
+        private void FinishRenovation()
         {
             Room room = roomStorage.GetOne(Room.Id);
             room.Status = RoomStatus.SLOBODNA;
