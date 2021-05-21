@@ -31,13 +31,13 @@ namespace Hospital.View
 
         private MedicineStorage _medicineStorage;
 
-        private ObservableCollection<Medicine> medicines;
+        private ObservableCollection<Medicine> _medicines;
         public ObservableCollection<Medicine> Medicines
         {
-            get => medicines;
+            get => _medicines;
             set
             {
-                medicines = value;
+                _medicines = value;
                 OnPropertyChanged("Medicines");
             }
         }

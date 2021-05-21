@@ -32,57 +32,48 @@ namespace Hospital.View
             }
         }
 
-        private MedicineRevision medicineRevision;
+        private MedicineRevision _medicineRevision;
         public MedicineRevision MedicineRevision
         {
-            get => medicineRevision;
+            get => _medicineRevision;
             set
             {
-                medicineRevision = value;
+                _medicineRevision = value;
                 OnPropertyChanged("MedicineRevision");
             }
         }
 
-        private ObservableCollection<string> doctorsNameSurname;
+        private ObservableCollection<string> _doctorsNameSurname;
         public ObservableCollection<string> DoctorsNameSurname
         {
-            get
-            {
-                return doctorsNameSurname;
-            }
-
+            get => _doctorsNameSurname;
             set
             {
-                doctorsNameSurname = value;
+                _doctorsNameSurname = value;
                 OnPropertyChanged("DoctorsNameSurname");
             }
         }
 
+        private MedicineRevisionStorage _medicineRevisionStorage;
         public List<string> Ingredients { get; set; }
-
-        private string searchstr;
-
-        private ICollectionView ingredientsCollection;
-
-        public ICollectionView IngredientsCollection
-        {
-            get { return ingredientsCollection; }
-            set { ingredientsCollection = value; }
-        }
+        private string _searchCriterion;
+        public ICollectionView IngredientsCollection { get; set; }
 
         public AddMedicine()
         {
             InitializeComponent();
+
+            _medicineRevisionStorage = new MedicineRevisionStorage();
             MedicineRevision = new MedicineRevision();
             MedicineRevision.Medicine = new Medicine();
-            addDoctorsInComboBox();
-            addIngredientsInListBox();
+            InitializeComboBoxItems();
+            InitializeIngredientsListBox();
             IngredientsCollection = CollectionViewSource.GetDefaultView(Ingredients);
 
             this.DataContext = this;
         }
 
-        private void addDoctorsInComboBox()
+        private void InitializeComboBoxItems()
         {
             DoctorsNameSurname = new ObservableCollection<string>();
             DoctorStorage doctorStorage = new DoctorStorage();
@@ -92,7 +83,7 @@ namespace Hospital.View
             }
         }
 
-        private void addIngredientsInListBox()
+        private void InitializeIngredientsListBox()
         {
             Ingredients = new List<string>();
             string[] ingredients = File.ReadAllLines("..\\..\\Files\\ingredients.txt");
@@ -105,11 +96,11 @@ namespace Hospital.View
             TextBox textbox = sender as TextBox;
             if (textbox != null)
             {
-                this.searchstr = textbox.Text;
-                if (!string.IsNullOrEmpty(searchstr))
+                this._searchCriterion = textbox.Text;
+                if (!string.IsNullOrEmpty(_searchCriterion))
                 {
                     ICollectionView view = CollectionViewSource.GetDefaultView(allIngredientsList.ItemsSource);
-                    view.Filter = new Predicate<object>(filter);
+                    view.Filter = new Predicate<object>(Filter);
                     IngredientsCollection.Refresh();
                 }
                 else
@@ -120,9 +111,9 @@ namespace Hospital.View
             }
         }
 
-        private bool filter(object item)
+        private bool Filter(object item)
         {
-            if (((string)item).Contains(searchstr))
+            if (((string)item).Contains(_searchCriterion))
             {
                 return true;
             }
@@ -161,30 +152,22 @@ namespace Hospital.View
 
         private void BtnSearchMouseDown(object sender, RoutedEventArgs e)
         {
-            ingredientsCollection.Refresh();
+            IngredientsCollection.Refresh();
         }
 
         private void SendOnRevision(object sender, RoutedEventArgs e)
         {
-            string doctorSelected = doctorsCB.Text.Trim().Substring(3);
-            DoctorStorage doctorStorage = new DoctorStorage();
-            MedicineRevision.DoctorID = doctorStorage.GetIDByNameSurname(doctorSelected);
-            MedicineRevision.RevisionDoctor = doctorStorage.GetOne(MedicineRevision.DoctorID);
-            MedicineRevision.IsMedicineRevised = false;
+            InitializeMedicine();
 
-            if (!isMedicineIDUnique())
-            {
-                MessageBox.Show("Vec postoji lek sa unetom oznakom!");
+            if (!IsMedicineIDUnique())
                 return;
-            }
 
-            MedicineRevisionStorage medicineRevisionStorage = new MedicineRevisionStorage();
-            medicineRevisionStorage.Save(MedicineRevision);
+            _medicineRevisionStorage.Save(MedicineRevision);
 
             NavigationService.Navigate(new MedicinesWindow());
         }
 
-        private bool isMedicineIDUnique()
+        private bool IsMedicineIDUnique()
         {
             MedicineStorage medicineStorage = new MedicineStorage();
             ObservableCollection<Medicine> medicines = medicineStorage.GetAll();
@@ -192,10 +175,20 @@ namespace Hospital.View
             {
                 if (medicine.ID.Equals(MedicineRevision.Medicine.ID))
                 {
+                    MessageBox.Show("Vec postoji lek sa unetom oznakom!");
                     return false;
                 }
             }
             return true;
+        }
+
+        private void InitializeMedicine()
+        {
+            string doctorSelected = doctorsCB.Text.Trim().Substring(3);
+            DoctorStorage doctorStorage = new DoctorStorage();
+            MedicineRevision.DoctorID = doctorStorage.GetIDByNameSurname(doctorSelected);
+            MedicineRevision.RevisionDoctor = doctorStorage.GetOne(MedicineRevision.DoctorID);
+            MedicineRevision.IsMedicineRevised = false;
         }
 
         private void Cancel(object sender, RoutedEventArgs e)

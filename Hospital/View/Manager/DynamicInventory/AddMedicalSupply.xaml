@@ -68,7 +68,7 @@
                 </Style>
             </TextBox.Resources>
             <TextBox.Text>
-                <Binding  Path="MedicalSupplyItem.Id"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                <Binding  Path="DynamicInventoryItem.Id"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <val:EmptyField ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
@@ -100,7 +100,7 @@
                 </Style>
             </TextBox.Resources>
             <TextBox.Text>
-                <Binding  Path="MedicalSupplyItem.Name"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                <Binding  Path="DynamicInventoryItem.Name"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <val:EmptyField ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
@@ -133,7 +133,7 @@
                 </Style>
             </TextBox.Resources>
             <TextBox.Text>
-                <Binding  Path="MedicalSupplyItem.Price"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                <Binding  Path="DynamicInventoryItem.Price"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <val:StringToDouble ValidationStep="RawProposedValue"/>
                         <val:MinValue       ValidationStep="ConvertedProposedValue" Min="0" />
@@ -166,7 +166,7 @@
                 </Style>
             </TextBox.Resources>
             <TextBox.Text>
-                <Binding  Path="MedicalSupplyItem.Quantity"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                <Binding  Path="DynamicInventoryItem.Quantity"    Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <val:StringToInteger ValidationStep="RawProposedValue"/>
                         <val:MinValue        ValidationStep="ConvertedProposedValue" Min="0"/>

@@ -80,7 +80,7 @@ namespace Hospital.View
                 if (!string.IsNullOrEmpty(searchstr))
                 {
                     ICollectionView view = CollectionViewSource.GetDefaultView(allIngredientsList.ItemsSource);
-                    view.Filter = new Predicate<object>(filter);
+                    view.Filter = new Predicate<object>(Filter);
                     IngredientsCollection.Refresh();
                 }
                 else
@@ -91,7 +91,7 @@ namespace Hospital.View
             }
         }
 
-        private bool filter(object item)
+        private bool Filter(object item)
         {
             if (((string)item).Contains(searchstr))
             {
@@ -147,12 +147,12 @@ namespace Hospital.View
             NavigationService.Navigate(new MedicineRevisionWindow());
         }
 
-        private void Cancel(object sender, RoutedEventArgs e)
+        private void CancelButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new MedicineRevisionWindow());
         }
 
-        private void Back(object sender, RoutedEventArgs e)
+        private void BackButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new MedicineRevisionWindow());
         }

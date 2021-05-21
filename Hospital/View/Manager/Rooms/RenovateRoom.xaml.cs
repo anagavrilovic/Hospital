@@ -174,6 +174,7 @@ namespace Hospital.View
                 return;
 
             RoomRenovation.RoomsDestroyedDuringRenovation.Remove(selectedRoom);
+            allRoomsFromSameFloorList.Items.Refresh();
         }
 
         private Room GetSelectedRoomForMerge()

@@ -21,13 +21,13 @@ namespace Hospital.View
     {
         private string _roomID;
 
-        private static ObservableCollection<DynamicInventory> _supply;
-        public static ObservableCollection<DynamicInventory> Supply 
+        private static ObservableCollection<DynamicInventory> _dynamicInventoryInRoom;
+        public static ObservableCollection<DynamicInventory> DynamicInventoryInRoom 
         {
-            get => _supply;
+            get => _dynamicInventoryInRoom;
             set
             {
-                _supply = value;
+                _dynamicInventoryInRoom = value;
                 NotifyStaticPropertyChanged();
             }
         }
@@ -38,10 +38,10 @@ namespace Hospital.View
             StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(name));
         }
 
-        private DynamicInventoryStorage _medicalSupplyStorage;
+        private DynamicInventoryStorage _dynamicInventoryStorage;
 
         private string _searchCriterion;
-        public ICollectionView SupplyCollection { get; set; }
+        public ICollectionView DynamicInventoryCollection { get; set; }
 
         public DynamicInventoryView(string id)
         {
@@ -49,12 +49,12 @@ namespace Hospital.View
             this.DataContext = this;
             this._roomID = id;
 
-            _medicalSupplyStorage = new DynamicInventoryStorage();
-            Supply = _medicalSupplyStorage.GetByRoomID(id);
-            SupplyCollection = CollectionViewSource.GetDefaultView(Supply);
+            _dynamicInventoryStorage = new DynamicInventoryStorage();
+            DynamicInventoryInRoom = _dynamicInventoryStorage.GetByRoomID(id);
+            DynamicInventoryCollection = CollectionViewSource.GetDefaultView(DynamicInventoryInRoom);
         }
 
-        private void SearchMedicalSupply(object sender, TextChangedEventArgs e)
+        private void SearchDynamicInventory(object sender, TextChangedEventArgs e)
         {
             TextBox textbox = sender as TextBox;
             if (textbox != null)
@@ -62,21 +62,21 @@ namespace Hospital.View
                 this._searchCriterion = textbox.Text;
                 if (!string.IsNullOrEmpty(_searchCriterion))
                 {
-                    ICollectionView view = CollectionViewSource.GetDefaultView(dataGridMedicalSupply.ItemsSource);
+                    ICollectionView view = CollectionViewSource.GetDefaultView(dataGridDynamicInventory.ItemsSource);
                     view.Filter = new Predicate<object>(Filter);
-                    this.SupplyCollection.Refresh();
+                    this.DynamicInventoryCollection.Refresh();
                 }
                 else
                 {
-                    ICollectionView view = CollectionViewSource.GetDefaultView(Supply);
-                    this.SupplyCollection.Refresh();
+                    ICollectionView view = CollectionViewSource.GetDefaultView(DynamicInventoryInRoom);
+                    this.DynamicInventoryCollection.Refresh();
                 }
             }
         }
 
         private void ButtonSearchMouseDown(object sender, RoutedEventArgs e)
         {
-            this.SupplyCollection.Refresh();
+            this.DynamicInventoryCollection.Refresh();
         }
 
         private bool Filter(object item)
@@ -97,7 +97,7 @@ namespace Hospital.View
 
         private void EditItemButtonClick(object o, RoutedEventArgs e)
         {
-            DynamicInventory selectedItem = (DynamicInventory)dataGridMedicalSupply.SelectedItem;
+            DynamicInventory selectedItem = (DynamicInventory)dataGridDynamicInventory.SelectedItem;
             if (selectedItem == null)
                 return;
 
@@ -107,7 +107,7 @@ namespace Hospital.View
 
         private void DeleteItemButtonClick(object o, RoutedEventArgs e)
         {
-            DynamicInventory selectedItem = (DynamicInventory) dataGridMedicalSupply.SelectedItem;
+            DynamicInventory selectedItem = (DynamicInventory) dataGridDynamicInventory.SelectedItem;
             if (selectedItem == null)
                 return;
 
@@ -115,14 +115,14 @@ namespace Hospital.View
                                          "Brisanje stavke", MessageBoxButton.YesNo, MessageBoxImage.Question);
            if (result == MessageBoxResult.Yes)
            {
-              Supply.Remove(selectedItem);
-              _medicalSupplyStorage.Delete(selectedItem.Id, selectedItem.RoomID);
+              DynamicInventoryInRoom.Remove(selectedItem);
+              _dynamicInventoryStorage.Delete(selectedItem.Id, selectedItem.RoomID);
            }
         }
 
         private void TransferItemButtonClick(object o, RoutedEventArgs e)
         {
-            DynamicInventory selectedItem = (DynamicInventory)dataGridMedicalSupply.SelectedItem;
+            DynamicInventory selectedItem = (DynamicInventory)dataGridDynamicInventory.SelectedItem;
             if (selectedItem == null)
                 return;
 

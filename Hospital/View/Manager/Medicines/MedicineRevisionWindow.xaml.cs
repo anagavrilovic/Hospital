@@ -85,7 +85,7 @@ namespace Hospital.View
             NavigationService.Navigate(editMedicine);
         }
 
-        private void Back(object sender, RoutedEventArgs e)
+        private void BackButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new MedicinesWindow());
         }

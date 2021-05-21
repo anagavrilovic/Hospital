@@ -32,7 +32,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
-            <Button Background="#FF95C0F4" BorderBrush="#FF95C0F4" Click="Back">
+            <Button Background="#FF95C0F4" BorderBrush="#FF95C0F4" Click="BackButtonClick">
                 <Image Source="/Icon/back.png"  Margin="0,0,5,0" Height="63" Width="55"/>
             </Button>
             <Label Content="REVIZIJA LEKOVA"    Margin="0,25,5,18.6" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="18"  />
