@@ -23,9 +23,7 @@ namespace Hospital.Model
                 roomRenovation = JsonConvert.DeserializeObject<ObservableCollection<RoomRenovation>>(sr.ReadToEnd());
 
                 if (roomRenovation == null)
-                {
                     return new ObservableCollection<RoomRenovation>();
-                }
             }
 
             return roomRenovation;
@@ -34,12 +32,6 @@ namespace Hospital.Model
         public void Save(RoomRenovation parameter1)
         {
             roomRenovation = GetAll();
-
-            if (roomRenovation == null)
-            {
-                roomRenovation = new ObservableCollection<RoomRenovation>();
-            }
-
             roomRenovation.Add(parameter1);
 
             foreach(RoomRenovation renovation in roomRenovation)
@@ -48,13 +40,12 @@ namespace Hospital.Model
                 renovation.WareHouse.SerializeInfo = false;
             }
 
-            doSerialization();
+            DoSerialization();
         }
 
         public void Delete(RoomRenovation renovation)
         {
             roomRenovation = GetAll();
-           
             roomRenovation.Remove(renovation);
 
             foreach (RoomRenovation r in roomRenovation)
@@ -72,7 +63,7 @@ namespace Hospital.Model
                 r.WareHouse.SerializeInfo = false;
             }
 
-            doSerialization();
+            DoSerialization();
         }
 
         public bool isBeingRenovatedNow(Appointment appointment)
@@ -90,7 +81,7 @@ namespace Hospital.Model
             return false;
         }
         
-        public void doSerialization()
+        public void DoSerialization()
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {
@@ -100,7 +91,7 @@ namespace Hospital.Model
         }
 
 
-        public static ObservableCollection<RoomRenovation> roomRenovation = new ObservableCollection<RoomRenovation>();
+        private ObservableCollection<RoomRenovation> roomRenovation = new ObservableCollection<RoomRenovation>();
         public String fileName;
     }
 }

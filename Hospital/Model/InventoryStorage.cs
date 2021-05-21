@@ -38,7 +38,7 @@ namespace Hospital
             inventory = GetAll();
             inventory.Add(parameter1);
 
-            doSerialization();
+            DoSerialization();
         }
    
        public Boolean Delete(string id, string roomID)
@@ -49,7 +49,7 @@ namespace Hospital
                 if (inv.Id.Equals(id) && inv.RoomID.Equals(roomID))
                 {
                     inventory.Remove(inv);
-                    doSerialization();
+                    DoSerialization();
                     return true;
                 }
             }
@@ -58,13 +58,14 @@ namespace Hospital
 
         public void EditItem(Inventory editedItem)
         {
+            inventory = GetAll();
             foreach (Inventory item in inventory)
             {
                 if (item.Id.Equals(editedItem.Id) && item.RoomID.Equals(editedItem.RoomID))
                 {
                     inventory.Remove(item);
                     inventory.Add(editedItem);
-                    doSerialization();
+                    DoSerialization();
                     break;
                 }
             }
@@ -104,8 +105,7 @@ namespace Hospital
             return ret;
         }
    
-      
-        public void doSerialization()
+        public void DoSerialization()
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + _fileName))
             {

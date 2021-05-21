@@ -19,12 +19,13 @@ namespace Hospital
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
+       
+        private string _id;
+        private string _name;
+        private int _floor;
+        private RoomStatus _status;
+        private RoomType _type;
         private int freeBeds;
-        private string id;
-        private string name;
-        private int floor;
-        private RoomStatus status;
-        private RoomType type;
 
         public Room()
         {
@@ -32,108 +33,63 @@ namespace Hospital
         }
 
         public string Id 
-        { 
-            
-            get
-            {
-                return id;
-            }
-            
+        {
+            get => _id;
             set
             {
-                if (value != id)
-                {
-                    id = value;
-                    OnPropertyChanged("Id");
-                }
+               _id = value;
+               OnPropertyChanged("Id");
             }
         }
 
 
         public String Name
         {
-
-            get
-            {
-                return name;
-            }
-
+            get => _name;
             set
             {
-                if (value != name)
-                {
-                    name = value;
-                    OnPropertyChanged("Name");
-                }
+               _name = value;
+               OnPropertyChanged("Name");
             }
         }
  
 
         public int Floor
-        { 
-            get
-            {
-                return floor;
-            }
-
+        {
+            get => _floor;
             set
             {
-                if (value != floor)
-                {
-                    floor = value;
-                    OnPropertyChanged("Floor");
-                }
+                _floor = value;
+                OnPropertyChanged("Floor");
             }
         }
 
         public RoomStatus Status
         {
-            get
-            {
-                return status;
-            }
-
+            get => _status;
             set
             {
-                if (value != status)
-                {
-                    status = value;
-                    OnPropertyChanged("Status");
-                }
+                _status = value;
+                OnPropertyChanged("Status");
             }
         }
 
         public RoomType Type
         {
-            get
-            {
-                return type;
-            }
-
+            get => _type;
             set
             {
-                if (value != type)
-                {
-                    type = value;
-                    OnPropertyChanged("Type");
-                }
+               _type = value;
+               OnPropertyChanged("Type");
             }
         }
         public int FreeBeds
         {
-
-            get
-            {
-                return freeBeds;
-            }
-
+            get => freeBeds;
             set
             {
-                if (value != freeBeds)
-                {
-                    freeBeds = value;
-                    OnPropertyChanged("freeBeds");
-                }
+                freeBeds = value;
+                OnPropertyChanged("freeBeds");
             }
         }
 

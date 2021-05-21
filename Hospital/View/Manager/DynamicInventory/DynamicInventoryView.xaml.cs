@@ -138,7 +138,7 @@ namespace Hospital.View
 
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            NavigationService.Navigate(new RoomsWindow());
         }
     }
 }

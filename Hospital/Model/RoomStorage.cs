@@ -64,21 +64,15 @@ namespace Hospital
                 if (r.Id.Equals(id))
                 {
                     InventoryStorage storage = new InventoryStorage();
-                    InventoryStorage.inventory = storage.GetAll();
-                    foreach (Inventory i in InventoryStorage.inventory)
-                    {
-                        if (i.RoomID.Equals(id))
+                    foreach (Inventory i in storage.GetByRoomID(id))
                             i.RoomID = "M1";
-                    }
-                    storage.doSerialization();
+
+                    storage.DoSerialization();
 
                     DynamicInventoryStorage msStorage = new DynamicInventoryStorage();
-                    DynamicInventoryStorage.DynamicInventory = msStorage.GetAll();
-                    foreach(DynamicInventory ms in DynamicInventoryStorage.DynamicInventory)
-                    {
-                        if (ms.RoomID.Equals(id))
+                    foreach(DynamicInventory ms in msStorage.GetByRoomID(id))
                             ms.RoomID = "M1";
-                    }
+
                     msStorage.DoSerialization();
 
                     rooms.Remove(r);

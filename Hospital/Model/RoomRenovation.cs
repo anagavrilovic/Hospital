@@ -99,7 +99,7 @@ namespace Hospital.Model
 
         public void WaitUntilEndDate()
         {
-            Room r = roomStorage.GetOne(Room.Id);
+            Room r = _roomStorage.GetOne(Room.Id);
 
             if (StartDate > DateTime.Now)
             {
@@ -113,7 +113,7 @@ namespace Hospital.Model
                 {
                     TransferInventoryToWarehouse();
                     r.Status = RoomStatus.RENOVIRA_SE;
-                    roomStorage.Save(r);
+                    _roomStorage.Save(r);
                 }
                 
                 Thread.Sleep(timeSpan);
@@ -126,7 +126,7 @@ namespace Hospital.Model
 
         private void TransferInventoryToWarehouse()
         {
-            foreach (Inventory inventory in inventoryStorage.GetByRoomID(Room.Id))
+            foreach (Inventory inventory in _inventoryStorage.GetByRoomID(Room.Id))
             {
                 TransferInventory transfer = new TransferInventory(inventory.Id, inventory.Quantity, Room.Id, WareHouse.Id, DateTime.Now);
                 transfer.UpdateInventory();
@@ -135,12 +135,12 @@ namespace Hospital.Model
 
         private void FinishRenovation()
         {
-            Room room = roomStorage.GetOne(Room.Id);
+            Room room = _roomStorage.GetOne(Room.Id);
             room.Status = RoomStatus.SLOBODNA;
-            roomStorage.Save(room);
+            _roomStorage.Save(room);
             FinishSeparatingRooms();
             FinishMergingRooms();
-            roomRenovationStorage.Delete(this);
+            _roomRenovationStorage.Delete(this);
         }
 
         private void FinishSeparatingRooms()
@@ -148,20 +148,20 @@ namespace Hospital.Model
             foreach (Room r in RoomsCreatedDuringRenovation)
             {
                 r.Status = RoomStatus.SLOBODNA;
-                roomStorage.Save(r);
+                _roomStorage.Save(r);
             }
         }
 
         private void FinishMergingRooms()
         {
             foreach (Room r in RoomsDestroyedDuringRenovation)
-                roomStorage.Delete(r.Id);
+                _roomStorage.Delete(r.Id);
         }
 
-       private InventoryStorage inventoryStorage = new InventoryStorage();
-       private DynamicInventoryStorage medicalSupplyStorage = new DynamicInventoryStorage();
-       private TransferInventoryStorage transferInventoryStorage = new TransferInventoryStorage();
-       private RoomStorage roomStorage = new RoomStorage();
-       private RoomRenovationStorage roomRenovationStorage = new RoomRenovationStorage();
+       private InventoryStorage _inventoryStorage = new InventoryStorage();
+       private DynamicInventoryStorage _medicalSupplyStorage = new DynamicInventoryStorage();
+       private TransferInventoryStorage _transferInventoryStorage = new TransferInventoryStorage();
+       private RoomStorage _roomStorage = new RoomStorage();
+       private RoomRenovationStorage _roomRenovationStorage = new RoomRenovationStorage();
     }
 }
