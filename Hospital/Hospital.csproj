@@ -110,8 +110,26 @@
     <Compile Include="Model\UserType.cs" />
     <Compile Include="Repositories\AppointmentFileRepository.cs" />
     <Compile Include="Repositories\DynamicInventoryFileRepository.cs" />
+    <Compile Include="Repositories\GenericFileRepository.cs" />
     <Compile Include="Repositories\HospitalTreatmentFileRepository.cs" />
-    <Compile Include="Repositories\IFileRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IAppointmentRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IDynamicInventoryRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IGenericRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IHospitalTreatmentRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IMedicalRecordRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IMedicineRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IMedicineRevisionRepository.cs" />
+    <Compile Include="Repositories\Interfaces\INotificationRepository.cs" />
+    <Compile Include="Repositories\Interfaces\INotificationsUsersRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IPatientCommentsRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IPatientNotificationsRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IPatientSettingsRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IRegistratedUsersRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IRoomRenovationRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IRoomRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IStaticInventoryRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ITransferInventoryRepository.cs" />
+    <Compile Include="Repositories\Interfaces\StaticInventory.cs" />
     <Compile Include="Repositories\MedicalRecordFileRepository.cs" />
     <Compile Include="Repositories\MedicineFileRepository.cs" />
     <Compile Include="Repositories\MedicineRevisionFileRepository.cs" />
@@ -971,5 +989,6 @@
   <ItemGroup>
     <Resource Include="Icon\medicals.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

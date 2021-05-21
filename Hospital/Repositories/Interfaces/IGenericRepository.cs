@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hospital.Repositories
+namespace Hospital.Repositories.Interfaces
 {
-    interface IFileRepository<T>
+    interface IGenericRepository<T>
         where T : class
     {
         ObservableCollection<T> GetAll();

@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Repositories
 {
-    public class TransferInventoryFileRepository : IFileRepository<TransferInventory>
+    public class TransferInventoryFileRepository : ITransferInventoryRepository
     {
         public void Delete(string id)
         {

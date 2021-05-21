@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Repositories.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Repositories
 {
-    public class RegistratedUserFileRepository : IFileRepository<RegistratedUser>
+    public class RegistratedUserFileRepository : IRegistratedUsersRepository
     {
         private string fileName = "registratedUsers.json";
 

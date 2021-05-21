@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Repositories.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Repositories
 {
-    public class RoomFileRepository : IFileRepository<Room>
+    public class RoomFileRepository : IRoomRepository
     {
         public void Delete(string id)
         {

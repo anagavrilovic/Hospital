@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Repositories
 {
-    public class PatientSettingsFileRepository : IFileRepository<PatientSettings>
+    public class PatientSettingsFileRepository : IPatientSettingsRepository
     {
         public void Delete(string id)
         {

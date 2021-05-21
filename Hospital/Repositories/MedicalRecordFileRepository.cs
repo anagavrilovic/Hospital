@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using Hospital.Repositories.Interfaces;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Repositories
 {
-    class MedicalRecordFileRepository : IFileRepository<MedicalRecord>
+    class MedicalRecordFileRepository : IMedicalRecordRepository
     {
         private string fileName = "medicalRecords.json";
 

@@ -1,5 +1,6 @@
 ﻿using Hospital.Model;
 using Newtonsoft.Json;
+using Hospital.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Repositories
 {
-    public class NotificationsUsersFileRepository : IFileRepository<NotificationsUsers>
+    public class NotificationsUsersFileRepository : INotificationsUsersRepository
     {
         private string fileName = "notificationsUsers.json";
 
