@@ -19,36 +19,42 @@ namespace Hospital.View
 {
     public partial class EditInventory : Page
     {
-        public Inventory Inv {  get; set; }
+        public Inventory InventoryItem {  get; set; }
+        private InventoryStorage _inventoryStorage;
 
         public EditInventory(Inventory inventory)
         {
             InitializeComponent();
             this.DataContext = this;
-            Inv = inventory;
+
+            InventoryItem = inventory;
+            this._inventoryStorage = new InventoryStorage();
         }
 
         private void AcceptButtonClick(object sender, RoutedEventArgs e)
         {
-            oznakaTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            nazivTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            cenaTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            kolicinaTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            SaveEditedProperties();
+            _inventoryStorage.EditItem(InventoryItem);
 
-            InventoryStorage inventoryStorage = new InventoryStorage();
-            inventoryStorage.doSerialization();
+            NavigationService.Navigate(new StaticInventoryView(InventoryItem.RoomID));
+        }
 
-            NavigationService.Navigate(new StaticInventoryView(Inv.RoomID));
+        private void SaveEditedProperties()
+        {
+            idTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            nameTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            priceTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            quantityTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
         }
 
         private void CancelButtonClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new StaticInventoryView(Inv.RoomID));
+            NavigationService.Navigate(new StaticInventoryView(InventoryItem.RoomID));
         }
 
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new StaticInventoryView(Inv.RoomID));
+            NavigationService.Navigate(new StaticInventoryView(InventoryItem.RoomID));
         }
     }
 }

@@ -50,27 +50,28 @@ namespace Hospital.View
             ItemForTransfer = itemForTransfer;
             ItemTransfering = new TransferDynamicInventory();
 
-            AllRoomsIDs = GetAllRoomsIDs();
+            InitializeComboBoxItems();
         }
 
         private void AcceptButtonClick(object sender, RoutedEventArgs e)
-        {   
-            if (!IsEnoughItemForTransferInFirstRoom())
-            {
-                MessageBox.Show("Sala ne raspolaže unetom količinom stavke. \n Pokušajte sa manjom količinom.");
+        {
+            if (!AreTransferAttributesValid())
                 return;
-            }
+
             ExecuteTransfer();
 
             NavigationService.Navigate(new DynamicInventoryView(ItemForTransfer.RoomID));
         }
 
-        private bool IsEnoughItemForTransferInFirstRoom()
+        private bool AreTransferAttributesValid()
         {
             if (ItemForTransfer.Quantity >= int.Parse(kolicinaTxt.Text))
                 return true;
             else
+            {
+                MessageBox.Show("Sala ne raspolaže unetom količinom stavke. \n Pokušajte sa manjom količinom.");
                 return false;
+            }
         }
 
         private void ExecuteTransfer()
@@ -79,16 +80,15 @@ namespace Hospital.View
             ItemTransfering.UpdateDynamicInventory();
         }
 
-        private ObservableCollection<string> GetAllRoomsIDs()
+        private void InitializeComboBoxItems()
         {
-            ObservableCollection<string> allRoomsIDs = new ObservableCollection<string>();
+            AllRoomsIDs = new ObservableCollection<string>();
             RoomStorage roomStorage = new RoomStorage();
             foreach (Room room in roomStorage.GetAll())
             {
                 if(!room.Id.Equals(ItemForTransfer.RoomID))
-                    allRoomsIDs.Add(room.Id);
+                    AllRoomsIDs.Add(room.Id);
             }
-            return allRoomsIDs;
         }
 
         private void CancelButtonClick(object sender, RoutedEventArgs e)

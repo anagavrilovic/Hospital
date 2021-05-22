@@ -17,56 +17,57 @@ namespace Hospital.View
 {
     public partial class AddMedicalSupply : Page
     {
-        public DynamicInventory MedicalSupplyItem  { get; set; }
-        private DynamicInventoryStorage _medicalSupplyStorage;
+        public DynamicInventory DynamicInventoryItem  { get; set; }
+        private DynamicInventoryStorage _dynamicInventoryStorage;
 
         public AddMedicalSupply(string id)
         {
             InitializeComponent();
             this.DataContext = this;
 
-            this._medicalSupplyStorage = new DynamicInventoryStorage();
-            MedicalSupplyItem = new DynamicInventory();
-            MedicalSupplyItem.RoomID = id;
+            this._dynamicInventoryStorage = new DynamicInventoryStorage();
+            DynamicInventoryItem = new DynamicInventory();
+            DynamicInventoryItem.RoomID = id;
         }
 
         private void AcceptAddingButtonClick(object o, RoutedEventArgs e)
         {
             switch (Units.SelectedIndex)
             {
-                case 0: MedicalSupplyItem.Units = UnitsType.kutije;   break;
-                case 1: MedicalSupplyItem.Units = UnitsType.trake;    break;
-                case 2: MedicalSupplyItem.Units = UnitsType.flasice;  break;
+                case 0: DynamicInventoryItem.Units = UnitsType.kutije;   break;
+                case 1: DynamicInventoryItem.Units = UnitsType.trake;    break;
+                case 2: DynamicInventoryItem.Units = UnitsType.flasice;  break;
             }
 
-            bool isItemIDUnique = CheckUniquenessOfNewItemID();
+            if (!IsItemIdUnique())
+                return;
 
-            if (isItemIDUnique)
-                _medicalSupplyStorage.Save(MedicalSupplyItem);
-            else
-                MessageBox.Show("Već postoji stavka sa unetom oznakom!");
-         
-            NavigationService.Navigate(new DynamicInventoryView(MedicalSupplyItem.RoomID));
+             _dynamicInventoryStorage.Save(DynamicInventoryItem);
+ 
+            NavigationService.Navigate(new DynamicInventoryView(DynamicInventoryItem.RoomID));
         }
 
-        private bool CheckUniquenessOfNewItemID()
+        private bool IsItemIdUnique()
         {
-            foreach (DynamicInventory ms in _medicalSupplyStorage.GetByRoomID(MedicalSupplyItem.RoomID))
+            foreach (DynamicInventory ms in _dynamicInventoryStorage.GetByRoomID(DynamicInventoryItem.RoomID))
             {
-                if (ms.Id.Equals(MedicalSupplyItem.Id))
+                if (ms.Id.Equals(DynamicInventoryItem.Id))
+                {
+                    MessageBox.Show("Već postoji stavka sa unetom oznakom!");
                     return false;
+                }
             }
             return true;
         }
 
         private void CancelButtonClick(object o, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new DynamicInventoryView(MedicalSupplyItem.RoomID));
+            NavigationService.Navigate(new DynamicInventoryView(DynamicInventoryItem.RoomID));
         }
 
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new DynamicInventoryView(MedicalSupplyItem.RoomID));
+            NavigationService.Navigate(new DynamicInventoryView(DynamicInventoryItem.RoomID));
         }
     }
 }

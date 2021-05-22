@@ -27,34 +27,32 @@ namespace Hospital.View
             {
                 if (renovation.StartDate < DateTime.Now)
                 {
-                    //renovation.Room = rs.GetOne(renovation.Room.Id);
                     renovation.Room.SerializeInfo = false;
                     renovation.WareHouse.SerializeInfo = false;
-                    renovation.startRenovation();
+                    renovation.StartRenovation();
                 }
             }
         }
 
-
-        private void getRooms(object sender, RoutedEventArgs e)
+        private void ShowRooms(object sender, RoutedEventArgs e)
         {
             RoomsWindow rw = new RoomsWindow();
             NavigationService.Navigate(new RoomsWindow());
         }
 
-        private void getNotifications(object sender, RoutedEventArgs e)
+        private void ShowNotifications(object sender, RoutedEventArgs e)
         {
-            ManagerNotifications obavestenja = new ManagerNotifications();
-            NavigationService.Navigate(obavestenja);
+            ManagerNotifications notifications = new ManagerNotifications();
+            NavigationService.Navigate(notifications);
         }
 
-        private void getMedicines(object sender, RoutedEventArgs e)
+        private void ShowMedicines(object sender, RoutedEventArgs e)
         {
             MedicinesWindow medicinesWindow = new MedicinesWindow();
             NavigationService.Navigate(medicinesWindow);
         }
 
-        private void back(object sender, RoutedEventArgs e)
+        private void Back(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ManagerMainPage());
         }

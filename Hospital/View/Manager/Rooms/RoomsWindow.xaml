@@ -32,19 +32,19 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
-            <Button Background="#FF95C0F4" BorderBrush="#FF95C0F4" Click="menuButton">
+            <Button Background="#FF95C0F4" BorderBrush="#FF95C0F4" Click="MenuButtonClick">
                 <Image Source="/Icon/menu.png"  Margin="10,8,5,5"/>
             </Button>
             <Label Content="PRIKAZ SALA"    Margin="0,15,5,10.2" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" />
-            <Image Source="/Icon/logo.png"  Margin="30,8,0,10" MouseDown="refreshView"/>
+            <Image Source="/Icon/logo.png"  Margin="30,8,0,10" MouseDown="RefreshView"/>
         </StackPanel>
 
         <Button x:Name="edit"             Content="IZMENI SALU"        Grid.Row="1" Grid.Column="0"   Margin="19,16.2,6,4.6" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="editRoom" FontSize="14"/>
-        <Button x:Name="staticInventory"  Content="PREGLED INVENTARA"  Grid.Row="1" Grid.Column="1"   Margin="6,16.2,19.2,4.6" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="viewStaticInventory" FontSize="14" />
-        <Button x:Name="renovation"       Content="RENOVIRANJA SALA"   Grid.Row="2" Grid.Column="0"   Margin="19,10.4,6,10.4"    Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="renovateRoom" FontSize="14"/>
-        <Button x:Name="dynamicInventory" Content="PREGLED OPREME"     Grid.Row="2" Grid.Column="1"   Margin="6,10.4,19.2,10.4"    Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="viewDynamicInventory" FontSize="14"/>
+        <Button x:Name="staticInventory"  Content="PREGLED INVENTARA"  Grid.Row="1" Grid.Column="1"   Margin="6,16.2,19.2,4.6" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="ViewStaticInventory" FontSize="14" />
+        <Button x:Name="renovation"       Content="RENOVIRANJA SALA"   Grid.Row="2" Grid.Column="0"   Margin="19,10.4,6,10.4"    Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="RenovateRoom" FontSize="14"/>
+        <Button x:Name="dynamicInventory" Content="PREGLED OPREME"     Grid.Row="2" Grid.Column="1"   Margin="6,10.4,19.2,10.4"    Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="ViewDynamicInventory" FontSize="14"/>
 
-        <TextBox x:Name="searchRoom"        Grid.Row="3" Grid.ColumnSpan="2" Margin="19,15.6,50.2,24" TextChanged="searchRooms">
+        <TextBox x:Name="searchRoom"        Grid.Row="3" Grid.ColumnSpan="2" Margin="19,15.6,50.2,24" TextChanged="SearchRooms">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -52,7 +52,7 @@
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <Image Source="/Icon/filtering.jpg" Grid.Row="3" Grid.Column="1"     Margin="161,9.6,0.2,24"   MouseDown="selectFilters"/>
+        <Image Source="/Icon/filtering.jpg" Grid.Row="3" Grid.Column="1"     Margin="161,9.6,0.2,24"   MouseDown="FilterRoomsByInventory"/>
 
         <ScrollViewer Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="2" Background="Azure" VerticalScrollBarVisibility="Hidden" Margin="10,0.2,0,9.8">
             <DataGrid x:Name="dataGridRooms" ItemsSource="{Binding Path=Rooms, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource dataGridMedicines}"
@@ -66,8 +66,8 @@
             </DataGrid>
         </ScrollViewer>
 
-        <Button x:Name="add"     Content="DODAJ SALU"    Grid.Row="9" Grid.Column="0"  Margin="19,0.2,6,30.6"  Background="#FFBBD7F9" Foreground="#FF051D6E"  Style="{StaticResource RoundButtonStyle}" Click="addRoom" FontSize="14"/>
-        <Button x:Name="delete"  Content="IZBRIŠI SALU"  Grid.Row="9" Grid.Column="1"  Margin="6,0.2,22.2,30.6" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="deleteRoom" FontSize="14"/>
+        <Button x:Name="add"     Content="DODAJ SALU"    Grid.Row="9" Grid.Column="0"  Margin="19,0.2,6,30.6"  Background="#FFBBD7F9" Foreground="#FF051D6E"  Style="{StaticResource RoundButtonStyle}" Click="AddRoom" FontSize="14"/>
+        <Button x:Name="delete"  Content="IZBRIŠI SALU"  Grid.Row="9" Grid.Column="1"  Margin="6,0.2,22.2,30.6" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="DeleteRoom" FontSize="14"/>
     </Grid>
 
 

@@ -20,15 +20,17 @@ namespace Hospital.View
 {
     public partial class EditMedicalSupply : Page
     {
-        public DynamicInventory MedicalSupplyItem { get; set; }
+        public DynamicInventory DynamicInventoryItem { get; set; }
+        private DynamicInventoryStorage _dynamicInventoryStorage;
 
-        public EditMedicalSupply(DynamicInventory supply)
+        public EditMedicalSupply(DynamicInventory item)
         {
             InitializeComponent();
             this.DataContext = this;
-            MedicalSupplyItem = supply;
+            DynamicInventoryItem = item;
+            _dynamicInventoryStorage = new DynamicInventoryStorage();
 
-            switch (MedicalSupplyItem.Units)
+            switch (DynamicInventoryItem.Units)
             {
                 case UnitsType.kutije:  units.SelectedItem = kutije;  break;
                 case UnitsType.trake:   units.SelectedItem = trake;   break;
@@ -38,32 +40,35 @@ namespace Hospital.View
 
         private void AcceptButtonClick(object sender, RoutedEventArgs e)
         {
-            oznakaTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            nazivTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            cenaTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            kolicinaTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            SaveEditedProperties();
+            _dynamicInventoryStorage.EditItem(DynamicInventoryItem);
+
+            NavigationService.Navigate(new DynamicInventoryView(DynamicInventoryItem.RoomID));
+        }
+
+        private void SaveEditedProperties()
+        {
+            idTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            nameTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            priceTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            quantityTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
 
             switch (units.SelectedIndex)
             {
-                case 0: MedicalSupplyItem.Units = UnitsType.kutije;  break;
-                case 1: MedicalSupplyItem.Units = UnitsType.trake;   break;
-                case 2: MedicalSupplyItem.Units = UnitsType.flasice; break;
+                case 0: DynamicInventoryItem.Units = UnitsType.kutije; break;
+                case 1: DynamicInventoryItem.Units = UnitsType.trake; break;
+                case 2: DynamicInventoryItem.Units = UnitsType.flasice; break;
             }
-
-            DynamicInventoryStorage medicalSupplyStorage = new DynamicInventoryStorage();
-            medicalSupplyStorage.DoSerialization();
-
-            NavigationService.Navigate(new DynamicInventoryView(MedicalSupplyItem.RoomID));
         }
 
         private void CancelButtonClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new DynamicInventoryView(MedicalSupplyItem.RoomID));
+            NavigationService.Navigate(new DynamicInventoryView(DynamicInventoryItem.RoomID));
         }
 
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new DynamicInventoryView(MedicalSupplyItem.RoomID));
+            NavigationService.Navigate(new DynamicInventoryView(DynamicInventoryItem.RoomID));
         }
     }
 }

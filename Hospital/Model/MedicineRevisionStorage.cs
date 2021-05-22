@@ -83,7 +83,6 @@ namespace Hospital.Model
                         break;
                     }
                 }
-
             }
 
             public void DoSerialization(ObservableCollection<MedicineRevision> medicineRevisions)

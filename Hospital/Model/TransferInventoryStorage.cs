@@ -20,41 +20,41 @@ namespace Hospital.Model
         {
             using (StreamReader sr = File.OpenText(@"..\\..\\Files\\" + fileName))
             {
-                transferInventory = JsonConvert.DeserializeObject<ObservableCollection<TransferInventory>>(sr.ReadToEnd());
+                _transferInventory = JsonConvert.DeserializeObject<ObservableCollection<TransferInventory>>(sr.ReadToEnd());
 
-                if (transferInventory == null)
+                if (_transferInventory == null)
                 {
                     return new ObservableCollection<TransferInventory>();
                 }
             }
 
-            return transferInventory;
+            return _transferInventory;
         }
 
         public void Save(TransferInventory parameter1)
         {
-            transferInventory = GetAll();
+            _transferInventory = GetAll();
 
-            if (transferInventory == null)
+            if (_transferInventory == null)
             {
-                transferInventory = new ObservableCollection<TransferInventory>();
+                _transferInventory = new ObservableCollection<TransferInventory>();
             }
 
-            transferInventory.Add(parameter1);
+            _transferInventory.Add(parameter1);
 
             DoSerialization();
         }
 
         public void Delete(TransferInventory transfer)
         {
-            transferInventory = GetAll();
-            transferInventory.Remove(transfer);
+            _transferInventory = GetAll();
+            _transferInventory.Remove(transfer);
           
-            foreach(TransferInventory ti in transferInventory)
+            foreach(TransferInventory ti in _transferInventory)
             {
                 if(ti.ItemID.Equals(transfer.ItemID) && ti.FirstRoomID.Equals(transfer.FirstRoomID) && ti.DestinationRoomID.Equals(transfer.DestinationRoomID))
                 {
-                    transferInventory.Remove(ti);
+                    _transferInventory.Remove(ti);
                     break;
                 }
             }
@@ -64,12 +64,12 @@ namespace Hospital.Model
 
         public void EditTransfer(TransferInventory editedTransfer)
         {
-            foreach (TransferInventory transfer in transferInventory)
+            foreach (TransferInventory transfer in _transferInventory)
             {
                 if (transfer.ItemID.Equals(editedTransfer.ItemID) && transfer.FirstRoomID.Equals(editedTransfer.FirstRoomID) && transfer.DestinationRoomID.Equals(editedTransfer.DestinationRoomID))
                 {
-                    transferInventory.Remove(transfer);
-                    transferInventory.Add(editedTransfer);
+                    _transferInventory.Remove(transfer);
+                    _transferInventory.Add(editedTransfer);
                     DoSerialization();
                     break;
                 }
@@ -81,11 +81,11 @@ namespace Hospital.Model
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, transferInventory);
+                serializer.Serialize(file, _transferInventory);
             }
         }
 
-        public static ObservableCollection<TransferInventory> transferInventory = new ObservableCollection<TransferInventory>();
+        private ObservableCollection<TransferInventory> _transferInventory = new ObservableCollection<TransferInventory>();
         public String fileName;
     }
 }

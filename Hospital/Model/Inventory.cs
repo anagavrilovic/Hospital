@@ -21,27 +21,19 @@ namespace Hospital
             }
         }
 
-       private string id;
-       private String name;
-       private double price;
-       private int quantity;
-       private string roomID;
+       private string _id;
+       private String _name;
+       private double _price;
+       private int _quantity;
+       private string _roomID;
 
         public string Id
         {
-
-            get
-            {
-                return id;
-            }
-
+            get => _id;
             set
             {
-                if (value != id)
-                {
-                    id = value;
-                    OnPropertyChanged("Id");
-                }
+               _id = value;
+               OnPropertyChanged("Id");
             }
         }
 
@@ -49,70 +41,42 @@ namespace Hospital
         public String Name
         {
 
-            get
-            {
-                return name;
-            }
-
+            get => _name;
             set
             {
-                if (value != name)
-                {
-                    name = value;
-                    OnPropertyChanged("Name");
-                }
+                _name = value;
+                OnPropertyChanged("Name");
             }
         }
 
         public double Price
         {
-            get
-            {
-                return price;
-            }
-
+            get => _price;
             set
             {
-                if (value != price)
-                {
-                    price = value;
-                    OnPropertyChanged("Price");
-                }
+               _price = value;
+               OnPropertyChanged("Price");
             }
         }
 
 
         public int Quantity
         {
-            get
-            {
-                return quantity;
-            }
-
+            get => _quantity;
             set
             {
-                if (value != quantity)
-                {
-                    quantity = value;
-                    OnPropertyChanged("Quantity");
-                }
+               _quantity = value;
+                OnPropertyChanged("Quantity");
             }
         }
 
         public string RoomID
         {
-            get
-            {
-                return roomID;
-            }
-
+            get => _roomID;
             set
             {
-                if (value != roomID)
-                {
-                    roomID = value;
-                    OnPropertyChanged("RoomID");
-                }
+               _roomID = value;
+                OnPropertyChanged("RoomID");
             }
         }
 

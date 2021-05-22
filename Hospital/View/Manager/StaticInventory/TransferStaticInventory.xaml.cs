@@ -22,7 +22,6 @@ namespace Hospital.View
     public partial class TransferStaticInventory : Page, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)

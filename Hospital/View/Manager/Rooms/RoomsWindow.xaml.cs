@@ -19,16 +19,8 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    public partial class RoomsWindow : Page, INotifyPropertyChanged
+    public partial class RoomsWindow : Page
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
         private static ObservableCollection<Room> _rooms;
         public static ObservableCollection<Room> Rooms
         {
@@ -46,10 +38,8 @@ namespace Hospital.View
             StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(name));
         }
 
-        RoomStorage roomStorage = new RoomStorage();
-
-        private string searchstr;
-
+        RoomStorage _roomStorage;
+        private string _searchCriterion;
         public ICollectionView RoomsCollection { get; set; }
 
 
@@ -57,23 +47,24 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
-            Rooms = roomStorage.GetAll();
+            _roomStorage = new RoomStorage();
+            Rooms = _roomStorage.GetAll();
 
             RoomsCollection = CollectionViewSource.GetDefaultView(Rooms);
         }
 
-        private void searchRooms(object sender, TextChangedEventArgs e)
+        private void SearchRooms(object sender, TextChangedEventArgs e)
         {
             TextBox textbox = sender as TextBox;
 
             if (textbox == null)
                 return;
            
-            this.searchstr = textbox.Text;
-            if (!string.IsNullOrEmpty(searchstr))
+            this._searchCriterion = textbox.Text;
+            if (!string.IsNullOrEmpty(_searchCriterion))
             {
                 ICollectionView view = CollectionViewSource.GetDefaultView(dataGridRooms.ItemsSource);
-                view.Filter = new Predicate<object>(filter);
+                view.Filter = new Predicate<object>(Filter);
                 this.RoomsCollection.Refresh();
             }
             else
@@ -83,23 +74,23 @@ namespace Hospital.View
             }    
         }
 
-        private void selectFilters(object sender, RoutedEventArgs e)
+        private void FilterRoomsByInventory(object sender, RoutedEventArgs e)
         {
             FilteringInventory filteringInventory = new FilteringInventory();
             NavigationService.Navigate(filteringInventory);
         }
 
 
-        private bool filter(object item)
+        private bool Filter(object item)
         {
-            if (((Room)item).Name.Contains(searchstr) || ((Room)item).Id.Contains(searchstr) || ((Room)item).Floor.ToString().Contains(searchstr))
+            if (((Room)item).Name.Contains(_searchCriterion) || ((Room)item).Id.Contains(_searchCriterion) || ((Room)item).Floor.ToString().Contains(_searchCriterion))
             {
                 return true;
             }
             return false;
         }
 
-        private void addRoom(object sender, RoutedEventArgs e)
+        private void AddRoom(object sender, RoutedEventArgs e)
         {
             AddRoom room = new AddRoom();
             NavigationService.Navigate(new AddRoom());
@@ -126,7 +117,7 @@ namespace Hospital.View
             NavigationService.Navigate(editRoom);
         }
 
-        private void deleteRoom(object sender, RoutedEventArgs e)
+        private void DeleteRoom(object sender, RoutedEventArgs e)
         {
             Room selectedItem = (Room) dataGridRooms.SelectedItem;
 
@@ -136,7 +127,7 @@ namespace Hospital.View
             NavigationService.Navigate(new DeleteRoom (selectedItem));
         }
 
-        private void viewStaticInventory(object sender, RoutedEventArgs e)
+        private void ViewStaticInventory(object sender, RoutedEventArgs e)
         {
             Room selectedItem = (Room)dataGridRooms.SelectedItem;
 
@@ -147,7 +138,7 @@ namespace Hospital.View
             NavigationService.Navigate(inv);
         }
 
-        private void viewDynamicInventory(object sender, RoutedEventArgs e)
+        private void ViewDynamicInventory(object sender, RoutedEventArgs e)
         {  
             Room selectedItem = (Room)dataGridRooms.SelectedItem;
 
@@ -158,17 +149,17 @@ namespace Hospital.View
             NavigationService.Navigate(inv);
         }
 
-        private void renovateRoom(object sender, RoutedEventArgs e)
+        private void RenovateRoom(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Renovations());
         }
 
-        private void refreshView(object sender, RoutedEventArgs e)
+        private void RefreshView(object sender, RoutedEventArgs e)
         {
-            Rooms = roomStorage.GetAll();
+            Rooms = _roomStorage.GetAll();
         }
 
-        private void menuButton(object sender, RoutedEventArgs e)
+        private void MenuButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ManagerMainPage());
         }

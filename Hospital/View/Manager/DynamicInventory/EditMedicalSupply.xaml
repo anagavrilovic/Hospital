@@ -58,34 +58,7 @@
         <Label Content="Količina:"         Grid.Row="7"  Grid.Column="0"   Foreground="#FF1E49D9" FontSize="20" Margin="30,50,5,9.8" Grid.RowSpan="2"/>
         <Label Content="Merna jedinica:"   Grid.Row="9"  Grid.Column="0"   Foreground="#FF1E49D9" FontSize="20" Margin="30,50.2,5,10.4" Grid.RowSpan="2"/>
 
-        <TextBox x:Name="oznakaTxt"        Grid.Row="2"  Grid.ColumnSpan="2" Margin="30,50.2,28,14.4" BorderBrush="#FF26282C" Text="{Binding Path=MedicalSupplyItem.Id,         Mode=TwoWay, UpdateSourceTrigger=Explicit}" IsEnabled="False" Grid.RowSpan="2">
-            <TextBox.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="10"/>
-                    <Setter Property="Padding" Value="2"/>
-                </Style>
-            </TextBox.Resources>
-        </TextBox>
-        
-        <TextBox x:Name="nazivTxt"         Grid.Row="5"  Grid.ColumnSpan="2" Margin="30,0.4,28,13.8"  BorderBrush="#FF26282C" Text="{Binding Path=MedicalSupplyItem.Name,       Mode=TwoWay, UpdateSourceTrigger=Explicit}">
-            <TextBox.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="10"/>
-                    <Setter Property="Padding" Value="2"/>
-                </Style>
-            </TextBox.Resources>
-        </TextBox>
-        
-        <TextBox x:Name="cenaTxt"          Grid.Row="7"  Grid.ColumnSpan="2" Margin="30,0,28,14.4"    BorderBrush="#FF26282C" Text="{Binding Path=MedicalSupplyItem.Price,      Mode=TwoWay, UpdateSourceTrigger=Explicit}">
-            <TextBox.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="10"/>
-                    <Setter Property="Padding" Value="2"/>
-                </Style>
-            </TextBox.Resources>
-        </TextBox>
-        
-        <TextBox x:Name="kolicinaTxt"      Grid.Row="9"  Grid.ColumnSpan="2" Margin="30,0.2,28,14.2"  BorderBrush="#FF26282C" Text="{Binding Path=MedicalSupplyItem.Quantity,   Mode=TwoWay, UpdateSourceTrigger=Explicit}">
+        <TextBox x:Name="idTxt"        Grid.Row="2"  Grid.ColumnSpan="2" Margin="30,50.2,28,14.4" BorderBrush="#FF26282C" Text="{Binding Path=DynamicInventoryItem.Id,         Mode=TwoWay, UpdateSourceTrigger=Explicit}" IsEnabled="False" Grid.RowSpan="2">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -94,7 +67,34 @@
             </TextBox.Resources>
         </TextBox>
 
-        <ComboBox x:Name="units" Grid.Row="11" Grid.ColumnSpan="2" BorderThickness="1" Margin="30,1.6,28,9.8" Style="{StaticResource cbTB}">
+        <TextBox x:Name="nameTxt"         Grid.Row="5"  Grid.ColumnSpan="2" Margin="30,0.4,28,13.8"  BorderBrush="#FF26282C" Text="{Binding Path=DynamicInventoryItem.Name,       Mode=TwoWay, UpdateSourceTrigger=Explicit}">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+
+        <TextBox x:Name="priceTxt"          Grid.Row="7"  Grid.ColumnSpan="2" Margin="30,0,28,14.4"    BorderBrush="#FF26282C" Text="{Binding Path=DynamicInventoryItem.Price,      Mode=TwoWay, UpdateSourceTrigger=Explicit}">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+
+        <TextBox x:Name="quantityTxt"      Grid.Row="9"  Grid.ColumnSpan="2" Margin="30,0.2,28,14.2"  BorderBrush="#FF26282C" Text="{Binding Path=DynamicInventoryItem.Quantity,   Mode=TwoWay, UpdateSourceTrigger=Explicit}">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+
+        <ComboBox x:Name="units" Grid.Row="11" Grid.ColumnSpan="2" BorderThickness="1" Margin="30,1.6,28,9.8">
             <ComboBoxItem x:Name="kutije" IsSelected="True">KUTIJE</ComboBoxItem>
             <ComboBoxItem x:Name="trake">TRAKE</ComboBoxItem>
             <ComboBoxItem x:Name="flasice">FLAŠICE</ComboBoxItem>

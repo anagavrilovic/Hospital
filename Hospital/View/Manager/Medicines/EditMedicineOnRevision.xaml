@@ -44,7 +44,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
-            <Button  Click="Back"   Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
+            <Button  Click="BackButtonClick"   Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
                 <Image  Source="/Icon/back.png" Margin="10,8,0,5"/>
             </Button>
             <Label Content="IZMENA LEKA" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" Margin="8,20,9,9.8"/>
@@ -227,7 +227,7 @@
                     Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <Button x:Name="sendOnRevision" Content="POŠALJI NA REVIZIJU" Grid.Row="21" Grid.Column="0"  Margin="19,0,10,0" Background="#FFAAD0E0" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="SendAgainOnRevision"/>
-                <Button x:Name="cancel"         Content="ODUSTANI"            Grid.Row="21" Grid.Column="1"  Margin="10,0,22,0" Background="White"     Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="Cancel"/>
+                <Button x:Name="cancel"         Content="ODUSTANI"            Grid.Row="21" Grid.Column="1"  Margin="10,0,22,0" Background="White"     Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="CancelButtonClick"/>
 
             </Grid>
         </ScrollViewer>

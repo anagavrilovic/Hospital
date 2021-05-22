@@ -20,58 +20,58 @@ namespace Hospital.Model
             }
         }
 
-        private Medicine medicine;
+        private Medicine _medicine;
         public Medicine Medicine
         {
-            get => medicine;
+            get => _medicine;
             set
             {
-                medicine = value;
+                _medicine = value;
                 OnPropertyChanged("Medicine");
             }
         }
 
-        private string doctorID;
+        private string _doctorID;
         public string DoctorID
         {
-            get => doctorID;
+            get => _doctorID;
             set
             {
-                doctorID = value;
+                _doctorID = value;
                 OnPropertyChanged("DoctorID");
             }
         }
 
-        private Doctor revisionDoctor;
+        private Doctor _revisionDoctor;
         [JsonIgnore]
         public Doctor RevisionDoctor
         {
-            get => revisionDoctor;
+            get => _revisionDoctor;
             set
             {
-                revisionDoctor = value;
+                _revisionDoctor = value;
                 OnPropertyChanged("RevisionDoctor");
             }
         }
 
-        private string revisionExplanation;
+        private string _revisionExplanation;
         public string RevisionExplanation
         {
-            get => revisionExplanation;
+            get => _revisionExplanation;
             set
             {
-                revisionExplanation = value;
+                _revisionExplanation = value;
                 OnPropertyChanged("RevisionExplanation");
             }
         }
 
-        private bool isMedicineRevised;
+        private bool _isMedicineRevised;
         public bool IsMedicineRevised
         {
-            get => isMedicineRevised;
+            get => _isMedicineRevised;
             set
             {
-                isMedicineRevised = value;
+                _isMedicineRevised = value;
                 OnPropertyChanged("IsMedicineRevised");
             }
         }
@@ -88,7 +88,5 @@ namespace Hospital.Model
                 OnPropertyChanged("RevisionStatus");
             }
         }
-
-
     }
 }

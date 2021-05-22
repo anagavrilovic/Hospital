@@ -27,61 +27,57 @@ namespace Hospital.View
             }
         }
 
-        private InventoryStorage inventoryStorage;
-        private DynamicInventoryStorage medicalSupplyStorage;
-        private RoomStorage roomStorage;
+        private InventoryStorage _staticInventoryStorage;
+        private DynamicInventoryStorage _dynamicInventoryStorage;
+        private RoomStorage _roomStorage;
 
-        private ObservableCollection<string> staticInventoryItems;
-        private ObservableCollection<string> dynamicInventoryItems;
+        private int _minQuantityFilter;
+        private int _maxQuantityFilter;
+
+
+        public ObservableCollection<Room> Rooms { get; set; }
+        private ObservableCollection<string> _staticInventoryItems;
+        private ObservableCollection<string> _dynamicInventoryItems;
 
         public ObservableCollection<string> StaticInventoryItems
         {
-            get
-            {
-                return staticInventoryItems;
-            }
-
+            get => _staticInventoryItems;
             set
             {
-                staticInventoryItems = value;
+                _staticInventoryItems = value;
                 OnPropertyChanged("StaticInventoryItems");
             }
         }
 
         public ObservableCollection<string> DynamicInventoryItems
         {
-            get
-            {
-                return dynamicInventoryItems;
-            }
-
+            get => _dynamicInventoryItems;
             set
             {
-                dynamicInventoryItems = value;
+                _dynamicInventoryItems = value;
                 OnPropertyChanged("DynamicInventoryItems");
             }
         }
-
-        public ObservableCollection<Room> Rooms { get; set; }
 
         public FilteringInventory()
         {
             InitializeComponent();
             this.DataContext = this;
-            this.inventoryStorage = new InventoryStorage();
-            this.medicalSupplyStorage = new DynamicInventoryStorage();
-            this.roomStorage = new RoomStorage();
-            Rooms = roomStorage.GetAll();
+
+            this._staticInventoryStorage = new InventoryStorage();
+            this._dynamicInventoryStorage = new DynamicInventoryStorage();
+            this._roomStorage = new RoomStorage();
+            Rooms = _roomStorage.GetAll();
             
-            getAllStaticInventoryItemsForComboBox();
-            getAllDynamicInventoryItemsForComboBox();
+            InitializeStaticInventoryComboBox();
+            InitializeDynamicInventoryComboBox();
         }
 
-        private void getAllStaticInventoryItemsForComboBox()
+        private void InitializeStaticInventoryComboBox()
         {
             StaticInventoryItems = new ObservableCollection<string>();
 
-            foreach (Inventory inventory in inventoryStorage.GetAll())
+            foreach (Inventory inventory in _staticInventoryStorage.GetAll())
             {
                 StringBuilder sb = new StringBuilder();
                 sb.Append(inventory.Id);
@@ -92,11 +88,11 @@ namespace Hospital.View
             }
         }
 
-        private void getAllDynamicInventoryItemsForComboBox()
+        private void InitializeDynamicInventoryComboBox()
         {
             DynamicInventoryItems = new ObservableCollection<string>();
 
-            foreach (DynamicInventory medicalSupply in medicalSupplyStorage.GetAll())
+            foreach (DynamicInventory medicalSupply in _dynamicInventoryStorage.GetAll())
             {
                 StringBuilder sb = new StringBuilder();
                 sb.Append(medicalSupply.Id);
@@ -107,7 +103,7 @@ namespace Hospital.View
             }
         }
 
-        private void isFloorFilterSelected()
+        private void IsFloorFilterSelected()
         {
             if (floorCB.SelectedItem == null)
                 return;
@@ -119,7 +115,7 @@ namespace Hospital.View
             }
         }
 
-        private void isRoomTypeSelected()
+        private void IsRoomTypeFilterSelected()
         {
             if (typeCB.SelectedItem == null)
                 return;
@@ -127,13 +123,11 @@ namespace Hospital.View
             foreach(Room room in Rooms.ToList())
             {
                if(room.Type != (RoomType)Enum.Parse(typeof(RoomType), typeCB.Text))
-                {
                     Rooms.Remove(room);
-                }
             }
         }
 
-        private void isStaticInventoryItemSelected()
+        private void IsStaticInventoryFilterSelected()
         {
             if (staticInventoryCB.SelectedItem == null)
                 return;
@@ -142,13 +136,13 @@ namespace Hospital.View
 
             foreach(Room room in Rooms.ToList())
             {
-                bool condition = inventoryStorage.GetByRoomID(room.Id).Contains(inventoryStorage.GetOneByRoom(selectedItemId, room.Id));
+                bool condition = _staticInventoryStorage.GetByRoomID(room.Id).Contains(_staticInventoryStorage.GetOneByRoom(selectedItemId, room.Id));
                 if (!condition)
                     Rooms.Remove(room);
             }
         }
 
-        private void isDynamicInventoryItemSelected()
+        private void IsDynamicInventoryFilterSelected()
         {
             if (dynamicInventoryCB.SelectedItem == null)
                 return;
@@ -157,91 +151,100 @@ namespace Hospital.View
 
             foreach (Room room in Rooms.ToList())
             {
-                bool condition = medicalSupplyStorage.GetByRoomID(room.Id).Contains(medicalSupplyStorage.GetOneByRoom(selectedItemId, room.Id));
+                bool condition = _dynamicInventoryStorage.GetByRoomID(room.Id).Contains(_dynamicInventoryStorage.GetOneByRoom(selectedItemId, room.Id));
                 if (!condition)
                     Rooms.Remove(room);
             }
         }
 
-        private void isQuantitiyFilterSelected()
+        private void SetQuantityFilters()
+        {
+            _maxQuantityFilter = 0;
+
+            if (quantityCB.Text.Contains(">"))
+            {
+                _minQuantityFilter = int.Parse(quantityCB.Text.Substring(1));
+            }
+            else
+            {
+                _minQuantityFilter = int.Parse(quantityCB.Text.Split("-".ToCharArray())[0]);
+                _maxQuantityFilter = int.Parse(quantityCB.Text.Split("-".ToCharArray())[1]);
+            }
+        }
+
+        private void FilterStaticInventory()
+        {
+            foreach (Room room in Rooms.ToList())
+            {
+                if (staticInventoryCB.SelectedItem != null)
+                {
+                    Inventory itemSelected = _staticInventoryStorage.GetOneByRoom(staticInventoryCB.Text.Split("-".ToCharArray())[0], room.Id);
+
+                    bool condition;
+                    if (_maxQuantityFilter == 0)
+                        condition = itemSelected.Quantity > _minQuantityFilter;
+                    condition = itemSelected.Quantity >= _minQuantityFilter && itemSelected.Quantity <= _maxQuantityFilter;
+
+                    if (!condition)
+                        Rooms.Remove(room);
+                }
+            }
+        }
+
+        private void FilterDynamicInventory()
+        {
+            foreach (Room room in Rooms.ToList())
+            {
+                if (dynamicInventoryCB.SelectedItem != null)
+                {
+                    DynamicInventory itemSelected = _dynamicInventoryStorage.GetOneByRoom(dynamicInventoryCB.Text.Split("-".ToCharArray())[0], room.Id);
+
+                    bool condition;
+                    if (_maxQuantityFilter == 0)
+                        condition = itemSelected.Quantity > _minQuantityFilter;
+                    else
+                        condition = itemSelected.Quantity >= _minQuantityFilter && itemSelected.Quantity <= _maxQuantityFilter;
+
+                    if (!condition)
+                        Rooms.Remove(room);
+                }
+            }
+        }
+
+        private void IsQuantitiyFilterSelected()
         {
             if ((staticInventoryCB.SelectedItem == null && dynamicInventoryCB.SelectedItem == null) || quantityCB.SelectedItem == null)
                 return;
 
-            int minQuantityFilter;
-            int maxQuantityFilter = 0;
-
-            if(quantityCB.Text.Contains(">"))
-            {
-                minQuantityFilter = int.Parse(quantityCB.Text.Substring(1));
-            }
-            else
-            {
-                minQuantityFilter = int.Parse(quantityCB.Text.Split("-".ToCharArray())[0]);
-                maxQuantityFilter = int.Parse(quantityCB.Text.Split("-".ToCharArray())[1]);
-            }
-
-            foreach(Room room in Rooms.ToList())
-            {
-                if (staticInventoryCB.SelectedItem != null)
-                {
-                    Inventory itemSelected = inventoryStorage.GetOneByRoom(staticInventoryCB.Text.Split("-".ToCharArray())[0], room.Id);
-                    bool condition;
-                    if (maxQuantityFilter==0)
-                    {
-                        condition = itemSelected.Quantity > minQuantityFilter;
-                    }
-                    else
-                    {
-                        condition = itemSelected.Quantity >= minQuantityFilter && itemSelected.Quantity <= maxQuantityFilter;
-                    }
-
-                    if (!condition)
-                        Rooms.Remove(room);
-                        
-                }
-                else if(dynamicInventoryCB.SelectedItem != null)
-                {
-                    DynamicInventory itemSelected = medicalSupplyStorage.GetOneByRoom(dynamicInventoryCB.Text.Split("-".ToCharArray())[0], room.Id);
-                    bool condition;
-                    if (maxQuantityFilter == 0)
-                    {
-                        condition = itemSelected.Quantity > minQuantityFilter;
-                    }
-                    else
-                    {
-                        condition = itemSelected.Quantity >= minQuantityFilter && itemSelected.Quantity <= maxQuantityFilter;
-                    }
-
-                    if (!condition)
-                        Rooms.Remove(room);
-                }
-                   
-            }
+            SetQuantityFilters();
+            FilterStaticInventory();
+            FilterDynamicInventory();
+            
         }
 
-        private void doFiltering(object sender, RoutedEventArgs e)
+        private void FinishFiltering(object sender, RoutedEventArgs e)
         {
-            filterDataGrid();
+            FilterRoomsDataGrid();
             NavigationService.Navigate(new RoomsWindow());
+
             RoomsWindow.Rooms = Rooms;
         }
 
-        private void filterDataGrid()
+        private void FilterRoomsDataGrid()
         {
-            isFloorFilterSelected();
-            isRoomTypeSelected();
-            isStaticInventoryItemSelected();
-            isDynamicInventoryItemSelected();
-            isQuantitiyFilterSelected();
+            IsFloorFilterSelected();
+            IsRoomTypeFilterSelected();
+            IsStaticInventoryFilterSelected();
+            IsDynamicInventoryFilterSelected();
+            IsQuantitiyFilterSelected();
         }
 
-        private void cancelFiltering(object sender, RoutedEventArgs e)
+        private void CancelFiltering(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RoomsWindow());
         }
 
-        private void back(object sender, RoutedEventArgs e)
+        private void BackBtnClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RoomsWindow());
         }

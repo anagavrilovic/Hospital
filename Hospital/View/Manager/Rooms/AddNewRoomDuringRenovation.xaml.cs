@@ -1,6 +1,7 @@
 ﻿using Hospital.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,34 +12,38 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Hospital.View
+namespace Hospital.View.Manager.Rooms
 {
-    public partial class AddRoom : Page
+    public partial class AddNewRoomDuringRenovation : Page
     {
-        private RoomStorage _roomStorage;
         public Room NewRoom { get; set; }
+        public RoomRenovation RoomRenovation { get; set; }
 
-        public AddRoom()
+        private RoomStorage _roomStorage;
+
+        public AddNewRoomDuringRenovation(RoomRenovation renovation)
         {
             InitializeComponent();
             this.DataContext = this;
 
             NewRoom = new Room();
-            _roomStorage = new RoomStorage();
+            this._roomStorage = new RoomStorage();
+            RoomRenovation = renovation;
         }
 
         private void AcceptAddingButtonClick(object sender, RoutedEventArgs e)
         {
-            InitializeNewRoom();
+            NewRoom.Type = (RoomType)Enum.Parse(typeof(RoomType), typeCB.Text);
 
             if (!IsNewRoomIdUnique())
                 return;
 
-            _roomStorage.Save(NewRoom);
-         
-            NavigationService.Navigate(new RoomsWindow());
+            RoomRenovation.RoomsCreatedDuringRenovation.Add(NewRoom);
+
+            NavigationService.GoBack();
         }
 
         private bool IsNewRoomIdUnique()
@@ -54,20 +59,10 @@ namespace Hospital.View
             return true;
         }
 
-        private void InitializeNewRoom()
-        {
-            NewRoom.Type = (RoomType)Enum.Parse(typeof(RoomType), typeCB.Text);
-            NewRoom.Status = (RoomStatus)Enum.Parse(typeof(RoomStatus), statusCB.Text);
-        }
-
         private void CancelAddingButtonClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new RoomsWindow());
-        }
-
-        private void BackButtonClick(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new RoomsWindow());
+            NavigationService.GoBack();
         }
     }
+
 }

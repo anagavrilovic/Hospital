@@ -56,7 +56,7 @@
         <Label Content="Cena:"     Grid.Row="6" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
         <Label Content="Količina:" Grid.Row="8" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,15,5,10.2" />
 
-        <TextBox x:Name="oznakaTxt"   Grid.Row="3" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Inv.Id,   Mode=TwoWay, UpdateSourceTrigger=Explicit}" IsEnabled="False">
+        <TextBox x:Name="idTxt"   Grid.Row="3" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=InventoryItem.Id,   Mode=TwoWay, UpdateSourceTrigger=Explicit}" IsEnabled="False">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -64,7 +64,7 @@
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <TextBox x:Name="nazivTxt"    Grid.Row="5" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=Inv.Name, Mode=TwoWay, UpdateSourceTrigger=Explicit}" >
+        <TextBox x:Name="nameTxt"    Grid.Row="5" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C" Text="{Binding Path=InventoryItem.Name, Mode=TwoWay, UpdateSourceTrigger=Explicit}" >
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -74,7 +74,7 @@
         </TextBox>
 
 
-        <TextBox x:Name="cenaTxt" Grid.Row="7" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C">
+        <TextBox x:Name="priceTxt" Grid.Row="7" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -82,7 +82,7 @@
                 </Style>
             </TextBox.Resources>
             <TextBox.Text>
-                <Binding  Path="Inv.Price"    Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                <Binding  Path="InventoryItem.Price"    Mode="TwoWay" UpdateSourceTrigger="Explicit">
                     <Binding.ValidationRules>
                         <val:StringToDouble ValidationStep="RawProposedValue"/>
                         <val:MinValue       ValidationStep="ConvertedProposedValue" Min="0" />
@@ -100,7 +100,7 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="cenaTxt"/>
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="priceTxt"/>
                         <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
                     </Grid>
                 </ControlTemplate>
@@ -108,7 +108,7 @@
         </TextBox>
 
 
-        <TextBox x:Name="kolicinaTxt" Grid.Row="9" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C">
+        <TextBox x:Name="quantityTxt" Grid.Row="9" Grid.ColumnSpan="2" Margin="30,10.2,28,4.8" BorderBrush="#FF26282C">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -116,7 +116,7 @@
                 </Style>
             </TextBox.Resources>
             <TextBox.Text>
-                <Binding  Path="Inv.Quantity"    Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                <Binding  Path="InventoryItem.Quantity"    Mode="TwoWay" UpdateSourceTrigger="Explicit">
                     <Binding.ValidationRules>
                         <val:StringToInteger ValidationStep="RawProposedValue"/>
                         <val:MinValue        ValidationStep="ConvertedProposedValue" Min="0"/>
@@ -134,7 +134,7 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="kolicinaTxt"/>
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="quantityTxt"/>
                         <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
                     </Grid>
                 </ControlTemplate>

@@ -32,14 +32,10 @@ namespace Hospital.Model
         public string ItemID
         {
             get => _itemID;
-
             set
             {
-                if (value != _itemID)
-                {
-                    _itemID = value;
-                    OnPropertyChanged("ItemID");
-                }
+               _itemID = value;
+               OnPropertyChanged("ItemID");
             }
         }
 
@@ -48,25 +44,18 @@ namespace Hospital.Model
             get => _quantity;
             set
             {
-                if (value != _quantity)
-                {
-                    _quantity = value;
-                    OnPropertyChanged("Quantity");
-                }
+                _quantity = value;
+                OnPropertyChanged("Quantity");
             }
         }
 
         public string FirstRoomID
         {
             get => _firstRoomID;
-
             set
             {
-                if (value != _firstRoomID)
-                {
-                    _firstRoomID = value;
-                    OnPropertyChanged("FirstRoomID");
-                }
+                _firstRoomID = value;
+                OnPropertyChanged("FirstRoomID");
             }
         }
 
@@ -75,11 +64,8 @@ namespace Hospital.Model
             get => _destinationRoomID;
             set
             {
-                if (value != _destinationRoomID)
-                {
-                    _destinationRoomID = value;
-                    OnPropertyChanged("DestinationRoomID");
-                }
+                _destinationRoomID = value;
+                 OnPropertyChanged("DestinationRoomID");
             }
         }
 

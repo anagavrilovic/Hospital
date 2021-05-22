@@ -22,6 +22,9 @@ namespace Hospital
 
        public ObservableCollection<DynamicInventory> GetAll()
        {
+
+            ObservableCollection<DynamicInventory> DynamicInventory = new ObservableCollection<DynamicInventory>();
+
             using (StreamReader sr = File.OpenText(@"..\\..\\Files\\" + fileName))
             {
                 DynamicInventory = JsonConvert.DeserializeObject<ObservableCollection<DynamicInventory>>(sr.ReadToEnd());
@@ -35,22 +38,22 @@ namespace Hospital
    
        public void Save(DynamicInventory parameter1)
        {
-            DynamicInventory = GetAll();
+            ObservableCollection<DynamicInventory> DynamicInventory = GetAll();
             DynamicInventory.Add(parameter1);
 
-            DoSerialization();
+            DoSerialization(DynamicInventory);
        }
    
        public Boolean Delete(string id, string roomID)
        {
-            DynamicInventory = GetAll();
+            ObservableCollection<DynamicInventory> DynamicInventory = GetAll();
 
             foreach(DynamicInventory ms in DynamicInventory)
             {
                 if(ms.Id.Equals(id) && ms.RoomID.Equals(roomID))
                 {
                     DynamicInventory.Remove(ms);
-                    DoSerialization();
+                    DoSerialization(DynamicInventory);
                     return true;
                 }
             }
@@ -59,13 +62,14 @@ namespace Hospital
 
         public void EditItem (DynamicInventory editedItem)
         {
+            ObservableCollection<DynamicInventory> DynamicInventory = GetAll();
             foreach (DynamicInventory item in DynamicInventory)
             {
                 if(item.Id.Equals(editedItem.Id) && item.RoomID.Equals(editedItem.RoomID))
                 {
                     DynamicInventory.Remove(item);
                     DynamicInventory.Add(editedItem);
-                    DoSerialization();
+                    DoSerialization(DynamicInventory);
                     break;
                 }
             }
@@ -73,7 +77,7 @@ namespace Hospital
 
         public DynamicInventory GetOne(string id)
        {
-            DynamicInventory = GetAll();
+            ObservableCollection<DynamicInventory> DynamicInventory = GetAll();
 
             foreach(DynamicInventory ms in DynamicInventory)
             {
@@ -86,6 +90,7 @@ namespace Hospital
 
         public DynamicInventory GetOneByRoom(string id, string roomId)
         {
+            ObservableCollection<DynamicInventory> DynamicInventory = GetAll();
             foreach (DynamicInventory ms in DynamicInventory)
             {
                 if (ms.Id.Equals(id) && ms.RoomID.Equals(roomId))
@@ -97,9 +102,9 @@ namespace Hospital
         public ObservableCollection<DynamicInventory> GetByRoomID(string id)
        {
             ObservableCollection<DynamicInventory> ret = new ObservableCollection<DynamicInventory>();
-            DynamicInventory = GetAll();
+            ObservableCollection<DynamicInventory> DynamicInventory = GetAll();
 
-            foreach(DynamicInventory ms in DynamicInventory)
+            foreach (DynamicInventory ms in DynamicInventory)
             {
                 if(ms.RoomID.Equals(id))
                     ret.Add(ms);
@@ -108,7 +113,7 @@ namespace Hospital
             return ret;
        }
 
-        public void DoSerialization()
+        public void DoSerialization(ObservableCollection<DynamicInventory> DynamicInventory)
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {
@@ -117,7 +122,7 @@ namespace Hospital
             }
         }
 
-       public static ObservableCollection<DynamicInventory> DynamicInventory;
+    
        public String fileName;
 
     }

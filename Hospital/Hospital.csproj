@@ -183,6 +183,12 @@
     <Compile Include="View\Doktor\NoviTermin.xaml.cs">
       <DependentUpon>NoviTermin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Manager\Rooms\AddNewRoomDuringRenovation.xaml.cs">
+      <DependentUpon>AddNewRoomDuringRenovation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\Rooms\ChangingRoomsPlan.xaml.cs">
+      <DependentUpon>ChangingRoomsPlan.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Manager\StaticInventory\AddInventory.xaml.cs">
       <DependentUpon>AddInventory.xaml</DependentUpon>
     </Compile>
@@ -445,6 +451,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Doktor\NoviTermin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\Rooms\AddNewRoomDuringRenovation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\Rooms\ChangingRoomsPlan.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -989,6 +1003,8 @@
   <ItemGroup>
     <Resource Include="Icon\medicals.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Icon\refresh.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -45,7 +45,7 @@
         <Button x:Name="transfer" Content="PREBACI STAVKU"   Grid.Row="2" Grid.Column="0" Margin="10,0.4,7.4,23.4" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="TransferItemButtonClick" FontSize="14"/>
         <Button x:Name="report"   Content="KREIRAJ IZVEŠTAJ" Grid.Row="2" Grid.Column="1" Margin="6.6,0.4,10,23.4" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="CreateReportButtonClick" FontSize="14"/>
 
-        <TextBox x:Name="search"  TextChanged="SearchMedicalSupply" Grid.Row="2" Grid.ColumnSpan="2" Margin="10,72.4,62,31" Grid.RowSpan="2" >
+        <TextBox x:Name="search"  TextChanged="SearchDynamicInventory" Grid.Row="2" Grid.ColumnSpan="2" Margin="10,72.4,62,31" Grid.RowSpan="2" >
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -57,8 +57,8 @@
 
         <ScrollViewer Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="2" Background="Azure" HorizontalScrollBarVisibility="Auto" Margin="10,0,0,0">
             <Grid MinWidth="200" Height="330">
-                <DataGrid  x:Name ="dataGridMedicalSupply"  Style="{StaticResource dataGridMedicines}" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}"
-                               ItemsSource="{Binding Path=Supply, UpdateSourceTrigger=PropertyChanged}"
+                <DataGrid  x:Name ="dataGridDynamicInventory"  Style="{StaticResource dataGridMedicines}" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}"
+                               ItemsSource="{Binding Path=DynamicInventoryInRoom, UpdateSourceTrigger=PropertyChanged}"
                                Background="#FFCADEED"  Foreground="#FF536AA0" Margin="0">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Oznaka"             Binding="{Binding Id}"          Width="70"/>

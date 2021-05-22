@@ -305,7 +305,7 @@
                     Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <Button x:Name="sendOnRevision" Content="POŠALJI NA REVIZIJU" Grid.Row="21" Grid.Column="0"  Margin="19,0,10,0" Background="#FFAAD0E0" Foreground="#FF051D6E" Click="SendOnRevision">
-                    <Button.Style>
+                    <!--Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Template">
                                 <Setter.Value>
@@ -330,7 +330,7 @@
                                 </MultiDataTrigger>
                             </Style.Triggers>
                         </Style>
-                    </Button.Style>
+                    </-->
                 </Button>
                 <Button x:Name="cancel"         Content="ODUSTANI"            Grid.Row="21" Grid.Column="1"  Margin="10,0,22,0" Background="white" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="Cancel"/>
 

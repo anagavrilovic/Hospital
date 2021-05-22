@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -22,53 +23,83 @@ namespace Hospital.Model
             }
         }
 
-        private DateTime startDate;
-        private DateTime endDate;
-        private string description;
+        private DateTime _startDate;
+        private DateTime _endDate;
+        private string _description;
+        private ObservableCollection<Room> _roomsDestroyedDuringRenovation;
+        private ObservableCollection<Room> _roomsCreatedDuringRenovation;
 
         public DateTime StartDate
         {
-            get => startDate;
+            get => _startDate;
             set
             {
-                startDate = value;
+                _startDate = value;
                 OnPropertyChanged("StartDate");
             }
         }
 
         public DateTime EndDate
         {
-            get => endDate;
+            get => _endDate;
             set
             {
-                endDate = value;
+                _endDate = value;
                 OnPropertyChanged("EndDate");
             }
         }
 
         public string Description
         {
-            get => description;
+            get => _description;
             set
             {
-                description = value;
+                _description = value;
                 OnPropertyChanged("Description");
+            }
+        }
+
+        public ObservableCollection<Room> RoomsDestroyedDuringRenovation
+        {
+            get => _roomsDestroyedDuringRenovation;
+            set
+            {
+                _roomsDestroyedDuringRenovation = value;
+                OnPropertyChanged("RoomsDestroyedDuringRenovation");
+            }
+        }
+
+        public ObservableCollection<Room> RoomsCreatedDuringRenovation
+        {
+            get => _roomsCreatedDuringRenovation;
+            set
+            {
+                _roomsCreatedDuringRenovation = value;
+                OnPropertyChanged("RoomsCreatedDuringRenovation");
             }
         }
 
         public Room Room { get; set; }
         public Room WareHouse { get; set; }
+
+        public  RoomRenovation()
+        {
+            RoomsCreatedDuringRenovation = new ObservableCollection<Room>();
+            RoomsDestroyedDuringRenovation = new ObservableCollection<Room>();
+            Room = new Room();
+            WareHouse = new Room();
+        }
        
 
-        public void startRenovation()
+        public void StartRenovation()
         {
-            Task task = new Task(() => waitUntilEndDate());
+            Task task = new Task(() => WaitUntilEndDate());
             task.Start();
         }
 
-        public void waitUntilEndDate()
+        public void WaitUntilEndDate()
         {
-            Room r = roomStorage.GetOne(Room.Id);
+            Room r = _roomStorage.GetOne(Room.Id);
 
             if (StartDate > DateTime.Now)
             {
@@ -80,40 +111,57 @@ namespace Hospital.Model
                 TimeSpan timeSpan = EndDate.Subtract(DateTime.Now);
                 if (r.Status != RoomStatus.RENOVIRA_SE)
                 {
-                    transferInventoryToWarehouse();
+                    TransferInventoryToWarehouse();
                     r.Status = RoomStatus.RENOVIRA_SE;
-                    roomStorage.Save(r);
+                    _roomStorage.EditRoom(r);
                 }
                 
                 Thread.Sleep(timeSpan);
             }
             else 
             {
-                finishRenovation();
+                FinishRenovation();
             }
         }
 
-        private void transferInventoryToWarehouse()
+        private void TransferInventoryToWarehouse()
         {
-            foreach (Inventory inventory in inventoryStorage.GetByRoomID(Room.Id))
+            foreach (Inventory inventory in _inventoryStorage.GetByRoomID(Room.Id))
             {
                 TransferInventory transfer = new TransferInventory(inventory.Id, inventory.Quantity, Room.Id, WareHouse.Id, DateTime.Now);
                 transfer.UpdateInventory();
             }            
         }
 
-        private void finishRenovation()
+        private void FinishRenovation()
         {
-            Room room = roomStorage.GetOne(Room.Id);
+            Room room = _roomStorage.GetOne(Room.Id);
             room.Status = RoomStatus.SLOBODNA;
-            roomStorage.Save(room);
-            roomRenovationStorage.Delete(this);
+            _roomStorage.EditRoom(room);
+            FinishSeparatingRooms();
+            FinishMergingRooms();
+            _roomRenovationStorage.Delete(this);
         }
 
-       private InventoryStorage inventoryStorage = new InventoryStorage();
-       private DynamicInventoryStorage medicalSupplyStorage = new DynamicInventoryStorage();
-       private TransferInventoryStorage transferInventoryStorage = new TransferInventoryStorage();
-       private RoomStorage roomStorage = new RoomStorage();
-       private RoomRenovationStorage roomRenovationStorage = new RoomRenovationStorage();
+        private void FinishSeparatingRooms()
+        {
+            foreach (Room r in RoomsCreatedDuringRenovation)
+            {
+                r.Status = RoomStatus.SLOBODNA;
+                _roomStorage.Save(r);
+            }
+        }
+
+        private void FinishMergingRooms()
+        {
+            foreach (Room r in RoomsDestroyedDuringRenovation)
+                _roomStorage.Delete(r.Id);
+        }
+
+       private InventoryStorage _inventoryStorage = new InventoryStorage();
+       private DynamicInventoryStorage _medicalSupplyStorage = new DynamicInventoryStorage();
+       private TransferInventoryStorage _transferInventoryStorage = new TransferInventoryStorage();
+       private RoomStorage _roomStorage = new RoomStorage();
+       private RoomRenovationStorage _roomRenovationStorage = new RoomRenovationStorage();
     }
 }
