@@ -9,5 +9,9 @@ namespace Hospital.Repositories.Interfaces
 {
     interface IRegistratedUsersRepository : IGenericRepository<RegistratedUser>
     {
+        bool IsUsernameUnique(string username);
+        int CountByRole(UserType userType);
+        UserType GetRoleByUsername(string username);
+
     }
 }

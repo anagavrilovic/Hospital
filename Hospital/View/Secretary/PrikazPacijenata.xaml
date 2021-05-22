@@ -43,7 +43,7 @@
                             </Border.Effect>
                         </Border>
                         <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="60">
-                            <Button Style="{StaticResource BigButtons}" Click="NoviClick">
+                            <Button Style="{StaticResource BigButtons}" Click="NewPatientClick">
                                 <StackPanel Orientation="Vertical">
                                     <Image Source="../../Icon/Secretary/adduser.png" Width="25"/>
                                     <TextBlock Text="Novi"/>
@@ -59,7 +59,7 @@
                             </Border.Effect>
                         </Border>
                         <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
-                            <Button Style="{StaticResource BigButtons}" Click="IzmeniClick" >
+                            <Button Style="{StaticResource BigButtons}" Click="UpdatePatientClick" >
                                 <StackPanel Orientation="Vertical">
                                     <Image Source="../../Icon/Secretary/edit.png" Width="25"/>
                                     <TextBlock Text="Izmeni"/>
@@ -75,7 +75,7 @@
                             </Border.Effect>
                         </Border>
                         <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
-                            <Button Style="{StaticResource BigButtons}" Click="DetaljiClick" >
+                            <Button Style="{StaticResource BigButtons}" Click="PatientsDetailsClick" >
                                 <StackPanel Orientation="Vertical">
                                     <Image Source="../../Icon/Secretary/info.png" Width="25"/>
                                     <TextBlock Text="Detalji"/>
@@ -91,7 +91,7 @@
                             </Border.Effect>
                         </Border>
                         <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
-                            <Button Style="{StaticResource BigButtons}" Click="BrisanjeClick" >
+                            <Button Style="{StaticResource BigButtons}" Click="DeletePatientClick" >
                                 <StackPanel Orientation="Vertical">
                                     <Image Source="../../Icon/Secretary/delete.png" Width="25"/>
                                     <TextBlock Text="Brisanje"/>
@@ -127,7 +127,7 @@
                     <StackPanel Margin="5" Orientation="Horizontal">
                         <Image Source="../../Icon/Secretary/search.png" Height="13"/>
                         <TextBox x:Name="PatientsFilter" BorderThickness="0" Width="200" Height="20" Margin="10,0,0,0" Background="Transparent"
-                                 TextChanged="PatientsFilterTextChanged"/>
+                                 TextChanged="PatientsRecordsFilterTextChanged"/>
                     </StackPanel>
                 </Border>
 
@@ -140,7 +140,8 @@
             </Border>
             <Border Grid.Row="1" CornerRadius="10" Background="{StaticResource MainWhite}">
                 <!-- Tabela sa prikazom svih pacijenata -->
-                <DataGrid x:Name="PacijentiTable" Grid.Row="1" Margin="5" Width="1038" ItemsSource="{Binding Pacijenti}" Style="{StaticResource PacijentiDataGrid}">
+                <DataGrid x:Name="PacijentiTable" Grid.Row="1" Margin="5" Width="1038" ItemsSource="{Binding PatientsRecords}" Style="{StaticResource PacijentiDataGrid}"
+                          SelectedItem="{Binding SelectedPatientsRecord}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Ime" Width="0.85*" Binding="{Binding Patient.FirstName}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
                         <DataGridTextColumn Header="Prezime" Width="*" Binding="{Binding Patient.LastName}" HeaderStyle="{StaticResource GridHeaderStyle}"/>

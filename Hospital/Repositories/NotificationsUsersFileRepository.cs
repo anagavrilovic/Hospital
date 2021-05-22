@@ -17,9 +17,20 @@ namespace Hospital.Repositories
 
         public NotificationsUsersFileRepository() { }
 
+
         public void Delete(string id)
         {
             throw new NotImplementedException();
+        }
+
+        public void DeleteNotificationsUsersByNotificationID(string id)
+        {
+            ObservableCollection<NotificationsUsers> notificationsUsers = GetAll();
+            foreach (NotificationsUsers n in notificationsUsers.ToList())
+                if (n.NotificationID.Equals(id))
+                    notificationsUsers.Remove(n);
+
+            Serialize(notificationsUsers);
         }
 
         public ObservableCollection<NotificationsUsers> GetAll()
@@ -40,6 +51,17 @@ namespace Hospital.Repositories
         public NotificationsUsers GetByID(string id)
         {
             throw new NotImplementedException();
+        }
+
+        public ObservableCollection<NotificationsUsers> GetNotificationRecipientsByIDNotification(string id)
+        {
+            ObservableCollection<NotificationsUsers> notificationsUsers = GetAll();
+            ObservableCollection<NotificationsUsers> recipients = new ObservableCollection<NotificationsUsers>();
+            foreach(NotificationsUsers nu in notificationsUsers)
+                if (nu.NotificationID.Equals(id))
+                    recipients.Add(nu);
+
+            return recipients;
         }
 
         public void Save(NotificationsUsers notification)

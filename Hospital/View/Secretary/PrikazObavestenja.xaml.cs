@@ -20,19 +20,13 @@ namespace Hospital.View
     /// </summary>
     public partial class PrikazObavestenja : Window
     {
-        private Notification notification = new Notification();
+        public Notification Notification { get; set; }
 
-        public Notification Notification
-        {
-            get { return notification; }
-            set { notification = value; }
-        }
-
-        public PrikazObavestenja(Notification n)
+        public PrikazObavestenja(Notification selectedNotification)
         {
             InitializeComponent();
             this.DataContext = this;
-            Notification = n;
+            Notification = selectedNotification;
         }
 
         private void BtnNazadClick(object sender, RoutedEventArgs e)

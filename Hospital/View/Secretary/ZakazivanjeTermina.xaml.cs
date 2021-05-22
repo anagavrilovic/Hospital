@@ -88,16 +88,12 @@ namespace Hospital.View
 
         private void SetPatientForNewAppointment()
         {
-            NewAppointment.IDpatient = Patient.Patient.PersonalID;
-            //NewAppointment.PatientName = Patient.Patient.FirstName;
-            //NewAppointment.PatientSurname = Patient.Patient.LastName; 
+            NewAppointment.IDpatient = Patient.Patient.PersonalID; 
         }
 
         private void SetDoctorForNewAppointment()
         {
             NewAppointment.IDDoctor = Doctor.PersonalID;
-           // StringBuilder sb = new StringBuilder(Doctor.FirstName).Append(" ").Append(Doctor.LastName);
-            //NewAppointment.DoctrosNameSurname = sb.ToString();
         }
 
         private void SetIDForNewAppointment()

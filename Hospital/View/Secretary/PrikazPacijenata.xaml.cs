@@ -1,4 +1,5 @@
-﻿using Hospital.View.Secretary;
+﻿using Hospital.Services;
+using Hospital.View.Secretary;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,10 +24,9 @@ namespace Hospital.View
     /// </summary>
     public partial class PrikazPacijenata : Page
     {
-        MedicalRecordStorage mrs = new MedicalRecordStorage();
-
-        private ObservableCollection<MedicalRecord> _pacijenti = new ObservableCollection<MedicalRecord>();
-        public ObservableCollection<MedicalRecord> Pacijenti { get => _pacijenti; set => _pacijenti = value; }
+        public ObservableCollection<MedicalRecord> PatientsRecords { get; set; }
+        public MedicalRecord SelectedPatientsRecord { get; set; }
+        public MedicalRecordService MedicalRecordService { get; set; }
 
         private ICollectionView patientCollection;
 
@@ -39,101 +39,124 @@ namespace Hospital.View
         public PrikazPacijenata()
         {
             InitializeComponent();
-            this.DataContext = this;   
-            Pacijenti = mrs.GetAll();
-            PatientCollection = CollectionViewSource.GetDefaultView(Pacijenti);
-            PatientCollection.Filter = CustomFilterPatients;
+            this.DataContext = this;
+            InitializeAllProperties();
+            InitializePatientsRecords();
         }
 
-        private bool CustomFilterPatients(object obj)
+        private void InitializeAllProperties()
+        {
+            this.PatientsRecords = new ObservableCollection<MedicalRecord>();
+            this.MedicalRecordService = new MedicalRecordService();
+            this.SelectedPatientsRecord = new MedicalRecord();
+        }
+
+        private void InitializePatientsRecords()
+        {
+            PatientsRecords = MedicalRecordService.GetAllRecords();
+            PatientCollection = CollectionViewSource.GetDefaultView(PatientsRecords);
+            PatientCollection.Filter = CustomFilterPatientsRecords;
+        }
+
+        private void NewPatientClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new KreiranjeKartona());
+        }
+        
+        private void UpdatePatientClick(object sender, RoutedEventArgs e)
+        {
+            if (!IsPatientSelected(PatientForUpdateNotSelectedMessage()))
+                return;
+
+            NavigationService.Navigate(new IzmenaKartona(SelectedPatientsRecord.MedicalRecordID));
+        }
+
+        private void PatientsDetailsClick(object sender, RoutedEventArgs e)
+        {
+            if (!IsPatientSelected(PatientForDetailsNotSelectedMessage()))
+                return;
+
+            NavigationService.Navigate(new DetaljiKarton(SelectedPatientsRecord));
+        }
+
+        private void DeletePatientClick(object sender, RoutedEventArgs e)
+        {
+            if (!IsPatientSelected(PatientForDeletingNotSelectedMessage()))
+                return;
+
+            ConfirmBox confirmBox = new ConfirmBox("da želite da izbrišete pacijenta?");
+            if ((bool)confirmBox.ShowDialog())
+            {
+                MedicalRecordService.DeletePatientsRecordFromSystem(SelectedPatientsRecord);
+                PatientsRecords.Remove(SelectedPatientsRecord);
+            }          
+        }
+
+        private void AlergeniClick(object sender, RoutedEventArgs e)
+        {
+            if (!IsPatientSelected(PatientForViewingAllergensNotSelectedMessage()))
+                return;
+
+            NavigationService.Navigate(new ModifikacijaAlergena(SelectedPatientsRecord));
+        }
+
+        private void IsBlockedUnchecked(object sender, RoutedEventArgs e)
+        {
+            MedicalRecordService.UpdateAllRecords(PatientsRecords);
+        }
+
+        private void IsBlockedChecked(object sender, RoutedEventArgs e)
+        {
+            MedicalRecordService.UpdateAllRecords(PatientsRecords);
+        }
+
+        private bool IsPatientSelected(string message)
+        {
+            if (PacijentiTable.SelectedItem == null)
+            {
+                InformationBox informationBox = new InformationBox(message);
+                informationBox.ShowDialog();
+                return false;
+            }
+
+            return true;
+        }
+
+        private string PatientForUpdateNotSelectedMessage()
+        {
+            return "Selektujte pacijenta kojeg želite da izmenite!";
+        }
+
+        private string PatientForDetailsNotSelectedMessage()
+        {
+            return "Selektujte pacijenta čije informacije želite da pregledate!";
+        }
+
+        private string PatientForDeletingNotSelectedMessage()
+        {
+            return "Selektujte pacijenta kojeg želite da izbrišete!";
+        }
+
+        private string PatientForViewingAllergensNotSelectedMessage()
+        {
+            return "Selektujte pacijenta čije alergene želite da izmenite!";
+        }
+
+        private bool CustomFilterPatientsRecords(object obj)
         {
             if (string.IsNullOrEmpty(PatientsFilter.Text))
-            {
                 return true;
-            }
             else
-            {
                 return ((obj as MedicalRecord).Patient.FirstName.IndexOf(PatientsFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0) ||
                        ((obj as MedicalRecord).Patient.LastName.IndexOf(PatientsFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0) ||
                        ((obj as MedicalRecord).Patient.DateOfBirth.ToString("dd.MM.yyyy, HH:mm").IndexOf(PatientsFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0) ||
                        ((obj as MedicalRecord).Patient.PersonalID.IndexOf(PatientsFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0) ||
                        ("blokirani".IndexOf(PatientsFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0 && ((obj as MedicalRecord).Patient.IsBlocked));
-            }
         }
 
-        private void PatientsFilterTextChanged(object sender, TextChangedEventArgs e)
+        private void PatientsRecordsFilterTextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(PacijentiTable.ItemsSource).Refresh();
-        }
-
-        private void NoviClick(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new KreiranjeKartona());
-        }
-        
-        private void IzmeniClick(object sender, RoutedEventArgs e)
-        {
-            if (PacijentiTable.SelectedItem == null)
-            {
-                InformationBox informationBox = new InformationBox("Selektujte pacijenta kojeg želite da izmenite!");
-                informationBox.ShowDialog();
-                return;
-            }
-
-            NavigationService.Navigate(new IzmenaKartona((MedicalRecord)PacijentiTable.SelectedItem, Pacijenti));
-        }
-
-        private void DetaljiClick(object sender, RoutedEventArgs e)
-        {
-            if (PacijentiTable.SelectedItem == null)
-            {
-                InformationBox informationBox = new InformationBox("Selektujte pacijenta čije informacije želite da pregledate!");
-                informationBox.ShowDialog();
-                return;
-            }
-
-            NavigationService.Navigate(new DetaljiKarton((MedicalRecord)PacijentiTable.SelectedItem));
-        }
-
-        private void BrisanjeClick(object sender, RoutedEventArgs e)
-        {
-            if (PacijentiTable.SelectedItem == null)
-            {
-                InformationBox informationBox = new InformationBox("Selektujte pacijenta kojeg želite da izbrišete!");
-                informationBox.ShowDialog();
-                return;
-            }
-
-            ConfirmBox confirmBox = new ConfirmBox("da želite da izbrišete pacijenta?");
-            if ((bool)confirmBox.ShowDialog())
-            {
-                Pacijenti.Remove((MedicalRecord)PacijentiTable.SelectedItem);
-                mrs.DoSerialization(Pacijenti);
-            }
-        }
-
-        private void AlergeniClick(object sender, RoutedEventArgs e)
-        {
-            if (PacijentiTable.SelectedItem == null)
-            {
-                InformationBox informationBox = new InformationBox("Selektujte pacijenta čije alergene želite da izmenite!");
-                informationBox.ShowDialog();
-                return;
-            }
-
-            NavigationService.Navigate(new ModifikacijaAlergena((MedicalRecord)PacijentiTable.SelectedItem, Pacijenti));
-        }
-
-        private void IsBlockedUnchecked(object sender, RoutedEventArgs e)
-        {
-            MedicalRecordStorage mrs = new MedicalRecordStorage();
-            mrs.DoSerialization(Pacijenti);
-        }
-
-        private void IsBlockedChecked(object sender, RoutedEventArgs e)
-        {
-            MedicalRecordStorage mrs = new MedicalRecordStorage();
-            mrs.DoSerialization(Pacijenti);
         }
     }
 }

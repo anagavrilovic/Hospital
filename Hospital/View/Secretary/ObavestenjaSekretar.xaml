@@ -37,7 +37,7 @@
                         </Border.Effect>
                     </Border>
                     <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="60" Height="60" Margin="0,45,0,0">
-                        <Button Style="{StaticResource BigButtons}" Click="NovoObavestenjeClick">
+                        <Button Style="{StaticResource BigButtons}" Click="CreateNotificationClick">
                             <StackPanel Orientation="Vertical">
                                 <Image Source="../../Icon/Secretary/new.png" Width="25"/>
                                 <TextBlock Text="Novo"/>
@@ -53,7 +53,7 @@
                         </Border.Effect>
                     </Border>
                     <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="60" Height="60" Margin="0,23,0,0">
-                        <Button Style="{StaticResource BigButtons}" Click="IzmenaObavestenjaClick">
+                        <Button Style="{StaticResource BigButtons}" Click="UpdateNotificationClick">
                             <StackPanel Orientation="Vertical">
                                 <Image Source="../../Icon/Secretary/edit.png" Width="25"/>
                                 <TextBlock Text="Izmeni"/>
@@ -69,7 +69,7 @@
                         </Border.Effect>
                     </Border>
                     <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="60" Height="60" Margin="0,23,0,0">
-                        <Button Style="{StaticResource BigButtons}" Click="PrikazObavestenjaClick">
+                        <Button Style="{StaticResource BigButtons}" Click="ShowNotificationClick">
                             <StackPanel Orientation="Vertical">
                                 <Image Source="../../Icon/Secretary/info.png" Width="25"/>
                                 <TextBlock Text="Pregledaj"/>
@@ -85,7 +85,7 @@
                         </Border.Effect>
                     </Border>
                     <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="60" Height="60" Margin="0,23,0,0">
-                        <Button  Style="{StaticResource BigButtons}" Click="BrisanjeObavestenjaClick">
+                        <Button  Style="{StaticResource BigButtons}" Click="DeleteNotificationClick">
                             <StackPanel Orientation="Vertical">
                                 <Image Source="../../Icon/Secretary/delete.png" Width="25"/>
                                 <TextBlock Text="Izbriši"/>
@@ -117,9 +117,9 @@
                 </Border>
 
                 <!-- Prikaz obavestenja -->
-                <ListBox x:Name="ListBoxNotifications" ItemsSource="{Binding NotificationList, Mode=TwoWay}" Grid.Row="1" Margin="10,0,10,15"
+                <ListBox x:Name="ListBoxNotifications" ItemsSource="{Binding AllNotifications, Mode=TwoWay}" Grid.Row="1" Margin="10,0,10,15"
                             ScrollViewer.HorizontalScrollBarVisibility="Hidden" Style="{StaticResource ListBoxStyle}" Background="Transparent" Width="930" 
-                            BorderThickness="0" ItemContainerStyle="{StaticResource ListBoxItemStyle}">
+                            BorderThickness="0" ItemContainerStyle="{StaticResource ListBoxItemStyle}" SelectedItem="{Binding SelectedNotification}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>

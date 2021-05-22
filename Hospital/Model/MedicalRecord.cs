@@ -22,7 +22,11 @@ namespace Hospital
         public BloodType BloodType
         {
             get { return bloodType; }
-            set { bloodType = value; }
+            set 
+            { 
+                bloodType = value;
+                OnPropertyChanged("BloodType");
+            }
         }
 
         public Allergen Allergen
@@ -146,6 +150,11 @@ namespace Hospital
             return stringBuilder.ToString();
         }
 
+        public bool HasSameIDAs(MedicalRecord medicalRecord)
+        {
+            return this.medicalRecordID.Equals(medicalRecord.medicalRecordID);
+        }
+
         public void DeepCopy(MedicalRecord original)
         {
             this.Patient.FirstName = original.Patient.FirstName;
@@ -163,7 +172,6 @@ namespace Hospital
             this.Patient.Password = original.Patient.Password;
             this.Patient.PersonalID = original.Patient.PersonalID;
             this.Patient.PhoneNumber = original.Patient.PhoneNumber;
-            this.Patient.Address.City.Township = original.Patient.Address.City.Township;
             this.Patient.Address.City.PostalCode = original.Patient.Address.City.PostalCode;
             this.Patient.Username = original.Patient.Username;
             this.Allergen = original.Allergen;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,18 +20,15 @@ namespace Hospital.View.Secretary
     /// </summary>
     public partial class HitanPregledDetalji : Window
     {
-        // Properties
         public Appointment Appointment { get; set; }
         public Model.Doctor Doctor { get; set; }
         public MedicalRecord Patient { get; set; }
         public string Type { get; set; }
 
-        // Storage classes properties
         public Model.DoctorStorage DoctorStorage { get; set; }
-        public MedicalRecordStorage MedicalRecordStorage { get; set; }
+        public MedicalRecordService MedicalRecordService { get; set; }
 
 
-        // Methods
         public HitanPregledDetalji(Appointment newAppointment)
         {
             InitializeComponent();
@@ -49,8 +47,7 @@ namespace Hospital.View.Secretary
 
         private void LoadPatient()
         {
-            MedicalRecordStorage = new MedicalRecordStorage();
-            Patient = MedicalRecordStorage.GetByPatientID(Appointment.IDpatient);
+            Patient = MedicalRecordService.GetRecordByID(Appointment.IDpatient);
         }
 
         private void LoadAppointmentType()

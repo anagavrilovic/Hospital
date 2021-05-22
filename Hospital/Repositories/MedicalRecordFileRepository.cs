@@ -70,5 +70,40 @@ namespace Hospital.Repositories
                 serializer.Serialize(file, medicalRecords);
             }
         }
+
+        public void UpdatePatientsInformation(MedicalRecord updatedRecord)
+        {
+            ObservableCollection<MedicalRecord> medicalRecords = GetAll();
+            foreach(MedicalRecord medicalRecord in medicalRecords)
+            {
+                if (medicalRecord.HasSameIDAs(updatedRecord))
+                {
+                    medicalRecord.DeepCopy(updatedRecord);
+                    break;
+                }
+            }
+            Serialize(medicalRecords);
+        }
+
+        public List<int> GetExistingIDs()
+        {
+            ObservableCollection<MedicalRecord> medicalRecords = GetAll();
+            List<int> existingIDs = new List<int>();
+
+            foreach (MedicalRecord medicalRecord in medicalRecords)
+                existingIDs.Add(Int32.Parse(medicalRecord.MedicalRecordID));
+
+            return existingIDs;
+        }
+
+        public MedicalRecord GetByUsername(string username)
+        {
+            ObservableCollection<MedicalRecord> records = GetAll();
+            foreach (MedicalRecord r in records)
+                if (r.Patient.Username.Equals(username))
+                    return r;
+
+            return null;
+        }
     }
 }

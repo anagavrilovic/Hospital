@@ -20,22 +20,13 @@ namespace Hospital.View.Secretary
     /// </summary>
     public partial class DetaljiKarton : Page
     {
-        private MedicalRecord record = new MedicalRecord();
+        public MedicalRecord PatientsRecord { get; set; }
 
-        public MedicalRecord Record
-        {
-            get => record;
-            set
-            {
-                record = value;
-            }
-        }
-
-        public DetaljiKarton(MedicalRecord mr)
+        public DetaljiKarton(MedicalRecord selectedPatient)
         {
             InitializeComponent();
             this.DataContext = this;
-            this.Record = mr;
+            this.PatientsRecord = selectedPatient;
         }
     }
 }

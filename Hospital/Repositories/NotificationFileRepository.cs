@@ -19,7 +19,16 @@ namespace Hospital.Repositories
 
         public void Delete(string notificationID)
         {
-            throw new NotImplementedException();
+            ObservableCollection<Notification> notifications = GetAll();
+            foreach (Notification n in notifications)
+            {
+                if (n.Id.Equals(notificationID))
+                {
+                    notifications.Remove(n);
+                    Serialize(notifications);
+                    return;
+                }
+            }
         }
 
         public ObservableCollection<Notification> GetAll()
@@ -35,6 +44,13 @@ namespace Hospital.Repositories
                 notifications = new ObservableCollection<Notification>();
 
             return notifications;
+        }
+
+        public ObservableCollection<Notification> GetAllNotificationsSortedDescending()
+        {
+            ObservableCollection<Notification> allNotifications = GetAll();
+            List<Notification> sortedNotifications = allNotifications.OrderByDescending(n => n.Date).ToList();
+            return new ObservableCollection<Notification>(sortedNotifications);
         }
 
         public Notification GetByID(string notificationId)
@@ -61,6 +77,13 @@ namespace Hospital.Repositories
                 JsonSerializer serializer = new JsonSerializer();
                 serializer.Serialize(file, notifications);
             }
+        }
+
+        public void Update(Notification newNotification)
+        {
+            List<Notification> notifications = GetAll().ToList();
+            notifications[notifications.FindIndex(notification => notification.Id.Equals(newNotification.Id))] = newNotification;
+            Serialize(new ObservableCollection<Notification>(notifications));
         }
     }
 }

@@ -36,13 +36,13 @@
             </Grid.ColumnDefinitions>
 
             <CheckBox x:Name="Gost" Content="GOSTUJUĆI PACIJENT" Style="{StaticResource CheckBoxStyle}" Margin="20,40,0,0" 
-                      IsChecked="{Binding Path=Record.Patient.IsGuest, Mode=OneWayToSource}"/>
+                      IsChecked="{Binding Path=NewRecord.Patient.IsGuest, Mode=OneWayToSource}"/>
             
 
             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,20,0">
                 <TextBlock Text="Broj zdravstvenog kartona*:" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Center"/>
                 <TextBlock x:Name="KartonText" Margin="10,0,0,0" Style="{StaticResource TextBlockStyle}" 
-                         Text="{Binding Record.MedicalRecordID}"/>
+                         Text="{Binding NewRecord.MedicalRecordID}"/>
             </StackPanel>
 
         </Grid>
@@ -55,7 +55,6 @@
         <Border Grid.Row="2" Margin="15,5,15,15" CornerRadius="10" Background="{StaticResource MainWhite}">
             <Grid Margin="0,50,0,0">
                 <Grid.RowDefinitions>
-                    <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
@@ -83,9 +82,8 @@
                 <TextBlock Text="Broj*:"                 Grid.Row="5"  Grid.Column="0" Style="{StaticResource KartoniTextBlock}"/>
                 <TextBlock Text="Mesto stanovanja*:"     Grid.Row="6"  Grid.Column="0" Style="{StaticResource KartoniTextBlock}"/>
                 <TextBlock Text="Poštanski broj*:"       Grid.Row="7"  Grid.Column="0" Style="{StaticResource KartoniTextBlock}"/>
-                <TextBlock Text="Opština*:"              Grid.Row="8"  Grid.Column="0" Style="{StaticResource KartoniTextBlock}"/>
-                <TextBlock Text="Država*:"               Grid.Row="9"  Grid.Column="0" Style="{StaticResource KartoniTextBlock}"/>
-                <TextBlock Text="Broj zdrav. knjizice*:" Grid.Row="10" Grid.Column="0" Style="{StaticResource KartoniTextBlock}"/>
+                <TextBlock Text="Država*:"               Grid.Row="8"  Grid.Column="0" Style="{StaticResource KartoniTextBlock}"/>
+                <TextBlock Text="Broj zdrav. knjizice*:" Grid.Row="9" Grid.Column="0" Style="{StaticResource KartoniTextBlock}"/>
 
                 <TextBlock Text="Broj lične karte*:"     Grid.Row="0"  Grid.Column="2" Style="{StaticResource KartoniTextBlock}"/>
                 <TextBlock Text="JMBG*:"                 Grid.Row="1"  Grid.Column="2" Style="{StaticResource KartoniTextBlock}"/>
@@ -97,11 +95,10 @@
                 <TextBlock Text="Osiguran*:"             Grid.Row="7"  Grid.Column="2" Style="{StaticResource KartoniTextBlock}"/>
                 <TextBlock Text="Korisničko ime*:"       Grid.Row="8"  Grid.Column="2" Style="{StaticResource KartoniTextBlock}"/>
                 <TextBlock Text="Lozinka*:"              Grid.Row="9"  Grid.Column="2" Style="{StaticResource KartoniTextBlock}"/>
-                <TextBlock Text="Potvrda lozinke*:"      Grid.Row="10" Grid.Column="2" Style="{StaticResource KartoniTextBlock}"/>
 
                 <TextBox x:Name="ImeText" Grid.Row="0" Grid.Column="1" Style="{StaticResource KartoniTextBox}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
                     <TextBox.Text>
-                        <Binding Path="Record.Patient.FirstName" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged" >
+                        <Binding Path="NewRecord.Patient.FirstName" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged" >
                             <Binding.ValidationRules>
                                 <val:OnlyLettersValidationRule ValidationStep="RawProposedValue" />
                             </Binding.ValidationRules>
@@ -111,7 +108,7 @@
 
                 <TextBox x:Name="RoditeljText" Grid.Row="1" Grid.Column="1" Style="{StaticResource cbTB}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
                     <TextBox.Text>
-                        <Binding Path="Record.ParentName" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="NewRecord.ParentName" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
                             </Binding.ValidationRules>
@@ -121,7 +118,7 @@
 
                 <TextBox x:Name="PrezimeText" Grid.Row="2" Grid.Column="1" Style="{StaticResource KartoniTextBox}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
                     <TextBox.Text>
-                        <Binding Path="Record.Patient.LastName" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="NewRecord.Patient.LastName" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
                             </Binding.ValidationRules>
@@ -130,12 +127,12 @@
                 </TextBox>
 
                 <DatePicker x:Name="Datum" Grid.Row="3" Grid.Column="1" Background="White" Margin="3,3,40,10" Foreground="{StaticResource MainDarkBlue}"
-                            Text="{Binding Path=Record.Patient.DateOfBirth, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" 
+                            Text="{Binding Path=NewRecord.Patient.DateOfBirth, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" 
                             FirstDayOfWeek="Monday" Validation.ErrorTemplate="{x:Null}"/>
 
                 <TextBox x:Name="AdresaText" Grid.Row="4" Grid.Column="1" Style="{StaticResource cbTB}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
                     <TextBox.Text>
-                        <Binding Path="Record.Patient.Address.Street" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="NewRecord.Patient.Address.Street" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
                             </Binding.ValidationRules>
@@ -143,14 +140,14 @@
                     </TextBox.Text>
                 </TextBox>
 
-                <TextBox x:Name="BrojUliceText" Grid.Row="5" Grid.Column="1" Text="{Binding Record.Patient.Address.StreetNumber}" Style="{StaticResource cbTB}"
+                <TextBox x:Name="BrojUliceText" Grid.Row="5" Grid.Column="1" Text="{Binding NewRecord.Patient.Address.StreetNumber}" Style="{StaticResource cbTB}"
                          Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
 
                 </TextBox>
 
                 <TextBox x:Name="MestoText" Grid.Row="6" Grid.Column="1" Style="{StaticResource cbTB}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
                     <TextBox.Text>
-                        <Binding Path="Record.Patient.Address.City.CityName" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="NewRecord.Patient.Address.City.CityName" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
                             </Binding.ValidationRules>
@@ -160,7 +157,7 @@
 
                 <TextBox x:Name="PostanskiBrojText" Grid.Row="7" Grid.Column="1" Style="{StaticResource cbTB}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
                     <TextBox.Text>
-                        <Binding Path="Record.Patient.Address.City.PostalCode" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="NewRecord.Patient.Address.City.PostalCode" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <val:PostalCodeValidationRule ValidationStep="RawProposedValue"/>
                             </Binding.ValidationRules>
@@ -168,9 +165,9 @@
                     </TextBox.Text>
                 </TextBox>
 
-                <TextBox x:Name="OpstinaText" Grid.Row="8" Grid.Column="1" Style="{StaticResource cbTB}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                <TextBox x:Name="DrzavaText" Grid.Row="8" Grid.Column="1" Style="{StaticResource cbTB}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
                     <TextBox.Text>
-                        <Binding Path="Record.Patient.Address.City.Township" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="NewRecord.Patient.Address.City.Country.CountryName" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
                             </Binding.ValidationRules>
@@ -178,19 +175,9 @@
                     </TextBox.Text>
                 </TextBox>
 
-                <TextBox x:Name="DrzavaText" Grid.Row="9" Grid.Column="1" Style="{StaticResource cbTB}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                <TextBox x:Name="KnjizicaText" Grid.Row="9" Grid.Column="1" Style="{StaticResource cbTB}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
                     <TextBox.Text>
-                        <Binding Path="Record.Patient.Address.City.Country.CountryName" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-
-                <TextBox x:Name="KnjizicaText" Grid.Row="10" Grid.Column="1" Style="{StaticResource cbTB}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
-                    <TextBox.Text>
-                        <Binding Path="Record.HealthCardNumber" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="NewRecord.HealthCardNumber" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <val:OnlyDigitsValidationRuleHealthCardID ValidationStep="RawProposedValue"/>
                             </Binding.ValidationRules>
@@ -200,7 +187,7 @@
 
                 <TextBox x:Name="LicnaText" Grid.Row="0" Grid.Column="3" Style="{StaticResource KartoniTextBox}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
                     <TextBox.Text>
-                        <Binding Path="Record.Patient.CardID" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged" >
+                        <Binding Path="NewRecord.Patient.CardID" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged" >
                             <Binding.ValidationRules>
                                 <val:OnlyDigitsValidationRuleCardID ValidationStep="RawProposedValue"/>
                             </Binding.ValidationRules>
@@ -210,7 +197,7 @@
 
                 <TextBox x:Name="JMBGText" Grid.Row="1" Grid.Column="3" Style="{StaticResource KartoniTextBox}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
                     <TextBox.Text>
-                        <Binding Path="Record.Patient.PersonalID" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="NewRecord.Patient.PersonalID" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <val:OnlyDigitsValidationRulePersonalID ValidationStep="RawProposedValue"/>
                             </Binding.ValidationRules>
@@ -220,7 +207,7 @@
 
                 <TextBox x:Name="TelefonText" Grid.Row="2" Grid.Column="3" Style="{StaticResource cbTB}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
                     <TextBox.Text>
-                        <Binding Path="Record.Patient.PhoneNumber" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="NewRecord.Patient.PhoneNumber" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <val:OnlyDigitsValidationRulePhoneNumber ValidationStep="RawProposedValue"/>
                             </Binding.ValidationRules>
@@ -230,7 +217,7 @@
 
                 <TextBox x:Name="EmailText" Grid.Row="3" Grid.Column="3" Style="{StaticResource cbTB}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
                     <TextBox.Text>
-                        <Binding Path="Record.Patient.Email" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="NewRecord.Patient.Email" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <val:EmailValidationRule ValidationStep="RawProposedValue"/>
                             </Binding.ValidationRules>
@@ -238,20 +225,23 @@
                     </TextBox.Text>
                 </TextBox>
 
-                <ComboBox x:Name="BracnoStanje" Grid.Row="4" Grid.Column="3" Style="{StaticResource cbTB}" >
+                <ComboBox x:Name="BracnoStanje" Grid.Row="4" Grid.Column="3" Style="{StaticResource cbTB}" 
+                          SelectedIndex="{Binding NewRecord.Patient.MaritalStatus, Mode=OneWayToSource}">
                     <ComboBoxItem Content="neoženjen - neudata" IsSelected="True"/>
                     <ComboBoxItem Content="oženjen - udata"/>
                     <ComboBoxItem Content="udovac - udovica"/>
                     <ComboBoxItem Content="razveden - razvedena"/>
                 </ComboBox>
 
-                <ComboBox x:Name="Pol" Grid.Row="5" Grid.Column="3" Style="{StaticResource cbTB}">
+                <ComboBox x:Name="Pol" Grid.Row="5" Grid.Column="3" Style="{StaticResource cbTB}"
+                          SelectedIndex="{Binding NewRecord.Patient.Gender, Mode=OneWayToSource}">
                     <ComboBoxItem Content="muški" IsSelected="True"/>
                     <ComboBoxItem Content="ženski"/>
                     <ComboBoxItem Content="ostalo"/>
                 </ComboBox>
 
-                <ComboBox x:Name="KrvnaGrupa" Grid.Row="6" Grid.Column="3" Style="{StaticResource cbTB}">
+                <ComboBox x:Name="KrvnaGrupa" Grid.Row="6" Grid.Column="3" Style="{StaticResource cbTB}"
+                          SelectedIndex="{Binding NewRecord.BloodType, Mode=OneWayToSource}">
                     <ComboBoxItem x:Name="Aplus"  Content="A+"/>
                     <ComboBoxItem x:Name="Aneg"   Content="A-"/>
                     <ComboBoxItem x:Name="Bplus"  Content="B+"/>
@@ -267,20 +257,15 @@
                     <RadioButton x:Name="NeButton" Content="NE" Margin="15,0,35,0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource cbTB}"/>
                 </StackPanel>
 
-                <TextBox x:Name="UsernameText" Grid.Row="8" Grid.Column="3" Text="{Binding Path=Record.Patient.Username, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"
-                         Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
-
+                <TextBox x:Name="UsernameText" Grid.Row="8" Grid.Column="3" Text="{Binding NewRecord.Patient.Username, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource cbTB}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
                 </TextBox>
 
-                <TextBox x:Name="PasswordText" Grid.Row="9" Grid.Column="3" Text="{Binding Path=Record.Patient.Password, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}" >
-
+                <TextBox x:Name="PasswordText" Grid.Row="9" Grid.Column="3" Style="{StaticResource cbTB}" 
+                         Text="{Binding NewRecord.Patient.Password, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                 </TextBox>
 
-                <TextBox x:Name="PasswordReentered" Grid.Row="10" Grid.Column="3" Style="{StaticResource cbTB}">
-
-                </TextBox>
-
-                <Button x:Name="btnPotvrdi" Grid.Row="11" Grid.Column="1" Content="Potvrdi" Click="BtnPotvrdiClick">
+                <Button x:Name="btnPotvrdi" Grid.Row="10" Grid.Column="1" Content="Potvrdi" Click="BtnPotvrdiClick">
                     <Button.Style>
                         <Style TargetType="Button" BasedOn="{StaticResource ButtonPotvrdiStyle}">
                             <Setter Property="IsEnabled" Value="False"/>
@@ -294,7 +279,6 @@
                                         <Condition Binding="{Binding Path=(Validation.HasError), ElementName=AdresaText}" Value="False"/>
                                         <Condition Binding="{Binding Path=(Validation.HasError), ElementName=MestoText}" Value="False"/>
                                         <Condition Binding="{Binding Path=(Validation.HasError), ElementName=PostanskiBrojText}" Value="False"/>
-                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=OpstinaText}" Value="False"/>
                                         <Condition Binding="{Binding Path=(Validation.HasError), ElementName=DrzavaText}" Value="False"/>
                                         <Condition Binding="{Binding Path=(Validation.HasError), ElementName=KnjizicaText}" Value="False"/>
                                         <Condition Binding="{Binding Path=(Validation.HasError), ElementName=LicnaText}" Value="False"/>
@@ -309,7 +293,7 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Button x:Name="btnOdustani" Grid.Row="11" Grid.Column="2" Content="Odustani" Style="{StaticResource ButtonOdustaniStyle}" Click="BtnOdustaniClick"/>
+                <Button x:Name="btnOdustani" Grid.Row="10" Grid.Column="2" Content="Odustani" Style="{StaticResource ButtonOdustaniStyle}" Click="BtnOdustaniClick"/>
             </Grid>
         </Border>
 

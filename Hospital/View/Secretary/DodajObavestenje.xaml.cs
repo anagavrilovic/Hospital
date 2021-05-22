@@ -1,4 +1,6 @@
-﻿using Hospital.Model;
+﻿using Hospital.DTO;
+using Hospital.Model;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,143 +19,92 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for DodajObavestenje.xaml
-    /// </summary>
     public partial class DodajObavestenje : Page
     {
-        private Notification notification = new Notification();
-        private ObservableCollection<MedicalRecord> allRecords = new ObservableCollection<MedicalRecord>();
-        private ObservableCollection<MedicalRecord> addedRecords = new ObservableCollection<MedicalRecord>();
-        
-        public Notification Notification
-        {
-            get { return notification; }
-            set { notification = value; }
-        }
+        public Notification NewNotification { get; set; }
+        public NotificationRecipientsDTO Recipients { get; set; }
 
-        public ObservableCollection<MedicalRecord> AllRecords
-        {
-            get { return allRecords; }
-            set { allRecords = value; }
-        }
+        public ObservableCollection<MedicalRecord> AllMedicalRecords { get; set; }
+        public ICollectionView PatientsRecordCollection { get; set; }
 
-        public ObservableCollection<MedicalRecord> AddedRecords
-        {
-            get { return addedRecords; }
-            set { addedRecords = value; }
-        }
+        public MedicalRecord SelectedForAdding { get; set; }
+        public MedicalRecord SelectedForRemoving { get; set; }
 
-        private bool sekretar;
-        private bool lekar;
-        private bool upravnik;
-        private bool pacijent;
+        public NotificationService NotificationService { get; set; }
+        public MedicalRecordService MedicalRecordService { get; set; }
 
-        public bool Pacijent
-        {
-            get { return pacijent; }
-            set { pacijent = value; }
-        }
-
-        public bool Upravnik
-        {
-            get { return upravnik; }
-            set { upravnik = value; }
-        }
-
-        public bool Lekar
-        {
-            get { return lekar; }
-            set { lekar = value; }
-        }
-
-        public bool Sekretar
-        {
-            get { return sekretar; }
-            set { sekretar = value; }
-        }
-
-        private ICollectionView pacijentiCollection;
-
-        public ICollectionView PacijentiCollection
-        {
-            get { return pacijentiCollection; }
-            set { pacijentiCollection = value; }
-        }
 
         public DodajObavestenje()
         {
             InitializeComponent();
             this.DataContext = this;
-            UcitajPacijente();
-            this.Notification.Date = DateTime.Now;
-            this.Notification.Id = this.Notification.GetHashCode().ToString();
+            InitializeEmptyProperties();
+            LoadAllMedicalRecords();
+            InitializeNewNotification();
         }
 
-        public void UcitajPacijente()
+        private void InitializeEmptyProperties()
         {
-            MedicalRecordStorage mds = new MedicalRecordStorage();
-            AllRecords = mds.GetAll();
-
-            PacijentiCollection = CollectionViewSource.GetDefaultView(AllRecords);
-            PacijentiCollection.Filter = CustomFilterPacijenti;
+            this.NewNotification = new Notification();
+            this.AllMedicalRecords = new ObservableCollection<MedicalRecord>();
+            this.Recipients = new NotificationRecipientsDTO();
+            this.NotificationService = new NotificationService();
+            this.MedicalRecordService = new MedicalRecordService();
         }
 
-        private bool CustomFilterPacijenti(object obj)
+        private void InitializeNewNotification()
         {
-            if (string.IsNullOrEmpty(PacijentiFilter.Text))
-            {
-                return true;
-            }
-            else
-            {
-                return (obj.ToString().IndexOf(PacijentiFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0);
-            }
+            this.NewNotification.Date = DateTime.Now;
+            this.NewNotification.Id = this.NewNotification.GetHashCode().ToString();
         }
 
-        private void PacijentiFilterTextChanged(object sender, TextChangedEventArgs e)
+        public void LoadAllMedicalRecords()
         {
-            CollectionViewSource.GetDefaultView(SviPacijentiListBox.ItemsSource).Refresh();
+            AllMedicalRecords = MedicalRecordService.GetAllRecords();
+
+            PatientsRecordCollection = CollectionViewSource.GetDefaultView(AllMedicalRecords);
+            PatientsRecordCollection.Filter = CustomFilterPacijenti;
         }
 
         private void BtnPotvrdiClick(object sender, RoutedEventArgs e)
         {
-            NotificationStorage ns = new NotificationStorage();
+            NotificationService.CreateNotification(Recipients, NewNotification);
+            /*NotificationStorage ns = new NotificationStorage();
             ns.SaveNotification(Notification);
 
             RegistratedUserStorage rus = new RegistratedUserStorage();
             ObservableCollection<RegistratedUser> regUsers = rus.GetAll();
             ObservableCollection<NotificationsUsers> notificationsUsers = ns.GetAllNotificationsUsers();
 
-            if (Sekretar || Lekar || Upravnik || Pacijent)
+            if (IsEverySecretaryRecipient || IsEveryDoctorRecipient || IsEveryManagerRecipient || IsEveryPatientRecipient)
             {
                 foreach (RegistratedUser user in regUsers)
                 {
-                    if (Sekretar && user.Type.Equals(UserType.secretary))
+                    if (IsEverySecretaryRecipient && user.Type.Equals(UserType.secretary))
                     {
                         notificationsUsers.Add(new NotificationsUsers { NotificationID = Notification.Id, Username = user.Username, Read = false });
                     }
-                    if (Lekar && user.Type.Equals(UserType.doctor))
+                    if (IsEveryDoctorRecipient && user.Type.Equals(UserType.doctor))
                     {
                         notificationsUsers.Add(new NotificationsUsers { NotificationID = Notification.Id, Username = user.Username, Read = false });
                     }
-                    if (Upravnik && user.Type.Equals(UserType.manager))
+                    if (IsEveryManagerRecipient && user.Type.Equals(UserType.manager))
                     {
                         notificationsUsers.Add(new NotificationsUsers { NotificationID = Notification.Id, Username = user.Username, Read = false });
                     }
-                    if (Pacijent && user.Type.Equals(UserType.patient))
+                    if (IsEveryPatientRecipient && user.Type.Equals(UserType.patient))
                     {
                         notificationsUsers.Add(new NotificationsUsers { NotificationID = Notification.Id, Username = user.Username, Read = false });
                     }
                 }
             }
             
-            foreach(MedicalRecord record in AddedRecords)
+            foreach(MedicalRecord record in AllMedicalRecords)
             {
                 notificationsUsers.Add(new NotificationsUsers { NotificationID = Notification.Id, Username = record.Patient.Username, Read = false });
             }
             
-            ns.SerializeNotificationsUsers(notificationsUsers);
+            ns.SerializeNotificationsUsers(notificationsUsers);*/
 
             NavigationService.Navigate(new ObavestenjaSekretar());
         }
@@ -163,16 +114,45 @@ namespace Hospital.View
             NavigationService.Navigate(new ObavestenjaSekretar());
         }
 
-        private void DodajPacijentaClick(object sender, RoutedEventArgs e)
+        private void AddPatientRecipientClick(object sender, RoutedEventArgs e)
         {
-            AddedRecords.Add((MedicalRecord)SviPacijentiListBox.SelectedItem);
-            AllRecords.Remove((MedicalRecord)SviPacijentiListBox.SelectedItem);
+            if(SelectedForAdding != null)
+            {
+                Recipients.RecipientsRecords.Add(SelectedForAdding);
+                AllMedicalRecords.Remove(SelectedForAdding);
+                UpdatePatientCheck();
+            }   
         }
 
-        private void UkloniPacijentaClick(object sender, RoutedEventArgs e)
+        private void RemovePatientRecipientClick(object sender, RoutedEventArgs e)
         {
-            AllRecords.Add((MedicalRecord)DodatiPacijentiListBox.SelectedItem);
-            AddedRecords.Remove((MedicalRecord)DodatiPacijentiListBox.SelectedItem);
+            if(SelectedForRemoving != null)
+            {
+                AllMedicalRecords.Add(SelectedForRemoving);
+                Recipients.RecipientsRecords.Remove(SelectedForRemoving);
+                UpdatePatientCheck();
+            } 
+        }
+
+        private void UpdatePatientCheck()
+        {
+            if (Recipients.RecipientsRecords.Count() != MedicalRecordService.GetAllRecords().Count())
+                Recipients.IsEveryPatientRecipient = false;
+            else
+                Recipients.IsEveryPatientRecipient = true;
+        }
+
+        private bool CustomFilterPacijenti(object obj)
+        {
+            if (string.IsNullOrEmpty(PacijentiFilter.Text))
+                return true;
+            else
+                return (obj.ToString().IndexOf(PacijentiFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+        }
+
+        private void PacijentiFilterTextChanged(object sender, TextChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(SviPacijentiListBox.ItemsSource).Refresh();
         }
     }
 }
