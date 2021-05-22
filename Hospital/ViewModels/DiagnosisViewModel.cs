@@ -1,6 +1,5 @@
 ﻿using Hospital.Commands.DoctorCommands;
 using Hospital.View;
-using Hospital.View.Doktor;
 using System;
 using System.Collections.Generic;
 using System.Linq;

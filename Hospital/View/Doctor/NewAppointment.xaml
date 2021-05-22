@@ -1,0 +1,97 @@
+﻿<Window x:Class="Hospital.View.Doctor.NewAppointment"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.View.Doctor"
+        xmlns:ns="clr-namespace:Hospital" 
+         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"
+        Title="NoviTermin" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+    </Window.Resources>
+    <Grid Margin="30,20,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Left">
+            <Label FontSize="17" Width="77" Margin="0,0,10,0" HorizontalAlignment="Left" Content="{ns:Loc patient}" VerticalAlignment="Center" Style="{DynamicResource Label}"/>
+            <Label x:Name="pacijentIme" FontSize="17" HorizontalAlignment="Left" Margin="0,30,5,0" Style="{DynamicResource Label}">
+                <Label.Content>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0}  {1}">
+                                <Binding Path="Appointment.PatientsRecord.Patient.FirstName"/>
+                                <Binding Path="Appointment.PatientsRecord.Patient.LastName" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </Label.Content>
+            </Label>
+            <Button x:Name="addPatient" Margin="15,0,0,0" Style="{DynamicResource ImageButtons}" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" Click="addPatient_Click">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="../../Icon/DoctorIcons/addDark.png" Width="30"/>
+                    <TextBlock Text="{ns:Loc addButton}"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Margin="0,20,20,0">
+            <Label x:Name="emergencyOperationLabel" Content="Hitna operacija:" FontSize="17" Style="{DynamicResource Label}" />
+            <CheckBox x:Name="emergencyOperationCheckBox" IsChecked="False"  Style="{DynamicResource CircleCheckbox}"
+                      Width="20" Height="20" Margin="0,-35,0,0" Checked="CheckBoxEmergency_Changed" Unchecked="CheckBoxEmergency_Changed"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center">
+            <Label FontSize="17"  Width="76" Content="{ns:Loc doctorColonLabel}" Margin="0,0,10,0"  HorizontalAlignment="Left" Style="{DynamicResource Label}"/>
+            <Label x:Name="doctorLabel" FontSize="17" HorizontalAlignment="Left" Margin="0,0,5,0" Style="{DynamicResource Label}">
+                <Label.Content>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0}  {1}">
+                                <Binding Path="Appointment.Doctor.FirstName" />
+                                <Binding Path="Appointment.Doctor.LastName" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </Label.Content>
+            </Label>
+            <RadioButton GroupName="tipTermina" x:Name="rdbPregled" FontSize="17"  Content="{ns:Loc examinationLabel}" IsChecked="False"/>
+            <RadioButton GroupName="tipTermina" x:Name="rdbOperacija" FontSize="17"   Content="{ns:Loc operationLabel}" IsChecked="False"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" >
+            <Label FontSize="17"  Width="190" Content="{ns:Loc dateAndTime}" Style="{DynamicResource Label}"/>
+            <DatePicker x:Name="datePicker" Width="150" Height="25"  DisplayDateStart="{x:Static sys:DateTime.Today}"
+                        SelectedDate="{Binding DateOfAppointment, Mode=OneWayToSource}" FirstDayOfWeek="Monday" Margin="10,0,5,0"/>
+            <ComboBox x:Name="timeComboBox" Width="20" Height="25" SelectedValue="{Binding TimeOfAppointment
+                ,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Label FontSize="17" Margin="0,0,10,0" Style="{DynamicResource Label}" Content="{ns:Loc durationLabel}"></Label>
+            <ComboBox FontSize="17" x:Name="durationInMinutesComboBox" Width="150" Height="25" SelectedValue="{Binding DurationInMinutes, Mode=OneWayToSource}"></ComboBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Label FontSize="17" Margin="0,0,10,0" Style="{DynamicResource Label}" Content="{ns:Loc typeExaminationLabel}"></Label>
+            <TextBox FontSize="17" Name="sale" Width="150" Height="25" IsEnabled="False">Text</TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Button x:Name="save" FontSize="18" Click="save_Click" Margin="0,0,40,0" Style="{DynamicResource ImageButtonsHorizontal}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../Icon/DoctorIcons/save.png" Width="20"/>
+                    <TextBlock Text="{ns:Loc acceptButton}"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="cancel"  FontSize="18" Click="cancel_Click" Style="{DynamicResource ImageButtonsHorizontal}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../Icon/DoctorIcons/back.png" Width="20"/>
+                    <TextBlock Text="{ns:Loc declineButton}"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </Grid>
+
+</Window>

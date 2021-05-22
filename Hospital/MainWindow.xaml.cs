@@ -18,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Hospital.Model;
 using System.Collections.ObjectModel;
+using Hospital.View.Doctor;
 
 namespace Hospital
 {
@@ -56,7 +57,7 @@ namespace Hospital
                         case UserType.doctor:
                             DoctorStorage ds = new DoctorStorage();
                             IDnumber= ds.GetByUsername(user.Username);
-                            DoktorGlavniProzor de = new DoktorGlavniProzor(IDnumber);
+                            DoctorMainWindow de = new DoctorMainWindow(IDnumber);
                             Application.Current.MainWindow=de;
                             de.Show();
                             this.Close();

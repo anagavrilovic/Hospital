@@ -1,0 +1,88 @@
+﻿<Page x:Class="Hospital.View.Doctor.NotificationsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hospital.View.Doctor"
+      xmlns:ns="clr-namespace:Hospital"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="DoktorObavestenja">
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+
+        <Border Grid.Row="1" Margin="15,80,15,15" CornerRadius="10" Background="{DynamicResource SecondBackground}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,50,0,0">
+                    <Button Height="50" Width="60" Margin="0,30,0,0" Style="{DynamicResource NoChromeButton}" Click="ShowNotification_Click">
+                        <StackPanel Orientation="Vertical">
+                            <Image Source="../../Icon/Secretary/info.png" x:Name="infoButton" Width="30"/>
+                            <TextBlock Text="{ns:Loc reviewButton}" Style="{DynamicResource TextBlockStyle}"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Height="50" Width="50" Margin="0,30,0,0" Style="{DynamicResource NoChromeButton}" Click="DeleteNotification_Click">
+                        <StackPanel Orientation="Vertical">
+                            <Image Source="../../Icon/Secretary/delete.png" x:Name="deleteButton" Width="30"/>
+                            <TextBlock Text="{ns:Loc removeButton}" Style="{DynamicResource TextBlockStyle}"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Search -->
+                    <Border Width="250" Height="25" Style="{StaticResource TextBoxBorder}" Margin="0,10,20,0" HorizontalAlignment="Right">
+                        <StackPanel Margin="5" Orientation="Horizontal">
+                            <Image Source="../../Icon/Secretary/search.png" Height="13" VerticalAlignment="Center"/>
+                            <TextBox x:Name="ObavestenjaFilter"  BorderThickness="0" Width="200" Height="23" Margin="10,0,0,0" Background="Transparent" 
+                                     FontSize="13" VerticalAlignment="Center" TextChanged="ObavestenjaFilterTextChanged"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Prikaz obavestenja -->
+                    <ListBox x:Name="ListBoxNotifications" ItemsSource="{Binding Notifications, Mode=TwoWay}" Grid.Row="1" Margin="20,5,20,15"
+                                ScrollViewer.HorizontalScrollBarVisibility="Hidden" Style="{StaticResource ListBoxStyle}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Height="110">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0" Width="860">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Title, Mode=TwoWay}" FontSize="16" FontWeight="Bold"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding Date, StringFormat='{}{0: dd.MM.yyyy, HH:mm}', Mode=TwoWay}" FontStyle="Italic" />
+                                    </Grid>
+                                    <TextBlock Margin="0,10,0,0" Grid.Row="1" Text="{Binding Content, Mode=TwoWay}" FontSize="14" TextWrapping="Wrap" Width="860"/>
+                                    <Separator Grid.Row="2"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>
