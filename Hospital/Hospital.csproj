@@ -64,6 +64,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\DoctorCommands\SaveDiagnosisCommand.cs" />
     <Compile Include="DoktorConverters\ListToStringConverter.cs" />
+    <Compile Include="DTO\NotificationRecipientsDTO.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Allergen.cs" />
     <Compile Include="Model\BloodType.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Repositories\StaticInventoryFileRepository.cs" />
     <Compile Include="Repositories\TransferInventoryFileRepository.cs" />
     <Compile Include="Services\AppointmentService.cs" />
+    <Compile Include="Services\DoctorService.cs" />
     <Compile Include="Services\DynamicInventoryService.cs" />
     <Compile Include="Services\HospitalTreatmentService.cs" />
     <Compile Include="Services\MedicalRecordService.cs" />
@@ -989,8 +991,6 @@
   <ItemGroup>
     <Resource Include="Icon\medicals.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DTO\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

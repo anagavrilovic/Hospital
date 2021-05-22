@@ -34,5 +34,10 @@ namespace Hospital.Services
         {
             registratedUsersRepository.Delete(username);
         }
+
+        public int CountByRole(UserType userType)
+        {
+            return registratedUsersRepository.CountByRole(userType);
+        }
     }
 }

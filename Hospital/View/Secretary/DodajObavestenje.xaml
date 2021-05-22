@@ -55,14 +55,14 @@
 
                         <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
                             <TextBlock Text="Naslov:" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Center" Margin="30,0,0,0" />
-                            <TextBox x:Name="NaslovText" Text="{Binding Notification.Title, Mode=OneWayToSource}" Style="{StaticResource TextBoxStyle}" Width="300" Height="25" Margin="10,0,0,0" />
+                            <TextBox x:Name="NaslovText" Text="{Binding NewNotification.Title, Mode=OneWayToSource}" Style="{StaticResource TextBoxStyle}" Width="300" Height="25" Margin="10,0,0,0" />
                         </StackPanel>
 
                         <TextBlock Grid.Column="2" Text="{Binding Notification.Date, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                    VerticalAlignment="Center" Style="{StaticResource TextBlockStyle}" Margin="0,30,30,0" />
                     </Grid>
 
-                    <TextBox Text="{Binding Notification.Content}" Style="{StaticResource TextBoxStyle}" Grid.Row="1" Margin="30,0,30,20" TextWrapping="Wrap"/>
+                    <TextBox Text="{Binding NewNotification.Content}" Style="{StaticResource TextBoxStyle}" Grid.Row="1" Margin="30,0,30,20" TextWrapping="Wrap"/>
 
                     <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,20,0,40">
                         <Button Content="Potvrdi" Width="100" Height="30" Style="{StaticResource ButtonPotvrdiStyle}" Click="BtnPotvrdiClick"/>
@@ -88,12 +88,12 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel>
-                            <CheckBox IsChecked="{Binding Path=Sekretar, Mode=TwoWay}" Content="SEKRETAR" Style="{StaticResource CheckBoxStyle}" />
-                            <CheckBox IsChecked="{Binding Path=Lekar, Mode=TwoWay}" Content="LEKAR" Style="{StaticResource CheckBoxStyle}"/>
+                            <CheckBox IsChecked="{Binding Path=Recipients.IsEverySecretaryRecipient, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="SEKRETAR" Style="{StaticResource CheckBoxStyle}" />
+                            <CheckBox IsChecked="{Binding Path=Recipients.IsEveryDoctorRecipient, Mode=TwoWay}" Content="LEKAR" Style="{StaticResource CheckBoxStyle}"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1">
-                            <CheckBox IsChecked="{Binding Path=Upravnik, Mode=TwoWay}" Content="UPRAVNIK" Style="{StaticResource CheckBoxStyle}"/>
-                            <CheckBox IsChecked="{Binding Path=Pacijent, Mode=TwoWay}" Content="SVI PACIJENTI" Style="{StaticResource CheckBoxStyle}"/>
+                            <CheckBox IsChecked="{Binding Path=Recipients.IsEveryManagerRecipient, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="UPRAVNIK" Style="{StaticResource CheckBoxStyle}"/>
+                            <CheckBox IsChecked="{Binding Path=Recipients.IsEveryPatientRecipient, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="SVI PACIJENTI" Style="{StaticResource CheckBoxStyle}"/>
                         </StackPanel>
                     </Grid>
 
@@ -108,25 +108,25 @@
                             </StackPanel>
                         </Border>
 
-                        <Button x:Name="Dodaj" Style="{StaticResource ButtonPotvrdiStyle}" Click="DodajPacijentaClick" Height="20" Width="20" Margin="0">
+                        <Button x:Name="Dodaj" Style="{StaticResource ButtonPotvrdiStyle}" Click="AddPatientRecipientClick" Height="20" Width="20" Margin="0">
                             <Image Source="../../Icon/Secretary/plus.png" Width="10"/>
                         </Button>
                     </StackPanel>
 
 
-                    <ListBox x:Name="SviPacijentiListBox" ItemsSource="{Binding AllRecords}" Height="100" Width="270" Margin="0,5,0,0" Style="{StaticResource ListBoxStyle}"
-                              ItemContainerStyle="{StaticResource ListBoxItemStyle}"/>
+                    <ListBox x:Name="SviPacijentiListBox" ItemsSource="{Binding AllMedicalRecords, UpdateSourceTrigger=PropertyChanged}" Height="100" Width="270" Margin="0,5,0,0" Style="{StaticResource ListBoxStyle}"
+                              ItemContainerStyle="{StaticResource ListBoxItemStyle}" SelectedItem="{Binding SelectedForAdding}"/>
 
                     <StackPanel Orientation="Horizontal" Margin="0">
                         <TextBlock Text="Dodati pacijenti:" Style="{StaticResource TextBlockStyle}" Margin="0,10,105,0"/>
                         <Button x:Name="UkloniPacijenta" Style="{StaticResource ButtonOdustaniStyle}"
-                                VerticalAlignment="Bottom" Width="20" Height="20" Click="UkloniPacijentaClick">
+                                VerticalAlignment="Bottom" Width="20" Height="20" Click="RemovePatientRecipientClick">
                             <Image Source="../../Icon/Secretary/x.png" Width="13"/>
                         </Button>
                     </StackPanel>
 
-                    <ListBox x:Name="DodatiPacijentiListBox" ItemsSource="{Binding AddedRecords}" Height="100" Margin="0,5,0,0" Style="{StaticResource ListBoxStyle}"
-                              ItemContainerStyle="{StaticResource ListBoxItemStyle}"/>
+                    <ListBox x:Name="DodatiPacijentiListBox" ItemsSource="{Binding Recipients.RecipientsRecords, UpdateSourceTrigger=PropertyChanged}" Height="100" Margin="0,5,0,0" Style="{StaticResource ListBoxStyle}"
+                              ItemContainerStyle="{StaticResource ListBoxItemStyle}" SelectedItem="{Binding SelectedForRemoving}"/>
                 </StackPanel>
             </Border>
         </Grid>

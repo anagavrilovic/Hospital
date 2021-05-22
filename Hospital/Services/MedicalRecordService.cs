@@ -69,5 +69,10 @@ namespace Hospital.Services
 
             return newID.ToString();
         }
+
+        internal MedicalRecord GetRecordByUsername(string username)
+        {
+            return medicalRecordRepository.GetByUsername(username);
+        }
     }
 }

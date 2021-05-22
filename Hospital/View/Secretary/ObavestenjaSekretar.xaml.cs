@@ -26,7 +26,6 @@ namespace Hospital.View
         public ICollectionView NotificationCollection { get; set; }
 
         public NotificationService NotificationService { get; set; }
-        public NotificationStorage Ns { get; set; }
 
         public ObavestenjaSekretar()
         {
@@ -38,57 +37,47 @@ namespace Hospital.View
 
         private void InitializeEmptyProperties()
         {
-            Ns = new NotificationStorage();
             AllNotifications = new ObservableCollection<Notification>();
             NotificationService = new NotificationService();
         }
 
         private void LoadAllNotifications()
         {
-            AllNotifications = NotificationService.GetAllNotifications();
-            SortNotificationList();
+            AllNotifications = NotificationService.GetAllNotificationsSortedDescending();
 
             NotificationCollection = CollectionViewSource.GetDefaultView(AllNotifications);
             NotificationCollection.Filter = CustomFilterObavestenja;
         }
 
-        private void SortNotificationList()
-        {
-            List<Notification> sortedList = AllNotifications.OrderByDescending(n => n.Date).ToList();
-            AllNotifications.Clear();
-            AllNotifications = new ObservableCollection<Notification>(sortedList);
-        }
-
-        private void NovoObavestenjeClick(object sender, RoutedEventArgs e)
+        private void CreateNotificationClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new DodajObavestenje());
         }
 
-        private void BrisanjeObavestenjaClick(object sender, RoutedEventArgs e)
+        private void DeleteNotificationClick(object sender, RoutedEventArgs e)
         {
-            if (!IsNotificationSelected(GetNotificationNotSelectedForDeletingErrorMessage()))
+            if (!IsNotificationSelected(notificationNotSelectedForDeletingErrorMessage))
                 return;
 
             ConfirmBox confirmBox = new ConfirmBox("da želite da izbrišete obaveštenje?");
             if ((bool)confirmBox.ShowDialog())
             {
-                Ns.ClearNotificationsUsersByNotificationID(((Notification)ListBoxNotifications.SelectedItem).Id);
-                AllNotifications.Remove((Notification)ListBoxNotifications.SelectedItem);
-                Ns.SerializeNotifications(AllNotifications);
+                NotificationService.DeleteNotification(SelectedNotification);
+                AllNotifications.Remove(SelectedNotification);
             }
         }
 
-        private void IzmenaObavestenjaClick(object sender, RoutedEventArgs e)
+        private void UpdateNotificationClick(object sender, RoutedEventArgs e)
         {
-            if (!IsNotificationSelected(GetNotificationNotSelectedForUpdatingErrorMessage()))
+            if (!IsNotificationSelected(notificationNotSelectedForUpdatingErrorMessage))
                 return;
 
-            NavigationService.Navigate(new IzmenaObavestenja(SelectedNotification, AllNotifications));
+            NavigationService.Navigate(new IzmenaObavestenja(SelectedNotification));
         }
 
         private void ShowNotificationClick(object sender, RoutedEventArgs e)
         {
-            if (!IsNotificationSelected(GetNotificationNotSelectedForShowingErrorMessage()))
+            if (!IsNotificationSelected(notificationNotSelectedForShowingErrorMessage))
                 return;
 
             PrikazObavestenja viewNotification = new PrikazObavestenja(SelectedNotification);
@@ -107,21 +96,6 @@ namespace Hospital.View
             return true;
         }
 
-        private string GetNotificationNotSelectedForShowingErrorMessage()
-        {
-            return "Selektujte obaveštenje koje želite da pregledate!";
-        }
-
-        private string GetNotificationNotSelectedForUpdatingErrorMessage()
-        {
-            return "Selektujte obaveštenje koje želite da izmenite!";
-        }
-
-        private string GetNotificationNotSelectedForDeletingErrorMessage()
-        {
-            return "Selektujte obaveštenje koje želite da izbrišete!";
-        }
-
         private bool CustomFilterObavestenja(object obj)
         {
             if (string.IsNullOrEmpty(ObavestenjaFilter.Text))
@@ -136,5 +110,9 @@ namespace Hospital.View
         {
             CollectionViewSource.GetDefaultView(ListBoxNotifications.ItemsSource).Refresh();
         }
+
+        private const string notificationNotSelectedForShowingErrorMessage = "Selektujte obaveštenje koje želite da pregledate!";
+        private const string notificationNotSelectedForUpdatingErrorMessage = "Selektujte obaveštenje koje želite da izmenite!";
+        private const string notificationNotSelectedForDeletingErrorMessage = "Selektujte obaveštenje koje želite da izbrišete!";
     }
 }

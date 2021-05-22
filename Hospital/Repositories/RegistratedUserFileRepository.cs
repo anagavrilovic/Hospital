@@ -31,6 +31,17 @@ namespace Hospital.Repositories
             }
         }
 
+        public UserType GetRoleByUsername(string username)
+        {
+            ObservableCollection<RegistratedUser> registratedUsers = GetAll();
+
+            foreach (RegistratedUser user in registratedUsers)
+                if (user.Username.Equals(username))
+                    return user.Type;
+
+            return UserType.doctor;
+        }
+
         public ObservableCollection<RegistratedUser> GetAll()
         {
             ObservableCollection<RegistratedUser> users;
@@ -82,5 +93,18 @@ namespace Hospital.Repositories
                 serializer.Serialize(file, users);
             }
         }
+
+        public int CountByRole(UserType userType)
+        {
+            ObservableCollection<RegistratedUser> registratedUsers = GetAll();
+            int count = 0;
+
+            foreach (RegistratedUser user in registratedUsers)
+                if (user.Type.Equals(userType))
+                    count += 1;
+
+            return count;
+        }
+
     }
 }
