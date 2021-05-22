@@ -1,0 +1,57 @@
+﻿<Window x:Class="Hospital.View.Doctor.MedicineTherapyWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.View.Doctor"
+        xmlns:ns="clr-namespace:Hospital"
+        mc:Ignorable="d"
+        Title="LekListBox"
+        Background="{DynamicResource Background}" WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+    </Window.Resources>
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+       
+        </DockPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical" Margin="20,10,0,0" HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
+                    <Label Content="{ns:Loc searchMedicineLabel}" FontSize="16" Style="{DynamicResource Label}"/>
+                    <Border Width="250" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                            Style="{StaticResource TextBoxBorder}">
+                        <StackPanel Margin="5" Orientation="Horizontal">
+                            <Image Source="../../Icon/Secretary/search.png" Height="13"/>
+                            <TextBox  x:Name="pretrazi" Width="200" Height="20" BorderThickness="0" Style="{DynamicResource SearchBox}" Margin="10,0,0,0"  TextChanged="filterMedicine"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <ListBox Name="listBox" Margin="40,10,40,40" MouseDoubleClick="AddMedicineToTherapy" Height="300" Width="400" IsSynchronizedWithCurrentItem="True" Style="{DynamicResource ListBoxStyle}"></ListBox>
+                <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+                    <Label Margin="40,20,0,10" Style="{DynamicResource Label}" Content="{ns:Loc daysForConsumptionLabel}"></Label>
+                    <ComboBox x:Name="daysConsumptionComboBox" Margin="0,25,20,20" SelectedValue="{Binding DaysForConsumption, Mode=OneWayToSource}"/>
+                    <Button  Margin="20,40,20,0" VerticalAlignment="Top" Click="BackToTherapy" Style="{DynamicResource ImageButtonsHorizontal}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../../Icon/DoctorIcons/back.png" Width="20"/>
+                            <TextBlock Text="{ns:Loc declineButton}"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Margin="60,0,25,10" Style="{DynamicResource Label}" Content="{ns:Loc dailyIntakeLabel}"></Label>
+                    <ComboBox x:Name="dailyIntakeComboBox" Margin="0,0,20,20" SelectedValue="{Binding DailyIntake, Mode=OneWayToSource}" ></ComboBox>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Center" Margin="0,10,0,0">
+                <Label Content="{ns:Loc consumptionLabel}" FontSize="20" Style="{DynamicResource Label}"></Label>
+                <TextBox Name="textBox" TextWrapping="Wrap" Height="300" Width="400" Style="{DynamicResource TextBox}"
+                         AcceptsReturn="True" FontSize="15" Text="{Binding MedicineDescription, Mode=TwoWay}"></TextBox>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</Window>

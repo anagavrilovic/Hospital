@@ -177,11 +177,11 @@
     <Compile Include="ValidationRulesManager\Time.cs" />
     <Compile Include="ViewModels\DiagnosisViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
-    <Compile Include="View\Doktor\HospitalizovaniPacijenti.xaml.cs">
-      <DependentUpon>HospitalizovaniPacijenti.xaml</DependentUpon>
+    <Compile Include="View\Doctor\HospitalizedPatients.xaml.cs">
+      <DependentUpon>HospitalizedPatients.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doktor\NoviTermin.xaml.cs">
-      <DependentUpon>NoviTermin.xaml</DependentUpon>
+    <Compile Include="View\Doctor\NewAppointment.xaml.cs">
+      <DependentUpon>NewAppointment.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Manager\StaticInventory\AddInventory.xaml.cs">
       <DependentUpon>AddInventory.xaml</DependentUpon>
@@ -201,71 +201,71 @@
     <Compile Include="View\Manager\Rooms\DeleteRoom.xaml.cs">
       <DependentUpon>DeleteRoom.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doktor\Anamnesis.xaml.cs">
+    <Compile Include="View\Doctor\Anamnesis.xaml.cs">
       <DependentUpon>Anamnesis.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doktor\BolnickoLecenje.xaml.cs">
-      <DependentUpon>BolnickoLecenje.xaml</DependentUpon>
+    <Compile Include="View\Doctor\HospitalTreatmentPage.xaml.cs">
+      <DependentUpon>HospitalTreatmentPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doktor\ConfirmBox.xaml.cs">
+    <Compile Include="View\Doctor\ConfirmBox.xaml.cs">
       <DependentUpon>ConfirmBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doktor\DetaljiPregleda.xaml.cs">
-      <DependentUpon>DetaljiPregleda.xaml</DependentUpon>
+    <Compile Include="View\Doctor\AppointmentDetails.xaml.cs">
+      <DependentUpon>AppointmentDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doktor\Diagnosis.xaml.cs">
+    <Compile Include="View\Doctor\Diagnosis.xaml.cs">
       <DependentUpon>Diagnosis.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doktor\DoktorGlavnaStranica.xaml.cs">
-      <DependentUpon>DoktorGlavnaStranica.xaml</DependentUpon>
+    <Compile Include="View\Doctor\DoctorMainPage.xaml.cs">
+      <DependentUpon>DoctorMainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doktor\DoktorGlavniProzor.xaml.cs">
-      <DependentUpon>DoktorGlavniProzor.xaml</DependentUpon>
+    <Compile Include="View\Doctor\DoctorMainWindow.xaml.cs">
+      <DependentUpon>DoctorMainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doktor\DoktorKarton.xaml.cs">
-      <DependentUpon>DoktorKarton.xaml</DependentUpon>
+    <Compile Include="View\Doctor\MedicalRecordWindow.xaml.cs">
+      <DependentUpon>MedicalRecordWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doktor\DoktorObavestenja.xaml.cs">
-      <DependentUpon>DoktorObavestenja.xaml</DependentUpon>
+    <Compile Include="View\Doctor\NotificationsPage.xaml.cs">
+      <DependentUpon>NotificationsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doktor\ErrorBox.xaml.cs">
+    <Compile Include="View\Doctor\ErrorBox.xaml.cs">
       <DependentUpon>ErrorBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doktor\OdbijeniLekoviKomentar.xaml.cs">
-      <DependentUpon>OdbijeniLekoviKomentar.xaml</DependentUpon>
+    <Compile Include="View\Doctor\RejectedMedicineComment.xaml.cs">
+      <DependentUpon>RejectedMedicineComment.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doktor\ValidnostLeka.xaml.cs">
-      <DependentUpon>ValidnostLeka.xaml</DependentUpon>
+    <Compile Include="View\Doctor\MedicineValidity.xaml.cs">
+      <DependentUpon>MedicineValidity.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Manager\DynamicInventory\EditMedicalSupply.xaml.cs">
       <DependentUpon>EditMedicalSupply.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doktor\KalendarTermini.xaml.cs">
-      <DependentUpon>KalendarTermini.xaml</DependentUpon>
+    <Compile Include="View\Doctor\DoctorAppointments.xaml.cs">
+      <DependentUpon>DoctorAppointments.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doktor\KartonDoktorStranica.xaml.cs">
-      <DependentUpon>KartonDoktorStranica.xaml</DependentUpon>
+    <Compile Include="View\Doctor\MedicalRecordPage.xaml.cs">
+      <DependentUpon>MedicalRecordPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doktor\KreiranjeTermina.xaml.cs">
-      <DependentUpon>KreiranjeTermina.xaml</DependentUpon>
+    <Compile Include="View\Doctor\CreateAppointment.xaml.cs">
+      <DependentUpon>CreateAppointment.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doktor\LekListBox.xaml.cs">
-      <DependentUpon>LekListBox.xaml</DependentUpon>
+    <Compile Include="View\Doctor\MedicineTherapyWindow.xaml.cs">
+      <DependentUpon>MedicineTherapyWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doktor\Lekovi.xaml.cs">
-      <DependentUpon>Lekovi.xaml</DependentUpon>
+    <Compile Include="View\Doctor\EditMedicinePage.xaml.cs">
+      <DependentUpon>EditMedicinePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doktor\PacijentListBox.xaml.cs">
-      <DependentUpon>PacijentListBox.xaml</DependentUpon>
+    <Compile Include="View\Doctor\AddPatientWindow.xaml.cs">
+      <DependentUpon>AddPatientWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doktor\PregledTermina.xaml.cs">
-      <DependentUpon>PregledTermina.xaml</DependentUpon>
+    <Compile Include="View\Doctor\AppointmentInfo.xaml.cs">
+      <DependentUpon>AppointmentInfo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doktor\Terapija.xaml.cs">
-      <DependentUpon>Terapija.xaml</DependentUpon>
+    <Compile Include="View\Doctor\TherapyPage.xaml.cs">
+      <DependentUpon>TherapyPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Doktor\Termin.xaml.cs">
-      <DependentUpon>Termin.xaml</DependentUpon>
+    <Compile Include="View\Doctor\AppointmentWindow.xaml.cs">
+      <DependentUpon>AppointmentWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Manager\Medicines\EditMedicine.xaml.cs">
       <DependentUpon>EditMedicine.xaml</DependentUpon>
@@ -440,11 +440,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Doktor\HospitalizovaniPacijenti.xaml">
+    <Page Include="View\Doctor\HospitalizedPatients.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Doktor\NoviTermin.xaml">
+    <Page Include="View\Doctor\NewAppointment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -472,79 +472,79 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Doktor\Anamnesis.xaml">
+    <Page Include="View\Doctor\Anamnesis.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doktor\BolnickoLecenje.xaml">
+    <Page Include="View\Doctor\HospitalTreatmentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Doktor\ConfirmBox.xaml">
+    <Page Include="View\Doctor\ConfirmBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Doktor\DetaljiPregleda.xaml">
+    <Page Include="View\Doctor\AppointmentDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doktor\Diagnosis.xaml">
+    <Page Include="View\Doctor\Diagnosis.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doktor\DoktorGlavnaStranica.xaml">
+    <Page Include="View\Doctor\DoctorMainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doktor\DoktorGlavniProzor.xaml">
+    <Page Include="View\Doctor\DoctorMainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doktor\DoktorKarton.xaml">
+    <Page Include="View\Doctor\MedicalRecordWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doktor\DoktorObavestenja.xaml">
+    <Page Include="View\Doctor\NotificationsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doktor\ErrorBox.xaml">
+    <Page Include="View\Doctor\ErrorBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doktor\KalendarTermini.xaml">
+    <Page Include="View\Doctor\DoctorAppointments.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doktor\KartonDoktorStranica.xaml">
+    <Page Include="View\Doctor\MedicalRecordPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doktor\KreiranjeTermina.xaml">
+    <Page Include="View\Doctor\CreateAppointment.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doktor\LekListBox.xaml">
+    <Page Include="View\Doctor\MedicineTherapyWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doktor\Lekovi.xaml">
+    <Page Include="View\Doctor\EditMedicinePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doktor\OdbijeniLekoviKomentar.xaml">
+    <Page Include="View\Doctor\RejectedMedicineComment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Doktor\PacijentListBox.xaml">
+    <Page Include="View\Doctor\AddPatientWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doktor\PregledTermina.xaml">
+    <Page Include="View\Doctor\AppointmentInfo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doktor\ValidnostLeka.xaml">
+    <Page Include="View\Doctor\MedicineValidity.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -636,11 +636,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doktor\Terapija.xaml">
+    <Page Include="View\Doctor\TherapyPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Doktor\Termin.xaml">
+    <Page Include="View\Doctor\AppointmentWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
