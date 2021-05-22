@@ -113,8 +113,6 @@ namespace Hospital
                 JsonSerializer serializer = new JsonSerializer();
                 serializer.Serialize(file, rooms);
             }
-
-            RoomsWindow.Rooms = rooms;
         }
 
         public String fileName;

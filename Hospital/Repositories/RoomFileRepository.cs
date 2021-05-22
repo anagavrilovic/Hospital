@@ -60,7 +60,6 @@ namespace Hospital.Repositories
         {
             ObservableCollection<Room> rooms = GetAll();
             rooms.Add(parameter);
-
             Serialize(rooms);
         }
 
@@ -71,8 +70,6 @@ namespace Hospital.Repositories
                 JsonSerializer serializer = new JsonSerializer();
                 serializer.Serialize(file, parameter);
             }
-
-            RoomsWindow.Rooms = parameter;
         }
     }
 }

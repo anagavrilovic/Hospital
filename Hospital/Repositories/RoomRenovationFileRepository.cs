@@ -17,7 +17,24 @@ namespace Hospital.Repositories
 
         public void Delete(string id)
         {
-            throw new NotImplementedException();
+            ObservableCollection<RoomRenovation> roomRenovations = GetAll();
+
+            foreach (RoomRenovation r in roomRenovations)
+            {
+                if (r.Id.Equals(id))
+                {
+                    roomRenovations.Remove(r);
+                    break;
+                }
+            }
+
+            foreach (RoomRenovation r in roomRenovations)
+            {
+                r.Room.SerializeInfo = false;
+                r.WareHouse.SerializeInfo = false;
+            }
+
+            Serialize(roomRenovations);
         }
 
         public ObservableCollection<RoomRenovation> GetAll()
@@ -36,7 +53,13 @@ namespace Hospital.Repositories
 
         public RoomRenovation GetByID(string id)
         {
-            throw new NotImplementedException();
+            ObservableCollection<RoomRenovation> roomRenovations = GetAll();
+            foreach(RoomRenovation renovation in roomRenovations)
+            {
+                if (renovation.Id.Equals(id))
+                    return renovation;
+            }
+            return null;
         }
 
         public void Save(RoomRenovation parameter)

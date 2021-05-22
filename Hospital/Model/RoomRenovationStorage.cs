@@ -44,14 +44,13 @@ namespace Hospital.Model
             Serialize(roomRenovations);
         }
 
-        public void Delete(RoomRenovation renovation)
+        public void Delete(string renovationId)
         {
             ObservableCollection<RoomRenovation> roomRenovations = GetAll();
-            roomRenovations.Remove(renovation);
 
             foreach (RoomRenovation r in roomRenovations)
             {
-                if (r.StartDate == renovation.StartDate && r.EndDate == renovation.EndDate)
+                if (r.Id.Equals(renovationId))
                 {
                     roomRenovations.Remove(r);
                     break;
