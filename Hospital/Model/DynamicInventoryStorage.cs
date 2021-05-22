@@ -22,7 +22,6 @@ namespace Hospital
 
        public ObservableCollection<DynamicInventory> GetAll()
        {
-
             ObservableCollection<DynamicInventory> DynamicInventory = new ObservableCollection<DynamicInventory>();
 
             using (StreamReader sr = File.OpenText(@"..\\..\\Files\\" + fileName))

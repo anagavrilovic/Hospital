@@ -18,6 +18,7 @@ namespace Hospital.Model
 
         public ObservableCollection<TransferInventory> GetAll()
         {
+            ObservableCollection<TransferInventory> _transferInventory = new ObservableCollection<TransferInventory>();
             using (StreamReader sr = File.OpenText(@"..\\..\\Files\\" + fileName))
             {
                 _transferInventory = JsonConvert.DeserializeObject<ObservableCollection<TransferInventory>>(sr.ReadToEnd());
@@ -33,7 +34,7 @@ namespace Hospital.Model
 
         public void Save(TransferInventory parameter1)
         {
-            _transferInventory = GetAll();
+            ObservableCollection<TransferInventory> _transferInventory = GetAll();
 
             if (_transferInventory == null)
             {
@@ -42,12 +43,12 @@ namespace Hospital.Model
 
             _transferInventory.Add(parameter1);
 
-            DoSerialization();
+            DoSerialization(_transferInventory);
         }
 
         public void Delete(TransferInventory transfer)
         {
-            _transferInventory = GetAll();
+            ObservableCollection<TransferInventory> _transferInventory = GetAll();
             _transferInventory.Remove(transfer);
           
             foreach(TransferInventory ti in _transferInventory)
@@ -59,24 +60,25 @@ namespace Hospital.Model
                 }
             }
             
-            DoSerialization();
+            DoSerialization(_transferInventory);
         }
 
         public void EditTransfer(TransferInventory editedTransfer)
         {
+            ObservableCollection<TransferInventory> _transferInventory = GetAll();
             foreach (TransferInventory transfer in _transferInventory)
             {
                 if (transfer.ItemID.Equals(editedTransfer.ItemID) && transfer.FirstRoomID.Equals(editedTransfer.FirstRoomID) && transfer.DestinationRoomID.Equals(editedTransfer.DestinationRoomID))
                 {
                     _transferInventory.Remove(transfer);
                     _transferInventory.Add(editedTransfer);
-                    DoSerialization();
+                    DoSerialization(_transferInventory);
                     break;
                 }
             }
         }
 
-        public void DoSerialization()
+        public void DoSerialization(ObservableCollection<TransferInventory> _transferInventory)
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {
@@ -85,7 +87,6 @@ namespace Hospital.Model
             }
         }
 
-        private ObservableCollection<TransferInventory> _transferInventory = new ObservableCollection<TransferInventory>();
         public String fileName;
     }
 }
