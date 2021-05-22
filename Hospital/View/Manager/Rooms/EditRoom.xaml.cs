@@ -34,7 +34,7 @@ namespace Hospital.View
         private void acceptEdit(object sender, RoutedEventArgs e)
         {
             SaveEditedProperties();
-            _roomStorage.doSerialization();
+            _roomStorage.EditRoom(EditedRoom);
 
             NavigationService.Navigate(new RoomsWindow());
         }

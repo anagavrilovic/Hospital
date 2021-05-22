@@ -113,7 +113,7 @@ namespace Hospital.Model
                 {
                     TransferInventoryToWarehouse();
                     r.Status = RoomStatus.RENOVIRA_SE;
-                    _roomStorage.Save(r);
+                    _roomStorage.EditRoom(r);
                 }
                 
                 Thread.Sleep(timeSpan);
@@ -137,7 +137,7 @@ namespace Hospital.Model
         {
             Room room = _roomStorage.GetOne(Room.Id);
             room.Status = RoomStatus.SLOBODNA;
-            _roomStorage.Save(room);
+            _roomStorage.EditRoom(room);
             FinishSeparatingRooms();
             FinishMergingRooms();
             _roomRenovationStorage.Delete(this);

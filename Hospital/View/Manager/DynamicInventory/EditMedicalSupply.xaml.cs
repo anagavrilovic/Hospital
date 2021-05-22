@@ -41,7 +41,7 @@ namespace Hospital.View
         private void AcceptButtonClick(object sender, RoutedEventArgs e)
         {
             SaveEditedProperties();
-            _dynamicInventoryStorage.DoSerialization();
+            _dynamicInventoryStorage.EditItem(DynamicInventoryItem);
 
             NavigationService.Navigate(new DynamicInventoryView(DynamicInventoryItem.RoomID));
         }
