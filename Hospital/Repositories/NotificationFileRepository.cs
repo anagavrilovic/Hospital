@@ -63,6 +63,17 @@ namespace Hospital.Repositories
             return null;
         }
 
+        public List<int> GetExistingIDs()
+        {
+            ObservableCollection<Notification> notifications = GetAll();
+            List<int> existingIDs = new List<int>();
+
+            foreach (Notification notification in notifications)
+                existingIDs.Add(Int32.Parse(notification.Id));
+
+            return existingIDs;
+        }
+
         public void Save(Notification notification)
         {
             ObservableCollection<Notification> notifications = this.GetAll();

@@ -15,6 +15,7 @@ namespace Hospital.Services
         private IMedicalRecordRepository medicalRecordRepository;
 
         private RegistratedUserService registratedUserService = new RegistratedUserService();
+        private AppointmentService appointmentService = new AppointmentService();
 
         public MedicalRecordService()
         {
@@ -38,6 +39,7 @@ namespace Hospital.Services
         {
             medicalRecordRepository.Delete(medicalRecord.MedicalRecordID);
             registratedUserService.DeleteAccount(medicalRecord.Patient.Username);
+            appointmentService.DeletePatientsAppointments(medicalRecord.Patient.PersonalID);
         }
 
         public void UpdateAllRecords(ObservableCollection<MedicalRecord> medicalRecords)
