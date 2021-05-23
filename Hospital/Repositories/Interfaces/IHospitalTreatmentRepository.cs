@@ -9,5 +9,6 @@ namespace Hospital.Repositories.Interfaces
 {
     interface IHospitalTreatmentRepository : IGenericRepository<HospitalTreatment>
     {
+        void EditHospitalTreatment(HospitalTreatment hospitalTreatment);
     }
 }

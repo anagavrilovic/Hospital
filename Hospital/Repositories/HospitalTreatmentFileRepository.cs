@@ -31,6 +31,20 @@ namespace Hospital.Repositories
             }
         }
 
+        public void EditHospitalTreatment(HospitalTreatment hospitalTreatment)
+        {
+            ObservableCollection<HospitalTreatment> hospitalTreatments = GetAll();
+            foreach (HospitalTreatment h in hospitalTreatments)
+            {
+                if (h.PatientId.Equals(hospitalTreatment.PatientId))
+                {
+                    h.DeepCopy(hospitalTreatment);
+                    break;
+                }
+            }
+            Serialize(hospitalTreatments);
+        }
+
         public ObservableCollection<HospitalTreatment> GetAll()
         {
             ObservableCollection<HospitalTreatment> hospitalTreatments;

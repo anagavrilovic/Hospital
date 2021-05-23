@@ -38,5 +38,15 @@ namespace Hospital.Model
         public MedicalRecord PatientsRecord { get; set; }
         [JsonIgnore]
         public Room Room { get; set; }
+
+        public void DeepCopy(HospitalTreatment original)
+        {
+            this.EndOfTreatment = original.EndOfTreatment;
+            this.PatientId = original.PatientId;
+            this.StartOfTreatment = original.StartOfTreatment;
+            this.RoomId = original.RoomId;
+            this.PatientsRecord = original.PatientsRecord;
+            this.Room = original.Room;
+        }
     }
 }

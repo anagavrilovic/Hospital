@@ -1,30 +1,19 @@
 ﻿using Hospital.Model;
+using Hospital.Services.DoctorServices;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Hospital.View.Doctor
 {
     public partial class HospitalizedPatients : Page,INotifyPropertyChanged
     {
+        private HospitalizedPatientsService service=new HospitalizedPatientsService();
         private ObservableCollection<HospitalTreatment> hospitalTreatments = new ObservableCollection<HospitalTreatment>();
-        private HospitalTreatmentStorage hospitalTreatmentStorage = new HospitalTreatmentStorage();
-        private RoomStorage roomStorage = new RoomStorage();
         private HospitalTreatment hospitalTreatment = new HospitalTreatment();
-        private MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -60,7 +49,6 @@ namespace Hospital.View.Doctor
         {
             InitializeComponent();
             this.DataContext = this;
-            FillTable();
             InitProperties();
         }
 
@@ -68,16 +56,7 @@ namespace Hospital.View.Doctor
         {
             DateTime startDate = DateTime.Today;
             calendar.DisplayDateStart = startDate;
-        }
-
-        private void FillTable()
-        {
-            foreach(HospitalTreatment hospitalTreatmentFromStorage in hospitalTreatmentStorage.GetAll())
-            {
-                hospitalTreatmentFromStorage.PatientsRecord = medicalRecordStorage.GetByPatientID(hospitalTreatmentFromStorage.PatientId);
-                hospitalTreatmentFromStorage.Room = roomStorage.GetOne(hospitalTreatmentFromStorage.RoomId);
-                hospitalTreatments.Add(hospitalTreatmentFromStorage);
-            }
+            hospitalTreatments = service.SetTreatments();
         }
 
         private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -112,8 +91,7 @@ namespace Hospital.View.Doctor
 
         private void SaveHospitalizedTreatment()
         {
-            hospitalTreatmentStorage.DeleteByPatientId(hospitalTreatment.PatientId);
-            hospitalTreatmentStorage.Save(hospitalTreatment);
+            service.EditHospitalTreatment(HospitalTreatment);
         }
     }
 }
