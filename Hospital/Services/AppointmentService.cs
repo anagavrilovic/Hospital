@@ -1,4 +1,5 @@
-﻿using Hospital.Repositories;
+﻿using Hospital.Model;
+using Hospital.Repositories;
 using Hospital.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,23 @@ namespace Hospital.Services
         public ObservableCollection<Appointment> GetAll()
         {
             return appointmentRepository.GetAll();
+        }
+        public void Save(Appointment appointment)
+        {
+            appointmentRepository.Save(appointment);
+        }
+
+        public bool IsDoctorAvaliableForAppointment(Appointment appointment)
+        {
+            return appointmentRepository.IsDoctorAvaliableForAppointment(appointment);
+        }
+        public bool IsPatientAvaliableForAppointment(Appointment appointment)
+        {
+            return appointmentRepository.IsPatientAvaliableForAppointment(appointment);
+        }
+        public String GetNewID()
+        {
+            return appointmentRepository.GetNewID();
         }
     }
 }

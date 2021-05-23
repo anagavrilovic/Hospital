@@ -8,5 +8,8 @@ namespace Hospital.Repositories.Interfaces
 {
     interface IAppointmentRepository : IGenericRepository<Appointment>
     {
+        bool IsDoctorAvaliableForAppointment(Appointment newAppointment);
+        bool IsPatientAvaliableForAppointment(Appointment newAppointment);
+        String GetNewID();
     }
 }
