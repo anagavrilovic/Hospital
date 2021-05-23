@@ -10,16 +10,14 @@ using System.Threading.Tasks;
 
 namespace Hospital.Services.DoctorServices
 {
-   public class MedicineRevisionService
+   public class MedicineRevisionServicePage
     {
-        private IMedicineRevisionRepository medicineRevisionRepository;
-        private IMedicineRepository medicineRepository;
-
+        private MedicineRevisionService medicineRevisionService;
         public ObservableCollection<MedicineRevision> SetRevisionList(Doctor doctor)
         {
+            medicineRevisionService = new MedicineRevisionService();
             ObservableCollection<MedicineRevision> medicineRevisions=new ObservableCollection<MedicineRevision>();
-            medicineRevisionRepository = new MedicineRevisionFileRepository();
-            foreach (MedicineRevision mRevision in medicineRevisionRepository.GetAll())
+            foreach (MedicineRevision mRevision in medicineRevisionService.GetAll())
             {
                 if (mRevision.DoctorID.Equals(doctor.PersonalID) && !mRevision.IsMedicineRevised)
                 {
@@ -27,16 +25,6 @@ namespace Hospital.Services.DoctorServices
                 }
             }
             return medicineRevisions;
-        }
-        public void DeleteMedicineRevision(string id)
-        {
-            medicineRevisionRepository = new MedicineRevisionFileRepository();
-            medicineRevisionRepository.Delete(id);
-        }
-        public void SaveNewMedicine(Medicine medicine)
-        {
-            medicineRepository = new MedicineFileRepository();
-            medicineRepository.Save(medicine);
         }
 
     }

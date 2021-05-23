@@ -124,5 +124,13 @@ namespace Hospital.Services
                 }
             }  
         }
+        public Notification GetById(string id)
+        {
+            return notificationRepository.GetByID(id);
+        }
+        public void Serialize(ObservableCollection<Notification> notifications)
+        {
+            notificationRepository.Serialize(notifications);
+        }
     }
 }

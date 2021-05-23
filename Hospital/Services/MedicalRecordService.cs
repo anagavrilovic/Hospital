@@ -74,5 +74,9 @@ namespace Hospital.Services
         {
             return medicalRecordRepository.GetByUsername(username);
         }
+        public MedicalRecord GetByPatientId(string id)
+        {
+            return medicalRecordRepository.GetByPatientID(id);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using Hospital.Services.DoctorServices;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace Hospital.View.Doctor
     /// </summary>
     public partial class DoctorMainWindow : Window, INotifyPropertyChanged
     {
+        private DoctorService doctorService = new DoctorService();
         private DoctorMainWindowService service = new DoctorMainWindowService();
         private Frame frameMainPage;
         private DoctorMainPage mainPage;
@@ -52,7 +54,7 @@ namespace Hospital.View.Doctor
             this.Height = (SystemParameters.PrimaryScreenHeight * 3 / 4);
             this.Width = (SystemParameters.PrimaryScreenWidth * 3 / 4);
             this.doctorId = doctorId;
-            doctor = service.GetDoctorById(doctorId);
+            doctor = doctorService.GetDoctorById(doctorId);
             frameMainPage = new Frame();
             mainPage = new DoctorMainPage(doctorId);
             frameMainPage.Content = mainPage;

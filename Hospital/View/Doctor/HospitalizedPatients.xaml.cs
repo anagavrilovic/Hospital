@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using Hospital.Services.DoctorServices;
 using System;
 using System.Collections.ObjectModel;
@@ -11,6 +12,7 @@ namespace Hospital.View.Doctor
 {
     public partial class HospitalizedPatients : Page,INotifyPropertyChanged
     {
+        private HospitalTreatmentService hospitalTreatmentService = new HospitalTreatmentService();
         private HospitalizedPatientsService service=new HospitalizedPatientsService();
         private ObservableCollection<HospitalTreatment> hospitalTreatments = new ObservableCollection<HospitalTreatment>();
         private HospitalTreatment hospitalTreatment = new HospitalTreatment();
@@ -91,7 +93,7 @@ namespace Hospital.View.Doctor
 
         private void SaveHospitalizedTreatment()
         {
-            service.EditHospitalTreatment(HospitalTreatment);
+            hospitalTreatmentService.Update(HospitalTreatment);
         }
     }
 }

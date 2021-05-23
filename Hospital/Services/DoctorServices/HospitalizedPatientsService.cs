@@ -12,28 +12,22 @@ namespace Hospital.Services.DoctorServices
 {
     public class HospitalizedPatientsService
     {
-        IHospitalTreatmentRepository treatmentRepository;
-        IMedicalRecordRepository medicalRecordRepository;
-        IRoomRepository roomRepository;
-
+        HospitalTreatmentService hospitalTreatmentService;
+        MedicalRecordService medicalRecordService;
+        RoomService roomService;
         public ObservableCollection<HospitalTreatment> SetTreatments()
         {
-            treatmentRepository = new HospitalTreatmentFileRepository();
-            medicalRecordRepository = new MedicalRecordFileRepository();
+            roomService = new RoomService();
+            medicalRecordService=new MedicalRecordService();
+            hospitalTreatmentService = new HospitalTreatmentService();
             ObservableCollection<HospitalTreatment> hospitalTreatments = new ObservableCollection<HospitalTreatment>();
-            roomRepository = new RoomFileRepository();
-            foreach (HospitalTreatment hospitalTreatmentFromStorage in treatmentRepository.GetAll())
+            foreach (HospitalTreatment hospitalTreatmentFromStorage in hospitalTreatmentService.GetAll())
             {
-                hospitalTreatmentFromStorage.PatientsRecord = medicalRecordRepository.GetByPatientID(hospitalTreatmentFromStorage.PatientId);
-                hospitalTreatmentFromStorage.Room = roomRepository.GetByID(hospitalTreatmentFromStorage.RoomId);
+                hospitalTreatmentFromStorage.PatientsRecord = medicalRecordService.GetByPatientId(hospitalTreatmentFromStorage.PatientId);
+                hospitalTreatmentFromStorage.Room = roomService.GetById(hospitalTreatmentFromStorage.RoomId);
                 hospitalTreatments.Add(hospitalTreatmentFromStorage);
             }
             return hospitalTreatments;
-        }
-        public void EditHospitalTreatment(HospitalTreatment hospitalTreatment)
-        {
-            treatmentRepository = new HospitalTreatmentFileRepository();
-            treatmentRepository.EditHospitalTreatment(hospitalTreatment);
         }
     }
 }

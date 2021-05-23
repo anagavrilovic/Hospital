@@ -12,21 +12,16 @@ namespace Hospital.Services.DoctorServices
 {
     public class DoctorMainWindowService
     {
-        private IHospitalTreatmentRepository treatmentRepository;
-        private IDoctorRepository doctorRepository;
+        private HospitalTreatmentService hospitalTreatmentService;
+
         public void checkHospitalTreatmentDates()
         {
-            treatmentRepository = new HospitalTreatmentFileRepository();
-            foreach (HospitalTreatment hospitalTreatment in treatmentRepository.GetAll())
+            hospitalTreatmentService = new HospitalTreatmentService();
+            foreach (HospitalTreatment hospitalTreatment in hospitalTreatmentService.GetAll())
             {
                 if (hospitalTreatment.EndOfTreatment.Date < DateTime.Today)
-                    treatmentRepository.Delete(hospitalTreatment.PatientId);
+                    hospitalTreatmentService.Delete(hospitalTreatment.PatientId);
             }
-        }
-        public Doctor GetDoctorById(string doctorId)
-        {
-            doctorRepository = new DoctorFileRepository();
-            return doctorRepository.GetByID(doctorId);
         }
     }
 }

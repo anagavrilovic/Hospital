@@ -28,6 +28,23 @@ namespace Hospital.Services
         {
             return medicineRepository.GetAllIngredients();
         }
+        public Medicine GetById(string id)
+        {
+           return medicineRepository.GetByID(id);
+        }
 
+        public void UpdateMedicine(Medicine medicine)
+        {
+            medicineRepository.EditMedicine(medicine);
+        }
+
+        public ObservableCollection<Medicine> GetAll()
+        {
+            return medicineRepository.GetAll();
+        }
+        public void SaveMedicine(Medicine medicine)
+        {
+            medicineRepository.Save(medicine);
+        }
     }
 }
