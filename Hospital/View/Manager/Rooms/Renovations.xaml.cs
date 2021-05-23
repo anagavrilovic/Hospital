@@ -66,7 +66,7 @@ namespace Hospital.View
                                         "Otkazivanje renoviranja", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
-                        _roomRenovationStorage.Delete(selectedItem);
+                        _roomRenovationStorage.Delete(selectedItem.Id);
                         RoomRenovations = _roomRenovationStorage.GetAll();
                 }
             }

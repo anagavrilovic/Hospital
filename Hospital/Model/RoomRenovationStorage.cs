@@ -18,59 +18,59 @@ namespace Hospital.Model
 
         public ObservableCollection<RoomRenovation> GetAll()
         {
+            ObservableCollection<RoomRenovation> roomRenovations = new ObservableCollection<RoomRenovation>();
             using (StreamReader sr = File.OpenText(@"..\\..\\Files\\" + fileName))
             {
-                roomRenovation = JsonConvert.DeserializeObject<ObservableCollection<RoomRenovation>>(sr.ReadToEnd());
+                roomRenovations = JsonConvert.DeserializeObject<ObservableCollection<RoomRenovation>>(sr.ReadToEnd());
 
-                if (roomRenovation == null)
+                if (roomRenovations == null)
                     return new ObservableCollection<RoomRenovation>();
             }
 
-            return roomRenovation;
+            return roomRenovations;
         }
 
         public void Save(RoomRenovation parameter1)
         {
-            roomRenovation = GetAll();
-            roomRenovation.Add(parameter1);
+            ObservableCollection<RoomRenovation> roomRenovations = GetAll();
+            roomRenovations.Add(parameter1);
 
-            foreach(RoomRenovation renovation in roomRenovation)
+            foreach(RoomRenovation renovation in roomRenovations)
             {
                 renovation.Room.SerializeInfo = false;
                 renovation.WareHouse.SerializeInfo = false;
             }
 
-            DoSerialization();
+            Serialize(roomRenovations);
         }
 
-        public void Delete(RoomRenovation renovation)
+        public void Delete(string renovationId)
         {
-            roomRenovation = GetAll();
-            roomRenovation.Remove(renovation);
+            ObservableCollection<RoomRenovation> roomRenovations = GetAll();
 
-            foreach (RoomRenovation r in roomRenovation)
+            foreach (RoomRenovation r in roomRenovations)
             {
-                if (r.StartDate == renovation.StartDate && r.EndDate == renovation.EndDate)
+                if (r.Id.Equals(renovationId))
                 {
-                    roomRenovation.Remove(r);
+                    roomRenovations.Remove(r);
                     break;
                 }
             }
 
-            foreach (RoomRenovation r in roomRenovation)
+            foreach (RoomRenovation r in roomRenovations)
             {
                 r.Room.SerializeInfo = false;
                 r.WareHouse.SerializeInfo = false;
             }
 
-            DoSerialization();
+            Serialize(roomRenovations);
         }
 
         public bool isBeingRenovatedNow(Appointment appointment)
         {
-            roomRenovation = GetAll();
+            ObservableCollection<RoomRenovation> roomRenovations = GetAll();
 
-            foreach (RoomRenovation r in roomRenovation)
+            foreach (RoomRenovation r in roomRenovations)
             {
                 if (appointment.DateTime > r.StartDate && appointment.DateTime.AddHours(appointment.DurationInHours) < r.EndDate + new TimeSpan(23,59,59) && appointment.Room.Id.Equals(r.Room.Id))
                 {
@@ -81,17 +81,15 @@ namespace Hospital.Model
             return false;
         }
         
-        public void DoSerialization()
+        public void Serialize(ObservableCollection<RoomRenovation> roomRenovations)
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, roomRenovation);
+                serializer.Serialize(file, roomRenovations);
             }
         }
 
-
-        private ObservableCollection<RoomRenovation> roomRenovation = new ObservableCollection<RoomRenovation>();
         public String fileName;
     }
 }

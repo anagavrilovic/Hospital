@@ -23,11 +23,22 @@ namespace Hospital.Model
             }
         }
 
+        private string _id;
         private DateTime _startDate;
         private DateTime _endDate;
         private string _description;
         private ObservableCollection<Room> _roomsDestroyedDuringRenovation;
         private ObservableCollection<Room> _roomsCreatedDuringRenovation;
+
+        public string Id
+        {
+            get => _id;
+            set
+            {
+                _id = value;
+                OnPropertyChanged("Id");
+            }
+        }
 
         public DateTime StartDate
         {
@@ -88,8 +99,20 @@ namespace Hospital.Model
             RoomsDestroyedDuringRenovation = new ObservableCollection<Room>();
             Room = new Room();
             WareHouse = new Room();
+            Id = GenerateRenovationId();
         }
-       
+
+        private string GenerateRenovationId()
+        {
+            var rand = new Random();
+            string id = rand.Next(100,1000).ToString();
+            /*
+            foreach (RoomRenovation renovation in _roomRenovationStorage.GetAll())
+                if (renovation.Id.Equals(id))
+                    return Room.Id;
+           */
+            return id;
+        }
 
         public void StartRenovation()
         {
@@ -140,7 +163,7 @@ namespace Hospital.Model
             _roomStorage.EditRoom(room);
             FinishSeparatingRooms();
             FinishMergingRooms();
-            _roomRenovationStorage.Delete(this);
+            _roomRenovationStorage.Delete(Id);
         }
 
         private void FinishSeparatingRooms()

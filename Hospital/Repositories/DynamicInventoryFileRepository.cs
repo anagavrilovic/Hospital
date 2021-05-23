@@ -13,19 +13,18 @@ namespace Hospital.Repositories
     class DynamicInventoryFileRepository : IDynamicInventoryRepository
     {
         private string fileName = "medicalSupply.json";
-        public static ObservableCollection<DynamicInventory> DynamicInventory;
 
         public DynamicInventoryFileRepository() { }
 
         public void Delete(string dynamicInventoryID)
         {
-            DynamicInventory = GetAll();
+            ObservableCollection<DynamicInventory> DynamicInventory = GetAll();
 
-            foreach (DynamicInventory di in DynamicInventory)
+            foreach (DynamicInventory ms in DynamicInventory)
             {
-                if (di.Id.Equals(dynamicInventoryID))
+                if (ms.Id.Equals(dynamicInventoryID))
                 {
-                    DynamicInventory.Remove(di);
+                    DynamicInventory.Remove(ms);
                     Serialize(DynamicInventory);
                     return;
                 }
@@ -34,8 +33,12 @@ namespace Hospital.Repositories
 
         public ObservableCollection<DynamicInventory> GetAll()
         {
+            ObservableCollection<DynamicInventory> DynamicInventory = new ObservableCollection<DynamicInventory>();
+
             using (StreamReader sr = File.OpenText(@"..\\..\\Files\\" + fileName))
+            {
                 DynamicInventory = JsonConvert.DeserializeObject<ObservableCollection<DynamicInventory>>(sr.ReadToEnd());
+            }
 
             if (DynamicInventory == null)
                 DynamicInventory = new ObservableCollection<DynamicInventory>();
@@ -45,19 +48,20 @@ namespace Hospital.Repositories
 
         public DynamicInventory GetByID(string dynamicInventoryID)
         {
-            DynamicInventory = GetAll();
+            ObservableCollection<DynamicInventory> DynamicInventory = GetAll();
 
-            foreach (DynamicInventory di in DynamicInventory)
-                if (di.Id.Equals(dynamicInventoryID))
-                    return di;
+            foreach (DynamicInventory inv in DynamicInventory)
+                if (inv.Id.Equals(dynamicInventoryID))
+                    return inv;
 
             return null;
         }
 
         public void Save(DynamicInventory dynamicInventory)
         {
-            DynamicInventory = GetAll();
+            ObservableCollection<DynamicInventory> DynamicInventory = GetAll();
             DynamicInventory.Add(dynamicInventory);
+
             Serialize(DynamicInventory);
         }
 
@@ -66,7 +70,7 @@ namespace Hospital.Repositories
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, DynamicInventory);
+                serializer.Serialize(file, dynamicInventories);
             }
         }
     }

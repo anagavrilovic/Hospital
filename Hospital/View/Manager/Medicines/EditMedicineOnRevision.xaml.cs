@@ -142,7 +142,7 @@ namespace Hospital.View
             quantityTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             doctorsCB.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
 
-            _medicineRevisionStorage.DoSerialization(AllMedicinesOnRevision);
+            _medicineRevisionStorage.EditMedicine(MedicineOnRevision);
 
             NavigationService.Navigate(new MedicineRevisionWindow());
         }
