@@ -22,18 +22,6 @@ namespace Hospital.Model
         private DateTime _transferDate;
         private string _transferTime;
 
-        private InventoryStorage _inventoryStorage = new InventoryStorage();
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
         public string ItemID
         {
             get => _itemID;
@@ -111,78 +99,11 @@ namespace Hospital.Model
             this._transferDate = date;
         }
 
-        public void StartTransfer()
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
         {
-            Task task = new Task(() => this.WaitUntilTransferDate());
-            task.Start();
-        }
-
-        public void WaitUntilTransferDate()
-        {
-            TimeSpan timeSpan = this.TransferDate.Subtract(DateTime.Now);
-
-            if (TransferDate > DateTime.Now)
-                Thread.Sleep(timeSpan);
-       
-           FinishTransfer();
-        }
-
-        public void FinishTransfer()
-        {
-            UpdateInventory();
-            RemoveTransferRequest();
-        }
-
-        public void UpdateInventory()
-        {
-            Inventory inventoryItem = _inventoryStorage.GetOneByRoom(_itemID, _firstRoomID);
-            if (inventoryItem.Quantity >= Quantity)
-            {
-                if (IsTransferingItemExistsInDestinationRoom())
-                    IncreaseItemQuantityInDestinationRoom();
-                else
-                    AddTransferingItemDestinationRoom();
-
-                ReduceItemQuantitiyInFirstRoom();
-            }
-        }
-
-        public void RemoveTransferRequest()
-        {
-            TransferInventoryStorage transferStorage = new TransferInventoryStorage();
-            transferStorage.Delete(this);
-        }
-
-        private bool IsTransferingItemExistsInDestinationRoom()
-        {
-            foreach (Inventory item in _inventoryStorage.GetByRoomID(DestinationRoomID))
-            {
-                if (item.Id.Equals(ItemID))
-                    return true;
-            }
-            return false;
-        }
-
-        private void IncreaseItemQuantityInDestinationRoom()
-        {
-            Inventory itemInDestinationRoom = _inventoryStorage.GetOneByRoom(ItemID, DestinationRoomID);
-            itemInDestinationRoom.Quantity += Quantity;
-            _inventoryStorage.EditItem(itemInDestinationRoom);
-        }
-
-        private void AddTransferingItemDestinationRoom()
-        {
-            Inventory itemFromFirstRoom = _inventoryStorage.GetOneByRoom(_itemID, _firstRoomID);
-            itemFromFirstRoom.Quantity = Quantity;
-            itemFromFirstRoom.RoomID = DestinationRoomID;
-            _inventoryStorage.Save(itemFromFirstRoom);
-        }
-
-        private void ReduceItemQuantitiyInFirstRoom()
-        {
-            Inventory itemInFirstRoom = _inventoryStorage.GetOneByRoom(ItemID, FirstRoomID);
-            itemInFirstRoom.Quantity -= _quantity;
-            _inventoryStorage.EditItem(itemInFirstRoom);
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
         }
     }
 }

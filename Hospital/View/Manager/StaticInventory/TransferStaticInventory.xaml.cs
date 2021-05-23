@@ -22,27 +22,14 @@ namespace Hospital.View
 {
     public partial class TransferStaticInventory : Page, INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
         public Inventory ItemForTransfer { get; set; }
         public TransferInventory TransferRequest { get; set; }
-
-        private TransferInventoryStorage _transferInventoryStorage;
-        private TransferInventory _firstReservedTransfer;
-        private int _totalQuantityForEachTransferOfItem;
+        private SchedulingTransferInventoryService _schedulingTransferService;
 
         private ObservableCollection<string> _allRoomsIDs;
         public ObservableCollection<string> AllRoomsIDs
         {
             get => _allRoomsIDs;
-
             set
             {
                 _allRoomsIDs = value;
@@ -54,33 +41,17 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
-            this._transferInventoryStorage = new TransferInventoryStorage();
             ItemForTransfer = inv;
             TransferRequest = new TransferInventory();
-            this._totalQuantityForEachTransferOfItem = 0;
-            this._firstReservedTransfer = new TransferInventory();
 
-            AllRoomsIDs = GetAllRoomsIDs();
+            AllRoomsIDs = InitializeComboBoxes();
         }
 
         private void AcceptButtonClick(object sender, RoutedEventArgs e)
         {
             InitializeTransferRequest();
-
-            if (!AreTransferAttributesValid())
-                return;
-
-            if (NotEnoughItemForNewTransfer() && IsTransferDateBeforeFirstReservedTransferDate())
-                ScheduleTemporaryTransferBeforeFirstReservedTransfer();
-            
-            else if (NotEnoughItemForNewTransfer() && IsTransferDateAfterFirstReservedTransferDate())
-            {
-                TransferCantBeExecuted();
-                return;
-            }
-
-            SaveTransfer(TransferRequest);
-
+            _schedulingTransferService.ProcessRequest();
+         
             NavigationService.Navigate(new StaticInventoryView(ItemForTransfer.RoomID));
         }
 
@@ -93,119 +64,17 @@ namespace Hospital.View
 
             TimeSpan timeSpan = TimeSpan.ParseExact(TransferRequest.TransferTime, "c", null);
             TransferRequest.TransferDate = TransferRequest.TransferDate.Add(timeSpan);
+            _schedulingTransferService = new SchedulingTransferInventoryService(TransferRequest);
         }
 
-        private bool AreTransferAttributesValid()
-        {
-            if (TransferRequest.TransferDate < DateTime.Now)
-            {
-                MessageBox.Show("Niste ispravno uneli vreme!");
-                return false;
-            }
-
-           else if (ItemForTransfer.Quantity < TransferRequest.Quantity)
-            {
-                MessageBox.Show("Pogrešan unos količine!");
-                return false;
-            }
-
-            return true;
-        }
-     
-        private int getTotalQuantityForEachTransferOfItem()
-        {
-            int totalQuantityForTransfer = 0;
-            foreach (TransferInventory ti in _transferInventoryStorage.GetAll())
-            {
-                if (ti.ItemID.Equals(TransferRequest.ItemID) && ti.FirstRoomID.Equals(TransferRequest.FirstRoomID))
-                    totalQuantityForTransfer += ti.Quantity;   
-            }
-            return totalQuantityForTransfer;
-        }
-
-        private TransferInventory getFirstReservedTransferOfItem()
-        {
-            TransferInventory firstReservedTransfer = new TransferInventory();
-
-            foreach (TransferInventory ti in _transferInventoryStorage.GetAll())
-            {
-                if (ti.ItemID.Equals(TransferRequest.ItemID) && ti.FirstRoomID.Equals(TransferRequest.FirstRoomID))
-                {
-                    if (ti.TransferDate > firstReservedTransfer.TransferDate)
-                        firstReservedTransfer = ti;
-                }
-            }
-            return firstReservedTransfer;
-        }
-
-        private bool NotEnoughItemForNewTransfer()
-        {
-            this._totalQuantityForEachTransferOfItem = getTotalQuantityForEachTransferOfItem();
-            if (_totalQuantityForEachTransferOfItem + TransferRequest.Quantity > ItemForTransfer.Quantity)
-                return true;
-
-            return false;
-        }
-
-        private bool IsTransferDateAfterFirstReservedTransferDate()
-        {
-            this._firstReservedTransfer = getFirstReservedTransferOfItem();
-            if (TransferRequest.TransferDate > _firstReservedTransfer.TransferDate)
-                return true;
-
-            return false;
-        }
-
-        private bool IsTransferDateBeforeFirstReservedTransferDate()
-        {
-            this._firstReservedTransfer = getFirstReservedTransferOfItem();
-            if (TransferRequest.TransferDate < _firstReservedTransfer.TransferDate)
-                return true;
-
-            return false;
-        }
-
-        private void ScheduleTemporaryTransferBeforeFirstReservedTransfer()
-        {
-            if (_firstReservedTransfer.Quantity <= TransferRequest.Quantity)
-            {
-                _firstReservedTransfer.FirstRoomID = TransferRequest.DestinationRoomID;
-                _transferInventoryStorage.EditTransfer(_firstReservedTransfer);
-            }
-            else
-            {
-                int newQuantity = _firstReservedTransfer.Quantity - TransferRequest.Quantity;
-                _firstReservedTransfer.FirstRoomID = TransferRequest.DestinationRoomID;
-                _firstReservedTransfer.Quantity = TransferRequest.Quantity;
-                _transferInventoryStorage.EditTransfer(_firstReservedTransfer);
-
-                TransferInventory newTransfer = new TransferInventory(_firstReservedTransfer.ItemID, newQuantity, ItemForTransfer.RoomID, _firstReservedTransfer.DestinationRoomID, _firstReservedTransfer.TransferDate + new TimeSpan(0, 0, 2));
-                SaveTransfer(newTransfer);
-            }
-        }
-
-        private void TransferCantBeExecuted()
-        {
-            MessageBox.Show("Sala ne raspolaže traženom količinom stavke. \n Pokušajte sa manjom količinom ili pogledajte stanje u drugim salama.");
-            return;
-        }
-
-        private void SaveTransfer(TransferInventory transfer)
-        {
-            _transferInventoryStorage.Save(transfer);
-            TransferInventoryService service = new TransferInventoryService(transfer);
-            service.ScheduleTransfer();
-        }
-
-        private ObservableCollection<string> GetAllRoomsIDs()
+        private ObservableCollection<string> InitializeComboBoxes()
         {
             ObservableCollection<string> allRoomsIDs = new ObservableCollection<string>();
             RoomStorage roomStorage = new RoomStorage();
             foreach (Room room in roomStorage.GetAll())
-            {
                 if (!room.Id.Equals(ItemForTransfer.RoomID))
                     allRoomsIDs.Add(room.Id);
-            }
+
             return allRoomsIDs;
         }
 
@@ -217,6 +86,13 @@ namespace Hospital.View
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new StaticInventoryView(ItemForTransfer.RoomID));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
         }
     }
 }

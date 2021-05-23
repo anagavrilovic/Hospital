@@ -68,7 +68,7 @@ namespace Hospital.Model
             ObservableCollection<TransferInventory> _transferInventory = GetAll();
             foreach (TransferInventory transfer in _transferInventory)
             {
-                if (transfer.ItemID.Equals(editedTransfer.ItemID) && transfer.FirstRoomID.Equals(editedTransfer.FirstRoomID) && transfer.DestinationRoomID.Equals(editedTransfer.DestinationRoomID))
+                if (transfer.ItemID.Equals(editedTransfer.ItemID) &&  transfer.DestinationRoomID.Equals(editedTransfer.DestinationRoomID))
                 {
                     _transferInventory.Remove(transfer);
                     _transferInventory.Add(editedTransfer);
