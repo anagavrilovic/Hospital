@@ -150,6 +150,8 @@
     <Compile Include="Services\DoctorService.cs" />
     <Compile Include="Services\DoctorServices\DoctorMainWindowService.cs" />
     <Compile Include="Services\DoctorServices\EditMedicineService.cs" />
+    <Compile Include="Services\DoctorServices\MedicineRevisionService.cs" />
+    <Compile Include="Services\DoctorServices\NotificationsService.cs" />
     <Compile Include="Services\DynamicInventoryService.cs" />
     <Compile Include="Services\HospitalTreatmentService.cs" />
     <Compile Include="Services\MedicalRecordService.cs" />

@@ -29,7 +29,6 @@ namespace Hospital.View.Doctor
         private DoctorMainPage mainPage;
         private string doctorId;
         private Model.Doctor doctor = new Model.Doctor();
-        private DoctorStorage doctorStorage = new DoctorStorage();
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
         {
@@ -50,8 +49,8 @@ namespace Hospital.View.Doctor
 
         private void InitProperties(string doctorId)
         {
-            this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
-            this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 3 / 4);
+            this.Height = (SystemParameters.PrimaryScreenHeight * 3 / 4);
+            this.Width = (SystemParameters.PrimaryScreenWidth * 3 / 4);
             this.doctorId = doctorId;
             doctor = service.GetDoctorById(doctorId);
             frameMainPage = new Frame();

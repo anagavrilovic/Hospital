@@ -72,7 +72,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0">
             <Label Content="{ns:Loc languageLabel}" Style="{DynamicResource Label}"/>
-        <ComboBox x:Name="languageComboBox" Margin="0,5,0,0" Width="130" Height="25" VerticalAlignment="Top" SelectionChanged="ComboBox_SelectionChanged">
+        <ComboBox x:Name="languageComboBox" Margin="0,5,0,0" Width="130" Height="25" VerticalAlignment="Top" SelectionChanged="ComboBox_SelectionChanged" Style="{DynamicResource ComboBoxStyle}">
             <ComboBoxItem>Srpski jezik</ComboBoxItem>
             <ComboBoxItem>Engleski jezik</ComboBoxItem>
         </ComboBox>

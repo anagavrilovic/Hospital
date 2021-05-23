@@ -1,20 +1,11 @@
 ﻿using Hospital.Model;
+using Hospital.Services.DoctorServices;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Hospital.View.Doctor
 {
@@ -23,9 +14,9 @@ namespace Hospital.View.Doctor
     /// </summary>
     public partial class MedicineValidity : Page,INotifyPropertyChanged
     {
+        private MedicineRevisionService service=new MedicineRevisionService();
         private Model.Doctor doctor=new Model.Doctor();
         private ObservableCollection<MedicineRevision> medicineRevisions = new ObservableCollection<MedicineRevision>();
-        private MedicineRevisionStorage medicineRevisionStorage = new MedicineRevisionStorage();
         public event PropertyChangedEventHandler PropertyChanged;
         private ObservableCollection<string> ingredients=new ObservableCollection<string>();
         public ObservableCollection<string> Ingredients
@@ -63,7 +54,7 @@ namespace Hospital.View.Doctor
             InitializeComponent();
             this.DataContext = this;
             this.doctor = doctor;
-            initProperties();
+            medicineRevisions = service.SetRevisionList(doctor);
             SetIcons();
         }
         private void SetIcons()
@@ -78,17 +69,6 @@ namespace Hospital.View.Doctor
             {
                 okButton.Source = new BitmapImage(new Uri("pack://application:,,,/Icon/Secretary/ok.png", UriKind.Absolute));
             }
-        }
-
-        private void initProperties()
-        {
-            foreach(MedicineRevision mRevision in medicineRevisionStorage.GetAll())
-            {
-                if (mRevision.DoctorID.Equals(doctor.PersonalID) && !mRevision.IsMedicineRevised)
-                {
-                    medicineRevisions.Add(mRevision);   
-                }
-            }          
         }
 
         protected void OnPropertyChanged(string name)
@@ -106,9 +86,8 @@ namespace Hospital.View.Doctor
                 ConfirmBox confirmBox = new ConfirmBox("Da li ste sigurni da odobravate lek?");
                 if ((bool)confirmBox.ShowDialog())
                 {
-                    medicineRevisionStorage.Delete(((MedicineRevision)ListBoxRevisions.SelectedItem).Medicine.ID);
-                    MedicineStorage medicineStorage = new MedicineStorage();
-                    medicineStorage.Save(((MedicineRevision)ListBoxRevisions.SelectedItem).Medicine);
+                    service.DeleteMedicineRevision(((MedicineRevision)ListBoxRevisions.SelectedItem).Medicine.ID);
+                    service.SaveNewMedicine(((MedicineRevision)ListBoxRevisions.SelectedItem).Medicine);
                     MedicineRevisions.Remove(((MedicineRevision)ListBoxRevisions.SelectedItem));
                 }
             }

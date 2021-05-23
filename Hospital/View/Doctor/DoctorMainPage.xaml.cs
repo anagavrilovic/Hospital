@@ -25,11 +25,17 @@ namespace Hospital.View.Doctor
         public DoctorMainPage(string doctorId)
         {
             InitializeComponent();
-           this.doctorId = doctorId;
-           var app = (App)Application.Current;
+            InitProperties(doctorId);
+        }
+
+        private void InitProperties(string doctorId)
+        {
+            this.doctorId = doctorId;
+            var app = (App)Application.Current;
             themeCheckBox.IsChecked = app.DarkTheme;
             languageComboBox.SelectedIndex = 1;
         }
+
         private void Pregled(object sender, RoutedEventArgs e)
         {
             ((DoctorMainWindow)Window.GetWindow(this)).Main.Content = new DoctorAppointments(doctorId);

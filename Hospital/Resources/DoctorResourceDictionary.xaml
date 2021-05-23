@@ -424,7 +424,7 @@ BorderThickness="3" CornerRadius="10" BorderBrush="{StaticResource HoverBlue}">
         <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
     </ControlTemplate>
 
-    <Style x:Key="{x:Type ComboBox}" TargetType="{x:Type ComboBox}">
+    <Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}">
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>

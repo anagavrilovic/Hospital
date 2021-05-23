@@ -85,5 +85,7 @@ namespace Hospital.Repositories
             notifications[notifications.FindIndex(notification => notification.Id.Equals(newNotification.Id))] = newNotification;
             Serialize(new ObservableCollection<Notification>(notifications));
         }
+
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services.DoctorServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,7 +25,7 @@ namespace Hospital.View.Doctor
     public partial class NotificationsPage : Page,INotifyPropertyChanged
     {
         private ObservableCollection<Notification> notifications = new ObservableCollection<Notification>();
-        private DoctorStorage doctorStorage = new DoctorStorage();
+        private NotificationsService service = new NotificationsService();
         private Hospital.Model.Doctor doctor=new Model.Doctor();
         public ObservableCollection<Notification> Notifications
         {
@@ -53,8 +54,8 @@ namespace Hospital.View.Doctor
         {
             InitializeComponent();
             this.DataContext = this;
-            doctor = doctorStorage.GetOne(doctorId);
-            SetNotificationsProperty();
+            doctor = service.GetDoctorById(doctorId);
+            service.SetNotificationsProperty(doctor, Notifications);
             SetFilterProperties();
             SetIcons();
         }
@@ -74,17 +75,6 @@ namespace Hospital.View.Doctor
             }
         }
 
-        private void SetNotificationsProperty()
-        {
-            foreach (NotificationsUsers notificationsUser in notificationStorage.GetAllNotificationsUsers())
-            {
-                if (notificationsUser.Username.Equals(doctor.Username))
-                {
-                    Notifications.Add(notificationStorage.GetOne(notificationsUser.NotificationID));
-                }
-
-            }
-        }
 
         private void SetFilterProperties()
         {
@@ -129,9 +119,9 @@ namespace Hospital.View.Doctor
                         "Potvrda", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
 
-                notificationStorage.ClearNotificationsUsersByNotificationID(((Notification)ListBoxNotifications.SelectedItem).Id);
+                service.ClearNotificationsFromUser(((Notification)ListBoxNotifications.SelectedItem).Id);
                 Notifications.Remove((Notification)ListBoxNotifications.SelectedItem);
-                notificationStorage.SerializeNotifications(Notifications);
+                service.SerializeNotifications(Notifications);
             }
 
         }
