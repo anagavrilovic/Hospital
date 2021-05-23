@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -66,7 +67,7 @@ namespace Hospital.View
         {
             InitializeTransferRequest();
 
-            if (!IsTransferAttributesValid())
+            if (!AreTransferAttributesValid())
                 return;
 
             if (NotEnoughItemForNewTransfer() && IsTransferDateBeforeFirstReservedTransferDate())
@@ -94,7 +95,7 @@ namespace Hospital.View
             TransferRequest.TransferDate = TransferRequest.TransferDate.Add(timeSpan);
         }
 
-        private bool IsTransferAttributesValid()
+        private bool AreTransferAttributesValid()
         {
             if (TransferRequest.TransferDate < DateTime.Now)
             {
@@ -192,7 +193,8 @@ namespace Hospital.View
         private void SaveTransfer(TransferInventory transfer)
         {
             _transferInventoryStorage.Save(transfer);
-            transfer.StartTransfer();
+            TransferInventoryService service = new TransferInventoryService(transfer);
+            service.ScheduleTransfer();
         }
 
         private ObservableCollection<string> GetAllRoomsIDs()

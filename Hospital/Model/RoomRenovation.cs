@@ -1,4 +1,5 @@
-﻿using Hospital.View;
+﻿using Hospital.Services;
+using Hospital.View;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -152,7 +153,8 @@ namespace Hospital.Model
             foreach (Inventory inventory in _inventoryStorage.GetByRoomID(Room.Id))
             {
                 TransferInventory transfer = new TransferInventory(inventory.Id, inventory.Quantity, Room.Id, WareHouse.Id, DateTime.Now);
-                transfer.UpdateInventory();
+                TransferInventoryService service = new TransferInventoryService(transfer);
+                service.UpdateInventory();
             }            
         }
 
