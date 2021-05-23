@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using Hospital.Services.DoctorServices;
 using System;
 using System.Collections.ObjectModel;
@@ -14,7 +15,9 @@ namespace Hospital.View.Doctor
     /// </summary>
     public partial class MedicineValidity : Page,INotifyPropertyChanged
     {
-        private MedicineRevisionService service=new MedicineRevisionService();
+        private MedicineRevisionServicePage service=new MedicineRevisionServicePage();
+        private MedicineService medicineService = new MedicineService();
+        private MedicineRevisionService medicineRevisionService = new MedicineRevisionService();
         private Model.Doctor doctor=new Model.Doctor();
         private ObservableCollection<MedicineRevision> medicineRevisions = new ObservableCollection<MedicineRevision>();
         public event PropertyChangedEventHandler PropertyChanged;
@@ -86,8 +89,8 @@ namespace Hospital.View.Doctor
                 ConfirmBox confirmBox = new ConfirmBox("Da li ste sigurni da odobravate lek?");
                 if ((bool)confirmBox.ShowDialog())
                 {
-                    service.DeleteMedicineRevision(((MedicineRevision)ListBoxRevisions.SelectedItem).Medicine.ID);
-                    service.SaveNewMedicine(((MedicineRevision)ListBoxRevisions.SelectedItem).Medicine);
+                    medicineRevisionService.Delete(((MedicineRevision)ListBoxRevisions.SelectedItem).Medicine.ID);
+                    medicineService.SaveMedicine(((MedicineRevision)ListBoxRevisions.SelectedItem).Medicine);
                     MedicineRevisions.Remove(((MedicineRevision)ListBoxRevisions.SelectedItem));
                 }
             }

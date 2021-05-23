@@ -2,6 +2,7 @@
 using Hospital.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,9 +18,19 @@ namespace Hospital.Services
             appointmentRepository = new AppointmentFileRepository();
         }
 
+
         public void DeletePatientsAppointments(string patientID)
         {
             appointmentRepository.DeleteByPatientID(patientID);
+        }
+        public void DeleteAppointment(string id)
+        {
+            appointmentRepository.Delete(id);
+        }
+
+        public ObservableCollection<Appointment> GetAll()
+        {
+            return appointmentRepository.GetAll();
         }
     }
 }

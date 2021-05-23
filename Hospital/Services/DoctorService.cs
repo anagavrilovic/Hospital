@@ -1,4 +1,5 @@
-﻿using Hospital.Repositories;
+﻿using Hospital.Model;
+using Hospital.Repositories;
 using Hospital.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,10 @@ namespace Hospital.Services
         public DoctorService()
         {
             doctorRepository = new DoctorFileRepository();
+        }
+        public Doctor GetDoctorById(string id)
+        {
+            return doctorRepository.GetByID(id);
         }
     }
 }

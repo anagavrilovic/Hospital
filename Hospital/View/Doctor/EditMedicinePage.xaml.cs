@@ -1,4 +1,5 @@
-﻿using Hospital.Services.DoctorServices;
+﻿using Hospital.Services;
+using Hospital.Services.DoctorServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,6 +26,7 @@ namespace Hospital.View.Doctor
     /// </summary>
     public partial class EditMedicinePage : Page, INotifyPropertyChanged
     {
+        private MedicineService medicineService = new MedicineService();
         private EditMedicineService service = new EditMedicineService();
         private Medicine medicine = new Medicine();
         public Medicine Medicine
@@ -97,7 +99,7 @@ namespace Hospital.View.Doctor
         private void SetProperites()
         {
             medicineIngredientsListBox.ItemsSource = Medicine.Ingredient;
-            medicineForDisplay = service.GetAllMedicine();
+            medicineForDisplay = medicineService.GetAll();
             allDrugsListBox.ItemsSource = medicineForDisplay;
             allIngredientsListBox.ItemsSource = Ingredients;
         }

@@ -122,7 +122,6 @@ namespace Hospital.Services
                 }
             }  
         }
-
         public string GenerateID()
         {
             List<int> existingIDs = notificationRepository.GetExistingIDs();
@@ -136,6 +135,14 @@ namespace Hospital.Services
             }
 
             return newID.ToString();
+        }
+        public Notification GetById(string id)
+        {
+            return notificationRepository.GetByID(id);
+        }
+        public void Serialize(ObservableCollection<Notification> notifications)
+        {
+            notificationRepository.Serialize(notifications);
         }
     }
 }

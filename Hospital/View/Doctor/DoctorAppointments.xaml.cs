@@ -1,4 +1,6 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
+using Hospital.Services.DoctorServices;
 using Hospital.View.Doctor;
 using System;
 using System.Collections.Generic;
@@ -25,11 +27,12 @@ namespace Hospital.View.Doctor
     /// </summary>
     public partial class DoctorAppointments : Page, INotifyPropertyChanged
     {
-        private DoctorStorage doctorStorage = new DoctorStorage();
-        private AppointmentStorage appointmentStorage = new AppointmentStorage();
-        private MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
-        private Hospital.Model.Doctor doctor = new Hospital.Model.Doctor();
-        public Hospital.Model.Doctor Doctor
+        private AppointmentService AppointmentService = new AppointmentService();
+        private MedicalRecordService medicalRecordService = new MedicalRecordService();
+        private DoctorService doctorService = new DoctorService();
+        private DoctorAppointmentsService service = new DoctorAppointmentsService();
+        private Model.Doctor doctor = new Model.Doctor();
+        public Model.Doctor Doctor
         {
             get { return doctor; }
             set
@@ -65,23 +68,10 @@ namespace Hospital.View.Doctor
             this.DataContext = this;
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 3 / 4);
-            Doctor=doctorStorage.GetOne(IDnumber);
-            InitAppointments();
+            Doctor=doctorService.GetDoctorById(IDnumber);
+            Appointments = service.InitAppointments(IDnumber);
         }
 
-        private void InitAppointments()
-        {
-            foreach(Appointment a in appointmentStorage.GetAll())
-            {
-                if (a.IDDoctor.Equals(Doctor.PersonalID))
-                {
-                    a.Doctor = doctorStorage.GetOne(a.IDDoctor);
-                    a.PatientsRecord = medicalRecordStorage.GetByPatientID(a.IDpatient);
-                    Appointments.Add(a);
-                }
-            }
-            
-        }
 
         private void dataGridAppointments_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -98,24 +88,17 @@ namespace Hospital.View.Doctor
         {
             if(dataGridAppointments.SelectedIndex != -1)
             {
-                appointmentStorage.Delete(((Appointment)dataGridAppointments.SelectedItem).IDAppointment);
-                MedicalRecord medicalRecord=medicalRecordStorage.GetByPatientID(((Appointment)dataGridAppointments.SelectedItem).IDpatient);
+                Appointment selectedAppointment = (Appointment)dataGridAppointments.SelectedItem;
+                AppointmentService.DeleteAppointment(selectedAppointment.IDAppointment);
+                MedicalRecord medicalRecord=medicalRecordService.GetByPatientId(selectedAppointment.IDpatient);
                 if (medicalRecord != null)
                 {
-                    foreach (Examination examination in medicalRecord.Examination)
-                    {
-                        if (examination.appointment != null)
-                        {
-                            if (examination.appointment.IDAppointment.Equals(((Appointment)dataGridAppointments.SelectedItem).IDAppointment))
-                            {
-                                medicalRecord.RemoveExamination(examination);
-                                break;
-                            }
-                        }
-                    }
+                    service.DeleteAppointmentFromExamination(selectedAppointment.IDAppointment, medicalRecord);
                 }
-                medicalRecordStorage.EditRecord(medicalRecord);
+                medicalRecordService.UpdateMedicalRecord(medicalRecord);
                 appointments.Remove((Appointment)dataGridAppointments.SelectedItem);
+                dataGridAppointments.ItemsSource = appointments;
+                dataGridAppointments.Items.Refresh();
             }
         }
 

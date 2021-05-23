@@ -14,7 +14,7 @@ namespace Hospital.Services.DoctorServices
     public class EditMedicineService
     {
         private IMedicineRepository medicineRepository;
-
+        private MedicineService medicineService;
 
         public ObservableCollection<Ingredient> ReadIngredients()
         {
@@ -30,23 +30,23 @@ namespace Hospital.Services.DoctorServices
         }
         public ObservableCollection<Medicine> SetReplacementMedicine(Medicine medicine)
         {
-            medicineRepository = new MedicineFileRepository();
+            medicineService = new MedicineService();
             ObservableCollection<Medicine> supstituteDrugs = new ObservableCollection<Medicine>();
             foreach (string medicID in medicine.ReplacementMedicineIDs)
             {
-                supstituteDrugs.Add(medicineRepository.GetByID(medicID));
+                supstituteDrugs.Add(medicineService.GetById(medicID));
             }
             return supstituteDrugs;
         }
 
         public void SaveMedicineSubstitutes(ObservableCollection<Medicine> substituteDrugs,Medicine changedMedicine)
         {
-            medicineRepository = new MedicineFileRepository();
+            medicineService = new MedicineService();
             foreach (Medicine medicine in substituteDrugs)
             {
                 changedMedicine.AddMedicineID(medicine.ID);
             }
-            medicineRepository.EditMedicine(changedMedicine);
+            medicineService.UpdateMedicine(changedMedicine);
         }
 
         public bool AlreadyInSubstituteDrugs(Medicine selectedMedic,ObservableCollection<Medicine>substituteDrugs)
@@ -65,10 +65,5 @@ namespace Hospital.Services.DoctorServices
             return false;
         }
 
-        public ObservableCollection<Medicine> GetAllMedicine()
-        {
-            medicineRepository = new MedicineFileRepository();
-            return medicineRepository.GetAll();
-        }
     }
 }
