@@ -15,18 +15,10 @@ using System.Windows.Shapes;
 
 namespace Hospital.View.Secretary
 {
-    /// <summary>
-    /// Interaction logic for HitanPregledDetalji.xaml
-    /// </summary>
     public partial class HitanPregledDetalji : Window
     {
         public Appointment Appointment { get; set; }
-        public Model.Doctor Doctor { get; set; }
-        public MedicalRecord Patient { get; set; }
         public string Type { get; set; }
-
-        public Model.DoctorStorage DoctorStorage { get; set; }
-        public MedicalRecordService MedicalRecordService { get; set; }
 
 
         public HitanPregledDetalji(Appointment newAppointment)
@@ -34,20 +26,7 @@ namespace Hospital.View.Secretary
             InitializeComponent();
             this.DataContext = this;
             this.Appointment = newAppointment;
-            LoadDoctor();
-            LoadPatient();
             LoadAppointmentType();
-        }
-
-        private void LoadDoctor()
-        {
-            DoctorStorage = new Model.DoctorStorage();
-            Doctor = DoctorStorage.GetDoctorByID(Appointment.IDDoctor);
-        }
-
-        private void LoadPatient()
-        {
-            Patient = MedicalRecordService.GetRecordByID(Appointment.IDpatient);
         }
 
         private void LoadAppointmentType()

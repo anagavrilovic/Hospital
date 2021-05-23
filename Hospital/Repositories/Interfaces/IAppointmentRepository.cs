@@ -8,5 +8,6 @@ namespace Hospital.Repositories.Interfaces
 {
     interface IAppointmentRepository : IGenericRepository<Appointment>
     {
+        void DeleteByPatientID(string patientID);
     }
 }

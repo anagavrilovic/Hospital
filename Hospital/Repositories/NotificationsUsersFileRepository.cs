@@ -17,7 +17,6 @@ namespace Hospital.Repositories
 
         public NotificationsUsersFileRepository() { }
 
-
         public void Delete(string id)
         {
             throw new NotImplementedException();

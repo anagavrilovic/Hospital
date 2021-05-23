@@ -3,6 +3,7 @@ using Hospital.Repositories;
 using Hospital.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,6 +39,16 @@ namespace Hospital.Services
         public int CountByRole(UserType userType)
         {
             return registratedUsersRepository.CountByRole(userType);
+        }
+
+        public UserType GetRoleByUsername(string username)
+        {
+            return registratedUsersRepository.GetRoleByUsername(username);
+        }
+
+        public ObservableCollection<RegistratedUser> GetAllRegistratedUsers()
+        {
+            return registratedUsersRepository.GetAll();
         }
     }
 }
