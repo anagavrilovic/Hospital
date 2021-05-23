@@ -1,4 +1,6 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
+using Hospital.Services.DoctorServices;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -23,7 +25,9 @@ namespace Hospital.View.Doctor
 
     public partial class AppointmentWindow : Window, INotifyPropertyChanged
     {
-        private MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
+        private AppointmentWindowService appointmentWindowService;
+        private MedicalRecordService medicalRecordService;
+        private DoctorService doctorService;
         private Examination examination;
         private static int MEDICAL_RECORD_REVIEW_TAB = 1;
         private Model.Doctor loggedInDoctor;
@@ -50,7 +54,6 @@ namespace Hospital.View.Doctor
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
-        private DoctorStorage doctorStorage = new DoctorStorage();
         public Examination Examintaion
         {
             get { return examination; }
@@ -69,11 +72,13 @@ namespace Hospital.View.Doctor
         }
         public AppointmentWindow(Appointment appointment)
         {
+            appointmentWindowService = new AppointmentWindowService();
+            medicalRecordService = new MedicalRecordService();
+            doctorService = new DoctorService();
             this.appointment = appointment;
             examination = new Examination();
             LoggedInDoctor = new Hospital.Model.Doctor();
-            LoggedInDoctor = doctorStorage.GetOne(appointment.IDDoctor);
-            
+            LoggedInDoctor = doctorService.GetDoctorById(appointment.IDDoctor);           
             InitializeComponent();
             intiProperties();
         }
@@ -120,7 +125,7 @@ namespace Hospital.View.Doctor
         private void SetAppointment()
         {
             frameAppointment = new Frame();
-            makeAppointment = new AppointmentInfo(loggedInDoctor, (medicalRecordStorage.GetByPatientID(appointment.IDpatient)).Patient.PersonalID);
+            makeAppointment = new AppointmentInfo(loggedInDoctor, (medicalRecordService.GetByPatientId(appointment.IDpatient)).Patient.PersonalID);
             frameAppointment.Content = makeAppointment;
         }
 
@@ -134,8 +139,7 @@ namespace Hospital.View.Doctor
         private void SetMedicalRecordReview()
         {
             frameMedicalRecordReview = new Frame();
-            medicalRecordStorage = new MedicalRecordStorage();
-            medicalRecordReview = new MedicalRecordPage((medicalRecordStorage.GetByPatientID(appointment.IDpatient)).MedicalRecordID, appointment);
+            medicalRecordReview = new MedicalRecordPage((medicalRecordService.GetByPatientId(appointment.IDpatient)).MedicalRecordID, appointment);
             frameMedicalRecordReview.Content = medicalRecordReview;
             medicalRecordReviewTab.Content = frameMedicalRecordReview;
         }
@@ -156,7 +160,7 @@ namespace Hospital.View.Doctor
                 case 4:
                     DiagnosisTab.Content = frameDiagnosis;
                     medicalRecordReview.saveButton.Visibility = Visibility.Visible;
-                    if (!AlreadyHospitalized())
+                    if (!appointmentWindowService.AlreadyHospitalized(appointment.IDpatient))
                     {
                         medicalRecordReview.hospitalTreatmentButton.Visibility = Visibility.Visible;
                     }
@@ -164,7 +168,7 @@ namespace Hospital.View.Doctor
                 case 5:
                     AppointmentTab.Content = frameAppointment;
                     medicalRecordReview.saveButton.Visibility = Visibility.Visible;
-                    if (!AlreadyHospitalized())
+                    if (!appointmentWindowService.AlreadyHospitalized(appointment.IDpatient))
                     {
                         medicalRecordReview.hospitalTreatmentButton.Visibility = Visibility.Visible;
                     }
@@ -176,17 +180,6 @@ namespace Hospital.View.Doctor
                     medicalRecordReview.hospitalTreatmentButton.Visibility = Visibility.Visible;
                     break;
             }
-        }
-
-        private bool AlreadyHospitalized()
-        {
-            HospitalTreatmentStorage hospitalTreatmentStorage = new HospitalTreatmentStorage();
-            foreach(HospitalTreatment hospitalTreatment in hospitalTreatmentStorage.GetAll())
-            {
-                if (hospitalTreatment.PatientId.Equals(appointment.IDpatient))
-                    return true;
-            }
-            return false;
         }
     }
     }

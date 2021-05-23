@@ -9,5 +9,8 @@ namespace Hospital.Repositories.Interfaces
     interface IAppointmentRepository : IGenericRepository<Appointment>
     {
         void DeleteByPatientID(string patientID);
+        bool IsDoctorAvaliableForAppointment(Appointment newAppointment);
+        bool IsPatientAvaliableForAppointment(Appointment newAppointment);
+        String GetNewID();
     }
 }

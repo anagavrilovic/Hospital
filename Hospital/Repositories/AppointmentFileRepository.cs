@@ -80,5 +80,64 @@ namespace Hospital.Repositories
                 serializer.Serialize(file, appointments);
             }
         }
+        public bool IsDoctorAvaliableForAppointment(Appointment newAppointment)
+        {
+            ObservableCollection<Appointment> allAppointments = GetAll();
+            foreach (Appointment appointment in allAppointments)
+            {
+                if (!appointment.IsDoctorAvaliable(newAppointment))
+                    return false;
+            }
+
+            return true;
+        }
+
+        public bool IsPatientAvaliableForAppointment(Appointment newAppointment)
+        {
+            ObservableCollection<Appointment> allAppointments = GetAll();
+            foreach (Appointment appointment in allAppointments)
+            {
+                if (!appointment.IsPatientAvaliable(newAppointment))
+                    return false;
+            }
+
+            return true;
+        }
+        public String GetNewID()
+        {
+            ObservableCollection<Appointment> apps;
+            using (StreamReader sr = File.OpenText(@"..\\..\\Files\\" + fileName))
+            {
+                apps = GetAll();
+                apps = JsonConvert.DeserializeObject<ObservableCollection<Appointment>>(sr.ReadToEnd());
+            }
+
+            int retVal = 1;
+            if (apps == null || apps.Count == 0)
+            {
+                return retVal.ToString();
+            }
+
+
+            List<int> lista = new List<int>();
+            foreach (Appointment app in apps)
+            {
+                int x = Int32.Parse(app.IDAppointment);
+                lista.Add(x);
+            }
+
+            while (true)
+            {
+                if (!lista.Contains(retVal))
+                {
+                    break;
+                }
+                else
+                {
+                    retVal++;
+                }
+            }
+            return retVal.ToString();
+        }
     }
 }

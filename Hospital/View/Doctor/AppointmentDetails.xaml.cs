@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -21,8 +22,8 @@ namespace Hospital.View.Doctor
     /// </summary>
     public partial class AppointmentDetails : Window,INotifyPropertyChanged
     {
+        private MedicalRecordService medicalRecordService;
         Appointment appointment = new Appointment();
-        MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Appointment Appointment
@@ -57,9 +58,10 @@ namespace Hospital.View.Doctor
 
         private void InitFields()
         {
+            medicalRecordService = new MedicalRecordService();
            double dur= Appointment.DurationInHours * 60;
             durationInMinutes = dur.ToString() +" minuta";
-           appointment.PatientsRecord= medicalRecordStorage.GetByPatientID(Appointment.IDpatient);
+           appointment.PatientsRecord= medicalRecordService.GetByPatientId(Appointment.IDpatient);
         }
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)
@@ -72,7 +74,7 @@ namespace Hospital.View.Doctor
 
         private void MedicalRecordReview(object sender, RoutedEventArgs e)
         {
-            MedicalRecordWindow review = new MedicalRecordWindow((medicalRecordStorage.GetByPatientID(Appointment.IDpatient)).MedicalRecordID);
+            MedicalRecordWindow review = new MedicalRecordWindow((medicalRecordService.GetByPatientId(Appointment.IDpatient)).MedicalRecordID);
             review.Owner = this;
             this.Hide();
             review.Show();

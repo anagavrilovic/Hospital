@@ -2,6 +2,7 @@
 using Hospital.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,10 @@ namespace Hospital.Services
         public Room GetById(string id)
         {
             return roomRepository.GetByID(id);
+        }
+        public ObservableCollection<Room> GetAll()
+        {
+            return roomRepository.GetAll();
         }
     }
 }

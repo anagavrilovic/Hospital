@@ -68,11 +68,11 @@
             <DatePicker x:Name="datePicker" Width="150" Height="25"  DisplayDateStart="{x:Static sys:DateTime.Today}"
                         SelectedDate="{Binding DateOfAppointment, Mode=OneWayToSource}" FirstDayOfWeek="Monday" Margin="10,0,5,0"/>
             <ComboBox x:Name="timeComboBox" Width="20" Height="25" SelectedValue="{Binding TimeOfAppointment
-                ,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+                ,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ComboBoxStyle}"></ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Label FontSize="17" Margin="0,0,10,0" Style="{DynamicResource Label}" Content="{ns:Loc durationLabel}"></Label>
-            <ComboBox FontSize="17" x:Name="durationInMinutesComboBox" Width="150" Height="25" SelectedValue="{Binding DurationInMinutes, Mode=OneWayToSource}"></ComboBox>
+            <ComboBox FontSize="17" x:Name="durationInMinutesComboBox" Width="150" Height="25" SelectedValue="{Binding DurationInMinutes, Mode=OneWayToSource}" Style="{DynamicResource ComboBoxStyle}"></ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Label FontSize="17" Margin="0,0,10,0" Style="{DynamicResource Label}" Content="{ns:Loc typeExaminationLabel}"></Label>

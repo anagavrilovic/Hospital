@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,6 +24,10 @@ namespace Hospital.View.Doctor
     /// </summary>
     public partial class NewAppointment : Window,INotifyPropertyChanged
     {
+        private MedicalRecordService medicalRecordService;
+        private RoomService roomService;
+        private DoctorService doctorService;
+        private AppointmentService appointmentService;
         private Appointment appointment;
         public Appointment Appointment {
             get { return appointment; }
@@ -80,11 +85,6 @@ namespace Hospital.View.Doctor
 
         }
         public DoctorAppointments parentWindow { get; set; }
-        AppointmentStorage appointmentStorage = new AppointmentStorage();
-        DoctorStorage doctorStorage = new DoctorStorage();
-        MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
-        RoomStorage roomStorage = new RoomStorage();
-
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
             if (PropertyChanged != null)
@@ -121,9 +121,12 @@ namespace Hospital.View.Doctor
 
         private void InitProperties(string doctorId)
         {
-
+            roomService = new RoomService();
+            appointmentService = new AppointmentService();
+            medicalRecordService = new MedicalRecordService();
+            doctorService = new DoctorService();
             Appointment = new Appointment();
-            Appointment.Doctor = doctorStorage.GetDoctorByID(doctorId);
+            Appointment.Doctor = doctorService.GetDoctorById(doctorId);
             SetDoctorListAndRadioButtons();
         }
 
@@ -173,7 +176,7 @@ namespace Hospital.View.Doctor
         {
             if (IsDoctorAvaliable() && IsPatientAvaliable())
             {
-                appointmentStorage.Save(Appointment);
+                appointmentService.Save(Appointment);
                 return true;
             }
             else
@@ -181,7 +184,7 @@ namespace Hospital.View.Doctor
         }
         private bool IsDoctorAvaliable()
         {
-            if (!appointmentStorage.IsDoctorAvaliableForAppointment(Appointment))
+            if (!appointmentService.IsDoctorAvaliableForAppointment(Appointment))
             {
                 ErrorBox errorBox = new ErrorBox("Doktor je već zauzet u ovom terminu. Promenite trajanje ili odaberite drugi termin!");
                 return false;
@@ -192,7 +195,7 @@ namespace Hospital.View.Doctor
 
         private bool IsPatientAvaliable()
         {
-            if (!appointmentStorage.IsPatientAvaliableForAppointment(Appointment))
+            if (!appointmentService.IsPatientAvaliableForAppointment(Appointment))
             {
                 ErrorBox errorBox = new ErrorBox("Ovaj pacijent već ima zakazan pregled/operaciju u ovom terminu!");
                 return false;
@@ -203,12 +206,12 @@ namespace Hospital.View.Doctor
         private void UpdateParentPage()
         {
             ObservableCollection<Appointment> list = new ObservableCollection<Appointment>();
-            foreach (Appointment a in appointmentStorage.GetAll())
+            foreach (Appointment a in appointmentService.GetAll())
             {
-                if (doctorStorage.GetOne(a.IDDoctor).PersonalID.Equals(Appointment.Doctor.PersonalID))
+                if (doctorService.GetDoctorById(a.IDDoctor).PersonalID.Equals(Appointment.Doctor.PersonalID))
                 {
-                    a.PatientsRecord = medicalRecordStorage.GetByPatientID(a.IDpatient);
-                    a.Doctor = doctorStorage.GetOne(a.IDDoctor);
+                    a.PatientsRecord = medicalRecordService.GetByPatientId(a.IDpatient);
+                    a.Doctor = doctorService.GetDoctorById(a.IDDoctor);
                     list.Add(a);
                 }
             }
@@ -217,7 +220,7 @@ namespace Hospital.View.Doctor
         }
         private void SetRoomAndRoomType()
         {
-            foreach (Room storageRoom in roomStorage.GetAll())
+            foreach (Room storageRoom in roomService.GetAll())
             {
                 if (rdbPregled.IsChecked.Equals(true) && Appointment.Doctor.RoomID.Equals(storageRoom.Id))
                 {
@@ -244,7 +247,7 @@ namespace Hospital.View.Doctor
             Appointment.IDpatient = Appointment.PatientsRecord.Patient.PersonalID;
             Appointment.DateTime = DateOfAppointment.Date.Add(DateTime.Parse(timeOfAppointment).TimeOfDay);
             Appointment.IDDoctor = Appointment.Doctor.PersonalID;
-            Appointment.IDAppointment = appointmentStorage.GetNewID();
+            Appointment.IDAppointment = appointmentService.GetNewID();
             double timeInMinutesDouble = double.Parse(DurationInMinutes);
             Appointment.DurationInHours = timeInMinutesDouble / 60;
         }
@@ -266,9 +269,9 @@ namespace Hospital.View.Doctor
 
         private void addPatient_Click(object sender, RoutedEventArgs e)
         {
-            AddPatientWindow pactientListBox = new AddPatientWindow(this);
-            pactientListBox.Owner = this;
-            pactientListBox.Show();
+            AddPatientWindow patientListBox = new AddPatientWindow(this);
+            patientListBox.Owner = this;
+            patientListBox.Show();
         }
     }
 }

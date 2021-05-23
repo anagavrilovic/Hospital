@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Services;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -23,7 +24,7 @@ namespace Hospital.View.Doctor
     public partial class AddPatientWindow : Window, INotifyPropertyChanged
     {
         ObservableCollection<Patient> patients = new ObservableCollection<Patient>();
-        MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
+        private MedicalRecordService medicalRecordService;
         public event PropertyChangedEventHandler PropertyChanged;
         private NewAppointment parentWindow;
         ObservableCollection<Patient> Patients
@@ -47,7 +48,8 @@ namespace Hospital.View.Doctor
 
         public AddPatientWindow(NewAppointment parentWindow)
         {
-            foreach (MedicalRecord record in medicalRecordStorage.GetAll())
+            medicalRecordService = new MedicalRecordService();
+            foreach (MedicalRecord record in medicalRecordService.GetAllRecords())
             {
                 Patients.Add(record.Patient);
             }
@@ -68,7 +70,7 @@ namespace Hospital.View.Doctor
 
         private void listBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            parentWindow.Appointment.PatientsRecord = medicalRecordStorage.GetByPatientID(((Patient)listBox.SelectedItem).PersonalID);
+            parentWindow.Appointment.PatientsRecord = medicalRecordService.GetByPatientId(((Patient)listBox.SelectedItem).PersonalID);
             parentWindow.pacijentIme.Content = parentWindow.Appointment.PatientsRecord.Patient.FirstName + " " + parentWindow.Appointment.PatientsRecord.Patient.LastName;
             Close();
         }
