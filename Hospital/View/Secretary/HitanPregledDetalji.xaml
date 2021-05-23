@@ -20,14 +20,14 @@
 
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Lekar: " Style="{StaticResource MessageBoxTextBigger}" Margin="20,10,0,10" FontWeight="SemiBold" />
-                <TextBlock Text="{Binding Doctor}" Style="{StaticResource MessageBoxTextBigger}" Margin="0,10" />
+                <TextBlock Text="{Binding Appointment.Doctor}" Style="{StaticResource MessageBoxTextBigger}" Margin="0,10" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Pacijent: " Style="{StaticResource MessageBoxTextBigger}" Margin="20,10,0,10" FontWeight="SemiBold"/>
-                <TextBlock Text="{Binding Patient.Patient.FirstName}" Style="{StaticResource MessageBoxTextBigger}" Margin="0,10"/>
+                <TextBlock Text="{Binding Appointment.PatientsRecord.Patient.FirstName}" Style="{StaticResource MessageBoxTextBigger}" Margin="0,10"/>
                 <TextBlock Text=" " Style="{StaticResource MessageBoxTextBigger}" Margin="0,10"/>
-                <TextBlock Text="{Binding Patient.Patient.LastName}" Style="{StaticResource MessageBoxTextBigger}" Margin="0,10"/>
+                <TextBlock Text="{Binding Appointment.PatientsRecord.Patient.LastName}" Style="{StaticResource MessageBoxTextBigger}" Margin="0,10"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">

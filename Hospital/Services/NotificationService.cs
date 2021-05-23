@@ -15,7 +15,6 @@ namespace Hospital.Services
     {
         private INotificationRepository notificationRepository;
         private INotificationsUsersRepository notificationsUsersRepository;
-        private IRegistratedUsersRepository registratedUsersRepository;
 
         private RegistratedUserService registratedUserService = new RegistratedUserService();
         private MedicalRecordService medicalRecordService = new MedicalRecordService();
@@ -24,7 +23,6 @@ namespace Hospital.Services
         {
             notificationRepository = new NotificationFileRepository();
             notificationsUsersRepository = new NotificationsUsersFileRepository();
-            registratedUsersRepository = new RegistratedUserFileRepository();
         }
 
         public ObservableCollection<Notification> GetAllNotificationsSortedDescending()
@@ -43,7 +41,7 @@ namespace Hospital.Services
             ObservableCollection<NotificationsUsers> recipientsOfRequestedNotification = notificationsUsersRepository.GetNotificationRecipientsByIDNotification(notification.Id);
             int count = 0;
             foreach(NotificationsUsers recipient in recipientsOfRequestedNotification)
-                if (registratedUsersRepository.GetRoleByUsername(recipient.Username) == userType)
+                if (registratedUserService.GetRoleByUsername(recipient.Username) == userType)
                     count += 1;
 
             return count;
@@ -60,7 +58,7 @@ namespace Hospital.Services
             ObservableCollection<MedicalRecord> recipientsRecords = new ObservableCollection<MedicalRecord>();
 
             foreach (NotificationsUsers recipient in recipientsOfRequestedNotification)
-                if (registratedUsersRepository.GetRoleByUsername(recipient.Username) == UserType.patient)
+                if (registratedUserService.GetRoleByUsername(recipient.Username) == UserType.patient)
                     recipientsRecords.Add(medicalRecordService.GetRecordByUsername(recipient.Username));
 
             return recipientsRecords;
@@ -92,7 +90,7 @@ namespace Hospital.Services
 
         private void SendNotificationByRole(NotificationRecipientsDTO recipients, Notification notification)
         {
-            ObservableCollection<RegistratedUser> registratedUsers = registratedUsersRepository.GetAll();
+            ObservableCollection<RegistratedUser> registratedUsers = registratedUserService.GetAllRegistratedUsers();
             if (recipients.IsEverySecretaryRecipient || recipients.IsEveryDoctorRecipient || recipients.IsEveryManagerRecipient || recipients.IsEveryPatientRecipient)
             {
                 foreach (RegistratedUser user in registratedUsers)
@@ -123,6 +121,21 @@ namespace Hospital.Services
                     notificationsUsersRepository.Save(notificationsUsers);
                 }
             }  
+        }
+
+        public string GenerateID()
+        {
+            List<int> existingIDs = notificationRepository.GetExistingIDs();
+            int newID = 1;
+            while (true)
+            {
+                if (!existingIDs.Contains(newID))
+                    break;
+
+                newID += 1;
+            }
+
+            return newID.ToString();
         }
     }
 }

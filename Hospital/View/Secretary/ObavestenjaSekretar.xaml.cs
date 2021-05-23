@@ -21,11 +21,12 @@ namespace Hospital.View
 {
     public partial class ObavestenjaSekretar : Page
     {
-        public ObservableCollection<Notification> AllNotifications { get; set; }
-        public Notification SelectedNotification { get; set; }
+        public ObservableCollection<Notification> AllNotifications { get; set; }      
         public ICollectionView NotificationCollection { get; set; }
+        public Notification SelectedNotification { get; set; }
 
         public NotificationService NotificationService { get; set; }
+
 
         public ObavestenjaSekretar()
         {

@@ -55,7 +55,7 @@ namespace Hospital.View
         private void InitializeNewNotification()
         {
             this.NewNotification.Date = DateTime.Now;
-            this.NewNotification.Id = this.NewNotification.GetHashCode().ToString();
+            this.NewNotification.Id = NotificationService.GenerateID();
         }
 
         public void LoadAllMedicalRecords()
@@ -69,43 +69,6 @@ namespace Hospital.View
         private void BtnPotvrdiClick(object sender, RoutedEventArgs e)
         {
             NotificationService.CreateNotification(Recipients, NewNotification);
-            /*NotificationStorage ns = new NotificationStorage();
-            ns.SaveNotification(Notification);
-
-            RegistratedUserStorage rus = new RegistratedUserStorage();
-            ObservableCollection<RegistratedUser> regUsers = rus.GetAll();
-            ObservableCollection<NotificationsUsers> notificationsUsers = ns.GetAllNotificationsUsers();
-
-            if (IsEverySecretaryRecipient || IsEveryDoctorRecipient || IsEveryManagerRecipient || IsEveryPatientRecipient)
-            {
-                foreach (RegistratedUser user in regUsers)
-                {
-                    if (IsEverySecretaryRecipient && user.Type.Equals(UserType.secretary))
-                    {
-                        notificationsUsers.Add(new NotificationsUsers { NotificationID = Notification.Id, Username = user.Username, Read = false });
-                    }
-                    if (IsEveryDoctorRecipient && user.Type.Equals(UserType.doctor))
-                    {
-                        notificationsUsers.Add(new NotificationsUsers { NotificationID = Notification.Id, Username = user.Username, Read = false });
-                    }
-                    if (IsEveryManagerRecipient && user.Type.Equals(UserType.manager))
-                    {
-                        notificationsUsers.Add(new NotificationsUsers { NotificationID = Notification.Id, Username = user.Username, Read = false });
-                    }
-                    if (IsEveryPatientRecipient && user.Type.Equals(UserType.patient))
-                    {
-                        notificationsUsers.Add(new NotificationsUsers { NotificationID = Notification.Id, Username = user.Username, Read = false });
-                    }
-                }
-            }
-            
-            foreach(MedicalRecord record in AllMedicalRecords)
-            {
-                notificationsUsers.Add(new NotificationsUsers { NotificationID = Notification.Id, Username = record.Patient.Username, Read = false });
-            }
-            
-            ns.SerializeNotificationsUsers(notificationsUsers);*/
-
             NavigationService.Navigate(new ObavestenjaSekretar());
         }
 

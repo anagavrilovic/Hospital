@@ -12,5 +12,6 @@ namespace Hospital.Repositories.Interfaces
     {
         ObservableCollection<Notification> GetAllNotificationsSortedDescending();
         void Update(Notification notification);
+        List<int> GetExistingIDs();
     }
 }
