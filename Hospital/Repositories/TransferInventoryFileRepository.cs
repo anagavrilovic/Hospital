@@ -17,7 +17,14 @@ namespace Hospital.Repositories
 
         public void Delete(string id)
         {
-            throw new NotImplementedException();
+            ObservableCollection<TransferInventory> allTransfers = GetAll();
+            foreach (TransferInventory transfer in allTransfers)
+                if (transfer.TransferID.Equals(id))
+                {
+                    allTransfers.Remove(transfer);
+                    break;
+                }
+            Serialize(allTransfers);
         }
 
         public ObservableCollection<TransferInventory> GetAll()
@@ -36,7 +43,12 @@ namespace Hospital.Repositories
 
         public TransferInventory GetByID(string id)
         {
-            throw new NotImplementedException();
+            ObservableCollection<TransferInventory> allTransfers = GetAll();
+            foreach (TransferInventory transfer in allTransfers)
+                if (transfer.TransferID.Equals(id))
+                    return transfer;
+
+            return null;
         }
 
         public void Save(TransferInventory parameter)
@@ -51,6 +63,17 @@ namespace Hospital.Repositories
             transferInventory.Add(parameter);
 
             Serialize(transferInventory);
+        }
+
+        public List<int> GetAllScheduledTransferIDs()
+        {
+            List<int> allIDs = new List<int>();
+            ObservableCollection<TransferInventory> allScheduledTransfers = GetAll();
+            foreach (TransferInventory transfer in allScheduledTransfers)
+                allIDs.Add(Int32.Parse(transfer.TransferID));
+
+            return allIDs;
+
         }
 
         public void Serialize(ObservableCollection<TransferInventory> parameter)

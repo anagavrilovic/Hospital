@@ -15,12 +15,23 @@ namespace Hospital.Model
 {
     public class TransferInventory : INotifyPropertyChanged
     {
+        private string _transferID;
         private string _itemID;
         private int _quantity;
         private string _firstRoomID;
         private string _destinationRoomID;
         private DateTime _transferDate;
         private string _transferTime;
+
+        public string TransferID
+        {
+            get => _transferID;
+            set
+            {
+                _transferID = value;
+                OnPropertyChanged("TransferID");
+            }
+        }
 
         public string ItemID
         {

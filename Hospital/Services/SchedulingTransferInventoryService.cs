@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -91,7 +92,7 @@ namespace Hospital.Services
             return false;
         }
 
-        public bool IsTransferAfterFirstScheduledTransferOfItem()
+        private bool IsTransferAfterFirstScheduledTransferOfItem()
         {
             this._firstReservedTransfer = getFirstScheduledTransferOfItem();
             if (TransferRequest.TransferDate > _firstReservedTransfer.TransferDate)
@@ -100,7 +101,7 @@ namespace Hospital.Services
             return false;
         }
 
-        public bool IsTransferBeforeFirstScheduledTransferOfTime()
+        private bool IsTransferBeforeFirstScheduledTransferOfTime()
         {
             this._firstReservedTransfer = getFirstScheduledTransferOfItem();
             if (TransferRequest.TransferDate < _firstReservedTransfer.TransferDate)
@@ -109,7 +110,7 @@ namespace Hospital.Services
             return false;
         }
 
-        public void ScheduleTemporaryTransferBeforeFirstReservedTransfer()
+        private void ScheduleTemporaryTransferBeforeFirstReservedTransfer()
         {
             if (_firstReservedTransfer.Quantity <= TransferRequest.Quantity)
             {
@@ -130,15 +131,31 @@ namespace Hospital.Services
             }
         }
 
-        public void SaveTransfer(TransferInventory transfer)
+        private void SaveTransfer(TransferInventory transfer)
         {
+            transfer.TransferID = GenerateTransferID();
             _transferInventoryStorage.Save(transfer);
             TransferInventoryService service = new TransferInventoryService(transfer);
             service.ScheduleTransfer();
         }
 
+        private string GenerateTransferID()
+        {
+            List<int> allScheduledTransfersIDs = _transferFileRepositry.GetAllScheduledTransferIDs();
+            int id = 1;
+            while(true)
+            {
+                if (!allScheduledTransfersIDs.Contains(id))
+                    break;
+
+                id += 1;
+            }
+            return id.ToString();
+        }
+
         public TransferInventory TransferRequest { get; set; }
         private TransferInventory _firstReservedTransfer = new TransferInventory();
         private TransferInventoryStorage _transferInventoryStorage = new TransferInventoryStorage();
+        private TransferInventoryFileRepository _transferFileRepositry = new TransferInventoryFileRepository();
     }
 }
