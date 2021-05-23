@@ -139,10 +139,8 @@ namespace Hospital
             ObservableCollection<Appointment> allAppointments = new AppointmentStorage().GetAll();
 
             foreach (Appointment a in allAppointments)
-            {
                 if (a.IsOverlappingWith(appointment) && this.Id.Equals(a.Room.Id))
                     return false;
-            }
 
             return true;
         }

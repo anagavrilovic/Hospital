@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace Hospital.Model
+namespace Hospital.DTO
 {
     public class WeeklyCalendarRow : INotifyPropertyChanged
     {

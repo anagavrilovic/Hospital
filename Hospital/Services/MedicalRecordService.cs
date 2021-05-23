@@ -29,6 +29,19 @@ namespace Hospital.Services
 
         public void RegisterNewRecord(MedicalRecord newRecord)
         {
+            if (newRecord.Patient.IsGuest)
+                RegisterGuestRecord(newRecord);
+            else
+                RegisterRegularRecord(newRecord);
+        }
+
+        private void RegisterGuestRecord(MedicalRecord newGuestRecord)
+        {
+            medicalRecordRepository.Save(newGuestRecord);
+        }
+
+        private void RegisterRegularRecord(MedicalRecord newRecord)
+        {
             bool accountCreated = registratedUserService.CreateAccount(newRecord);
 
             if (accountCreated)
@@ -72,9 +85,14 @@ namespace Hospital.Services
             return newID.ToString();
         }
 
-        internal MedicalRecord GetRecordByUsername(string username)
+        public MedicalRecord GetRecordByUsername(string username)
         {
             return medicalRecordRepository.GetByUsername(username);
+        }
+
+        public MedicalRecord GetRecordByIDPatient(string patientID)
+        {
+            return medicalRecordRepository.GetByPatientID(patientID);
         }
     }
 }

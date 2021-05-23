@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using Hospital.View.Secretary;
 using System;
 using System.Collections.Generic;
@@ -24,26 +25,21 @@ namespace Hospital.View
         private const double maxDurationForAppointment = 24;
         private const double timeSlot = 0.5;
 
-        public Model.Doctor Doctor { get; set; }
-        public MedicalRecord Patient { get; set; }
         public Appointment NewAppointment { get; set; }
         public ObservableCollection<Room> AvaliableRooms { get; set; }
         public ObservableCollection<string> PossibleDuration { get; set; }
 
-        public AppointmentStorage AppointmentStorage { get; set; }
-        public RoomStorage RoomStorage { get; set; }
+        public AppointmentService AppointmentService { get; set; }
+        public RoomService RoomService { get; set; }
 
 
         public ZakazivanjeTermina(Hospital.Model.Doctor selectedDoctor, MedicalRecord selectedPatient, DateTime dateTimeForNewAppointment)
         {
             InitializeComponent();
+            this.DataContext = this;
             InitializeAllProperties();
             ShowPossibleDuration();
-
-            this.DataContext = this;
-            this.Doctor = selectedDoctor;
-            this.Patient = selectedPatient;
-            NewAppointment.DateTime = dateTimeForNewAppointment;
+            InitializeNewAppointment(selectedDoctor, selectedPatient, dateTimeForNewAppointment);
         }
 
         private void InitializeAllProperties()
@@ -51,8 +47,8 @@ namespace Hospital.View
             NewAppointment = new Appointment();
             AvaliableRooms = new ObservableCollection<Room>();
             PossibleDuration = new ObservableCollection<string>();
-            AppointmentStorage = new AppointmentStorage();
-            RoomStorage = new RoomStorage();
+            AppointmentService = new AppointmentService();
+            RoomService = new RoomService();
         }
 
         private void ShowPossibleDuration()
@@ -65,69 +61,57 @@ namespace Hospital.View
             }
         }
 
+        private void InitializeNewAppointment(Model.Doctor selectedDoctor, MedicalRecord selectedPatient, DateTime dateTimeForNewAppointment)
+        {
+            SetPatientForNewAppointment(selectedPatient);
+            SetDoctorForNewAppointment(selectedDoctor);
+            NewAppointment.DateTime = dateTimeForNewAppointment;
+            NewAppointment.IDAppointment = AppointmentService.GenerateID();
+        }
+
+        private void SetPatientForNewAppointment(MedicalRecord selectedPatient)
+        {
+            NewAppointment.PatientsRecord = selectedPatient;
+            NewAppointment.IDpatient = selectedPatient.Patient.PersonalID;
+        }
+
+        private void SetDoctorForNewAppointment(Model.Doctor selectedDoctor)
+        {
+            NewAppointment.Doctor = selectedDoctor;
+            NewAppointment.IDDoctor = selectedDoctor.PersonalID;
+        }
+
         private void PotvrdiClick(object sender, RoutedEventArgs e)
         {
-            InitializeNewAppointment();
-
-            if (!IsDoctorAvaliable())
-                return;
-
-            if (!IsPatientAvaliable())
-                return;
-
-            AppointmentStorage.Save(NewAppointment);
-            NavigationService.Navigate(new Kalendar(Doctor));
+            AppointmentService.ScheduleAppointment(NewAppointment);
+            NavigationService.Navigate(new Kalendar(NewAppointment.Doctor));
         }
 
-        private void InitializeNewAppointment()
+        /*private bool IsDoctorAvaliable()
         {
-            SetPatientForNewAppointment();
-            SetDoctorForNewAppointment();
-            SetIDForNewAppointment();
-        }
-
-        private void SetPatientForNewAppointment()
-        {
-            NewAppointment.IDpatient = Patient.Patient.PersonalID; 
-        }
-
-        private void SetDoctorForNewAppointment()
-        {
-            NewAppointment.IDDoctor = Doctor.PersonalID;
-        }
-
-        private void SetIDForNewAppointment()
-        {
-            NewAppointment.IDAppointment = NewAppointment.GetHashCode().ToString();
-        }
-
-        private bool IsDoctorAvaliable()
-        {
-            if (!AppointmentStorage.IsDoctorAvaliableForAppointment(NewAppointment))
+            if (!AppointmentService.IsDoctorAvaliableForAppointment(NewAppointment))
             {
                 InformationBox informationBox = new InformationBox("Doktor je već zauzet u ovom terminu. Promenite trajanje ili odaberite drugi termin!");
                 informationBox.ShowDialog();
                 return false;
             }
-
             return true;
         }
 
         private bool IsPatientAvaliable()
         {
-            if (!AppointmentStorage.IsPatientAvaliableForAppointment(NewAppointment))
+            if (!AppointmentService.IsPatientAvaliableForAppointment(NewAppointment))
             {
                 InformationBox informationBox = new InformationBox("Ovaj pacijent već ima zakazan pregled/operaciju u ovom terminu!");
                 informationBox.ShowDialog();
                 return false;
             }
-
             return true;
-        }
+        }*/
 
         private void OdustaniClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Kalendar(Doctor));
+            NavigationService.Navigate(new Kalendar(NewAppointment.Doctor));
         }
 
         private void DurationSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -143,7 +127,7 @@ namespace Hospital.View
 
         private void LoadAvaliableRooms()
         {
-            AvaliableRooms = RoomStorage.GetAvaliableRooms(NewAppointment);
+            AvaliableRooms = RoomService.GetAvaliableRoomsForNewAppointment(NewAppointment);
             Room.ItemsSource = AvaliableRooms;
         }
         

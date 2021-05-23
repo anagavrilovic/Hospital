@@ -46,6 +46,18 @@ namespace Hospital.Repositories
             return rooms;
         }
 
+        public ObservableCollection<Room> GetAllRoomsWithoutMagazines()
+        {
+            ObservableCollection<Room> allRooms = GetAll();
+            ObservableCollection<Room> requestedRooms = new ObservableCollection<Room>();
+
+            foreach (Room room in allRooms)
+                if (!room.IsMagazine())
+                    requestedRooms.Add(room);
+
+            return requestedRooms;
+        }
+
         public Room GetByID(string id)
         {
             ObservableCollection<Room> rooms = GetAll();

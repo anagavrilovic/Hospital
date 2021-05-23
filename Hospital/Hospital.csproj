@@ -71,7 +71,7 @@
     <Compile Include="Model\BoolToStringConverter.cs" />
     <Compile Include="Model\City.cs" />
     <Compile Include="Model\Country.cs" />
-    <Compile Include="Model\DatesInWeeklyCalendar.cs" />
+    <Compile Include="DTO\DatesInWeeklyCalendar.cs" />
     <Compile Include="Model\DoctorSpecialty.cs" />
     <Compile Include="Model\DoctorStorage.cs" />
     <Compile Include="Model\HospitalTreatment.cs" />
@@ -99,7 +99,7 @@
     <Compile Include="Model\RoomStatus.cs" />
     <Compile Include="Model\DynamicInventory.cs" />
     <Compile Include="Model\DynamicInventoryStorage.cs" />
-    <Compile Include="Model\WeeklyCalendarRow.cs" />
+    <Compile Include="DTO\WeeklyCalendarRow.cs" />
     <Compile Include="Model\Medicine.cs" />
     <Compile Include="Model\MedicineStorage.cs" />
     <Compile Include="Model\RegistratedUser.cs" />

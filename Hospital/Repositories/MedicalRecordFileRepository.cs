@@ -105,5 +105,15 @@ namespace Hospital.Repositories
 
             return null;
         }
+
+        public MedicalRecord GetByPatientID(string patientID)
+        {
+            ObservableCollection<MedicalRecord> records = GetAll();
+            foreach (MedicalRecord r in records)
+                if (r.Patient.PersonalID.Equals(patientID))
+                    return r;
+
+            return null;
+        }
     }
 }

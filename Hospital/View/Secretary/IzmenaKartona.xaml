@@ -39,7 +39,7 @@
            
 
             <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,40,20,0">
-                <TextBlock Text="Broj zdravstvenog kartona*:" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Center"/>
+                <TextBlock Text="Broj zdravstvenog kartona:" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Center"/>
                 <TextBlock x:Name="KartonText" Margin="10,0,0,0" Style="{StaticResource TextBlockStyle}" Text="{Binding PatientsRecord.MedicalRecordID}"/>
             </StackPanel>
 
