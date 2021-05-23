@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services.DoctorServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,7 +24,7 @@ namespace Hospital.View.Doctor
     /// </summary>
     public partial class DoctorMainWindow : Window, INotifyPropertyChanged
     {
-
+        private DoctorMainWindowService service = new DoctorMainWindowService();
         private Frame frameMainPage;
         private DoctorMainPage mainPage;
         private string doctorId;
@@ -39,10 +40,11 @@ namespace Hospital.View.Doctor
         }
 
         public DoctorMainWindow(string doctorId)
-        { 
+        {
             InitializeComponent();
             this.DataContext = this;
             InitProperties(doctorId);
+            service.checkHospitalTreatmentDates();
 
         }
 
@@ -51,24 +53,14 @@ namespace Hospital.View.Doctor
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 3 / 4);
             this.doctorId = doctorId;
-            doctor = doctorStorage.GetDoctorByID(doctorId);
+            doctor = service.GetDoctorById(doctorId);
             frameMainPage = new Frame();
             mainPage = new DoctorMainPage(doctorId);
             frameMainPage.Content = mainPage;
             Main.Content = frameMainPage;
-            checkHospitalTreatmentDates();
         }
 
-     
-        private void checkHospitalTreatmentDates()
-        {
-            HospitalTreatmentStorage hospitalTreatmentStorage = new HospitalTreatmentStorage();
-            foreach(HospitalTreatment hospitalTreatment in hospitalTreatmentStorage.GetAll())
-            {
-                if (hospitalTreatment.EndOfTreatment.Date < DateTime.Today)
-                    hospitalTreatmentStorage.DeleteByPatientId(hospitalTreatment.PatientId);
-            }
-        }
+
 
         private void Logo(object sender, RoutedEventArgs e)
         {
@@ -85,7 +77,6 @@ namespace Hospital.View.Doctor
 
         private void Announcment_Click(object sender, RoutedEventArgs e)
         {
-            //obavestenje.Source = new BitmapImage(new Uri("pack://application:,,,/Icon/announcment.png", UriKind.Absolute));
             Main.Content = new NotificationsPage(doctorId);
         }
 

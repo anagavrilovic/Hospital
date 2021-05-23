@@ -100,12 +100,18 @@ namespace Hospital.View.Doctor
             {
                 appointmentStorage.Delete(((Appointment)dataGridAppointments.SelectedItem).IDAppointment);
                 MedicalRecord medicalRecord=medicalRecordStorage.GetByPatientID(((Appointment)dataGridAppointments.SelectedItem).IDpatient);
-                foreach(Examination examination in medicalRecord.Examination)
+                if (medicalRecord != null)
                 {
-                    if (examination.appointment.IDAppointment.Equals(((Appointment)dataGridAppointments.SelectedItem).IDAppointment))
+                    foreach (Examination examination in medicalRecord.Examination)
                     {
-                        medicalRecord.RemoveExamination(examination);
-                        break;
+                        if (examination.appointment != null)
+                        {
+                            if (examination.appointment.IDAppointment.Equals(((Appointment)dataGridAppointments.SelectedItem).IDAppointment))
+                            {
+                                medicalRecord.RemoveExamination(examination);
+                                break;
+                            }
+                        }
                     }
                 }
                 medicalRecordStorage.EditRecord(medicalRecord);

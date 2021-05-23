@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Services.DoctorServices;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -22,10 +23,10 @@ namespace Hospital.View.Doctor
     /// <summary>
     /// Interaction logic for Lekovi.xaml
     /// </summary>
-    public partial class EditMedicinePage : Page,INotifyPropertyChanged
+    public partial class EditMedicinePage : Page, INotifyPropertyChanged
     {
-        private MedicineStorage medicineStorage = new MedicineStorage();
-        private Medicine medicine=new Medicine();
+        private EditMedicineService service = new EditMedicineService();
+        private Medicine medicine = new Medicine();
         public Medicine Medicine
         {
             get { return medicine; }
@@ -45,7 +46,7 @@ namespace Hospital.View.Doctor
                 OnPropertyChanged();
             }
         }
-        private ObservableCollection<Medicine> substituteDrugs=new ObservableCollection<Medicine>();
+        private ObservableCollection<Medicine> substituteDrugs = new ObservableCollection<Medicine>();
         public ObservableCollection<Medicine> SubstituteDrugs
         {
             get { return substituteDrugs; }
@@ -87,29 +88,18 @@ namespace Hospital.View.Doctor
         {
             InitializeComponent();
             this.DataContext = this;
+            Ingredients = service.ReadIngredients();
             SetProperites();
             AddFilterAndSorter();
+            SetReplacementMedicine();
         }
 
         private void SetProperites()
         {
             medicineIngredientsListBox.ItemsSource = Medicine.Ingredient;
-            medicineForDisplay = medicineStorage.GetAll();
+            medicineForDisplay = service.GetAllMedicine();
             allDrugsListBox.ItemsSource = medicineForDisplay;
-            SetReplacementMedicine();
-            ReadIngredients();
             allIngredientsListBox.ItemsSource = Ingredients;
-        }
-
-        private void ReadIngredients()
-        {
-            string[] lines2 = File.ReadAllLines("..\\..\\Files\\ingredients.txt");
-            foreach (string line in lines2)
-            {
-                Ingredient ingredient = new Ingredient();
-                ingredient.Name = line;
-                Ingredients.Add(ingredient);
-            }
         }
 
         private void AddFilterAndSorter()
@@ -136,27 +126,24 @@ namespace Hospital.View.Doctor
         }
 
         private bool filterMedics(object obj)
-        {           
-                if (string.IsNullOrEmpty(pretrazi.Text))
-                {
-                    return true;
-                }
-                else
-                {
-                    return (obj.ToString().IndexOf(pretrazi.Text, StringComparison.OrdinalIgnoreCase) >= 0);
-                }
+        {
+            if (string.IsNullOrEmpty(pretrazi.Text))
+            {
+                return true;
+            }
+            else
+            {
+                return (obj.ToString().IndexOf(pretrazi.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
         }
 
         private void SetReplacementMedicine()
         {
             if (Medicine != null)
             {
-                SubstituteDrugs.Clear();
-                foreach (string medicID in Medicine.ReplacementMedicineIDs)
-                {
-                    SubstituteDrugs.Add(medicineStorage.GetOne(medicID));
-                }
+                SubstituteDrugs = service.SetReplacementMedicine(Medicine);
                 replacementDrugsListBox.ItemsSource = SubstituteDrugs;
+                replacementDrugsListBox.Items.Refresh();
             }
         }
 
@@ -173,15 +160,13 @@ namespace Hospital.View.Doctor
 
         private void SelctedMedicChanged(object sender, SelectionChangedEventArgs e)
         {
-            if ((Medicine)allDrugsListBox.SelectedItem != null)
+            Medicine selectedMedic = (Medicine)allDrugsListBox.SelectedItem;
+            if (selectedMedic != null && sacuvaj.IsEnabled.Equals(false))
             {
-                if (sacuvaj.IsEnabled.Equals(false))
-                {
-                    Medicine = (Medicine)allDrugsListBox.SelectedItem;
-                    SetReplacementMedicine();
-                    medicineIngredientsListBox.ItemsSource = Medicine.Ingredient;
-                    medicineIngredientsListBox.Items.Refresh();
-                }
+                Medicine = selectedMedic;
+                SetReplacementMedicine();
+                medicineIngredientsListBox.ItemsSource = Medicine.Ingredient;
+                medicineIngredientsListBox.Items.Refresh();
             }
         }
 
@@ -198,10 +183,10 @@ namespace Hospital.View.Doctor
 
         private void AddIngridient_Click(object sender, RoutedEventArgs e)
         {
-            if (allIngredientsListBox.SelectedItem !=null)
+            Ingredient seletedIngredient = (Ingredient)allIngredientsListBox.SelectedItem;
+            if (seletedIngredient != null && !service.ContainsIngredient(Medicine, seletedIngredient))
             {
-                Ingredient i =(Ingredient)allIngredientsListBox.SelectedItem;
-                Medicine.AddIngredient(i); 
+                Medicine.AddIngredient(seletedIngredient);
                 medicineIngredientsListBox.ItemsSource = Medicine.Ingredient;
                 medicineIngredientsListBox.Items.Refresh();
             }
@@ -219,7 +204,8 @@ namespace Hospital.View.Doctor
 
         private void AddReplacement_Click(object sender, RoutedEventArgs e)
         {
-            if (!Medicine.ID.Equals(((Medicine)allDrugsListBox.SelectedItem).ID))
+            Medicine selectedMedic = ((Medicine)allDrugsListBox.SelectedItem);
+            if (!Medicine.ID.Equals(selectedMedic.ID) && !service.AlreadyInSubstituteDrugs(selectedMedic, SubstituteDrugs))
             {
                 Medicine.AddMedicineID(((Medicine)allDrugsListBox.SelectedItem).ID);
                 SubstituteDrugs.Add((Medicine)allDrugsListBox.SelectedItem);
@@ -230,10 +216,14 @@ namespace Hospital.View.Doctor
 
         private void RemoveReplacement_Click(object sender, RoutedEventArgs e)
         {
-            Medicine.RemoveMedicineID(((Medicine)allDrugsListBox.SelectedItem).ID);
-            SubstituteDrugs.Remove((Medicine)allDrugsListBox.SelectedItem);
-            replacementDrugsListBox.ItemsSource = SubstituteDrugs;
-            replacementDrugsListBox.Items.Refresh();
+            Medicine selectedReplacementMedic = ((Medicine)replacementDrugsListBox.SelectedItem);
+            if (selectedReplacementMedic != null)
+            {
+                Medicine.RemoveMedicineID(selectedReplacementMedic.ID);
+                SubstituteDrugs.Remove(selectedReplacementMedic);
+                replacementDrugsListBox.ItemsSource = SubstituteDrugs;
+                replacementDrugsListBox.Items.Refresh();
+            }
         }
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)
@@ -248,11 +238,7 @@ namespace Hospital.View.Doctor
 
         private void SaveChanges_Click(object sender, RoutedEventArgs e)
         {
-            foreach(Medicine medicine in SubstituteDrugs)
-            {
-                Medicine.AddMedicineID(medicine.ID);
-            }
-            medicineStorage.EditMedicine(Medicine);
+            service.SaveMedicineSubstitutes(SubstituteDrugs, Medicine);
             SavedChangesVisibilities();
         }
 
