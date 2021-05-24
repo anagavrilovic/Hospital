@@ -76,6 +76,16 @@ namespace Hospital.Repositories
             Serialize(roomRenovations);
         }
 
+        public List<int> GetAllScheduledRenovationsIDs()
+        {
+            List<int> allIDs = new List<int>();
+            ObservableCollection<RoomRenovation> allScheduledRenovations = GetAll();
+            foreach (RoomRenovation renovation in allScheduledRenovations)
+                allIDs.Add(Int32.Parse(renovation.Id));
+
+            return allIDs;
+        }
+
         public void Serialize(ObservableCollection<RoomRenovation> parameter)
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))

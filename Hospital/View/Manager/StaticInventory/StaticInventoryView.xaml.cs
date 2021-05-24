@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -53,13 +54,19 @@ namespace Hospital.View
             _inventoryStorage = new InventoryStorage();
             InventoryInRoom = _inventoryStorage.GetByRoomID(id);
             InventoryCollection = CollectionViewSource.GetDefaultView(InventoryInRoom);
+            CheckScheduledTransfersStatus();
+        }
 
+        private void CheckScheduledTransfersStatus()
+        {
+            TransferInventoryService service;
             TransferInventoryStorage transferStorage = new TransferInventoryStorage();
-            foreach(TransferInventory ti in transferStorage.GetAll())
+            foreach (TransferInventory ti in transferStorage.GetAll())
             {
-                if(ti.TransferDate < DateTime.Now)
+                if (ti.TransferDate < DateTime.Now)
                 {
-                    ti.WaitUntilTransferDate();
+                    service = new TransferInventoryService(ti);
+                    service.CheckTransferStatus();
                 }
             }
         }
@@ -143,6 +150,5 @@ namespace Hospital.View
         {
             NavigationService.Navigate(new RoomsWindow());
         }
-
     }
 }

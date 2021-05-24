@@ -12,6 +12,7 @@ namespace Hospital.Services
 {
     public class MedicineRevisionService
     {
+
         IMedicineRevisionRepository medicineRevisionRepository;
         public MedicineRevisionService()
         {
@@ -29,5 +30,11 @@ namespace Hospital.Services
         {
             return medicineRevisionRepository.GetAll();
         }
+      
+        public void EditMedicine(MedicineRevision medicine)
+        {
+            medicineRevisionRepository.EditMedicine(medicine);
+        }
+
     }
 }

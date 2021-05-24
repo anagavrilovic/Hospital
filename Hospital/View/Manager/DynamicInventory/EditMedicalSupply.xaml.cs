@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Hospital.Services;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,14 +22,12 @@ namespace Hospital.View
     public partial class EditMedicalSupply : Page
     {
         public DynamicInventory DynamicInventoryItem { get; set; }
-        private DynamicInventoryStorage _dynamicInventoryStorage;
 
         public EditMedicalSupply(DynamicInventory item)
         {
             InitializeComponent();
             this.DataContext = this;
             DynamicInventoryItem = item;
-            _dynamicInventoryStorage = new DynamicInventoryStorage();
 
             switch (DynamicInventoryItem.Units)
             {
@@ -41,7 +40,8 @@ namespace Hospital.View
         private void AcceptButtonClick(object sender, RoutedEventArgs e)
         {
             SaveEditedProperties();
-            _dynamicInventoryStorage.EditItem(DynamicInventoryItem);
+            DynamicInventoryService inventoryService = new DynamicInventoryService(DynamicInventoryItem);
+            inventoryService.EditItem();
 
             NavigationService.Navigate(new DynamicInventoryView(DynamicInventoryItem.RoomID));
         }

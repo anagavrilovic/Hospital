@@ -20,7 +20,6 @@ namespace Hospital.View
     public partial class MedicinesWindow : Page, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
@@ -28,8 +27,6 @@ namespace Hospital.View
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
-
-        private MedicineStorage _medicineStorage;
 
         private ObservableCollection<Medicine> _medicines;
         public ObservableCollection<Medicine> Medicines
@@ -49,9 +46,9 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
-            this._medicineStorage = new MedicineStorage();
+            MedicineStorage medicineStorage = new MedicineStorage();
 
-            Medicines = _medicineStorage.GetAll();
+            Medicines = medicineStorage.GetAll();
             MedicineCollection = CollectionViewSource.GetDefaultView(Medicines);
         }
 

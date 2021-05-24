@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Hospital.Services
 {
@@ -45,6 +46,29 @@ namespace Hospital.Services
         public void SaveMedicine(Medicine medicine)
         {
             medicineRepository.Save(medicine);
+        }
+        public void DeleteMedicine(Medicine medicine)
+        {
+            medicineRepository.Delete(medicine.ID);
+        }
+
+        public void EditMedicine(Medicine medicine)
+        {
+            medicineRepository.EditMedicine(medicine);
+        }
+
+        private bool IsMedicineIDUnique(string id)
+        {
+            ObservableCollection<Medicine> medicines = GetAll();
+            foreach (Medicine medicine in medicines)
+            {
+                if (medicine.ID.Equals(id))
+                {
+                    MessageBox.Show("Vec postoji lek sa unetom oznakom!");
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

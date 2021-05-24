@@ -81,7 +81,6 @@ namespace Hospital
                     break;
                 }
             }
-
         }
 
         public void DoSerialization(ObservableCollection<Medicine> medicines)

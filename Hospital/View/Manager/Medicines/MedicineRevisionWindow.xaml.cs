@@ -28,8 +28,6 @@ namespace Hospital.View
             }
         }
 
-        private MedicineRevisionStorage _medicineRevisionStorage;
-
         private ObservableCollection<MedicineRevision> medicinesOnRevision;
         public ObservableCollection<MedicineRevision> MedicinesOnRevision
         {
@@ -45,8 +43,8 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
-            this._medicineRevisionStorage = new MedicineRevisionStorage();
-            MedicinesOnRevision = _medicineRevisionStorage.GetAll();
+            MedicineRevisionStorage medicineRevisionStorage = new MedicineRevisionStorage();
+            MedicinesOnRevision = medicineRevisionStorage.GetAll();
 
             SetRevisionStatusTextBlock();
             SetRevisionDoctorTextBlock();

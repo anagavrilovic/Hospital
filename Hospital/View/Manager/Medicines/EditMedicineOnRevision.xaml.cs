@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,23 +22,15 @@ namespace Hospital.View
     public partial class EditMedicineOnRevision : Page
     {
         public MedicineRevision MedicineOnRevision { get; set; }
-
-        public ObservableCollection<MedicineRevision> AllMedicinesOnRevision { get; set; }
-        private MedicineRevisionStorage _medicineRevisionStorage;
-
         public List<string> Ingredients { get; set; }
-
-        private string searchstr;
-
+        private string _searchCriterion;
         public ICollectionView IngredientsCollection {  get; set; }
 
         public EditMedicineOnRevision(MedicineRevision medicineRevision)
         {
             InitializeComponent();
             this.DataContext = this;
-            this._medicineRevisionStorage = new MedicineRevisionStorage();
             MedicineOnRevision = medicineRevision;
-            AllMedicinesOnRevision = _medicineRevisionStorage.GetAll();
 
             AddIngredientsInListBox();
             AddDoctorsInComboBox();
@@ -49,9 +42,7 @@ namespace Hospital.View
             ObservableCollection<string>  DoctorsNameSurname = new ObservableCollection<string>();
             DoctorStorage doctorStorage = new DoctorStorage();
             foreach (Hospital.Model.Doctor doctor in doctorStorage.GetAll())
-            {
                 DoctorsNameSurname.Add(doctor.ToString());
-            }
 
             doctorsCB.ItemsSource = DoctorsNameSurname;
         }
@@ -60,7 +51,6 @@ namespace Hospital.View
         {
             DoctorStorage doctorStorage = new DoctorStorage();
             doctorsCB.SelectedItem = doctorStorage.GetOne(MedicineOnRevision.DoctorID).ToString();
-            Console.WriteLine(doctorStorage.GetOne(MedicineOnRevision.DoctorID).ToString());
         }
 
         private void AddIngredientsInListBox()
@@ -76,8 +66,8 @@ namespace Hospital.View
             TextBox textbox = sender as TextBox;
             if (textbox != null)
             {
-                this.searchstr = textbox.Text;
-                if (!string.IsNullOrEmpty(searchstr))
+                this._searchCriterion = textbox.Text;
+                if (!string.IsNullOrEmpty(_searchCriterion))
                 {
                     ICollectionView view = CollectionViewSource.GetDefaultView(allIngredientsList.ItemsSource);
                     view.Filter = new Predicate<object>(Filter);
@@ -93,7 +83,7 @@ namespace Hospital.View
 
         private bool Filter(object item)
         {
-            if (((string)item).Contains(searchstr))
+            if (((string)item).Contains(_searchCriterion))
             {
                 return true;
             }
@@ -110,10 +100,8 @@ namespace Hospital.View
             newIngredient.Name = selectedIngredient;
 
             foreach (Ingredient ing in MedicineOnRevision.Medicine.Ingredient)
-            {
                 if (ing.Name.Equals(newIngredient.Name))
                     return;
-            }
 
             MedicineOnRevision.Medicine.AddIngredient(newIngredient);
             ingredientsList.Items.Refresh();
@@ -142,7 +130,8 @@ namespace Hospital.View
             quantityTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             doctorsCB.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
 
-            _medicineRevisionStorage.EditMedicine(MedicineOnRevision);
+            MedicineRevisionService service = new MedicineRevisionService();
+            service.EditMedicine(MedicineOnRevision);
 
             NavigationService.Navigate(new MedicineRevisionWindow());
         }

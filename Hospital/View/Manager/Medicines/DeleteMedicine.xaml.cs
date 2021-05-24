@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,18 +19,17 @@ namespace Hospital.View
     public partial class DeleteMedicine : Page
     {
         public Medicine MedicineForDeleting { get; set; }
-        private MedicineStorage _medicineStorage;
 
         public DeleteMedicine(Medicine medicine)
         {
             InitializeComponent();
             MedicineForDeleting = medicine;
-            _medicineStorage = new MedicineStorage();
         }
 
         private void AcceptDeleting(object sender, RoutedEventArgs e)
         {
-            _medicineStorage.Delete(MedicineForDeleting.ID);
+            MedicineService service = new MedicineService();
+            service.DeleteMedicine(MedicineForDeleting);
 
             NavigationService.Navigate(new MedicinesWindow());
         }
