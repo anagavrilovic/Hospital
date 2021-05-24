@@ -19,7 +19,7 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Orientation="Horizontal">
                     <Label FontSize="17" Content="{ns:Loc appointmentAtLabel}" Margin="30,20,0,0" Style="{DynamicResource Label}"/>
-                    <ComboBox x:Name="ComboBox"  Margin="10,30,0,20" HorizontalAlignment="Left" SelectionChanged="SetAppointmentsInDataGrid"/>
+                    <ComboBox x:Name="ComboBox"  Margin="10,30,0,20" HorizontalAlignment="Left" SelectionChanged="SetAppointmentsInDataGrid" Style="{DynamicResource ComboBoxStyle}"/>
                 </StackPanel>
                 <Button x:Name="addButton" Margin="0,20,30,20" Click="AddAppointment" Grid.Column="2" HorizontalAlignment="Right" Style="{DynamicResource ImageButtonsHorizontal}">
                     <StackPanel Orientation="Horizontal">

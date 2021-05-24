@@ -1,4 +1,6 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
+using Hospital.Services.DoctorServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -39,17 +41,6 @@ namespace Hospital.View.Doctor
                 _durationInHours = value; 
             }
         }
-        MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
-        private ObservableCollection<Model.Doctor> doctors = new ObservableCollection<Model.Doctor>();
-        public ObservableCollection<Model.Doctor> Doctors
-        {
-            get => doctors;
-            set
-            {
-                doctors = value;
-            }
-        }
-
         protected virtual void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
@@ -59,10 +50,12 @@ namespace Hospital.View.Doctor
         }
         private string patientId;
         public event PropertyChangedEventHandler PropertyChanged;
-        AppointmentStorage appointmentStorage=new AppointmentStorage();
-        private DoctorStorage doctorStorage = new DoctorStorage();
+        private AppointmentService appointmentService;
+        private DoctorService doctorService;
+        private MedicalRecordService medicalRecordService;
+        private AppointmentInfoService appointmentInfoService;
 
-        public AppointmentInfo(Hospital.Model.Doctor doctor,string patientId)
+        public AppointmentInfo(Model.Doctor doctor,string patientId)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -72,6 +65,10 @@ namespace Hospital.View.Doctor
 
         private void InitProperties(Model.Doctor doctor, string patientId)
         {
+            appointmentInfoService = new AppointmentInfoService();
+            medicalRecordService = new MedicalRecordService();
+            appointmentService = new AppointmentService();
+            doctorService = new DoctorService();
             this.patientId = patientId;
             ComboBox.ItemsSource = Enum.GetValues(typeof(DoctorSpecialty)).Cast<DoctorSpecialty>();
             ComboBox.SelectedIndex = (int)doctor.Specialty;
@@ -96,18 +93,7 @@ namespace Hospital.View.Doctor
 
         private void SetAppointmentsInDataGrid(object sender, SelectionChangedEventArgs e)
         {
-            Appointments.Clear();
-            Doctors.Clear();
-            foreach (Appointment appointmentToAdd in appointmentStorage.GetAll())
-            {
-                Model.Doctor doctor = doctorStorage.GetOne(appointmentToAdd.IDDoctor);
-                if (doctor.Specialty.Equals((DoctorSpecialty)ComboBox.SelectedItem))
-                {
-                    Doctors.Add(doctorStorage.GetOne(doctor.PersonalID));
-                    appointmentToAdd.PatientsRecord = medicalRecordStorage.GetByPatientID(appointmentToAdd.IDpatient);
-                    Appointments.Add(appointmentToAdd);
-                }
-            }
+           Appointments=appointmentInfoService.SetAppointmentDataGrid((DoctorSpecialty)ComboBox.SelectedItem);
         }
     }
 }

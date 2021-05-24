@@ -14,8 +14,8 @@ namespace Hospital.ViewModels
     class DiagnosisViewModel : ViewModel
     {
         public ICommand SaveDiagnosisCommand { get; set; }
-        private static int APPOINTMENTS_TAB = 5;
-        private static int MEDICAL_RECORD_TAB = 1;
+        //private static int APPOINTMENTS_TAB = 5;
+       // private static int MEDICAL_RECORD_TAB = 1;
         private string diagnosisDescription;
         public string DiagnosisDescription
         {
