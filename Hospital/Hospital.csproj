@@ -148,6 +148,9 @@
     <Compile Include="Repositories\TransferInventoryFileRepository.cs" />
     <Compile Include="Services\AppointmentService.cs" />
     <Compile Include="Services\DoctorService.cs" />
+    <Compile Include="Services\DoctorServices\AppointmentInfoService.cs" />
+    <Compile Include="Services\DoctorServices\AppointmentWindowService.cs" />
+    <Compile Include="Services\DoctorServices\CreateAppointmentService.cs" />
     <Compile Include="Services\DoctorServices\DoctorAppointmentsService.cs" />
     <Compile Include="Services\DoctorServices\DoctorMainWindowService.cs" />
     <Compile Include="Services\DoctorServices\EditMedicineService.cs" />

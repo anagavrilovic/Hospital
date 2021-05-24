@@ -30,7 +30,7 @@
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-            <Button  Style="{DynamicResource ButtonWithValidation}" Command="{Binding SaveDiagnosisCommand, Source={StaticResource vm}}"
+            <Button  Style="{DynamicResource ButtonWithValidation}" Click="Sacuvaj"
                              Margin="200,5,20,0" VerticalAlignment="Top" HorizontalAlignment="Left">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../../Icon/DoctorIcons/save.png" Width="20"/>
