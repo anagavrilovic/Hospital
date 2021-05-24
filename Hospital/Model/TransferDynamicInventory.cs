@@ -18,17 +18,6 @@ namespace Hospital.Model
 
        private DynamicInventoryStorage _dynamicInventoryStorage = new DynamicInventoryStorage();
 
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
-
         public string ItemID
         {
             get => _itemID;
@@ -124,6 +113,15 @@ namespace Hospital.Model
             DynamicInventory itemInFirstRoom = _dynamicInventoryStorage.GetOneByRoom(ItemID, FirstRoomID);
             itemInFirstRoom.Quantity -= _quantity;
             _dynamicInventoryStorage.EditItem(itemInFirstRoom);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

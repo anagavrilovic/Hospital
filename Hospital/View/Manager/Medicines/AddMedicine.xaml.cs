@@ -18,9 +18,6 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for AddMedicine.xaml
-    /// </summary>
     public partial class AddMedicine : Page, INotifyPropertyChanged
     { 
         public event PropertyChangedEventHandler PropertyChanged;

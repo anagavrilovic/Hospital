@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Services;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -18,14 +19,12 @@ namespace Hospital.View
     public partial class AddMedicalSupply : Page
     {
         public DynamicInventory DynamicInventoryItem  { get; set; }
-        private DynamicInventoryStorage _dynamicInventoryStorage;
 
         public AddMedicalSupply(string id)
         {
             InitializeComponent();
             this.DataContext = this;
-
-            this._dynamicInventoryStorage = new DynamicInventoryStorage();
+      
             DynamicInventoryItem = new DynamicInventory();
             DynamicInventoryItem.RoomID = id;
         }
@@ -39,25 +38,10 @@ namespace Hospital.View
                 case 2: DynamicInventoryItem.Units = UnitsType.flasice;  break;
             }
 
-            if (!IsItemIdUnique())
-                return;
-
-             _dynamicInventoryStorage.Save(DynamicInventoryItem);
+            DynamicInventoryService inventoryService = new DynamicInventoryService(DynamicInventoryItem);
+            inventoryService.AddNewItem();
  
             NavigationService.Navigate(new DynamicInventoryView(DynamicInventoryItem.RoomID));
-        }
-
-        private bool IsItemIdUnique()
-        {
-            foreach (DynamicInventory ms in _dynamicInventoryStorage.GetByRoomID(DynamicInventoryItem.RoomID))
-            {
-                if (ms.Id.Equals(DynamicInventoryItem.Id))
-                {
-                    MessageBox.Show("Već postoji stavka sa unetom oznakom!");
-                    return false;
-                }
-            }
-            return true;
         }
 
         private void CancelButtonClick(object o, RoutedEventArgs e)
