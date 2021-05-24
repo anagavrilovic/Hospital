@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -80,6 +81,8 @@ namespace Hospital.View.Doctor
 
         private void SaveExamination()
         {
+            PatientNotificationsStorage patientNotificationsStorage = new PatientNotificationsStorage();
+            patientNotificationsStorage.SaveFirst(((AppointmentWindow)Window.GetWindow(this)).Examintaion);
             MedicalRecord.AddExamination(((AppointmentWindow)Window.GetWindow(this)).Examintaion);
             medicalRecordStorage.EditRecord(MedicalRecord);
         }

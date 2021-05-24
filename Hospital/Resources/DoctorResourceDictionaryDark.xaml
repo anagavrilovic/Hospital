@@ -217,7 +217,7 @@
     </Style>
 
     <!-- SimpleStyles: ComboBoxItem -->
-    <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
+    <Style x:Key="ComboBoxItemStyle" TargetType="{x:Type ComboBoxItem}">
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="Foreground" Value="{StaticResource Background}"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
