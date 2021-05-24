@@ -307,37 +307,37 @@
     <Compile Include="View\Manager\ManagerNotifications.xaml.cs">
       <DependentUpon>ManagerNotifications.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientAppointmentMenu.xaml.cs">
+    <Compile Include="View\Patient\PatientAppointmentMenu.xaml.cs">
       <DependentUpon>PatientAppointmentMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientAppointmentOptions.xaml.cs">
+    <Compile Include="View\Patient\PatientAppointmentOptions.xaml.cs">
       <DependentUpon>PatientAppointmentOptions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientAppointments.xaml.cs">
+    <Compile Include="View\Patient\PatientAppointments.xaml.cs">
       <DependentUpon>PatientAppointments.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientMakeAppointment.xaml.cs">
+    <Compile Include="View\Patient\PatientMakeAppointment.xaml.cs">
       <DependentUpon>PatientMakeAppointment.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientMenu.xaml.cs">
+    <Compile Include="View\Patient\PatientMenu.xaml.cs">
       <DependentUpon>PatientMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientNotifications.xaml.cs">
+    <Compile Include="View\Patient\PatientNotifications.xaml.cs">
       <DependentUpon>PatientNotifications.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientPassedAppointmentOptions.xaml.cs">
+    <Compile Include="View\Patient\PatientPassedAppointmentOptions.xaml.cs">
       <DependentUpon>PatientPassedAppointmentOptions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientPassedAppointments.xaml.cs">
+    <Compile Include="View\Patient\PatientPassedAppointments.xaml.cs">
       <DependentUpon>PatientPassedAppointments.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientRateDoctor.xaml.cs">
+    <Compile Include="View\Patient\PatientRateDoctor.xaml.cs">
       <DependentUpon>PatientRateDoctor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientSettingsPage.xaml.cs">
+    <Compile Include="View\Patient\PatientSettingsPage.xaml.cs">
       <DependentUpon>PatientSettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientTherapy.xaml.cs">
+    <Compile Include="View\Patient\PatientTherapy.xaml.cs">
       <DependentUpon>PatientTherapy.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Manager\Rooms\RenovateRoom.xaml.cs">
@@ -409,7 +409,7 @@
     <Compile Include="View\Manager\MenagerWindow.xaml.cs">
       <DependentUpon>MenagerWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientMain.xaml.cs">
+    <Compile Include="View\Patient\PatientMain.xaml.cs">
       <DependentUpon>PatientMain.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Manager\Rooms\RoomsWindow.xaml.cs">
@@ -603,47 +603,47 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientAppointmentMenu.xaml">
+    <Page Include="View\Patient\PatientAppointmentMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientAppointmentOptions.xaml">
+    <Page Include="View\Patient\PatientAppointmentOptions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientAppointments.xaml">
+    <Page Include="View\Patient\PatientAppointments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientMakeAppointment.xaml">
+    <Page Include="View\Patient\PatientMakeAppointment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientMenu.xaml">
+    <Page Include="View\Patient\PatientMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientNotifications.xaml">
+    <Page Include="View\Patient\PatientNotifications.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientPassedAppointmentOptions.xaml">
+    <Page Include="View\Patient\PatientPassedAppointmentOptions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientPassedAppointments.xaml">
+    <Page Include="View\Patient\PatientPassedAppointments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientRateDoctor.xaml">
+    <Page Include="View\Patient\PatientRateDoctor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientSettingsPage.xaml">
+    <Page Include="View\Patient\PatientSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientTherapy.xaml">
+    <Page Include="View\Patient\PatientTherapy.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -751,7 +751,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientMain.xaml">
+    <Page Include="View\Patient\PatientMain.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
