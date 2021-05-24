@@ -30,7 +30,7 @@ namespace Hospital.Repositories
             }
         }
 
-        public void DeleteByPatientID(string patientID)
+        public void DeletePatientsAppointments(string patientID)
         {
             ObservableCollection<Appointment> appointments = GetAll();
             foreach (Appointment a in appointments.ToList())

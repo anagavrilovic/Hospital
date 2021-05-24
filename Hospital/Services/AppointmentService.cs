@@ -13,18 +13,14 @@ namespace Hospital.Services
     public class AppointmentService
     {
         IAppointmentRepository appointmentRepository;
+        IDoctorRepository doctorRepository;
 
-        private DoctorService doctorService = new DoctorService();
         private RoomService roomService = new RoomService();
 
         public AppointmentService()
         {
             appointmentRepository = new AppointmentFileRepository();
-        }
-
-        public void DeletePatientsAppointments(string patientID)
-        {
-            appointmentRepository.DeleteByPatientID(patientID);
+            doctorRepository = new DoctorFileRepository();
         }
 
         public void DeleteAppointment(string id)
@@ -62,12 +58,6 @@ namespace Hospital.Services
         public void Save(Appointment appointment)
         {
             appointmentRepository.Save(appointment);
-        }
-
-
-        public String GetNewID()
-        {
-            return appointmentRepository.GetNewID();
         }
 
         public bool IsDoctorAvaliableForAppointment(Appointment newAppointment)
@@ -117,7 +107,7 @@ namespace Hospital.Services
         {
             SetDateTimeForNewUrgentAppointmentWithoutRescheduling(newUrgentAppointment);
             SetRoomForNewUrgentAppointment(newUrgentAppointment);
-            ObservableCollection<Doctor> possibleDoctors = doctorService.GetDoctorsBySpecialty(doctorSpecialty);
+            ObservableCollection<Doctor> possibleDoctors = doctorRepository.GetBySpecialty(doctorSpecialty);
 
             for (int i = 0; i < 3; i++)
             {
@@ -180,7 +170,7 @@ namespace Hospital.Services
         public ObservableCollection<OptionForRescheduling> FindAllOptionsForRescheduling(Appointment newUrgentAppointment, DoctorSpecialty doctorsSpecialty)
         {
             ObservableCollection<OptionForRescheduling> options = new ObservableCollection<OptionForRescheduling>();
-            ObservableCollection<Doctor> possibleDoctors = doctorService.GetDoctorsBySpecialty(doctorsSpecialty);
+            ObservableCollection<Doctor> possibleDoctors = doctorRepository.GetBySpecialty(doctorsSpecialty);
 
             foreach (Doctor doctor in possibleDoctors)
             {

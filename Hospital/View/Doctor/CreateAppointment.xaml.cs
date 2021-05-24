@@ -257,7 +257,7 @@ namespace Hospital.View.Doctor
             Appointment.IDpatient = Appointment.PatientsRecord.Patient.PersonalID;
             Appointment.DateTime = DateOfAppointment.Date.Add(DateTime.Parse(timeOfAppointment).TimeOfDay);
             Appointment.IDDoctor = Appointment.Doctor.PersonalID;
-            Appointment.IDAppointment = appointmentService.GetNewID();
+            Appointment.IDAppointment = appointmentService.GenerateID();
             double timeInMinutesDouble = double.Parse(DurationInMinutes);
             Appointment.DurationInHours = timeInMinutesDouble / 60;
         }
