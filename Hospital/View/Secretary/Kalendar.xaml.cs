@@ -141,7 +141,7 @@ namespace Hospital.View
             foreach(Appointment appointment in selectedDoctorsAppointmentsInChosenWeek)
             {
                 appointment.Doctor = DoctorService.GetByID(appointment.IDDoctor);
-                appointment.PatientsRecord = MedicalRecordService.GetRecordByIDPatient(appointment.IDpatient);
+                appointment.PatientsRecord = MedicalRecordService.GetByPatientId(appointment.IDpatient);
             }
         }
 

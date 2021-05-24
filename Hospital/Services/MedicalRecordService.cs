@@ -94,10 +94,5 @@ namespace Hospital.Services
         {
             return medicalRecordRepository.GetByPatientID(id);
         }
-
-        public MedicalRecord GetRecordByIDPatient(string patientID)
-        {
-            return medicalRecordRepository.GetByPatientID(patientID);
-        }
     }
 }

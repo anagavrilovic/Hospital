@@ -64,15 +64,6 @@ namespace Hospital.Services
             appointmentRepository.Save(appointment);
         }
 
-        public bool IsDoctorAvaliableForAppointment(Appointment appointment)
-        {
-            return appointmentRepository.IsDoctorAvaliableForAppointment(appointment);
-        }
-
-        public bool IsPatientAvaliableForAppointment(Appointment appointment)
-        {
-            return appointmentRepository.IsPatientAvaliableForAppointment(appointment);
-        }
 
         public String GetNewID()
         {
