@@ -11,5 +11,6 @@ namespace Hospital.Repositories.Interfaces
     {
         ObservableCollection<string> GetAllMedicines();
         ObservableCollection<string> GetAllIngredients();
+        void EditMedicine(Medicine editedMedicine);
     }
 }

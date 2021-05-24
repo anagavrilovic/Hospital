@@ -64,6 +64,21 @@ namespace Hospital.Repositories
             Serialize(medicineRevisions);
         }
 
+        public void EditMedicine(MedicineRevision editedMedicineRevision)
+        {
+            ObservableCollection<MedicineRevision> medicineRevisions = GetAll();
+            foreach (MedicineRevision medicineRevision in medicineRevisions.ToList())
+            {
+                if (editedMedicineRevision.Medicine.ID.Equals(medicineRevision.Medicine.ID))
+                {
+                    medicineRevisions.Remove(medicineRevision);
+                    medicineRevisions.Add(editedMedicineRevision);
+                    Serialize(medicineRevisions);
+                    break;
+                }
+            }
+        }
+
         public void Serialize(ObservableCollection<MedicineRevision> medicineRevisions)
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))

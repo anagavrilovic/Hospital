@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Services;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -21,17 +22,12 @@ namespace Hospital.View
     {
         public Medicine Medicine { get; set; }
 
-        public ObservableCollection<Medicine> AllMedicines { get; set; }
-        private MedicineStorage _medicineStorage;
-
         public EditMedicine(Medicine medicine)
         {
             InitializeComponent();
             this.DataContext = this;
 
             Medicine = medicine;
-            this._medicineStorage = new MedicineStorage();
-            AllMedicines = _medicineStorage.GetAll();
         }
 
        
@@ -40,7 +36,8 @@ namespace Hospital.View
             priceTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             quantityTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
 
-            _medicineStorage.EditMedicine(Medicine);
+            MedicineService service = new MedicineService();
+            service.EditMedicine(Medicine);
 
             NavigationService.Navigate(new MedicinesWindow());
         }
