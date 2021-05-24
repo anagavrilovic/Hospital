@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Hospital.Services;
+using Hospital.View.Secretary;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -16,25 +18,20 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for OdaberiPacijenta.xaml
-    /// </summary>
     public partial class OdaberiPacijenta : Window
     {
-        // Properties
         public MedicalRecord PatientInCalendar { get; set; }
         public MedicalRecord SelectedPatient { get; set; }
+
         public ObservableCollection<MedicalRecord> Patients { get; set; }
         public ObservableCollection<Appointment> PatientsAppointments { get; set; }
-        public MedicalRecordStorage MedicalRecordStorage { get; set; }
-        public AppointmentStorage AppointmentStorage { get; set; }
-
-
         public ICollectionView PatientsCollection { get; set; }
         public ICollectionView PatientsAppointmentsCollection { get; set; }
 
+        public MedicalRecordService MedicalRecordService { get; set; }
+        public AppointmentService AppointmentService { get; set; }
 
-        // Methods
+
         public OdaberiPacijenta(MedicalRecord patient)
         {
             InitializeComponent();
@@ -49,13 +46,13 @@ namespace Hospital.View
         {
             Patients = new ObservableCollection<MedicalRecord>();
             PatientsAppointments = new ObservableCollection<Appointment>();
-            MedicalRecordStorage = new MedicalRecordStorage();
-            AppointmentStorage = new AppointmentStorage();
+            MedicalRecordService = new MedicalRecordService();
+            AppointmentService = new AppointmentService();
         }
 
         private void LoadPatients()
         {
-            Patients = MedicalRecordStorage.GetAll();
+            Patients = MedicalRecordService.GetAllRecords();
 
             PatientsCollection = CollectionViewSource.GetDefaultView(Patients);
             PatientsCollection.Filter = CustomFilterPatients;
@@ -83,7 +80,8 @@ namespace Hospital.View
         {
             if(SelectedPatient == null)
             {
-                MessageBox.Show("Selektujte pacijenta!");
+                InformationBox informationBox = new InformationBox("Selektujte pacijenta!");
+                informationBox.Show();
                 return;
             }
 
@@ -96,10 +94,8 @@ namespace Hospital.View
             this.Close();
         }
 
-        private void ListBoxPacijenti_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ListBoxAllPatients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            PatientsAppointments.Clear();
-
             if (SelectedPatient == null)
                 return;
 
@@ -111,7 +107,8 @@ namespace Hospital.View
 
         private void GetSelectedPatientsAppointments()
         {
-            ObservableCollection<Appointment> app = AppointmentStorage.GetAll();
+            PatientsAppointments.Clear();
+            ObservableCollection<Appointment> app = AppointmentService.GetAll();
             foreach (Appointment ap in app)
             {
                 if (SelectedPatient.Patient.PersonalID.Equals(ap.IDpatient))

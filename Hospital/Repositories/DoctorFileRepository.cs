@@ -54,6 +54,18 @@ namespace Hospital.Repositories
             return null;
         }
 
+        public ObservableCollection<Doctor> GetBySpecialty(DoctorSpecialty requestedSpecialty)
+        {
+            ObservableCollection<Doctor> allDoctors = GetAll();
+            ObservableCollection<Doctor> doctorsWithRequestedSpecialty = new ObservableCollection<Doctor>();
+
+            foreach (Doctor doctor in allDoctors)
+                if (doctor.Specialty.Equals(requestedSpecialty))
+                    doctorsWithRequestedSpecialty.Add(doctor);
+
+            return doctorsWithRequestedSpecialty;
+        }
+
         public void Save(Doctor doctor)
         {
             ObservableCollection<Doctor> doctors = GetAll();

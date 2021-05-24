@@ -1,4 +1,6 @@
-﻿using Hospital.Model;
+﻿using Hospital.DTO;
+using Hospital.Model;
+using Hospital.Services;
 using Hospital.View.Secretary;
 using System;
 using System.Collections.Generic;
@@ -6,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,28 +22,27 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for Kalendar.xaml
-    /// </summary>
     public partial class Kalendar : Page
     {
         public const int numberOfTimeSlotsPerDay = 48;
 
-        // Properties
         public ObservableCollection<WeeklyCalendarRow> WeeklyCalendar { get; set; }
+
         public ObservableCollection<Model.Doctor> AllDoctors { get; set; }
         public DateTime ChosenDate { get; set; }
         public DateTime WeekBegin { get; set; }
         public DateTime WeekEnd { get; set; }
+
         public MedicalRecord SelectedPatientForNewAppointment { get; set; }
         public Model.Doctor SelectedDoctorForNewAppointment { get; set; }
+
         public DatesInWeeklyCalendar DatesInWeeklyCalendar { get; set; }
 
-        // Storage class properties
-        public AppointmentStorage AppointmentStorage { get; set; }
+        public AppointmentService AppointmentService { get; set; }
+        public DoctorService DoctorService { get; set; }
+        public MedicalRecordService MedicalRecordService { get; set; }
 
 
-        // Methods
         public Kalendar(Model.Doctor doctorWhoseAppointmentsWillInitialyBeShown)
         {
             InitializeComponent();
@@ -55,35 +57,29 @@ namespace Hospital.View
         private void InitializeAllProperties()
         {
             this.WeeklyCalendar = new ObservableCollection<WeeklyCalendarRow>();
-            this.AllDoctors = new ObservableCollection<Model.Doctor>();
             this.ChosenDate = DateTime.Today;
             this.DatesInWeeklyCalendar = new DatesInWeeklyCalendar();
             this.SelectedPatientForNewAppointment = new MedicalRecord();
-            this.AppointmentStorage = new AppointmentStorage();
+            this.AppointmentService = new AppointmentService();
+            this.DoctorService = new DoctorService();
+            this.MedicalRecordService = new MedicalRecordService();
         }
 
         private void LoadAllDoctors()
         {
-            DoctorStorage doctorStorage = new DoctorStorage();
-            AllDoctors = doctorStorage.GetAll();
+            AllDoctors = DoctorService.GetAll();
         }
 
         private void SetDatesForWeeklyCalendar()
         {
             SetFirstAndLastDateOfWeekInWhichChosenDateIs();
-            
-            for(int i = 0; i < 7; i++)
+
+            int days = 0;
+            PropertyInfo[] properties = typeof(DatesInWeeklyCalendar).GetProperties();
+            foreach(PropertyInfo property in properties)
             {
-                switch (i)
-                {
-                    case 0: DatesInWeeklyCalendar.Monday = WeekBegin.AddDays(i).ToString("dd.MM."); break;
-                    case 1: DatesInWeeklyCalendar.Tuesday = WeekBegin.AddDays(i).ToString("dd.MM."); break;
-                    case 2: DatesInWeeklyCalendar.Wednesday = WeekBegin.AddDays(i).ToString("dd.MM."); break;
-                    case 3: DatesInWeeklyCalendar.Thursday = WeekBegin.AddDays(i).ToString("dd.MM."); break;
-                    case 4: DatesInWeeklyCalendar.Friday = WeekBegin.AddDays(i).ToString("dd.MM."); break;
-                    case 5: DatesInWeeklyCalendar.Saturday = WeekBegin.AddDays(i).ToString("dd.MM."); break;
-                    case 6: DatesInWeeklyCalendar.Sunday = WeekBegin.AddDays(i).ToString("dd.MM."); break;
-                }
+                property.SetValue(DatesInWeeklyCalendar, WeekBegin.AddDays(days).ToString("dd.MM."));
+                days += 1;
             }
         }
 
@@ -96,6 +92,7 @@ namespace Hospital.View
                     if (doctor.IsEqualWith(doctorWhoseAppointmentsWillInitialyBeShown))
                     {
                         SelectedDoctorForNewAppointment = doctor;
+                        break;
                     }
                 }
             }
@@ -104,8 +101,9 @@ namespace Hospital.View
         private void RefreshWeeklyCalendar()
         {
             SetDatesForWeeklyCalendar();
+
             WeeklyCalendar.Clear();
-            FillWeeklyCalendarWithEmptyTimeSlots(GetStartTimeForWeeklyCalendar());
+            FillWeeklyCalendarWithEmptyTimeSlots();
 
             if (SelectedDoctorForNewAppointment != null)
                 ShowSelectedDoctorsAppointments();
@@ -117,8 +115,9 @@ namespace Hospital.View
             return new DateTime().Date + startTime;
         }
 
-        private void FillWeeklyCalendarWithEmptyTimeSlots(DateTime timeForRow)
+        private void FillWeeklyCalendarWithEmptyTimeSlots()
         {
+            DateTime timeForRow = GetStartTimeForWeeklyCalendar();
             for (int i = 0; i < numberOfTimeSlotsPerDay; i++)
             {
                 WeeklyCalendarRow newRow = new WeeklyCalendarRow();
@@ -131,10 +130,19 @@ namespace Hospital.View
 
         private void ShowSelectedDoctorsAppointments()
         {
-            ObservableCollection<Appointment> selectedDoctorsAppointments = AppointmentStorage.GetAppointmentsByDoctor(SelectedDoctorForNewAppointment.PersonalID);
+            ObservableCollection<Appointment> selectedDoctorsAppointments = AppointmentService.GetAppointmentsByDoctor(SelectedDoctorForNewAppointment);
             ObservableCollection<Appointment> selectedDoctorsAppointmentsInChosenWeek = GetSelectedDoctorsAppointmentsInChosenWeek(selectedDoctorsAppointments);
-
+            LoadDoctorAndPatientForAppointments(selectedDoctorsAppointmentsInChosenWeek);
             LoadSelectedDoctorsAppointmentsIntoWeeklyCalendar(selectedDoctorsAppointmentsInChosenWeek);
+        }
+
+        private void LoadDoctorAndPatientForAppointments(ObservableCollection<Appointment> selectedDoctorsAppointmentsInChosenWeek)
+        {
+            foreach(Appointment appointment in selectedDoctorsAppointmentsInChosenWeek)
+            {
+                appointment.Doctor = DoctorService.GetByID(appointment.IDDoctor);
+                appointment.PatientsRecord = MedicalRecordService.GetRecordByIDPatient(appointment.IDpatient);
+            }
         }
 
         private ObservableCollection<Appointment> GetSelectedDoctorsAppointmentsInChosenWeek(ObservableCollection<Appointment> selectedDoctorsAppointments)
@@ -306,6 +314,12 @@ namespace Hospital.View
                 informationBox.ShowDialog();
                 return false;
             }
+            else if (SelectedPatientForNewAppointment.MedicalRecordID == null)
+            {
+                InformationBox informationBox = new InformationBox("Odaberite pacijenta kojem želite da zakažete termin.");
+                informationBox.ShowDialog();
+                return false;
+            }
 
             return true;
         }
@@ -349,60 +363,52 @@ namespace Hospital.View
                 switch (columnIndex)
                 {
                     case 1:
-                        AppointmentStorage.Delete(WeeklyCalendar[FindTimeRow(time)].Monday.IDAppointment);
+                        AppointmentService.Delete(WeeklyCalendar[FindTimeRow(time)].Monday.IDAppointment);
                         numberOfCells = WeeklyCalendar[FindTimeRow(time)].Monday.DurationInHours / 0.5;
                         for (int i = 1; i < numberOfCells; i++)
-                        {
                             WeeklyCalendar[FindTimeRow(time) + i].Monday.Type = AppointmentType.none;
-                        }
                         break;
+
                     case 2:
-                        AppointmentStorage.Delete(WeeklyCalendar[FindTimeRow(time)].Tuesday.IDAppointment);
+                        AppointmentService.Delete(WeeklyCalendar[FindTimeRow(time)].Tuesday.IDAppointment);
                         numberOfCells = WeeklyCalendar[FindTimeRow(time)].Tuesday.DurationInHours / 0.5;
                         for (int i = 1; i < numberOfCells; i++)
-                        {
                             WeeklyCalendar[FindTimeRow(time) + i].Tuesday.Type = AppointmentType.none;
-                        }
                         break;
+
                     case 3:
-                        AppointmentStorage.Delete(WeeklyCalendar[FindTimeRow(time)].Wednesday.IDAppointment);
+                        AppointmentService.Delete(WeeklyCalendar[FindTimeRow(time)].Wednesday.IDAppointment);
                         numberOfCells = WeeklyCalendar[FindTimeRow(time)].Wednesday.DurationInHours / 0.5;
                         for (int i = 1; i < numberOfCells; i++)
-                        {
                             WeeklyCalendar[FindTimeRow(time) + i].Wednesday.Type = AppointmentType.none;
-                        }
                         break;
+
                     case 4:
-                        AppointmentStorage.Delete(WeeklyCalendar[FindTimeRow(time)].Thursday.IDAppointment);
+                        AppointmentService.Delete(WeeklyCalendar[FindTimeRow(time)].Thursday.IDAppointment);
                         numberOfCells = WeeklyCalendar[FindTimeRow(time)].Thursday.DurationInHours / 0.5;
                         for (int i = 1; i < numberOfCells; i++)
-                        {
                             WeeklyCalendar[FindTimeRow(time) + i].Thursday.Type = AppointmentType.none;
-                        }
                         break;
+
                     case 5:
-                        AppointmentStorage.Delete(WeeklyCalendar[FindTimeRow(time)].Friday.IDAppointment);
+                        AppointmentService.Delete(WeeklyCalendar[FindTimeRow(time)].Friday.IDAppointment);
                         numberOfCells = WeeklyCalendar[FindTimeRow(time)].Friday.DurationInHours / 0.5;
                         for (int i = 1; i < numberOfCells; i++)
-                        {
                             WeeklyCalendar[FindTimeRow(time) + i].Friday.Type = AppointmentType.none;
-                        }
                         break;
+
                     case 6:
-                        AppointmentStorage.Delete(WeeklyCalendar[FindTimeRow(time)].Saturday.IDAppointment);
+                        AppointmentService.Delete(WeeklyCalendar[FindTimeRow(time)].Saturday.IDAppointment);
                         numberOfCells = WeeklyCalendar[FindTimeRow(time)].Saturday.DurationInHours / 0.5;
                         for (int i = 1; i < numberOfCells; i++)
-                        {
                             WeeklyCalendar[FindTimeRow(time) + i].Saturday.Type = AppointmentType.none;
-                        }
                         break;
+
                     case 7:
-                        AppointmentStorage.Delete(WeeklyCalendar[FindTimeRow(time)].Sunday.IDAppointment);
+                        AppointmentService.Delete(WeeklyCalendar[FindTimeRow(time)].Sunday.IDAppointment);
                         numberOfCells = WeeklyCalendar[FindTimeRow(time)].Sunday.DurationInHours / 0.5;
                         for (int i = 1; i < numberOfCells; i++)
-                        {
                             WeeklyCalendar[FindTimeRow(time) + i].Sunday.Type = AppointmentType.none;
-                        }
                         break;
                 }
 

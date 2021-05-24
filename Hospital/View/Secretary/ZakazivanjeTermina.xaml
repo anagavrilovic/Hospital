@@ -63,10 +63,10 @@
 
 
                 <!-- Polja forme -->
-                <TextBox Text="{Binding Doctor, Mode=OneWay}" Style="{StaticResource KartoniTextBox}" IsEnabled="False"
+                <TextBox Text="{Binding NewAppointment.Doctor, Mode=OneWay}" Style="{StaticResource KartoniTextBox}" IsEnabled="False"
                          Grid.Row="1" Grid.Column="1" Height="22" Margin="3,10,40,10" />
 
-                <TextBox Text="{Binding Patient, Mode=OneWay}" Style="{StaticResource KartoniTextBox}" IsEnabled="False"
+                <TextBox Text="{Binding NewAppointment.PatientsRecord, Mode=OneWay}" Style="{StaticResource KartoniTextBox}" IsEnabled="False"
                          Grid.Row="2" Grid.Column="1" Height="22" Margin="3,10,40,10"/>
                 
                 <TextBox Text="{Binding NewAppointment.DateTime, StringFormat='{}{0: dd.MM.yyyy}', Mode=OneWay}" Style="{StaticResource KartoniTextBox}" IsEnabled="False" 

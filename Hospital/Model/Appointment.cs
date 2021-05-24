@@ -8,7 +8,6 @@ namespace Hospital
    public class Appointment : INotifyPropertyChanged
    {
         private double durationInHours = 0.5;
-        
         public double DurationInHours
         {
             get
@@ -23,7 +22,6 @@ namespace Hospital
         }
 
         private DateTime dateTime;
-
         public DateTime DateTime 
         {
             get
@@ -38,7 +36,6 @@ namespace Hospital
         }
 
         public AppointmentType type;
-
         public AppointmentType Type
         {
             get
@@ -53,7 +50,6 @@ namespace Hospital
         }
 
         private string iDpatient;
-
         public string IDpatient 
         {
             get
@@ -97,7 +93,6 @@ namespace Hospital
 
       
         private Room room = new Room();
-      
         public Room Room
         {
             get
@@ -111,10 +106,12 @@ namespace Hospital
             }
         }
 
+
         [JsonIgnore]
         public MedicalRecord PatientsRecord { get; set; }
         [JsonIgnore]
         public Model.Doctor Doctor { get; set; }
+
 
         public Appointment()
         {
@@ -132,16 +129,6 @@ namespace Hospital
             this.iDDoctor = iDDoctor;
             this.iDAppointment = iDAppointment;
             this.room = room;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
         }
 
         public bool IsDoctorAvaliable(Appointment appointment)
@@ -191,9 +178,7 @@ namespace Hospital
         public string ToString()
         {
             if(this.Equals(new Appointment()))
-            {
                 return "";
-            }
             else
             {
                 StringBuilder stringBuilder = new StringBuilder("");
@@ -206,5 +191,15 @@ namespace Hospital
                 return stringBuilder.ToString();
             }
         }
-   }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+    }
 }

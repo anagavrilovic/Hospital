@@ -40,7 +40,7 @@
             
 
             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,20,0">
-                <TextBlock Text="Broj zdravstvenog kartona*:" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Center"/>
+                <TextBlock Text="Broj zdravstvenog kartona:" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Center"/>
                 <TextBlock x:Name="KartonText" Margin="10,0,0,0" Style="{StaticResource TextBlockStyle}" 
                          Text="{Binding NewRecord.MedicalRecordID}"/>
             </StackPanel>
@@ -116,7 +116,7 @@
                     </TextBox.Text>
                 </TextBox>
 
-                <TextBox x:Name="PrezimeText" Grid.Row="2" Grid.Column="1" Style="{StaticResource KartoniTextBox}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                <TextBox x:Name="PrezimeText" Grid.Row="2" Grid.Column="1" Style="{StaticResource KartoniTextBox}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}" Height="27" Margin="3,3,40,0" VerticalAlignment="Top">
                     <TextBox.Text>
                         <Binding Path="NewRecord.Patient.LastName" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>

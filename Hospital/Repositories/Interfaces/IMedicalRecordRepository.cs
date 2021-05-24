@@ -11,6 +11,7 @@ namespace Hospital.Repositories.Interfaces
         void UpdatePatientsInformation(MedicalRecord medicalRecord);
         List<int> GetExistingIDs();
         MedicalRecord GetByUsername(string username);
-        MedicalRecord GetByPatientID(string id);
+        MedicalRecord GetByPatientID(string patientID);
+
     }
 }

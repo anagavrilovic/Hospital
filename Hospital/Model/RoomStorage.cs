@@ -35,7 +35,6 @@ namespace Hospital
         {
             ObservableCollection<Room> rooms = GetAll();
             rooms.Add(parameter1);
-
             doSerialization(rooms);
         }
 

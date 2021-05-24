@@ -18,13 +18,25 @@ namespace Hospital.Services
         {
             doctorRepository = new DoctorFileRepository();
         }
+
         public Doctor GetDoctorById(string id)
         {
             return doctorRepository.GetByID(id);
         }
+
         public ObservableCollection<Doctor> GetAll()
         {
             return doctorRepository.GetAll();
+        }
+
+        public Doctor GetByID(string doctorID)
+        {
+            return doctorRepository.GetByID(doctorID);
+        }
+
+        public ObservableCollection<Doctor> GetDoctorsBySpecialty(DoctorSpecialty doctorsSpecialty)
+        {
+            return doctorRepository.GetBySpecialty(doctorsSpecialty);
         }
     }
 }

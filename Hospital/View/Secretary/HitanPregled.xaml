@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:Hospital.View.Secretary"
       xmlns:enum="clr-namespace:Hospital"
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:val="clr-namespace:Hospital.ValidacijeSekretar"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1065"
       Background="{StaticResource BackgroundGray}"
@@ -73,8 +74,8 @@
                     <!-- ComboBox-ovi -->
                     <ComboBox Grid.Row="0" Grid.Column="1" Margin="0,30,40,20" Style="{StaticResource cbTB}" 
                               ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedItem="{Binding DoctorsSpecialty}"/>
-                    <ComboBox Grid.Row="1" Grid.Column="1" Margin="0,20,40,20" ItemsSource="{Binding Duration}" 
-                              Style="{StaticResource cbTB}" SelectedItem="{Binding NewUrgentAppointment.DurationInHours}" SelectedIndex="1"/>
+                    <ComboBox Grid.Row="1" Grid.Column="1" Margin="0,20,40,20" ItemsSource="{Binding PossibleDuration}" 
+                              Style="{StaticResource cbTB}" SelectedItem="{Binding NewUrgentAppointment.DurationInHours, Mode=OneWayToSource}" SelectedIndex="0"/>
                     <ComboBox x:Name="AppointmentType" Grid.Row="2" Grid.Column="1" Margin="0,20,40,20" Style="{StaticResource cbTB}">
                         <ComboBoxItem IsSelected="True">Pregled</ComboBoxItem>
                         <ComboBoxItem>Operacija</ComboBoxItem>
@@ -135,17 +136,49 @@
                     <TextBlock Grid.Row="5" Grid.Column="0" Text="JMBG: " Style="{StaticResource KartoniTextBlock}" Margin="40,10,0,10"/>
 
                     <!-- Polja za unos -->
-                    <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource GuestForm}" Margin="0,15,40,15" 
-                             Text="{Binding NewGuestPatient.Patient.FirstName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource GuestForm}" Margin="0,15,40,15" 
-                             Text="{Binding NewGuestPatient.Patient.LastName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource GuestForm}" Margin="0,15,40,15"
+                             Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                        <TextBox.Text>
+                            <Binding Path="NewGuestPatient.Patient.FirstName" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged" >
+                                <Binding.ValidationRules>
+                                    <val:OnlyLettersValidationRule ValidationStep="RawProposedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource GuestForm}" Margin="0,15,40,15"
+                             Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                        <TextBox.Text>
+                            <Binding Path="NewGuestPatient.Patient.LastName" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <val:OnlyLettersValidationRule ValidationStep="RawProposedValue"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <DatePicker Grid.Row="3" Grid.Column="1" Style="{StaticResource GuestForm}" Margin="0,15,40,15" 
                                 Text="{Binding NewGuestPatient.Patient.DateOfBirth, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" FirstDayOfWeek="Monday"
                                 Validation.ErrorTemplate="{x:Null}"/>
-                    <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource GuestForm}" Margin="0,15,40,15" 
-                             Text="{Binding NewGuestPatient.Patient.CardID, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource GuestForm}" Margin="0,15,40,15" 
-                             Text="{Binding NewGuestPatient.Patient.PersonalID, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource GuestForm}" Margin="0,15,40,15"
+                             Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                        <TextBox.Text>
+                            <Binding Path="NewGuestPatient.Patient.CardID" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged" >
+                                <Binding.ValidationRules>
+                                    <val:OnlyDigitsValidationRuleCardID ValidationStep="RawProposedValue"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBox Grid.Row="5" Grid.Column="1" Style="{StaticResource GuestForm}" Margin="0,15,40,15"
+                             Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                        <TextBox.Text>
+                            <Binding Path="NewGuestPatient.Patient.PersonalID" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <val:OnlyDigitsValidationRulePersonalID ValidationStep="RawProposedValue"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </Grid>
             </Border>
         </Grid>

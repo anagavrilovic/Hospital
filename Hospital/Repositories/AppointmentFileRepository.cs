@@ -55,6 +55,18 @@ namespace Hospital.Repositories
             return appointments;
         }
 
+        public ObservableCollection<Appointment> GetByDoctorID(string doctorID)
+        {
+            ObservableCollection<Appointment> appointments = GetAll();
+            ObservableCollection<Appointment> doctorsAppointments = new ObservableCollection<Appointment>();
+
+            foreach(Appointment appointment in appointments)
+                if (appointment.IDDoctor.Equals(doctorID))
+                    doctorsAppointments.Add(appointment);
+
+            return doctorsAppointments;
+        }
+
         public Appointment GetByID(string appointmentID)
         {
             ObservableCollection<Appointment> appointments = GetAll();
@@ -63,6 +75,29 @@ namespace Hospital.Repositories
                     return a;
 
             return new Appointment();
+        }
+
+        public ObservableCollection<Appointment> GetByPatientID(string patientID)
+        {
+            ObservableCollection<Appointment> appointments = GetAll();
+            ObservableCollection<Appointment> patientsAppointments = new ObservableCollection<Appointment>();
+
+            foreach (Appointment appointment in appointments)
+                if (appointment.IDpatient.Equals(patientID))
+                    patientsAppointments.Add(appointment);
+
+            return patientsAppointments;
+        }
+
+        public List<int> GetExistingIDs()
+        {
+            ObservableCollection<Appointment> appointments = GetAll();
+            List<int> existingIDs = new List<int>();
+
+            foreach (Appointment appointment in appointments)
+                existingIDs.Add(Int32.Parse(appointment.IDAppointment));
+
+            return existingIDs;
         }
 
         public void Save(Appointment appointment)
