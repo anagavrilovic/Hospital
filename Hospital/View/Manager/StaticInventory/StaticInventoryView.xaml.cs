@@ -150,6 +150,5 @@ namespace Hospital.View
         {
             NavigationService.Navigate(new RoomsWindow());
         }
-
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,18 +19,17 @@ namespace Hospital.View
     public partial class DeleteInventory : Page
     {
         public Inventory InventoryForDeleting;
-        private InventoryStorage _inventoryStorage;
 
         public DeleteInventory(Inventory inventory)
         {
             InitializeComponent();
             InventoryForDeleting = inventory;
-            _inventoryStorage = new InventoryStorage();
         }
 
         private void AcceptDeleting(object sender, RoutedEventArgs e)
         {
-            _inventoryStorage.Delete(InventoryForDeleting.Id, InventoryForDeleting.RoomID);
+            StaticInventoryService inventoryService = new StaticInventoryService(InventoryForDeleting);
+            inventoryService.DeleteItem();
 
             NavigationService.Navigate(new StaticInventoryView(InventoryForDeleting.RoomID));
         }
