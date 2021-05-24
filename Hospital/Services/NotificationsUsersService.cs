@@ -18,7 +18,7 @@ namespace Hospital.Services
         {
             notificationUsersRepository = new NotificationsUsersFileRepository();
         }
-        public ObservableCollection<NotificationsUsers> GetAll()
+        public List<NotificationsUsers> GetAll()
         {
             return notificationUsersRepository.GetAll();
         }

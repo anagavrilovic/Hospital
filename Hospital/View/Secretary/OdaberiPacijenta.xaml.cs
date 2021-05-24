@@ -52,7 +52,7 @@ namespace Hospital.View
 
         private void LoadPatients()
         {
-            Patients = MedicalRecordService.GetAllRecords();
+            Patients = new ObservableCollection<MedicalRecord>(MedicalRecordService.GetAllRecords());
 
             PatientsCollection = CollectionViewSource.GetDefaultView(Patients);
             PatientsCollection.Filter = CustomFilterPatients;
@@ -108,7 +108,7 @@ namespace Hospital.View
         private void GetSelectedPatientsAppointments()
         {
             PatientsAppointments.Clear();
-            ObservableCollection<Appointment> app = AppointmentService.GetAll();
+            ObservableCollection<Appointment> app = new ObservableCollection<Appointment>(AppointmentService.GetAll());
             foreach (Appointment ap in app)
             {
                 if (SelectedPatient.Patient.PersonalID.Equals(ap.IDpatient))

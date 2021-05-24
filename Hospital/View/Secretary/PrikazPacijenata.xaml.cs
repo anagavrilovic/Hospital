@@ -19,9 +19,6 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for PrikazPacijenata.xaml
-    /// </summary>
     public partial class PrikazPacijenata : Page
     {
         public ObservableCollection<MedicalRecord> PatientsRecords { get; set; }
@@ -53,7 +50,7 @@ namespace Hospital.View
 
         private void InitializePatientsRecords()
         {
-            PatientsRecords = MedicalRecordService.GetAllRecords();
+            PatientsRecords = new ObservableCollection<MedicalRecord>(MedicalRecordService.GetAllRecords());
             PatientCollection = CollectionViewSource.GetDefaultView(PatientsRecords);
             PatientCollection.Filter = CustomFilterPatientsRecords;
         }
@@ -102,12 +99,12 @@ namespace Hospital.View
 
         private void IsBlockedUnchecked(object sender, RoutedEventArgs e)
         {
-            MedicalRecordService.UpdateAllRecords(PatientsRecords);
+            MedicalRecordService.UpdateAllRecords(PatientsRecords.ToList());
         }
 
         private void IsBlockedChecked(object sender, RoutedEventArgs e)
         {
-            MedicalRecordService.UpdateAllRecords(PatientsRecords);
+            MedicalRecordService.UpdateAllRecords(PatientsRecords.ToList());
         }
 
         private bool IsPatientSelected(string message)

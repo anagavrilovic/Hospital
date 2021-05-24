@@ -19,7 +19,7 @@ namespace Hospital.Repositories
 
         public void Delete(string id)
         {
-            ObservableCollection<HospitalTreatment> hospitalTreatments = GetAll();
+            List<HospitalTreatment> hospitalTreatments = GetAll();
             foreach (HospitalTreatment treatment in hospitalTreatments)
             {
                 if (treatment.PatientId.Equals(id))
@@ -33,7 +33,7 @@ namespace Hospital.Repositories
 
         public void EditHospitalTreatment(HospitalTreatment hospitalTreatment)
         {
-            ObservableCollection<HospitalTreatment> hospitalTreatments = GetAll();
+            List<HospitalTreatment> hospitalTreatments = GetAll();
             foreach (HospitalTreatment h in hospitalTreatments)
             {
                 if (h.PatientId.Equals(hospitalTreatment.PatientId))
@@ -45,24 +45,24 @@ namespace Hospital.Repositories
             Serialize(hospitalTreatments);
         }
 
-        public ObservableCollection<HospitalTreatment> GetAll()
+        public List<HospitalTreatment> GetAll()
         {
-            ObservableCollection<HospitalTreatment> hospitalTreatments;
+            List<HospitalTreatment> hospitalTreatments;
             using (StreamReader file = File.OpenText(@"..\\..\\Files\\" + fileName))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                hospitalTreatments = (ObservableCollection<HospitalTreatment>)serializer.Deserialize(file, typeof(ObservableCollection<HospitalTreatment>));
+                hospitalTreatments = (List<HospitalTreatment>)serializer.Deserialize(file, typeof(List<HospitalTreatment>));
             }
 
             if (hospitalTreatments == null)
-                hospitalTreatments = new ObservableCollection<HospitalTreatment>();
+                hospitalTreatments = new List<HospitalTreatment>();
 
             return hospitalTreatments;
         }
 
         public HospitalTreatment GetByID(string id)
         {
-            ObservableCollection<HospitalTreatment> hospitalTreatments = GetAll();
+            List<HospitalTreatment> hospitalTreatments = GetAll();
             foreach (HospitalTreatment treatment in hospitalTreatments)
                 if (treatment.PatientId.Equals(id))
                     return treatment;
@@ -72,12 +72,12 @@ namespace Hospital.Repositories
 
         public void Save(HospitalTreatment hospitalTreatment)
         {
-            ObservableCollection<HospitalTreatment> hospitalTreatments = GetAll();
+            List<HospitalTreatment> hospitalTreatments = GetAll();
             hospitalTreatments.Add(hospitalTreatment);
             Serialize(hospitalTreatments);
         }
 
-        public void Serialize(ObservableCollection<HospitalTreatment> hospitalTreatments)
+        public void Serialize(List<HospitalTreatment> hospitalTreatments)
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {

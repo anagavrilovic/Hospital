@@ -25,15 +25,15 @@ namespace Hospital.Services
             return roomRepository.GetByID(id);
         }
 
-        public ObservableCollection<Room> GetAll()
+        public List<Room> GetAll()
         {
             return roomRepository.GetAll();
         }
 
-        public ObservableCollection<Room> GetAvaliableRoomsForNewAppointment(Appointment newAppointment)
+        public List<Room> GetAvaliableRoomsForNewAppointment(Appointment newAppointment)
         {
-            ObservableCollection<Room> allRooms = roomRepository.GetAllRoomsWithoutMagazines();
-            ObservableCollection<Room> avaliableRooms = new ObservableCollection<Room>();
+            List<Room> allRooms = roomRepository.GetAllRoomsWithoutMagazines();
+            List<Room> avaliableRooms = new List<Room>();
 
             DateTime startTime = newAppointment.DateTime;
             DateTime endTime = newAppointment.DateTime.AddHours(newAppointment.DurationInHours);
@@ -47,7 +47,7 @@ namespace Hospital.Services
 
         private bool IsRoomAvaliableInSelectedPeriod(Room room, DateTime startTime, DateTime endTime)
         {
-            ObservableCollection<Appointment> allAppointments = appointmentRepository.GetAll();
+            List<Appointment> allAppointments = appointmentRepository.GetAll();
 
             foreach (Appointment appointment in allAppointments)
                 if (appointment.IsOverlappingWith(startTime, endTime) && room.Id.Equals(appointment.Room.Id))

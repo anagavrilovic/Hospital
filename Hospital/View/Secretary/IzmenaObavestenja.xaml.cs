@@ -64,17 +64,17 @@ namespace Hospital.View
         {
             if (Recipients.IsEveryPatientRecipient)
             {
-                Recipients.RecipientsRecords = MedicalRecordService.GetAllRecords();
+                Recipients.RecipientsRecords = new ObservableCollection<MedicalRecord>(MedicalRecordService.GetAllRecords());
                 return;
             }
 
-            Recipients.RecipientsRecords = NotificationService.GetPatientRecipientsRecords(Notification);
+            Recipients.RecipientsRecords = new ObservableCollection<MedicalRecord>(NotificationService.GetPatientRecipientsRecords(Notification));
             LoadPatientsForAdding();
         }
 
         private void LoadPatientsForAdding()
         {
-            ObservableCollection<MedicalRecord> medicalRecords = MedicalRecordService.GetAllRecords();
+            ObservableCollection<MedicalRecord> medicalRecords = new ObservableCollection<MedicalRecord>(MedicalRecordService.GetAllRecords());
             
             LoadPatientsWhoAreNotReceivers(medicalRecords);
 

@@ -9,8 +9,8 @@ namespace Hospital.Repositories.Interfaces
 {
     interface IMedicineRepository : IGenericRepository<Medicine>
     {
-        ObservableCollection<string> GetAllMedicines();
-        ObservableCollection<string> GetAllIngredients();
+        List<string> GetAllMedicines();
+        List<string> GetAllIngredients();
         void EditMedicine(Medicine editedMedicine);
     }
 }

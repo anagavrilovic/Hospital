@@ -16,7 +16,7 @@ namespace Hospital.Repositories
 
         public void Delete(string id)
         {
-            ObservableCollection<Inventory> inventory = GetAll();
+            List<Inventory> inventory = GetAll();
             foreach (Inventory inv in inventory)
             {
                 if (inv.Id.Equals(id))
@@ -28,23 +28,23 @@ namespace Hospital.Repositories
             }
         }
 
-        public ObservableCollection<Inventory> GetAll()
+        public List<Inventory> GetAll()
         {
-            ObservableCollection<Inventory> inventory = new ObservableCollection<Inventory>();
+            List<Inventory> inventory = new List<Inventory>();
             using (StreamReader sr = File.OpenText(@"..\\..\\Files\\" + fileName))
             {
-                inventory = JsonConvert.DeserializeObject<ObservableCollection<Inventory>>(sr.ReadToEnd());
+                inventory = JsonConvert.DeserializeObject<List<Inventory>>(sr.ReadToEnd());
             }
 
             if (inventory == null)
-                inventory = new ObservableCollection<Inventory>();
+                inventory = new List<Inventory>();
 
             return inventory;
         }
 
         public Inventory GetByID(string id)
         {
-            ObservableCollection<Inventory> inventory = GetAll();
+            List<Inventory> inventory = GetAll();
             foreach (Inventory inv in inventory)
                 if (inv.Id.Equals(id))
                     return inv;
@@ -54,13 +54,13 @@ namespace Hospital.Repositories
 
         public void Save(Inventory parameter)
         {
-            ObservableCollection<Inventory> inventory = GetAll();
+            List<Inventory> inventory = GetAll();
             inventory.Add(parameter);
 
             Serialize(inventory);
         }
 
-        public void Serialize(ObservableCollection<Inventory> parameter)
+        public void Serialize(List<Inventory> parameter)
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {

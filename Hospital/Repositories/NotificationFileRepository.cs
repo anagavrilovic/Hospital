@@ -19,7 +19,7 @@ namespace Hospital.Repositories
 
         public void Delete(string notificationID)
         {
-            ObservableCollection<Notification> notifications = GetAll();
+            List<Notification> notifications = GetAll();
             foreach (Notification n in notifications)
             {
                 if (n.Id.Equals(notificationID))
@@ -31,31 +31,31 @@ namespace Hospital.Repositories
             }
         }
 
-        public ObservableCollection<Notification> GetAll()
+        public List<Notification> GetAll()
         {
-            ObservableCollection<Notification> notifications;
+            List<Notification> notifications;
             using (StreamReader file = File.OpenText(@"..\\..\\Files\\" + fileName))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                notifications = (ObservableCollection<Notification>)serializer.Deserialize(file, typeof(ObservableCollection<Notification>));
+                notifications = (List<Notification>)serializer.Deserialize(file, typeof(List<Notification>));
             }
 
             if (notifications == null)
-                notifications = new ObservableCollection<Notification>();
+                notifications = new List<Notification>();
 
             return notifications;
         }
 
-        public ObservableCollection<Notification> GetAllNotificationsSortedDescending()
+        public List<Notification> GetAllNotificationsSortedDescending()
         {
-            ObservableCollection<Notification> allNotifications = GetAll();
+            List<Notification> allNotifications = GetAll();
             List<Notification> sortedNotifications = allNotifications.OrderByDescending(n => n.Date).ToList();
-            return new ObservableCollection<Notification>(sortedNotifications);
+            return new List<Notification>(sortedNotifications);
         }
 
         public Notification GetByID(string notificationId)
         {
-            ObservableCollection<Notification> notifications = GetAll();
+            List<Notification> notifications = GetAll();
             foreach (Notification n in notifications)
                 if (n.Id.Equals(notificationId))
                     return n;
@@ -65,7 +65,7 @@ namespace Hospital.Repositories
 
         public List<int> GetExistingIDs()
         {
-            ObservableCollection<Notification> notifications = GetAll();
+            List<Notification> notifications = GetAll();
             List<int> existingIDs = new List<int>();
 
             foreach (Notification notification in notifications)
@@ -76,12 +76,12 @@ namespace Hospital.Repositories
 
         public void Save(Notification notification)
         {
-            ObservableCollection<Notification> notifications = this.GetAll();
+            List<Notification> notifications = this.GetAll();
             notifications.Add(notification);
             Serialize(notifications);
         }
 
-        public void Serialize(ObservableCollection<Notification> notifications)
+        public void Serialize(List<Notification> notifications)
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {
@@ -94,7 +94,7 @@ namespace Hospital.Repositories
         {
             List<Notification> notifications = GetAll().ToList();
             notifications[notifications.FindIndex(notification => notification.Id.Equals(newNotification.Id))] = newNotification;
-            Serialize(new ObservableCollection<Notification>(notifications));
+            Serialize(new List<Notification>(notifications));
         }
 
 

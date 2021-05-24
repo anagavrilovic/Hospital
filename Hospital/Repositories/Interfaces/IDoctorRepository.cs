@@ -10,6 +10,6 @@ namespace Hospital.Repositories.Interfaces
 {
     interface IDoctorRepository : IGenericRepository<Doctor>
     {
-        ObservableCollection<Doctor> GetBySpecialty(DoctorSpecialty doctorSpecialty);
+        List<Doctor> GetBySpecialty(DoctorSpecialty doctorSpecialty);
     }
 }

@@ -67,7 +67,7 @@ namespace Hospital.View
 
         private void LoadAllDoctors()
         {
-            AllDoctors = DoctorService.GetAll();
+            AllDoctors = new ObservableCollection<Model.Doctor>(DoctorService.GetAll());
         }
 
         private void SetDatesForWeeklyCalendar()
@@ -130,7 +130,7 @@ namespace Hospital.View
 
         private void ShowSelectedDoctorsAppointments()
         {
-            ObservableCollection<Appointment> selectedDoctorsAppointments = AppointmentService.GetAppointmentsByDoctor(SelectedDoctorForNewAppointment);
+            ObservableCollection<Appointment> selectedDoctorsAppointments = new ObservableCollection<Appointment>(AppointmentService.GetAppointmentsByDoctor(SelectedDoctorForNewAppointment));
             ObservableCollection<Appointment> selectedDoctorsAppointmentsInChosenWeek = GetSelectedDoctorsAppointmentsInChosenWeek(selectedDoctorsAppointments);
             LoadDoctorAndPatientForAppointments(selectedDoctorsAppointmentsInChosenWeek);
             LoadSelectedDoctorsAppointmentsIntoWeeklyCalendar(selectedDoctorsAppointmentsInChosenWeek);

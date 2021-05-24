@@ -19,7 +19,7 @@ namespace Hospital.Repositories
 
         public void Delete(string id)
         {
-            ObservableCollection<Room> rooms = GetAll();
+            List<Room> rooms = GetAll();
             foreach (Room r in rooms)
             {
                 if (r.Id.Equals(id))
@@ -32,24 +32,24 @@ namespace Hospital.Repositories
             }
         }
 
-        public ObservableCollection<Room> GetAll()
+        public List<Room> GetAll()
         {
-            ObservableCollection<Room> rooms = new ObservableCollection<Room>();
+            List<Room> rooms = new List<Room>();
             using (StreamReader sr = File.OpenText(@"..\\..\\Files\\" + fileName))
             {
-                rooms = JsonConvert.DeserializeObject<ObservableCollection<Room>>(sr.ReadToEnd());
+                rooms = JsonConvert.DeserializeObject<List<Room>>(sr.ReadToEnd());
             }
 
             if (rooms == null)
-                return new ObservableCollection<Room>();
+                return new List<Room>();
 
             return rooms;
         }
 
-        public ObservableCollection<Room> GetAllRoomsWithoutMagazines()
+        public List<Room> GetAllRoomsWithoutMagazines()
         {
-            ObservableCollection<Room> allRooms = GetAll();
-            ObservableCollection<Room> requestedRooms = new ObservableCollection<Room>();
+            List<Room> allRooms = GetAll();
+            List<Room> requestedRooms = new List<Room>();
 
             foreach (Room room in allRooms)
                 if (!room.IsMagazine())
@@ -60,7 +60,7 @@ namespace Hospital.Repositories
 
         public Room GetByID(string id)
         {
-            ObservableCollection<Room> rooms = GetAll();
+            List<Room> rooms = GetAll();
             foreach (Room r in rooms)
                 if (r.Id.Equals(id))
                     return r;
@@ -70,12 +70,12 @@ namespace Hospital.Repositories
 
         public void Save(Room parameter)
         {
-            ObservableCollection<Room> rooms = GetAll();
+            List<Room> rooms = GetAll();
             rooms.Add(parameter);
             Serialize(rooms);
         }
 
-        public void Serialize(ObservableCollection<Room> parameter)
+        public void Serialize(List<Room> parameter)
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {

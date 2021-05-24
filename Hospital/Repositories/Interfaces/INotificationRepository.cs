@@ -10,7 +10,7 @@ namespace Hospital.Repositories.Interfaces
 {
     interface INotificationRepository : IGenericRepository<Notification>
     {
-        ObservableCollection<Notification> GetAllNotificationsSortedDescending();
+        List<Notification> GetAllNotificationsSortedDescending();
         void Update(Notification notification);
         List<int> GetExistingIDs();
     }

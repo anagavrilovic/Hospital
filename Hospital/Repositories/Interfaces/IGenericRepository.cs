@@ -10,11 +10,11 @@ namespace Hospital.Repositories.Interfaces
     interface IGenericRepository<T>
         where T : class
     {
-        ObservableCollection<T> GetAll();
+        List<T> GetAll();
         void Save(T parameter);
         void Delete(string id);
         T GetByID(string id);
-        void Serialize(ObservableCollection<T> parameter);
+        void Serialize(List<T> parameter);
 
     }
 }

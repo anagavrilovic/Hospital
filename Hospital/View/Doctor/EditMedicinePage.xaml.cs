@@ -99,7 +99,7 @@ namespace Hospital.View.Doctor
         private void SetProperites()
         {
             medicineIngredientsListBox.ItemsSource = Medicine.Ingredient;
-            medicineForDisplay = medicineService.GetAll();
+            medicineForDisplay = new ObservableCollection<Medicine>(medicineService.GetAll());
             allDrugsListBox.ItemsSource = medicineForDisplay;
             allIngredientsListBox.ItemsSource = Ingredients;
         }

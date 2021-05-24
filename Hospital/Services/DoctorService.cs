@@ -24,7 +24,7 @@ namespace Hospital.Services
             return doctorRepository.GetByID(id);
         }
 
-        public ObservableCollection<Doctor> GetAll()
+        public List<Doctor> GetAll()
         {
             return doctorRepository.GetAll();
         }
@@ -34,7 +34,7 @@ namespace Hospital.Services
             return doctorRepository.GetByID(doctorID);
         }
 
-        public ObservableCollection<Doctor> GetDoctorsBySpecialty(DoctorSpecialty doctorsSpecialty)
+        public List<Doctor> GetDoctorsBySpecialty(DoctorSpecialty doctorsSpecialty)
         {
             return doctorRepository.GetBySpecialty(doctorsSpecialty);
         }

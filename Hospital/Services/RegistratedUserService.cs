@@ -46,7 +46,7 @@ namespace Hospital.Services
             return registratedUsersRepository.GetRoleByUsername(username);
         }
 
-        public ObservableCollection<RegistratedUser> GetAllRegistratedUsers()
+        public List<RegistratedUser> GetAllRegistratedUsers()
         {
             return registratedUsersRepository.GetAll();
         }

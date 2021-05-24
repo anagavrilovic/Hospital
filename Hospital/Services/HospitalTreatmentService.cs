@@ -21,7 +21,7 @@ namespace Hospital.Services
         {
            hospitalTreatmentRepository.Delete(id);
         }
-        public ObservableCollection<HospitalTreatment> GetAll()
+        public List<HospitalTreatment> GetAll()
         {
             return hospitalTreatmentRepository.GetAll();
         }

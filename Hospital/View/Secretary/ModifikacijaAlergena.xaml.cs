@@ -52,7 +52,7 @@ namespace Hospital.View
 
         private void ReadAllMedicines()
         {
-            AllMedicines = MedicineService.GetAllMedicines();
+            AllMedicines = new ObservableCollection<string>(MedicineService.GetAllMedicines());
 
             MedicineCollection = CollectionViewSource.GetDefaultView(AllMedicines);
             MedicineCollection.Filter = CustomFilterLekovi;
@@ -60,7 +60,7 @@ namespace Hospital.View
 
         private void ReadAllIngredients()
         {
-            AllIngredients = MedicineService.GetAllIngredients();
+            AllIngredients = new ObservableCollection<string>(MedicineService.GetAllIngredients());
 
             IngredientsCollection = CollectionViewSource.GetDefaultView(AllIngredients);
             IngredientsCollection.Filter = CustomFilterSastojci;

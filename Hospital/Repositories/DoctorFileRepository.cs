@@ -17,7 +17,7 @@ namespace Hospital.Repositories
 
         public void Delete(string id)
         {
-            ObservableCollection<Doctor> doctors = GetAll();
+            List<Doctor> doctors = GetAll();
             foreach (Doctor d in doctors)
             {
                 if (d.PersonalID.Equals(id))
@@ -29,24 +29,24 @@ namespace Hospital.Repositories
             }
         }
 
-        public ObservableCollection<Doctor> GetAll()
+        public List<Doctor> GetAll()
         {
-            ObservableCollection<Doctor> doctors;
+            List<Doctor> doctors;
             using (StreamReader file = File.OpenText(@"..\\..\\Files\\" + fileName))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                doctors = (ObservableCollection<Doctor>)serializer.Deserialize(file, typeof(ObservableCollection<Doctor>));
+                doctors = (List<Doctor>)serializer.Deserialize(file, typeof(List<Doctor>));
             }
 
             if (doctors == null)
-                doctors = new ObservableCollection<Doctor>();
+                doctors = new List<Doctor>();
 
             return doctors;
         }
 
         public Doctor GetByID(string id)
         {
-            ObservableCollection<Doctor> doctors = GetAll();
+            List<Doctor> doctors = GetAll();
             foreach (Doctor d in doctors)
                 if (d.PersonalID.Equals(id))
                     return d;
@@ -54,10 +54,10 @@ namespace Hospital.Repositories
             return null;
         }
 
-        public ObservableCollection<Doctor> GetBySpecialty(DoctorSpecialty requestedSpecialty)
+        public List<Doctor> GetBySpecialty(DoctorSpecialty requestedSpecialty)
         {
-            ObservableCollection<Doctor> allDoctors = GetAll();
-            ObservableCollection<Doctor> doctorsWithRequestedSpecialty = new ObservableCollection<Doctor>();
+            List<Doctor> allDoctors = GetAll();
+            List<Doctor> doctorsWithRequestedSpecialty = new List<Doctor>();
 
             foreach (Doctor doctor in allDoctors)
                 if (doctor.Specialty.Equals(requestedSpecialty))
@@ -68,12 +68,12 @@ namespace Hospital.Repositories
 
         public void Save(Doctor doctor)
         {
-            ObservableCollection<Doctor> doctors = GetAll();
+            List<Doctor> doctors = GetAll();
             doctors.Add(doctor);
             Serialize(doctors);
         }
 
-        public void Serialize(ObservableCollection<Doctor> doctors)
+        public void Serialize(List<Doctor> doctors)
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {

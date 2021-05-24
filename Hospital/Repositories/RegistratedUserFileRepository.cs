@@ -19,7 +19,7 @@ namespace Hospital.Repositories
 
         public void Delete(string username)
         {
-            ObservableCollection<RegistratedUser> users = GetAll();
+            List<RegistratedUser> users = GetAll();
             foreach (RegistratedUser user in users)
             {
                 if (user.Username.Equals(username))
@@ -33,7 +33,7 @@ namespace Hospital.Repositories
 
         public UserType GetRoleByUsername(string username)
         {
-            ObservableCollection<RegistratedUser> registratedUsers = GetAll();
+            List<RegistratedUser> registratedUsers = GetAll();
 
             foreach (RegistratedUser user in registratedUsers)
                 if (user.Username.Equals(username))
@@ -42,24 +42,24 @@ namespace Hospital.Repositories
             return UserType.doctor;
         }
 
-        public ObservableCollection<RegistratedUser> GetAll()
+        public List<RegistratedUser> GetAll()
         {
-            ObservableCollection<RegistratedUser> users;
+            List<RegistratedUser> users;
             using (StreamReader file = File.OpenText(@"..\\..\\Files\\" + fileName))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                users = (ObservableCollection<RegistratedUser>)serializer.Deserialize(file, typeof(ObservableCollection<RegistratedUser>));
+                users = (List<RegistratedUser>)serializer.Deserialize(file, typeof(List<RegistratedUser>));
             }
 
             if (users == null)
-                users = new ObservableCollection<RegistratedUser>();
+                users = new List<RegistratedUser>();
 
             return users;
         }
 
         public RegistratedUser GetByID(string username)
         {
-            ObservableCollection<RegistratedUser> registratedUsers = GetAll();
+            List<RegistratedUser> registratedUsers = GetAll();
 
             foreach (RegistratedUser user in registratedUsers)
                 if (user.Username.Equals(username))
@@ -70,7 +70,7 @@ namespace Hospital.Repositories
 
         public bool IsUsernameUnique(string username)
         {
-            ObservableCollection<RegistratedUser> registratedUsers = GetAll();
+            List<RegistratedUser> registratedUsers = GetAll();
             foreach (RegistratedUser user in registratedUsers)
                 if (user.Username.Equals(username))
                     return false;
@@ -80,12 +80,12 @@ namespace Hospital.Repositories
 
         public void Save(RegistratedUser user)
         {
-            ObservableCollection<RegistratedUser> users = GetAll();
+            List<RegistratedUser> users = GetAll();
             users.Add(user);
             Serialize(users);
         }
 
-        public void Serialize(ObservableCollection<RegistratedUser> users)
+        public void Serialize(List<RegistratedUser> users)
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {
@@ -96,7 +96,7 @@ namespace Hospital.Repositories
 
         public int CountByRole(UserType userType)
         {
-            ObservableCollection<RegistratedUser> registratedUsers = GetAll();
+            List<RegistratedUser> registratedUsers = GetAll();
             int count = 0;
 
             foreach (RegistratedUser user in registratedUsers)

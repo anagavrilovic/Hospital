@@ -22,7 +22,7 @@ namespace Hospital.Services
             medicalRecordRepository = new MedicalRecordFileRepository();
         }
 
-        public ObservableCollection<MedicalRecord> GetAllRecords()
+        public List<MedicalRecord> GetAllRecords()
         {
             return medicalRecordRepository.GetAll();
         }
@@ -55,7 +55,7 @@ namespace Hospital.Services
             appointmentRepository.DeletePatientsAppointments(medicalRecord.Patient.PersonalID);
         }
 
-        public void UpdateAllRecords(ObservableCollection<MedicalRecord> medicalRecords)
+        public void UpdateAllRecords(List<MedicalRecord> medicalRecords)
         {
             medicalRecordRepository.Serialize(medicalRecords);
         }

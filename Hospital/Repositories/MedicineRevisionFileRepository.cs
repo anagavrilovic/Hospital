@@ -19,7 +19,7 @@ namespace Hospital.Repositories
 
         public void Delete(string medicineID)
         {
-            ObservableCollection<MedicineRevision> medicineRevisions = GetAll();
+            List<MedicineRevision> medicineRevisions = GetAll();
             foreach (MedicineRevision medicineRevision in medicineRevisions)
             {
                 if (medicineRevision.Medicine.ID.Equals(medicineID))
@@ -31,16 +31,16 @@ namespace Hospital.Repositories
             }
         }
 
-        public ObservableCollection<MedicineRevision> GetAll()
+        public List<MedicineRevision> GetAll()
         {
-            ObservableCollection<MedicineRevision> medicineRevisions = new ObservableCollection<MedicineRevision>();
+            List<MedicineRevision> medicineRevisions = new List<MedicineRevision>();
 
             using (StreamReader sr = File.OpenText(@"..\\..\\Files\\" + fileName))
             {
-                medicineRevisions = JsonConvert.DeserializeObject<ObservableCollection<MedicineRevision>>(sr.ReadToEnd());
+                medicineRevisions = JsonConvert.DeserializeObject<List<MedicineRevision>>(sr.ReadToEnd());
 
                 if (medicineRevisions == null)
-                    return new ObservableCollection<MedicineRevision>();
+                    return new List<MedicineRevision>();
             }
 
             return medicineRevisions;
@@ -48,7 +48,7 @@ namespace Hospital.Repositories
 
         public MedicineRevision GetByID(string medicineID)
         {
-            ObservableCollection<MedicineRevision> medicineRevisions = GetAll();
+            List<MedicineRevision> medicineRevisions = GetAll();
 
             foreach (MedicineRevision medicineRevision in medicineRevisions)
                 if (medicineRevision.Medicine.ID.Equals(medicineID))
@@ -59,14 +59,14 @@ namespace Hospital.Repositories
 
         public void Save(MedicineRevision medicineRevision)
         {
-            ObservableCollection<MedicineRevision> medicineRevisions = GetAll();
+            List<MedicineRevision> medicineRevisions = GetAll();
             medicineRevisions.Add(medicineRevision);
             Serialize(medicineRevisions);
         }
 
         public void EditMedicine(MedicineRevision editedMedicineRevision)
         {
-            ObservableCollection<MedicineRevision> medicineRevisions = GetAll();
+            List<MedicineRevision> medicineRevisions = GetAll();
             foreach (MedicineRevision medicineRevision in medicineRevisions.ToList())
             {
                 if (editedMedicineRevision.Medicine.ID.Equals(medicineRevision.Medicine.ID))
@@ -79,7 +79,7 @@ namespace Hospital.Repositories
             }
         }
 
-        public void Serialize(ObservableCollection<MedicineRevision> medicineRevisions)
+        public void Serialize(List<MedicineRevision> medicineRevisions)
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {

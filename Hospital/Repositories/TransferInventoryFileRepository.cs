@@ -17,7 +17,7 @@ namespace Hospital.Repositories
 
         public void Delete(string id)
         {
-            ObservableCollection<TransferInventory> allTransfers = GetAll();
+            List<TransferInventory> allTransfers = GetAll();
             foreach (TransferInventory transfer in allTransfers)
                 if (transfer.TransferID.Equals(id))
                 {
@@ -27,15 +27,15 @@ namespace Hospital.Repositories
             Serialize(allTransfers);
         }
 
-        public ObservableCollection<TransferInventory> GetAll()
+        public List<TransferInventory> GetAll()
         {
-            ObservableCollection<TransferInventory> transferInventory = new ObservableCollection<TransferInventory>();
+            List<TransferInventory> transferInventory = new List<TransferInventory>();
             using (StreamReader sr = File.OpenText(@"..\\..\\Files\\" + fileName))
             {
-                transferInventory = JsonConvert.DeserializeObject<ObservableCollection<TransferInventory>>(sr.ReadToEnd());
+                transferInventory = JsonConvert.DeserializeObject<List<TransferInventory>>(sr.ReadToEnd());
 
                 if (transferInventory == null)
-                    return new ObservableCollection<TransferInventory>();
+                    return new List<TransferInventory>();
             }
 
             return transferInventory;
@@ -43,7 +43,7 @@ namespace Hospital.Repositories
 
         public TransferInventory GetByID(string id)
         {
-            ObservableCollection<TransferInventory> allTransfers = GetAll();
+            List<TransferInventory> allTransfers = GetAll();
             foreach (TransferInventory transfer in allTransfers)
                 if (transfer.TransferID.Equals(id))
                     return transfer;
@@ -53,12 +53,10 @@ namespace Hospital.Repositories
 
         public void Save(TransferInventory parameter)
         {
-            ObservableCollection<TransferInventory> transferInventory = GetAll();
+            List<TransferInventory> transferInventory = GetAll();
 
             if (transferInventory == null)
-            {
-                transferInventory = new ObservableCollection<TransferInventory>();
-            }
+                transferInventory = new List<TransferInventory>();
 
             transferInventory.Add(parameter);
 
@@ -68,7 +66,7 @@ namespace Hospital.Repositories
         public List<int> GetAllScheduledTransferIDs()
         {
             List<int> allIDs = new List<int>();
-            ObservableCollection<TransferInventory> allScheduledTransfers = GetAll();
+            List<TransferInventory> allScheduledTransfers = GetAll();
             foreach (TransferInventory transfer in allScheduledTransfers)
                 allIDs.Add(Int32.Parse(transfer.TransferID));
 
@@ -76,7 +74,7 @@ namespace Hospital.Repositories
 
         }
 
-        public void Serialize(ObservableCollection<TransferInventory> parameter)
+        public void Serialize(List<TransferInventory> parameter)
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {

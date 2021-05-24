@@ -20,12 +20,12 @@ namespace Hospital.Services
             medicineRepository = new MedicineFileRepository();
         }
 
-        public ObservableCollection<string> GetAllMedicines()
+        public List<string> GetAllMedicines()
         {
             return medicineRepository.GetAllMedicines();
         }
 
-        public ObservableCollection<string> GetAllIngredients()
+        public List<string> GetAllIngredients()
         {
             return medicineRepository.GetAllIngredients();
         }
@@ -39,7 +39,7 @@ namespace Hospital.Services
             medicineRepository.EditMedicine(medicine);
         }
 
-        public ObservableCollection<Medicine> GetAll()
+        public List<Medicine> GetAll()
         {
             return medicineRepository.GetAll();
         }
@@ -59,7 +59,7 @@ namespace Hospital.Services
 
         private bool IsMedicineIDUnique(string id)
         {
-            ObservableCollection<Medicine> medicines = GetAll();
+            List<Medicine> medicines = GetAll();
             foreach (Medicine medicine in medicines)
             {
                 if (medicine.ID.Equals(id))

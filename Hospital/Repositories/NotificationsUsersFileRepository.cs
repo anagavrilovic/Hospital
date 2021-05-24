@@ -24,7 +24,7 @@ namespace Hospital.Repositories
 
         public void DeleteNotificationsUsersByNotificationID(string id)
         {
-            ObservableCollection<NotificationsUsers> notificationsUsers = GetAll();
+            List<NotificationsUsers> notificationsUsers = GetAll();
             foreach (NotificationsUsers n in notificationsUsers.ToList())
                 if (n.NotificationID.Equals(id))
                     notificationsUsers.Remove(n);
@@ -32,17 +32,17 @@ namespace Hospital.Repositories
             Serialize(notificationsUsers);
         }
 
-        public ObservableCollection<NotificationsUsers> GetAll()
+        public List<NotificationsUsers> GetAll()
         {
-            ObservableCollection<NotificationsUsers> notificationsUsers;
+            List<NotificationsUsers> notificationsUsers;
             using (StreamReader file = File.OpenText(@"..\\..\\Files\\" + fileName))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                notificationsUsers = (ObservableCollection<NotificationsUsers>)serializer.Deserialize(file, typeof(ObservableCollection<NotificationsUsers>));
+                notificationsUsers = (List<NotificationsUsers>)serializer.Deserialize(file, typeof(List<NotificationsUsers>));
             }
 
             if (notificationsUsers == null)
-                notificationsUsers = new ObservableCollection<NotificationsUsers>();
+                notificationsUsers = new List<NotificationsUsers>();
 
             return notificationsUsers;
         }
@@ -52,10 +52,10 @@ namespace Hospital.Repositories
             throw new NotImplementedException();
         }
 
-        public ObservableCollection<NotificationsUsers> GetNotificationRecipientsByIDNotification(string id)
+        public List<NotificationsUsers> GetNotificationRecipientsByIDNotification(string id)
         {
-            ObservableCollection<NotificationsUsers> notificationsUsers = GetAll();
-            ObservableCollection<NotificationsUsers> recipients = new ObservableCollection<NotificationsUsers>();
+            List<NotificationsUsers> notificationsUsers = GetAll();
+            List<NotificationsUsers> recipients = new List<NotificationsUsers>();
             foreach(NotificationsUsers nu in notificationsUsers)
                 if (nu.NotificationID.Equals(id))
                     recipients.Add(nu);
@@ -65,12 +65,12 @@ namespace Hospital.Repositories
 
         public void Save(NotificationsUsers notification)
         {
-            ObservableCollection<NotificationsUsers> notificationsUsers = this.GetAll();
+            List<NotificationsUsers> notificationsUsers = this.GetAll();
             notificationsUsers.Add(notification);
             Serialize(notificationsUsers);
         }
 
-        public void Serialize(ObservableCollection<NotificationsUsers> notificationsUsers)
+        public void Serialize(List<NotificationsUsers> notificationsUsers)
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {

@@ -11,6 +11,6 @@ namespace Hospital.Repositories.Interfaces
     interface INotificationsUsersRepository : IGenericRepository<NotificationsUsers>
     {
         void DeleteNotificationsUsersByNotificationID(string id);
-        ObservableCollection<NotificationsUsers> GetNotificationRecipientsByIDNotification(string id);
+        List<NotificationsUsers> GetNotificationRecipientsByIDNotification(string id);
     }
 }

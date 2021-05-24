@@ -26,7 +26,7 @@ namespace Hospital.Services
         {
             medicineRevisionRepository.Save(revision);
         }
-        public ObservableCollection<MedicineRevision> GetAll()
+        public List<MedicineRevision> GetAll()
         {
             return medicineRevisionRepository.GetAll();
         }

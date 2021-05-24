@@ -44,7 +44,7 @@ namespace Hospital.View
 
         private void LoadAllNotifications()
         {
-            AllNotifications = NotificationService.GetAllNotificationsSortedDescending();
+            AllNotifications = new ObservableCollection<Notification>(NotificationService.GetAllNotificationsSortedDescending());
 
             NotificationCollection = CollectionViewSource.GetDefaultView(AllNotifications);
             NotificationCollection.Filter = CustomFilterObavestenja;

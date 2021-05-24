@@ -125,7 +125,7 @@ namespace Hospital.View.Doctor
 
                 notificationsUsersService.DeleteNotificationsUsersByNotificationID(((Notification)ListBoxNotifications.SelectedItem).Id);
                 Notifications.Remove((Notification)ListBoxNotifications.SelectedItem);
-                notificationService.Serialize(Notifications);
+                notificationService.Serialize(Notifications.ToList());
             }
 
         }

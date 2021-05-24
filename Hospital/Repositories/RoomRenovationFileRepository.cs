@@ -17,7 +17,7 @@ namespace Hospital.Repositories
 
         public void Delete(string id)
         {
-            ObservableCollection<RoomRenovation> roomRenovations = GetAll();
+            List<RoomRenovation> roomRenovations = GetAll();
 
             foreach (RoomRenovation r in roomRenovations)
             {
@@ -37,15 +37,15 @@ namespace Hospital.Repositories
             Serialize(roomRenovations);
         }
 
-        public ObservableCollection<RoomRenovation> GetAll()
+        public List<RoomRenovation> GetAll()
         {
-            ObservableCollection<RoomRenovation> roomRenovations = new ObservableCollection<RoomRenovation>();
+            List<RoomRenovation> roomRenovations = new List<RoomRenovation>();
             using (StreamReader sr = File.OpenText(@"..\\..\\Files\\" + fileName))
             {
-                roomRenovations = JsonConvert.DeserializeObject<ObservableCollection<RoomRenovation>>(sr.ReadToEnd());
+                roomRenovations = JsonConvert.DeserializeObject<List<RoomRenovation>>(sr.ReadToEnd());
 
                 if (roomRenovations == null)
-                    return new ObservableCollection<RoomRenovation>();
+                    return new List<RoomRenovation>();
             }
 
             return roomRenovations;
@@ -53,7 +53,7 @@ namespace Hospital.Repositories
 
         public RoomRenovation GetByID(string id)
         {
-            ObservableCollection<RoomRenovation> roomRenovations = GetAll();
+            List<RoomRenovation> roomRenovations = GetAll();
             foreach(RoomRenovation renovation in roomRenovations)
             {
                 if (renovation.Id.Equals(id))
@@ -64,7 +64,7 @@ namespace Hospital.Repositories
 
         public void Save(RoomRenovation parameter)
         {
-            ObservableCollection<RoomRenovation> roomRenovations = GetAll();
+            List<RoomRenovation> roomRenovations = GetAll();
             roomRenovations.Add(parameter);
 
             foreach (RoomRenovation renovation in roomRenovations)
@@ -79,14 +79,14 @@ namespace Hospital.Repositories
         public List<int> GetAllScheduledRenovationsIDs()
         {
             List<int> allIDs = new List<int>();
-            ObservableCollection<RoomRenovation> allScheduledRenovations = GetAll();
+            List<RoomRenovation> allScheduledRenovations = GetAll();
             foreach (RoomRenovation renovation in allScheduledRenovations)
                 allIDs.Add(Int32.Parse(renovation.Id));
 
             return allIDs;
         }
 
-        public void Serialize(ObservableCollection<RoomRenovation> parameter)
+        public void Serialize(List<RoomRenovation> parameter)
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {

@@ -9,6 +9,6 @@ namespace Hospital.Repositories.Interfaces
 {
     interface IRoomRepository : IGenericRepository<Room>
     {
-        ObservableCollection<Room> GetAllRoomsWithoutMagazines();
+        List<Room> GetAllRoomsWithoutMagazines();
     }
 }

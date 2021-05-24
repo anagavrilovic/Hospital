@@ -18,7 +18,7 @@ namespace Hospital.Repositories
 
         public void Delete(string dynamicInventoryID)
         {
-            ObservableCollection<DynamicInventory> DynamicInventory = GetAll();
+            List<DynamicInventory> DynamicInventory = GetAll();
 
             foreach (DynamicInventory ms in DynamicInventory)
             {
@@ -31,24 +31,24 @@ namespace Hospital.Repositories
             }
         }
 
-        public ObservableCollection<DynamicInventory> GetAll()
+        public List<DynamicInventory> GetAll()
         {
-            ObservableCollection<DynamicInventory> DynamicInventory = new ObservableCollection<DynamicInventory>();
+            List<DynamicInventory> DynamicInventory = new List<DynamicInventory>();
 
             using (StreamReader sr = File.OpenText(@"..\\..\\Files\\" + fileName))
             {
-                DynamicInventory = JsonConvert.DeserializeObject<ObservableCollection<DynamicInventory>>(sr.ReadToEnd());
+                DynamicInventory = JsonConvert.DeserializeObject<List<DynamicInventory>>(sr.ReadToEnd());
             }
 
             if (DynamicInventory == null)
-                DynamicInventory = new ObservableCollection<DynamicInventory>();
+                DynamicInventory = new List<DynamicInventory>();
 
             return DynamicInventory;
         }
 
         public DynamicInventory GetByID(string dynamicInventoryID)
         {
-            ObservableCollection<DynamicInventory> DynamicInventory = GetAll();
+            List<DynamicInventory> DynamicInventory = GetAll();
 
             foreach (DynamicInventory inv in DynamicInventory)
                 if (inv.Id.Equals(dynamicInventoryID))
@@ -59,13 +59,13 @@ namespace Hospital.Repositories
 
         public void Save(DynamicInventory dynamicInventory)
         {
-            ObservableCollection<DynamicInventory> DynamicInventory = GetAll();
+            List<DynamicInventory> DynamicInventory = GetAll();
             DynamicInventory.Add(dynamicInventory);
 
             Serialize(DynamicInventory);
         }
 
-        public void Serialize(ObservableCollection<DynamicInventory> dynamicInventories)
+        public void Serialize(List<DynamicInventory> dynamicInventories)
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {

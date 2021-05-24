@@ -71,7 +71,7 @@ namespace Hospital.View.Secretary
 
         private void LoadPatients()
         {
-            Patients = MedicalRecordService.GetAllRecords();
+            Patients = new ObservableCollection<MedicalRecord>(MedicalRecordService.GetAllRecords());
 
             PatientsCollection = CollectionViewSource.GetDefaultView(Patients);
             PatientsCollection.Filter = CustomFilterPatients;

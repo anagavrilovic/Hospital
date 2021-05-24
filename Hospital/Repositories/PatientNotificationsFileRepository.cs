@@ -19,7 +19,7 @@ namespace Hospital.Repositories
 
         public void Delete(string id)
         {
-            ObservableCollection<PatientTherapyMedicineNotification> patientNotifications = GetAll();
+            List<PatientTherapyMedicineNotification> patientNotifications = GetAll();
             foreach (PatientTherapyMedicineNotification r in patientNotifications)
             {
                 if (r.ID.Equals(id))
@@ -31,17 +31,17 @@ namespace Hospital.Repositories
             }
         }
 
-        public ObservableCollection<PatientTherapyMedicineNotification> GetAll()
+        public List<PatientTherapyMedicineNotification> GetAll()
         {
-            ObservableCollection<PatientTherapyMedicineNotification> patientNotifications;
+            List<PatientTherapyMedicineNotification> patientNotifications;
             using (StreamReader file = File.OpenText(@"..\\..\\Files\\" + fileName))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                patientNotifications = (ObservableCollection<PatientTherapyMedicineNotification>)serializer.Deserialize(file, typeof(ObservableCollection<PatientTherapyMedicineNotification>));
+                patientNotifications = (List<PatientTherapyMedicineNotification>)serializer.Deserialize(file, typeof(List<PatientTherapyMedicineNotification>));
             }
 
             if (patientNotifications == null)
-                patientNotifications = new ObservableCollection<PatientTherapyMedicineNotification>();
+                patientNotifications = new List<PatientTherapyMedicineNotification>();
 
             return patientNotifications;
         }
@@ -53,12 +53,12 @@ namespace Hospital.Repositories
 
         public void Save(PatientTherapyMedicineNotification notification)
         {
-            ObservableCollection<PatientTherapyMedicineNotification> petientNotifications = GetAll();
+            List<PatientTherapyMedicineNotification> petientNotifications = GetAll();
             petientNotifications.Add(notification);
             Serialize(petientNotifications);
         }
 
-        public void Serialize(ObservableCollection<PatientTherapyMedicineNotification> patientNotifications)
+        public void Serialize(List<PatientTherapyMedicineNotification> patientNotifications)
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {

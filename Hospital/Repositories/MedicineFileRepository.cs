@@ -18,7 +18,7 @@ namespace Hospital.Repositories
 
         public void Delete(string medicineID)
         {
-            ObservableCollection<Medicine> medicines = GetAll();
+            List<Medicine> medicines = GetAll();
             foreach (Medicine r in medicines)
             {
                 if (r.ID.Equals(medicineID))
@@ -30,24 +30,24 @@ namespace Hospital.Repositories
             }
         }
 
-        public ObservableCollection<Medicine> GetAll()
+        public List<Medicine> GetAll()
         {
-            ObservableCollection<Medicine> medicines;
+            List<Medicine> medicines;
             using (StreamReader file = File.OpenText(@"..\\..\\Files\\" + fileName))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                medicines = (ObservableCollection<Medicine>)serializer.Deserialize(file, typeof(ObservableCollection<Medicine>));
+                medicines = (List<Medicine>)serializer.Deserialize(file, typeof(List<Medicine>));
             }
 
             if (medicines == null)
-                medicines = new ObservableCollection<Medicine>();
+                medicines = new List<Medicine>();
 
             return medicines;
         }
 
         public Medicine GetByID(string medicineID)
         {
-            ObservableCollection<Medicine> medicines = GetAll();
+            List<Medicine> medicines = GetAll();
             foreach (Medicine m in medicines)
                 if (m.ID.Equals(medicineID))
                     return m;
@@ -57,12 +57,12 @@ namespace Hospital.Repositories
 
         public void Save(Medicine medicine)
         {
-            ObservableCollection<Medicine> medicines = GetAll();
+            List<Medicine> medicines = GetAll();
             medicines.Add(medicine);
             Serialize(medicines);
         }
 
-        public void Serialize(ObservableCollection<Medicine> medicines)
+        public void Serialize(List<Medicine> medicines)
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {
@@ -71,9 +71,9 @@ namespace Hospital.Repositories
             }
         }
 
-        public ObservableCollection<string> GetAllMedicines()
+        public List<string> GetAllMedicines()
         {
-            ObservableCollection<string> allMedicines = new ObservableCollection<string>();
+            List<string> allMedicines = new List<string>();
 
             string[] medicines = File.ReadAllLines("..\\..\\Files\\drugs.txt");
             foreach (string medicine in medicines)
@@ -82,9 +82,9 @@ namespace Hospital.Repositories
             return allMedicines;
         }
 
-        public ObservableCollection<string> GetAllIngredients()
+        public List<string> GetAllIngredients()
         {
-            ObservableCollection<string> allIngredients = new ObservableCollection<string>();
+            List<string> allIngredients = new List<string>();
 
             string[] lines2 = File.ReadAllLines("..\\..\\Files\\ingredients.txt");
             foreach (string line in lines2)
@@ -94,7 +94,7 @@ namespace Hospital.Repositories
         }
         public void EditMedicine(Medicine editedMedicine)
         {
-            ObservableCollection<Medicine> medicines = GetAll();
+            List<Medicine> medicines = GetAll();
             foreach (Medicine medicine in medicines)
             {
                 if (editedMedicine.ID.Equals(medicine.ID))

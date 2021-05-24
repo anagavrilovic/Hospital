@@ -25,7 +25,7 @@ namespace Hospital.Services
             notificationsUsersRepository = new NotificationsUsersFileRepository();
         }
 
-        public ObservableCollection<Notification> GetAllNotificationsSortedDescending()
+        public List<Notification> GetAllNotificationsSortedDescending()
         {
             return notificationRepository.GetAllNotificationsSortedDescending();
         }
@@ -38,7 +38,7 @@ namespace Hospital.Services
 
         public int CountNotificationByRole(Notification notification, UserType userType)
         {
-            ObservableCollection<NotificationsUsers> recipientsOfRequestedNotification = notificationsUsersRepository.GetNotificationRecipientsByIDNotification(notification.Id);
+            List<NotificationsUsers> recipientsOfRequestedNotification = notificationsUsersRepository.GetNotificationRecipientsByIDNotification(notification.Id);
             int count = 0;
             foreach(NotificationsUsers recipient in recipientsOfRequestedNotification)
                 if (registratedUserService.GetRoleByUsername(recipient.Username) == userType)
@@ -52,10 +52,10 @@ namespace Hospital.Services
             return CountNotificationByRole(notification, userType) == registratedUserService.CountByRole(userType);
         }
 
-        public ObservableCollection<MedicalRecord> GetPatientRecipientsRecords(Notification notification)
+        public List<MedicalRecord> GetPatientRecipientsRecords(Notification notification)
         {
-            ObservableCollection<NotificationsUsers> recipientsOfRequestedNotification = notificationsUsersRepository.GetNotificationRecipientsByIDNotification(notification.Id);
-            ObservableCollection<MedicalRecord> recipientsRecords = new ObservableCollection<MedicalRecord>();
+            List<NotificationsUsers> recipientsOfRequestedNotification = notificationsUsersRepository.GetNotificationRecipientsByIDNotification(notification.Id);
+            List<MedicalRecord> recipientsRecords = new List<MedicalRecord>();
 
             foreach (NotificationsUsers recipient in recipientsOfRequestedNotification)
                 if (registratedUserService.GetRoleByUsername(recipient.Username) == UserType.patient)
@@ -90,7 +90,7 @@ namespace Hospital.Services
 
         private void SendNotificationByRole(NotificationRecipientsDTO recipients, Notification notification)
         {
-            ObservableCollection<RegistratedUser> registratedUsers = registratedUserService.GetAllRegistratedUsers();
+            List<RegistratedUser> registratedUsers = registratedUserService.GetAllRegistratedUsers();
             if (recipients.IsEverySecretaryRecipient || recipients.IsEveryDoctorRecipient || recipients.IsEveryManagerRecipient || recipients.IsEveryPatientRecipient)
             {
                 foreach (RegistratedUser user in registratedUsers)
@@ -143,7 +143,7 @@ namespace Hospital.Services
             return notificationRepository.GetByID(id);
         }
 
-        public void Serialize(ObservableCollection<Notification> notifications)
+        public void Serialize(List<Notification> notifications)
         {
             notificationRepository.Serialize(notifications);
         }

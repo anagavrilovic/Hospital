@@ -132,7 +132,6 @@
     <Compile Include="Repositories\Interfaces\IRoomRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStaticInventoryRepository.cs" />
     <Compile Include="Repositories\Interfaces\ITransferInventoryRepository.cs" />
-    <Compile Include="Repositories\Interfaces\StaticInventory.cs" />
     <Compile Include="Repositories\MedicalRecordFileRepository.cs" />
     <Compile Include="Repositories\MedicineFileRepository.cs" />
     <Compile Include="Repositories\MedicineRevisionFileRepository.cs" />

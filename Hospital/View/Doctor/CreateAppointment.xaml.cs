@@ -127,7 +127,7 @@ namespace Hospital.View.Doctor
             {
                 rdbOperacija.Visibility = Visibility.Hidden;
                 rdbPregled.IsChecked = true;
-                Doctors = doctorService.GetAll();
+                Doctors = new ObservableCollection<Model.Doctor>(doctorService.GetAll());
                 emergencyOperationLabel.Visibility = Visibility.Collapsed;
                 emergencyOperationCheckBox.Visibility = Visibility.Collapsed;
             }

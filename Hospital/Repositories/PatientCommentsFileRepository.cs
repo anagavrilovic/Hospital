@@ -22,17 +22,17 @@ namespace Hospital.Repositories
             throw new NotImplementedException();
         }
 
-        public ObservableCollection<PatientComment> GetAll()
+        public List<PatientComment> GetAll()
         {
-            ObservableCollection<PatientComment> patientComments;
+            List<PatientComment> patientComments;
             using (StreamReader file = File.OpenText(@"..\\..\\Files\\" + fileName))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                patientComments = (ObservableCollection<PatientComment>)serializer.Deserialize(file, typeof(ObservableCollection<PatientComment>));
+                patientComments = (List<PatientComment>)serializer.Deserialize(file, typeof(List<PatientComment>));
             }
 
             if (patientComments == null)
-                patientComments = new ObservableCollection<PatientComment>();
+                patientComments = new List<PatientComment>();
 
             return patientComments;
         }
@@ -44,12 +44,12 @@ namespace Hospital.Repositories
 
         public void Save(PatientComment patientComment)
         {
-            ObservableCollection<PatientComment> patientComments = GetAll();
+            List<PatientComment> patientComments = GetAll();
             patientComments.Add(patientComment);
             Serialize(patientComments);
         }
 
-        public void Serialize(ObservableCollection<PatientComment> patientComments)
+        public void Serialize(List<PatientComment> patientComments)
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {

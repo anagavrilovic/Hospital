@@ -16,7 +16,7 @@ namespace Hospital.Repositories
             throw new NotImplementedException();
         }
 
-        public ObservableCollection<PatientSettings> GetAll()
+        public List<PatientSettings> GetAll()
         {
             throw new NotImplementedException();
         }
@@ -31,7 +31,7 @@ namespace Hospital.Repositories
             throw new NotImplementedException();
         }
 
-        public void Serialize(ObservableCollection<PatientSettings> parameter)
+        public void Serialize(List<PatientSettings> parameter)
         {
             throw new NotImplementedException();
         }

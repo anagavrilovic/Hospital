@@ -28,7 +28,7 @@ namespace Hospital.Services
             appointmentRepository.Delete(id);
         }
 
-        public ObservableCollection<Appointment> GetAppointmentsByDoctor(Doctor doctor)
+        public List<Appointment> GetAppointmentsByDoctor(Doctor doctor)
         {
             return appointmentRepository.GetByDoctorID(doctor.PersonalID);
         }
@@ -50,7 +50,7 @@ namespace Hospital.Services
             }
         }
 
-        public ObservableCollection<Appointment> GetAll()
+        public List<Appointment> GetAll()
         {
             return appointmentRepository.GetAll();
         }
@@ -62,7 +62,7 @@ namespace Hospital.Services
 
         public bool IsDoctorAvaliableForAppointment(Appointment newAppointment)
         {
-            ObservableCollection<Appointment> allAppointments = GetAll();
+            List<Appointment> allAppointments = GetAll();
 
             foreach (Appointment appointment in allAppointments)
                 if (!appointment.IsDoctorAvaliable(newAppointment))
@@ -73,7 +73,7 @@ namespace Hospital.Services
 
         public bool IsPatientAvaliableForAppointment(Appointment newAppointment)
         {
-            ObservableCollection<Appointment> allAppointments = GetAll();
+            List<Appointment> allAppointments = GetAll();
 
             foreach (Appointment appointment in allAppointments)
                 if (!appointment.IsPatientAvaliable(newAppointment))
@@ -98,7 +98,7 @@ namespace Hospital.Services
             appointmentRepository.Save(newUrgentAppointment);
         }
 
-        public ObservableCollection<Appointment> GetPatientsAppointments(MedicalRecord selectedPatient)
+        public List<Appointment> GetPatientsAppointments(MedicalRecord selectedPatient)
         {
             return appointmentRepository.GetByPatientID(selectedPatient.Patient.PersonalID);
         }
@@ -107,7 +107,7 @@ namespace Hospital.Services
         {
             SetDateTimeForNewUrgentAppointmentWithoutRescheduling(newUrgentAppointment);
             SetRoomForNewUrgentAppointment(newUrgentAppointment);
-            ObservableCollection<Doctor> possibleDoctors = doctorRepository.GetBySpecialty(doctorSpecialty);
+            List<Doctor> possibleDoctors = doctorRepository.GetBySpecialty(doctorSpecialty);
 
             for (int i = 0; i < 3; i++)
             {
@@ -141,7 +141,7 @@ namespace Hospital.Services
 
         private void SetRoomForNewUrgentAppointment(Appointment newUrgentAppointment)
         {
-            ObservableCollection<Room> avaliableRooms = roomService.GetAvaliableRoomsForNewAppointment(newUrgentAppointment);
+            List<Room> avaliableRooms = roomService.GetAvaliableRoomsForNewAppointment(newUrgentAppointment);
             newUrgentAppointment.Room = avaliableRooms[0];
         }
 
@@ -167,10 +167,10 @@ namespace Hospital.Services
             newUrgentAppointment.DateTime = newUrgentAppointment.DateTime.AddSeconds(-newUrgentAppointment.DateTime.Second);
         }
 
-        public ObservableCollection<OptionForRescheduling> FindAllOptionsForRescheduling(Appointment newUrgentAppointment, DoctorSpecialty doctorsSpecialty)
+        public List<OptionForRescheduling> FindAllOptionsForRescheduling(Appointment newUrgentAppointment, DoctorSpecialty doctorsSpecialty)
         {
-            ObservableCollection<OptionForRescheduling> options = new ObservableCollection<OptionForRescheduling>();
-            ObservableCollection<Doctor> possibleDoctors = doctorRepository.GetBySpecialty(doctorsSpecialty);
+            List<OptionForRescheduling> options = new List<OptionForRescheduling>();
+            List<Doctor> possibleDoctors = doctorRepository.GetBySpecialty(doctorsSpecialty);
 
             foreach (Doctor doctor in possibleDoctors)
             {
@@ -179,7 +179,7 @@ namespace Hospital.Services
 
                 for (int i = 0; i < 3; i++)
                 {
-                    ObservableCollection<Appointment> overlappingAppointments = GetOverlappingAppointments(newUrgentAppointment);
+                    List<Appointment> overlappingAppointments = GetOverlappingAppointments(newUrgentAppointment);
                     if (HasAppointmentStarted(overlappingAppointments))
                     {
                         newUrgentAppointment.DateTime = newUrgentAppointment.DateTime.AddMinutes(30);
@@ -201,13 +201,13 @@ namespace Hospital.Services
             return SortOptions(options);
         }
 
-        private ObservableCollection<OptionForRescheduling> SortOptions(ObservableCollection<OptionForRescheduling> options)
+        private List<OptionForRescheduling> SortOptions(List<OptionForRescheduling> options)
         {
             List<OptionForRescheduling> sortedList = options.OrderBy(o => o.NewUrgentAppointmentTime).ToList();
-            return new ObservableCollection<OptionForRescheduling>(sortedList);
+            return new List<OptionForRescheduling>(sortedList);
         }
 
-        private void InsertIfOptionDoesntExist(OptionForRescheduling option, ObservableCollection<OptionForRescheduling> options, Appointment appointment)
+        private void InsertIfOptionDoesntExist(OptionForRescheduling option, List<OptionForRescheduling> options, Appointment appointment)
         {
             if (option.Option.Count() == 0)
                 return;
@@ -224,7 +224,7 @@ namespace Hospital.Services
             options.Add(option);
         }
 
-        private bool HasAppointmentStarted(ObservableCollection<Appointment> overlappingAppointments)
+        private bool HasAppointmentStarted(List<Appointment> overlappingAppointments)
         {
             foreach (Appointment appointment in overlappingAppointments)
                 if (appointment.DateTime < DateTime.Now)
@@ -233,10 +233,10 @@ namespace Hospital.Services
             return false;
         }
 
-        private ObservableCollection<Appointment> GetOverlappingAppointments(Appointment appointment)
+        private List<Appointment> GetOverlappingAppointments(Appointment appointment)
         {
-            ObservableCollection<Appointment> overlappingAppointments = new ObservableCollection<Appointment>();
-            ObservableCollection<Appointment> allAppointmnets = GetAll();
+            List<Appointment> overlappingAppointments = new List<Appointment>();
+            List<Appointment> allAppointmnets = GetAll();
 
             foreach (Appointment a in allAppointmnets)
                 if (a.IDDoctor.Equals(appointment.IDDoctor))

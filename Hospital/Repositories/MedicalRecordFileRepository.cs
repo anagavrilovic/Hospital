@@ -18,7 +18,7 @@ namespace Hospital.Repositories
 
         public void Delete(string medicalRecordID)
         {
-            ObservableCollection<MedicalRecord> medicalRecords = GetAll();
+            List<MedicalRecord> medicalRecords = GetAll();
             foreach (MedicalRecord r in medicalRecords)
             {
                 if (r.MedicalRecordID.Equals(medicalRecordID))
@@ -30,24 +30,24 @@ namespace Hospital.Repositories
             }
         }
 
-        public ObservableCollection<MedicalRecord> GetAll()
+        public List<MedicalRecord> GetAll()
         {
-            ObservableCollection<MedicalRecord> medicalRecords;
+            List<MedicalRecord> medicalRecords;
             using (StreamReader file = File.OpenText(@"..\\..\\Files\\" + fileName))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                medicalRecords = (ObservableCollection<MedicalRecord>)serializer.Deserialize(file, typeof(ObservableCollection<MedicalRecord>));
+                medicalRecords = (List<MedicalRecord>)serializer.Deserialize(file, typeof(List<MedicalRecord>));
             }
 
             if (medicalRecords == null)
-                medicalRecords = new ObservableCollection<MedicalRecord>();
+                medicalRecords = new List<MedicalRecord>();
 
             return medicalRecords;
         }
 
         public MedicalRecord GetByID(string medicalRecordID)
         {
-            ObservableCollection<MedicalRecord> records = GetAll();
+            List<MedicalRecord> records = GetAll();
             foreach (MedicalRecord r in records)
                 if (r.MedicalRecordID.Equals(medicalRecordID))
                     return r;
@@ -57,12 +57,12 @@ namespace Hospital.Repositories
 
         public void Save(MedicalRecord medicalRecord)
         {
-            ObservableCollection<MedicalRecord> medicalRecords = GetAll();
+            List<MedicalRecord> medicalRecords = GetAll();
             medicalRecords.Add(medicalRecord);
             Serialize(medicalRecords);
         }
 
-        public void Serialize(ObservableCollection<MedicalRecord> medicalRecords)
+        public void Serialize(List<MedicalRecord> medicalRecords)
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {
@@ -73,7 +73,7 @@ namespace Hospital.Repositories
 
         public void UpdatePatientsInformation(MedicalRecord updatedRecord)
         {
-            ObservableCollection<MedicalRecord> medicalRecords = GetAll();
+            List<MedicalRecord> medicalRecords = GetAll();
             foreach(MedicalRecord medicalRecord in medicalRecords)
             {
                 if (medicalRecord.HasSameIDAs(updatedRecord))
@@ -87,7 +87,7 @@ namespace Hospital.Repositories
 
         public List<int> GetExistingIDs()
         {
-            ObservableCollection<MedicalRecord> medicalRecords = GetAll();
+            List<MedicalRecord> medicalRecords = GetAll();
             List<int> existingIDs = new List<int>();
 
             foreach (MedicalRecord medicalRecord in medicalRecords)
@@ -98,7 +98,7 @@ namespace Hospital.Repositories
 
         public MedicalRecord GetByUsername(string username)
         {
-            ObservableCollection<MedicalRecord> records = GetAll();
+            List<MedicalRecord> records = GetAll();
             foreach (MedicalRecord r in records)
                 if (r.Patient.Username.Equals(username))
                     return r;
@@ -108,7 +108,7 @@ namespace Hospital.Repositories
 
         public MedicalRecord GetByPatientID(string patientID)
         {
-            ObservableCollection<MedicalRecord> records = GetAll();
+            List<MedicalRecord> records = GetAll();
             foreach (MedicalRecord r in records)
                 if (r.Patient.PersonalID.Equals(patientID))
                     return r;

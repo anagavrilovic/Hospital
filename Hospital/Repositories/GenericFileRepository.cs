@@ -25,17 +25,17 @@ namespace Hospital.Repositories
             throw new NotImplementedException();
         }
 
-        public ObservableCollection<T> GetAll()
+        public List<T> GetAll()
         {
-            ObservableCollection<T> entitites;
+            List<T> entitites;
             using (StreamReader file = File.OpenText(@"..\\..\\Files\\" + fileName))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                entitites = (ObservableCollection<T>)serializer.Deserialize(file, typeof(ObservableCollection<T>));
+                entitites = (List<T>)serializer.Deserialize(file, typeof(List<T>));
             }
 
             if (entitites == null)
-                entitites = new ObservableCollection<T>();
+                entitites = new List<T>();
 
             return entitites;
         }
@@ -47,12 +47,12 @@ namespace Hospital.Repositories
 
         public void Save(T parameter)
         {
-            ObservableCollection<T> entitites = GetAll();
+            List<T> entitites = GetAll();
             entitites.Add(parameter);
             Serialize(entitites);
         }
 
-        public void Serialize(ObservableCollection<T> parameter)
+        public void Serialize(List<T> parameter)
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {

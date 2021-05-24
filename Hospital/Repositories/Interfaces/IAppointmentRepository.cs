@@ -13,9 +13,9 @@ namespace Hospital.Repositories.Interfaces
         bool IsDoctorAvaliableForAppointment(Appointment newAppointment);
         bool IsPatientAvaliableForAppointment(Appointment newAppointment);
         String GetNewID();
-        ObservableCollection<Appointment> GetByDoctorID(string doctorID);
+        List<Appointment> GetByDoctorID(string doctorID);
         List<int> GetExistingIDs();
-        ObservableCollection<Appointment> GetByPatientID(string patientID);
+        List<Appointment> GetByPatientID(string patientID);
 
     }
 }

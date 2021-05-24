@@ -18,7 +18,7 @@ namespace Hospital.Repositories
 
         public void Delete(string appointmentID)
         {
-            ObservableCollection<Appointment> appointments = GetAll();
+            List<Appointment> appointments = GetAll();
             foreach (Appointment a in appointments)
             {
                 if (a.IDAppointment.Equals(appointmentID))
@@ -32,7 +32,7 @@ namespace Hospital.Repositories
 
         public void DeletePatientsAppointments(string patientID)
         {
-            ObservableCollection<Appointment> appointments = GetAll();
+            List<Appointment> appointments = GetAll();
             foreach (Appointment a in appointments.ToList())
                 if (a.IDpatient.Equals(patientID))
                     appointments.Remove(a);
@@ -40,25 +40,25 @@ namespace Hospital.Repositories
             Serialize(appointments);
         }
 
-        public ObservableCollection<Appointment> GetAll()
+        public List<Appointment> GetAll()
         {
-            ObservableCollection<Appointment> appointments;
+            List<Appointment> appointments;
             using (StreamReader file = File.OpenText(@"..\\..\\Files\\" + fileName))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                appointments = (ObservableCollection<Appointment>)serializer.Deserialize(file, typeof(ObservableCollection<Appointment>));
+                appointments = (List<Appointment>)serializer.Deserialize(file, typeof(List<Appointment>));
             }
 
             if (appointments == null)
-                appointments = new ObservableCollection<Appointment>();
+                appointments = new List<Appointment>();
 
             return appointments;
         }
 
-        public ObservableCollection<Appointment> GetByDoctorID(string doctorID)
+        public List<Appointment> GetByDoctorID(string doctorID)
         {
-            ObservableCollection<Appointment> appointments = GetAll();
-            ObservableCollection<Appointment> doctorsAppointments = new ObservableCollection<Appointment>();
+            List<Appointment> appointments = GetAll();
+            List<Appointment> doctorsAppointments = new List<Appointment>();
 
             foreach(Appointment appointment in appointments)
                 if (appointment.IDDoctor.Equals(doctorID))
@@ -69,7 +69,7 @@ namespace Hospital.Repositories
 
         public Appointment GetByID(string appointmentID)
         {
-            ObservableCollection<Appointment> appointments = GetAll();
+            List<Appointment> appointments = GetAll();
             foreach (Appointment a in appointments)
                 if (a.IDAppointment.Equals(appointmentID))
                     return a;
@@ -77,10 +77,10 @@ namespace Hospital.Repositories
             return new Appointment();
         }
 
-        public ObservableCollection<Appointment> GetByPatientID(string patientID)
+        public List<Appointment> GetByPatientID(string patientID)
         {
-            ObservableCollection<Appointment> appointments = GetAll();
-            ObservableCollection<Appointment> patientsAppointments = new ObservableCollection<Appointment>();
+            List<Appointment> appointments = GetAll();
+            List<Appointment> patientsAppointments = new List<Appointment>();
 
             foreach (Appointment appointment in appointments)
                 if (appointment.IDpatient.Equals(patientID))
@@ -91,7 +91,7 @@ namespace Hospital.Repositories
 
         public List<int> GetExistingIDs()
         {
-            ObservableCollection<Appointment> appointments = GetAll();
+            List<Appointment> appointments = GetAll();
             List<int> existingIDs = new List<int>();
 
             foreach (Appointment appointment in appointments)
@@ -102,12 +102,12 @@ namespace Hospital.Repositories
 
         public void Save(Appointment appointment)
         {
-            ObservableCollection<Appointment> appointments = GetAll();
+            List<Appointment> appointments = GetAll();
             appointments.Add(appointment);
             Serialize(appointments);
         }
 
-        public void Serialize(ObservableCollection<Appointment> appointments)
+        public void Serialize(List<Appointment> appointments)
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
             {
@@ -117,7 +117,7 @@ namespace Hospital.Repositories
         }
         public bool IsDoctorAvaliableForAppointment(Appointment newAppointment)
         {
-            ObservableCollection<Appointment> allAppointments = GetAll();
+            List<Appointment> allAppointments = GetAll();
             foreach (Appointment appointment in allAppointments)
             {
                 if (!appointment.IsDoctorAvaliable(newAppointment))
@@ -129,7 +129,7 @@ namespace Hospital.Repositories
 
         public bool IsPatientAvaliableForAppointment(Appointment newAppointment)
         {
-            ObservableCollection<Appointment> allAppointments = GetAll();
+            List<Appointment> allAppointments = GetAll();
             foreach (Appointment appointment in allAppointments)
             {
                 if (!appointment.IsPatientAvaliable(newAppointment))
@@ -140,11 +140,11 @@ namespace Hospital.Repositories
         }
         public String GetNewID()
         {
-            ObservableCollection<Appointment> apps;
+            List<Appointment> apps;
             using (StreamReader sr = File.OpenText(@"..\\..\\Files\\" + fileName))
             {
                 apps = GetAll();
-                apps = JsonConvert.DeserializeObject<ObservableCollection<Appointment>>(sr.ReadToEnd());
+                apps = JsonConvert.DeserializeObject<List<Appointment>>(sr.ReadToEnd());
             }
 
             int retVal = 1;

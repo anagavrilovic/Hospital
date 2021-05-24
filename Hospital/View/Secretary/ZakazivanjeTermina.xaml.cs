@@ -127,7 +127,7 @@ namespace Hospital.View
 
         private void LoadAvaliableRooms()
         {
-            AvaliableRooms = RoomService.GetAvaliableRoomsForNewAppointment(NewAppointment);
+            AvaliableRooms = new ObservableCollection<Room>(RoomService.GetAvaliableRoomsForNewAppointment(NewAppointment));
             Room.ItemsSource = AvaliableRooms;
         }
         

@@ -46,7 +46,6 @@ namespace Hospital.View
         private void InitializeEmptyProperties()
         {
             this.NewNotification = new Notification();
-            this.AllMedicalRecords = new ObservableCollection<MedicalRecord>();
             this.Recipients = new NotificationRecipientsDTO();
             this.NotificationService = new NotificationService();
             this.MedicalRecordService = new MedicalRecordService();
@@ -60,7 +59,7 @@ namespace Hospital.View
 
         public void LoadAllMedicalRecords()
         {
-            AllMedicalRecords = MedicalRecordService.GetAllRecords();
+            AllMedicalRecords = new ObservableCollection<MedicalRecord>(MedicalRecordService.GetAllRecords());
 
             PatientsRecordCollection = CollectionViewSource.GetDefaultView(AllMedicalRecords);
             PatientsRecordCollection.Filter = CustomFilterPacijenti;
