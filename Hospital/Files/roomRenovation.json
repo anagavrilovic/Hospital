@@ -1,1 +1,1 @@
-[]
+[{"Id":"259","StartDate":"2021-05-24T00:00:00","EndDate":"2021-05-25T00:00:00","Description":"Popravka grijanja","RoomsDestroyedDuringRenovation":[],"RoomsCreatedDuringRenovation":[],"Room":{"Id":"4"},"WareHouse":{"Id":"M2"}},{"Id":"1","StartDate":"2021-05-29T00:00:00","EndDate":"2021-05-30T00:00:00","Description":"","RoomsDestroyedDuringRenovation":[],"RoomsCreatedDuringRenovation":[],"Room":{"Id":"3.1"},"WareHouse":{"Id":"M2"}}]

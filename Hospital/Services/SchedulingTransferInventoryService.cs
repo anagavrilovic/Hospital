@@ -21,7 +21,7 @@ namespace Hospital.Services
             if (!AreTransferAttributesValid())
                 return;
 
-            if (NotEnoughItemForNewTransfer() && IsTransferBeforeFirstScheduledTransferOfTime())
+            if (NotEnoughItemForNewTransfer() && IsTransferBeforeFirstScheduledTransferOfItem())
                 ScheduleTemporaryTransferBeforeFirstReservedTransfer();
             else if (NotEnoughItemForNewTransfer() && IsTransferAfterFirstScheduledTransferOfItem())
             {
@@ -55,7 +55,7 @@ namespace Hospital.Services
             return;
         }
 
-        private int getTotalQuantityForAllTransfersOfItem()
+        private int GetTotalQuantityForAllTransfersOfItem()
         {
             int totalQuantityForTransfer = 0;
             foreach (TransferInventory ti in _transferInventoryStorage.GetAll())
@@ -66,7 +66,7 @@ namespace Hospital.Services
             return totalQuantityForTransfer;
         }
 
-        private TransferInventory getFirstScheduledTransferOfItem()
+        private TransferInventory GetFirstScheduledTransferOfItem()
         {
             TransferInventory firstReservedTransfer = new TransferInventory();
 
@@ -83,7 +83,7 @@ namespace Hospital.Services
 
         public bool NotEnoughItemForNewTransfer()
         {
-            int totalQuantityForEachTransferOfItem = getTotalQuantityForAllTransfersOfItem();
+            int totalQuantityForEachTransferOfItem = GetTotalQuantityForAllTransfersOfItem();
             InventoryStorage storage = new InventoryStorage();
             Inventory ItemForTransfer = storage.GetOneByRoom(TransferRequest.ItemID, TransferRequest.FirstRoomID);
             if (totalQuantityForEachTransferOfItem + TransferRequest.Quantity > ItemForTransfer.Quantity)
@@ -94,16 +94,16 @@ namespace Hospital.Services
 
         private bool IsTransferAfterFirstScheduledTransferOfItem()
         {
-            this._firstReservedTransfer = getFirstScheduledTransferOfItem();
+            this._firstReservedTransfer = GetFirstScheduledTransferOfItem();
             if (TransferRequest.TransferDate > _firstReservedTransfer.TransferDate)
                 return true;
 
             return false;
         }
 
-        private bool IsTransferBeforeFirstScheduledTransferOfTime()
+        private bool IsTransferBeforeFirstScheduledTransferOfItem()
         {
-            this._firstReservedTransfer = getFirstScheduledTransferOfItem();
+            this._firstReservedTransfer = GetFirstScheduledTransferOfItem();
             if (TransferRequest.TransferDate < _firstReservedTransfer.TransferDate)
                 return true;
 

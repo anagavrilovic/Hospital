@@ -38,7 +38,8 @@ namespace Hospital.Model
             foreach(RoomRenovation renovation in roomRenovations)
             {
                 renovation.Room.SerializeInfo = false;
-                renovation.WareHouse.SerializeInfo = false;
+                if(renovation.WareHouse != null)
+                     renovation.WareHouse.SerializeInfo = false;
             }
 
             Serialize(roomRenovations);

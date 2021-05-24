@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using Hospital.View.Manager.Rooms;
 using System;
 using System.Collections.Generic;
@@ -61,8 +62,6 @@ namespace Hospital.View
             }
         }
 
-        private RoomRenovationStorage _roomRenovationStorage;
-        private AppointmentStorage _appointmentStorage;
         private RoomStorage _roomStorage;
         public RoomRenovation RoomRenovation { get; set; }
 
@@ -73,8 +72,6 @@ namespace Hospital.View
           
             RoomRenovation = new RoomRenovation();
             this._roomStorage = new RoomStorage();
-            this._appointmentStorage = new AppointmentStorage();
-            this._roomRenovationStorage = new RoomRenovationStorage();
 
             FindRoomsFromSameFloor();
             InitializeComboBoxes();
@@ -84,13 +81,9 @@ namespace Hospital.View
         {
             InitializeRenovation();
 
-            if (!IsRenovationAttributesValid())
-                return;
+            RoomRenovationService renovationService = new RoomRenovationService(RoomRenovation);
+            renovationService.ProccessRenovationRequest();
 
-            if (IsAnyAppointmentInRoomDuringRenovationPeriod())
-                return;
-
-            _roomRenovationStorage.Save(RoomRenovation);
             NavigationService.Navigate(new Renovations());
         }
 
@@ -100,38 +93,9 @@ namespace Hospital.View
             RoomRenovation.Room = _roomStorage.GetOne(roomCB.Text);
             RoomRenovation.Room.SerializeInfo = false;
             RoomRenovation.WareHouse = _roomStorage.GetOne(magacinCB.Text);
-            RoomRenovation.WareHouse.SerializeInfo = false;
+            if (RoomRenovation.WareHouse != null)
+                RoomRenovation.WareHouse.SerializeInfo = false;
             SaveNewRooms();
-        }
-
-        private bool IsRenovationAttributesValid()
-        {
-            if (RoomRenovation.Room.Status == RoomStatus.RENOVIRA_SE)
-            {
-                MessageBox.Show("Izabrana sala se trenutno renovira!");
-                return false;
-            }
-
-            if (RoomRenovation.StartDate >= RoomRenovation.EndDate)
-            {
-                MessageBox.Show("Pogrešan izbor datuma renoviranja!");
-                return false;
-            }
-
-            return true;
-        }
-
-        private bool IsAnyAppointmentInRoomDuringRenovationPeriod()
-        {
-            foreach (Appointment appointment in _appointmentStorage.GetAll())
-            {
-                if (appointment.DateTime > RoomRenovation.StartDate && appointment.DateTime < RoomRenovation.EndDate + new TimeSpan(23, 59, 59) && appointment.Room.Id.Equals(RoomRenovation.Room.Id))
-                {
-                    MessageBox.Show("U izabranom periodu postoje zakazani termini pa nije moguće zakazati renoviranje!");
-                    return true;
-                }
-            }
-            return false;
         }
 
         private void SaveNewRooms()
@@ -239,5 +203,4 @@ namespace Hospital.View
             NavigationService.Navigate(new Renovations());
         }
     }
-
 }

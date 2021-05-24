@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,12 @@ namespace Hospital.View
         public ManagerMainPage()
         {
             InitializeComponent();
+            CheckScheduledRenovationsStatus();
+        }
 
+        private void CheckScheduledRenovationsStatus()
+        {
+            RoomRenovationService renovationService;
             RoomRenovationStorage roomRenovationStorage = new RoomRenovationStorage();
             foreach (RoomRenovation renovation in roomRenovationStorage.GetAll())
             {
@@ -29,7 +35,8 @@ namespace Hospital.View
                 {
                     renovation.Room.SerializeInfo = false;
                     renovation.WareHouse.SerializeInfo = false;
-                    renovation.StartRenovation();
+                    renovationService = new RoomRenovationService(renovation);
+                    renovationService.ScheduleRenovation();
                 }
             }
         }
