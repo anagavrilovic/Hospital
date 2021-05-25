@@ -16,5 +16,12 @@ namespace Hospital.Model
 
         [JsonIgnore]
         public MedicalRecord PatientsRecord { get; set; }
+
+        public PatientSettings(string chosenDoctor, string iDPatient)
+        {
+            ChosenDoctor = chosenDoctor;
+            IDPatient = iDPatient;
+        }
+
     }
 }

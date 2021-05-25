@@ -9,5 +9,8 @@ namespace Hospital.Repositories.Interfaces
 {
     interface IPatientSettingsRepository : IGenericRepository<PatientSettings>
     {
+        void Update(PatientSettings patientSettings);
+
+        void FirstSave(String id);
     }
 }

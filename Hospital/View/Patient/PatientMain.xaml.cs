@@ -25,9 +25,7 @@ namespace Hospital.View
         public PatientMain()
         {
             InitializeComponent();
-            PatientMenu patientMenu = new PatientMenu();
-            frame.NavigationService.Navigate(patientMenu);
-           
+            
         }
 
        

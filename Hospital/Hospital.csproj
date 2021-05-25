@@ -63,6 +63,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\DoctorCommands\SaveDiagnosisCommand.cs" />
+    <Compile Include="Commands\Patient\RelayCommand.cs" />
     <Compile Include="DoktorConverters\ListToStringConverter.cs" />
     <Compile Include="DTO\NotificationRecipientsDTO.cs" />
     <Compile Include="Model\Address.cs" />
@@ -189,6 +190,7 @@
     <Compile Include="ValidationRulesManager\StringToInteger.cs" />
     <Compile Include="ValidationRulesManager\Time.cs" />
     <Compile Include="ViewModels\DiagnosisViewModel.cs" />
+    <Compile Include="ViewModels\Patient\PatientSettingsPageViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="View\Doctor\HospitalizedPatients.xaml.cs">
       <DependentUpon>HospitalizedPatients.xaml</DependentUpon>
@@ -1019,5 +1021,6 @@
   <ItemGroup>
     <Resource Include="Icon\refresh.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

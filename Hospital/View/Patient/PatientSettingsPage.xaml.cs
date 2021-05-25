@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.ViewModels.Patient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,27 +22,10 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientSettingsPage : Page
     {
-        public PatientSettingsPage()
+        public PatientSettingsPage(PatientSettingsPageViewModel viewModel)
         {
             InitializeComponent();
-            PatientSettingsStorage patientSettingsStorage = new PatientSettingsStorage();
-            PatientSettings patientSettings = patientSettingsStorage.getByID(MainWindow.IDnumber);
-            if (patientSettings == null)
-            {
-                lekar3.IsChecked = true;
-            }
-            else if (lekar1.Content.ToString().Equals(patientSettings.ChosenDoctor))
-            {
-                lekar1.IsChecked = true;
-            }
-            else if (lekar2.Content.ToString().Equals(patientSettings.ChosenDoctor))
-            {
-                lekar2.IsChecked = true;
-            }
-            else if (lekar3.Content.ToString().Equals(patientSettings.ChosenDoctor))
-            {
-                lekar3.IsChecked = true;
-            }
+            this.DataContext = viewModel;
             BackButton.Focus();
         }
 
@@ -51,28 +35,13 @@ namespace Hospital.View
             this.NavigationService.GoBack();
         }
 
-        private void Sacuvaj(object sender, RoutedEventArgs e)
+        private void KeyPressed(object sender, KeyEventArgs e)
         {
-            PatientSettingsStorage patientSettingsStorage = new PatientSettingsStorage();
-            PatientSettings patientSettings = new PatientSettings();
-            patientSettings.IDPatient = MainWindow.IDnumber;
-            patientSettingsStorage.Delete(MainWindow.IDnumber);
-            if (lekar1.IsChecked == true)
+            if ((e.Key == Key.Space) && ComboBox.IsFocused)
             {
-                patientSettings.ChosenDoctor = lekar1.Content.ToString();
+                Keyboard.ClearFocus();
+                SaveButton.Focus();
             }
-            else if (lekar2.IsChecked == true)
-            {
-                patientSettings.ChosenDoctor = lekar2.Content.ToString();
-            }
-            else if (lekar3.IsChecked == true)
-            {
-                patientSettings.ChosenDoctor = lekar3.Content.ToString();
-            }
-
-            patientSettingsStorage.Save(patientSettings);
-            this.NavigationService.GoBack();
         }
-
     }
 }

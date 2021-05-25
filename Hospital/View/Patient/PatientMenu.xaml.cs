@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.ViewModels.Patient;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -77,7 +78,8 @@ namespace Hospital.View
 
         private void Settings(object sender, RoutedEventArgs e)
         {
-            PatientSettingsPage patientSettings = new PatientSettingsPage();
+            PatientSettingsPageViewModel vm = new PatientSettingsPageViewModel(this.NavigationService);
+            PatientSettingsPage patientSettings = new PatientSettingsPage(vm);
             this.NavigationService.Navigate(patientSettings);
         }
 

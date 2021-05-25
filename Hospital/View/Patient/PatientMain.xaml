@@ -8,9 +8,7 @@
         Title="PatientMain" Height="450" Width="800"
         WindowStartupLocation="CenterScreen"
         >
-    <Grid>
-        <Frame Name="frame" NavigationUIVisibility="Hidden" Content="Frame" HorizontalAlignment="Left" Height="442" VerticalAlignment="Top" Width="792" Focusable="False"/>
 
+    <Frame Name="frame" Source="PatientMenu.xaml" NavigationUIVisibility="Hidden" Focusable="False" />
 
-    </Grid>
 </Window>
