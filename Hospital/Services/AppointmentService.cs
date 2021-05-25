@@ -16,6 +16,7 @@ namespace Hospital.Services
         IDoctorRepository doctorRepository;
 
         private RoomService roomService = new RoomService();
+        private MedicalRecordService medicalRecordService = new MedicalRecordService();
 
         public AppointmentService()
         {
@@ -254,6 +255,16 @@ namespace Hospital.Services
                 newUrgentAppointment.DateTime = newUrgentAppointment.DateTime.AddMinutes(30 - newUrgentAppointment.DateTime.Minute);
             else if (newUrgentAppointment.DateTime.Minute > 30 && newUrgentAppointment.DateTime.Minute <= 59)
                 newUrgentAppointment.DateTime = newUrgentAppointment.DateTime.AddMinutes(60 - newUrgentAppointment.DateTime.Minute);
+        }
+
+        public List<Appointment> GetPassedAppointmentsForPatient(String id)
+        {
+            return appointmentRepository.GetPassedAppointmentsForPatient(id);
+        }
+
+        public List<Appointment> GetByPatientID(string patientID)
+        {
+            return appointmentRepository.GetByPatientID(patientID);
         }
     }
 }

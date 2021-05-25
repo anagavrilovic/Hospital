@@ -1,4 +1,5 @@
-﻿using Hospital.Repositories.Interfaces;
+﻿using Hospital.Model;
+using Hospital.Repositories.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,12 @@ namespace Hospital.Repositories
     {
         private string fileName = "appointments.json";
 
-        public AppointmentFileRepository() { }
+        private IDoctorRepository doctorRepository;
+        private IMedicalRecordRepository medicalRecordRepository;
+        public AppointmentFileRepository() {
+            doctorRepository = new DoctorFileRepository();
+            medicalRecordRepository = new MedicalRecordFileRepository();
+        }
 
         public void Delete(string appointmentID)
         {
@@ -84,7 +90,10 @@ namespace Hospital.Repositories
 
             foreach (Appointment appointment in appointments)
                 if (appointment.IDpatient.Equals(patientID))
-                    patientsAppointments.Add(appointment);
+                {
+                    Appointment appointmentWithDoctor = SetDoctorForAppointment(appointment);
+                    patientsAppointments.Add(appointmentWithDoctor);
+                }
 
             return patientsAppointments;
         }
@@ -153,7 +162,7 @@ namespace Hospital.Repositories
                 return retVal.ToString();
             }
 
-
+            apps.AddRange(GetPassedAppointments());
             List<int> lista = new List<int>();
             foreach (Appointment app in apps)
             {
@@ -174,5 +183,41 @@ namespace Hospital.Repositories
             }
             return retVal.ToString();
         }
+
+        public Appointment SetDoctorForAppointment(Appointment appointment)
+        {
+           Doctor doctor=doctorRepository.GetByID(appointment.IDDoctor);
+           appointment.Doctor = doctor;
+           return appointment;
+        }
+
+        public List<Appointment> GetPassedAppointmentsForPatient(String id)
+        {
+            MedicalRecord medicalRecord = medicalRecordRepository.GetByPatientID(id);
+            List<Appointment> appointments = new List<Appointment>();
+            foreach (Examination examination in medicalRecord.Examination)
+            {
+                Appointment appointmentWithDoctor = SetDoctorForAppointment(examination.appointment);
+                appointments.Add(appointmentWithDoctor);
+            }
+            return appointments;
+
+        }
+
+        public List<Appointment> GetPassedAppointments()
+        {
+            List<MedicalRecord> medicalRecords = medicalRecordRepository.GetAll();
+            List<Appointment> appointments = new List<Appointment>();
+            foreach (MedicalRecord medRec in medicalRecords)
+            {
+                foreach(Examination examination in medRec.Examination)
+                {
+                    appointments.Add(examination.appointment);
+                }
+            }
+            return appointments;
+
+        }
+
     }
 }

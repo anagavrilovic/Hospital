@@ -16,6 +16,9 @@ namespace Hospital.Repositories.Interfaces
         List<Appointment> GetByDoctorID(string doctorID);
         List<int> GetExistingIDs();
         List<Appointment> GetByPatientID(string patientID);
+        Appointment SetDoctorForAppointment(Appointment appointment);
+        List<Appointment> GetPassedAppointmentsForPatient(String id);
+        List<Appointment> GetPassedAppointments();
 
     }
 }

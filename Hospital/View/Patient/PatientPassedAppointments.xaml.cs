@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.ViewModels.Patient;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -21,24 +22,12 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientPassedAppointments : Page
     {
-        public ObservableCollection<Appointment> Lista
-        {
-            get;
-            set;
-        }
+       
         public PatientPassedAppointments()
         {
             InitializeComponent();
-            this.DataContext = this;
-            MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
-            MedicalRecord record = medicalRecordStorage.GetByPatientID(MainWindow.IDnumber);
-            List<Examination> lista = record.Examination;
-            List<Appointment> lista1 = new List<Appointment>();
-            foreach (Examination examination in lista)
-            {
-                lista1.Add(examination.appointment);
-            }
-            Lista = new ObservableCollection<Appointment>(lista1);
+            this.DataContext = new PatientPassedAppointmentsViewModel();
+            
             dataGridApp.SelectedIndex = 0;
 
             dataGridApp.Focus();

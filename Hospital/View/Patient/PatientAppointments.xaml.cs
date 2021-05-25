@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.ViewModels.Patient;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -21,20 +22,12 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientAppointments : Page
     {
-        public ObservableCollection<Appointment> Lista
-        {
-            get;
-            set;
-        }
+     
         public PatientAppointments()
         {
             InitializeComponent();
-            this.DataContext = this;
-            AppointmentStorage app = new AppointmentStorage();
-            Lista = app.GetByPatient(MainWindow.IDnumber);
-
+            this.DataContext = new PatientAppointmentsViewModel();
             dataGridApp.SelectedIndex = 0;
-
             dataGridApp.Focus();
         }
         private void myTestKey(object sender, KeyEventArgs e)
@@ -55,8 +48,8 @@ namespace Hospital.View
 
         public void Refresh()
         {
-            dataGridApp.ItemsSource = null;
-            dataGridApp.ItemsSource = Lista;
+            //dataGridApp.ItemsSource = null;
+           // dataGridApp.ItemsSource = Lista;
         }
     }
 }

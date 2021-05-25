@@ -10,11 +10,11 @@
       KeyDown="myTestKey">
 
     <Grid Background="White">
-        <DataGrid x:Name="dataGridApp" ItemsSource="{Binding Lista}" IsReadOnly="True" 
+        <DataGrid x:Name="dataGridApp" ItemsSource="{Binding Appointments}" IsReadOnly="True" 
                   SelectionMode="Single" AutoGenerateColumns="False" Margin="0,0,107,110">
             <DataGrid.Columns>
                 <DataGridTextColumn  Header="DatumVreme" Binding="{Binding DateTime}" Width="*"/>
-                <DataGridTextColumn  Header="Doktor" Binding="{Binding DoctrosNameSurname}" Width="*"/>
+                <DataGridTextColumn  Header="Doktor" Binding="{Binding Doctor}" Width="*"/>
                 <DataGridTextColumn  Header="Tip" Binding="{Binding Type}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
