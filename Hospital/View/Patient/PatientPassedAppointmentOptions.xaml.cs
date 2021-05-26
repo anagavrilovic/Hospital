@@ -57,5 +57,11 @@ namespace Hospital.View
             PatientDiagnosis patientDiagnosis = new PatientDiagnosis(app);
             this.NavigationService.Navigate(patientDiagnosis);
         }
+
+        private void ViewTherapy(object sender, RoutedEventArgs e)
+        {
+            PatientsTherapy patientsTherapy = new PatientsTherapy(app);
+            this.NavigationService.Navigate(patientsTherapy);
+        }
     }
 }
