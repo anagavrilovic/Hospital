@@ -1,6 +1,8 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,12 +23,42 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientTherapysMedications : Page
     {
-        private List<MedicineTherapy> medicineTherapies;
+        public ObservableCollection<MedicineTherapy> MedicineTherapies
+        {
+            get;
+            set;
+        }
+       
+        private MedicineService medicineService=new MedicineService();
         
         public PatientTherapysMedications(List<MedicineTherapy> medicineTherapies)
         {
             InitializeComponent();
-            this.medicineTherapies = medicineTherapies;
+            this.DataContext = this;
+            this.MedicineTherapies = new ObservableCollection<MedicineTherapy>(medicineTherapies);
+            foreach(MedicineTherapy medTer in medicineTherapies)
+            {
+                medTer.Medicine=medicineService.GetById(medTer.MedicineID);
+            }
+            dataGridApp.SelectedIndex = 0;
+
+            dataGridApp.Focus();
+        }
+
+        private void myTestKey(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                MedicineTherapy selectedItem = (MedicineTherapy)dataGridApp.SelectedItem;
+                PatientMedication patientMedication = new PatientMedication(selectedItem);
+                this.NavigationService.Navigate(patientMedication);
+
+            }
+
+            if (e.Key == Key.Escape)
+            {
+                this.NavigationService.GoBack();
+            }
         }
     }
 }

@@ -6,9 +6,21 @@
       xmlns:local="clr-namespace:Hospital.View"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PatientTherapysMedications">
+      Title="PatientTherapysMedications"
+      KeyDown="myTestKey">
 
     <Grid Background="White">
-        
+        <DataGrid x:Name="dataGridApp" ItemsSource="{Binding MedicineTherapies}" IsReadOnly="True" 
+                  SelectionMode="Single" AutoGenerateColumns="False" Margin="0,0,107,110">
+            <DataGrid.Columns>
+                <DataGridTextColumn  Header="Lekovi" Binding="{Binding Medicine}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>
