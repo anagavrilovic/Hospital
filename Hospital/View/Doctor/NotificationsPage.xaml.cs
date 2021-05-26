@@ -135,7 +135,7 @@ namespace Hospital.View.Doctor
                 return;
             }
 
-            var displayNotification = new PrikazObavestenja((Notification)ListBoxNotifications.SelectedItem);
+            var displayNotification = new DisplayNotification((Notification)ListBoxNotifications.SelectedItem);
             displayNotification.Show();
         }
     }

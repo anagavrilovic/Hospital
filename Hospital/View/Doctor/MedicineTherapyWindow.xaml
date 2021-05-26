@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Hospital.View.Doctor"
         xmlns:ns="clr-namespace:Hospital"
         mc:Ignorable="d"
-        Title="LekListBox"
+        Title="LekListBox" AllowsTransparency="True" WindowStyle="None" 
         Background="{DynamicResource Background}" WindowStartupLocation="CenterOwner">
     <Window.Resources>
     </Window.Resources>

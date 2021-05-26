@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,7 +25,7 @@ namespace Hospital.View.Doctor
     {
         private static int HOSPITAL_TREATMENT_TAB=6;
         private MedicalRecord medicalRecord;
-        private MedicalRecordStorage medicalRecordStorage;
+        private MedicalRecordService medicalRecordSerivce;
         private Appointment appointment=new Appointment();
         public MedicalRecord MedicalRecord
         {
@@ -52,8 +53,8 @@ namespace Hospital.View.Doctor
 
         private void InitProperties(string id, Appointment pregled)
         {
-            medicalRecordStorage = new MedicalRecordStorage();
-            MedicalRecord = medicalRecordStorage.GetOne(id);
+            medicalRecordSerivce = new MedicalRecordService();
+            MedicalRecord = medicalRecordSerivce.GetRecordByID(id);
             this.appointment = pregled;
             saveButton.Visibility = Visibility.Collapsed;
             hospitalTreatmentButton.Visibility = Visibility.Collapsed;
@@ -64,10 +65,9 @@ namespace Hospital.View.Doctor
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            DoctorMainWindow doctorMainWindow = new DoctorMainWindow((((AppointmentWindow)Window.GetWindow(this)).LoggedInDoctor).PersonalID);
-            doctorMainWindow.Show();
-            Application.Current.MainWindow = doctorMainWindow;
-            doctorMainWindow.Main.Navigate(new DoctorAppointments((((AppointmentWindow)Window.GetWindow(this)).LoggedInDoctor).PersonalID));
+            ((DoctorMainWindow)Window.GetWindow(this).Owner).Show();
+            Application.Current.MainWindow = ((DoctorMainWindow)Window.GetWindow(this).Owner);
+            ((DoctorMainWindow)Window.GetWindow(this).Owner).Main.Content = ((DoctorMainWindow)Window.GetWindow(this).Owner).frameMainPage;
             Window.GetWindow(this).Close();
             SaveExamination();
             DeleteAppointmentOfExamination();
@@ -84,7 +84,7 @@ namespace Hospital.View.Doctor
             PatientNotificationsStorage patientNotificationsStorage = new PatientNotificationsStorage();
             patientNotificationsStorage.SaveFirst(((AppointmentWindow)Window.GetWindow(this)).Examintaion);
             MedicalRecord.AddExamination(((AppointmentWindow)Window.GetWindow(this)).Examintaion);
-            medicalRecordStorage.EditRecord(MedicalRecord);
+            medicalRecordSerivce.UpdateMedicalRecord(MedicalRecord);
         }
 
         private void hospitalTreatmentButton_Click(object sender, RoutedEventArgs e)

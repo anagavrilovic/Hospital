@@ -186,6 +186,9 @@
     <Compile Include="ViewModels\Patient\PatientPassedAppointmentsViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientSettingsPageViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
+    <Compile Include="View\Doctor\DisplayNotification.xaml.cs">
+      <DependentUpon>DisplayNotification.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Doctor\HospitalizedPatients.xaml.cs">
       <DependentUpon>HospitalizedPatients.xaml</DependentUpon>
     </Compile>
@@ -467,6 +470,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\SecretaryResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Doctor\DisplayNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

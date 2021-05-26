@@ -72,7 +72,7 @@ namespace Hospital.View.Doctor
             }
             else
             {
-                ((DoctorMainWindow)Window.GetWindow(this)).pills.Source = new BitmapImage(new Uri("pack://application:,,,/Icon/DoctorIcons/pills.png", UriKind.Absolute));
+                    ((DoctorMainWindow)Window.GetWindow(this)).pills.Source = new BitmapImage(new Uri("pack://application:,,,/Icon/DoctorIcons/pills.png", UriKind.Absolute));
                 ((DoctorMainWindow)Window.GetWindow(this)).obavestenje.Source = new BitmapImage(new Uri("pack://application:,,,/Icon/notification.png", UriKind.Absolute));
             }
         }

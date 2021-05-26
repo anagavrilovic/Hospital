@@ -7,7 +7,7 @@
         xmlns:ns="clr-namespace:Hospital" 
          xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Background="{DynamicResource Background }"
+        Background="{DynamicResource Background }" AllowsTransparency="True" WindowStyle="None" 
         Title="NoviTermin" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Window.Resources>
     </Window.Resources>
@@ -34,10 +34,10 @@
                     </TextBlock>
                 </Label.Content>
             </Label>
-            <Button x:Name="addPatient" Margin="15,0,0,0" Style="{DynamicResource ImageButtons}" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" Click="addPatient_Click">
+            <Button x:Name="addPatient" Margin="15,0,0,0" Style="{DynamicResource NoChromeButton}" Click="addPatient_Click">
                 <StackPanel Orientation="Vertical">
                     <Image Source="../../Icon/DoctorIcons/addDark.png" Width="30"/>
-                    <TextBlock Text="{ns:Loc addButton}"/>
+                    <TextBlock Text="{ns:Loc addButton}" Style="{DynamicResource TextBlockStyle}"/>
                 </StackPanel>
             </Button>
         </StackPanel>
@@ -60,8 +60,8 @@
                     </TextBlock>
                 </Label.Content>
             </Label>
-            <RadioButton GroupName="tipTermina" x:Name="rdbPregled" FontSize="17"  Content="{ns:Loc examinationLabel}" IsChecked="False"/>
-            <RadioButton GroupName="tipTermina" x:Name="rdbOperacija" FontSize="17"   Content="{ns:Loc operationLabel}" IsChecked="False"/>
+            <RadioButton GroupName="tipTermina" x:Name="rdbPregled" FontSize="17"  Content="{ns:Loc examinationLabel}" IsChecked="False" Style="{DynamicResource RadioButtonStyle}"/>
+            <RadioButton GroupName="tipTermina" x:Name="rdbOperacija" FontSize="17"   Content="{ns:Loc operationLabel}" IsChecked="False" Style="{DynamicResource RadioButtonStyle}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" >
             <Label FontSize="17"  Width="190" Content="{ns:Loc dateAndTime}" Style="{DynamicResource Label}"/>
@@ -82,13 +82,13 @@
             <Button x:Name="save" FontSize="18" Click="save_Click" Margin="0,0,40,0" Style="{DynamicResource ImageButtonsHorizontal}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../../Icon/DoctorIcons/save.png" Width="20"/>
-                    <TextBlock Text="{ns:Loc acceptButton}"/>
+                    <TextBlock Text="{ns:Loc acceptButton}"  Style="{DynamicResource TextBlockStyle}"/>
                 </StackPanel>
             </Button>
             <Button x:Name="cancel"  FontSize="18" Click="cancel_Click" Style="{DynamicResource ImageButtonsHorizontal}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../../Icon/DoctorIcons/back.png" Width="20"/>
-                    <TextBlock Text="{ns:Loc declineButton}"/>
+                    <TextBlock Text="{ns:Loc declineButton}" Style="{DynamicResource TextBlockStyle}"/>
                 </StackPanel>
             </Button>
         </StackPanel>

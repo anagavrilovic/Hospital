@@ -26,7 +26,7 @@ namespace Hospital.View.Doctor
     {
         private DoctorService doctorService = new DoctorService();
         private HospitalTreatmentService hospitalTreatmentService;
-        private Frame frameMainPage;
+        public Frame frameMainPage;
         private DoctorMainPage mainPage;
         private string doctorId;
         private Model.Doctor doctor = new Model.Doctor();

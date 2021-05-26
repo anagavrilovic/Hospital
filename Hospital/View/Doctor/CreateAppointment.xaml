@@ -7,7 +7,7 @@
         xmlns:ns="clr-namespace:Hospital" 
         xmlns:local="clr-namespace:Hospital.View.Doctor"
         mc:Ignorable="d"
-        Title="KreiranjeTermina"
+        Title="KreiranjeTermina" AllowsTransparency="True" WindowStyle="None" 
         WindowStartupLocation="CenterScreen"
         Background="{DynamicResource Background}">
     <Grid Margin="30,20,0,0">
@@ -52,8 +52,8 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <RadioButton GroupName="tipTermina" x:Name="rdbPregled" FontSize="17"  Content="{ns:Loc examinationLabel}" IsChecked="False"/>
-            <RadioButton GroupName="tipTermina" x:Name="rdbOperacija" FontSize="17"  Content="{ns:Loc operationLabel}" IsChecked="False"/>
+            <RadioButton GroupName="tipTermina" x:Name="rdbPregled" FontSize="17"  Content="{ns:Loc examinationLabel}" Style="{DynamicResource RadioButtonStyle}" IsChecked="False"/>
+            <RadioButton GroupName="tipTermina" x:Name="rdbOperacija" FontSize="17"  Content="{ns:Loc operationLabel}" Style="{DynamicResource RadioButtonStyle}" IsChecked="False"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" >
             <Label FontSize="17"  Width="190" Content="{ns:Loc dateAndTime}" Style="{DynamicResource Label}"/>

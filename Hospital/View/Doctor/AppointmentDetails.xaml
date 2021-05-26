@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Hospital.View.Doctor"
         xmlns:ns="clr-namespace:Hospital"
         mc:Ignorable="d"
-        Title="DetaljiPregleda"
+        Title="DetaljiPregleda" AllowsTransparency="True" WindowStyle="None" 
         Background="{DynamicResource Background}" WindowStartupLocation="CenterScreen">
     <Window.Resources>
     </Window.Resources>

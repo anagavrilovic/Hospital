@@ -75,6 +75,12 @@ BorderThickness="3" CornerRadius="10" BorderBrush="{StaticResource HoverBlue}">
         <Setter Property="FontSize" Value="14"/>
     </Style>
 
+    <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
+        <Setter Property="Foreground" Value="{StaticResource DarkBlue}"/>
+        <Setter Property="FontFamily" Value="Yu Gothic"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+
     <!-- Template za validacije -->
     <ControlTemplate x:Key="ValidationErrorTemplate">
         <Grid>
