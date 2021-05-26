@@ -1,6 +1,5 @@
 ﻿using Hospital.Model;
 using Hospital.Services;
-using Hospital.Services.DoctorServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -51,9 +50,6 @@ namespace Hospital.View.Doctor
         private string patientId;
         public event PropertyChangedEventHandler PropertyChanged;
         private AppointmentService appointmentService;
-        private DoctorService doctorService;
-        private MedicalRecordService medicalRecordService;
-        private AppointmentInfoService appointmentInfoService;
 
         public AppointmentInfo(Model.Doctor doctor,string patientId)
         {
@@ -65,10 +61,7 @@ namespace Hospital.View.Doctor
 
         private void InitProperties(Model.Doctor doctor, string patientId)
         {
-            appointmentInfoService = new AppointmentInfoService();
-            medicalRecordService = new MedicalRecordService();
             appointmentService = new AppointmentService();
-            doctorService = new DoctorService();
             this.patientId = patientId;
             ComboBox.ItemsSource = Enum.GetValues(typeof(DoctorSpecialty)).Cast<DoctorSpecialty>();
             ComboBox.SelectedIndex = (int)doctor.Specialty;
@@ -93,7 +86,9 @@ namespace Hospital.View.Doctor
 
         private void SetAppointmentsInDataGrid(object sender, SelectionChangedEventArgs e)
         {
-           Appointments=appointmentInfoService.SetAppointmentDataGrid((DoctorSpecialty)ComboBox.SelectedItem);
+           Appointments=new ObservableCollection<Appointment>(appointmentService.SetAppointmentDataGrid((DoctorSpecialty)ComboBox.SelectedItem));
+            dataGridPregledi.ItemsSource = Appointments;
+            dataGridPregledi.Items.Refresh();
         }
     }
 }

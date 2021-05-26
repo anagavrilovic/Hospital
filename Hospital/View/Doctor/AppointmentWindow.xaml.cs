@@ -1,6 +1,5 @@
 ﻿using Hospital.Model;
 using Hospital.Services;
-using Hospital.Services.DoctorServices;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -25,7 +24,7 @@ namespace Hospital.View.Doctor
 
     public partial class AppointmentWindow : Window, INotifyPropertyChanged
     {
-        private AppointmentWindowService appointmentWindowService;
+        private HospitalTreatmentService hospitalTreatmentService;
         private MedicalRecordService medicalRecordService;
         private DoctorService doctorService;
         private Examination examination;
@@ -72,7 +71,7 @@ namespace Hospital.View.Doctor
         }
         public AppointmentWindow(Appointment appointment)
         {
-            appointmentWindowService = new AppointmentWindowService();
+            hospitalTreatmentService = new HospitalTreatmentService();
             medicalRecordService = new MedicalRecordService();
             doctorService = new DoctorService();
             this.appointment = appointment;
@@ -160,7 +159,7 @@ namespace Hospital.View.Doctor
                 case 4:
                     DiagnosisTab.Content = frameDiagnosis;
                     medicalRecordReview.saveButton.Visibility = Visibility.Visible;
-                    if (!appointmentWindowService.AlreadyHospitalized(appointment.IDpatient))
+                    if (!hospitalTreatmentService.AlreadyHospitalized(appointment.IDpatient))
                     {
                         medicalRecordReview.hospitalTreatmentButton.Visibility = Visibility.Visible;
                     }
@@ -168,7 +167,7 @@ namespace Hospital.View.Doctor
                 case 5:
                     AppointmentTab.Content = frameAppointment;
                     medicalRecordReview.saveButton.Visibility = Visibility.Visible;
-                    if (!appointmentWindowService.AlreadyHospitalized(appointment.IDpatient))
+                    if (!hospitalTreatmentService.AlreadyHospitalized(appointment.IDpatient))
                     {
                         medicalRecordReview.hospitalTreatmentButton.Visibility = Visibility.Visible;
                     }

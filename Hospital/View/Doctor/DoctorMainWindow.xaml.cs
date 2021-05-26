@@ -1,6 +1,5 @@
 ﻿using Hospital.Model;
 using Hospital.Services;
-using Hospital.Services.DoctorServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,7 +25,7 @@ namespace Hospital.View.Doctor
     public partial class DoctorMainWindow : Window, INotifyPropertyChanged
     {
         private DoctorService doctorService = new DoctorService();
-        private DoctorMainWindowService service = new DoctorMainWindowService();
+        private HospitalTreatmentService hospitalTreatmentService;
         private Frame frameMainPage;
         private DoctorMainPage mainPage;
         private string doctorId;
@@ -45,7 +44,7 @@ namespace Hospital.View.Doctor
             InitializeComponent();
             this.DataContext = this;
             InitProperties(doctorId);
-            service.checkHospitalTreatmentDates();
+            hospitalTreatmentService.checkHospitalTreatmentDates();
 
         }
 
@@ -59,6 +58,7 @@ namespace Hospital.View.Doctor
             mainPage = new DoctorMainPage(doctorId);
             frameMainPage.Content = mainPage;
             Main.Content = frameMainPage;
+            hospitalTreatmentService = new HospitalTreatmentService();
         }
 
 

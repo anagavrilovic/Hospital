@@ -143,9 +143,19 @@ namespace Hospital.Services
             return notificationRepository.GetByID(id);
         }
 
-        public void Serialize(List<Notification> notifications)
+        public List<Notification> SetNotificationsProperty(Doctor doctor)
         {
-            notificationRepository.Serialize(notifications);
+            notificationsUsersRepository = new NotificationsUsersFileRepository();
+            List<Notification> notifications = new List<Notification>();
+            foreach (NotificationsUsers notificationsUser in notificationsUsersRepository.GetAll())
+            {
+                if (notificationsUser.Username.Equals(doctor.Username))
+                {
+                    notifications.Add(GetById(notificationsUser.NotificationID));
+                }
+
+            }
+            return notifications;
         }
     }
 }

@@ -36,5 +36,17 @@ namespace Hospital.Services
             medicineRevisionRepository.EditMedicine(medicine);
         }
 
+        public List<MedicineRevision> SetRevisionList(Doctor doctor)
+        {
+            List<MedicineRevision> medicineRevisions = new List<MedicineRevision>();
+            foreach (MedicineRevision mRevision in GetAll())
+            {
+                if (mRevision.DoctorID.Equals(doctor.PersonalID) && !mRevision.IsMedicineRevised)
+                {
+                    medicineRevisions.Add(mRevision);
+                }
+            }
+            return medicineRevisions;
+        }
     }
 }

@@ -94,5 +94,21 @@ namespace Hospital.Services
         {
             return medicalRecordRepository.GetByPatientID(id);
         }
+
+        public void DeleteAppointmentFromExamination(string appointmentId, MedicalRecord medicalRecord)
+        {
+            foreach (Examination examination in medicalRecord.Examination)
+            {
+                if (examination.appointment.IDAppointment != null)
+                {
+                    if (examination.appointment.IDAppointment.Equals(appointmentId))
+                    {
+                        medicalRecord.RemoveExamination(examination);
+                        break;
+                    }
+                }
+            }
+            UpdateMedicalRecord(medicalRecord);
+        }
     }
 }

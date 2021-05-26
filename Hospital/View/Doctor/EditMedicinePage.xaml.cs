@@ -1,5 +1,4 @@
 ﻿using Hospital.Services;
-using Hospital.Services.DoctorServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,7 +26,6 @@ namespace Hospital.View.Doctor
     public partial class EditMedicinePage : Page, INotifyPropertyChanged
     {
         private MedicineService medicineService = new MedicineService();
-        private EditMedicineService service = new EditMedicineService();
         private Medicine medicine = new Medicine();
         public Medicine Medicine
         {
@@ -90,7 +88,7 @@ namespace Hospital.View.Doctor
         {
             InitializeComponent();
             this.DataContext = this;
-            Ingredients = service.ReadIngredients();
+            Ingredients =new ObservableCollection<Ingredient>(medicineService.ReadIngredients());
             SetProperites();
             AddFilterAndSorter();
             SetReplacementMedicine();
@@ -143,7 +141,7 @@ namespace Hospital.View.Doctor
         {
             if (Medicine != null)
             {
-                SubstituteDrugs = service.SetReplacementMedicine(Medicine);
+                SubstituteDrugs =new ObservableCollection<Medicine>(medicineService.SetReplacementMedicine(Medicine));
                 replacementDrugsListBox.ItemsSource = SubstituteDrugs;
                 replacementDrugsListBox.Items.Refresh();
             }
@@ -186,7 +184,7 @@ namespace Hospital.View.Doctor
         private void AddIngridient_Click(object sender, RoutedEventArgs e)
         {
             Ingredient seletedIngredient = (Ingredient)allIngredientsListBox.SelectedItem;
-            if (seletedIngredient != null && !service.ContainsIngredient(Medicine, seletedIngredient))
+            if (seletedIngredient != null && !medicineService.ContainsIngredient(Medicine, seletedIngredient))
             {
                 Medicine.AddIngredient(seletedIngredient);
                 medicineIngredientsListBox.ItemsSource = Medicine.Ingredient;
@@ -207,7 +205,7 @@ namespace Hospital.View.Doctor
         private void AddReplacement_Click(object sender, RoutedEventArgs e)
         {
             Medicine selectedMedic = ((Medicine)allDrugsListBox.SelectedItem);
-            if (!Medicine.ID.Equals(selectedMedic.ID) && !service.AlreadyInSubstituteDrugs(selectedMedic, SubstituteDrugs))
+            if (!Medicine.ID.Equals(selectedMedic.ID) && !medicineService.AlreadyInSubstituteDrugs(selectedMedic, SubstituteDrugs.ToList()))
             {
                 Medicine.AddMedicineID(((Medicine)allDrugsListBox.SelectedItem).ID);
                 SubstituteDrugs.Add((Medicine)allDrugsListBox.SelectedItem);
@@ -240,7 +238,7 @@ namespace Hospital.View.Doctor
 
         private void SaveChanges_Click(object sender, RoutedEventArgs e)
         {
-            service.SaveMedicineSubstitutes(SubstituteDrugs, Medicine);
+            medicineService.SaveMedicineSubstitutes(SubstituteDrugs.ToList(), Medicine);
             SavedChangesVisibilities();
         }
 

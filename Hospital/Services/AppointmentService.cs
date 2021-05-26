@@ -14,6 +14,7 @@ namespace Hospital.Services
     {
         IAppointmentRepository appointmentRepository;
         IDoctorRepository doctorRepository;
+        IMedicalRecordRepository medicalRecordRepository;
 
         private RoomService roomService = new RoomService();
         private MedicalRecordService medicalRecordService = new MedicalRecordService();
@@ -265,6 +266,56 @@ namespace Hospital.Services
         public List<Appointment> GetByPatientID(string patientID)
         {
             return appointmentRepository.GetByPatientID(patientID);
+        }
+
+        public List<Appointment> SetAppointmentDataGrid(DoctorSpecialty doctorSpecialty)
+        {
+            doctorRepository = new DoctorFileRepository();
+            medicalRecordRepository = new MedicalRecordFileRepository();
+            List<Appointment> appointments = new List<Appointment>();
+
+            foreach (Appointment appointmentToAdd in GetAll())
+            {
+                appointmentToAdd.Doctor = doctorRepository.GetByID(appointmentToAdd.IDDoctor);
+                if (appointmentToAdd.Doctor.Specialty.Equals(doctorSpecialty))
+                {
+                    appointmentToAdd.PatientsRecord = medicalRecordRepository.GetByPatientID(appointmentToAdd.IDpatient);
+                    appointments.Add(appointmentToAdd);
+                }
+            }
+            return appointments;
+        }
+
+        public List<Appointment> SetParentAppointments(Appointment appointment)
+        {
+            doctorRepository = new DoctorFileRepository();
+            medicalRecordRepository = new MedicalRecordFileRepository();
+            List<Appointment> appointments = new List<Appointment>();
+            foreach (Appointment appointmentFromStorage in GetAll())
+            {
+                if (doctorRepository.GetByID(appointmentFromStorage.IDDoctor).Specialty.Equals(appointment.Doctor.Specialty))
+                {
+                    appointmentFromStorage.PatientsRecord = medicalRecordRepository.GetByPatientID(appointmentFromStorage.IDpatient);
+                    appointments.Add(appointmentFromStorage);
+                }
+            }
+            return appointments;
+        }
+
+        public List<Appointment> InitAppointments(string doctorId)
+        {
+            doctorRepository = new DoctorFileRepository();
+            List<Appointment> appointments = new List<Appointment>();
+            foreach (Appointment a in GetAll())
+            {
+                if (a.IDDoctor.Equals(doctorId))
+                {
+                    a.Doctor = doctorRepository.GetByID(a.IDDoctor);
+                    a.PatientsRecord = medicalRecordService.GetByPatientId(a.IDpatient);
+                    appointments.Add(a);
+                }
+            }
+            return appointments;
         }
     }
 }

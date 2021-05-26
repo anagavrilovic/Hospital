@@ -1,6 +1,5 @@
 ﻿using Hospital.Model;
 using Hospital.Services;
-using Hospital.Services.DoctorServices;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -13,7 +12,6 @@ namespace Hospital.View.Doctor
     public partial class HospitalizedPatients : Page,INotifyPropertyChanged
     {
         private HospitalTreatmentService hospitalTreatmentService = new HospitalTreatmentService();
-        private HospitalizedPatientsService service=new HospitalizedPatientsService();
         private ObservableCollection<HospitalTreatment> hospitalTreatments = new ObservableCollection<HospitalTreatment>();
         private HospitalTreatment hospitalTreatment = new HospitalTreatment();
 
@@ -58,7 +56,7 @@ namespace Hospital.View.Doctor
         {
             DateTime startDate = DateTime.Today;
             calendar.DisplayDateStart = startDate;
-            hospitalTreatments = service.SetTreatments();
+            hospitalTreatments =new ObservableCollection<HospitalTreatment>(hospitalTreatmentService.SetTreatments());
         }
 
         private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -57,7 +57,7 @@ namespace Hospital.Services
             medicineRepository.EditMedicine(medicine);
         }
 
-        private bool IsMedicineIDUnique(string id)
+        public bool IsMedicineIDUnique(string id)
         {
             List<Medicine> medicines = GetAll();
             foreach (Medicine medicine in medicines)
@@ -69,6 +69,54 @@ namespace Hospital.Services
                 }
             }
             return true;
+        }
+
+        public List<Ingredient> ReadIngredients()
+        {
+            string[] lines2 = File.ReadAllLines("..\\..\\Files\\ingredients.txt");
+            List<Ingredient> ingredients = new List<Ingredient>();
+            foreach (string line in lines2)
+            {
+                Ingredient ingredient = new Ingredient();
+                ingredient.Name = line;
+                ingredients.Add(ingredient);
+            }
+            return ingredients;
+        }
+
+        public List<Medicine> SetReplacementMedicine(Medicine medicine)
+        {
+            List<Medicine> supstituteDrugs = new List<Medicine>();
+            foreach (string medicID in medicine.ReplacementMedicineIDs)
+            {
+                supstituteDrugs.Add(GetById(medicID));
+            }
+            return supstituteDrugs;
+        }
+
+        public void SaveMedicineSubstitutes(List<Medicine> substituteDrugs, Medicine changedMedicine)
+        {
+            foreach (Medicine medicine in substituteDrugs)
+            {
+                changedMedicine.AddMedicineID(medicine.ID);
+            }
+            UpdateMedicine(changedMedicine);
+        }
+
+        public bool AlreadyInSubstituteDrugs(Medicine selectedMedic, List<Medicine> substituteDrugs)
+        {
+            foreach (Medicine m in substituteDrugs)
+                if (m.ID.Equals(selectedMedic.ID))
+                    return true;
+            return false;
+        }
+
+        public bool ContainsIngredient(Medicine medicine, Ingredient selectedIngredient)
+        {
+            foreach (Ingredient i in medicine.Ingredient)
+                if (i.Name.Equals(selectedIngredient))
+                    return true;
+            return false;
         }
     }
 }

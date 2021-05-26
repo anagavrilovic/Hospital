@@ -1,6 +1,5 @@
 ﻿using Hospital.Model;
 using Hospital.Services;
-using Hospital.Services.DoctorServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,7 +28,6 @@ namespace Hospital.View.Doctor
         private NotificationService notificationService = new NotificationService();
         private NotificationsUsersService notificationsUsersService = new NotificationsUsersService();
         private ObservableCollection<Notification> notifications = new ObservableCollection<Notification>();
-        private NotificationsServicePage service = new NotificationsServicePage();
         private Hospital.Model.Doctor doctor=new Model.Doctor();
         public ObservableCollection<Notification> Notifications
         {
@@ -59,7 +57,7 @@ namespace Hospital.View.Doctor
             InitializeComponent();
             this.DataContext = this;
             doctor = doctorService.GetDoctorById(doctorId);
-            service.SetNotificationsProperty(doctor, Notifications);
+            Notifications=new ObservableCollection<Notification>(notificationService.SetNotificationsProperty(doctor));
             SetFilterProperties();
             SetIcons();
         }
@@ -124,8 +122,8 @@ namespace Hospital.View.Doctor
             {
 
                 notificationsUsersService.DeleteNotificationsUsersByNotificationID(((Notification)ListBoxNotifications.SelectedItem).Id);
+                notificationService.DeleteNotification((Notification)ListBoxNotifications.SelectedItem);
                 Notifications.Remove((Notification)ListBoxNotifications.SelectedItem);
-                notificationService.Serialize(Notifications.ToList());
             }
 
         }

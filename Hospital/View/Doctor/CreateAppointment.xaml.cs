@@ -1,6 +1,5 @@
 ﻿using Hospital.Model;
 using Hospital.Services;
-using Hospital.Services.DoctorServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -80,7 +79,6 @@ namespace Hospital.View.Doctor
             }
 
         }
-        private CreateAppointmentService createAppointmentService;
         private RoomService roomService;
         private DoctorService doctorService;
         private MedicalRecordService medicalRecordService;
@@ -111,7 +109,6 @@ namespace Hospital.View.Doctor
 
         private void InitProperties(string id)
         {
-            createAppointmentService = new CreateAppointmentService();
             roomService = new RoomService();
             doctorService = new DoctorService();
             medicalRecordService = new MedicalRecordService();
@@ -220,7 +217,7 @@ namespace Hospital.View.Doctor
         {
             ((AppointmentWindow)Window.GetWindow(this.Owner)).Examintaion.appointment = Appointment;
             ObservableCollection<Appointment> list = new ObservableCollection<Appointment>();
-            list =createAppointmentService.SetParentAppointments(Appointment);
+            list =new ObservableCollection<Appointment>(appointmentService.SetParentAppointments(Appointment));
             parentWindow.dataGridPregledi.ItemsSource = list;
             parentWindow.dataGridPregledi.Items.Refresh();
             parentWindow.ComboBox.SelectedIndex=(int)(doctorService.GetDoctorById(Appointment.IDDoctor).Specialty);
@@ -296,11 +293,14 @@ namespace Hospital.View.Doctor
             }else 
             {
                 rdbPregled.IsEnabled = true;
-                if (!((AppointmentWindow)Window.GetWindow(this.Owner)).LoggedInDoctor.PersonalID.Equals
-               (((Hospital.Model.Doctor)doctorComboBox.SelectedItem).PersonalID))
+                if (doctorComboBox.SelectedIndex != -1)
                 {
-                    rdbOperacija.IsEnabled = false;
-                    rdbPregled.IsChecked = true; 
+                    if (!((AppointmentWindow)Window.GetWindow(this.Owner)).LoggedInDoctor.PersonalID.Equals
+                   (((Model.Doctor)doctorComboBox.SelectedItem).PersonalID))
+                    {
+                        rdbOperacija.IsEnabled = false;
+                        rdbPregled.IsChecked = true;
+                    }
                 }
             }
         }

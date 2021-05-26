@@ -1,6 +1,5 @@
 ﻿using Hospital.Model;
 using Hospital.Services;
-using Hospital.Services.DoctorServices;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -15,7 +14,6 @@ namespace Hospital.View.Doctor
     /// </summary>
     public partial class MedicineValidity : Page,INotifyPropertyChanged
     {
-        private MedicineRevisionServicePage service=new MedicineRevisionServicePage();
         private MedicineService medicineService = new MedicineService();
         private MedicineRevisionService medicineRevisionService = new MedicineRevisionService();
         private Model.Doctor doctor=new Model.Doctor();
@@ -57,7 +55,7 @@ namespace Hospital.View.Doctor
             InitializeComponent();
             this.DataContext = this;
             this.doctor = doctor;
-            medicineRevisions = service.SetRevisionList(doctor);
+            medicineRevisions =new ObservableCollection<MedicineRevision>(medicineRevisionService.SetRevisionList(doctor));
             SetIcons();
         }
         private void SetIcons()

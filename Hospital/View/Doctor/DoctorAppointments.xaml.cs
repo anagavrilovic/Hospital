@@ -1,6 +1,5 @@
 ﻿using Hospital.Model;
 using Hospital.Services;
-using Hospital.Services.DoctorServices;
 using Hospital.View.Doctor;
 using System;
 using System.Collections.Generic;
@@ -30,7 +29,6 @@ namespace Hospital.View.Doctor
         private AppointmentService AppointmentService = new AppointmentService();
         private MedicalRecordService medicalRecordService = new MedicalRecordService();
         private DoctorService doctorService = new DoctorService();
-        private DoctorAppointmentsService service = new DoctorAppointmentsService();
         private Model.Doctor doctor = new Model.Doctor();
         public Model.Doctor Doctor
         {
@@ -69,7 +67,7 @@ namespace Hospital.View.Doctor
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 3 / 4);
             Doctor=doctorService.GetDoctorById(IDnumber);
-            Appointments = service.InitAppointments(IDnumber);
+            Appointments =new ObservableCollection<Appointment>(AppointmentService.InitAppointments(IDnumber));
         }
 
 
@@ -93,9 +91,8 @@ namespace Hospital.View.Doctor
                 MedicalRecord medicalRecord=medicalRecordService.GetByPatientId(selectedAppointment.IDpatient);
                 if (medicalRecord != null)
                 {
-                    service.DeleteAppointmentFromExamination(selectedAppointment.IDAppointment, medicalRecord);
+                    medicalRecordService.DeleteAppointmentFromExamination(selectedAppointment.IDAppointment, medicalRecord);
                 }
-                medicalRecordService.UpdateMedicalRecord(medicalRecord);
                 appointments.Remove((Appointment)dataGridAppointments.SelectedItem);
                 dataGridAppointments.ItemsSource = appointments;
                 dataGridAppointments.Items.Refresh();
