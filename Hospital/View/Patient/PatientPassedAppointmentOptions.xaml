@@ -9,8 +9,10 @@
       Title="PatientPassedAppointmentOptions">
 
     <Grid Background="White">
-        <Button Name="RateDoctorButton" Content="Oceni doktora" HorizontalAlignment="Left" Height="43" Margin="251,82,0,0" VerticalAlignment="Top" Width="285" Click="RateDoctor"/>
-        <Button Content="Nazad" HorizontalAlignment="Left" Height="43" Margin="251,322,0,0" VerticalAlignment="Top" Width="285" Click="Back"/>
-
+        <Button Name="RateDoctorButton" Content="Oceni doktora" HorizontalAlignment="Left" Height="43" Margin="251,54,0,0" VerticalAlignment="Top" Width="285" Click="RateDoctor"/>
+        <Button Content="Nazad" HorizontalAlignment="Left" Height="43" Margin="251,342,0,0" VerticalAlignment="Top" Width="285" Click="Back"/>
+        <Button Name="DiagnosisButton" Content="Pregled dijagnoze" HorizontalAlignment="Left" Height="43" Margin="251,267,0,0" VerticalAlignment="Top" Width="285" Click="ViewDiagnosis"/>
+        <Button Name="AnamnesisButton" Content="Pregled anamneze" HorizontalAlignment="Left" Height="43" Margin="251,126,0,0" VerticalAlignment="Top" Width="285" Click="ViewAnamnesis"/>
+        <Button Name="TherapyButton" Content="Pregled terapije" HorizontalAlignment="Left" Height="43" Margin="251,197,0,0" VerticalAlignment="Top" Width="285" Click="RateDoctor"/>
     </Grid>
 </Page>

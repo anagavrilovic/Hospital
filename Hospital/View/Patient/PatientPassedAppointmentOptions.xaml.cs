@@ -45,5 +45,17 @@ namespace Hospital.View
             PatientRateDoctor patientRateDoctor = new PatientRateDoctor(app);
             this.NavigationService.Navigate(patientRateDoctor);
         }
+
+        private void ViewAnamnesis(object sender, RoutedEventArgs e)
+        {
+            PatientAnamnesis patientAnamnesis = new PatientAnamnesis(app);
+            this.NavigationService.Navigate(patientAnamnesis);
+        }
+
+        private void ViewDiagnosis(object sender, RoutedEventArgs e)
+        {
+            PatientDiagnosis patientDiagnosis = new PatientDiagnosis(app);
+            this.NavigationService.Navigate(patientDiagnosis);
+        }
     }
 }

@@ -158,6 +158,7 @@
     <Compile Include="Services\DoctorServices\MedicineRevisionServicePage.cs" />
     <Compile Include="Services\DoctorServices\NotificationsServicePage.cs" />
     <Compile Include="Services\DynamicInventoryService.cs" />
+    <Compile Include="Services\ExaminationService.cs" />
     <Compile Include="Services\HospitalTreatmentService.cs" />
     <Compile Include="Services\MedicalRecordService.cs" />
     <Compile Include="Services\MedicineRevisionService.cs" />
@@ -310,6 +311,12 @@
     </Compile>
     <Compile Include="View\Manager\ManagerNotifications.xaml.cs">
       <DependentUpon>ManagerNotifications.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\PatientDiagnosis.xaml.cs">
+      <DependentUpon>PatientDiagnosis.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\PatientAnamnesis.xaml.cs">
+      <DependentUpon>PatientAnamnesis.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patient\PatientAppointmentMenu.xaml.cs">
       <DependentUpon>PatientAppointmentMenu.xaml</DependentUpon>
@@ -604,6 +611,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Manager\ManagerNotifications.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\PatientDiagnosis.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\PatientAnamnesis.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
