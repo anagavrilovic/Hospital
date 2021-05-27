@@ -103,7 +103,7 @@ namespace Hospital.View.Secretary
 
         private void RegisterGuestPatient()
         {
-            NewGuestPatient.MedicalRecordID = NewGuestPatient.GetHashCode().ToString();
+            NewGuestPatient.MedicalRecordID = MedicalRecordService.GenerateID();
             MedicalRecordService.RegisterNewRecord(NewGuestPatient);
         }
 

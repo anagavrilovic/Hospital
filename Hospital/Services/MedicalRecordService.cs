@@ -14,12 +14,15 @@ namespace Hospital.Services
     {
         private IMedicalRecordRepository medicalRecordRepository;
         private IAppointmentRepository appointmentRepository;
+        private IHospitalTreatmentRepository hospitalTreatmentRepository;
 
         private RegistratedUserService registratedUserService = new RegistratedUserService();
 
         public MedicalRecordService()
         {
             medicalRecordRepository = new MedicalRecordFileRepository();
+            appointmentRepository = new AppointmentFileRepository();
+            hospitalTreatmentRepository = new HospitalTreatmentFileRepository();
         }
 
         public List<MedicalRecord> GetAllRecords()
@@ -53,6 +56,8 @@ namespace Hospital.Services
             medicalRecordRepository.Delete(medicalRecord.MedicalRecordID);
             registratedUserService.DeleteAccount(medicalRecord.Patient.Username);
             appointmentRepository.DeletePatientsAppointments(medicalRecord.Patient.PersonalID);
+            hospitalTreatmentRepository.Delete(medicalRecord.Patient.PersonalID);
+
         }
 
         public void UpdateAllRecords(List<MedicalRecord> medicalRecords)
