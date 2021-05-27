@@ -7,12 +7,12 @@ using System.Windows.Input;
 
 namespace Hospital.Commands.DoctorCommands
 {
-    public class SaveDiagnosisCommand : ICommand
+    public class RelayCommand : ICommand
     {
         Action<object> executeMethod;
         Func<object, bool> canexecuteMethod;
         
-        public SaveDiagnosisCommand(Action<object> executeMethod, Func<object, bool> canexecuteMethod)
+        public RelayCommand(Action<object> executeMethod, Func<object, bool> canexecuteMethod)
         {
             this.executeMethod = executeMethod;
             this.canexecuteMethod = canexecuteMethod;

@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Caliburn.Micro.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
+      <HintPath>packages\Caliburn.Micro.Core.4.0.173\lib\netstandard2.0\Caliburn.Micro.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -44,6 +47,12 @@
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Primitives, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.Serialization.Primitives.4.3.0\lib\net46\System.Runtime.Serialization.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -62,8 +71,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Commands\DoctorCommands\SaveDiagnosisCommand.cs" />
+    <Compile Include="Commands\DoctorCommands\RelayCommand.cs" />
     <Compile Include="Commands\Patient\RelayCommand.cs" />
+    <Compile Include="Controller\NavigationController.cs" />
+    <Compile Include="Controller\WpfNavigationController.cs" />
     <Compile Include="DoktorConverters\ListToStringConverter.cs" />
     <Compile Include="DTO\NotificationRecipientsDTO.cs" />
     <Compile Include="Model\Address.cs" />
@@ -181,7 +192,8 @@
     <Compile Include="ValidationRulesManager\StringToDouble.cs" />
     <Compile Include="ValidationRulesManager\StringToInteger.cs" />
     <Compile Include="ValidationRulesManager\Time.cs" />
-    <Compile Include="ViewModels\DiagnosisViewModel.cs" />
+    <Compile Include="ViewModels\Doctor\DiagnosisViewModel.cs" />
+    <Compile Include="ViewModels\Doctor\DoctorNotificationViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientAppointmentsViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientPassedAppointmentsViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientSettingsPageViewModel.cs" />

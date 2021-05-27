@@ -44,7 +44,7 @@ namespace Hospital.ViewModels.Patient
         {
             this.navService = service;
             DoctorsNamesSurnames = new ObservableCollection<string>();
-           foreach(Doctor doctor in doctorService.GetDoctorsBySpecialty(DoctorSpecialty.general))
+           foreach(Model.Doctor doctor in doctorService.GetDoctorsBySpecialty(DoctorSpecialty.general))
             {
                 DoctorsNamesSurnames.Add(doctor.ToString());
             }

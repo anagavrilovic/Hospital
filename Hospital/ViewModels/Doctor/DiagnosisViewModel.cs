@@ -35,7 +35,7 @@ namespace Hospital.ViewModels
 
         public DiagnosisViewModel()
         {
-            SaveDiagnosisCommand = new SaveDiagnosisCommand(ExecuteMethod, canExecuteMethod); 
+            SaveDiagnosisCommand = new RelayCommand(ExecuteMethod, canExecuteMethod); 
         }
 
         private bool canExecuteMethod(object parameter)

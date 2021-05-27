@@ -25,15 +25,15 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,50,0,0">
-                    <Button Height="50" Width="60" Margin="0,30,0,0" Style="{DynamicResource NoChromeButton}" Click="ShowNotification_Click">
+                    <Button Height="50" Width="60" Margin="0,30,0,0" Style="{DynamicResource NoChromeButton}" Command="{Binding ShowNotification}">
                         <StackPanel Orientation="Vertical">
-                            <Image Source="../../Icon/Secretary/info.png" x:Name="infoButton" Width="30"/>
+                            <Image Source="{Binding InfoImage}" x:Name="infoButton" Width="30"/>
                             <TextBlock Text="{ns:Loc reviewButton}" Style="{DynamicResource TextBlockStyle}"/>
                         </StackPanel>
                     </Button>
-                    <Button Height="50" Width="50" Margin="0,30,0,0" Style="{DynamicResource NoChromeButton}" Click="DeleteNotification_Click">
+                    <Button Height="50" Width="50" Margin="0,30,0,0" Style="{DynamicResource NoChromeButton}">
                         <StackPanel Orientation="Vertical">
-                            <Image Source="../../Icon/Secretary/delete.png" x:Name="deleteButton" Width="30"/>
+                            <Image Source="{Binding DeleteImage}" Width="30"/>
                             <TextBlock Text="{ns:Loc removeButton}" Style="{DynamicResource TextBlockStyle}"/>
                         </StackPanel>
                     </Button>
@@ -49,13 +49,16 @@
                     <Border Width="250" Height="25" Style="{StaticResource TextBoxBorder}" Margin="0,10,20,0" HorizontalAlignment="Right">
                         <StackPanel Margin="5" Orientation="Horizontal">
                             <Image Source="../../Icon/Secretary/search.png" Height="13" VerticalAlignment="Center"/>
-                            <TextBox x:Name="ObavestenjaFilter"  BorderThickness="0" Width="200" Height="23" Margin="10,0,0,0" Background="Transparent" 
-                                     FontSize="13" VerticalAlignment="Center" TextChanged="ObavestenjaFilterTextChanged"/>
+                            <TextBox x:Name="ObavestenjaFilter" Text="{Binding NotificationFilterString}"  BorderThickness="0" Width="200" Height="23" Margin="10,0,0,0" Background="Transparent" 
+                                     FontSize="13" VerticalAlignment="Center">
+                                   
+                            </TextBox>
                         </StackPanel>
                     </Border>
 
                     <!-- Prikaz obavestenja -->
-                    <ListBox x:Name="ListBoxNotifications" ItemsSource="{Binding Notifications, Mode=TwoWay}" Grid.Row="1" Margin="20,5,20,15"
+                    <ListBox x:Name="ListBoxNotifications" ItemsSource="{Binding Notifications, Mode=TwoWay}" 
+                             SelectedItem="{Binding SelectedNotification}" Grid.Row="1" Margin="20,5,20,15"
                                 ScrollViewer.HorizontalScrollBarVisibility="Hidden" Style="{StaticResource ListBoxStyle}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>

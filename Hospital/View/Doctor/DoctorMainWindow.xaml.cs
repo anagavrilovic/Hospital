@@ -78,7 +78,7 @@ namespace Hospital.View.Doctor
 
         private void Announcment_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new NotificationsPage(doctorId);
+            Main.Content = new NotificationsPage(doctorId,this.Main.NavigationService);
         }
 
         private void Revision_Click(object sender, RoutedEventArgs e)

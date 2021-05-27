@@ -170,6 +170,8 @@ namespace Hospital.View.Doctor
             }
         }
 
+       
+
         private void EditMedic_Click(object sender, RoutedEventArgs e)
         {
             doza.IsEnabled = true;
