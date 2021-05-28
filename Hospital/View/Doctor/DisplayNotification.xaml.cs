@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.ViewModels.Doctor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,18 +21,14 @@ namespace Hospital.View.Doctor
     /// </summary>
     public partial class DisplayNotification : Window
     {
-        public Notification Notification { get; set; }
 
         public DisplayNotification(Notification selectedNotification)
         {
             InitializeComponent();
-            this.DataContext = this;
-            Notification = selectedNotification;
-        }
-
-        private void BtnNazadClick(object sender, RoutedEventArgs e)
-        {
-            this.Close();
+            DisplayNotificationViewModel viewModel = new DisplayNotificationViewModel(selectedNotification);
+            this.DataContext = viewModel;
+            if (viewModel.CloseAction == null)
+                viewModel.CloseAction = new Action(this.Close);
         }
     }
 }

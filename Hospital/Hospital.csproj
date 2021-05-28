@@ -38,6 +38,9 @@
     <Reference Include="Caliburn.Micro.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <HintPath>packages\Caliburn.Micro.Core.4.0.173\lib\netstandard2.0\Caliburn.Micro.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Xaml.Behaviors.Wpf.1.1.31\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -193,7 +196,10 @@
     <Compile Include="ValidationRulesManager\StringToInteger.cs" />
     <Compile Include="ValidationRulesManager\Time.cs" />
     <Compile Include="ViewModels\Doctor\DiagnosisViewModel.cs" />
+    <Compile Include="ViewModels\Doctor\DisplayNotificationViewModel.cs" />
     <Compile Include="ViewModels\Doctor\DoctorNotificationViewModel.cs" />
+    <Compile Include="ViewModels\Doctor\HospitalizedPatientsViewModel.cs" />
+    <Compile Include="ViewModels\Doctor\MedicineValidityViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientAppointmentsViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientPassedAppointmentsViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientSettingsPageViewModel.cs" />
@@ -1071,6 +1077,27 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\hospital.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\delete_pink.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\info_pink.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\ok_pink.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\ok.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\cancel_pink.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

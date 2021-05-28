@@ -26,7 +26,6 @@ namespace Hospital.ViewModels.Doctor
         private NotificationsUsersService notificationsUsersService = new NotificationsUsersService();
         private ObservableCollection<Notification> notifications = new ObservableCollection<Notification>();
         private Model.Doctor doctor = new Model.Doctor();
-        private NavigationService navigationService;
 
         private Notification selectedNotification;
 
@@ -54,7 +53,6 @@ namespace Hospital.ViewModels.Doctor
             {
                 notificationFilterString = value;
                 OnPropertyChanged("NotificationFilterString");
-                MessageBox.Show("aaa");
             }
         }
 
@@ -86,6 +84,15 @@ namespace Hospital.ViewModels.Doctor
             set
             {
                 textChanged = value;
+            }
+        }
+        private RelayCommand deleteCommand;
+        public RelayCommand DeleteCommand
+        {
+            get { return deleteCommand; }
+            set
+            {
+                deleteCommand = value;
             }
         }
 
@@ -131,27 +138,32 @@ namespace Hospital.ViewModels.Doctor
 
         public DoctorNotificationViewModel(string doctorId,NavigationService navigationService)
         {
-            this.navigationService = navigationService;
-            this.textChanged = new RelayCommand(Execute_TextChanged, CanExecute_Command);
-            this.ShowNotification = new RelayCommand(Execute_ShowNotificationCommand, CanExecute_Command);
             doctor = doctorService.GetDoctorById(doctorId);
             Notifications = new ObservableCollection<Notification>(notificationService.SetNotificationsProperty(doctor));
+            SetCommands();
             SetFilterProperties();
             SetIcons();
         }
-        
+
+        private void SetCommands()
+        {
+            this.DeleteCommand = new RelayCommand(Execute_DeleteNotification, CanExecute_Command);
+            this.textChanged = new RelayCommand(Execute_TextChanged, CanExecute_Command);
+            this.ShowNotification = new RelayCommand(Execute_ShowNotificationCommand, CanExecute_Command);
+        }
+
         private void SetIcons()
         {
             var app = (App)System.Windows.Application.Current;
             if (app.DarkTheme)
             {
-                deleteImage = new BitmapImage(new Uri("pack://application:,,,/Icon/DoctorIcons/delete-16 (1).png", UriKind.Absolute));
-                infoImage = new BitmapImage(new Uri("pack://application:,,,/Icon/DoctorIcons/info-5-16 (1).png", UriKind.Absolute));
+                deleteImage = new BitmapImage(new Uri("pack://application:,,,/Icon/DoctorIcons/delete_pink.png", UriKind.Absolute));
+                infoImage = new BitmapImage(new Uri("pack://application:,,,/Icon/DoctorIcons/info_pink.png", UriKind.Absolute));
             }
             else
             {
-                deleteImage = new BitmapImage(new Uri("pack://application:,,,/Icon/DoctorIcons/delete-16 (1).png", UriKind.Absolute));
-                infoImage= new BitmapImage(new Uri("pack://application:,,,/Icon/DoctorIcons/info-5-16 (1).png", UriKind.Absolute));
+                deleteImage = new BitmapImage(new Uri("pack://application:,,,/Icon/DoctorIcons/delete.png", UriKind.Absolute));
+                infoImage = new BitmapImage(new Uri("pack://application:,,,/Icon/DoctorIcons/info.png", UriKind.Absolute));
             }
         }
         
@@ -166,22 +178,20 @@ namespace Hospital.ViewModels.Doctor
         {
             if (string.IsNullOrEmpty(NotificationFilterString))
             {
-                MessageBox.Show("aaa");
                 return true;
             }
             else
             {
-                MessageBox.Show("bbb");
                 return (obj.ToString().IndexOf(NotificationFilterString, StringComparison.OrdinalIgnoreCase) >= 0);
             }   
         }
 
          void Execute_TextChanged(object sender)
         {
-            CollectionViewSource.GetDefaultView(Notifications);
+            CollectionViewSource.GetDefaultView(Notifications).Refresh();
         }
 
-        private void DeleteNotification_Click(object sender, RoutedEventArgs e)
+        private void Execute_DeleteNotification(object sender)
         {
             if (SelectedNotification == null)
             {

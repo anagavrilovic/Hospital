@@ -28,8 +28,7 @@ namespace Hospital.View.Doctor
         public NotificationsPage(string doctorId,NavigationService navigationService)
         {
             InitializeComponent();
-            this.DataContext = new DoctorNotificationViewModel(doctorId, navigationService); ;
-            
+            this.DataContext = new DoctorNotificationViewModel(doctorId, navigationService);
         }
 
     }

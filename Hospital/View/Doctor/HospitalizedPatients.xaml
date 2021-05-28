@@ -15,8 +15,9 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Path=HospitalTreatments}" Grid.Column="0" SelectedValue="{Binding HospitalTreatment, UpdateSourceTrigger=Explicit}"
-               SelectionMode="Single" SelectionChanged="dataGrid_SelectionChanged" IsReadOnly="True" Margin="30,30,30,30" AutoGenerateColumns="False" Style="{DynamicResource PacijentiDataGrid}">
+        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Path=HospitalTreatments}" Grid.Column="0" SelectedValue="{Binding HospitalTreatment, Mode=OneWay}"
+               SelectionMode="Single" IsReadOnly="True" 
+                  Margin="30,30,30,30" AutoGenerateColumns="False" Style="{DynamicResource PacijentiDataGrid}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{ns:Loc namePatientLabel}" Width="0.25*" Binding="{Binding PatientsRecord.Patient.FirstName}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
                 <DataGridTextColumn Header="{ns:Loc surnamePatientLabel}" Width="0.25*" Binding="{Binding PatientsRecord.Patient.LastName}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
@@ -25,7 +26,7 @@
                 <DataGridTextColumn Header="{ns:Loc appointmentTypeLabel}" Width="0.25*" Binding="{Binding EndOfTreatment, StringFormat=dd-MM-yyyy}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel x:Name="patientInfo" Orientation="Vertical" Margin="30,30,30,30" Visibility="Collapsed" Background="{DynamicResource SecondBackground}" Grid.Column="1">
+        <StackPanel x:Name="patientInfo" Orientation="Vertical" Margin="30,30,30,30" Visibility="{Binding PanelVisibility}" Background="{DynamicResource SecondBackground}" Grid.Column="1">
             <Label Style="{DynamicResource Label}" Margin="0,0,5,0">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{ns:Loc patientLabel}"/>
@@ -51,22 +52,24 @@
                     <TextBlock Text="{Binding HospitalTreatment.EndOfTreatment, StringFormat=dd-MM-yyyy}"/>
                 </StackPanel>
             </Label>
-            <Button x:Name="editButton" Style="{DynamicResource ImageButtonsHorizontal}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10,10,0" Click="edit_Click">
+            <Button x:Name="editButton" Style="{DynamicResource ImageButtonsHorizontal}" IsEnabled="{Binding EditButtonEnable}" 
+                    HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10,10,0" Command="{Binding EditCommand}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="../../Icon/DoctorIcons/edit.png" Width="20"/>
                     <TextBlock Text="{ns:Loc editButton}"/>
                     </StackPanel>
                 </Button>
-            <Button x:Name="saveButton" Margin="0,10,10,0" HorizontalAlignment="Right" Click="save_Click"
-                            IsEnabled="False" Style="{DynamicResource ImageButtonsHorizontal}">
+            <Button x:Name="saveButton" Margin="0,10,10,0" HorizontalAlignment="Right" Command="{Binding SaveCommand}" IsEnabled="{Binding SaveButtonEnable}"
+                     Style="{DynamicResource ImageButtonsHorizontal}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../../Icon/DoctorIcons/addDark.png" Width="20"/>
                     <TextBlock Text="{ns:Loc saveChangesButton}"/>
                 </StackPanel>
             </Button>
-            <StackPanel Orientation="Vertical" Margin="0,20,0,0" Visibility="Collapsed" x:Name="calendarPanel">
+            <StackPanel Orientation="Vertical" Margin="0,20,0,0" Visibility="{Binding CalendarPanel}" x:Name="calendarPanel">
                 <Label Content="{ns:Loc endOfTreatmentLabel}" Style="{DynamicResource Label}" HorizontalAlignment="Left"/>
-                <Calendar x:Name="calendar" HorizontalAlignment="Center" SelectedDate="{Binding HospitalTreatment.EndOfTreatment, StringFormat=dd-MM-yyyy, UpdateSourceTrigger=Explicit}"/>
+                <Calendar x:Name="calendar" HorizontalAlignment="Center" DisplayDateStart="{Binding StartDate}" 
+                          SelectedDate="{Binding HospitalTreatment.EndOfTreatment, StringFormat=dd-MM-yyyy, Mode=OneWay}"/>
             </StackPanel>
 
         </StackPanel>

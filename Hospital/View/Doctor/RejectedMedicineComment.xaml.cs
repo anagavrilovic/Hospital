@@ -23,7 +23,6 @@ namespace Hospital.View.Doctor
     {
         private MedicineRevision medicineRevision = new MedicineRevision();
         private MedicineRevisionStorage medicineRevisionStorage = new MedicineRevisionStorage();
-        private MedicineValidity validateMedicine;
         public event PropertyChangedEventHandler PropertyChanged;
         public MedicineRevision MedicineRevision
         {
@@ -47,14 +46,13 @@ namespace Hospital.View.Doctor
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
-        public RejectedMedicineComment(MedicineRevision medicineRevision, MedicineValidity validateMedicine)
+        public RejectedMedicineComment(MedicineRevision medicineRevision)
         {
             InitializeComponent();
             this.DataContext = this;
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 1 / 2);
             this.medicineRevision = medicineRevision;
-            this.validateMedicine = validateMedicine;
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
@@ -65,7 +63,7 @@ namespace Hospital.View.Doctor
         private void SaveRejection_Click(object sender, RoutedEventArgs e)
         {
             MedicineRevision.IsMedicineRevised = true;
-            validateMedicine.MedicineRevisions.Remove(MedicineRevision);
+            //validateMedicine.MedicineRevisions.Remove(MedicineRevision);
             medicineRevisionStorage.EditMedicine(MedicineRevision);
             this.Close();
         }

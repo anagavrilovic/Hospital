@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="DisplayNotification" Height="450" Width="800" BorderThickness="1" BorderBrush="{DynamicResource MainWhite}"
         Background="{DynamicResource Background}" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding BackCommand}" Key="B" Modifiers="Ctrl"/>
+    </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
@@ -42,7 +45,7 @@
 
         <!-- Button nazad -->
         <StackPanel Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,0,20,0">
-            <Button Content="Nazad" Width="100" Height="30" Style="{StaticResource ImageButtonsHorizontal}" Click="BtnNazadClick"/>
+            <Button Content="Nazad" Width="100" Height="30" Style="{StaticResource ImageButtonsHorizontal}" Command="{Binding BackCommand}"/>
         </StackPanel>
     </Grid>
 </Window>

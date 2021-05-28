@@ -16,7 +16,10 @@
             <converters:ListToStringConverter x:Key="ListToStringConverter"/>
         </ResourceDictionary>
     </Page.Resources>
-
+    <Page.InputBindings>
+        <KeyBinding Command="{Binding ConfirmMedicine}" Key="C" Modifiers="Ctrl"/>
+        <KeyBinding Command="{Binding RejectMedicine}" Key="R" Modifiers="Ctrl"/>
+    </Page.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -31,17 +34,16 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Dugmici za CRUD nad obavestenjima -->
                 <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,50,0,0">
-                    <Button Height="50" Width="100" Margin="0,30,0,0" Style="{DynamicResource NoChromeButton}" Click="ConfirmMedicine_Click">
+                    <Button Height="50" Width="100" Margin="0,30,0,0" Style="{DynamicResource NoChromeButton}" Command="{Binding ConfirmMedicine}">
                         <StackPanel Orientation="Vertical">
-                            <Image Source="../../Icon/DoctorIcons/confirm.png" x:Name="okButton" Width="30"/>
+                            <Image Source="{Binding OkImage}"  x:Name="okButton" Width="30"/>
                             <TextBlock Text="{ns:Loc validateLabel}" Style="{DynamicResource TextBlockStyle}"/>
                         </StackPanel>
                     </Button>
-                    <Button Height="50" Width="100" Margin="0,30,0,0" Style="{DynamicResource NoChromeButton}" Click="RejectMedicine_Click">
+                    <Button Height="50" Width="100" Margin="0,30,0,0" Style="{DynamicResource NoChromeButton}" Command="{Binding RejectMedicine}">
                         <StackPanel Orientation="Vertical">
-                            <Image Source="../../Icon/DoctorIcons/cancel.png" x:Name="cancelButton" Width="30"/>
+                            <Image Source="{Binding CancelImage}" x:Name="cancelButton" Width="30"/>
                             <TextBlock Text="{ns:Loc returnLabel}" Style="{DynamicResource TextBlockStyle}"/>
                         </StackPanel>
                     </Button>
@@ -63,7 +65,7 @@
                     </Border>
 
                     <!-- Prikaz obavestenja -->
-                    <ListBox x:Name="ListBoxRevisions" ItemsSource="{Binding MedicineRevisions, Mode=TwoWay}" Grid.Row="1" Margin="20,5,20,15"
+                    <ListBox x:Name="ListBoxRevisions" ItemsSource="{Binding MedicineRevisions, Mode=TwoWay}" SelectedItem="{Binding SelectedRevision}" Grid.Row="1" Margin="20,5,20,15"
                                 ScrollViewer.HorizontalScrollBarVisibility="Hidden" Style="{StaticResource ListBoxStyle}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>

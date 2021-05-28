@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.ViewModels
 {
-    class ViewModel : INotifyPropertyChanged
+     public class ViewModel : INotifyPropertyChanged
     {
         [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
