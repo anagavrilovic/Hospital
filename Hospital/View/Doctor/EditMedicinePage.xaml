@@ -8,8 +8,10 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Lekovi" Background="{DynamicResource Background}">
-    <Page.Resources>
-    </Page.Resources>
+    <Page.InputBindings>
+        <KeyBinding Command="{Binding SaveCommand}" Key="S" Modifiers="Ctrl"/>
+        <KeyBinding Command="{Binding EditCommand}" Key="E" Modifiers="Ctrl"/>
+    </Page.InputBindings>
     <Grid Margin="0,50,0,20">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -22,12 +24,12 @@
                             Style="{StaticResource TextBoxBorder}">
                     <StackPanel Margin="5" Orientation="Horizontal">
                         <Image Source="../../Icon/Secretary/search.png" Height="13"/>
-                        <TextBox  x:Name="pretrazi" Width="200" Height="20" BorderThickness="0" Style="{DynamicResource SearchBox}" Margin="10,0,0,0"  TextChanged="LekoviFilterTextChanged"/>
+                        <TextBox  x:Name="pretrazi" Width="200" Height="20" BorderThickness="0" Text="{Binding SearchMedicine}" Style="{DynamicResource SearchBox}" Margin="10,0,0,0"/>
                     </StackPanel>
                 </Border>
             </StackPanel>
-            <ListBox Name="allDrugsListBox" IsSynchronizedWithCurrentItem="True" Margin="0,20,0,20"
-                     SelectionChanged="SelctedMedicChanged" Height="225" Style="{DynamicResource ListBoxStyle}">
+            <ListBox Name="allDrugsListBox" IsSynchronizedWithCurrentItem="True" Margin="0,20,0,20" ItemsSource="{Binding MedicineForDisplay}"
+                     SelectedValue="{Binding SelectedMedicine}" Height="225" Style="{DynamicResource ListBoxStyle}">
             </ListBox>
             
             <StackPanel Orientation="Horizontal">
@@ -36,26 +38,26 @@
                             Style="{StaticResource TextBoxBorder}">
                     <StackPanel Margin="5" Orientation="Horizontal">
                         <Image Source="../../Icon/Secretary/search.png" Height="13"/>
-                        <TextBox  x:Name="pretraziSastojak" Width="200" Height="20" BorderThickness="0" Style="{DynamicResource SearchBox}" Margin="10,0,0,0" TextChanged="SearchIngredientFilter"/>
+                        <TextBox  x:Name="pretraziSastojak" Width="200" Height="20" BorderThickness="0" Text="{Binding SearchIngredient}" Style="{DynamicResource SearchBox}" Margin="10,0,0,0"/>
                     </StackPanel>
                 </Border>
             </StackPanel>
             <ListBox Name="allIngredientsListBox" IsSynchronizedWithCurrentItem="True" Margin="0,20,0,20"
-                      Height="180" Style="{DynamicResource ListBoxStyle}">
+                      Height="180" Style="{DynamicResource ListBoxStyle}" ItemsSource="{Binding Ingredients}" SelectedValue="{Binding SelectedIngredient}">
             </ListBox>
         </StackPanel>
         
         
         <StackPanel Orientation="Vertical" Grid.Column="1" Margin="20,10,20,0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="izmeni" Click="EditMedic_Click" Style="{DynamicResource ImageButtonsHorizontal}" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Button x:Name="izmeni" Command="{Binding EditCommand}" Style="{DynamicResource ImageButtonsHorizontal}" IsEnabled="{Binding IsEnableEdit}" HorizontalAlignment="Right" VerticalAlignment="Center">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="../../Icon/DoctorIcons/edit.png" Width="20"/>
                         <TextBlock Text="{ns:Loc editButton}" />
                     </StackPanel>
                 </Button>
                 <Button x:Name="sacuvaj" Margin="20,0,0,0" 
-                            IsEnabled="False" Click="SaveChanges_Click" Style="{DynamicResource ImageButtonsHorizontal}">
+                            IsEnabled="{Binding IsEnableAddIngredient}" Command="{Binding SaveCommand}" Style="{DynamicResource ImageButtonsHorizontal}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="../../Icon/DoctorIcons/addDark.png" Width="20"/>
                         <TextBlock Text="{ns:Loc saveChangesButton}" />
@@ -75,19 +77,19 @@
 
             <Label Content="{ns:Loc supstitutionMedicineLabel}" Margin="0,10,0,10" FontSize="15" Style="{DynamicResource Label}"/>
             <StackPanel Orientation="Horizontal" Background="{DynamicResource SecondBackground}">
-                <ListBox x:Name="replacementDrugsListBox" Height="150" IsSynchronizedWithCurrentItem="True" Width="300"
-                         Style="{DynamicResource ListBoxStyle}"></ListBox>
+                <ListBox x:Name="replacementDrugsListBox" ItemsSource="{Binding SubstituteDrugs}" Height="150" IsSynchronizedWithCurrentItem="True" Width="300"
+                         Style="{DynamicResource ListBoxStyle}" SelectedValue="{Binding SelectedSubstituteDrugs}"></ListBox>
                 <StackPanel Orientation="Vertical" Margin="30,0,0,0">
                     <Label Style="{DynamicResource Label}" Content="{ns:Loc addOrRemoveReplacement}"/>
-                    <Button x:Name="dodajZamenu" Margin="15,10,0,0"
-                           IsEnabled="False" Click="AddReplacement_Click" Style="{DynamicResource NoChromeButton}">
+                    <Button x:Name="dodajZamenu" Margin="15,10,0,0" Command="{Binding CommandAddReplacement}"
+                           IsEnabled="{Binding IsEnableAddSubstitute}" Style="{DynamicResource NoChromeButton}">
                         <StackPanel Orientation="Vertical">
                             <Image Source="../../Icon/DoctorIcons/addDark.png" Width="30"/>
                             <TextBlock Text="{ns:Loc addButton}" Style="{DynamicResource TextBlockStyle}"/>
                         </StackPanel>
                     </Button>
-                    <Button x:Name="izbaciZamenu" Margin="15,20,0,0"
-                         IsEnabled="False" Click="RemoveReplacement_Click" Style="{DynamicResource NoChromeButton}">
+                    <Button x:Name="izbaciZamenu" Margin="15,20,0,0" Command="{Binding CommandRemoveReplacement}"
+                         IsEnabled="{Binding IsEnableRemoveSubstitute}" Style="{DynamicResource NoChromeButton}">
                         <StackPanel Orientation="Vertical">
                             <Image Source="../../Icon/DoctorIcons/minus.png" Width="30"/>
                             <TextBlock Text="{ns:Loc removeButton}" Style="{DynamicResource TextBlockStyle}"/>
@@ -98,25 +100,25 @@
             
             <StackPanel Orientation="Horizontal"    >
                 <Label Content="{ns:Loc dosageInMgLabel}" FontSize="15" Style="{DynamicResource Label}"/>
-                <TextBox x:Name="doza" Width="40" Height="25" Text="{Binding Lek.DosageInMg}" IsEnabled="False"/>
+                <TextBox x:Name="doza" Width="40" Height="25" Text="{Binding DosageInMg}" IsEnabled="{Binding IsEnableAddIngredient}"/>
             </StackPanel>
 
 
             <Label Margin="0,10,0,0" FontSize="15" Content="{ns:Loc ingredientsLabel}" Style="{DynamicResource Label}" />
             <StackPanel Orientation="Horizontal" Background="{DynamicResource SecondBackground}">
                     <ListBox x:Name="medicineIngredientsListBox" Height="130" IsSynchronizedWithCurrentItem="True" Width="300" Margin="0,0,30,0"
-                         Style="{DynamicResource ListBoxStyle}"></ListBox>
+                         Style="{DynamicResource ListBoxStyle}" ItemsSource="{Binding MedicineIngredients}" SelectedValue="{Binding SelectedMedicineIngredient}"></ListBox>
                     <StackPanel Orientation="Vertical">
                     <Label x:Name="sastojakLabela" Content="{ns:Loc addOrRemoveIngredientLabel}" Margin="15,0,0,0" Style="{DynamicResource Label}"/>
-                    <Button  x:Name="dodajSastojak" Margin="15,10,0,0" IsEnabled="False"
-                             Click="AddIngridient_Click" Style="{DynamicResource NoChromeButton}">
+                    <Button  x:Name="dodajSastojak" Margin="15,10,0,0" IsEnabled="{Binding IsEnableAddIngredient}"
+                             Command="{Binding CommandAddIngredient}" Style="{DynamicResource NoChromeButton}">
                         <StackPanel Orientation="Vertical">
                             <Image Source="../../Icon/DoctorIcons/addDark.png" Width="30"/>
                             <TextBlock Text="{ns:Loc addButton}" Style="{DynamicResource TextBlockStyle}"/>
                         </StackPanel>
                     </Button>
-                    <Button  x:Name="izbaciSastojak" Margin="15,10,0,0" IsEnabled="False" 
-                         Click="RemoveIngridient_Click" Style="{DynamicResource NoChromeButton}">
+                    <Button  x:Name="izbaciSastojak" Margin="15,10,0,0" IsEnabled="{Binding IsEnableRemoveIngredient}"
+                         Command="{Binding CommandRemoveIngredient}" Style="{DynamicResource NoChromeButton}">
                         <StackPanel Orientation="Vertical">
                             <Image Source="../../Icon/DoctorIcons/minus.png" Width="30"/>
                             <TextBlock Text="{ns:Loc removeButton}" Style="{DynamicResource TextBlockStyle}"/>

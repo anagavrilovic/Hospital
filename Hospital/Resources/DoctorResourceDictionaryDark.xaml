@@ -49,7 +49,7 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background" Value="{StaticResource MainWhite}"/>
+                <Setter Property="Background" Value="{StaticResource MainGreenDark}"/>
                 <Setter Property="Foreground" Value="{StaticResource Background}"/>
             </Trigger>
         </Style.Triggers>
@@ -74,7 +74,7 @@
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Background" Value="{StaticResource SecondBackground}"/>
-                <Setter Property="Foreground" Value="{StaticResource MainWhite}"/>
+                <Setter Property="Foreground" Value="{StaticResource MainGreenDark}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
