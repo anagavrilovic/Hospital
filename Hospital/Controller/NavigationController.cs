@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.View.Doctor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,13 +10,13 @@ namespace Hospital.Controller
 {
     public abstract class NavigationController
     {
-        public abstract void NavigateToDoctorHomePage();
+        public abstract void NavigateToDoctorHomePage(DoctorMainPage doctorMainPage);
 
-        public abstract void NavigateToDoctorNotifications(string id,NavigationService nav);
+        public abstract void NavigateToDoctorNotifications(string id,NavigationController navigationController);
 
-        public abstract void NavigateToDoctorValidation();
+        public abstract void NavigateToDoctorValidation(Model.Doctor doctor);
 
-        public abstract void NavigateToDoctorAppointments();
+        public abstract void NavigateToDoctorAppointments(string id);
 
         public abstract void NavigateToDoctorEditMedics();
 

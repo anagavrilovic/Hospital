@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Controller;
+using Hospital.Model;
 using Hospital.Services;
 using Hospital.ViewModels.Doctor;
 using System;
@@ -25,10 +26,10 @@ namespace Hospital.View.Doctor
     /// </summary>
     public partial class NotificationsPage : Page
     {
-        public NotificationsPage(string doctorId,NavigationService navigationService)
+        public NotificationsPage(string doctorId,NavigationController navigationController)
         {
             InitializeComponent();
-            this.DataContext = new DoctorNotificationViewModel(doctorId, navigationService);
+            this.DataContext = new DoctorNotificationViewModel(doctorId, navigationController);
         }
 
     }

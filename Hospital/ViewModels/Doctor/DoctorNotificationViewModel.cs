@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using Hospital.Commands.DoctorCommands;
+using Hospital.Controller;
 using Hospital.Model;
 using Hospital.Services;
 using Hospital.View.Doctor;
@@ -26,7 +27,7 @@ namespace Hospital.ViewModels.Doctor
         private NotificationsUsersService notificationsUsersService = new NotificationsUsersService();
         private ObservableCollection<Notification> notifications = new ObservableCollection<Notification>();
         private Model.Doctor doctor = new Model.Doctor();
-
+        private NavigationController navigationController;
         private Notification selectedNotification;
 
         private BitmapImage deleteImage;
@@ -128,7 +129,7 @@ namespace Hospital.ViewModels.Doctor
                 return;
             }
 
-            var displayNotification = new DisplayNotification((Notification)selectedNotification);
+            var displayNotification = new DisplayNotification(selectedNotification, navigationController);
             displayNotification.Show();
         }
         private bool CanExecute_Command(object obj)
@@ -136,8 +137,9 @@ namespace Hospital.ViewModels.Doctor
             return true;
         }
 
-        public DoctorNotificationViewModel(string doctorId,NavigationService navigationService)
+        public DoctorNotificationViewModel(string doctorId, NavigationController navigationController)
         {
+            this.navigationController = navigationController;
             doctor = doctorService.GetDoctorById(doctorId);
             Notifications = new ObservableCollection<Notification>(notificationService.SetNotificationsProperty(doctor));
             SetCommands();
@@ -203,9 +205,9 @@ namespace Hospital.ViewModels.Doctor
                         "Potvrda", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
 
-                notificationsUsersService.DeleteNotificationsUsersByNotificationID(((Notification)SelectedNotification).Id);
-                notificationService.DeleteNotification((Notification)SelectedNotification);
-                Notifications.Remove((Notification)SelectedNotification);
+                notificationsUsersService.DeleteNotificationsUsersByNotificationID((SelectedNotification).Id);
+                notificationService.DeleteNotification(SelectedNotification);
+                Notifications.Remove(SelectedNotification);
             }
 
         }

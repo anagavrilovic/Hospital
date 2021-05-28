@@ -17,33 +17,34 @@ namespace Hospital.Controller
             navService = service;
         }
 
-        public override void NavigateToDoctorAppointments()
+        public override void NavigateToDoctorAppointments(string id)
         {
+            navService.Navigate(new DoctorAppointments(id));
         }
 
         public override void NavigateToDoctorEditMedics()
         {
-            throw new NotImplementedException();
+            navService.Navigate(new EditMedicinePage());
         }
 
-        public override void NavigateToDoctorHomePage()
+        public override void NavigateToDoctorHomePage(DoctorMainPage doctorMainPage)
         {
-            throw new NotImplementedException();
+            navService.Navigate(doctorMainPage);
         }
 
         public override void NavigateToDoctorHospitalizedPatients()
         {
-            throw new NotImplementedException();
+            navService.Navigate(new HospitalizedPatients());
         }
 
-        public override void NavigateToDoctorNotifications(string id,NavigationService nav)
+        public override void NavigateToDoctorNotifications(string id, NavigationController navigationController)
         {
-            navService.Navigate(new NotificationsPage(id,nav));
+            navService.Navigate(new NotificationsPage(id, navigationController));
         }
 
-        public override void NavigateToDoctorValidation()
+        public override void NavigateToDoctorValidation(Model.Doctor doctor)
         {
-            throw new NotImplementedException();
+            navService.Navigate(new MedicineValidity(doctor));
         }
     }
 }

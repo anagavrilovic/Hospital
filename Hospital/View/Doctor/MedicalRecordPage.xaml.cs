@@ -67,7 +67,7 @@ namespace Hospital.View.Doctor
         {
             ((DoctorMainWindow)Window.GetWindow(this).Owner).Show();
             Application.Current.MainWindow = ((DoctorMainWindow)Window.GetWindow(this).Owner);
-            ((DoctorMainWindow)Window.GetWindow(this).Owner).Main.Content = ((DoctorMainWindow)Window.GetWindow(this).Owner).frameMainPage;
+            //((DoctorMainWindow)Window.GetWindow(this).Owner).Main.Content = ((DoctorMainWindow)Window.GetWindow(this).Owner).frameMainPage;
             Window.GetWindow(this).Close();
             SaveExamination();
             DeleteAppointmentOfExamination();

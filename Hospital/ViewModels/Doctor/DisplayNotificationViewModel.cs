@@ -1,4 +1,5 @@
 ﻿using Hospital.Commands.DoctorCommands;
+using Hospital.Controller;
 using Hospital.Model;
 using System;
 using System.Collections.Generic;
@@ -20,9 +21,11 @@ namespace Hospital.ViewModels.Doctor
                 backCommand = value;
             }
         }
+        NavigationController navigationController;
         public Notification Notification { get; set; }
-        public DisplayNotificationViewModel(Notification notification)
+        public DisplayNotificationViewModel(Notification notification, NavigationController navigationController)
         {
+            this.navigationController = navigationController;
             this.BackCommand = new RelayCommand(Execute_Back, CanExecute_Command);
             this.Notification = notification;
         }
