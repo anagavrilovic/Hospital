@@ -88,6 +88,7 @@
     <Compile Include="Model\Country.cs" />
     <Compile Include="DTO\DatesInWeeklyCalendar.cs" />
     <Compile Include="Model\DoctorSpecialty.cs" />
+    <Compile Include="Model\DoctorsShift.cs" />
     <Compile Include="Model\DoctorStorage.cs" />
     <Compile Include="Model\HospitalTreatment.cs" />
     <Compile Include="Model\HospitalTreatmentStorage.cs" />
@@ -119,6 +120,8 @@
     <Compile Include="Model\MedicineStorage.cs" />
     <Compile Include="Model\RegistratedUser.cs" />
     <Compile Include="Model\RegistratedUserStorage.cs" />
+    <Compile Include="Model\ScheduledShift.cs" />
+    <Compile Include="Model\Shift.cs" />
     <Compile Include="Model\TransferDynamicInventory.cs" />
     <Compile Include="Model\TransferInventory.cs" />
     <Compile Include="Model\TransferInventoryStorage.cs" />
@@ -402,6 +405,9 @@
     <Compile Include="View\Secretary\IzmenaObavestenja.xaml.cs">
       <DependentUpon>IzmenaObavestenja.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Secretary\IzmenaSmene.xaml.cs">
+      <DependentUpon>IzmenaSmene.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Secretary\Kalendar.xaml.cs">
       <DependentUpon>Kalendar.xaml</DependentUpon>
     </Compile>
@@ -457,8 +463,14 @@
     <Compile Include="View\Secretary\PrikazPacijenata.xaml.cs">
       <DependentUpon>PrikazPacijenata.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Secretary\RadnoVreme.xaml.cs">
+      <DependentUpon>RadnoVreme.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Secretary\SecretaryWindow.xaml.cs">
       <DependentUpon>SecretaryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\SlobodniDani.xaml.cs">
+      <DependentUpon>SlobodniDani.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\ZakazivanjeTermina.xaml.cs">
       <DependentUpon>ZakazivanjeTermina.xaml</DependentUpon>
@@ -755,6 +767,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Secretary\IzmenaSmene.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Secretary\Kalendar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -827,7 +843,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Secretary\RadnoVreme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Secretary\SecretaryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\SlobodniDani.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1098,6 +1122,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\DoctorIcons\cancel_pink.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\Secretary\111.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\Secretary\image.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
