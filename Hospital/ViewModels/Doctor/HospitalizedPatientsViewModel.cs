@@ -90,7 +90,10 @@ namespace Hospital.ViewModels.Doctor
         public ObservableCollection<HospitalTreatment> HospitalTreatments
         {
             get { return hospitalTreatments; }
-            set { hospitalTreatments = value; }
+            set {
+                hospitalTreatments = value;
+                OnPropertyChanged("HospitalTreatments");
+                }
         }
         public HospitalTreatment HospitalTreatment
         {
@@ -100,11 +103,11 @@ namespace Hospital.ViewModels.Doctor
             }
             set
             {
-                MessageBox.Show("aaa");
-                if (value != null)
+                if (value != hospitalTreatment)
                 {
                     hospitalTreatment = value;
                     OnPropertyChanged("HospitalTreatment");
+                    Execute_SelectionChanged();
                 }
             }
         }
@@ -115,10 +118,12 @@ namespace Hospital.ViewModels.Doctor
             this.EditCommand = new RelayCommand(Execute_Edit, CanExecute_Command);
             panelVisibility = Visibility.Collapsed;
             saveButtonEnable = false;
-            EditButtonEnable = false;
-            startDate = DateTime.Today;
+            EditButtonEnable = true;
+            CalendarPanel = Visibility.Collapsed;
+            StartDate = DateTime.Today;
             hospitalTreatments = new ObservableCollection<HospitalTreatment>(hospitalTreatmentService.SetTreatments());
         }
+
         private void Execute_SelectionChanged()
         {
             if (CalendarPanel.Equals(Visibility.Collapsed))
@@ -138,17 +143,17 @@ namespace Hospital.ViewModels.Doctor
             if (HospitalTreatment.EndOfTreatment != null)
             {
                 CalendarPanel = Visibility.Collapsed;
-                saveButtonEnable = false;
+                SaveButtonEnable = false;
                 EditButtonEnable = true;
-                this.OnPropertyChanged("HospitalTreatment");
+                OnPropertyChanged("HospitalTreatment");
                 SaveHospitalizedTreatment();
             }
         }
         private void Execute_Edit(object sender)
         {
             CalendarPanel = Visibility.Visible;
-            saveButtonEnable = true;
-            editButtonEnable = false;
+            SaveButtonEnable = true;
+            EditButtonEnable = false;
         }
         private bool CanExecute_Command(object obj)
         {
