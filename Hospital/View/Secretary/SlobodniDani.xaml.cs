@@ -24,5 +24,15 @@ namespace Hospital.View.Secretary
         {
             InitializeComponent();
         }
+
+        private void PotvrdiClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OdustaniClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

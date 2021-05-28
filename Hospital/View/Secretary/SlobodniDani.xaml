@@ -59,8 +59,8 @@
                 <DatePicker Grid.Row="3" Grid.Column="1" Height="30" Margin="10,0,70,0" Style="{StaticResource cbTB}" Padding="0,5,0,0"/>
 
                 <!-- Buttons -->
-                <Button Grid.Row="5" Grid.Column="0" Content="Potvrdi" Style="{StaticResource ButtonPotvrdiStyle}" Click="PotvrdiClick" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,50,-20,30" />
-                <Button Grid.Row="5" Grid.Column="1" Content="Odustani"  Style="{StaticResource ButtonOdustaniStyle}" Click="OdustaniClick" Margin="0,50,150,30" HorizontalAlignment="Right"/>
+                <Button Grid.Row="5" Grid.Column="0" Content="Potvrdi" Style="{StaticResource ButtonPotvrdiStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,50,-20,30" Click="PotvrdiClick" />
+                <Button Grid.Row="5" Grid.Column="1" Content="Odustani"  Style="{StaticResource ButtonOdustaniStyle}" Margin="0,50,150,30" HorizontalAlignment="Right" Click="OdustaniClick"/>
 
             </Grid>
         </Border>
