@@ -84,7 +84,6 @@ namespace Hospital.View.Doctor
             }
 
         }
-        public DoctorAppointments parentWindow { get; set; }
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
             if (PropertyChanged != null)
@@ -92,7 +91,7 @@ namespace Hospital.View.Doctor
                 this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
             }
         }
-        public NewAppointment(DoctorAppointments parentWindow, string doctorId)
+        public NewAppointment(string doctorId)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -100,7 +99,6 @@ namespace Hospital.View.Doctor
             DateAndTimeComponents();
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 1 / 2);
-            this.parentWindow = parentWindow;
         }
 
         private void DateAndTimeComponents()
@@ -215,8 +213,6 @@ namespace Hospital.View.Doctor
                     list.Add(a);
                 }
             }
-            parentWindow.dataGridAppointments.ItemsSource = list;
-            parentWindow.dataGridAppointments.Items.Refresh();
         }
         private void SetRoomAndRoomType()
         {

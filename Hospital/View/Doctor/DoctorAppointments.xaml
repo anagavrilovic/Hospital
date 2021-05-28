@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
       xmlns:ns="clr-namespace:Hospital" 
-        xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        mc:Ignorable="d"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib" xmlns:i1="http://schemas.microsoft.com/xaml/behaviors"
+      mc:Ignorable="d"
         Title="KalendarTermini" Background="{DynamicResource Background}">
     <Page.Resources>
     </Page.Resources>
@@ -26,14 +26,14 @@
                     </TextBlock>
                 </Label.Content>
             </Label>
-                <Button x:Name="addAppointment" Margin="15,0,0,0" Style="{DynamicResource NoChromeButton}" Click="addAppointment_Click"> 
+                <Button x:Name="addAppointment" Margin="15,0,0,0" Style="{DynamicResource NoChromeButton}" Command="{Binding NewCommand}"> 
                     <StackPanel Orientation="Vertical">
                         <Image Source="../../Icon/DoctorIcons/addDark.png" Width="30"/>
                         <TextBlock Text="{ns:Loc newButton}" Style="{DynamicResource TextBlockStyle}"/>
                     </StackPanel>
                 </Button>
-                <Button Margin="15,0,0,0" Style="{DynamicResource NoChromeButton}"
-                        Click="Delete_Click">
+                <Button Margin="15,0,0,0" Style="{DynamicResource NoChromeButton}" 
+                       Command="{Binding DeleteCommand}">
                     <StackPanel Orientation="Vertical">
                         <Image Source="../../Icon/DoctorIcons/minus.png" Width="30"/>
                         <TextBlock Text="{ns:Loc deleteButton}" Style="{DynamicResource TextBlockStyle}"/>
@@ -42,7 +42,7 @@
             </StackPanel>
         </DockPanel>
         <DataGrid x:Name="dataGridAppointments" ItemsSource="{Binding Path=Appointments}" Style="{DynamicResource PacijentiDataGrid}"
-               SelectionMode="Single" IsReadOnly="True" Margin="30,30,30,50" AutoGenerateColumns="False" MouseDoubleClick="dataGridAppointments_MouseDoubleClick">
+               SelectionMode="Single" IsReadOnly="True" Margin="30,30,30,50" AutoGenerateColumns="False"  SelectedValue="{Binding SelectedAppointment}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{ns:Loc namePatientLabel}" Width="0.25*" Binding="{Binding PatientsRecord.Patient.FirstName}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
                 <DataGridTextColumn Header="{ns:Loc surnamePatientLabel}" Width="0.25*" Binding="{Binding PatientsRecord.Patient.LastName}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
@@ -51,6 +51,11 @@
                 <DataGridTextColumn Header="{ns:Loc appointmentTypeLabel}" Width="0.25*" Binding="{Binding Type}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
                 <DataGridTextColumn Header="{ns:Loc roomLabel}" Width="0.25*" Binding="{Binding Room.Name}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
             </DataGrid.Columns>
+            <i1:Interaction.Triggers>
+                <i1:EventTrigger EventName="MouseDoubleClick">
+                    <i1:InvokeCommandAction Command="{Binding DoubleClickCommand}"/>
+                </i1:EventTrigger>
+            </i1:Interaction.Triggers>
         </DataGrid>
     </DockPanel>
 </Page>
