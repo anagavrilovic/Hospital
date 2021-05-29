@@ -13,6 +13,8 @@ namespace Hospital.Services
     public class TransferInventoryService
     {
         private IStaticInventoryRepository staticInventoryRepository;
+        public TransferInventory Transfer { get; set; }
+
         public TransferInventoryService(TransferInventory transfer)
         {
             staticInventoryRepository = new StaticInventoryFileRepository();
@@ -94,7 +96,5 @@ namespace Hospital.Services
             itemInFirstRoom.Quantity -= Transfer.Quantity;
             staticInventoryRepository.EditItem(itemInFirstRoom);
         }
-
-        public TransferInventory Transfer { get; set; }
     }
 }

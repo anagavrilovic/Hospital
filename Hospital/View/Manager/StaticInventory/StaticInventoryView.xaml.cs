@@ -1,4 +1,6 @@
 ﻿using Hospital.Model;
+using Hospital.Repositories;
+using Hospital.Repositories.Interfaces;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -53,8 +55,8 @@ namespace Hospital.View
         private void CheckScheduledTransfersStatus()
         {
             TransferInventoryService service;
-            TransferInventoryStorage transferStorage = new TransferInventoryStorage();
-            foreach (TransferInventory ti in transferStorage.GetAll())
+            ITransferInventoryRepository transferRepository = new TransferInventoryFileRepository();
+            foreach (TransferInventory ti in transferRepository.GetAll())
             {
                 if (ti.TransferDate < DateTime.Now)
                 {

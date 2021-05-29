@@ -71,7 +71,7 @@ namespace Hospital.Services
         private int GetTotalQuantityForAllTransfersOfItem()
         {
             int totalQuantityForTransfer = 0;
-            foreach (TransferInventory ti in _transferInventoryStorage.GetAll())
+            foreach (TransferInventory ti in transferInventoryRepository.GetAll())
             {
                 if (ti.ItemID.Equals(TransferRequest.ItemID) && ti.FirstRoomID.Equals(TransferRequest.FirstRoomID))
                     totalQuantityForTransfer += ti.Quantity;
@@ -83,7 +83,7 @@ namespace Hospital.Services
         {
             TransferInventory firstReservedTransfer = new TransferInventory();
 
-            foreach (TransferInventory ti in _transferInventoryStorage.GetAll())
+            foreach (TransferInventory ti in transferInventoryRepository.GetAll())
             {
                 if (ti.ItemID.Equals(TransferRequest.ItemID) && ti.FirstRoomID.Equals(TransferRequest.FirstRoomID))
                 {
@@ -128,14 +128,14 @@ namespace Hospital.Services
             if (_firstReservedTransfer.Quantity <= TransferRequest.Quantity)
             {
                 _firstReservedTransfer.FirstRoomID = TransferRequest.DestinationRoomID;
-                _transferInventoryStorage.EditTransfer(_firstReservedTransfer);
+                transferInventoryRepository.EditTransfer(_firstReservedTransfer);
             }
             else
             {
                 int newQuantity = _firstReservedTransfer.Quantity - TransferRequest.Quantity;
                 _firstReservedTransfer.FirstRoomID = TransferRequest.DestinationRoomID;
                 _firstReservedTransfer.Quantity = TransferRequest.Quantity;
-                _transferInventoryStorage.EditTransfer(_firstReservedTransfer);
+                transferInventoryRepository.EditTransfer(_firstReservedTransfer);
 
                 InventoryStorage storage = new InventoryStorage();
                 Inventory ItemForTransfer = storage.GetOneByRoom(TransferRequest.ItemID, TransferRequest.FirstRoomID);
@@ -147,7 +147,7 @@ namespace Hospital.Services
         private void SaveTransfer(TransferInventory transfer)
         {
             transfer.TransferID = GenerateTransferID();
-            _transferInventoryStorage.Save(transfer);
+            transferInventoryRepository.Save(transfer);
             TransferInventoryService service = new TransferInventoryService(transfer);
             service.ScheduleTransfer();
         }
@@ -168,6 +168,5 @@ namespace Hospital.Services
 
         public TransferInventory TransferRequest { get; set; }
         private TransferInventory _firstReservedTransfer = new TransferInventory();
-        private TransferInventoryStorage _transferInventoryStorage = new TransferInventoryStorage();
     }
 }
