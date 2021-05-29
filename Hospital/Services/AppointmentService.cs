@@ -84,15 +84,16 @@ namespace Hospital.Services
             return true;
         }
 
-        public void ScheduleAppointment(Appointment newAppointment)
+        public string ScheduleAppointment(Appointment newAppointment)
         {
             if (!IsDoctorAvaliableForAppointment(newAppointment))
-                return;
+                return "Doktor je već zauzet u ovom terminu. Promenite trajanje ili odaberite drugi termin!";
 
             if (!IsPatientAvaliableForAppointment(newAppointment))
-                return;
+                return "Ovaj pacijent već ima zakazan pregled/operaciju u ovom terminu!";
 
             appointmentRepository.Save(newAppointment);
+            return "";
         }
 
         public void ScheduleUrgentAppointment(Appointment newUrgentAppointment)

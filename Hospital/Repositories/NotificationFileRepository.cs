@@ -49,8 +49,7 @@ namespace Hospital.Repositories
         public List<Notification> GetAllNotificationsSortedDescending()
         {
             List<Notification> allNotifications = GetAll();
-            List<Notification> sortedNotifications = allNotifications.OrderByDescending(n => n.Date).ToList();
-            return new List<Notification>(sortedNotifications);
+            return allNotifications.OrderByDescending(n => n.Date).ToList();
         }
 
         public Notification GetByID(string notificationId)

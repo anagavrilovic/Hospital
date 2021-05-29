@@ -79,6 +79,8 @@
     <Compile Include="Controller\NavigationController.cs" />
     <Compile Include="Controller\WpfNavigationController.cs" />
     <Compile Include="DoktorConverters\ListToStringConverter.cs" />
+    <Compile Include="DTO\DatesForShiftsDTO.cs" />
+    <Compile Include="DTO\DoctorsShiftsDTO.cs" />
     <Compile Include="DTO\NotificationRecipientsDTO.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Allergen.cs" />
@@ -86,7 +88,7 @@
     <Compile Include="Model\BoolToStringConverter.cs" />
     <Compile Include="Model\City.cs" />
     <Compile Include="Model\Country.cs" />
-    <Compile Include="DTO\DatesInWeeklyCalendar.cs" />
+    <Compile Include="DTO\DatesInWeeklyCalendarDTO.cs" />
     <Compile Include="Model\DoctorSpecialty.cs" />
     <Compile Include="Model\DoctorsShift.cs" />
     <Compile Include="Model\DoctorStorage.cs" />
@@ -115,7 +117,7 @@
     <Compile Include="Model\RoomStatus.cs" />
     <Compile Include="Model\DynamicInventory.cs" />
     <Compile Include="Model\DynamicInventoryStorage.cs" />
-    <Compile Include="DTO\WeeklyCalendarRow.cs" />
+    <Compile Include="DTO\WeeklyCalendarRowDTO.cs" />
     <Compile Include="Model\Medicine.cs" />
     <Compile Include="Model\MedicineStorage.cs" />
     <Compile Include="Model\RegistratedUser.cs" />

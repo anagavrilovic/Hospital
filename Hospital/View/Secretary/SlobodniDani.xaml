@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Hospital.View.Secretary"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1065"
       Background="{StaticResource BackgroundGray}"
@@ -54,9 +55,12 @@
                 <TextBlock Grid.Row="2" Text="Početak: " Style="{StaticResource TextBlockStyle}" FontSize="18" VerticalAlignment="Center" Margin="70,0,0,0"/>
                 <TextBlock Grid.Row="3" Text="Kraj: " Style="{StaticResource TextBlockStyle}" FontSize="18" VerticalAlignment="Center" Margin="70,0,0,0"/>
 
-                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="DoctorComboBox" Height="30" Margin="10,0,70,0" Style="{StaticResource cbTB}"/>
-                <DatePicker Grid.Row="2" Grid.Column="1" Height="30" Margin="10,0,70,0" Style="{StaticResource cbTB}" Padding="0,5,0,0"/>
-                <DatePicker Grid.Row="3" Grid.Column="1" Height="30" Margin="10,0,70,0" Style="{StaticResource cbTB}" Padding="0,5,0,0"/>
+                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="DoctorComboBox" Height="30" Margin="10,0,70,0" Style="{StaticResource cbTB}"
+                          ItemsSource="{Binding AllDoctors}" SelectedItem="{Binding SelectedDoctor}"/>
+                <DatePicker Grid.Row="2" Grid.Column="1" Height="30" Margin="10,0,70,0" Style="{StaticResource cbTB}" Padding="0,5,0,0"
+                            SelectedDate="{Binding StartDate}" DisplayDateStart="{x:Static sys:DateTime.Today}"/>
+                <DatePicker Grid.Row="3" Grid.Column="1" Height="30" Margin="10,0,70,0" Style="{StaticResource cbTB}" Padding="0,5,0,0"
+                            SelectedDate="{Binding EndDate}" DisplayDateStart="{x:Static sys:DateTime.Today}"/>
 
                 <!-- Buttons -->
                 <Button Grid.Row="5" Grid.Column="0" Content="Potvrdi" Style="{StaticResource ButtonPotvrdiStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,50,-20,30" Click="PotvrdiClick" />

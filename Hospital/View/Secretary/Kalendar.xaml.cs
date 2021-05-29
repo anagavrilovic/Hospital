@@ -26,7 +26,7 @@ namespace Hospital.View
     {
         public const int numberOfTimeSlotsPerDay = 48;
 
-        public ObservableCollection<WeeklyCalendarRow> WeeklyCalendar { get; set; }
+        public ObservableCollection<WeeklyCalendarRowDTO> WeeklyCalendar { get; set; }
 
         public ObservableCollection<Model.Doctor> AllDoctors { get; set; }
         public DateTime ChosenDate { get; set; }
@@ -36,7 +36,7 @@ namespace Hospital.View
         public MedicalRecord SelectedPatientForNewAppointment { get; set; }
         public Model.Doctor SelectedDoctorForNewAppointment { get; set; }
 
-        public DatesInWeeklyCalendar DatesInWeeklyCalendar { get; set; }
+        public DatesInWeeklyCalendarDTO DatesInWeeklyCalendar { get; set; }
 
         public AppointmentService AppointmentService { get; set; }
         public DoctorService DoctorService { get; set; }
@@ -56,9 +56,9 @@ namespace Hospital.View
 
         private void InitializeAllProperties()
         {
-            this.WeeklyCalendar = new ObservableCollection<WeeklyCalendarRow>();
+            this.WeeklyCalendar = new ObservableCollection<WeeklyCalendarRowDTO>();
             this.ChosenDate = DateTime.Today;
-            this.DatesInWeeklyCalendar = new DatesInWeeklyCalendar();
+            this.DatesInWeeklyCalendar = new DatesInWeeklyCalendarDTO();
             this.SelectedPatientForNewAppointment = new MedicalRecord();
             this.AppointmentService = new AppointmentService();
             this.DoctorService = new DoctorService();
@@ -75,7 +75,7 @@ namespace Hospital.View
             SetFirstAndLastDateOfWeekInWhichChosenDateIs();
 
             int days = 0;
-            PropertyInfo[] properties = typeof(DatesInWeeklyCalendar).GetProperties();
+            PropertyInfo[] properties = typeof(DatesInWeeklyCalendarDTO).GetProperties();
             foreach(PropertyInfo property in properties)
             {
                 property.SetValue(DatesInWeeklyCalendar, WeekBegin.AddDays(days).ToString("dd.MM."));
@@ -120,7 +120,7 @@ namespace Hospital.View
             DateTime timeForRow = GetStartTimeForWeeklyCalendar();
             for (int i = 0; i < numberOfTimeSlotsPerDay; i++)
             {
-                WeeklyCalendarRow newRow = new WeeklyCalendarRow();
+                WeeklyCalendarRowDTO newRow = new WeeklyCalendarRowDTO();
                 newRow.TimeInRow = timeForRow.ToString("HH:mm", CultureInfo.InvariantCulture);
                 WeeklyCalendar.Add(newRow);
                 
@@ -339,7 +339,7 @@ namespace Hospital.View
         private DateTime SetDateTimeForNewAppointment()
         {
             int dayOfWeek = KalendarDataGrid.SelectedCells[0].Column.DisplayIndex;
-            string time = ((WeeklyCalendarRow)KalendarDataGrid.SelectedCells[0].Item).TimeInRow;
+            string time = ((WeeklyCalendarRowDTO)KalendarDataGrid.SelectedCells[0].Item).TimeInRow;
 
             DateTime date = WeekBegin.AddDays(dayOfWeek - 1);
 
@@ -356,7 +356,7 @@ namespace Hospital.View
             if ((bool)confirmBox.ShowDialog())
             {
                 int columnIndex = KalendarDataGrid.SelectedCells[0].Column.DisplayIndex;
-                var time = ((WeeklyCalendarRow)KalendarDataGrid.SelectedCells[0].Item).TimeInRow;
+                var time = ((WeeklyCalendarRowDTO)KalendarDataGrid.SelectedCells[0].Item).TimeInRow;
 
                 double numberOfCells;
 

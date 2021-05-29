@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Hospital.View.Secretary"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1065"
       Background="{StaticResource BackgroundGray}"
@@ -53,20 +54,33 @@
                 <TextBlock Grid.Row="2" Text="Stara smena: " Style="{StaticResource TextBlockStyle}" FontSize="18" VerticalAlignment="Center" Margin="70,0,0,0"/>
                 <TextBlock Grid.Row="3" Text="Nova smena: " Style="{StaticResource TextBlockStyle}" FontSize="18" VerticalAlignment="Center" Margin="70,0,0,0"/>
 
-                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="DoctorComboBox" Height="30" Margin="10,0,70,0" Style="{StaticResource cbTB}"/>
-                <DatePicker Grid.Row="1" Grid.Column="1" Height="30" Margin="10,0,70,0" Style="{StaticResource cbTB}" Padding="0,5,0,0"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Height="30" Margin="10,0,70,0" Style="{StaticResource TextBoxStyle}"/>
-                <ComboBox Grid.Row="3" Grid.Column="1" x:Name="ShiftComboBox" Height="30" Margin="10,0,70,0" Style="{StaticResource cbTB}"/>
+                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="DoctorComboBox" Height="30" Margin="10,0,70,0" Style="{StaticResource cbTB}"
+                          ItemsSource="{Binding AllDoctors}" SelectedItem="{Binding SelectedDoctor}" FontSize="15" Padding="5,5,0,0"/>
+                
+                <DatePicker Grid.Row="1" Grid.Column="1" Height="30" Margin="10,0,70,0" Style="{StaticResource cbTB}" Padding="5,5,0,0" SelectedDateChanged="DateChanged"
+                            SelectedDate="{Binding NewScheduledShift.Date, Mode=OneWayToSource}" x:Name="DatePickerDate" FontSize="15" DisplayDateStart="{x:Static sys:DateTime.Today}"
+                            Validation.ErrorTemplate="{x:Null}"/>
+
+                <TextBox Grid.Row="2" Grid.Column="1" Height="30" Margin="10,0,70,0" Style="{StaticResource TextBoxStyle}"  FontSize="15" Padding="5,5,0,0"
+                         IsEnabled="False" Text="{Binding CurrentShift, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" x:Name="OldShiftText"/>
+                
+                <ComboBox Grid.Row="3" Grid.Column="1" x:Name="ShiftComboBox" Height="30" Margin="10,0,70,0" Style="{StaticResource cbTB}" 
+                          SelectedIndex="{Binding NewScheduledShift.Shift, Mode=OneWayToSource}" FontSize="15" Padding="5,5,0,0">
+                    <ComboBoxItem Content="P (pauza)"/>
+                    <ComboBoxItem Content="I (prva)"/>
+                    <ComboBoxItem Content="II (druga)"/>
+                    <ComboBoxItem Content="III (treća)"/>
+                </ComboBox>
 
 
                 <CheckBox Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource CheckBoxStyle}" FontSize="17" VerticalContentAlignment="Center"
-                          Margin="70,20,0,30" VerticalAlignment="Center" BorderBrush="{StaticResource MediumGray}">
-                    <TextBlock Text="Izmeni smenu samo za odabrani datum" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                          Margin="70,20,0,30" VerticalAlignment="Center" BorderBrush="{StaticResource MediumGray}" IsChecked="{Binding NewScheduledShift.RollShifts}">
+                    <TextBlock Text="Trajno izmeni smene" VerticalAlignment="Center" Margin="10,0,0,0"/>
                 </CheckBox>
 
                 <!-- Buttons -->
-                <Button Grid.Row="5" Grid.Column="0" Content="Potvrdi" Style="{StaticResource ButtonPotvrdiStyle}" Click="PotvrdiClick" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,50,-20,30" />
-                <Button Grid.Row="5" Grid.Column="1" Content="Odustani"  Style="{StaticResource ButtonOdustaniStyle}" Click="OdustaniClick" Margin="0,50,150,30" HorizontalAlignment="Right"/>
+                <Button Grid.Row="5" Grid.Column="0" Content="Potvrdi" Style="{StaticResource ButtonPotvrdiStyle}" Click="ButtonYes" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,50,-20,30" />
+                <Button Grid.Row="5" Grid.Column="1" Content="Odustani"  Style="{StaticResource ButtonOdustaniStyle}" Click="ButtonCancel" Margin="0,50,150,30" HorizontalAlignment="Right"/>
 
             </Grid>
         </Border>
