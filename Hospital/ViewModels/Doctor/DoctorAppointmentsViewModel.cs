@@ -1,4 +1,5 @@
 ﻿using Hospital.Commands.DoctorCommands;
+using Hospital.Controller;
 using Hospital.Services;
 using Hospital.View.Doctor;
 using System;
@@ -16,6 +17,7 @@ namespace Hospital.ViewModels.Doctor
         private AppointmentService AppointmentService = new AppointmentService();
         private MedicalRecordService medicalRecordService = new MedicalRecordService();
         private DoctorService doctorService = new DoctorService();
+        NavigationController navigationController;
         private Model.Doctor doctor = new Model.Doctor();
         public Model.Doctor Doctor
         {
@@ -73,8 +75,9 @@ namespace Hospital.ViewModels.Doctor
                 OnPropertyChanged("Appointments");
             }
         }
-        public DoctorAppointmentsViewModel(string IDnumber)
+        public DoctorAppointmentsViewModel(string IDnumber, NavigationController navigationController)
         {
+            this.navigationController = navigationController;
             DoubleClickCommand = new RelayCommand(dataGridAppointments_MouseDoubleClick, CanExecute_Command);
             NewCommand = new RelayCommand(Execute_AddAppointment, CanExecute_Command);
             DeleteCommand = new RelayCommand(Execute_Delete, CanExecute_Command);
@@ -114,7 +117,7 @@ namespace Hospital.ViewModels.Doctor
 
         private void Execute_AddAppointment(object sender)
         {
-            NewAppointment newAppointment = new NewAppointment(doctor.PersonalID);
+            NewAppointment newAppointment = new NewAppointment(doctor.PersonalID,navigationController);
             newAppointment.Show();
         }
     }

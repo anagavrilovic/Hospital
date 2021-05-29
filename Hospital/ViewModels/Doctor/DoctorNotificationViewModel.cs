@@ -157,7 +157,7 @@ namespace Hospital.ViewModels.Doctor
         private void SetIcons()
         {
             var app = (App)System.Windows.Application.Current;
-            if (app.DarkTheme)
+            if (!app.DarkTheme)
             {
                 deleteImage = new BitmapImage(new Uri("pack://application:,,,/Icon/DoctorIcons/delete_pink.png", UriKind.Absolute));
                 infoImage = new BitmapImage(new Uri("pack://application:,,,/Icon/DoctorIcons/info_pink.png", UriKind.Absolute));

@@ -80,7 +80,7 @@ namespace Hospital.ViewModels.Doctor
         }
         private void Execute_Appointments(object sender)
         {
-            navigationController.NavigateToDoctorAppointments(doctorId);
+            navigationController.NavigateToDoctorAppointments(doctorId,navigationController);
 
         }
 

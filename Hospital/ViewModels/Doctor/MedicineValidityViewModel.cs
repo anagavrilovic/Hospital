@@ -108,7 +108,7 @@ namespace Hospital.ViewModels.Doctor
         private void SetIcons()
         {
             var app = (App)Application.Current;
-            if (app.DarkTheme)
+            if (!app.DarkTheme)
             {
                 OkImage = new BitmapImage(new Uri("pack://application:,,,/Icon/DoctorIcons/ok_pink.png", UriKind.Absolute));
                 CancelImage = new BitmapImage(new Uri("pack://application:,,,/Icon/DoctorIcons/cancel_pink.png", UriKind.Absolute));

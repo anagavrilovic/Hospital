@@ -17,9 +17,9 @@ namespace Hospital.Controller
             navService = service;
         }
 
-        public override void NavigateToDoctorAppointments(string id)
+        public override void NavigateToDoctorAppointments(string id, NavigationController navigationController)
         {
-            navService.Navigate(new DoctorAppointments(id));
+            navService.Navigate(new DoctorAppointments(id, navigationController));
         }
 
         public override void NavigateToDoctorEditMedics()

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Hospital.View.Doctor"
+        xmlns:local="clr-namespace:Hospital.View.Doctor" xmlns:i1="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="PacijentListBox" Height="450" Width="450" WindowStartupLocation="CenterOwner"
         Background="{DynamicResource Background}">
@@ -16,17 +16,25 @@
                             Style="{StaticResource TextBoxBorder}">
                     <StackPanel Margin="5" Orientation="Horizontal">
                         <Image Source="../../Icon/Secretary/search.png" Height="13"/>
-                        <TextBox  x:Name="pretrazi" Width="150" Height="20" BorderThickness="0" Style="{DynamicResource SearchBox}" Margin="10,0,0,0" />
+                        <TextBox  x:Name="pretrazi" Width="150" Height="20" BorderThickness="0" Text="{Binding PatientTextFilter}" 
+                                  Style="{DynamicResource SearchBox}" Margin="10,0,0,0" />
                     </StackPanel>
                 </Border>
-                <Button Name="image" Margin="5,20,20,0" Width="60" Height="30" Click="filterPatients" Style="{DynamicResource ImageButtons}">
+                <Button Name="image" Margin="5,20,20,0" Width="60" Height="30" Command="{Binding FilterCommand}"  Style="{DynamicResource ImageButtons}">
                     <Button.Content>
                         <Image Source="../../Icon/DoctorIcons/search.png" />
                     </Button.Content>
                 </Button>
             </WrapPanel>
         </DockPanel>
-        <ListBox Name="listBox" Margin="40,40,40,40" MouseDoubleClick="listBox_MouseDoubleClick" Style="{DynamicResource ListBoxStyle}"></ListBox>
+        <ListBox Name="listBox" Margin="40,40,40,40" 
+                 Style="{DynamicResource ListBoxStyle}" ItemsSource="{Binding Patients}" SelectedValue="{Binding SelectedPatient}">
+            <i1:Interaction.Triggers>
+                <i1:EventTrigger EventName="MouseDoubleClick">
+                    <i1:InvokeCommandAction Command="{Binding DoubleClickCommand}"/>
+                </i1:EventTrigger>
+            </i1:Interaction.Triggers>
+        </ListBox>
 
     </DockPanel>
 </Window>

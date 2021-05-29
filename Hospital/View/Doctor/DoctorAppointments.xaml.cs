@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Controller;
+using Hospital.Model;
 using Hospital.Services;
 using Hospital.View.Doctor;
 using Hospital.ViewModels.Doctor;
@@ -29,10 +30,10 @@ namespace Hospital.View.Doctor
     {
        
 
-        public DoctorAppointments(string IDnumber)
+        public DoctorAppointments(string IDnumber,NavigationController navigationController)
         {
             InitializeComponent();
-            this.DataContext = new DoctorAppointmentsViewModel(IDnumber);
+            this.DataContext = new DoctorAppointmentsViewModel(IDnumber, navigationController);
         }
     }
 }

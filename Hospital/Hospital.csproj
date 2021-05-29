@@ -195,6 +195,7 @@
     <Compile Include="ValidationRulesManager\StringToDouble.cs" />
     <Compile Include="ValidationRulesManager\StringToInteger.cs" />
     <Compile Include="ValidationRulesManager\Time.cs" />
+    <Compile Include="ViewModels\Doctor\AddPatientViewModel.cs" />
     <Compile Include="ViewModels\Doctor\DiagnosisViewModel.cs" />
     <Compile Include="ViewModels\Doctor\DisplayNotificationViewModel.cs" />
     <Compile Include="ViewModels\Doctor\DoctorAppointmentsViewModel.cs" />
@@ -204,6 +205,7 @@
     <Compile Include="ViewModels\Doctor\EditMedicineViewModel.cs" />
     <Compile Include="ViewModels\Doctor\HospitalizedPatientsViewModel.cs" />
     <Compile Include="ViewModels\Doctor\MedicineValidityViewModel.cs" />
+    <Compile Include="ViewModels\Doctor\NewAppointmentViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientAppointmentsViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientPassedAppointmentsViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientSettingsPageViewModel.cs" />

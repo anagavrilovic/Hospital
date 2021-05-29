@@ -363,6 +363,12 @@ BorderThickness="3" CornerRadius="10" BorderBrush="{StaticResource MainPink}">
         <Setter Property="FontSize" Value="14"/>
     </Style>
 
+    <Style x:Key="ButtonTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource Background}"/>
+        <Setter Property="FontFamily" Value="Yu Gothic"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+
     <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
         <Setter Property="Foreground" Value="{StaticResource MainWhite}"/>
         <Setter Property="FontFamily" Value="Yu Gothic"/>
