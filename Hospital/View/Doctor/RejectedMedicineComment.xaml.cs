@@ -26,12 +26,12 @@ namespace Hospital.View.Doctor
         public RejectedMedicineComment(MedicineRevision medicineRevision)
         {
             InitializeComponent();
-            RejectedMedicineViewModel viewModel = new RejectedMedicineViewModel(medicineRevision);
+           /* RejectedMedicineViewModel viewModel = new RejectedMedicineViewModel(medicineRevision);
             this.DataContext = viewModel;
             if (viewModel.CloseAction == null)
                 viewModel.CloseAction = new Action(this.Close);
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
-            this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 1 / 2);
+            this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 1 / 2);*/
 
         }
     }
