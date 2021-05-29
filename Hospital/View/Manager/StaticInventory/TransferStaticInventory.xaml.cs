@@ -20,23 +20,12 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    public partial class TransferStaticInventory : Page, INotifyPropertyChanged
+    public partial class TransferStaticInventory : Page
     {
         public Inventory ItemForTransfer { get; set; }
         public TransferInventory TransferRequest { get; set; }
         private SchedulingTransferInventoryService _schedulingTransferService;
-
-        private ObservableCollection<string> _allRoomsIDs;
-        public ObservableCollection<string> AllRoomsIDs
-        {
-            get => _allRoomsIDs;
-            set
-            {
-                _allRoomsIDs = value;
-                OnPropertyChanged("AllRoomsIDs");
-            }
-        }
-
+     
         public TransferStaticInventory(Inventory inv)
         {
             InitializeComponent();
@@ -44,7 +33,7 @@ namespace Hospital.View
             ItemForTransfer = inv;
             TransferRequest = new TransferInventory();
 
-            AllRoomsIDs = InitializeComboBoxes();
+            InitializeComboBoxes();
         }
 
         private void AcceptButtonClick(object sender, RoutedEventArgs e)
@@ -67,15 +56,15 @@ namespace Hospital.View
             _schedulingTransferService = new SchedulingTransferInventoryService(TransferRequest);
         }
 
-        private ObservableCollection<string> InitializeComboBoxes()
+        private void InitializeComboBoxes()
         {
-            ObservableCollection<string> allRoomsIDs = new ObservableCollection<string>();
-            RoomStorage roomStorage = new RoomStorage();
-            foreach (Room room in roomStorage.GetAll())
+            ObservableCollection<string> AllRoomsIDs = new ObservableCollection<string>();
+            RoomService roomService = new RoomService();
+            foreach (Room room in roomService.GetAll())
                 if (!room.Id.Equals(ItemForTransfer.RoomID))
-                    allRoomsIDs.Add(room.Id);
+                    AllRoomsIDs.Add(room.Id);
 
-            return allRoomsIDs;
+            roomID.ItemsSource = AllRoomsIDs;
         }
 
         private void CancelButtonClick(object sender, RoutedEventArgs e)
@@ -86,13 +75,6 @@ namespace Hospital.View
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new StaticInventoryView(ItemForTransfer.RoomID));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
         }
     }
 }

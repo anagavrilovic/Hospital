@@ -66,6 +66,17 @@ namespace Hospital.Repositories
             return null;
         }
 
+        public Inventory GetOneItemFromRoom(string id, string roomId)
+        {
+            List<Inventory> inventory = GetAll();
+            foreach (Inventory inv in inventory)
+            {
+                if (inv.Id.Equals(id) && inv.RoomID.Equals(roomId))
+                    return inv;
+            }
+            return null;
+        }
+
         public void Save(Inventory parameter)
         {
             List<Inventory> inventory = GetAll();

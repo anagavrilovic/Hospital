@@ -1,5 +1,6 @@
 ﻿using Hospital.Model;
 using Hospital.Repositories;
+using Hospital.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,16 +35,16 @@ namespace Hospital.Services
 
         public bool AreTransferAttributesValid()
         {
-            InventoryStorage storage = new InventoryStorage();
-            Inventory ItemForTransfer = storage.GetOneByRoom(TransferRequest.ItemID, TransferRequest.FirstRoomID);
+            IStaticInventoryRepository staticInventoryRepository = new StaticInventoryFileRepository();
+            Inventory ItemForTransfer = staticInventoryRepository.GetOneItemFromRoom(TransferRequest.ItemID, TransferRequest.FirstRoomID);
             if (TransferRequest.TransferDate < DateTime.Now)
             {
-                MessageBox.Show("Niste ispravno uneli vreme!");
+                MessageBox.Show("Niste ispravno uneli vreme!"); //TODO: throw exception
                 return false;
             }
             else if (ItemForTransfer.Quantity < TransferRequest.Quantity)
             {
-                MessageBox.Show("Pogrešan unos količine!");
+                MessageBox.Show("Pogrešan unos količine!");    //TODO: throw exception
                 return false;
             }
             return true;
@@ -51,6 +52,7 @@ namespace Hospital.Services
 
         private void TransferCantBeExecuted()
         {
+            //TODO: throw exception
             MessageBox.Show("Sala ne raspolaže traženom količinom stavke. \n Pokušajte sa manjom količinom ili pogledajte stanje u drugim salama.");
             return;
         }
