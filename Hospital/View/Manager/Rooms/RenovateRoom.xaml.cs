@@ -30,26 +30,8 @@ namespace Hospital.View
             }
         }
 
-        private ObservableCollection<string> _warehousesIDs;
-        public ObservableCollection<string> WarehousesIDs
-        {
-            get => _warehousesIDs;
-            set
-            {
-                _warehousesIDs = value;
-                OnPropertyChanged("WarehousesIDs");
-            }
-        }
-        private ObservableCollection<string> _roomIDs;
-        public ObservableCollection<string> RoomIDs
-        {
-            get => _roomIDs;
-            set
-            {
-                _roomIDs = value;
-                OnPropertyChanged("RoomIDs");
-            }
-        }
+        public ObservableCollection<string> WarehousesIDs { get; set; }
+        public ObservableCollection<string> RoomIDs { get; set; }
 
         private ObservableCollection<String> _roomsFromSameFloor;
         public ObservableCollection<String> RoomsFromSameFloor
@@ -62,7 +44,7 @@ namespace Hospital.View
             }
         }
 
-        private RoomStorage _roomStorage;
+        private RoomService _roomService;
         public RoomRenovation RoomRenovation { get; set; }
 
         public RenovateRoom()
@@ -71,7 +53,7 @@ namespace Hospital.View
             this.DataContext = this;
           
             RoomRenovation = new RoomRenovation();
-            this._roomStorage = new RoomStorage();
+            this._roomService = new RoomService();
 
             FindRoomsFromSameFloor();
             InitializeComboBoxes();
@@ -90,9 +72,9 @@ namespace Hospital.View
 
         private void InitializeRenovation()
         {
-            RoomRenovation.Room = _roomStorage.GetOne(roomCB.Text);
+            RoomRenovation.Room = _roomService.GetById(roomCB.Text);
             RoomRenovation.Room.SerializeInfo = false;
-            RoomRenovation.WareHouse = _roomStorage.GetOne(magacinCB.Text);
+            RoomRenovation.WareHouse = _roomService.GetById(magacinCB.Text);
             if (RoomRenovation.WareHouse != null)
                 RoomRenovation.WareHouse.SerializeInfo = false;
             SaveNewRooms();
@@ -143,7 +125,7 @@ namespace Hospital.View
             String[] splitedStr = str.Split('-');
             String roomID = splitedStr[0];
 
-            return _roomStorage.GetOne(roomID);
+            return _roomService.GetById(roomID);
         }
 
         private void BtnRefrehRoomsForMerge(object sender, RoutedEventArgs e)
@@ -164,14 +146,14 @@ namespace Hospital.View
 
             if (roomCB.SelectedItem != null)
             {
-                Room RenovatingRoom = _roomStorage.GetOne(roomCB.Text);
-                foreach (Room r in _roomStorage.GetAll())
+                Room RenovatingRoom = _roomService.GetById(roomCB.Text);
+                foreach (Room r in _roomService.GetAll())
                     if (r.Floor == RenovatingRoom.Floor && !r.Id.Equals(RenovatingRoom.Id))
                         RoomsFromSameFloor.Add(r.Id + "-" + r.Name); 
             }
             else
             {
-                foreach (Room r in _roomStorage.GetAll())
+                foreach (Room r in _roomService.GetAll())
                     RoomsFromSameFloor.Add(r.Id + "-" + r.Name);
             }
             return RoomsFromSameFloor;
@@ -181,7 +163,7 @@ namespace Hospital.View
         {
             WarehousesIDs = new ObservableCollection<string>();
             RoomIDs = new ObservableCollection<string>();
-            foreach (Room room in _roomStorage.GetAll())
+            foreach (Room room in _roomService.GetAll())
             {
                 RoomIDs.Add(room.Id);
                 if (room.Type == RoomType.MAGACIN)

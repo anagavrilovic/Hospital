@@ -9,5 +9,6 @@ namespace Hospital.Repositories.Interfaces
 {
     interface IRoomRenovationRepository : IGenericRepository<RoomRenovation>
     {
+        List<int> GetAllScheduledRenovationsIDs();
     }
 }

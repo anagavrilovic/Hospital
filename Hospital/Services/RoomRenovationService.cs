@@ -1,5 +1,6 @@
 ﻿using Hospital.Model;
 using Hospital.Repositories;
+using Hospital.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,12 @@ namespace Hospital.Services
 {
     public class RoomRenovationService
     {
+        private IRoomRenovationRepository renovationRepository;
+        private IRoomRepository roomRepository;
         public RoomRenovationService(RoomRenovation renovation)
         {
+            renovationRepository = new RoomRenovationFileRepository();
+            roomRepository = new RoomFileRepository();
             Renovation = renovation;
         }
 
@@ -21,13 +26,13 @@ namespace Hospital.Services
         {
             if (Renovation.Room.Status == RoomStatus.RENOVIRA_SE)
             {
-                MessageBox.Show("Izabrana sala se trenutno renovira!");
+                MessageBox.Show("Izabrana sala se trenutno renovira!");     //TODO: throw exception
                 return false;
             }
 
             if (Renovation.StartDate >= Renovation.EndDate)
             {
-                MessageBox.Show("Pogrešan izbor datuma renoviranja!");
+                MessageBox.Show("Pogrešan izbor datuma renoviranja!");      //TODO: throw exception
                 return false;
             }
 
@@ -41,7 +46,7 @@ namespace Hospital.Services
             {
                 if (appointment.DateTime > Renovation.StartDate && appointment.DateTime < Renovation.EndDate + new TimeSpan(23, 59, 59) && appointment.Room.Id.Equals(Renovation.Room.Id))
                 {
-                    MessageBox.Show("U izabranom periodu postoje zakazani termini pa nije moguće zakazati renoviranje!");
+                    MessageBox.Show("U izabranom periodu postoje zakazani termini pa nije moguće zakazati renoviranje!");   //TODO: throw exception
                     return true;
                 }
             }
@@ -61,9 +66,8 @@ namespace Hospital.Services
 
         private void SaveScheduledRenovation()
         {
-            RoomRenovationStorage renovationStorage = new RoomRenovationStorage();
             Renovation.Id = GenerateRenovationID();
-            renovationStorage.Save(Renovation);
+            renovationRepository.Save(Renovation);
         }
 
         public void ScheduleRenovation()
@@ -90,21 +94,21 @@ namespace Hospital.Services
 
         private void RenovationInProgress()
         {
-            Room room = _roomStorage.GetOne(Renovation.Room.Id);
+            Room room = roomRepository.GetByID(Renovation.Room.Id);
             TimeSpan timeSpan = Renovation.EndDate.Subtract(DateTime.Now);
             if (room.Status != RoomStatus.RENOVIRA_SE)
             {
                 TransferInventoryToWarehouse();
                 room.Status = RoomStatus.RENOVIRA_SE;
-                _roomStorage.EditRoom(room);
+                roomRepository.EditRoom(room);
             }
             Thread.Sleep(timeSpan);
         }
 
         private void TransferInventoryToWarehouse()
         {
-            InventoryStorage inventoryStorage = new InventoryStorage();
-            foreach (Inventory inventory in inventoryStorage.GetByRoomID(Renovation.Room.Id))
+            IStaticInventoryRepository inventoryRepository = new StaticInventoryFileRepository();
+            foreach (Inventory inventory in inventoryRepository.GetAllInventoryFromRoom(Renovation.Room.Id))
             {
                 TransferInventory transfer = new TransferInventory(inventory.Id, inventory.Quantity, Renovation.Room.Id, Renovation.WareHouse.Id, DateTime.Now);
                 TransferInventoryService service = new TransferInventoryService(transfer);
@@ -114,12 +118,12 @@ namespace Hospital.Services
 
         private void FinishRenovation()
         {
-            Room room = _roomStorage.GetOne(Renovation.Room.Id);
+            Room room = roomRepository.GetByID(Renovation.Room.Id);
             room.Status = RoomStatus.SLOBODNA;
-            _roomStorage.EditRoom(room);
+            roomRepository.EditRoom(room);
             FinishSeparatingRooms();
             FinishMergingRooms();
-            _roomStorage.Delete(Renovation.Id);
+            roomRepository.Delete(Renovation.Id);
         }
 
         private void FinishSeparatingRooms()
@@ -127,19 +131,19 @@ namespace Hospital.Services
             foreach (Room r in Renovation.RoomsCreatedDuringRenovation)
             {
                 r.Status = RoomStatus.SLOBODNA;
-                _roomStorage.Save(r);
+                roomRepository.Save(r);
             }
         }
 
         private void FinishMergingRooms()
         {
             foreach (Room r in Renovation.RoomsDestroyedDuringRenovation)
-                _roomStorage.Delete(r.Id);
+                roomRepository.Delete(r.Id);
         }
 
         private string GenerateRenovationID()
         {
-            List<int> allScheduledRenovationsIDs = _renovationRepository.GetAllScheduledRenovationsIDs();
+            List<int> allScheduledRenovationsIDs = renovationRepository.GetAllScheduledRenovationsIDs();
             int id = 1;
             while (true)
             {
@@ -152,7 +156,5 @@ namespace Hospital.Services
         }
 
         public RoomRenovation Renovation { get; set; }
-        private RoomStorage _roomStorage = new RoomStorage();
-        private RoomRenovationFileRepository _renovationRepository = new RoomRenovationFileRepository();
     }
 }
