@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Services;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -32,13 +33,7 @@ namespace Hospital.View
             }
         }
 
-        public static event PropertyChangedEventHandler StaticPropertyChanged;
-        private static void NotifyStaticPropertyChanged([CallerMemberName] string name = null)
-        {
-            StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(name));
-        }
-
-        private DynamicInventoryStorage _dynamicInventoryStorage;
+        private DynamicInventoryService _dynamicInventoryService;
 
         private string _searchCriterion;
         public ICollectionView DynamicInventoryCollection { get; set; }
@@ -49,8 +44,8 @@ namespace Hospital.View
             this.DataContext = this;
             this._roomID = id;
 
-            _dynamicInventoryStorage = new DynamicInventoryStorage();
-            DynamicInventoryInRoom = _dynamicInventoryStorage.GetByRoomID(id);
+            _dynamicInventoryService = new DynamicInventoryService();
+            DynamicInventoryInRoom = new ObservableCollection<DynamicInventory>(_dynamicInventoryService.GetAllDynamicInventoryFroomRoom(id));
             DynamicInventoryCollection = CollectionViewSource.GetDefaultView(DynamicInventoryInRoom);
         }
 
@@ -83,9 +78,8 @@ namespace Hospital.View
         {
             if (((DynamicInventory)item).Name.Contains(_searchCriterion) || ((DynamicInventory)item).Id.Contains(_searchCriterion) || ((DynamicInventory)item).Price.ToString().Contains(_searchCriterion) ||
                 ((DynamicInventory)item).RoomID.Contains(_searchCriterion) || ((DynamicInventory)item).Quantity.ToString().Contains(_searchCriterion))
-            {
                 return true;
-            }
+            
             return false;
         }
 
@@ -116,7 +110,7 @@ namespace Hospital.View
            if (result == MessageBoxResult.Yes)
            {
               DynamicInventoryInRoom.Remove(selectedItem);
-              _dynamicInventoryStorage.Delete(selectedItem.Id, selectedItem.RoomID);
+              _dynamicInventoryService.DeleteItemFromRoom(selectedItem.Id, selectedItem.RoomID);
            }
         }
 
@@ -131,14 +125,15 @@ namespace Hospital.View
             NavigationService.Navigate(transfer);
         }
 
-        private void CreateReportButtonClick(object o, RoutedEventArgs e)
-        {
-            //TODO HCI 
-        }
-
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RoomsWindow());
+        }
+
+        public static event PropertyChangedEventHandler StaticPropertyChanged;
+        private static void NotifyStaticPropertyChanged([CallerMemberName] string name = null)
+        {
+            StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(name));
         }
     }
 }

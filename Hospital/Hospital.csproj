@@ -178,6 +178,7 @@
     <Compile Include="Services\RoomService.cs" />
     <Compile Include="Services\SchedulingTransferInventoryService.cs" />
     <Compile Include="Services\StaticInventoryService.cs" />
+    <Compile Include="Services\TransferDynamicInventoryService.cs" />
     <Compile Include="Services\TransferInventoryService.cs" />
     <Compile Include="TranslationSource.cs" />
     <Compile Include="ValidacijeLekar\EmptyStringValidationRule.cs" />

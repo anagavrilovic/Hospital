@@ -1,11 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hospital.Model
 {
@@ -63,57 +57,7 @@ namespace Hospital.Model
         [JsonIgnore]
         public Room DestinationRoom { get; set; }
 
-        public TransferDynamicInventory() { }
-
-        public TransferDynamicInventory(string itemId, int quantity, string firstRoomID, string destinationRoomID)
-        {
-            ItemID = itemId;
-            Quantity = quantity;
-            FirstRoomID = firstRoomID;
-            DestinationRoomID = destinationRoomID;
-        }
-
-        public void UpdateDynamicInventory()
-        {
-            if (IsTransferingItemExistsInDestinationRoom())
-                IncreaseItemQuantityInDestinationRoom();
-            else
-                AddTransferingItemDestinationRoom();
-
-            ReduceItemQuantitiyInFirstRoom();
-        }
-
-        private bool IsTransferingItemExistsInDestinationRoom()
-        {
-            foreach(DynamicInventory item in _dynamicInventoryStorage.GetByRoomID(DestinationRoomID))
-            {
-                if (item.Id.Equals(ItemID))
-                    return true;
-            }
-            return false;
-        }
-
-        private void IncreaseItemQuantityInDestinationRoom()
-        {
-            DynamicInventory itemInDestinationRoom = _dynamicInventoryStorage.GetOneByRoom(ItemID, DestinationRoomID);
-            itemInDestinationRoom.Quantity += Quantity;
-            _dynamicInventoryStorage.EditItem(itemInDestinationRoom);
-        }
-
-        private void AddTransferingItemDestinationRoom()
-        {
-            DynamicInventory itemFromFirstRoom = _dynamicInventoryStorage.GetOneByRoom(_itemID, _firstRoomID);
-            itemFromFirstRoom.Quantity = Quantity;
-            itemFromFirstRoom.RoomID = DestinationRoomID;
-            _dynamicInventoryStorage.Save(itemFromFirstRoom);
-        }
-
-        private void ReduceItemQuantitiyInFirstRoom()
-        {
-            DynamicInventory itemInFirstRoom = _dynamicInventoryStorage.GetOneByRoom(ItemID, FirstRoomID);
-            itemInFirstRoom.Quantity -= _quantity;
-            _dynamicInventoryStorage.EditItem(itemInFirstRoom);
-        }
+        public TransferDynamicInventory() { }    
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string name)
