@@ -100,8 +100,9 @@
             </Border>
             <Border Grid.Row="1" CornerRadius="10" Background="{StaticResource MainWhite}">
                 <!-- Tabela sa prikazom svih pacijenata -->
-                <DataGrid x:Name="DoctorsTable" Grid.Row="1" Margin="5" Width="1038" ItemsSource="{Binding DoctorsShifts, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                         VerticalGridLinesBrush="#FFCCCCCC" Style="{StaticResource PacijentiDataGrid}">
+                <DataGrid x:Name="DoctorsTable" Grid.Row="1" Margin="5" Width="1038" 
+                          Style="{StaticResource RadnoVremeStyle}"
+                          ItemsSource="{Binding DoctorsShifts, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Lekar" Width="3     *" Binding="{Binding Doctor}" HeaderStyle="{StaticResource GridHeaderStyle}">
                         </DataGridTextColumn>

@@ -181,59 +181,161 @@ namespace Hospital.Services
                 SetDoctorForNewAppointment(newUrgentAppointment, doctor);
 
                 for (int i = 0; i < 3; i++)
-                {
-                    List<Appointment> overlappingAppointments = GetOverlappingAppointments(newUrgentAppointment);
-                    if (HasAppointmentStarted(overlappingAppointments))
-                    {
-                        newUrgentAppointment.DateTime = newUrgentAppointment.DateTime.AddMinutes(30);
-                        continue;
-                    }
-
-                    OptionForRescheduling optionForRescheduling = new OptionForRescheduling();
-                    foreach (Appointment appointment in overlappingAppointments)
-                    {
-                        MoveAppointment moveAppointment = new MoveAppointment(appointment);
-                        optionForRescheduling.Option.Add(moveAppointment);
-                    }
-
-                    InsertIfOptionDoesntExist(optionForRescheduling, options, newUrgentAppointment);
-                    newUrgentAppointment.DateTime = newUrgentAppointment.DateTime.AddMinutes(30);
-                }
+                    CalculateNewOption(newUrgentAppointment, options);
             }
 
             return SortOptions(options);
         }
 
+        private void CalculateNewOption(Appointment newUrgentAppointment, List<OptionForRescheduling> options)
+        {
+            List<Appointment> overlappingAppointments = GetOverlappingAppointments(newUrgentAppointment);
+            if (HasAnyAppointmentStarted(overlappingAppointments))
+            {
+                newUrgentAppointment.DateTime = newUrgentAppointment.DateTime.AddMinutes(30);
+                return;
+            }
+
+            OptionForRescheduling optionForRescheduling = new OptionForRescheduling();
+            foreach (Appointment appointment in overlappingAppointments)
+            {
+                MoveAppointment moveAppointment = new MoveAppointment(appointment);
+                optionForRescheduling.Option.Add(moveAppointment);
+            }
+
+            InsertIfOptionIsValid(optionForRescheduling, options, newUrgentAppointment);
+            newUrgentAppointment.DateTime = newUrgentAppointment.DateTime.AddMinutes(30);
+        }
+
         private List<OptionForRescheduling> SortOptions(List<OptionForRescheduling> options)
         {
             List<OptionForRescheduling> sortedList = options.OrderBy(o => o.NewUrgentAppointmentTime).ToList();
-            return new List<OptionForRescheduling>(sortedList);
+            return sortedList;
         }
 
-        private void InsertIfOptionDoesntExist(OptionForRescheduling option, List<OptionForRescheduling> options, Appointment appointment)
+        private void InsertIfOptionIsValid(OptionForRescheduling option, List<OptionForRescheduling> options, Appointment appointment)
         {
-            if (option.Option.Count() == 0)
+            if (!IsOptionValid(option, options))
                 return;
 
-            foreach (OptionForRescheduling o in options)
-                if (o.IsEqual(option))
-                    return;
-
-            foreach (MoveAppointment moveAppointment in option.Option)
-                if (moveAppointment.Appointment.Type.Equals(AppointmentType.urgentExamination) || moveAppointment.Appointment.Type.Equals(AppointmentType.urgentOperation))
-                    return;
-
-            option.SetTimeForRescheduling(appointment);
+            SetTimeForReschedulingAllAppointmentsInOption(option, appointment);
             options.Add(option);
         }
 
-        private bool HasAppointmentStarted(List<Appointment> overlappingAppointments)
+        private bool IsOptionValid(OptionForRescheduling option, List<OptionForRescheduling> options)
+        {
+            if (option.Option.Count() == 0)
+                return false;
+
+            foreach (OptionForRescheduling o in options)
+                if (o.IsEqual(option))
+                    return false;
+
+            foreach (MoveAppointment moveAppointment in option.Option)
+                if (moveAppointment.HasUrgentAppointment())
+                    return false;
+
+            return true;
+        }
+
+        private bool HasAnyAppointmentStarted(List<Appointment> overlappingAppointments)
         {
             foreach (Appointment appointment in overlappingAppointments)
                 if (appointment.DateTime < DateTime.Now)
                     return true;
 
             return false;
+        }
+
+        public void SetTimeForReschedulingAllAppointmentsInOption(OptionForRescheduling option, Appointment newUrgentAppointment)
+        {
+            SetTimeForNewUrgentAppointmentInOption(option, newUrgentAppointment.DateTime);
+            SortOption(option);
+
+            foreach (MoveAppointment moveAppointment in option.Option)
+                SetTimeForReschedulingAppointment(option, moveAppointment, newUrgentAppointment);
+        }
+
+        private void SetTimeForReschedulingAppointment(OptionForRescheduling option, MoveAppointment moveAppointment, Appointment newUrgentAppointment)
+        {
+            moveAppointment.ToTime = newUrgentAppointment.DateTime.AddHours(newUrgentAppointment.DurationInHours);
+
+            while (true)
+            {
+                bool alreadyTaken = false;
+                DateTime testStartTime = moveAppointment.ToTime;
+                DateTime testEndTime = moveAppointment.ToTime.AddHours(moveAppointment.Appointment.DurationInHours);
+
+                if (CheckIfOverlapWithAnyAppointment(testStartTime, testEndTime, moveAppointment.Doctor.PersonalID, option.Option))
+                {
+                    moveAppointment.ToTime = moveAppointment.ToTime.AddMinutes(30);
+                    continue;
+                }
+
+                foreach (MoveAppointment existingMoveappointment in option.Option)
+                {
+                    if (existingMoveappointment.ToTime.Equals(new DateTime()) || moveAppointment.Equals(existingMoveappointment))
+                        break;
+
+                    DateTime startTime = existingMoveappointment.ToTime;
+                    DateTime endTime = existingMoveappointment.ToTime.AddHours(existingMoveappointment.Appointment.DurationInHours);
+                    if (testStartTime < endTime && startTime < testEndTime)
+                    {
+                        alreadyTaken = true;
+                        break;
+                    }
+                }
+
+                if (alreadyTaken)
+                {
+                    moveAppointment.ToTime = moveAppointment.ToTime.AddMinutes(30);
+                    continue;
+                }
+
+                break;
+            }
+        }
+
+        private bool CheckIfOverlapWithAnyAppointment(DateTime startTime, DateTime endTime, string doctorID, ObservableCollection<MoveAppointment> option)
+        {
+            List<Appointment> appointments = GetAll();
+
+            foreach (Appointment appointment in appointments)
+            {
+                bool exisits = false;
+                if (appointment.IDDoctor.Equals(doctorID) && IsTimeOverlapping(appointment, startTime, endTime))
+                {
+                    foreach (MoveAppointment moveAppointment in option)
+                    {
+                        if (moveAppointment.Appointment.IDAppointment.Equals(appointment.IDAppointment))
+                        {
+                            exisits = true;
+                            break;
+                        }
+                    }
+                    if (exisits)
+                        continue;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool IsTimeOverlapping(Appointment appointment, DateTime startTime, DateTime endTime)
+        {
+            return appointment.DateTime < endTime && startTime < appointment.DateTime.AddHours(appointment.DurationInHours);
+        }
+
+        private void SortOption(OptionForRescheduling option)
+        {
+            List<MoveAppointment> sortedList = option.Option.OrderBy(o => o.Appointment.DateTime).ToList();
+            option.Option = new ObservableCollection<MoveAppointment>(sortedList);
+        }
+
+        private void SetTimeForNewUrgentAppointmentInOption(OptionForRescheduling option, DateTime dateTime)
+        {
+            option.NewUrgentAppointmentTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, dateTime.Kind);
         }
 
         private List<Appointment> GetOverlappingAppointments(Appointment appointment)
