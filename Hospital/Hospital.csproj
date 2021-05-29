@@ -176,6 +176,7 @@
     <Compile Include="Services\RegistratedUserService.cs" />
     <Compile Include="Services\RoomRenovationService.cs" />
     <Compile Include="Services\RoomService.cs" />
+    <Compile Include="Services\RoomsFilteringService.cs" />
     <Compile Include="Services\SchedulingTransferInventoryService.cs" />
     <Compile Include="Services\StaticInventoryService.cs" />
     <Compile Include="Services\TransferDynamicInventoryService.cs" />

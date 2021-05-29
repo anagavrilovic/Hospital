@@ -72,10 +72,9 @@ namespace Hospital.Services
         {
             int totalQuantityForTransfer = 0;
             foreach (TransferInventory ti in transferInventoryRepository.GetAll())
-            {
                 if (ti.ItemID.Equals(TransferRequest.ItemID) && ti.FirstRoomID.Equals(TransferRequest.FirstRoomID))
                     totalQuantityForTransfer += ti.Quantity;
-            }
+            
             return totalQuantityForTransfer;
         }
 
@@ -84,21 +83,18 @@ namespace Hospital.Services
             TransferInventory firstReservedTransfer = new TransferInventory();
 
             foreach (TransferInventory ti in transferInventoryRepository.GetAll())
-            {
                 if (ti.ItemID.Equals(TransferRequest.ItemID) && ti.FirstRoomID.Equals(TransferRequest.FirstRoomID))
-                {
                     if (ti.TransferDate > firstReservedTransfer.TransferDate)
                         firstReservedTransfer = ti;
-                }
-            }
+                          
             return firstReservedTransfer;
         }
 
         public bool NotEnoughItemForNewTransfer()
         {
             int totalQuantityForEachTransferOfItem = GetTotalQuantityForAllTransfersOfItem();
-            InventoryStorage storage = new InventoryStorage();
-            Inventory ItemForTransfer = storage.GetOneByRoom(TransferRequest.ItemID, TransferRequest.FirstRoomID);
+            IStaticInventoryRepository inventoryRepository = new StaticInventoryFileRepository();
+            Inventory ItemForTransfer = inventoryRepository.GetOneItemFromRoom(TransferRequest.ItemID, TransferRequest.FirstRoomID);
             if (totalQuantityForEachTransferOfItem + TransferRequest.Quantity > ItemForTransfer.Quantity)
                 return true;
 
@@ -137,8 +133,8 @@ namespace Hospital.Services
                 _firstReservedTransfer.Quantity = TransferRequest.Quantity;
                 transferInventoryRepository.EditTransfer(_firstReservedTransfer);
 
-                InventoryStorage storage = new InventoryStorage();
-                Inventory ItemForTransfer = storage.GetOneByRoom(TransferRequest.ItemID, TransferRequest.FirstRoomID);
+                IStaticInventoryRepository inventoryRepository = new StaticInventoryFileRepository();
+                Inventory ItemForTransfer = inventoryRepository.GetOneItemFromRoom(TransferRequest.ItemID, TransferRequest.FirstRoomID);
                 TransferInventory newTransfer = new TransferInventory(_firstReservedTransfer.ItemID, newQuantity, ItemForTransfer.RoomID, _firstReservedTransfer.DestinationRoomID, _firstReservedTransfer.TransferDate + new TimeSpan(0, 0, 2));
                 SaveTransfer(newTransfer);
             }

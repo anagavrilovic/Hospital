@@ -48,12 +48,10 @@ namespace Hospital.Services
         public bool IsNewRoomIdUnique(string roomID)
         {
             foreach (Room room in GetAll())
-            {
                 if (room.Id.Equals(roomID))
-                {
                     return false;
-                }
-            }
+                
+            
             return true;
         }
 

@@ -61,10 +61,9 @@ namespace Hospital.Services
         {
             List<Medicine> medicines = GetAll();
             foreach (Medicine medicine in medicines)
-            {
                 if (medicine.ID.Equals(id))
                     return false;
-            }
+            
             return true;
         }
 
