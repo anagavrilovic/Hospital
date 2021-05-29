@@ -206,6 +206,7 @@
     <Compile Include="ViewModels\Doctor\HospitalizedPatientsViewModel.cs" />
     <Compile Include="ViewModels\Doctor\MedicineValidityViewModel.cs" />
     <Compile Include="ViewModels\Doctor\NewAppointmentViewModel.cs" />
+    <Compile Include="ViewModels\Doctor\RejectedMedicineViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientAppointmentsViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientPassedAppointmentsViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientSettingsPageViewModel.cs" />
