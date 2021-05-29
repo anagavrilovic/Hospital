@@ -1,5 +1,6 @@
 ﻿using Hospital.Commands.DoctorCommands;
 using Hospital.Controller;
+using Hospital.Controller.DoctorControllers;
 using Hospital.Services;
 using Hospital.View.Doctor;
 using System;
@@ -16,8 +17,7 @@ namespace Hospital.ViewModels.Doctor
     public class DoctorMainWindowViewModel : ViewModel
     {
         public Action CloseAction { get; set; }
-        private DoctorService doctorService = new DoctorService();
-        private HospitalTreatmentService hospitalTreatmentService;
+        private DoctorMainWindowController controller;
         public Frame frameMainPage;
         private DoctorMainPage mainPage;
         private string doctorId;
@@ -65,22 +65,22 @@ namespace Hospital.ViewModels.Doctor
         }
         public DoctorMainWindowViewModel(string doctorId,NavigationController navController)
         {
+            controller = new DoctorMainWindowController();
             RevisionCommand = new RelayCommand(Execute_Revision, canExecuteMethod);
             AnnouncmentsCommand = new RelayCommand(Execute_Announcment, canExecuteMethod);
             SignOutCommand = new RelayCommand(Execute_SignOut, canExecuteMethod);
             LogoCommand = new RelayCommand(Execute_Logo, canExecuteMethod);
             InitProperties(doctorId, navController);
-            hospitalTreatmentService.checkHospitalTreatmentDates();
+            controller.CheckHospitalTreatmentDates();
         }
 
         private void InitProperties(string doctorId, NavigationController navController)
         {
             this.navigationController = navController;
             this.doctorId = doctorId;
-            doctor = doctorService.GetDoctorById(doctorId);
+            doctor = controller.GetDoctorById(doctorId);
             frameMainPage = new Frame();
             mainPage = new DoctorMainPage(doctorId,navigationController);
-            hospitalTreatmentService = new HospitalTreatmentService();
             navigationController.NavigateToDoctorHomePage(mainPage);
         }
 
