@@ -38,5 +38,14 @@ namespace Hospital.Services
         {
             return doctorRepository.GetBySpecialty(doctorsSpecialty);
         }
+
+        public List<string> GetDoctorsNameSurname()
+        {
+            List<string> doctorsNameSurname = new List<string>();
+            foreach (Hospital.Model.Doctor doctor in GetAll())
+                doctorsNameSurname.Add(doctor.ToString());
+
+            return doctorsNameSurname;
+        }
     }
 }

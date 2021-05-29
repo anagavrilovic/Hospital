@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -46,9 +47,8 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
-            MedicineStorage medicineStorage = new MedicineStorage();
-
-            Medicines = medicineStorage.GetAll();
+            MedicineService medicineService = new MedicineService();
+            Medicines = new ObservableCollection<Medicine>(medicineService.GetAll());
             MedicineCollection = CollectionViewSource.GetDefaultView(Medicines);
         }
 

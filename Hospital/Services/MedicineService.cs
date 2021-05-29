@@ -63,10 +63,7 @@ namespace Hospital.Services
             foreach (Medicine medicine in medicines)
             {
                 if (medicine.ID.Equals(id))
-                {
-                    MessageBox.Show("Vec postoji lek sa unetom oznakom!");
                     return false;
-                }
             }
             return true;
         }

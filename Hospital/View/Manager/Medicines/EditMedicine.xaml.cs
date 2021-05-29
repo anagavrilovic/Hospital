@@ -17,7 +17,6 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-  
     public partial class EditMedicine : Page
     {
         public Medicine Medicine { get; set; }
@@ -29,8 +28,7 @@ namespace Hospital.View
 
             Medicine = medicine;
         }
-
-       
+     
         private void AcceptEditingMedicine(object sender, RoutedEventArgs e)
         {
             priceTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();

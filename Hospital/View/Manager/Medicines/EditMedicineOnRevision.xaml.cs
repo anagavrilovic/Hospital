@@ -40,8 +40,9 @@ namespace Hospital.View
         private void AddDoctorsInComboBox()
         {
             ObservableCollection<string>  DoctorsNameSurname = new ObservableCollection<string>();
-            DoctorStorage doctorStorage = new DoctorStorage();
-            foreach (Hospital.Model.Doctor doctor in doctorStorage.GetAll())
+            DoctorService doctorService = new DoctorService();
+            ObservableCollection<Model.Doctor> doctors = new ObservableCollection<Model.Doctor>(doctorService.GetAll());
+            foreach (Hospital.Model.Doctor doctor in doctors)
                 DoctorsNameSurname.Add(doctor.ToString());
 
             doctorsCB.ItemsSource = DoctorsNameSurname;
@@ -49,16 +50,14 @@ namespace Hospital.View
 
         private void SetDoctorOnComboBox()
         {
-            DoctorStorage doctorStorage = new DoctorStorage();
-            doctorsCB.SelectedItem = doctorStorage.GetOne(MedicineOnRevision.DoctorID).ToString();
+            DoctorService doctorService = new DoctorService();
+            doctorsCB.SelectedItem = doctorService.GetDoctorById(MedicineOnRevision.DoctorID).ToString();
         }
 
         private void AddIngredientsInListBox()
         {
-            Ingredients = new List<string>();
-            string[] ingredients = File.ReadAllLines("..\\..\\Files\\ingredients.txt");
-            foreach (string line in ingredients)
-                Ingredients.Add(line);
+            MedicineService medicineService = new MedicineService();
+            Ingredients = medicineService.GetAllIngredients();
         }
 
         private void SearchIngredients(object sender, RoutedEventArgs e)
@@ -109,7 +108,7 @@ namespace Hospital.View
 
         private void BtnMinusIngredients(object sender, RoutedEventArgs e)
         {
-            Ingredient ingredientToDelete = (Ingredient)ingredientsList.SelectedItem; ;
+            Ingredient ingredientToDelete = (Ingredient)ingredientsList.SelectedItem; 
             if (ingredientToDelete == null)
                 return;
 
