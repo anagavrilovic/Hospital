@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.ViewModels.Doctor;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,53 +20,19 @@ namespace Hospital.View.Doctor
     /// <summary>
     /// Interaction logic for OdbijeniLekoviKomentar.xaml
     /// </summary>
-    public partial class RejectedMedicineComment : Window,INotifyPropertyChanged
+    public partial class RejectedMedicineComment : Window
     {
-        private MedicineRevision medicineRevision = new MedicineRevision();
-        private MedicineRevisionStorage medicineRevisionStorage = new MedicineRevisionStorage();
-        public event PropertyChangedEventHandler PropertyChanged;
-        public MedicineRevision MedicineRevision
-        {
-            get
-            {
-                return medicineRevision;
-            }
-            set
-            {
-                if (value != medicineRevision)
-                {
-                    medicineRevision = value;
-                    OnPropertyChanged("MedicineRevision");
-                }
-            }
-        }
-        protected void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
+
         public RejectedMedicineComment(MedicineRevision medicineRevision)
         {
             InitializeComponent();
-            this.DataContext = this;
+            RejectedMedicineViewModel viewModel = new RejectedMedicineViewModel(medicineRevision);
+            this.DataContext = viewModel;
+            if (viewModel.CloseAction == null)
+                viewModel.CloseAction = new Action(this.Close);
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 1 / 2);
-            this.medicineRevision = medicineRevision;
-        }
 
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void SaveRejection_Click(object sender, RoutedEventArgs e)
-        {
-            MedicineRevision.IsMedicineRevised = true;
-            //validateMedicine.MedicineRevisions.Remove(MedicineRevision);
-            medicineRevisionStorage.EditMedicine(MedicineRevision);
-            this.Close();
         }
     }
 }

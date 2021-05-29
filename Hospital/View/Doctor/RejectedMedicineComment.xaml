@@ -8,8 +8,10 @@
         xmlns:ns="clr-namespace:Hospital"
         mc:Ignorable="d"
         Title="OdbijeniLekoviKomentar" Height="450" Width="800" WindowStartupLocation="CenterScreen" Background="{DynamicResource Background}">
-    <Window.Resources>
-    </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding SaveCommand}" Key="S" Modifiers="Ctrl"/>
+        <KeyBinding Command="{Binding BackCommand}" Key="C" Modifiers="Ctrl"/>
+    </Window.InputBindings>
     <StackPanel Orientation="Vertical">
         <Label FontSize="22" Content="{ns:Loc explanationLabel}" Margin="60,0,0,0" Style="{DynamicResource Label}"></Label>
         <TextBox Name="txtName" TextWrapping="Wrap" FontSize="15" AcceptsReturn="True"
@@ -24,13 +26,13 @@
             </TextBox.Text>
         </TextBox>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button VerticalAlignment="Top" Click="SaveRejection_Click" Style="{DynamicResource ButtonWithValidation}">
+            <Button VerticalAlignment="Top" Command="{Binding SaveCommand}" Style="{DynamicResource ButtonWithValidation}">
             <StackPanel Orientation="Horizontal">
                 <Image Source="../../Icon/DoctorIcons/save.png" Width="20"/>
                     <TextBlock Text="{ns:Loc saveRevisionTB}"/>
             </StackPanel>
         </Button>
-            <Button VerticalAlignment="Top" Margin="30,0,0,0" Click="Back_Click" Style="{DynamicResource ImageButtonsHorizontal}">
+            <Button VerticalAlignment="Top" Margin="30,0,0,0" Command="{Binding BackCommand}" Style="{DynamicResource ImageButtonsHorizontal}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../../Icon/DoctorIcons/back.png" Width="20"/>
                     <TextBlock Text="{ns:Loc backButton}"/>
