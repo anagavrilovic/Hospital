@@ -61,6 +61,9 @@ namespace Hospital.View
         private void EditMedicineButtonClick(object sender, RoutedEventArgs e)
         {
             Medicine selectedMedicine = (Medicine)dataGridMedicines.SelectedItem;
+            if (selectedMedicine == null)
+                return;
+
             EditMedicine editMedicine = new EditMedicine(selectedMedicine);
             NavigationService.Navigate(editMedicine);
         }
@@ -102,10 +105,9 @@ namespace Hospital.View
 
         private bool Filter(object item)
         {
-            if (((Medicine)item).Name.Contains(_searchCriterion) || ((Medicine)item).ID.Contains(_searchCriterion) || ((Medicine)item).Price.ToString().Contains(_searchCriterion))
-            {
+            if (((Medicine)item).Name.Contains(_searchCriterion) || ((Medicine)item).ID.Contains(_searchCriterion) || ((Medicine)item).Price.ToString().Contains(_searchCriterion))       
                 return true;
-            }
+            
             return false;
         }
 

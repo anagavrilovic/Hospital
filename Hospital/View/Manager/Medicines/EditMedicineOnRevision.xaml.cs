@@ -39,12 +39,8 @@ namespace Hospital.View
 
         private void AddDoctorsInComboBox()
         {
-            ObservableCollection<string>  DoctorsNameSurname = new ObservableCollection<string>();
             DoctorService doctorService = new DoctorService();
-            ObservableCollection<Model.Doctor> doctors = new ObservableCollection<Model.Doctor>(doctorService.GetAll());
-            foreach (Hospital.Model.Doctor doctor in doctors)
-                DoctorsNameSurname.Add(doctor.ToString());
-
+            ObservableCollection<string>  DoctorsNameSurname = new ObservableCollection<string>(doctorService.GetDoctorsNameSurname());
             doctorsCB.ItemsSource = DoctorsNameSurname;
         }
 
@@ -83,9 +79,8 @@ namespace Hospital.View
         private bool Filter(object item)
         {
             if (((string)item).Contains(_searchCriterion))
-            {
                 return true;
-            }
+            
             return false;
         }
 
@@ -125,14 +120,21 @@ namespace Hospital.View
 
         private void SendAgainOnRevision(object sender, RoutedEventArgs e)
         {
-            priceTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            quantityTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            doctorsCB.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
+            SaveUpdatedProperties();
 
             MedicineRevisionService service = new MedicineRevisionService();
             service.EditMedicine(MedicineOnRevision);
 
             NavigationService.Navigate(new MedicineRevisionWindow());
+        }
+
+        private void SaveUpdatedProperties()
+        {
+            nameTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            dosageTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            priceTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            quantityTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            doctorsCB.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
         }
 
         private void CancelButtonClick(object sender, RoutedEventArgs e)
