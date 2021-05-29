@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,8 +17,7 @@ using System.Windows.Shapes;
 namespace Hospital.View
 {
     public partial class AddRoom : Page
-    {
-        private RoomStorage _roomStorage;
+    { 
         public Room NewRoom { get; set; }
 
         public AddRoom()
@@ -26,32 +26,21 @@ namespace Hospital.View
             this.DataContext = this;
 
             NewRoom = new Room();
-            _roomStorage = new RoomStorage();
         }
 
         private void AcceptAddingButtonClick(object sender, RoutedEventArgs e)
         {
             InitializeNewRoom();
 
-            if (!IsNewRoomIdUnique())
+            RoomService roomService = new RoomService();
+            if (!roomService.IsNewRoomIdUnique(NewRoom.Id))
+            {
+                MessageBox.Show("Vec postoji prostorija sa unetom oznakom!");
                 return;
-
-            _roomStorage.Save(NewRoom);
+            }
+            roomService.Save(NewRoom);
          
             NavigationService.Navigate(new RoomsWindow());
-        }
-
-        private bool IsNewRoomIdUnique()
-        {
-            foreach (Room room in _roomStorage.GetAll())
-            {
-                if (room.Id.Equals(NewRoom.Id))
-                {
-                    MessageBox.Show("Već postoji sala sa unetom oznakom!");
-                    return false;
-                }
-            }
-            return true;
         }
 
         private void InitializeNewRoom()

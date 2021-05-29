@@ -30,6 +30,33 @@ namespace Hospital.Services
             return roomRepository.GetAll();
         }
 
+        public void EditRoom(Room editedRoom)
+        {
+            roomRepository.EditRoom(editedRoom);
+        }
+
+        public void Save(Room room)
+        {
+            roomRepository.Save(room);
+        }
+
+        public void DeleteRoom(string roomId)
+        {
+            roomRepository.Delete(roomId);
+        }
+
+        public bool IsNewRoomIdUnique(string roomID)
+        {
+            foreach (Room room in GetAll())
+            {
+                if (room.Id.Equals(roomID))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public List<Room> GetAvaliableRoomsForNewAppointment(Appointment newAppointment)
         {
             List<Room> allRooms = roomRepository.GetAllRoomsWithoutMagazines();

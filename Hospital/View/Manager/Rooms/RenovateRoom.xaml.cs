@@ -109,11 +109,7 @@ namespace Hospital.View
 
         private void EditRoomsOrganization(object sender, RoutedEventArgs e)
         {
-            if (roomCB.SelectedItem == null)
-                return;
-
-            View.Manager.Rooms.ChangingRoomsPlan plan = new View.Manager.Rooms.ChangingRoomsPlan(_roomStorage.GetOne(roomCB.Text));
-            NavigationService.Navigate(plan);
+           
         }
 
         private void BtnAddRoomForMerge(object sender, RoutedEventArgs e)

@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -32,23 +33,15 @@ namespace Hospital.View
             }    
         }
 
-        public static event PropertyChangedEventHandler StaticPropertyChanged;
-        private static void NotifyStaticPropertyChanged([CallerMemberName] string name = null)
-        {
-            StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(name));
-        }
-
-        RoomStorage _roomStorage;
         private string _searchCriterion;
         public ICollectionView RoomsCollection { get; set; }
-
 
         public RoomsWindow()
         {
             InitializeComponent();
             this.DataContext = this;
-            _roomStorage = new RoomStorage();
-            Rooms = _roomStorage.GetAll();
+            RoomService roomService = new RoomService();
+            Rooms = new ObservableCollection<Room>(roomService.GetAll());
 
             RoomsCollection = CollectionViewSource.GetDefaultView(Rooms);
         }
@@ -83,10 +76,9 @@ namespace Hospital.View
 
         private bool Filter(object item)
         {
-            if (((Room)item).Name.Contains(_searchCriterion) || ((Room)item).Id.Contains(_searchCriterion) || ((Room)item).Floor.ToString().Contains(_searchCriterion))
-            {
+            if (((Room)item).Name.Contains(_searchCriterion) || ((Room)item).Id.Contains(_searchCriterion) || ((Room)item).Floor.ToString().Contains(_searchCriterion))          
                 return true;
-            }
+            
             return false;
         }
 
@@ -120,7 +112,6 @@ namespace Hospital.View
         private void DeleteRoom(object sender, RoutedEventArgs e)
         {
             Room selectedItem = (Room) dataGridRooms.SelectedItem;
-
             if (selectedItem == null)
                 return;
    
@@ -156,12 +147,19 @@ namespace Hospital.View
 
         private void RefreshView(object sender, RoutedEventArgs e)
         {
-            Rooms = _roomStorage.GetAll();
+            RoomService roomService = new RoomService();
+            Rooms = new ObservableCollection<Room>(roomService.GetAll());
         }
 
         private void MenuButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ManagerMainPage());
+        }
+
+        public static event PropertyChangedEventHandler StaticPropertyChanged;
+        private static void NotifyStaticPropertyChanged([CallerMemberName] string name = null)
+        {
+            StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(name));
         }
     }
 }
