@@ -9,5 +9,6 @@ namespace Hospital.Repositories.Interfaces
 {
     interface ITransferInventoryRepository : IGenericRepository<TransferInventory>
     {
+        List<int> GetAllScheduledTransferIDs();
     }
 }

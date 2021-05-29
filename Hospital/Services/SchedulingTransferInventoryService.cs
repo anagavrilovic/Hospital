@@ -12,9 +12,20 @@ namespace Hospital.Services
 {
     class SchedulingTransferInventoryService
     {
+        private ITransferInventoryRepository transferInventoryRepository;
+        public SchedulingTransferInventoryService() 
+        {
+            transferInventoryRepository = new TransferInventoryFileRepository();
+        }
         public SchedulingTransferInventoryService(TransferInventory transfer)
         {
             TransferRequest = transfer;
+            transferInventoryRepository = new TransferInventoryFileRepository();
+        }
+
+        public List<TransferInventory> GetAll()
+        {
+            return transferInventoryRepository.GetAll();
         }
 
         public void ProcessRequest()
@@ -143,7 +154,7 @@ namespace Hospital.Services
 
         private string GenerateTransferID()
         {
-            List<int> allScheduledTransfersIDs = _transferFileRepositry.GetAllScheduledTransferIDs();
+            List<int> allScheduledTransfersIDs = transferInventoryRepository.GetAllScheduledTransferIDs();
             int id = 1;
             while(true)
             {
@@ -158,6 +169,5 @@ namespace Hospital.Services
         public TransferInventory TransferRequest { get; set; }
         private TransferInventory _firstReservedTransfer = new TransferInventory();
         private TransferInventoryStorage _transferInventoryStorage = new TransferInventoryStorage();
-        private TransferInventoryFileRepository _transferFileRepositry = new TransferInventoryFileRepository();
     }
 }
