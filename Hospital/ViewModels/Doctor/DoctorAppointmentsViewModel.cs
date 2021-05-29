@@ -1,5 +1,7 @@
 ﻿using Hospital.Commands.DoctorCommands;
 using Hospital.Controller;
+using Hospital.Controller.DoctorControllers;
+using Hospital.DTO.DoctorDTO;
 using Hospital.Services;
 using Hospital.View.Doctor;
 using System;
@@ -14,30 +16,18 @@ namespace Hospital.ViewModels.Doctor
 {
     public class DoctorAppointmentsViewModel : ViewModel
     {
-        private AppointmentService AppointmentService = new AppointmentService();
-        private MedicalRecordService medicalRecordService = new MedicalRecordService();
-        private DoctorService doctorService = new DoctorService();
         NavigationController navigationController;
-        private Model.Doctor doctor = new Model.Doctor();
-        public Model.Doctor Doctor
+        private NewAppointmentDTO dTO;
+        public NewAppointmentDTO DTO
         {
-            get { return doctor; }
+            get { return dTO; }
             set
             {
-                doctor = value;
-                OnPropertyChanged("Doctor");
+                dTO = value;
+                OnPropertyChanged("DTO");
             }
         }
-        private Appointment selectedAppointment;
-        public Appointment SelectedAppointment
-        {
-            get { return selectedAppointment; }
-            set
-            {
-                selectedAppointment = value;
-                OnPropertyChanged("SelectedAppointment");
-            }
-        }
+        private DoctorAppointmentsController controller; 
         private RelayCommand newCommand;
         public RelayCommand NewCommand
         {
@@ -65,31 +55,28 @@ namespace Hospital.ViewModels.Doctor
                 doubleClickCommand = value;
             }
         }
-        private ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
-        public ObservableCollection<Appointment> Appointments
-        {
-            get { return appointments; }
-            set
-            {
-                appointments = value;
-                OnPropertyChanged("Appointments");
-            }
-        }
         public DoctorAppointmentsViewModel(string IDnumber, NavigationController navigationController)
         {
+            DTO = new NewAppointmentDTO();
+            controller = new DoctorAppointmentsController(DTO);
             this.navigationController = navigationController;
+            SetCommands();
+            DTO.Doctor = controller.GetDoctorById(IDnumber);
+            DTO.Appointments = new ObservableCollection<Appointment>(controller.InitAppointments());
+        }
+
+        private void SetCommands()
+        {
             DoubleClickCommand = new RelayCommand(dataGridAppointments_MouseDoubleClick, CanExecute_Command);
             NewCommand = new RelayCommand(Execute_AddAppointment, CanExecute_Command);
             DeleteCommand = new RelayCommand(Execute_Delete, CanExecute_Command);
-            Doctor = doctorService.GetDoctorById(IDnumber);
-            Appointments = new ObservableCollection<Appointment>(AppointmentService.InitAppointments(IDnumber));
         }
 
         private void dataGridAppointments_MouseDoubleClick(object sender)
         {
-            if (SelectedAppointment != null)
+            if (DTO.SelectedAppointment != null)
             {
-                AppointmentDetails review = new AppointmentDetails(SelectedAppointment);
+                AppointmentDetails review = new AppointmentDetails(DTO.SelectedAppointment);
                 review.Owner = Window.GetWindow(App.Current.MainWindow);
                 review.Show();
                 Window.GetWindow(App.Current.MainWindow).Hide();
@@ -102,22 +89,22 @@ namespace Hospital.ViewModels.Doctor
         }
         private void Execute_Delete(object sender)
         {
-            if (SelectedAppointment != null)
+            if (DTO.SelectedAppointment != null)
             {
-                Appointment selectedAppointment = SelectedAppointment;
-                AppointmentService.DeleteAppointment(selectedAppointment.IDAppointment);
-                MedicalRecord medicalRecord = medicalRecordService.GetByPatientId(selectedAppointment.IDpatient);
+                Appointment selectedAppointment = DTO.SelectedAppointment;
+                controller.DeleteAppointment();
+                MedicalRecord medicalRecord = controller.GetByPatientId();
                 if (medicalRecord != null)
                 {
-                    medicalRecordService.DeleteAppointmentFromExamination(selectedAppointment.IDAppointment, medicalRecord);
+                    controller.DeleteAppointmentFromExamination(medicalRecord);
                 }
-                appointments.Remove(SelectedAppointment);
+                DTO.Appointments.Remove(DTO.SelectedAppointment);
             }
         }
 
         private void Execute_AddAppointment(object sender)
         {
-            NewAppointment newAppointment = new NewAppointment(doctor.PersonalID,navigationController);
+            NewAppointment newAppointment = new NewAppointment(DTO.Doctor.PersonalID,navigationController);
             newAppointment.Show();
         }
     }

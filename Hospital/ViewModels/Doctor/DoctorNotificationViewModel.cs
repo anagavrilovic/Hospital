@@ -1,6 +1,8 @@
 ﻿using Caliburn.Micro;
 using Hospital.Commands.DoctorCommands;
 using Hospital.Controller;
+using Hospital.Controller.DoctorControllers;
+using Hospital.DTO.DoctorDTO;
 using Hospital.Model;
 using Hospital.Services;
 using Hospital.View.Doctor;
@@ -22,29 +24,24 @@ namespace Hospital.ViewModels.Doctor
 {
     class DoctorNotificationViewModel : ViewModel
     {
-        private DoctorService doctorService = new DoctorService();
-        private NotificationService notificationService = new NotificationService();
-        private NotificationsUsersService notificationsUsersService = new NotificationsUsersService();
-        private ObservableCollection<Notification> notifications = new ObservableCollection<Notification>();
         private Model.Doctor doctor = new Model.Doctor();
         private NavigationController navigationController;
-        private Notification selectedNotification;
-
+        private DoctorNotificationsDTO dTO;
+        public DoctorNotificationsDTO DTO
+        {
+            get { return dTO; }
+            set
+            {
+                dTO = value;
+                OnPropertyChanged("DTO");
+            }
+        }
+        private DoctorNotificationsController controller;
         private BitmapImage deleteImage;
         public BitmapImage DeleteImage
         {
             get { return this.deleteImage; }
             set { this.deleteImage = value; this.OnPropertyChanged("ImageSource"); }
-        }
-
-        public Notification SelectedNotification
-        {
-            get { return selectedNotification; }
-            set
-            {
-                selectedNotification = value;
-                OnPropertyChanged("SelectedNotification");
-            }
         }
         private string notificationFilterString;
         public string NotificationFilterString
@@ -97,22 +94,6 @@ namespace Hospital.ViewModels.Doctor
             }
         }
 
-
-        public ObservableCollection<Notification> Notifications
-        {
-            get
-            {
-                return notifications;
-            }
-            set
-            {
-                if (value != notifications)
-                {
-                    notifications = value;
-                    OnPropertyChanged("Notifications");
-                }
-            }
-        }
         private ICollectionView notificationCollection;
 
         public ICollectionView NotificationCollection
@@ -123,13 +104,13 @@ namespace Hospital.ViewModels.Doctor
 
         private void Execute_ShowNotificationCommand(object obj)
         {
-            if (SelectedNotification == null)
+            if (DTO.SelectedNotification == null)
             {
                 ErrorBox messageBox = new ErrorBox("Selektujte obaveštenje koje želite da pregledate!");
                 return;
             }
 
-            var displayNotification = new DisplayNotification(selectedNotification, navigationController);
+            var displayNotification = new DisplayNotification(DTO.SelectedNotification, navigationController);
             displayNotification.Show();
         }
         private bool CanExecute_Command(object obj)
@@ -139,9 +120,12 @@ namespace Hospital.ViewModels.Doctor
 
         public DoctorNotificationViewModel(string doctorId, NavigationController navigationController)
         {
+            DTO = new DoctorNotificationsDTO();
+            controller = new DoctorNotificationsController(DTO);
             this.navigationController = navigationController;
-            doctor = doctorService.GetDoctorById(doctorId);
-            Notifications = new ObservableCollection<Notification>(notificationService.SetNotificationsProperty(doctor));
+            doctor = controller.GetDoctorById(doctorId);
+            DTO.Notifications = new ObservableCollection<Notification>();
+            DTO.Notifications = new ObservableCollection<Notification>(controller.SetNotificationsProperty(doctor));
             SetCommands();
             SetFilterProperties();
             SetIcons();
@@ -172,7 +156,7 @@ namespace Hospital.ViewModels.Doctor
         
         private void SetFilterProperties()
         {
-            NotificationCollection = CollectionViewSource.GetDefaultView(Notifications);
+            NotificationCollection = CollectionViewSource.GetDefaultView(DTO.Notifications);
             NotificationCollection.Filter = CustomFilterNotifications;
         }
 
@@ -190,12 +174,12 @@ namespace Hospital.ViewModels.Doctor
 
          void Execute_TextChanged(object sender)
         {
-            CollectionViewSource.GetDefaultView(Notifications).Refresh();
+            CollectionViewSource.GetDefaultView(DTO.Notifications).Refresh();
         }
 
         private void Execute_DeleteNotification(object sender)
         {
-            if (SelectedNotification == null)
+            if (DTO.SelectedNotification == null)
             {
                 ErrorBox messageBox = new ErrorBox("Selektujte obaveštenje koje želite da izbrišete!");
                 return;
@@ -205,9 +189,9 @@ namespace Hospital.ViewModels.Doctor
                         "Potvrda", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
 
-                notificationsUsersService.DeleteNotificationsUsersByNotificationID((SelectedNotification).Id);
-                notificationService.DeleteNotification(SelectedNotification);
-                Notifications.Remove(SelectedNotification);
+                controller.DeleteNotificationsUsersByNotificationID();
+                controller.DeleteNotification();
+                DTO.Notifications.Remove(DTO.SelectedNotification);
             }
 
         }

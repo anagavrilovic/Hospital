@@ -1,4 +1,6 @@
 ﻿using Hospital.Commands.DoctorCommands;
+using Hospital.Controller.DoctorControllers;
+using Hospital.DTO.DoctorDTO;
 using Hospital.Model;
 using Hospital.Services;
 using Hospital.View.Doctor;
@@ -17,23 +19,18 @@ namespace Hospital.ViewModels.Doctor
 
    public class MedicineValidityViewModel : ViewModel
     {
-        private MedicineService medicineService = new MedicineService();
-        private MedicineRevisionService medicineRevisionService = new MedicineRevisionService();
-        private ObservableCollection<MedicineRevision> medicineRevisions = new ObservableCollection<MedicineRevision>();
-        private ObservableCollection<string> ingredients = new ObservableCollection<string>();
-        public ObservableCollection<string> Ingredients
+        private MedicineValidityController controller;
+        private MedicineValidityDTO dTO;
+        public MedicineValidityDTO DTO
         {
             get
             {
-                return ingredients;
+                return dTO;
             }
             set
             {
-                if (value != ingredients)
-                {
-                    ingredients = value;
-                    OnPropertyChanged("MedicineRevisions");
-                }
+                    dTO = value;
+                    OnPropertyChanged("DTO");
             }
         }
         private RelayCommand rejectMedicine;
@@ -54,22 +51,6 @@ namespace Hospital.ViewModels.Doctor
                 confirmMedicine = value;
             }
         }
-        private MedicineRevision selectedRevision = new MedicineRevision();
-        public MedicineRevision SelectedRevision
-        {
-            get
-            {
-                return selectedRevision;
-            }
-            set
-            {
-                if (value != selectedRevision)
-                {
-                    selectedRevision = value;
-                    OnPropertyChanged("SelectedRevision");
-                }
-            }
-        }
         private BitmapImage okImage;
         public BitmapImage OkImage
         {
@@ -82,27 +63,14 @@ namespace Hospital.ViewModels.Doctor
             get { return this.cancelImage; }
             set { this.cancelImage = value; this.OnPropertyChanged("OkImage"); }
         }
-
-        public ObservableCollection<MedicineRevision> MedicineRevisions
-        {
-            get
-            {
-                return medicineRevisions;
-            }
-            set
-            {
-                if (value != medicineRevisions)
-                {
-                    medicineRevisions = value;
-                    OnPropertyChanged("MedicineRevisions");
-                }
-            }
-        }
         public MedicineValidityViewModel(Model.Doctor doctor)
         {
+            DTO = new MedicineValidityDTO();
+            controller = new MedicineValidityController(DTO);
+            DTO.MedicineRevisions = new ObservableCollection<MedicineRevision>();
             this.ConfirmMedicine = new RelayCommand(Execute_ConfirmMedicine, CanExecute_Command);
             this.RejectMedicine = new RelayCommand(Execute_RejectMedicine, CanExecute_Command);
-            medicineRevisions = new ObservableCollection<MedicineRevision>(medicineRevisionService.SetRevisionList(doctor));
+            DTO.MedicineRevisions = new ObservableCollection<MedicineRevision>(controller.SetRevisionList(doctor));
             SetIcons();
         }
         private void SetIcons()
@@ -126,23 +94,23 @@ namespace Hospital.ViewModels.Doctor
 
         private void Execute_ConfirmMedicine(object sender)
         {
-            if (selectedRevision != null)
+            if (DTO.SelectedRevision != null)
             {
                 ConfirmBox confirmBox = new ConfirmBox("Da li ste sigurni da odobravate lek?");
                 if ((bool)confirmBox.ShowDialog())
                 {
-                    medicineRevisionService.Delete((selectedRevision).Medicine.ID);
-                    medicineService.SaveMedicine((selectedRevision).Medicine);
-                    MedicineRevisions.Remove((selectedRevision));
+                    controller.DeleteMedicineRevision();
+                    controller.SaveMedicine();
+                    DTO.MedicineRevisions.Remove((DTO.SelectedRevision));
                 }
             }
         }
 
         private void Execute_RejectMedicine(object sender)
         {
-            if (selectedRevision != null)
+            if (DTO.SelectedRevision != null)
             {
-                RejectedMedicineComment dialog = new RejectedMedicineComment(selectedRevision);
+                RejectedMedicineComment dialog = new RejectedMedicineComment(DTO.SelectedRevision);
                 dialog.Show();
             }
         }

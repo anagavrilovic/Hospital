@@ -65,7 +65,7 @@
                     </Border>
 
                     <!-- Prikaz obavestenja -->
-                    <ListBox x:Name="ListBoxRevisions" ItemsSource="{Binding MedicineRevisions, Mode=TwoWay}" SelectedItem="{Binding SelectedRevision}" Grid.Row="1" Margin="20,5,20,15"
+                    <ListBox x:Name="ListBoxRevisions" ItemsSource="{Binding DTO.MedicineRevisions, Mode=TwoWay}" SelectedItem="{Binding DTO.SelectedRevision}" Grid.Row="1" Margin="20,5,20,15"
                                 ScrollViewer.HorizontalScrollBarVisibility="Hidden" Style="{StaticResource ListBoxStyle}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>

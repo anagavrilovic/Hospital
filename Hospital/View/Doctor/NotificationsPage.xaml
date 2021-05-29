@@ -65,8 +65,8 @@
                     </Border>
 
                     <!-- Prikaz obavestenja -->
-                    <ListBox x:Name="ListBoxNotifications" ItemsSource="{Binding Notifications, Mode=TwoWay}" 
-                             SelectedItem="{Binding SelectedNotification}" Grid.Row="1" Margin="20,5,20,15"
+                    <ListBox x:Name="ListBoxNotifications" ItemsSource="{Binding DTO.Notifications, Mode=TwoWay}" 
+                             SelectedItem="{Binding DTO.SelectedNotification}" Grid.Row="1" Margin="20,5,20,15"
                                 ScrollViewer.HorizontalScrollBarVisibility="Hidden" Style="{StaticResource ListBoxStyle}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>

@@ -76,12 +76,18 @@
     </ApplicationDefinition>
     <Compile Include="Commands\DoctorCommands\RelayCommand.cs" />
     <Compile Include="Commands\Patient\RelayCommand.cs" />
+    <Compile Include="Controller\DoctorControllers\DoctorAppointmentsController.cs" />
     <Compile Include="Controller\DoctorControllers\DoctorMainWindowController.cs" />
+    <Compile Include="Controller\DoctorControllers\DoctorNotificationsController.cs" />
     <Compile Include="Controller\DoctorControllers\EditMedicineController.cs" />
+    <Compile Include="Controller\DoctorControllers\MedicineValidityController.cs" />
     <Compile Include="Controller\NavigationController.cs" />
     <Compile Include="Controller\WpfNavigationController.cs" />
     <Compile Include="DoktorConverters\ListToStringConverter.cs" />
+    <Compile Include="DTO\DoctorDTO\DoctorNotificationsDTO.cs" />
     <Compile Include="DTO\DoctorDTO\EditMedicineDTO.cs" />
+    <Compile Include="DTO\DoctorDTO\MedicineValidityDTO.cs" />
+    <Compile Include="DTO\DoctorDTO\NewAppointmentDTO.cs" />
     <Compile Include="DTO\NotificationRecipientsDTO.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Allergen.cs" />

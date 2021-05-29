@@ -19,8 +19,8 @@
                     <TextBlock>
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0}  {1}">
-                                <Binding Path="Doctor.FirstName" />
-                                <Binding Path="Doctor.LastName" />
+                                 <Binding Path="DTO.Doctor.FirstName" />
+                                 <Binding Path="DTO.Doctor.LastName" />
                             </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>
@@ -41,8 +41,8 @@
                 </Button>
             </StackPanel>
         </DockPanel>
-        <DataGrid x:Name="dataGridAppointments" ItemsSource="{Binding Path=Appointments}" Style="{DynamicResource PacijentiDataGrid}"
-               SelectionMode="Single" IsReadOnly="True" Margin="30,30,30,50" AutoGenerateColumns="False"  SelectedValue="{Binding SelectedAppointment}">
+        <DataGrid x:Name="dataGridAppointments" ItemsSource="{Binding Path=DTO.Appointments}" Style="{DynamicResource PacijentiDataGrid}"
+               SelectionMode="Single" IsReadOnly="True" Margin="30,30,30,50" AutoGenerateColumns="False"  SelectedValue="{Binding DTO.SelectedAppointment}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{ns:Loc namePatientLabel}" Width="0.25*" Binding="{Binding PatientsRecord.Patient.FirstName}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
                 <DataGridTextColumn Header="{ns:Loc surnamePatientLabel}" Width="0.25*" Binding="{Binding PatientsRecord.Patient.LastName}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
