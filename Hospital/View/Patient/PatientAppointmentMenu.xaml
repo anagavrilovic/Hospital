@@ -9,9 +9,10 @@
       Title="PatientAppointmentMenu">
 
     <Grid Background="White">
-        <Button Name="DoneAppointmentsButton" Content="Obavljeni pregledi/operacije" HorizontalAlignment="Left" Height="43" Margin="251,88,0,0" VerticalAlignment="Top" Width="239" Click="PassedAppointments"/>
+        <Button Name="DoneAppointmentsButton" Content="Obavljeni pregledi/operacije" HorizontalAlignment="Left" Height="43" Margin="251,255,0,0" VerticalAlignment="Top" Width="239" Click="PassedAppointments"/>
         <Button Content="Zakazani pregledi/operacije" HorizontalAlignment="Left" Height="43" Margin="251,183,0,0" VerticalAlignment="Top" Width="239" Click="Appointments"/>
         <Button Content="Nazad" HorizontalAlignment="Left" Height="43" Margin="251,326,0,0" VerticalAlignment="Top" Width="239" Click="Back"/>
+        <Button Content="Zakaži pregled" HorizontalAlignment="Left" Height="43" Margin="251,87,0,0" VerticalAlignment="Top" Width="239" Click="MakeAnAppointment" />
 
     </Grid>
 </Page>

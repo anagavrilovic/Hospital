@@ -1,0 +1,20 @@
+﻿<Page x:Class="Hospital.View.PatientNotes"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hospital.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PatientNotes"
+      KeyDown="myTestKey">
+
+    <Grid Background="White">
+        <DataGrid x:Name="dataGridApp" ItemsSource="{Binding Notes}" IsReadOnly="True" 
+                  SelectionMode="Single" AutoGenerateColumns="False" Margin="0,0,107,110">
+            <DataGrid.Columns>
+                <DataGridTextColumn  Header="Naslov" Binding="{Binding Subject}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

@@ -29,7 +29,6 @@ namespace Hospital.View
         {
             
             InitializeComponent();
-            if (!patientCommentsStorage.IsTimeForHospitalRating()) RateButton.Visibility = Visibility.Collapsed;
             Boolean newNotification = false;
             PatientNotificationsStorage patientNotificationsStorage = new PatientNotificationsStorage();
             //  patientNotificationsStorage.SaveAll();
@@ -95,26 +94,10 @@ namespace Hospital.View
             this.NavigationService.Navigate(patientAppointmentMenu);
         }
 
-        private void MakeAppointment(object sender, RoutedEventArgs e)
+        private void ViewAdditionalOptions(object sender, RoutedEventArgs e)
         {
-            if (patientSettingsStorage.IsAntiTrollTriggered())
-            {
-                MessageBox.Show("Previše puta ste zakazali/pomerili termin u kratkom vremenskom periodu.");
-                return;
-            }
-            PatientMakeAppointment patientMakeAppointment = new PatientMakeAppointment();
-            this.NavigationService.Navigate(patientMakeAppointment);
-        }
-
-        private void RateHospital(object sender, RoutedEventArgs e)
-        {
-            PatientRateDoctor patientRateDoctor = new PatientRateDoctor();
-            this.NavigationService.Navigate(patientRateDoctor);
-        }
-
-        public void Refresh()
-        { 
-            if (!patientCommentsStorage.IsTimeForHospitalRating()) RateButton.Visibility = Visibility.Collapsed;
+            PatientAdditionalOptions patientAdditionalOptions = new PatientAdditionalOptions();
+            this.NavigationService.Navigate(patientAdditionalOptions);
         }
     }
 }
