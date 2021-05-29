@@ -19,6 +19,7 @@ using System.Windows.Shapes;
 using Hospital.Model;
 using System.Collections.ObjectModel;
 using Hospital.View.Doctor;
+using Hospital.Services;
 
 namespace Hospital
 {
@@ -26,25 +27,19 @@ namespace Hospital
     public partial class MainWindow : Window
     {
         public static String IDnumber;
-        private ObservableCollection<RegistratedUser> users;
+        public DoctorsShiftService DoctorsShiftService { get; set; }
 
-        public ObservableCollection<RegistratedUser> Users
-        {
-            get => users;
-            set
-            {
-                users = value;
-            }
-        }
         public MainWindow()
         {
             InitializeComponent();
+            DoctorsShiftService = new DoctorsShiftService();
+            DoctorsShiftService.UpdateAllShifts();
         }
 
         private void BtnUlogujSe(object sender, RoutedEventArgs e)
         {
             RegistratedUserStorage rus = new RegistratedUserStorage();
-            users = rus.GetAll();
+            ObservableCollection<RegistratedUser> users = rus.GetAll();
             bool found = false;
 
             foreach (RegistratedUser user in users)

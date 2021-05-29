@@ -165,6 +165,7 @@
     <Compile Include="Repositories\TransferInventoryFileRepository.cs" />
     <Compile Include="Services\AppointmentService.cs" />
     <Compile Include="Services\DoctorService.cs" />
+    <Compile Include="Services\DoctorsShiftService.cs" />
     <Compile Include="Services\DynamicInventoryService.cs" />
     <Compile Include="Services\ExaminationService.cs" />
     <Compile Include="Services\HospitalTreatmentService.cs" />

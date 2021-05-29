@@ -8,10 +8,10 @@ namespace Hospital.Model
 {
     public enum Shift
     {
+        pause,
         first, 
         second, 
         third, 
-        pause,
         free
     }
 }

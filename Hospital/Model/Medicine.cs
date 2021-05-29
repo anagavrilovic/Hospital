@@ -235,6 +235,5 @@ namespace Hospital
                 ReplacementMedicineIDs.Clear();
         }
     }
-    class PretragaM : ObservableCollection<Medicine> { }
 }
 

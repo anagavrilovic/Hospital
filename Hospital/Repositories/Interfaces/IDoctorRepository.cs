@@ -11,5 +11,6 @@ namespace Hospital.Repositories.Interfaces
     interface IDoctorRepository : IGenericRepository<Doctor>
     {
         List<Doctor> GetBySpecialty(DoctorSpecialty doctorSpecialty);
+        void Update(Doctor doctorForUpdating);
     }
 }

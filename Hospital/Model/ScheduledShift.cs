@@ -10,6 +10,6 @@ namespace Hospital.Model
     {
         public Shift Shift { get; set; }
         public DateTime Date { get; set; }
-        public bool ChangeShifts { get; set; }
+        public bool RollShifts { get; set; }
     }
 }

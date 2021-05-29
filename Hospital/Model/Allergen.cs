@@ -1,8 +1,3 @@
-// File:    Allergen.cs
-// Author:  Ana Gavrilovic
-// Created: Monday, April 5, 2021 7:28:17 PM
-// Purpose: Definition of Class Allergen
-
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,8 +7,8 @@ namespace Hospital
     public class Allergen
     {
        private string other;
-       private ObservableCollection<string> medicineNames = new ObservableCollection<string>();
-       private ObservableCollection<string> ingredientNames = new ObservableCollection<string>();
+       private List<string> medicineNames = new List<string>();
+       private List<string> ingredientNames = new List<string>();
 
         public string Other
         {
@@ -21,12 +16,12 @@ namespace Hospital
             set { other = value; }
         }
 
-        public ObservableCollection<string> MedicineNames
+        public List<string> MedicineNames
         {
             get { return medicineNames; }
             set { medicineNames = value; }
         }
-        public ObservableCollection<string> IngredientNames
+        public List<string> IngredientNames
         {
             get { return ingredientNames; }
             set { ingredientNames = value; }

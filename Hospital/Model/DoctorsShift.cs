@@ -12,6 +12,12 @@ namespace Hospital.Model
         public DateTime LastUpdated { get; set; }
         public Shift ChangingShift { get; set; }
         public int NumberOfFreeDays { get; set; }
+        public DateTime FreeDaysBegin { get; set; }
         public List<ScheduledShift> ScheduledShifts { get; set; }
+
+        public DoctorsShift()
+        {
+            ScheduledShifts = new List<ScheduledShift>();
+        }
     }
 }
