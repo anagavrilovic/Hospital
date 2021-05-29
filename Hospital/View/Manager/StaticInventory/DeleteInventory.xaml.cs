@@ -28,8 +28,8 @@ namespace Hospital.View
 
         private void AcceptDeleting(object sender, RoutedEventArgs e)
         {
-            StaticInventoryService inventoryService = new StaticInventoryService(InventoryForDeleting);
-            inventoryService.DeleteItem();
+            StaticInventoryService inventoryService = new StaticInventoryService();
+            inventoryService.DeleteItem(InventoryForDeleting);
 
             NavigationService.Navigate(new StaticInventoryView(InventoryForDeleting.RoomID));
         }

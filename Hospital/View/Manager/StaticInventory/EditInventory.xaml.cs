@@ -33,8 +33,8 @@ namespace Hospital.View
         private void AcceptButtonClick(object sender, RoutedEventArgs e)
         {
             SaveEditedProperties();
-            StaticInventoryService inventoryService = new StaticInventoryService(InventoryItem);
-            inventoryService.EditItem();
+            StaticInventoryService inventoryService = new StaticInventoryService();
+            inventoryService.EditItem(InventoryItem);
 
             NavigationService.Navigate(new StaticInventoryView(InventoryItem.RoomID));
         }

@@ -35,13 +35,6 @@ namespace Hospital.View
             }
         }
 
-        public static event PropertyChangedEventHandler StaticPropertyChanged;
-        private static void NotifyStaticPropertyChanged([CallerMemberName] string name = null)
-        {
-            StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(name));
-        }
-
-        private InventoryStorage _inventoryStorage;
         private string _searchCriterion;
         public ICollectionView InventoryCollection { get; set; }
 
@@ -51,8 +44,8 @@ namespace Hospital.View
             this.DataContext = this;
             this._roomID = id;
 
-            _inventoryStorage = new InventoryStorage();
-            InventoryInRoom = _inventoryStorage.GetByRoomID(id);
+            StaticInventoryService inventoryService = new StaticInventoryService();
+            InventoryInRoom = new ObservableCollection<Inventory>(inventoryService.GetAllInventoryFroomRoom(id));
             InventoryCollection = CollectionViewSource.GetDefaultView(InventoryInRoom);
             CheckScheduledTransfersStatus();
         }
@@ -100,9 +93,8 @@ namespace Hospital.View
         {
             if (((Inventory)item).Name.Contains(_searchCriterion) || ((Inventory)item).Id.Contains(_searchCriterion) || ((Inventory)item).Price.ToString().Contains(_searchCriterion) ||
                 ((Inventory)item).RoomID.Contains(_searchCriterion) || ((Inventory)item).Quantity.ToString().Contains(_searchCriterion))
-            {
                 return true;
-            }
+            
             return false;
         }
 
@@ -149,6 +141,12 @@ namespace Hospital.View
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RoomsWindow());
+        }
+
+        public static event PropertyChangedEventHandler StaticPropertyChanged;
+        private static void NotifyStaticPropertyChanged([CallerMemberName] string name = null)
+        {
+            StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(name));
         }
     }
 }
