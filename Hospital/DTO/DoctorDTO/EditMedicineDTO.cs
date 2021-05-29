@@ -65,18 +65,6 @@ namespace Hospital.DTO.DoctorDTO
             }
         }
 
-        private Medicine selectedMedicine;
-        public Medicine SelectedMedicine
-        {
-            get { return selectedMedicine; }
-            set
-            {
-                selectedMedicine = value;
-                OnPropertyChanged("SelectedMedicine");
-                SelctedMedicChanged();
-            }
-        }
-
         private Medicine selectedSubstituteDrugs;
         public Medicine SelectedSubstituteDrugs
         {
@@ -105,6 +93,26 @@ namespace Hospital.DTO.DoctorDTO
             {
                 medicineIngredients = value;
                 OnPropertyChanged("MedicineIngredients");
+            }
+        }
+        private Medicine medicine;
+        public Medicine Medicine
+        {
+            get { return medicine; }
+            set
+            {
+                medicine = value;
+                OnPropertyChanged("Medicine");
+            }
+        }
+        private Medicine selectedMedicine;
+        public Medicine SelectedMedicine
+        {
+            get { return selectedMedicine; }
+            set
+            {
+                selectedMedicine = value;
+                OnPropertyChanged("SelectedMedicine");
             }
         }
 

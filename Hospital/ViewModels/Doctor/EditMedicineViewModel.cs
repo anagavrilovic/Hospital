@@ -1,4 +1,6 @@
 ﻿using Hospital.Commands.DoctorCommands;
+using Hospital.Controller.DoctorControllers;
+using Hospital.DTO.DoctorDTO;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -7,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 
 namespace Hospital.ViewModels.Doctor
@@ -14,60 +17,18 @@ namespace Hospital.ViewModels.Doctor
     class EditMedicineViewModel : ViewModel
     {
         private MedicineService medicineService = new MedicineService();
-        private Medicine medicine = new Medicine();
-        public Medicine Medicine
-        {
-            get { return medicine; }
-            set
-            {
-                medicine = value;
-                OnPropertyChanged("Medicine");
-            }
-        }
-        private ObservableCollection<Medicine> medicineForDisplay;
-        public ObservableCollection<Medicine> MedicineForDisplay
-        {
-            get { return medicineForDisplay; }
-            set
-            {
-                medicineForDisplay = value;
-                OnPropertyChanged("MedicineForDisplay");
-            }
-        }
-        private ObservableCollection<Medicine> substituteDrugs = new ObservableCollection<Medicine>();
-        public ObservableCollection<Medicine> SubstituteDrugs
-        {
-            get { return substituteDrugs; }
-            set
-            {
-                substituteDrugs = value;
-                OnPropertyChanged("SubstituteDrugs");
-            }
-        }
-        private Ingredient selectedIngredient;
-        public Ingredient SelectedIngredient
-        {
-            get { return selectedIngredient; }
-            set
-            {
-                selectedIngredient = value;
-                OnPropertyChanged("SelectedIngredient");
-            }
-        }
-
-        private ObservableCollection<Ingredient> ingredients = new ObservableCollection<Ingredient>();
-        public ObservableCollection<Ingredient> Ingredients
-        {
-            get { return ingredients; }
-            set
-            {
-                ingredients = value;
-                OnPropertyChanged("Ingredients");
-            }
-        }
-
         private ICollectionView medicineCollection;
-
+        private EditMedicineController controller;
+        private EditMedicineDTO dTO;
+        public EditMedicineDTO DTO
+        {
+            get { return dTO; }
+            set
+            {
+                dTO = value;
+                OnPropertyChanged("DTO");
+            }
+        }
         public ICollectionView MedicineCollection
         {
             get { return medicineCollection; }
@@ -93,14 +54,16 @@ namespace Hospital.ViewModels.Doctor
                 Execute_SearchIngredientFilter();
             }
         }
-        public string dosageInMg;
-        public string DosageInMg
+        private Medicine selectedMedicine;
+        public Medicine SelectedMedicine
         {
-            get { return dosageInMg; }
+            get { return selectedMedicine; }
             set
             {
-                dosageInMg = value;
-                OnPropertyChanged("DosageInMg");
+                selectedMedicine = value;
+                OnPropertyChanged("SelectedMedicine");
+                DTO.SelectedMedicine = SelectedMedicine;
+                Execute_SelctedMedicChanged();
             }
         }
 
@@ -166,48 +129,6 @@ namespace Hospital.ViewModels.Doctor
                 OnPropertyChanged("IsEnableEdit");
             }
         }
-        private Medicine selectedMedicine;
-        public Medicine SelectedMedicine
-        {
-            get { return selectedMedicine; }
-            set
-            {
-                selectedMedicine = value;
-                OnPropertyChanged("SelectedMedicine");
-                SelctedMedicChanged();
-            }
-        }
-        private Medicine selectedSubstituteDrugs;
-        public Medicine SelectedSubstituteDrugs
-        {
-            get { return selectedSubstituteDrugs; }
-            set
-            {
-                selectedSubstituteDrugs = value;
-                OnPropertyChanged("SelectedSubstituteDrugs");
-            }
-        }
-        private Ingredient selectedMedicineIngredient;
-        public Ingredient SelectedMedicineIngredient
-        {
-            get { return selectedMedicineIngredient; }
-            set
-            {
-                selectedMedicineIngredient = value;
-                OnPropertyChanged("SelectedMedicineIngredient");
-            }
-        }
-        private ObservableCollection<Ingredient> medicineIngredients;
-        public ObservableCollection<Ingredient> MedicineIngredients
-        {
-            get { return medicineIngredients; }
-            set
-            {
-                medicineIngredients = value;
-                OnPropertyChanged("MedicineIngredients");
-            }
-        }
-
         private RelayCommand saveCommand;
         public RelayCommand SaveCommand
         {
@@ -281,14 +202,25 @@ namespace Hospital.ViewModels.Doctor
             }
         }
 
+        private RelayCommand commandSelectionChanged;
+        public RelayCommand CommandSelectionChanged
+        {
+            get { return commandSelectionChanged; }
+            set
+            {
+                commandSelectionChanged = value;
+            }
+        }
+
         public EditMedicineViewModel()
         {
+            DTO = new EditMedicineDTO();
+            controller = new EditMedicineController(DTO);
             NewMethod();
             SetButtonIsEnableProperty();
-            Ingredients = new ObservableCollection<Ingredient>(medicineService.ReadIngredients());
+            DTO.Ingredients = new ObservableCollection<Ingredient>(medicineService.ReadIngredients());
             SetProperites();
             AddFilterAndSorter();
-            SetReplacementMedicine();
         }
 
         private void NewMethod()
@@ -312,16 +244,17 @@ namespace Hospital.ViewModels.Doctor
 
         private void SetProperites()
         {
-            MedicineIngredients = new ObservableCollection<Ingredient>();
-            MedicineForDisplay = new ObservableCollection<Medicine>(medicineService.GetAll());
-            SelectedMedicine = MedicineForDisplay.First();
-            Medicine = SelectedMedicine;
+            DTO.MedicineIngredients = new ObservableCollection<Ingredient>();
+            DTO.MedicineForDisplay = new ObservableCollection<Medicine>(medicineService.GetAll());
+            SelectedMedicine = DTO.MedicineForDisplay.First();
+            DTO.Medicine = SelectedMedicine;
+            SetReplacementMedicine();
         }
 
         private void AddFilterAndSorter()
         {
-            MedicineCollection = CollectionViewSource.GetDefaultView(MedicineForDisplay);
-            IngredientCollection = CollectionViewSource.GetDefaultView(Ingredients);
+            MedicineCollection = CollectionViewSource.GetDefaultView(DTO.MedicineForDisplay);
+            IngredientCollection = CollectionViewSource.GetDefaultView(DTO.Ingredients);
             IngredientCollection.Filter = filterIngredients;
             MedicineCollection.Filter = filterMedics;
             ICollectionView view = GetPretraga();
@@ -353,37 +286,35 @@ namespace Hospital.ViewModels.Doctor
             }
         }
 
-        private void SetReplacementMedicine()
-        {
-            if (SelectedMedicine != null)
-            {
-                SubstituteDrugs = new ObservableCollection<Medicine>(medicineService.SetReplacementMedicine(Medicine));
-            }
-        }
-
         private void Execute_LekoviFilterTextChanged()
         {
-            CollectionViewSource.GetDefaultView(MedicineForDisplay).Refresh();
-            OnPropertyChanged("MedicineForDisplay");
+            CollectionViewSource.GetDefaultView(DTO.MedicineForDisplay).Refresh();
         }
 
 
         public ICollectionView GetPretraga()
         {
-            return CollectionViewSource.GetDefaultView(MedicineForDisplay);
+            return CollectionViewSource.GetDefaultView(DTO.MedicineForDisplay);
         }
 
-        private void SelctedMedicChanged()
+        private void Execute_SelctedMedicChanged()
         {
             if (SelectedMedicine != null && IsEnableRemoveIngredient.Equals(false))
             {
-                DosageInMg = SelectedMedicine.DosageInMg.ToString();    
-                Medicine = SelectedMedicine;
+                DTO.DosageInMg = SelectedMedicine.DosageInMg.ToString();
+                DTO.Medicine = SelectedMedicine;
                 SetReplacementMedicine();
             }
         }
 
-
+        private void SetReplacementMedicine()
+        {
+            if (SelectedMedicine != null)
+            {
+                DTO.SubstituteDrugs = new ObservableCollection<Medicine>(controller.SetReplacementMedicine());
+                DTO.MedicineIngredients = new ObservableCollection<Ingredient>(DTO.Medicine.Ingredient);
+            }
+        }
 
         private void Execute_EditMedic(object sender)
         {
@@ -396,43 +327,44 @@ namespace Hospital.ViewModels.Doctor
 
         private void Execute_AddIngridient(object sender)
         {
-            if (SelectedIngredient != null && !medicineService.ContainsIngredient(Medicine, SelectedIngredient))
+            if (DTO.SelectedIngredient != null && ! controller.MedicineContainsIngredient())
             {
-                Medicine.AddIngredient(SelectedIngredient);
-                MedicineIngredients.Add(SelectedIngredient);
+                DTO.Medicine.AddIngredient(DTO.SelectedIngredient);
+                DTO.MedicineIngredients.Add(DTO.SelectedIngredient);
             }
         }
 
         private void Execute_RemoveIngridient(object sender)
         {
-            if (SelectedMedicineIngredient != null)
+            if (DTO.SelectedMedicineIngredient != null)
             {
-                Medicine.RemoveIngredient(SelectedMedicineIngredient);
-                MedicineIngredients.Remove(SelectedMedicineIngredient);
+                MessageBox.Show(DTO.SelectedMedicineIngredient.Name);
+                DTO.Medicine.RemoveIngredient(DTO.SelectedMedicineIngredient);
+                DTO.MedicineIngredients.Remove(DTO.SelectedMedicineIngredient);
             }
         }
 
         private void Execute_AddReplacement(object sender)
         {
-            if (!Medicine.ID.Equals(SelectedMedicine.ID) && !medicineService.AlreadyInSubstituteDrugs(SelectedMedicine, SubstituteDrugs.ToList()))
+            if (!DTO.Medicine.ID.Equals(SelectedMedicine.ID) && !controller.MedicineAlreadyInSubstituteDrugs())
             {
-                Medicine.AddMedicineID((SelectedMedicine).ID);
-                SubstituteDrugs.Add(SelectedMedicine);
+                DTO.Medicine.AddMedicineID((SelectedMedicine).ID);
+                DTO.SubstituteDrugs.Add(SelectedMedicine);
             }
         }
 
         private void Execute_RemoveReplacement(object sender)
         {
-            if (SelectedSubstituteDrugs != null)
+            if (DTO.SelectedSubstituteDrugs != null)
             {
-                Medicine.RemoveMedicineID(SelectedSubstituteDrugs.ID);
-                SubstituteDrugs.Remove(SelectedSubstituteDrugs);
+                DTO.Medicine.RemoveMedicineID(DTO.SelectedSubstituteDrugs.ID);
+                DTO.SubstituteDrugs.Remove(DTO.SelectedSubstituteDrugs);
             }
         }
         private void Execute_SaveChanges(object sender)
         {
-            Medicine.DosageInMg = Convert.ToDouble(DosageInMg);
-            medicineService.SaveMedicineSubstitutes(SubstituteDrugs.ToList(), Medicine);
+            DTO.Medicine.DosageInMg = Convert.ToDouble(DTO.DosageInMg);
+            controller.SaveMedicineChanges();
             SavedChangesVisibilities();
         }
 
@@ -447,7 +379,7 @@ namespace Hospital.ViewModels.Doctor
 
         private void Execute_SearchIngredientFilter()
         {
-            CollectionViewSource.GetDefaultView(Ingredients).Refresh();
+            CollectionViewSource.GetDefaultView(DTO.Ingredients).Refresh();
         }
         private bool CanExecute_Command(object obj)
         {

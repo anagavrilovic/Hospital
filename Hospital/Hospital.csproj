@@ -76,9 +76,12 @@
     </ApplicationDefinition>
     <Compile Include="Commands\DoctorCommands\RelayCommand.cs" />
     <Compile Include="Commands\Patient\RelayCommand.cs" />
+    <Compile Include="Controller\DoctorControllers\DoctorMainWindowController.cs" />
+    <Compile Include="Controller\DoctorControllers\EditMedicineController.cs" />
     <Compile Include="Controller\NavigationController.cs" />
     <Compile Include="Controller\WpfNavigationController.cs" />
     <Compile Include="DoktorConverters\ListToStringConverter.cs" />
+    <Compile Include="DTO\DoctorDTO\EditMedicineDTO.cs" />
     <Compile Include="DTO\NotificationRecipientsDTO.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Allergen.cs" />
@@ -1106,5 +1109,6 @@
   <ItemGroup>
     <Resource Include="Icon\DoctorIcons\cancel_pink.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

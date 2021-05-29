@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Hospital.View.Doctor"
-      xmlns:ns="clr-namespace:Hospital" 
+      xmlns:ns="clr-namespace:Hospital" xmlns:i1="http://schemas.microsoft.com/xaml/behaviors"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Lekovi" Background="{DynamicResource Background}">
@@ -28,8 +28,13 @@
                     </StackPanel>
                 </Border>
             </StackPanel>
-            <ListBox Name="allDrugsListBox" IsSynchronizedWithCurrentItem="True" Margin="0,20,0,20" ItemsSource="{Binding MedicineForDisplay}"
+            <ListBox Name="allDrugsListBox" IsSynchronizedWithCurrentItem="True" Margin="0,20,0,20" ItemsSource="{Binding DTO.MedicineForDisplay}"
                      SelectedValue="{Binding SelectedMedicine}" Height="225" Style="{DynamicResource ListBoxStyle}">
+                <i1:Interaction.Triggers>
+                    <i1:EventTrigger EventName="MouseClick">
+                        <i1:InvokeCommandAction Command="{Binding CommandSelectionChanged}"/>
+                    </i1:EventTrigger>
+                </i1:Interaction.Triggers>
             </ListBox>
             
             <StackPanel Orientation="Horizontal">
@@ -43,7 +48,7 @@
                 </Border>
             </StackPanel>
             <ListBox Name="allIngredientsListBox" IsSynchronizedWithCurrentItem="True" Margin="0,20,0,20"
-                      Height="180" Style="{DynamicResource ListBoxStyle}" ItemsSource="{Binding Ingredients}" SelectedValue="{Binding SelectedIngredient}">
+                      Height="180" Style="{DynamicResource ListBoxStyle}" ItemsSource="{Binding DTO.Ingredients}" SelectedValue="{Binding DTO.SelectedIngredient}">
             </ListBox>
         </StackPanel>
         
@@ -68,7 +73,7 @@
                 <Label x:Name="lekLabel" HorizontalAlignment="Left" FontSize="20" Style="{DynamicResource Label}">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{ns:Loc medicineTB}"/>
-                        <TextBlock Text="{Binding Medicine.Name}"/>
+                        <TextBlock Text="{Binding DTO.Medicine.Name}"/>
                     </StackPanel>
                 </Label>
             </StackPanel>
@@ -77,8 +82,8 @@
 
             <Label Content="{ns:Loc supstitutionMedicineLabel}" Margin="0,10,0,10" FontSize="15" Style="{DynamicResource Label}"/>
             <StackPanel Orientation="Horizontal" Background="{DynamicResource SecondBackground}">
-                <ListBox x:Name="replacementDrugsListBox" ItemsSource="{Binding SubstituteDrugs}" Height="150" IsSynchronizedWithCurrentItem="True" Width="300"
-                         Style="{DynamicResource ListBoxStyle}" SelectedValue="{Binding SelectedSubstituteDrugs}"></ListBox>
+                <ListBox x:Name="replacementDrugsListBox" ItemsSource="{Binding DTO.SubstituteDrugs}" Height="150" IsSynchronizedWithCurrentItem="False" Width="300"
+                         Style="{DynamicResource ListBoxStyle}" SelectedValue="{Binding DTO.SelectedSubstituteDrugs}"></ListBox>
                 <StackPanel Orientation="Vertical" Margin="30,0,0,0">
                     <Label Style="{DynamicResource Label}" Content="{ns:Loc addOrRemoveReplacement}"/>
                     <Button x:Name="dodajZamenu" Margin="15,10,0,0" Command="{Binding CommandAddReplacement}"
@@ -100,14 +105,15 @@
             
             <StackPanel Orientation="Horizontal"    >
                 <Label Content="{ns:Loc dosageInMgLabel}" FontSize="15" Style="{DynamicResource Label}"/>
-                <TextBox x:Name="doza" Width="40" Height="25" Text="{Binding DosageInMg}" IsEnabled="{Binding IsEnableAddIngredient}"/>
+                <TextBox x:Name="doza" Width="40" Height="25" Text="{Binding DTO.Medicine.DosageInMg}" IsEnabled="{Binding IsEnableAddIngredient}"/>
             </StackPanel>
 
 
             <Label Margin="0,10,0,0" FontSize="15" Content="{ns:Loc ingredientsLabel}" Style="{DynamicResource Label}" />
             <StackPanel Orientation="Horizontal" Background="{DynamicResource SecondBackground}">
-                    <ListBox x:Name="medicineIngredientsListBox" Height="130" IsSynchronizedWithCurrentItem="True" Width="300" Margin="0,0,30,0"
-                         Style="{DynamicResource ListBoxStyle}" ItemsSource="{Binding MedicineIngredients}" SelectedValue="{Binding SelectedMedicineIngredient}"></ListBox>
+                    <ListBox x:Name="medicineIngredientsListBox" Height="130" Width="300" Margin="0,0,30,0"
+                         Style="{DynamicResource ListBoxStyle}" IsSynchronizedWithCurrentItem="False"
+                             ItemsSource="{Binding DTO.MedicineIngredients}" SelectedValue="{Binding DTO.SelectedMedicineIngredient}"></ListBox>
                     <StackPanel Orientation="Vertical">
                     <Label x:Name="sastojakLabela" Content="{ns:Loc addOrRemoveIngredientLabel}" Margin="15,0,0,0" Style="{DynamicResource Label}"/>
                     <Button  x:Name="dodajSastojak" Margin="15,10,0,0" IsEnabled="{Binding IsEnableAddIngredient}"

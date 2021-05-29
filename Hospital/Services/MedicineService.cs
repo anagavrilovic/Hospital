@@ -114,7 +114,7 @@ namespace Hospital.Services
         public bool ContainsIngredient(Medicine medicine, Ingredient selectedIngredient)
         {
             foreach (Ingredient i in medicine.Ingredient)
-                if (i.Name.Equals(selectedIngredient))
+                if (i.Name.Equals(selectedIngredient.Name))
                     return true;
             return false;
         }
