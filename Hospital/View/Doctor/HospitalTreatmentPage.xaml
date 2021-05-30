@@ -19,14 +19,14 @@
             <Label x:Name="patientLabel" HorizontalAlignment="Left" Margin="0,0,0,15" FontSize="14" Style="{DynamicResource Label}">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text=" Pacijent: "/>
-                    <TextBlock Text="{Binding MedicalRecord.Patient.FirstName}"/>
-                    <TextBlock Text="{Binding MedicalRecord.Patient.LastName}" Margin="5,0,0,0"/>
+                    <TextBlock Text="{Binding DTO.MedicalRecord.Patient.FirstName}"/>
+                    <TextBlock Text="{Binding DTO.MedicalRecord.Patient.LastName}" Margin="5,0,0,0"/>
                 </StackPanel>
             </Label>
             <StackPanel Orientation="Horizontal">
                 <Label x:Name="roomLabel" Content="Soba: " HorizontalAlignment="Left" Margin="5,0,0,15" FontSize="14" Style="{DynamicResource Label}">
             </Label>
-                <ComboBox x:Name="roomComboBox" Width="250" Height="30" SelectedValue="{Binding SelectedRoom}" 
+                <ComboBox x:Name="roomComboBox" Width="250" Height="30" SelectedValue="{Binding DTO.SelectedRoom}" 
                       VerticalAlignment="Top" Margin="5,0,0,15">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -40,13 +40,13 @@
             <Label x:Name="bedNumberLabel" HorizontalAlignment="Left" Margin="0,0,0,15" FontSize="14" Style="{DynamicResource Label}">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{ns:Loc freeBedsTB}"/>
-                    <TextBlock Text="{Binding SelectedRoom.FreeBeds}"/>
+                    <TextBlock Text="{Binding DTO.SelectedRoom.FreeBeds}"/>
                 </StackPanel>
             </Label>
             <StackPanel Orientation="Horizontal">
                 <Label x:Name="dateLabel" Content="{ns:Loc hospitalDatePicker}" HorizontalAlignment="Left" Margin="5,0,5,15" FontSize="14" Style="{DynamicResource Label}"></Label>
             <DatePicker x:Name="datePicker" Width="150" Height="25"  DisplayDateStart="{x:Static sys:DateTime.Today}"
-                        SelectedDate="{Binding PatientsStayDuration, Mode=OneWayToSource}" FirstDayOfWeek="Monday" Margin="10,0,0,15"/>
+                        SelectedDate="{Binding DTO.PatientsStayDuration, Mode=OneWayToSource}" FirstDayOfWeek="Monday" Margin="10,0,0,15"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,30,0,0">
                 <Button  Style="{DynamicResource ImageButtonsHorizontal}" Click="Save_Click">

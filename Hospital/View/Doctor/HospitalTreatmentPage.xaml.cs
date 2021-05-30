@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.DTO.DoctorDTO;
+using Hospital.Model;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -25,72 +26,24 @@ namespace Hospital.View.Doctor
         private static int MEDICAL_RECORD_TAB = 1;
         private RoomService roomService = new RoomService();
         private HospitalTreatment hospitalTreatment = new HospitalTreatment();
-        private Room selectedRoom = new Room();
-        private MedicalRecord medicalRecord;
         public event PropertyChangedEventHandler PropertyChanged;
+        private HospitalTreatmentDTO dTO;
+        public HospitalTreatmentDTO DTO
+        {
+            get
+            {
+                return dTO;
+            }
+            set
+            {
+                if (value != dTO)
+                {
+                    dTO = value;
+                    OnPropertyChanged("DTO");
+                }
+            }
+        }
         private MedicalRecordService medicalRecordService = new MedicalRecordService();
-        public Room SelectedRoom
-        {
-            get
-            {
-                return selectedRoom;
-            }
-            set
-            {
-                if (value != selectedRoom)
-                {
-                    selectedRoom = value;
-                    OnPropertyChanged("selectedRoom");
-                }
-            }
-        }
-        public MedicalRecord MedicalRecord
-        {
-            get
-            {
-                return medicalRecord;
-            }
-            set
-            {
-                if (value != medicalRecord)
-                {
-                    medicalRecord = value;
-                    OnPropertyChanged("medicalRecord");
-                }
-            }
-        }
-        private DateTime patientsStayDuration;
-        public DateTime PatientsStayDuration
-        {
-            get
-            {
-                return patientsStayDuration;
-            }
-            set
-            {
-                if (value != patientsStayDuration)
-                {
-                    patientsStayDuration = value;
-                    OnPropertyChanged("patientsStayDuration");
-                }
-            }
-        }
-        private ObservableCollection<Room> roomsForDisplay = new ObservableCollection<Room>();
-        public ObservableCollection<Room> RoomsForDisplay
-        {
-            get
-            {
-                return roomsForDisplay;
-            }
-            set
-            {
-                if (value != roomsForDisplay)
-                {
-                    roomsForDisplay = value;
-                    OnPropertyChanged("roomsForDisplay");
-                }
-            }
-        }
         public HospitalTreatmentPage(string patientId)
         {
             InitializeComponent();
@@ -100,13 +53,14 @@ namespace Hospital.View.Doctor
 
         private void initProperties(string patientId)
         {
-            medicalRecord= medicalRecordService.GetByPatientId(patientId);
+            DTO = new HospitalTreatmentDTO();
+            DTO.MedicalRecord = medicalRecordService.GetByPatientId(patientId);
             foreach(Room roomForDisplay in roomService.GetAll())
             {
                 if (roomForDisplay.Type.Equals(RoomType.SOBA_ZA_ODMOR))
-                    roomsForDisplay.Add(roomForDisplay);
+                    DTO.RoomsForDisplay.Add(roomForDisplay);
             }
-            roomComboBox.ItemsSource = RoomsForDisplay;
+            roomComboBox.ItemsSource = DTO.RoomsForDisplay;
         }
 
         protected void OnPropertyChanged(string name)
@@ -119,10 +73,10 @@ namespace Hospital.View.Doctor
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            hospitalTreatment.PatientId = medicalRecord.Patient.PersonalID;
-            hospitalTreatment.RoomId = selectedRoom.Id;
+            hospitalTreatment.PatientId = DTO.MedicalRecord.Patient.PersonalID;
+            hospitalTreatment.RoomId = DTO.SelectedRoom.Id;
             hospitalTreatment.StartOfTreatment = DateTime.Now;
-            hospitalTreatment.EndOfTreatment = PatientsStayDuration;
+            hospitalTreatment.EndOfTreatment = DTO.PatientsStayDuration;
             HospitalTreatmentService hospitalTreatmentService = new HospitalTreatmentService();
             hospitalTreatmentService.Save(hospitalTreatment);
             changeUI();

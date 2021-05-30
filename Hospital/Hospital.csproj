@@ -101,6 +101,8 @@
     <Compile Include="DTO\DoctorDTO\CreateAppointmentDTO.cs" />
     <Compile Include="DTO\DoctorDTO\DoctorNotificationsDTO.cs" />
     <Compile Include="DTO\DoctorDTO\EditMedicineDTO.cs" />
+    <Compile Include="DTO\DoctorDTO\HospitalizedPatientsDTO.cs" />
+    <Compile Include="DTO\DoctorDTO\HospitalTreatmentDTO.cs" />
     <Compile Include="DTO\DoctorDTO\MedicineTherapyDTO.cs" />
     <Compile Include="DTO\DoctorDTO\MedicineValidityDTO.cs" />
     <Compile Include="DTO\DoctorDTO\NewAppointmentDTO.cs" />

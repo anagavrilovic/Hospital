@@ -1,4 +1,5 @@
 ﻿using Hospital.Commands.DoctorCommands;
+using Hospital.DTO.DoctorDTO;
 using Hospital.Model;
 using Hospital.Services;
 using System;
@@ -16,7 +17,6 @@ namespace Hospital.ViewModels.Doctor
     class HospitalizedPatientsViewModel : ViewModel
     {
         private HospitalTreatmentService hospitalTreatmentService = new HospitalTreatmentService();
-        private ObservableCollection<HospitalTreatment> hospitalTreatments = new ObservableCollection<HospitalTreatment>();
         private HospitalTreatment hospitalTreatment = new HospitalTreatment();
         private RelayCommand saveCommand;
         public RelayCommand SaveCommand
@@ -77,24 +77,6 @@ namespace Hospital.ViewModels.Doctor
                 OnPropertyChanged("EditButtonEnable");
             }
         }
-        private DateTime startDate;
-        public DateTime StartDate
-        {
-            get { return startDate; }
-            set
-            {
-                startDate = value;
-                OnPropertyChanged("StartDate");
-            }
-        }
-        public ObservableCollection<HospitalTreatment> HospitalTreatments
-        {
-            get { return hospitalTreatments; }
-            set {
-                hospitalTreatments = value;
-                OnPropertyChanged("HospitalTreatments");
-                }
-        }
         public HospitalTreatment HospitalTreatment
         {
             get
@@ -107,21 +89,38 @@ namespace Hospital.ViewModels.Doctor
                 {
                     hospitalTreatment = value;
                     OnPropertyChanged("HospitalTreatment");
+                    DTO.HospitalTreatment = HospitalTreatment;
                     Execute_SelectionChanged();
                 }
             }
         }
-
+        private HospitalizedPatientsDTO dTO;
+        public HospitalizedPatientsDTO DTO
+        {
+            get
+            {
+                return dTO;
+            }
+            set
+            {
+                if (value != dTO)
+                {
+                    dTO = value;
+                    OnPropertyChanged("DTO");
+                }
+            }
+        }
         public HospitalizedPatientsViewModel()
         {
+            DTO = new HospitalizedPatientsDTO();
             this.SaveCommand = new RelayCommand(Execute_Save, CanExecute_Command);
             this.EditCommand = new RelayCommand(Execute_Edit, CanExecute_Command);
             panelVisibility = Visibility.Collapsed;
             saveButtonEnable = false;
             EditButtonEnable = true;
             CalendarPanel = Visibility.Collapsed;
-            StartDate = DateTime.Today;
-            hospitalTreatments = new ObservableCollection<HospitalTreatment>(hospitalTreatmentService.SetTreatments());
+            DTO.StartDate = DateTime.Today;
+            DTO.HospitalTreatments = new ObservableCollection<HospitalTreatment>(hospitalTreatmentService.SetTreatments());
         }
 
         private void Execute_SelectionChanged()
