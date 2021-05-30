@@ -31,7 +31,7 @@ namespace Hospital.View
 
         private void GoBack(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new PatientNotes());
+            this.NavigationService.GoBack();
         }
     }
 }

@@ -46,7 +46,7 @@ namespace Hospital.View
             if (e.Key == Key.Space)
             {
                 PatientNote selectedItem = (PatientNote)dataGridApp.SelectedItem;
-                this.NavigationService.Navigate(new PatientsNote(selectedItem));
+                this.NavigationService.Navigate(new PatientNoteOptions(selectedItem));
             }
         }
     }
