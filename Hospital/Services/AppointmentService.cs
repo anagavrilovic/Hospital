@@ -39,18 +39,6 @@ namespace Hospital.Services
             appointmentRepository.Delete(appointmentID);
         }
 
-        public string GenerateID()
-        {
-            List<int> existingIDs = appointmentRepository.GetExistingIDs();
-            int newID = 1;
-            while (true)
-            {
-                if (!existingIDs.Contains(newID))
-                    return newID.ToString();
-                newID += 1;
-            }
-        }
-
         public List<Appointment> GetAll()
         {
             return appointmentRepository.GetAll();

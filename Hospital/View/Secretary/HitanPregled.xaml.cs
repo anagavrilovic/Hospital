@@ -120,7 +120,7 @@ namespace Hospital.View.Secretary
         private void SetAppointmentDetails()
         {
             NewUrgentAppointment.Type = (Hospital.AppointmentType)AppointmentType.SelectedIndex + 2;
-            NewUrgentAppointment.IDAppointment = AppointmentService.GenerateID();
+            NewUrgentAppointment.IDAppointment = AppointmentService.GetNewID();
         }
 
         private void ScheduleUrgentAppointment()

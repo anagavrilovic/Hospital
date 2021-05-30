@@ -64,7 +64,7 @@ namespace Hospital.DTO.DoctorDTO
 
         public string GenerateAppointmentId()
         {
-            return appointmentService.GenerateID();
+            return appointmentService.GetNewID();
         }
     }
 }

@@ -47,7 +47,7 @@ namespace Hospital.Controller.DoctorControllers
 
         public string GenereteAppointmentId()
         {
-            return appointmentService.GenerateID();
+            return appointmentService.GetNewID();
         }
     }
 }

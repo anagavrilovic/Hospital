@@ -136,17 +136,6 @@ namespace Hospital
             return this.Type.Equals(RoomType.MAGACIN);
         }
 
-        public bool IsRoomAvaliableInSelectedPeriod(Appointment appointment)
-        {
-            List<Appointment> allAppointments = new AppointmentService().GetAll();
-
-            foreach (Appointment a in allAppointments)
-                if (a.IsOverlappingWith(appointment) && this.Id.Equals(a.Room.Id))
-                    return false;
-
-            return true;
-        }
-
         public bool IsSuitableRoom(AppointmentType appointmentType)
         {
             if (appointmentType.Equals(AppointmentType.examination) || appointmentType.Equals(AppointmentType.urgentExamination))

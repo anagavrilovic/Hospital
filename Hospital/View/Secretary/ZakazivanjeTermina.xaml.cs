@@ -66,7 +66,7 @@ namespace Hospital.View
             SetPatientForNewAppointment(selectedPatient);
             SetDoctorForNewAppointment(selectedDoctor);
             NewAppointment.DateTime = dateTimeForNewAppointment;
-            NewAppointment.IDAppointment = AppointmentService.GenerateID();
+            NewAppointment.IDAppointment = AppointmentService.GetNewID();
         }
 
         private void SetPatientForNewAppointment(MedicalRecord selectedPatient)
