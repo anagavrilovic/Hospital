@@ -117,6 +117,9 @@
     <Compile Include="Model\PatientCalendarDTO.cs" />
     <Compile Include="Model\PatientComment.cs" />
     <Compile Include="Model\PatientCommentsStorage.cs" />
+    <Compile Include="Model\PatientNote.cs" />
+    <Compile Include="Model\PatientNotesNotification.cs" />
+    <Compile Include="Model\PatientNotification.cs" />
     <Compile Include="Model\PatientNotificationsStorage.cs" />
     <Compile Include="Model\PatientSettings.cs" />
     <Compile Include="Model\PatientSettingsStorage.cs" />
@@ -154,6 +157,8 @@
     <Compile Include="Repositories\Interfaces\INotificationRepository.cs" />
     <Compile Include="Repositories\Interfaces\INotificationsUsersRepository.cs" />
     <Compile Include="Repositories\Interfaces\IPatientCommentsRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IPatientNotesNotificationRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IPatientNotesRepository.cs" />
     <Compile Include="Repositories\Interfaces\IPatientNotificationsRepository.cs" />
     <Compile Include="Repositories\Interfaces\IPatientSettingsRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRegistratedUsersRepository.cs" />
@@ -167,6 +172,8 @@
     <Compile Include="Repositories\NotificationFileRepository.cs" />
     <Compile Include="Repositories\NotificationsUsersFileRepository.cs" />
     <Compile Include="Repositories\PatientCommentsFileRepository.cs" />
+    <Compile Include="Repositories\PatientNotesFileRepository.cs" />
+    <Compile Include="Repositories\PatientNotesNotificationFileRepository.cs" />
     <Compile Include="Repositories\PatientNotificationsFileRepository.cs" />
     <Compile Include="Repositories\PatientSettingsFileRepository.cs" />
     <Compile Include="Repositories\RegistratedUserFileRepository.cs" />
@@ -186,6 +193,8 @@
     <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\NotificationsUsersService.cs" />
     <Compile Include="Services\PatientCommentsService.cs" />
+    <Compile Include="Services\PatientNotesNotificationService.cs" />
+    <Compile Include="Services\PatientNotesService.cs" />
     <Compile Include="Services\PatientNotificationService.cs" />
     <Compile Include="Services\PatientSettingsService.cs" />
     <Compile Include="Services\RegistratedUserService.cs" />
@@ -223,6 +232,7 @@
     <Compile Include="ViewModels\Doctor\NewAppointmentViewModel.cs" />
     <Compile Include="ViewModels\Doctor\RejectedMedicineViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientAppointmentsViewModel.cs" />
+    <Compile Include="ViewModels\Patient\PatientNotesViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientPassedAppointmentsViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientSettingsPageViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
@@ -345,6 +355,24 @@
     </Compile>
     <Compile Include="View\Manager\ManagerNotifications.xaml.cs">
       <DependentUpon>ManagerNotifications.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\PatientNotificationAdd.xaml.cs">
+      <DependentUpon>PatientNotificationAdd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\PatientNoteOptions.xaml.cs">
+      <DependentUpon>PatientNoteOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\PatientsNote.xaml.cs">
+      <DependentUpon>PatientsNote.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\PatientNoteAdd.xaml.cs">
+      <DependentUpon>PatientNoteAdd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\PatientNotes.xaml.cs">
+      <DependentUpon>PatientNotes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\PatientAdditionalOptions.xaml.cs">
+      <DependentUpon>PatientAdditionalOptions.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patient\PatientMedication.xaml.cs">
       <DependentUpon>PatientMedication.xaml</DependentUpon>
@@ -667,6 +695,30 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Manager\ManagerNotifications.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\PatientNotificationAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\PatientNoteOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\PatientsNote.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\PatientNoteAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\PatientNotes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\PatientAdditionalOptions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

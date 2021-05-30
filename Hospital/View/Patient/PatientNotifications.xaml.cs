@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,7 +23,8 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientNotifications : Page
     {
-        public ObservableCollection<PatientTherapyMedicineNotification> Lista
+        private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService();
+        public ObservableCollection<PatientNotification> Lista
         {
             get;
             set;
@@ -34,7 +36,12 @@ namespace Hospital.View
             //MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
             // MedicalRecord medicalRecord = medicalRecordStorage.GetByPatientID(MainWindow.IDnumber);
             PatientNotificationsStorage patientNotificationsStorage = new PatientNotificationsStorage();
-            Lista = patientNotificationsStorage.GetAll();
+            Lista = new ObservableCollection<PatientNotification>(patientNotificationsStorage.GetAll());
+            ObservableCollection<PatientNotification> auxiliaryList = new ObservableCollection<PatientNotification>(patientNotesNotificationService.GetByPatientID());
+            foreach(PatientNotification pt in auxiliaryList)
+            {
+                Lista.Add(pt);
+            }
             dataGridApp.SelectedIndex = 0;
 
             dataGridApp.Focus();
@@ -74,14 +81,22 @@ namespace Hospital.View
         {
             if (e.Key == Key.Space)
             {
-                PatientTherapyMedicineNotification selectedItem = (PatientTherapyMedicineNotification)dataGridApp.SelectedItem;
-                selectedItem.LastRead = DateTime.Now;
-                selectedItem.Read = true;
-                PatientNotificationsStorage patientNotificationsStorage = new PatientNotificationsStorage();
-                patientNotificationsStorage.Delete(selectedItem.ID);
-                patientNotificationsStorage.Save(selectedItem);
-                PatientTherapy patientTherapy = new PatientTherapy(selectedItem);
-                this.NavigationService.Navigate(patientTherapy);
+                if (dataGridApp.SelectedItem.GetType() == typeof(PatientTherapyMedicineNotification))
+                {
+                    PatientTherapyMedicineNotification selectedItem = (PatientTherapyMedicineNotification)dataGridApp.SelectedItem;
+                    selectedItem.LastRead = DateTime.Now;
+                    selectedItem.Read = true;
+                    PatientNotificationsStorage patientNotificationsStorage = new PatientNotificationsStorage();
+                    patientNotificationsStorage.Delete(selectedItem.ID);
+                    patientNotificationsStorage.Save(selectedItem);
+                    PatientTherapy patientTherapy = new PatientTherapy(selectedItem);
+                    this.NavigationService.Navigate(patientTherapy);
+                }
+                else
+                {
+                    PatientsNote patientsNote = new PatientsNote((PatientNotesNotification)dataGridApp.SelectedItem);
+                    this.NavigationService.Navigate(patientsNote);
+                }
 
             }
 

@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using Hospital.ViewModels.Patient;
 using System;
 using System.Collections.Generic;
@@ -25,12 +26,13 @@ namespace Hospital.View
     {
         private PatientSettingsStorage patientSettingsStorage = new PatientSettingsStorage();
         private PatientCommentsStorage patientCommentsStorage = new PatientCommentsStorage();
+        private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService();
         public PatientMenu()
         {
             
             InitializeComponent();
-            if (!patientCommentsStorage.IsTimeForHospitalRating()) RateButton.Visibility = Visibility.Collapsed;
             Boolean newNotification = false;
+            if (patientNotesNotificationService.IsThereNewNotification()) newNotification = true;
             PatientNotificationsStorage patientNotificationsStorage = new PatientNotificationsStorage();
             //  patientNotificationsStorage.SaveAll();
             ObservableCollection<PatientTherapyMedicineNotification> lista = patientNotificationsStorage.GetByIDPatient(MainWindow.IDnumber);
@@ -95,26 +97,10 @@ namespace Hospital.View
             this.NavigationService.Navigate(patientAppointmentMenu);
         }
 
-        private void MakeAppointment(object sender, RoutedEventArgs e)
+        private void ViewAdditionalOptions(object sender, RoutedEventArgs e)
         {
-            if (patientSettingsStorage.IsAntiTrollTriggered())
-            {
-                MessageBox.Show("Previše puta ste zakazali/pomerili termin u kratkom vremenskom periodu.");
-                return;
-            }
-            PatientMakeAppointment patientMakeAppointment = new PatientMakeAppointment();
-            this.NavigationService.Navigate(patientMakeAppointment);
-        }
-
-        private void RateHospital(object sender, RoutedEventArgs e)
-        {
-            PatientRateDoctor patientRateDoctor = new PatientRateDoctor();
-            this.NavigationService.Navigate(patientRateDoctor);
-        }
-
-        public void Refresh()
-        { 
-            if (!patientCommentsStorage.IsTimeForHospitalRating()) RateButton.Visibility = Visibility.Collapsed;
+            PatientAdditionalOptions patientAdditionalOptions = new PatientAdditionalOptions();
+            this.NavigationService.Navigate(patientAdditionalOptions);
         }
     }
 }

@@ -83,9 +83,9 @@ namespace Hospital.View
             patientCommentsStorage.Save(patientComment);
             if (app == null)
             {
-                PatientMenu menu = new PatientMenu();
-                menu.Refresh();
-                this.NavigationService.Navigate(menu);
+                PatientAdditionalOptions additionalOptions = new PatientAdditionalOptions();
+                additionalOptions.Refresh();
+                this.NavigationService.Navigate(additionalOptions);
                 return;
             }
             this.NavigationService.GoBack();
