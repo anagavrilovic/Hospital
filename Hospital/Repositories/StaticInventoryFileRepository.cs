@@ -72,7 +72,9 @@ namespace Hospital.Repositories
             foreach (Inventory inv in inventory)
             {
                 if (inv.Id.Equals(id) && inv.RoomID.Equals(roomId))
+                {
                     return inv;
+                }
             }
             return null;
         }

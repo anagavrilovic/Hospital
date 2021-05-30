@@ -17,6 +17,11 @@ namespace Hospital.Services
             staticInventoryRepository = new StaticInventoryFileRepository();
         }
 
+        public List<Inventory> GetAll()
+        {
+            return staticInventoryRepository.GetAll();
+        }
+
         public List<Inventory> GetAllInventoryFroomRoom(string roomID)
         {
             return staticInventoryRepository.GetAllInventoryFromRoom(roomID);

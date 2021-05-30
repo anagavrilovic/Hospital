@@ -79,6 +79,7 @@
     <Compile Include="Controller\NavigationController.cs" />
     <Compile Include="Controller\WpfNavigationController.cs" />
     <Compile Include="DoktorConverters\ListToStringConverter.cs" />
+    <Compile Include="DTO\FilteringRoomsDTO.cs" />
     <Compile Include="DTO\NotificationRecipientsDTO.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Allergen.cs" />

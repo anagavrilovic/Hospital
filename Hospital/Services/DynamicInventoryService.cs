@@ -17,6 +17,11 @@ namespace Hospital.Services
             dynamicInventoryRepository = new DynamicInventoryFileRepository();
         }
 
+        public List<DynamicInventory> GetAll()
+        {
+            return dynamicInventoryRepository.GetAll();
+        }
+
         public List<DynamicInventory> GetAllDynamicInventoryFroomRoom(string roomID)
         {
             return dynamicInventoryRepository.GetAllInventoryFromRoom(roomID);
