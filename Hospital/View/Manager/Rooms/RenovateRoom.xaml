@@ -124,7 +124,7 @@
                             SelectedItem="{Binding SomeBindingPropertySelectedCurrently, 
                             Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.RowSpan="2" />
 
-                <Button Grid.Column="1" Grid.Row="8" Content="IZMENA PLANA PROSTORIJA" Background="#FFB9DDED" Foreground="#FF061031" Style="{StaticResource RoundButtonStyle}" Margin="9.6,14,28,53" Click="EditRoomsOrganization" RenderTransformOrigin="0.458,1.15" Grid.RowSpan="2" />
+                <!--Button Grid.Column="1" Grid.Row="8" Content="IZMENA PLANA PROSTORIJA" Background="#FFB9DDED" Foreground="#FF061031" Style="{StaticResource RoundButtonStyle}" Margin="9.6,14,28,53" Click="EditRoomsOrganization" Grid.RowSpan="2" /-->
 
                 <TextBox    x:Name="description"  Grid.Row="9" Grid.ColumnSpan="2" Grid.RowSpan="3" Margin="30,12,28,21" Text="{Binding Path=RoomRenovation.Description, Mode=OneWayToSource}" BorderBrush="#FF26282C" TextWrapping="Wrap">
                     <TextBox.Resources>

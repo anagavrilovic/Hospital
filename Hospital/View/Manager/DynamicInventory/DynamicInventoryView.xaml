@@ -40,11 +40,11 @@
             <Image Source="/Icon/logo.png" Margin="80,15,5,9.8" Width="166"/>
         </StackPanel>
 
-        <Button x:Name="edit"     Content="IZMENI STAVKU"    Grid.Row="1" Grid.Column="0" Margin="10,16.2,7.4,9.6" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="EditItemButtonClick"     FontSize="14" />
-        <Button x:Name="delete"   Content="IZBRIŠI STAVKU"   Grid.Row="1" Grid.Column="1" Margin="6.6,16.2,10,9.6" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="DeleteItemButtonClick"   FontSize="14"/>
-        <Button x:Name="transfer" Content="PREBACI STAVKU"   Grid.Row="2" Grid.Column="0" Margin="10,0.4,10,23.4" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="TransferItemButtonClick" FontSize="14" Grid.ColumnSpan="2"/>
+        <Button x:Name="edit"     Content="IZMENI STAVKU"    Grid.Row="1" Grid.Column="0" Margin="10,24.8,7.2,0.4" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="EditItemButtonClick"     FontSize="14" />
+        <Button x:Name="delete"   Content="IZBRIŠI STAVKU"   Grid.Row="1" Grid.Column="1" Margin="5.8,25.8,10.4,0.4" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="DeleteItemButtonClick"   FontSize="14"/>
+        <Button x:Name="transfer" Content="PREBACI STAVKU"   Grid.Row="2" Grid.Column="0" Margin="10,9.6,10.4,13.8" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="TransferItemButtonClick" FontSize="14" Grid.ColumnSpan="2"/>
 
-        <TextBox x:Name="search"  TextChanged="SearchDynamicInventory" Grid.Row="2" Grid.ColumnSpan="2" Margin="10,72.4,62,31" Grid.RowSpan="2" >
+        <TextBox x:Name="search"  TextChanged="SearchDynamicInventory" Grid.Row="3" Grid.ColumnSpan="2" Margin="18,10.2,65.4,27.2" >
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -52,7 +52,7 @@
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <Image Source="/Icon/search-blue.png" Grid.Row="2" Grid.Column="1" Margin="154.6,72.4,15,31" MouseDown="ButtonSearchMouseDown" Grid.RowSpan="2"/>
+        <Image Source="/Icon/search-blue.png" Grid.Row="3" Grid.Column="1" Margin="154.8,10.2,25.4,27.2" MouseDown="ButtonSearchMouseDown"/>
 
         <ScrollViewer Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="2" Background="Azure" HorizontalScrollBarVisibility="Auto" Margin="10,0,0,0">
             <Grid MinWidth="200" Height="330">
@@ -71,7 +71,7 @@
             </Grid>
         </ScrollViewer>
 
-        <Button x:Name="add"    Content="DODAJ STAVKU"  Grid.Row="8" Grid.ColumnSpan="2" Margin="10,75,25.4,29.4" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="AddItemButtonClick" FontSize="14" Grid.RowSpan="2" />
+        <Button x:Name="add"    Content="DODAJ STAVKU"  Grid.Row="8" Grid.ColumnSpan="2" Margin="10,65,25.4,39.4" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="AddItemButtonClick" FontSize="14" Grid.RowSpan="2" />
 
     </Grid>
 </Page>
