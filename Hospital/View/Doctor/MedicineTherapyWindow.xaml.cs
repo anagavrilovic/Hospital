@@ -1,4 +1,6 @@
-﻿using Hospital.Model;
+﻿using Hospital.Controller.DoctorControllers;
+using Hospital.DTO.DoctorDTO;
+using Hospital.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,62 +25,27 @@ namespace Hospital.View.Doctor
     /// </summary>
     public partial class MedicineTherapyWindow : Window, INotifyPropertyChanged
     {
-
+        private MedicineTherapyController controller;
         private MedicalRecord medicalRecord;
-        MedicineStorage medicineStorage = new MedicineStorage();
+        private MedicineTherapyDTO dTO;
+        public MedicineTherapyDTO DTO
+        {
+            get { return dTO; }
+            set
+            {
+                dTO = value;
+                OnPropertyChanged("DTO");
+            }
+
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         private TherapyPage parentWindow;
-
-        ObservableCollection<Medicine> medics = new ObservableCollection<Medicine>();
-        ObservableCollection<Medicine> Medics
-        {
-            get { return medics; }
-            set
-            {
-                medics = value;
-                OnPropertyChanged();
-            }
-
-        }
-
-        private string medicineDescription;
-        public string MedicineDescription
-        {
-            get { return medicineDescription; }
-            set
-            {
-                medicineDescription = value;
-                OnPropertyChanged();
-            }
-
-        }
         private ICollectionView medicsCollection;
 
         public ICollectionView MedicsCollection
         {
             get { return medicsCollection; }
             set { medicsCollection = value; }
-        }
-
-        private string daysForConsumption;
-        public string DaysForConsumption
-        {
-            get { return daysForConsumption; }
-            set
-            {
-                daysForConsumption = value;
-                OnPropertyChanged();
-            }
-        }
-        private string dailyIntake;
-        public string DailyIntake
-        {
-            get { return dailyIntake; }
-            set
-            {
-                dailyIntake = value;
-                OnPropertyChanged();
-            }
         }
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)
@@ -100,7 +67,7 @@ namespace Hospital.View.Doctor
 
         private void FilterAndSorterParameters()
         {
-            MedicsCollection = CollectionViewSource.GetDefaultView(Medics);
+            MedicsCollection = CollectionViewSource.GetDefaultView(DTO.Medics);
             MedicsCollection.Filter = filterMedics;
             ICollectionView view = GetSearch();
             view.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
@@ -109,9 +76,11 @@ namespace Hospital.View.Doctor
 
         private void FillProperties(MedicalRecord medicalRecord)
         {
-            Medics = medicineStorage.GetAll();
+            DTO = new MedicineTherapyDTO();
+            controller = new MedicineTherapyController(DTO);
+            DTO.Medics = new ObservableCollection<Medicine>(controller.GetAllMedics());
             this.medicalRecord = medicalRecord;
-            this.listBox.ItemsSource = Medics;
+            this.listBox.ItemsSource = DTO.Medics;
         }
 
         private void FillComboBoxes()
@@ -147,53 +116,24 @@ namespace Hospital.View.Doctor
 
         public ICollectionView GetSearch()
         {
-            return CollectionViewSource.GetDefaultView(Medics);
+            return CollectionViewSource.GetDefaultView(DTO.Medics);
         }
 
         private void AddMedicineToTherapy(object sender, MouseButtonEventArgs e)
         {
             Medicine medicToBeAdded = ((Medicine)listBox.SelectedItem);
             MedicineTherapy medicineTherapy = FillMedicine(medicToBeAdded);
-            if (!AlreadyAddedToTherapy(medicToBeAdded) && !AllergicToMedic(medicToBeAdded) && !AlergicToIngredients(medicToBeAdded))
+            if (!AlreadyAddedToTherapy(medicToBeAdded) && !controller.AllergicToMedic(medicToBeAdded,medicalRecord) && !controller.AlergicToIngredients(medicToBeAdded,medicalRecord))
             {
-                    parentWindow.MedicineView.Add(medicToBeAdded);
-                    parentWindow.Medics.Add(medicineTherapy);
+                    parentWindow.DTO.MedicineView.Add(medicToBeAdded);
+                    parentWindow.DTO.Medics.Add(medicineTherapy);
                     this.Close();
             }
         }
 
-        private bool AlergicToIngredients(Medicine medicToBeAdded)
-        {
-            foreach(string ingredient in medicalRecord.Allergen.IngredientNames)
-            {
-                foreach(Ingredient medicToBeAddedIngredients in medicToBeAdded.Ingredient)
-                {
-                    if (ingredient.Equals(medicToBeAddedIngredients.Name))
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        private bool AllergicToMedic(Medicine medicToBeAdded)
-        {
-            foreach (string medicineName in medicalRecord.Allergen.MedicineNames)
-            {
-                if (medicineName.Equals(medicToBeAdded.Name))
-                {
-                    ErrorBox errorBox=new ErrorBox("Pacijent je alergican na dati lek");
-                    return true;
-                }
-            }
-            return false;
-        }
-
-
         private bool AlreadyAddedToTherapy(Medicine medicine)
         {
-            foreach (MedicineTherapy medicineAddedToTherapy in parentWindow.Medics)
+            foreach (MedicineTherapy medicineAddedToTherapy in parentWindow.DTO.Medics)
             {
                 if (medicineAddedToTherapy.MedicineID.Equals(medicine.ID))
                 {
@@ -209,9 +149,9 @@ namespace Hospital.View.Doctor
         {
             MedicineTherapy medicineTherapy = new MedicineTherapy();
             medicineTherapy.MedicineID = medicToBeAdded.ID;
-            medicineTherapy.DurationInDays = int.Parse(DaysForConsumption);
-            medicineTherapy.TimesPerDay = int.Parse(DailyIntake);
-            medicineTherapy.Description = MedicineDescription;
+            medicineTherapy.DurationInDays = int.Parse(DTO.DaysForConsumption);
+            medicineTherapy.TimesPerDay = int.Parse(DTO.DailyIntake);
+            medicineTherapy.Description = DTO.MedicineDescription;
             return medicineTherapy;
 
         }

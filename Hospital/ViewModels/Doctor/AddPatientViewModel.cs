@@ -90,8 +90,8 @@ namespace Hospital.ViewModels.Doctor
 
         private void Execute_MouseDoubleClick(object sender)
         {
-            parentViewModel.Appointment.PatientsRecord = medicalRecordService.GetByPatientId((SelectedPatient).PersonalID);
-            parentViewModel.PatientLabel = parentViewModel.Appointment.PatientsRecord.Patient.FirstName + " " + parentViewModel.Appointment.PatientsRecord.Patient.LastName;
+            parentViewModel.DTO.Appointment.PatientsRecord = medicalRecordService.GetByPatientId((SelectedPatient).PersonalID);
+            parentViewModel.PatientLabel = parentViewModel.DTO.Appointment.PatientsRecord.Patient.FirstName + " " + parentViewModel.DTO.Appointment.PatientsRecord.Patient.LastName;
             CloseAction();
         }
         public ICollectionView GetPretraga()

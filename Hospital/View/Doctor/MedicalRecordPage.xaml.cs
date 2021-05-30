@@ -33,6 +33,7 @@ namespace Hospital.View.Doctor
             set
             {
                 medicalRecord = value;
+                OnPropertyChanged("MedicalRecord");
             }
         }
 
@@ -75,8 +76,8 @@ namespace Hospital.View.Doctor
 
         private void DeleteAppointmentOfExamination()
         {
-            AppointmentStorage appointmentStorage = new AppointmentStorage();
-            appointmentStorage.Delete(appointment.IDAppointment);
+            AppointmentService appointmentService = new AppointmentService();
+            appointmentService.Delete(appointment.IDAppointment);
         }
 
         private void SaveExamination()

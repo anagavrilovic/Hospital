@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace Hospital.View.Doctor
     {
 
         private MedicalRecord medicalRecordReview;
-        private MedicalRecordStorage medicalRecordStorage;
+        private MedicalRecordService medicalRecordService;
         public MedicalRecord MedicalRecordReview
         {
             get { return medicalRecordReview; }
@@ -52,8 +53,8 @@ namespace Hospital.View.Doctor
 
         private void initProperties(string id)
         {
-            medicalRecordStorage = new MedicalRecordStorage();
-            MedicalRecordReview = medicalRecordStorage.GetOne(id);
+            medicalRecordService = new MedicalRecordService();
+            MedicalRecordReview = medicalRecordService.GetRecordByID(id);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

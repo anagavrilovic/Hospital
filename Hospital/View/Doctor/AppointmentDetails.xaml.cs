@@ -1,4 +1,6 @@
-﻿using Hospital.Services;
+﻿using Hospital.Controller.DoctorControllers;
+using Hospital.DTO.DoctorDTO;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,46 +24,35 @@ namespace Hospital.View.Doctor
     /// </summary>
     public partial class AppointmentDetails : Window,INotifyPropertyChanged
     {
-        private MedicalRecordService medicalRecordService;
-        Appointment appointment = new Appointment();
         public event PropertyChangedEventHandler PropertyChanged;
-
-        public Appointment Appointment
+        private AppointmentDetailsController controller;
+        private AppointmentDetailsDTO dTO;
+        public AppointmentDetailsDTO DTO
         {
-            get { return appointment; }
+            get { return dTO; }
             set
             {
-                appointment = value;
-                OnPropertyChanged();
+                dTO = value;
+                OnPropertyChanged("DTO");
             }
         }
-        private string durationInMinutes;
-        public string DurationInMinutes
-        {
-            get { return durationInMinutes; }
-            set
-            {
-                durationInMinutes = value;
-                OnPropertyChanged();
-            }
-        }
-
         public AppointmentDetails(Appointment a)
         {
-            this.Appointment = a;
             InitializeComponent();
-            InitFields();
+            InitFields(a);
             this.DataContext = this;
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 3 / 4);
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 1 / 2);
         }
 
-        private void InitFields()
+        private void InitFields(Appointment a)
         {
-            medicalRecordService = new MedicalRecordService();
-           double dur= Appointment.DurationInHours * 60;
-            durationInMinutes = dur.ToString() +" minuta";
-           appointment.PatientsRecord= medicalRecordService.GetByPatientId(Appointment.IDpatient);
+            DTO = new AppointmentDetailsDTO();
+            controller = new AppointmentDetailsController(DTO);
+            this.DTO.Appointment = a;
+            double dur= DTO.Appointment.DurationInHours * 60;
+            DTO.DurationInMinutes = dur.ToString() +" minuta";
+            DTO.Appointment.PatientsRecord= controller.GetMedicalRecordByPatientId();
         }
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)
@@ -74,7 +65,7 @@ namespace Hospital.View.Doctor
 
         private void MedicalRecordReview(object sender, RoutedEventArgs e)
         {
-            MedicalRecordWindow review = new MedicalRecordWindow((medicalRecordService.GetByPatientId(Appointment.IDpatient)).MedicalRecordID);
+            MedicalRecordWindow review = new MedicalRecordWindow((controller.GetMedicalRecordByPatientId()).MedicalRecordID);
             review.Owner = this;
             this.Hide();
             review.Show();
@@ -82,7 +73,7 @@ namespace Hospital.View.Doctor
 
         private void startExamination_Click(object sender, RoutedEventArgs e)
         {
-            AppointmentWindow examination = new AppointmentWindow(appointment);
+            AppointmentWindow examination = new AppointmentWindow(DTO.Appointment);
             examination.Show();
             Application.Current.MainWindow = examination;
             this.Close();

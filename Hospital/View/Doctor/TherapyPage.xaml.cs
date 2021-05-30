@@ -1,4 +1,6 @@
-﻿using Hospital.Model;
+﻿using Hospital.DTO.DoctorDTO;
+using Hospital.Model;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,36 +25,26 @@ namespace Hospital.View.Doctor
     /// </summary>
     public partial class TherapyPage : Page, INotifyPropertyChanged
     {
-        private ObservableCollection<MedicineTherapy> medics = new ObservableCollection<MedicineTherapy>();
-        private MedicalRecordStorage medicineStorage = new MedicalRecordStorage();
+        private MedicalRecordService medicalRecordService;
         public event PropertyChangedEventHandler PropertyChanged;
-        public ObservableCollection<MedicineTherapy> Medics
-        {
-            get { return medics; }
-            set
-            {
-                medics = value;
-                OnPropertyChanged();
-            }
-        }
-        private ObservableCollection<Medicine> medicineView = new ObservableCollection<Medicine>();
-        public ObservableCollection<Medicine> MedicineView
-        {
-            get { return medicineView; }
-            set
-            {
-                medicineView = value;
-                OnPropertyChanged();
-            }
-        }
         private string therapyDescription;
+        private TherapyDTO dTO;
+        public TherapyDTO DTO
+        {
+            get { return dTO; }
+            set
+            {
+                dTO = value;
+                OnPropertyChanged("DTO");
+            }
+        }
         public string TherapyDescription
         {
             get { return therapyDescription; }
             set
             {
                 therapyDescription = value;
-                OnPropertyChanged();
+                OnPropertyChanged("TherapyDescription");
             }
         }
         private string therapyTitle;
@@ -62,7 +54,7 @@ namespace Hospital.View.Doctor
             set
             {
                 therapyTitle = value;
-                OnPropertyChanged();
+                OnPropertyChanged("TherapyTitle");
             }
         }
 
@@ -70,12 +62,14 @@ namespace Hospital.View.Doctor
         {
             InitializeComponent();
             this.DataContext = this;
-            medicineBox.ItemsSource = MedicineView;
+            DTO = new TherapyDTO();
+            medicineBox.ItemsSource = DTO.MedicineView;
+            medicalRecordService = new MedicalRecordService();
         }
 
         private void AddMedicine(object sender, RoutedEventArgs e)
         {
-            MedicalRecord medicalRecord = medicineStorage.GetByPatientID(((AppointmentWindow)Window.GetWindow(this)).appointment.IDpatient);
+            MedicalRecord medicalRecord = medicalRecordService.GetByPatientId(((AppointmentWindow)Window.GetWindow(this)).appointment.IDpatient);
             MedicineTherapyWindow AddMedicineWindow = new MedicineTherapyWindow(this,medicalRecord);
             AddMedicineWindow.Owner = Window.GetWindow(this);
             AddMedicineWindow.ShowDialog();
@@ -106,7 +100,7 @@ namespace Hospital.View.Doctor
 
         private void FillTherapy(Therapy therapy)
         {
-            foreach (MedicineTherapy medicineTherapyAdded in Medics)
+            foreach (MedicineTherapy medicineTherapyAdded in DTO.Medics)
             {
                 therapy.AddMedicine(medicineTherapyAdded);
             }
@@ -118,7 +112,7 @@ namespace Hospital.View.Doctor
         {
             if (medicineBox.SelectedItem != null)
             {
-               Medics.Remove((MedicineTherapy)medicineBox.SelectedItem);
+                DTO.Medics.Remove((MedicineTherapy)medicineBox.SelectedItem);
             }
         }
     }

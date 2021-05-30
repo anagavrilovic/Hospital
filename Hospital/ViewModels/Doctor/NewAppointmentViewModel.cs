@@ -1,5 +1,7 @@
 ﻿using Hospital.Commands.DoctorCommands;
 using Hospital.Controller;
+using Hospital.Controller.DoctorControllers;
+using Hospital.DTO.DoctorDTO;
 using Hospital.Services;
 using Hospital.View.Doctor;
 using System;
@@ -15,63 +17,16 @@ namespace Hospital.ViewModels.Doctor
     public class NewAppointmentViewModel : ViewModel
     {
         public Action CloseAction { get; set; }
-        private RoomService roomService;
-        private DoctorService doctorService;
         NavigationController navigationController;
-        private AppointmentService appointmentService;
-        private Appointment appointment;
-        public Appointment Appointment
+        private NewAppointmentController controller;
+        private AddAppointmentDTO dTO;
+        public AddAppointmentDTO DTO
         {
-            get { return appointment; }
+            get { return dTO; }
             set
             {
-                appointment = value;
-                OnPropertyChanged("Appointment");
-            }
-        }
-        private Room room;
-        public Room Room
-        {
-            get { return room; }
-            set
-            {
-                room = value;
-                OnPropertyChanged("Room");
-            }
-
-        }
-        private string timeOfAppointment;
-        public string TimeOfAppointment
-        {
-            get { return timeOfAppointment; }
-            set
-            {
-                timeOfAppointment = value;
-                OnPropertyChanged("TimeOfAppointment");
-            }
-
-        }
-        private DateTime dateOfAppointment;
-        public DateTime DateOfAppointment
-        {
-            get { return dateOfAppointment; }
-            set
-            {
-                dateOfAppointment = value;
-                OnPropertyChanged("DateOfAppointment");
-            }
-
-        }
-        private string durationInMinutes;
-
-
-        public string DurationInMinutes
-        {
-            get { return durationInMinutes; }
-            set
-            {
-                durationInMinutes = value;
-                OnPropertyChanged("DurationInMinutes");
+                dTO = value;
+                OnPropertyChanged("DTO");
             }
         }
         private bool examinationIsChecked;
@@ -146,26 +101,6 @@ namespace Hospital.ViewModels.Doctor
                 OnPropertyChanged("OperationIsEnabled");
             }
         }
-        private ObservableCollection<string> setTimeComboBox;
-        public ObservableCollection<string> SetTimeComboBox
-        {
-            get { return setTimeComboBox; }
-            set
-            {
-                setTimeComboBox = value;
-                OnPropertyChanged("SetTimeComboBox");
-            }
-        }
-        private ObservableCollection<int> durationForComboBox;
-        public ObservableCollection<int> DurationForComboBox
-        {
-            get { return durationForComboBox; }
-            set
-            {
-                durationForComboBox = value;
-                OnPropertyChanged("DurationForComboBox");
-            }
-        }
         private string patientLabel;
         public string PatientLabel
         {
@@ -205,11 +140,16 @@ namespace Hospital.ViewModels.Doctor
         }
         public NewAppointmentViewModel(string doctorId, NavigationController navigationController)
         {
+            CreateCommands();
+            InitProperties(doctorId, navigationController);
+            DateAndTimeComponents();
+        }
+
+        private void CreateCommands()
+        {
             AddPatientCommand = new RelayCommand(Execute_AddPatient, canExecuteMethod);
             CancelCommand = new RelayCommand(Execute_Cancel, canExecuteMethod);
             SaveCommand = new RelayCommand(Execute_Save, canExecuteMethod);
-            InitProperties(doctorId, navigationController);
-            DateAndTimeComponents();
         }
 
         private bool canExecuteMethod(object parameter)
@@ -221,31 +161,30 @@ namespace Hospital.ViewModels.Doctor
             DateTime time = DateTime.Today;
             for (DateTime tm = time.AddHours(0); tm < time.AddHours(24); tm = tm.AddMinutes(30))
             {
-                SetTimeComboBox.Add(tm.ToShortTimeString());
+                DTO.SetTimeComboBox.Add(tm.ToShortTimeString());
 
             }
             for (int i = 0; i < 15; i++)
             {
-                DurationForComboBox.Add(((i + 1) * 30));
+                DTO.DurationForComboBox.Add(((i + 1) * 30));
             }
         }
 
         private void InitProperties(string doctorId, NavigationController navigationController)
         {
-            DurationForComboBox = new ObservableCollection<int>();
-            SetTimeComboBox = new ObservableCollection<string>();
+            DTO = new AddAppointmentDTO();
+            controller = new NewAppointmentController(DTO);
+            DTO.DurationForComboBox = new ObservableCollection<int>();
+            DTO.SetTimeComboBox = new ObservableCollection<string>();
             this.navigationController = navigationController;
-            roomService = new RoomService();
-            appointmentService = new AppointmentService();
-            doctorService = new DoctorService();
-            Appointment = new Appointment();
-            Appointment.Doctor = doctorService.GetDoctorById(doctorId);
+            DTO.Appointment = new Appointment();
+            DTO.Appointment.Doctor = controller.GetDoctorById(doctorId);
             SetDoctorListAndRadioButtons();
         }
 
         private void SetDoctorListAndRadioButtons()
         {
-            if (Appointment.Doctor.Specialty == (int)DoctorSpecialty.general)
+            if (DTO.Appointment.Doctor.Specialty == (int)DoctorSpecialty.general)
             {
                 OperationVisibility = Visibility.Hidden;
                 ExaminationIsChecked = true;
@@ -286,7 +225,7 @@ namespace Hospital.ViewModels.Doctor
         {
             if (IsDoctorAvaliable() && IsPatientAvaliable())
             {
-                appointmentService.Save(Appointment);
+                controller.SaveAppointment();
                 return true;
             }
             else
@@ -294,7 +233,7 @@ namespace Hospital.ViewModels.Doctor
         }
         private bool IsDoctorAvaliable()
         {
-            if (!appointmentService.IsDoctorAvaliableForAppointment(Appointment))
+            if (!controller.IsDoctorAvaliableForAppointment())
             {
                 ErrorBox errorBox = new ErrorBox("Doktor je već zauzet u ovom terminu. Promenite trajanje ili odaberite drugi termin!");
                 return false;
@@ -305,7 +244,7 @@ namespace Hospital.ViewModels.Doctor
 
         private bool IsPatientAvaliable()
         {
-            if (!appointmentService.IsPatientAvaliableForAppointment(Appointment))
+            if (!controller.IsPatientAvaliableForAppointment())
             {
                 ErrorBox errorBox = new ErrorBox("Ovaj pacijent već ima zakazan pregled/operaciju u ovom terminu!");
                 return false;
@@ -315,27 +254,27 @@ namespace Hospital.ViewModels.Doctor
         }
         private void UpdateParentPage()
         {
-            navigationController.NavigateToDoctorAppointments(Appointment.Doctor.PersonalID, navigationController);
+            navigationController.NavigateToDoctorAppointments(DTO.Appointment.Doctor.PersonalID, navigationController);
         }
         private void SetRoomAndRoomType()
         {
-            foreach (Room storageRoom in roomService.GetAll())
+            foreach (Room storageRoom in controller.GetAllRooms())
             {
-                if (ExaminationIsChecked.Equals(true) && Appointment.Doctor.RoomID.Equals(storageRoom.Id))
+                if (ExaminationIsChecked.Equals(true) && DTO.Appointment.Doctor.RoomID.Equals(storageRoom.Id))
                 {
-                    Appointment.Room = storageRoom;
-                    Appointment.Type = AppointmentType.examination;
+                    DTO.Appointment.Room = storageRoom;
+                    DTO.Appointment.Type = AppointmentType.examination;
                     break;
                 }
                 else
                 {
                     if (storageRoom.Type.Equals(RoomType.OPERACIONA_SALA))
                     {
-                        Appointment.Room = storageRoom;
+                        DTO.Appointment.Room = storageRoom;
                         if (EmergencyOperationIsChecked.Equals(false))
-                            Appointment.Type = AppointmentType.operation;
+                            DTO.Appointment.Type = AppointmentType.operation;
                         else
-                            Appointment.Type = AppointmentType.urgentExamination;
+                            DTO.Appointment.Type = AppointmentType.urgentExamination;
                         break;
                     }
                 }
@@ -343,17 +282,17 @@ namespace Hospital.ViewModels.Doctor
         }
         private void FillAppointmentProperties()
         {
-            Appointment.IDpatient = Appointment.PatientsRecord.Patient.PersonalID;
-            Appointment.DateTime = DateOfAppointment.Date.Add(DateTime.Parse(timeOfAppointment).TimeOfDay);
-            Appointment.IDDoctor = Appointment.Doctor.PersonalID;
-            Appointment.IDAppointment = appointmentService.GenerateID();
-            double timeInMinutesDouble = double.Parse(DurationInMinutes);
-            Appointment.DurationInHours = timeInMinutesDouble / 60;
+            DTO.Appointment.IDpatient = DTO.Appointment.PatientsRecord.Patient.PersonalID;
+            DTO.Appointment.DateTime = DTO.DateOfAppointment.Date.Add(DateTime.Parse(DTO.TimeOfAppointment).TimeOfDay);
+            DTO.Appointment.IDDoctor = DTO.Appointment.Doctor.PersonalID;
+            DTO.Appointment.IDAppointment = controller.GenereteAppointmentId();
+            double timeInMinutesDouble = double.Parse(DTO.DurationInMinutes);
+            DTO.Appointment.DurationInHours = timeInMinutesDouble / 60;
         }
         private bool SomeFieldsEmpty()
         {
-            if (DateOfAppointment == null || (OperationIsChecked.Equals(false) && ExaminationIsChecked.Equals(false)) ||
-                DateOfAppointment == null || TimeOfAppointment == null || DurationForComboBox == null)
+            if (DTO.DateOfAppointment == null || (OperationIsChecked.Equals(false) && ExaminationIsChecked.Equals(false)) ||
+                DTO.DateOfAppointment == null || DTO.TimeOfAppointment == null || DTO.DurationForComboBox == null)
             {
                 ErrorBox messageBox = new ErrorBox("Nisu uneti svi podaci");
                 return true;

@@ -46,8 +46,8 @@
                     <TextBlock>
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0}  {1}">
-                                <Binding Path="Appointment.Doctor.FirstName" />
-                                <Binding Path="Appointment.Doctor.LastName" />
+                                <Binding Path="DTO.Appointment.Doctor.FirstName" />
+                                <Binding Path="DTO.Appointment.Doctor.LastName" />
                             </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>
@@ -59,15 +59,15 @@
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" >
             <Label FontSize="17"  Width="190" Content="{ns:Loc dateAndTime}" Style="{DynamicResource Label}"/>
             <DatePicker x:Name="datePicker" Width="150" Height="25"  DisplayDateStart="{x:Static sys:DateTime.Today}"
-                        SelectedDate="{Binding DateOfAppointment, Mode=OneWayToSource}" FirstDayOfWeek="Monday" Margin="10,0,5,0"/>
-            <ComboBox x:Name="timeComboBox" Width="20" Height="25" SelectedValue="{Binding TimeOfAppointment
-                ,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding SetTimeComboBox}"
+                        SelectedDate="{Binding DTO.DateOfAppointment, Mode=OneWayToSource}" FirstDayOfWeek="Monday" Margin="10,0,5,0"/>
+            <ComboBox x:Name="timeComboBox" Width="20" Height="25" SelectedValue="{Binding DTO.TimeOfAppointment
+                ,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding DTO.SetTimeComboBox}"
                       Style="{DynamicResource ComboBoxStyle}"></ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Label FontSize="17" Margin="0,0,10,0" Style="{DynamicResource Label}" Content="{ns:Loc durationLabel}"></Label>
-            <ComboBox FontSize="17" x:Name="durationInMinutesComboBox" Width="150" Height="25" ItemsSource="{Binding DurationForComboBox}"
-                      SelectedValue="{Binding DurationInMinutes, Mode=OneWayToSource}" Style="{DynamicResource ComboBoxStyle}"></ComboBox>
+            <ComboBox FontSize="17" x:Name="durationInMinutesComboBox" Width="150" Height="25" ItemsSource="{Binding DTO.DurationForComboBox}"
+                      SelectedValue="{Binding DTO.DurationInMinutes, Mode=OneWayToSource}" Style="{DynamicResource ComboBoxStyle}"></ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Label FontSize="17" Margin="0,0,10,0" Style="{DynamicResource Label}" Content="{ns:Loc typeExaminationLabel}"></Label>

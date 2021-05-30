@@ -28,8 +28,8 @@
                     <TextBlock>
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0}  {1}">
-                                <Binding Path="Appointment.PatientsRecord.Patient.FirstName" />
-                                <Binding Path="Appointment.PatientsRecord.Patient.LastName" />
+                                <Binding Path="DTO.Appointment.PatientsRecord.Patient.FirstName" />
+                                <Binding Path="DTO.Appointment.PatientsRecord.Patient.LastName" />
                             </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>
@@ -48,19 +48,20 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1">
             <Label Content="{ns:Loc dateAndTime}" FontSize="17" FontFamily="Yu Gothic" Style="{DynamicResource Label}"/>
-            <Label x:Name="Datum" FontSize="17" Content="{Binding Appointment.DateTime, StringFormat=d}" Style="{DynamicResource Label}"/>
+            <Label x:Name="Datum" FontSize="17" Content="{Binding DTO.Appointment.DateTime, StringFormat=d}" Style="{DynamicResource Label}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Label FontSize="17" Margin="0,0,10,0" Content="{ns:Loc durationLabel}" FontFamily="Yu Gothic" Style="{DynamicResource Label}"></Label>
-            <Label FontSize="17" x:Name="trajanje" Content="{Binding DurationInMinutes, Mode=OneWay}" Style="{DynamicResource Label}" FontFamily="Yu Gothic"></Label>
+            <Label FontSize="17" x:Name="trajanje" Content="{Binding DTO.DurationInMinutes, Mode=OneWay}" Style="{DynamicResource Label}" FontFamily="Yu Gothic"></Label>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Label FontSize="17" Margin="0,0,10,0" Content="{ns:Loc typeExaminationLabel}" Style="{DynamicResource Label}"></Label>
-            <Label FontSize="17" Name="novac" IsEnabled="False" FontFamily="Yu Gothic">Text</Label>
+            <Label FontSize="17" Name="novac" IsEnabled="False" FontFamily="Yu Gothic" 
+                   Content="{Binding DTO.Appointment.Type}" Style="{DynamicResource Label}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Label FontSize="17"     Content="{ns:Loc roomLabel}" Style="{DynamicResource Label}"></Label>
-            <Label x:Name="salalab" FontSize="17" Content="{Binding Appointment.Room.Name}" Style="{DynamicResource Label}"></Label>
+            <Label x:Name="salalab" FontSize="17" Content="{Binding DTO.Appointment.Room.Name}" Style="{DynamicResource Label}"></Label>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" >
 

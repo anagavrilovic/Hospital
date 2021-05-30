@@ -34,7 +34,7 @@
                 <ListBox Name="listBox" Margin="40,10,40,40" MouseDoubleClick="AddMedicineToTherapy" Height="300" Width="400" IsSynchronizedWithCurrentItem="True" Style="{DynamicResource ListBoxStyle}"></ListBox>
                 <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                     <Label Margin="40,20,0,10" Style="{DynamicResource Label}" Content="{ns:Loc daysForConsumptionLabel}"></Label>
-                    <ComboBox x:Name="daysConsumptionComboBox" Margin="0,25,20,20" SelectedValue="{Binding DaysForConsumption, Mode=OneWayToSource}" Style="{DynamicResource ComboBoxStyle}"/>
+                    <ComboBox x:Name="daysConsumptionComboBox" Margin="0,25,20,20" SelectedValue="{Binding DTO.DaysForConsumption, Mode=OneWayToSource}" Style="{DynamicResource ComboBoxStyle}"/>
                     <Button  Margin="20,40,20,0" VerticalAlignment="Top" Click="BackToTherapy" Style="{DynamicResource ImageButtonsHorizontal}">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="../../Icon/DoctorIcons/back.png" Width="20"/>
@@ -44,13 +44,13 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Margin="60,0,25,10" Style="{DynamicResource Label}" Content="{ns:Loc dailyIntakeLabel}"></Label>
-                    <ComboBox x:Name="dailyIntakeComboBox" Margin="0,0,20,20" SelectedValue="{Binding DailyIntake, Mode=OneWayToSource}" Style="{DynamicResource ComboBoxStyle}"></ComboBox>
+                    <ComboBox x:Name="dailyIntakeComboBox" Margin="0,0,20,20" SelectedValue="{Binding DTO.DailyIntake, Mode=OneWayToSource}" Style="{DynamicResource ComboBoxStyle}"></ComboBox>
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Center" Margin="0,10,0,0">
-                <Label Content="{ns:Loc consumptionLabel}" FontSize="20" Style="{DynamicResource Label}"></Label>
+                <Label Content="{ns:Loc consumptionLabel}" FontSize="20" Style="{DynamicResource Label}" Margin="0,0,15,0"></Label>
                 <TextBox Name="textBox" TextWrapping="Wrap" Height="300" Width="400" Style="{DynamicResource TextBox}"
-                         AcceptsReturn="True" FontSize="15" Text="{Binding MedicineDescription, Mode=TwoWay}"></TextBox>
+                         AcceptsReturn="True" FontSize="15" Text="{Binding DTO.MedicineDescription, Mode=TwoWay}"></TextBox>
             </StackPanel>
         </Grid>
     </DockPanel>

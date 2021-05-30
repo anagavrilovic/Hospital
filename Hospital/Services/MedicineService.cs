@@ -1,5 +1,6 @@
 ﻿using Hospital.Repositories;
 using Hospital.Repositories.Interfaces;
+using Hospital.View.Doctor;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -112,6 +113,34 @@ namespace Hospital.Services
             foreach (Ingredient i in medicine.Ingredient)
                 if (i.Name.Equals(selectedIngredient.Name))
                     return true;
+            return false;
+        }
+
+        public bool AlergicToIngredients(Medicine medicToBeAdded,MedicalRecord medicalRecord)
+        {
+            foreach (string ingredient in medicalRecord.Allergen.IngredientNames)
+            {
+                foreach (Ingredient medicToBeAddedIngredients in medicToBeAdded.Ingredient)
+                {
+                    if (ingredient.Equals(medicToBeAddedIngredients.Name))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool AllergicToMedic(Medicine medicToBeAdded,MedicalRecord medicalRecord)
+        {
+            foreach (string medicineName in medicalRecord.Allergen.MedicineNames)
+            {
+                if (medicineName.Equals(medicToBeAdded.Name))
+                {
+                    ErrorBox errorBox = new ErrorBox("Pacijent je alergican na dati lek");
+                    return true;
+                }
+            }
             return false;
         }
     }

@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Hospital.Services
 {
@@ -442,6 +443,7 @@ namespace Hospital.Services
         public List<Appointment> InitAppointments(string doctorId)
         {
             doctorRepository = new DoctorFileRepository();
+            medicalRecordRepository = new MedicalRecordFileRepository();
             List<Appointment> appointments = new List<Appointment>();
             foreach (Appointment a in GetAll())
             {

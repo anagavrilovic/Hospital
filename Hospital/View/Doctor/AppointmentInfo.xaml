@@ -30,7 +30,7 @@
             </Grid>
         </DockPanel>
 
-        <DataGrid x:Name="dataGridPregledi" ItemsSource="{Binding Path=Appointments}"
+        <DataGrid x:Name="dataGridPregledi" ItemsSource="{Binding Path=DTO.Appointments}"
                SelectionMode="Single" IsReadOnly="True" Margin="30,30,30,30" AutoGenerateColumns="False" Style="{DynamicResource PacijentiDataGrid}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{ns:Loc namePatientLabel}" Width="0.25*" Binding="{Binding PatientsRecord.Patient.FirstName}" HeaderStyle="{DynamicResource CenterGridHeaderStyle}"/>

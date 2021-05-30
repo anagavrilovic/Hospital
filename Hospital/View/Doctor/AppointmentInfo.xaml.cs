@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.DTO.DoctorDTO;
+using Hospital.Model;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -22,24 +23,6 @@ namespace Hospital.View.Doctor
 
     public partial class AppointmentInfo : Page, INotifyPropertyChanged
     {
-        private ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
-        public ObservableCollection<Appointment> Appointments
-        {
-            get => appointments;
-            set
-            {
-                appointments = value;
-            }
-        }
-        private double _durationInHours;
-        public double DurationInHours 
-        { 
-            get => _durationInHours;
-            set 
-            {
-                _durationInHours = value; 
-            }
-        }
         protected virtual void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
@@ -50,7 +33,16 @@ namespace Hospital.View.Doctor
         private string patientId;
         public event PropertyChangedEventHandler PropertyChanged;
         private AppointmentService appointmentService;
-
+        private AppointmentInfoDTO dTO;
+        public AppointmentInfoDTO DTO
+        {
+            get => dTO;
+            set
+            {
+                dTO = value;
+                OnPropertyChanged("DTO");
+            }
+        }
         public AppointmentInfo(Model.Doctor doctor,string patientId)
         {
             InitializeComponent();
@@ -61,6 +53,7 @@ namespace Hospital.View.Doctor
 
         private void InitProperties(Model.Doctor doctor, string patientId)
         {
+            DTO = new AppointmentInfoDTO();
             appointmentService = new AppointmentService();
             this.patientId = patientId;
             ComboBox.ItemsSource = Enum.GetValues(typeof(DoctorSpecialty)).Cast<DoctorSpecialty>();
@@ -86,8 +79,8 @@ namespace Hospital.View.Doctor
 
         private void SetAppointmentsInDataGrid(object sender, SelectionChangedEventArgs e)
         {
-           Appointments=new ObservableCollection<Appointment>(appointmentService.SetAppointmentDataGrid((DoctorSpecialty)ComboBox.SelectedItem));
-            dataGridPregledi.ItemsSource = Appointments;
+            DTO.Appointments = new ObservableCollection<Appointment>(appointmentService.SetAppointmentDataGrid((DoctorSpecialty)ComboBox.SelectedItem));
+            dataGridPregledi.ItemsSource = DTO.Appointments;
             dataGridPregledi.Items.Refresh();
         }
     }

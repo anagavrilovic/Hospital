@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.DTO.DoctorDTO;
+using Hospital.Model;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -23,66 +24,18 @@ namespace Hospital.View.Doctor
   
     public partial class CreateAppointment : Window,INotifyPropertyChanged
     {
-        private ObservableCollection<Hospital.Model.Doctor> doctors;
-        private Appointment appointment=new Appointment();
-        public Appointment Appointment { get => appointment; set => appointment = value; } 
-        private Room room;
-        public Room Room
+        private CreateAppointmentController controller;
+        private CreateAppointmentDTO dTO;
+        public CreateAppointmentDTO DTO
         {
-            get { return room; }
+            get { return dTO; }
             set
             {
-                room = value;
-                OnPropertyChanged();
+                dTO = value;
+                OnPropertyChanged("DTO");
             }
 
         }
-        private string timeOfAppointment;
-        public string TimeOfAppointment
-        {
-            get { return timeOfAppointment; }
-            set
-            {
-                timeOfAppointment = value;
-                OnPropertyChanged();
-            }
-
-        }
-        private DateTime dateOfAppointment;
-        public DateTime DateOfAppointment
-        {
-            get { return dateOfAppointment; }
-            set
-            {
-                dateOfAppointment = value;
-                OnPropertyChanged();
-            }
-
-        }
-        public ObservableCollection<Hospital.Model.Doctor> Doctors  
-            {
-                get{ return doctors;}
-                set {
-                doctors = value;
-                OnPropertyChanged();
-            }
-
-            }
-        private string durationInMinutes;
-        public string DurationInMinutes
-        {
-            get { return durationInMinutes; }
-            set
-            {
-                durationInMinutes = value;
-                OnPropertyChanged();
-            }
-
-        }
-        private RoomService roomService;
-        private DoctorService doctorService;
-        private MedicalRecordService medicalRecordService;
-        private AppointmentService appointmentService;
         private int specialization;
         public AppointmentInfo parentWindow { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -109,32 +62,30 @@ namespace Hospital.View.Doctor
 
         private void InitProperties(string id)
         {
-            roomService = new RoomService();
-            doctorService = new DoctorService();
-            medicalRecordService = new MedicalRecordService();
-            appointmentService = new AppointmentService();
-            Appointment.PatientsRecord = (medicalRecordService.GetByPatientId(id));
+            DTO = new CreateAppointmentDTO();
+            controller = new CreateAppointmentController(DTO);
+            DTO.Appointment.PatientsRecord = (controller.GetMedicalRecordByPatientId(id));
             SetDoctorListAndRadioButtons();
         }
 
         private void SetDoctorListAndRadioButtons()
         {
-            Doctors = new ObservableCollection<Model.Doctor>();
+            DTO.Doctors = new ObservableCollection<Model.Doctor>();
             if (specialization == (int)DoctorSpecialty.general)
             {
                 rdbOperacija.Visibility = Visibility.Hidden;
                 rdbPregled.IsChecked = true;
-                Doctors = new ObservableCollection<Model.Doctor>(doctorService.GetAll());
+                DTO.Doctors = new ObservableCollection<Model.Doctor>(controller.GetAllDoctors());
                 emergencyOperationLabel.Visibility = Visibility.Collapsed;
                 emergencyOperationCheckBox.Visibility = Visibility.Collapsed;
             }
             else
             {
-                foreach (Model.Doctor doctor in doctorService.GetAll())
+                foreach (Model.Doctor doctor in controller.GetAllDoctors())
                 {
                     if (specialization == (int)doctor.Specialty)
                     {
-                        Doctors.Add(doctor);
+                        DTO.Doctors.Add(doctor);
                     }
                 }
             }
@@ -184,7 +135,7 @@ namespace Hospital.View.Doctor
         {
             if (IsDoctorAvaliable() && IsPatientAvaliable())
             {
-                appointmentService.Save(Appointment);
+                controller.SaveAppointment();
                 return true;
             }   
             else
@@ -193,7 +144,7 @@ namespace Hospital.View.Doctor
 
         private bool IsDoctorAvaliable()
         {
-            if (!appointmentService.IsDoctorAvaliableForAppointment(Appointment))
+            if (!controller.IsDoctorAvaliableForAppointment())
             {
                 ErrorBox errorBox = new ErrorBox("Doktor je već zauzet u ovom terminu. Promenite trajanje ili odaberite drugi termin!");
                 return false;
@@ -204,7 +155,7 @@ namespace Hospital.View.Doctor
 
         private bool IsPatientAvaliable()
         {
-            if (!appointmentService.IsPatientAvaliableForAppointment(Appointment))
+            if (!controller.IsPatientAvaliableForAppointment())
             {
                 ErrorBox errorBox = new ErrorBox("Ovaj pacijent već ima zakazan pregled/operaciju u ovom terminu!");
                 return false;
@@ -215,33 +166,33 @@ namespace Hospital.View.Doctor
 
         private void UpdateParentPage()
         {
-            ((AppointmentWindow)Window.GetWindow(this.Owner)).Examintaion.appointment = Appointment;
+            ((AppointmentWindow)Window.GetWindow(this.Owner)).Examintaion.appointment = DTO.Appointment;
             ObservableCollection<Appointment> list = new ObservableCollection<Appointment>();
-            list =new ObservableCollection<Appointment>(appointmentService.SetParentAppointments(Appointment));
+            list =new ObservableCollection<Appointment>(controller.SetParentAppointments());
             parentWindow.dataGridPregledi.ItemsSource = list;
             parentWindow.dataGridPregledi.Items.Refresh();
-            parentWindow.ComboBox.SelectedIndex=(int)(doctorService.GetDoctorById(Appointment.IDDoctor).Specialty);
+            parentWindow.ComboBox.SelectedIndex=(int)(controller.GetDoctorById(DTO.Appointment.IDDoctor).Specialty);
         }
 
         private void SetRoomAndRoomType()
         {
-            foreach (Room storageRoom in roomService.GetAll())
+            foreach (Room storageRoom in controller.GetAllRooms())
             {
-                if (rdbPregled.IsChecked.Equals(true) && Appointment.Doctor.RoomID.Equals(storageRoom.Id))
+                if (rdbPregled.IsChecked.Equals(true) && DTO.Appointment.Doctor.RoomID.Equals(storageRoom.Id))
                 {
-                    Appointment.Room = storageRoom;
-                    Appointment.Type = AppointmentType.examination;
+                    DTO.Appointment.Room = storageRoom;
+                    DTO.Appointment.Type = AppointmentType.examination;
                     break;
                 }
                 else
                 {
                     if (storageRoom.Type.Equals(RoomType.OPERACIONA_SALA))
                     {
-                        Appointment.Room = storageRoom;
+                        DTO.Appointment.Room = storageRoom;
                         if(emergencyOperationCheckBox.IsChecked.Equals(false))
-                            Appointment.Type = AppointmentType.operation;
+                            DTO.Appointment.Type = AppointmentType.operation;
                         else
-                            Appointment.Type = AppointmentType.urgentExamination;
+                            DTO.Appointment.Type = AppointmentType.urgentExamination;
                         break;
                     }
                 }
@@ -251,17 +202,17 @@ namespace Hospital.View.Doctor
 
         private void FillAppointmentProperties()
         {
-            Appointment.IDpatient = Appointment.PatientsRecord.Patient.PersonalID;
-            Appointment.DateTime = DateOfAppointment.Date.Add(DateTime.Parse(timeOfAppointment).TimeOfDay);
-            Appointment.IDDoctor = Appointment.Doctor.PersonalID;
-            Appointment.IDAppointment = appointmentService.GenerateID();
-            double timeInMinutesDouble = double.Parse(DurationInMinutes);
-            Appointment.DurationInHours = timeInMinutesDouble / 60;
+            DTO.Appointment.IDpatient = DTO.Appointment.PatientsRecord.Patient.PersonalID;
+            DTO.Appointment.DateTime = DTO.DateOfAppointment.Date.Add(DateTime.Parse(DTO.TimeOfAppointment).TimeOfDay);
+            DTO.Appointment.IDDoctor = DTO.Appointment.Doctor.PersonalID;
+            DTO.Appointment.IDAppointment = controller.GenerateAppointmentId();
+            double timeInMinutesDouble = double.Parse(DTO.DurationInMinutes);
+            DTO.Appointment.DurationInHours = timeInMinutesDouble / 60;
         }
 
         private bool SomeFieldsEmpty()
         {
-            if (DateOfAppointment == null ||  (rdbOperacija.IsChecked.Equals(false) && rdbPregled.IsChecked.Equals(false)) || 
+            if (DTO.DateOfAppointment == null ||  (rdbOperacija.IsChecked.Equals(false) && rdbPregled.IsChecked.Equals(false)) || 
                 doctorComboBox.SelectedIndex == -1 || datePicker.SelectedDate==null)
             {
                 ErrorBox messageBox =new ErrorBox("Nisu uneti svi podaci");
