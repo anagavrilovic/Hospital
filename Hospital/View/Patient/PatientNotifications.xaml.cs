@@ -81,14 +81,22 @@ namespace Hospital.View
         {
             if (e.Key == Key.Space)
             {
-                PatientTherapyMedicineNotification selectedItem = (PatientTherapyMedicineNotification)dataGridApp.SelectedItem;
-                selectedItem.LastRead = DateTime.Now;
-                selectedItem.Read = true;
-                PatientNotificationsStorage patientNotificationsStorage = new PatientNotificationsStorage();
-                patientNotificationsStorage.Delete(selectedItem.ID);
-                patientNotificationsStorage.Save(selectedItem);
-                PatientTherapy patientTherapy = new PatientTherapy(selectedItem);
-                this.NavigationService.Navigate(patientTherapy);
+                if (dataGridApp.SelectedItem.GetType() == typeof(PatientTherapyMedicineNotification))
+                {
+                    PatientTherapyMedicineNotification selectedItem = (PatientTherapyMedicineNotification)dataGridApp.SelectedItem;
+                    selectedItem.LastRead = DateTime.Now;
+                    selectedItem.Read = true;
+                    PatientNotificationsStorage patientNotificationsStorage = new PatientNotificationsStorage();
+                    patientNotificationsStorage.Delete(selectedItem.ID);
+                    patientNotificationsStorage.Save(selectedItem);
+                    PatientTherapy patientTherapy = new PatientTherapy(selectedItem);
+                    this.NavigationService.Navigate(patientTherapy);
+                }
+                else
+                {
+                    PatientsNote patientsNote = new PatientsNote((PatientNotesNotification)dataGridApp.SelectedItem);
+                    this.NavigationService.Navigate(patientsNote);
+                }
 
             }
 

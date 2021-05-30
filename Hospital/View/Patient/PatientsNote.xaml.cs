@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,12 +22,24 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientsNote : Page
     {
+        private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService();
         public PatientsNote(PatientNote patientNote)
         {
             InitializeComponent();
             BackButton.Focus();
             SubjectLabel.Content = patientNote.Subject;
             TextBlock.Text = patientNote.Text;
+        }
+
+        public PatientsNote(PatientNotesNotification patientNotesNotification)
+        {
+            InitializeComponent();
+            BackButton.Focus();
+            SubjectLabel.Content = patientNotesNotification.Name;
+            TextBlock.Text = patientNotesNotification.Content;
+            patientNotesNotification.LastRead = DateTime.Now;
+            patientNotesNotification.Read = true;
+            patientNotesNotificationService.Update(patientNotesNotification);
         }
 
         private void GoBack(object sender, RoutedEventArgs e)

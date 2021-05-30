@@ -78,6 +78,8 @@ namespace Hospital.Model
        public Boolean[] Days { get; set; }
        public TimeSpan HoursMinutes { get; set; }
 
+       public DateTime LastRead { get; set; }
+
         public PatientNotesNotification(string name, string content, string iD, string patientID, Boolean[] days, TimeSpan hoursMinutes)
         {
             this.name = name;
@@ -90,19 +92,20 @@ namespace Hospital.Model
             active = true;
             times = hoursMinutes.ToString();
             SetDurationBasedOnDays();
+            LastRead = DateTime.Now;
         }
 
         private void SetDurationBasedOnDays()
         {
             duration = "";
             if (!Days.Contains(true)) duration = "Samo jednom";
-            else if (Days[0] == true) duration = duration + "Pon";
-            else if (Days[1] == true) duration = duration + "Uto";
-            else if (Days[2] == true) duration = duration + "Sre";
-            else if (Days[3] == true) duration = duration + "Čet";
-            else if (Days[4] == true) duration = duration + "Pet";
-            else if (Days[5] == true) duration = duration + "Sub";
-            else if (Days[6] == true) duration = duration + "Ned";
+            else if (Days[0] == true) duration = duration + "Pon ";
+            else if (Days[1] == true) duration = duration + "Uto ";
+            else if (Days[2] == true) duration = duration + "Sre ";
+            else if (Days[3] == true) duration = duration + "Čet ";
+            else if (Days[4] == true) duration = duration + "Pet ";
+            else if (Days[5] == true) duration = duration + "Sub ";
+            else if (Days[6] == true) duration = duration + "Ned ";
         }
     }
 }

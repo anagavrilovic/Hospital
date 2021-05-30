@@ -35,6 +35,10 @@
         </ComboBox>
         <ComboBox Name="ComboBoxMinutes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="517,242,0,0">
             <ComboBoxItem Content="00"></ComboBoxItem>
+            <ComboBoxItem Content="01"></ComboBoxItem>
+            <ComboBoxItem Content="02"></ComboBoxItem>
+            <ComboBoxItem Content="03"></ComboBoxItem>
+            <ComboBoxItem Content="04"></ComboBoxItem>
         </ComboBox>
         <Button Content="Nazad" HorizontalAlignment="Left" VerticalAlignment="Top" Width="123" Margin="313,377,0,0" Height="32" Click="GoBack"/>
         <Button Content="Dodaj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="123" Margin="313,320,0,0" Height="32" Click="AddNotification"/>

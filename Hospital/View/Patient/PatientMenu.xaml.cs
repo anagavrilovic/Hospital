@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using Hospital.ViewModels.Patient;
 using System;
 using System.Collections.Generic;
@@ -25,11 +26,13 @@ namespace Hospital.View
     {
         private PatientSettingsStorage patientSettingsStorage = new PatientSettingsStorage();
         private PatientCommentsStorage patientCommentsStorage = new PatientCommentsStorage();
+        private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService();
         public PatientMenu()
         {
             
             InitializeComponent();
             Boolean newNotification = false;
+            if (patientNotesNotificationService.IsThereNewNotification()) newNotification = true;
             PatientNotificationsStorage patientNotificationsStorage = new PatientNotificationsStorage();
             //  patientNotificationsStorage.SaveAll();
             ObservableCollection<PatientTherapyMedicineNotification> lista = patientNotificationsStorage.GetByIDPatient(MainWindow.IDnumber);

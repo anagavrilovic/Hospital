@@ -98,5 +98,11 @@ namespace Hospital.Repositories
             }
             return patientsNotesNotifications;
         }
+
+        public void Update(PatientNotesNotification patientNotesNotification)
+        {
+            Delete(patientNotesNotification.ID);
+            Save(patientNotesNotification);
+        }
     }
 }
