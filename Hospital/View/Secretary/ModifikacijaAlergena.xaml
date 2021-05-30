@@ -26,11 +26,11 @@
             
             <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
                 <TextBlock Text="Pacijent: " Style="{StaticResource TextBlockStyle}"/>
-                <TextBlock Text="{Binding Mr.Patient.FirstName, Mode=OneWay}" Style="{StaticResource TextBlockStyle}"/>
+                <TextBlock Text="{Binding PatientsRecord.Patient.FirstName, Mode=OneWay}" Style="{StaticResource TextBlockStyle}"/>
                 <TextBlock Text=" "/>
-                <TextBlock Text="{Binding Mr.Patient.LastName, Mode=OneWay}" Style="{StaticResource TextBlockStyle}"/>
+                <TextBlock Text="{Binding PatientsRecord.Patient.LastName, Mode=OneWay}" Style="{StaticResource TextBlockStyle}"/>
                 <TextBlock Text="  Broj kartona: " Style="{StaticResource TextBlockStyle}"/>
-                <TextBlock Text="{Binding Mr.MedicalRecordID, Mode=OneWay}" Style="{StaticResource TextBlockStyle}"/>
+                <TextBlock Text="{Binding PatientsRecord.MedicalRecordID, Mode=OneWay}" Style="{StaticResource TextBlockStyle}"/>
             </StackPanel>
             <!--<Separator Margin="15,0"/>-->
         </StackPanel>

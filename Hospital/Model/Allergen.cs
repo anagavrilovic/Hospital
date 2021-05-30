@@ -7,8 +7,8 @@ namespace Hospital
     public class Allergen
     {
        private string other;
-       private List<string> medicineNames = new List<string>();
-       private List<string> ingredientNames = new List<string>();
+       private ObservableCollection<string> medicineNames = new ObservableCollection<string>();
+       private ObservableCollection<string> ingredientNames = new ObservableCollection<string>();
 
         public string Other
         {
@@ -16,12 +16,12 @@ namespace Hospital
             set { other = value; }
         }
 
-        public List<string> MedicineNames
+        public ObservableCollection<string> MedicineNames
         {
             get { return medicineNames; }
             set { medicineNames = value; }
         }
-        public List<string> IngredientNames
+        public ObservableCollection<string> IngredientNames
         {
             get { return ingredientNames; }
             set { ingredientNames = value; }
