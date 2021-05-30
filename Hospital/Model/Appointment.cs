@@ -120,8 +120,7 @@ namespace Hospital
             this.Doctor = new Model.Doctor();
         }
 
-        public Appointment(DateTime dateTime, AppointmentType type, string patientName, string patientSurname, string iDpatient, string iDDoctor, string iDAppointment, 
-            string doctrosNameSurname, Room room)
+        public Appointment(DateTime dateTime, AppointmentType type, string iDpatient, string iDDoctor, string iDAppointment, Room room)
         {
             this.dateTime = dateTime;
             this.type = type;

@@ -9,6 +9,7 @@ namespace Hospital.Model
 {
     public class PatientComment
     {
+       public String ID { get; set; }
        public String IDPatient { get; set; }
        public String IDAppointment { get; set; }
        public String Comment { get; set; }

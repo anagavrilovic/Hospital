@@ -66,5 +66,23 @@ namespace Hospital.Repositories
                 serializer.Serialize(file, patientNotifications);
             }
         }
+
+        public List<PatientTherapyMedicineNotification> GetByPatientID()
+        {
+            List<PatientTherapyMedicineNotification> notifications = GetAll();
+            List<PatientTherapyMedicineNotification> patientsNotifications = new List<PatientTherapyMedicineNotification>();
+            foreach (PatientTherapyMedicineNotification notification in notifications)
+            {
+                if (notification.IDpatient.Equals(MainWindow.IDnumber)) patientsNotifications.Add(notification);
+            }
+            return patientsNotifications;
+        }
+
+        public void Update(PatientTherapyMedicineNotification patientTherapyMedicineNotification)
+        {
+            Delete(patientTherapyMedicineNotification.ID);
+            Save(patientTherapyMedicineNotification);
+
+        }
     }
 }

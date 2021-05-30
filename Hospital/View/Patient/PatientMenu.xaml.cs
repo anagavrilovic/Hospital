@@ -24,8 +24,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientMenu : Page
     {
-        private PatientSettingsStorage patientSettingsStorage = new PatientSettingsStorage();
-        private PatientCommentsStorage patientCommentsStorage = new PatientCommentsStorage();
+        private PatientNotificationService patientNotificationService = new PatientNotificationService();
         private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService();
         public PatientMenu()
         {
@@ -33,9 +32,9 @@ namespace Hospital.View
             InitializeComponent();
             Boolean newNotification = false;
             if (patientNotesNotificationService.IsThereNewNotification()) newNotification = true;
-            PatientNotificationsStorage patientNotificationsStorage = new PatientNotificationsStorage();
-            //  patientNotificationsStorage.SaveAll();
-            ObservableCollection<PatientTherapyMedicineNotification> lista = patientNotificationsStorage.GetByIDPatient(MainWindow.IDnumber);
+           
+ 
+            ObservableCollection<PatientTherapyMedicineNotification> lista = new ObservableCollection<PatientTherapyMedicineNotification>(patientNotificationService.GetByPatientID());
             if (lista != null)
             {
                 foreach (PatientTherapyMedicineNotification ptm in lista)
@@ -57,8 +56,7 @@ namespace Hospital.View
                                 {
                                     newNotification = true;
                                     ptm.Read = false;
-                                    patientNotificationsStorage.Delete(ptm.ID);
-                                    patientNotificationsStorage.Save(ptm);
+                                    patientNotificationService.Update(ptm);
                                 }
                             }
                         }

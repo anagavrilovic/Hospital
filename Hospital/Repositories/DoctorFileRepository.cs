@@ -88,5 +88,19 @@ namespace Hospital.Repositories
             doctors[doctors.FindIndex(doctor => doctor.PersonalID.Equals(doctorForUpdating.PersonalID))] = doctorForUpdating;
             Serialize(new List<Doctor>(doctors));
         }
+
+        public String GetIDByNameSurname(string nameSurname)
+        {
+            String[] nameSurnameSplitted = nameSurname.Split(' ');
+            List<Doctor> doctors = GetAll();
+            foreach (Doctor d in doctors)
+            {
+                if (d.FirstName.Equals(nameSurnameSplitted[1]) && d.LastName.Equals(nameSurnameSplitted[2]))
+                {
+                    return d.PersonalID;
+                }
+            }
+            return null;
+        }
     }
 }

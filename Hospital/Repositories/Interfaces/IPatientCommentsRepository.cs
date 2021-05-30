@@ -9,5 +9,7 @@ namespace Hospital.Repositories.Interfaces
 {
     interface IPatientCommentsRepository : IGenericRepository<PatientComment>
     {
+        String GetNewID();
+    
     }
 }

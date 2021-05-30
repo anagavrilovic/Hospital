@@ -96,7 +96,7 @@ namespace Hospital.Model
             ObservableCollection<Doctor> doctors = GetAll();
             foreach (Doctor d in doctors)
             {
-                if (d.FirstName.Equals(nameSurnameSplitted[0]) && d.LastName.Equals(nameSurnameSplitted[1]))
+                if (d.FirstName.Equals(nameSurnameSplitted[1]) && d.LastName.Equals(nameSurnameSplitted[2]))
                 {
                     return d.PersonalID;
                 }

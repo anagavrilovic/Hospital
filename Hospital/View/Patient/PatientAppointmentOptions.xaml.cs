@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,10 +23,9 @@ namespace Hospital.View
     public partial class PatientAppointmentOptions : Page
     {
         private Appointment selectedAppointment;
-        private PatientSettingsStorage patientSettingsStorage = new PatientSettingsStorage();
-        private DoctorStorage doctorStorage = new DoctorStorage();
-        private AppointmentStorage appointmentStorage = new AppointmentStorage();
-        private const int MINIMUM_DAYS_DIFFERENCE = 2;
+        private AppointmentService appointmentService = new AppointmentService();
+        private PatientSettingsService patientSettingsService = new PatientSettingsService();
+      
 
         public PatientAppointmentOptions(Appointment selectedAppointment)
         {
@@ -40,11 +40,11 @@ namespace Hospital.View
             {
                 MessageBox.Show("Moguće je pomeriti samo termine kod opšte prakse.");
             }
-            else if (patientSettingsStorage.IsAntiTrollTriggered())
+            else if (patientSettingsService.IsAntiTrollTriggered())
             {
                 MessageBox.Show("Previše puta ste zakazali / pomerili termin u kratkom vremenskom periodu.");
             }
-            else if (IsTooLateForAppointmentChange())
+            else if (appointmentService.IsTooLateForAppointmentChange(selectedAppointment))
             {
                 MessageBox.Show("Nije moguce otkazati termin tako kasno");
 
@@ -63,9 +63,9 @@ namespace Hospital.View
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
-            if (!IsTooLateForAppointmentChange())
+            if (!appointmentService.IsTooLateForAppointmentChange(selectedAppointment))
             {
-                appointmentStorage.Delete(selectedAppointment.IDAppointment);
+                appointmentService.Delete(selectedAppointment.IDAppointment);
                 NavigateBack();
             }
             else
@@ -76,14 +76,9 @@ namespace Hospital.View
 
         private Boolean IsGPAppointment()
         {
-            Hospital.Model.Doctor doctor = doctorStorage.GetOne(selectedAppointment.IDDoctor);
-            return (doctor.Specialty == DoctorSpecialty.general);
+            return (selectedAppointment.Doctor.Specialty == DoctorSpecialty.general);
         }
 
-        private Boolean IsTooLateForAppointmentChange()
-        {
-            return !((selectedAppointment.DateTime - DateTime.Now).TotalDays >= MINIMUM_DAYS_DIFFERENCE);
-        }
 
         private void NavigateBack()
         {

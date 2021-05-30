@@ -148,41 +148,26 @@ namespace Hospital.Repositories
 
             return true;
         }
+   
         public String GetNewID()
         {
-            List<Appointment> apps;
-            using (StreamReader sr = File.OpenText(@"..\\..\\Files\\" + fileName))
-            {
-                apps = GetAll();
-                apps = JsonConvert.DeserializeObject<List<Appointment>>(sr.ReadToEnd());
-            }
-
-            int retVal = 1;
-            if (apps == null || apps.Count == 0)
-            {
-                return retVal.ToString();
-            }
-
-            apps.AddRange(GetPassedAppointments());
-            List<int> lista = new List<int>();
-            foreach (Appointment app in apps)
-            {
-                int x = Int32.Parse(app.IDAppointment);
-                lista.Add(x);
-            }
-
+            int newID = 0;
             while (true)
             {
-                if (!lista.Contains(retVal))
-                {
-                    break;
-                }
-                else
-                {
-                    retVal++;
-                }
+                if (!CheckIfIDExists(newID.ToString())) return newID.ToString();
+                newID++;
             }
-            return retVal.ToString();
+        }
+
+        private Boolean CheckIfIDExists(String ID)
+        {
+            List<Appointment> appointments = GetAll();
+            appointments.AddRange(GetPassedAppointments());
+            foreach (Appointment appointment in appointments)
+            {
+                if (appointment.IDAppointment.Equals(ID)) return true;
+            }
+            return false;
         }
 
         public Appointment SetDoctorForAppointment(Appointment appointment)

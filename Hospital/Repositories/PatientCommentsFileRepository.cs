@@ -17,9 +17,18 @@ namespace Hospital.Repositories
 
         public PatientCommentsFileRepository() { }
 
-        public void Delete(string patientCommentsID)
+        public void Delete(string id)
         {
-            throw new NotImplementedException();
+            List<PatientComment> patientComments = GetAll();
+            foreach (PatientComment comment in patientComments)
+            {
+                if (comment.ID.Equals(id))
+                {
+                    patientComments.Remove(comment);
+                    Serialize(patientComments);
+                    return;
+                }
+            }
         }
 
         public List<PatientComment> GetAll()
@@ -37,9 +46,14 @@ namespace Hospital.Repositories
             return patientComments;
         }
 
-        public PatientComment GetByID(string patientCommentsID)
+        public PatientComment GetByID(string id)
         {
-            throw new NotImplementedException();
+            List<PatientComment> patientComments = GetAll();
+            foreach (PatientComment comment in patientComments)
+                if (comment.ID.Equals(id))
+                    return comment;
+
+            return null;
         }
 
         public void Save(PatientComment patientComment)
@@ -56,6 +70,37 @@ namespace Hospital.Repositories
                 JsonSerializer serializer = new JsonSerializer();
                 serializer.Serialize(file, patientComments);
             }
+        }
+
+        public String GetNewID()
+        {
+            int newID = 0;
+            while (true)
+            {
+                if (!CheckIfIDExists(newID.ToString())) return newID.ToString();
+                newID++;
+            }
+        }
+
+        private Boolean CheckIfIDExists(String ID)
+        {
+            List<PatientComment> patientComments = GetAll();
+            foreach (PatientComment comment in patientComments)
+            {
+                if (comment.ID.Equals(ID)) return true;
+            }
+            return false;
+        }
+
+        public List<PatientComment> GetByPatientID()
+        {
+            List<PatientComment> comments = GetAll();
+            List<PatientComment> patientComments = new List<PatientComment>();
+            foreach (PatientComment comment in comments)
+            {
+                if (comment.IDPatient.Equals(MainWindow.IDnumber)) patientComments.Add(comment);
+            }
+            return patientComments;
         }
     }
 }

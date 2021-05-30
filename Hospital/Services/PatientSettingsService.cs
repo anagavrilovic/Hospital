@@ -45,6 +45,44 @@ namespace Hospital.Services
             patientSettingsRepository.FirstSave(id);
         }
 
-        
+        public Boolean IsAntiTrollTriggered()
+        {
+            PatientSettings patientSettings = patientSettingsRepository.GetByID(MainWindow.IDnumber);
+
+            if ((patientSettings.LatestScheduledAppointmentsTime != null) && (patientSettings.LatestScheduledAppointmentsTime.Count == 3))
+            {
+
+                if (AreAppointmentsWithinTenDays(patientSettings.LatestScheduledAppointmentsTime)) return true;
+            }
+            return false;
+        }
+
+        private Boolean AreAppointmentsWithinTenDays(List<DateTime> appointmentsDates)
+        {
+            foreach (DateTime dts in appointmentsDates)
+            {
+                if ((DateTime.Now - dts).TotalDays > 10)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public void AddScheduling(DateTime dt)
+        {
+            PatientSettings patientSettings = patientSettingsRepository.GetByID(MainWindow.IDnumber);
+            if (patientSettings.LatestScheduledAppointmentsTime == null)
+            {
+                patientSettings.LatestScheduledAppointmentsTime = new List<DateTime>();
+            }
+            patientSettings.LatestScheduledAppointmentsTime.Add(dt);
+            if (patientSettings.LatestScheduledAppointmentsTime.Count > 3)
+            {
+                patientSettings.LatestScheduledAppointmentsTime.RemoveAt(0);
+            }
+            Update(patientSettings);
+        }
+
     }
 }

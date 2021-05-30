@@ -82,6 +82,7 @@
     <Compile Include="Controller\DoctorControllers\EditMedicineController.cs" />
     <Compile Include="Controller\DoctorControllers\MedicineValidityController.cs" />
     <Compile Include="Controller\NavigationController.cs" />
+    <Compile Include="Controller\PatientControllers\CalendarController.cs" />
     <Compile Include="Controller\WpfNavigationController.cs" />
     <Compile Include="DoktorConverters\ListToStringConverter.cs" />
     <Compile Include="DTO\DoctorDTO\DoctorNotificationsDTO.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="DTO\DoctorsShiftsDTO.cs" />
     <Compile Include="DTO\FilteringRoomsDTO.cs" />
     <Compile Include="DTO\NotificationRecipientsDTO.cs" />
+    <Compile Include="DTO\PatientDTO\CalendarDTO.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Allergen.cs" />
     <Compile Include="Model\BloodType.cs" />
@@ -1196,5 +1198,6 @@
   <ItemGroup>
     <Resource Include="Icon\Secretary\image.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

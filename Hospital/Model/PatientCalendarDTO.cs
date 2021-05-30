@@ -56,7 +56,7 @@ namespace Hospital.Model
             Doctors[day] = "";
             if (!appointmentStorage.ExistByTime(trackedDateTime, doctorStorage.GetIDByNameSurname(patientSettings.ChosenDoctor)))
                 {
-                    Doctors[day] = "dr " + patientSettings.ChosenDoctor;
+                    Doctors[day] = patientSettings.ChosenDoctor;
                     DoctorsID[day] = doctorStorage.GetIDByNameSurname(patientSettings.ChosenDoctor);
                 }
             Dates[day] = trackedDateTime;
@@ -114,7 +114,7 @@ namespace Hospital.Model
 
         private void SetDoctor(int day,Doctor doctor)
         {
-            Doctors[day] = "dr " + doctor.FirstName + " " + doctor.LastName;
+            Doctors[day] = doctor.FirstName + " " + doctor.LastName;
             DoctorsID[day] = doctor.PersonalID;
         }
     }
