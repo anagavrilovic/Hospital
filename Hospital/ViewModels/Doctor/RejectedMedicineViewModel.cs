@@ -1,5 +1,6 @@
 ﻿using Hospital.Commands.DoctorCommands;
 using Hospital.Model;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,7 @@ namespace Hospital.ViewModels.Doctor
             }
         }
         private MedicineRevision medicineRevision = new MedicineRevision();
-        private MedicineRevisionStorage medicineRevisionStorage = new MedicineRevisionStorage();
+        private MedicineRevisionService medicineRevisionService = new MedicineRevisionService();
         public MedicineRevision MedicineRevision
         {
             get
@@ -63,7 +64,7 @@ namespace Hospital.ViewModels.Doctor
         private void Execute_SaveRejection(object sender)
         {
             MedicineRevision.IsMedicineRevised = true;
-            medicineRevisionStorage.EditMedicine(MedicineRevision);
+            medicineRevisionService.EditMedicine(MedicineRevision);
             CloseAction();
         }
     }

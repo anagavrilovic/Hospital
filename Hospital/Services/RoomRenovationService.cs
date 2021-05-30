@@ -13,10 +13,13 @@ namespace Hospital.Services
     {
         private IRoomRenovationRepository renovationRepository;
         private IRoomRepository roomRepository;
+        private IAppointmentRepository appointmentRepository;
+
         public RoomRenovationService(RoomRenovation renovation)
         {
             renovationRepository = new RoomRenovationFileRepository();
             roomRepository = new RoomFileRepository();
+            appointmentRepository = new AppointmentFileRepository();
             Renovation = renovation;
         }
 
@@ -39,8 +42,7 @@ namespace Hospital.Services
 
         private bool IsAnyScheduledAppointmentInRoomDuringRenovation()
         {
-            AppointmentStorage appointmentStorage = new AppointmentStorage();
-            foreach (Appointment appointment in appointmentStorage.GetAll())
+            foreach (Appointment appointment in appointmentRepository.GetAll())
             {
                 if (appointment.DateTime > Renovation.StartDate && appointment.DateTime < Renovation.EndDate + new TimeSpan(23, 59, 59) && appointment.Room.Id.Equals(Renovation.Room.Id))
                 {

@@ -12,10 +12,12 @@ namespace Hospital.Services
     public class PatientNotificationService
     {
         IPatientNotificationsRepository patientNotificationsRepository;
+        IMedicineRepository medicineRepository;
 
         public PatientNotificationService()
         {
             patientNotificationsRepository = new PatientNotificationsFileRepository();
+            medicineRepository = new MedicineFileRepository();
         }
         public List<PatientTherapyMedicineNotification> GetByPatientID()
         {
@@ -40,7 +42,7 @@ namespace Hospital.Services
             {
                 x++;
                 PatientTherapyMedicineNotification patientTherapyMedicineNotification = new PatientTherapyMedicineNotification();
-                patientTherapyMedicineNotification.Name = e.therapy.name + ": " + medicineStorage.GetOne(med.MedicineID).Name;
+                patientTherapyMedicineNotification.Name = e.therapy.name + ": " + medicineRepository.GetByID(med.MedicineID).Name;
                 for (int i = 0; i < med.TimesPerDay; i++)
                 {
                     TimeSpan ts = new TimeSpan(i * 3 + 10, 0, 0);

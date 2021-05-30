@@ -126,7 +126,6 @@
     <Compile Include="Model\Inventory.cs" />
     <Compile Include="Model\InventoryStorage.cs" />
     <Compile Include="Model\MedicineRevision.cs" />
-    <Compile Include="Model\MedicineRevisionStorage.cs" />
     <Compile Include="Model\MedicineTherapy.cs" />
     <Compile Include="Model\MoveAppointment.cs" />
     <Compile Include="Model\Notification.cs" />
@@ -146,7 +145,6 @@
     <Compile Include="Model\DynamicInventoryStorage.cs" />
     <Compile Include="DTO\WeeklyCalendarRowDTO.cs" />
     <Compile Include="Model\Medicine.cs" />
-    <Compile Include="Model\MedicineStorage.cs" />
     <Compile Include="Model\RegistratedUser.cs" />
     <Compile Include="Model\RegistratedUserStorage.cs" />
     <Compile Include="Model\ScheduledShift.cs" />

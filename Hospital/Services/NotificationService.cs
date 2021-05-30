@@ -161,7 +161,7 @@ namespace Hospital.Services
         public void NotifyPatientAboutRescheduledAppointment(Appointment appointment, DateTime newTime)
         {
             Notification notification = GenerateNotificationForPatientsRescheduledAppointment(appointment, newTime);
-            NotificationsUsers notificationsUsers = new NotificationsUsers(notification.Id, new MedicalRecordStorage().GetUsernameByIDPatient(appointment.IDpatient));
+            NotificationsUsers notificationsUsers = new NotificationsUsers(notification.Id, new MedicalRecordService().GetUsernameByIDPatient(appointment.IDpatient));
 
             notificationRepository.Save(notification);
             notificationsUsersRepository.Save(notificationsUsers);
@@ -170,7 +170,7 @@ namespace Hospital.Services
         public void NotifyDoctor(Appointment newUrgentAppointment)
         {
             Notification notification = GenerateNotificationForDoctorsUrgentAppointment(newUrgentAppointment);
-            NotificationsUsers notificationsUsers = new NotificationsUsers(notification.Id, new DoctorStorage().GetUsernameByIDDoctor(newUrgentAppointment.IDDoctor));
+            NotificationsUsers notificationsUsers = new NotificationsUsers(notification.Id, new DoctorService().GetUsernameByIDDoctor(newUrgentAppointment.IDDoctor));
 
             notificationRepository.Save(notification);
             notificationsUsersRepository.Save(notificationsUsers);

@@ -28,7 +28,7 @@ namespace Hospital.View.Doctor
         private Room selectedRoom = new Room();
         private MedicalRecord medicalRecord;
         public event PropertyChangedEventHandler PropertyChanged;
-        private MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
+        private MedicalRecordService medicalRecordService = new MedicalRecordService();
         public Room SelectedRoom
         {
             get
@@ -100,7 +100,7 @@ namespace Hospital.View.Doctor
 
         private void initProperties(string patientId)
         {
-            medicalRecord=medicalRecordStorage.GetByPatientID(patientId);
+            medicalRecord= medicalRecordService.GetByPatientId(patientId);
             foreach(Room roomForDisplay in roomService.GetAll())
             {
                 if (roomForDisplay.Type.Equals(RoomType.SOBA_ZA_ODMOR))
@@ -123,8 +123,8 @@ namespace Hospital.View.Doctor
             hospitalTreatment.RoomId = selectedRoom.Id;
             hospitalTreatment.StartOfTreatment = DateTime.Now;
             hospitalTreatment.EndOfTreatment = PatientsStayDuration;
-            HospitalTreatmentStorage hospitalTreatmentStorage = new HospitalTreatmentStorage();
-            hospitalTreatmentStorage.Save(hospitalTreatment);
+            HospitalTreatmentService hospitalTreatmentService = new HospitalTreatmentService();
+            hospitalTreatmentService.Save(hospitalTreatment);
             changeUI();
         }
 

@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -20,8 +21,8 @@ namespace Hospital
         {
             this.Appointment = appointment;
             this.FromTime = appointment.DateTime;
-            this.Doctor = new DoctorStorage().GetDoctorByID(appointment.IDDoctor);
-            this.Patient = new MedicalRecordStorage().GetByPatientID(appointment.IDpatient);
+            this.Doctor = new DoctorService().GetDoctorById(appointment.IDDoctor);
+            this.Patient = new MedicalRecordService().GetByPatientId(appointment.IDpatient);
             this.ToTime = new DateTime();
         }
 

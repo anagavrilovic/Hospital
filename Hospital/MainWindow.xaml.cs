@@ -50,7 +50,7 @@ namespace Hospital
                     switch (user.Type)
                     {
                         case UserType.doctor:
-                            DoctorStorage ds = new DoctorStorage();
+                            DoctorService ds = new DoctorService();
                             IDnumber= ds.GetByUsername(user.Username);
                             DoctorMainWindow de = new DoctorMainWindow(IDnumber);
                             Application.Current.MainWindow=de;
@@ -63,8 +63,8 @@ namespace Hospital
                             mw.Show();
                             break;
                         case UserType.patient:
-                            MedicalRecordStorage mds = new MedicalRecordStorage();
-                            IDnumber = mds.GetByUsername(user.Username);
+                            MedicalRecordService medicalRecordService = new MedicalRecordService();
+                            IDnumber = medicalRecordService.GetByUsername(user.Username);
                             PatientMain patientMain = new PatientMain();
                             patientMain.Show();
                             this.Close();

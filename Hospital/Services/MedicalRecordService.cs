@@ -115,5 +115,25 @@ namespace Hospital.Services
             }
             UpdateMedicalRecord(medicalRecord);
         }
+
+        public String GetByUsername(string username)
+        {
+            List<MedicalRecord> records = GetAllRecords();
+            foreach (MedicalRecord r in records)
+                if (r.Patient.Username.Equals(username))
+                    return r.Patient.PersonalID;
+
+            return null;
+        }
+
+        internal string GetUsernameByIDPatient(string idpatient)
+        {
+            List<MedicalRecord> records = GetAllRecords();
+            foreach (MedicalRecord r in records)
+                if (r.Patient.PersonalID.Equals(idpatient))
+                    return r.Patient.Username;
+
+            return null;
+        }
     }
 }

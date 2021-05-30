@@ -47,9 +47,30 @@ namespace Hospital.Services
 
             return doctorsNameSurname;
         }
+
         public String GetIDByNameSurname(string nameSurname)
         {
             return doctorRepository.GetIDByNameSurname(nameSurname);
+        }
+
+        public String GetByUsername(string username)
+        {
+            List<Doctor> doctors = GetAll();
+            foreach (Doctor d in doctors)
+                if (d.Username.Equals(username))
+                    return d.PersonalID;
+
+            return null;
+        }
+
+        public string GetUsernameByIDDoctor(string iDDoctor)
+        {
+            List<Doctor> doctors = GetAll();
+            foreach (Doctor d in doctors)
+                if (d.PersonalID.Equals(iDDoctor))
+                    return d.Username;
+
+            return null;
         }
     }
 }

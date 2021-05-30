@@ -66,5 +66,10 @@ namespace Hospital.Services
             }
             return hospitalTreatments;
         }
+
+        internal void Save(HospitalTreatment hospitalTreatment)
+        {
+            hospitalTreatmentRepository.Save(hospitalTreatment);
+        }
     }
 }

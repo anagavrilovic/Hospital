@@ -1,7 +1,9 @@
 
 using Hospital.Model;
+using Hospital.Services;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -136,7 +138,7 @@ namespace Hospital
 
         public bool IsRoomAvaliableInSelectedPeriod(Appointment appointment)
         {
-            ObservableCollection<Appointment> allAppointments = new AppointmentStorage().GetAll();
+            List<Appointment> allAppointments = new AppointmentService().GetAll();
 
             foreach (Appointment a in allAppointments)
                 if (a.IsOverlappingWith(appointment) && this.Id.Equals(a.Room.Id))

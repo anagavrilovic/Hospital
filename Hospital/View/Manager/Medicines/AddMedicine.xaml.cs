@@ -130,9 +130,8 @@ namespace Hospital.View
         private void InitializeMedicine()
         {
             string doctorSelected = doctorsCB.Text.Trim().Substring(3);
-            DoctorStorage doctorStorage = new DoctorStorage();
             DoctorService doctorService = new DoctorService();
-            MedicineRevision.DoctorID = doctorStorage.GetIDByNameSurname(doctorSelected);
+            MedicineRevision.DoctorID = doctorService.GetIDByNameSurname(doctorSelected);
             MedicineRevision.RevisionDoctor = doctorService.GetDoctorById(MedicineRevision.DoctorID);
             MedicineRevision.IsMedicineRevised = false;
         }
