@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.DTO
 {
-    public class DatesInWeeklyCalendar : INotifyPropertyChanged
+    public class DatesInWeeklyCalendarDTO : INotifyPropertyChanged
     {
         private string monday;
 

@@ -8,6 +8,12 @@ namespace Hospital.Model
    {
         public DoctorSpecialty Specialty { get; set; }
         public string RoomID { get; set; }
+        public DoctorsShift Shifts { get; set; }
+
+        public Doctor()
+        {
+            Shifts = new DoctorsShift();
+        }
 
         [JsonIgnore]
         public Room Room { get; set; }
@@ -28,7 +34,6 @@ namespace Hospital.Model
 
                 return stringBuilder.ToString();
             }
-            
         }
-    }
+   }
 }

@@ -25,13 +25,7 @@ namespace Hospital.View
         public MedicalRecord SelectedPatientsRecord { get; set; }
         public MedicalRecordService MedicalRecordService { get; set; }
 
-        private ICollectionView patientCollection;
-
-        public ICollectionView PatientCollection
-        {
-            get { return patientCollection; }
-            set { patientCollection = value; }
-        }
+        public ICollectionView PatientCollection { get; set; }
 
         public PrikazPacijenata()
         {

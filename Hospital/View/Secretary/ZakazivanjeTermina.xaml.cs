@@ -83,31 +83,17 @@ namespace Hospital.View
 
         private void PotvrdiClick(object sender, RoutedEventArgs e)
         {
-            AppointmentService.ScheduleAppointment(NewAppointment);
+            string message = AppointmentService.ScheduleAppointment(NewAppointment);
+
+            if (!message.Equals(""))
+            {
+                InformationBox informationBox = new InformationBox(message);
+                informationBox.ShowDialog();
+                return;
+            }
+
             NavigationService.Navigate(new Kalendar(NewAppointment.Doctor));
         }
-
-        /*private bool IsDoctorAvaliable()
-        {
-            if (!AppointmentService.IsDoctorAvaliableForAppointment(NewAppointment))
-            {
-                InformationBox informationBox = new InformationBox("Doktor je već zauzet u ovom terminu. Promenite trajanje ili odaberite drugi termin!");
-                informationBox.ShowDialog();
-                return false;
-            }
-            return true;
-        }
-
-        private bool IsPatientAvaliable()
-        {
-            if (!AppointmentService.IsPatientAvaliableForAppointment(NewAppointment))
-            {
-                InformationBox informationBox = new InformationBox("Ovaj pacijent već ima zakazan pregled/operaciju u ovom terminu!");
-                informationBox.ShowDialog();
-                return false;
-            }
-            return true;
-        }*/
 
         private void OdustaniClick(object sender, RoutedEventArgs e)
         {

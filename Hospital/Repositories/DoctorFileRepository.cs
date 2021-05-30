@@ -81,5 +81,12 @@ namespace Hospital.Repositories
                 serializer.Serialize(file, doctors);
             }
         }
+
+        public void Update(Doctor doctorForUpdating)
+        {
+            List<Doctor> doctors = GetAll();
+            doctors[doctors.FindIndex(doctor => doctor.PersonalID.Equals(doctorForUpdating.PersonalID))] = doctorForUpdating;
+            Serialize(new List<Doctor>(doctors));
+        }
     }
 }

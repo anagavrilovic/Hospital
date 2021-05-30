@@ -197,9 +197,7 @@ namespace Hospital
         protected virtual void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
-            {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
         }
     }
 }

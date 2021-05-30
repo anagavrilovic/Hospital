@@ -88,6 +88,8 @@
     <Compile Include="DTO\DoctorDTO\EditMedicineDTO.cs" />
     <Compile Include="DTO\DoctorDTO\MedicineValidityDTO.cs" />
     <Compile Include="DTO\DoctorDTO\NewAppointmentDTO.cs" />
+    <Compile Include="DTO\DatesForShiftsDTO.cs" />
+    <Compile Include="DTO\DoctorsShiftsDTO.cs" />
     <Compile Include="DTO\NotificationRecipientsDTO.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Allergen.cs" />
@@ -95,8 +97,9 @@
     <Compile Include="Model\BoolToStringConverter.cs" />
     <Compile Include="Model\City.cs" />
     <Compile Include="Model\Country.cs" />
-    <Compile Include="DTO\DatesInWeeklyCalendar.cs" />
+    <Compile Include="DTO\DatesInWeeklyCalendarDTO.cs" />
     <Compile Include="Model\DoctorSpecialty.cs" />
+    <Compile Include="Model\DoctorsShift.cs" />
     <Compile Include="Model\DoctorStorage.cs" />
     <Compile Include="Model\HospitalTreatment.cs" />
     <Compile Include="Model\HospitalTreatmentStorage.cs" />
@@ -123,11 +126,13 @@
     <Compile Include="Model\RoomStatus.cs" />
     <Compile Include="Model\DynamicInventory.cs" />
     <Compile Include="Model\DynamicInventoryStorage.cs" />
-    <Compile Include="DTO\WeeklyCalendarRow.cs" />
+    <Compile Include="DTO\WeeklyCalendarRowDTO.cs" />
     <Compile Include="Model\Medicine.cs" />
     <Compile Include="Model\MedicineStorage.cs" />
     <Compile Include="Model\RegistratedUser.cs" />
     <Compile Include="Model\RegistratedUserStorage.cs" />
+    <Compile Include="Model\ScheduledShift.cs" />
+    <Compile Include="Model\Shift.cs" />
     <Compile Include="Model\TransferDynamicInventory.cs" />
     <Compile Include="Model\TransferInventory.cs" />
     <Compile Include="Model\TransferInventoryStorage.cs" />
@@ -171,6 +176,7 @@
     <Compile Include="Repositories\TransferInventoryFileRepository.cs" />
     <Compile Include="Services\AppointmentService.cs" />
     <Compile Include="Services\DoctorService.cs" />
+    <Compile Include="Services\DoctorsShiftService.cs" />
     <Compile Include="Services\DynamicInventoryService.cs" />
     <Compile Include="Services\ExaminationService.cs" />
     <Compile Include="Services\HospitalTreatmentService.cs" />
@@ -418,6 +424,9 @@
     <Compile Include="View\Secretary\IzmenaObavestenja.xaml.cs">
       <DependentUpon>IzmenaObavestenja.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Secretary\IzmenaSmene.xaml.cs">
+      <DependentUpon>IzmenaSmene.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Secretary\Kalendar.xaml.cs">
       <DependentUpon>Kalendar.xaml</DependentUpon>
     </Compile>
@@ -473,8 +482,14 @@
     <Compile Include="View\Secretary\PrikazPacijenata.xaml.cs">
       <DependentUpon>PrikazPacijenata.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Secretary\RadnoVreme.xaml.cs">
+      <DependentUpon>RadnoVreme.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Secretary\SecretaryWindow.xaml.cs">
       <DependentUpon>SecretaryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\SlobodniDani.xaml.cs">
+      <DependentUpon>SlobodniDani.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\ZakazivanjeTermina.xaml.cs">
       <DependentUpon>ZakazivanjeTermina.xaml</DependentUpon>
@@ -771,6 +786,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Secretary\IzmenaSmene.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Secretary\Kalendar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -843,7 +862,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Secretary\RadnoVreme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Secretary\SecretaryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\SlobodniDani.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1115,6 +1142,11 @@
   <ItemGroup>
     <Resource Include="Icon\DoctorIcons\cancel_pink.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Icon\Secretary\111.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\Secretary\image.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

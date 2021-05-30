@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace Hospital.DTO
 {
-    public class WeeklyCalendarRow : INotifyPropertyChanged
+    public class WeeklyCalendarRowDTO : INotifyPropertyChanged
     {
         private string timeInRow;
         private Appointment monday = new Appointment();
@@ -99,7 +99,7 @@ namespace Hospital.DTO
             }
         }
 
-        public WeeklyCalendarRow()
+        public WeeklyCalendarRowDTO()
         {
             this.TimeInRow = "";
         }

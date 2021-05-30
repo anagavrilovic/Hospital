@@ -68,9 +68,9 @@ namespace Hospital.View
             Main.Navigate(new HitanPregled());
         }
 
-        private void ButtonNaplataClick(object sender, RoutedEventArgs e)
+        private void ButtonRadnoVremeClick(object sender, RoutedEventArgs e)
         {
-
+            Main.Navigate(new RadnoVreme());
         }
 
         private void ButtonObavestenjaClick(object sender, RoutedEventArgs e)

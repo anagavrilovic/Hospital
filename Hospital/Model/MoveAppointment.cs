@@ -24,5 +24,10 @@ namespace Hospital
             this.Patient = new MedicalRecordStorage().GetByPatientID(appointment.IDpatient);
             this.ToTime = new DateTime();
         }
+
+        public bool HasUrgentAppointment()
+        {
+            return this.Appointment.Type.Equals(AppointmentType.urgentExamination) || this.Appointment.Type.Equals(AppointmentType.urgentOperation);
+        }
     }
 }

@@ -19,6 +19,6 @@ namespace Hospital.Repositories.Interfaces
         Appointment SetDoctorForAppointment(Appointment appointment);
         List<Appointment> GetPassedAppointmentsForPatient(String id);
         List<Appointment> GetPassedAppointments();
-
+        void Update(Appointment appointment);
     }
 }
