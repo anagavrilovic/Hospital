@@ -42,6 +42,20 @@ namespace Hospital.Repositories
             return inventory;
         }
 
+        public List<Inventory> GetAllInventoryFromRoom(string id)
+        {
+            List<Inventory> inventory = GetAll();
+            List<Inventory> ret = new List<Inventory>();
+
+            foreach (Inventory inv in inventory)
+            {
+                if (inv.RoomID.Equals(id))
+                    ret.Add(inv);
+            }
+
+            return ret;
+        }
+
         public Inventory GetByID(string id)
         {
             List<Inventory> inventory = GetAll();
@@ -52,12 +66,54 @@ namespace Hospital.Repositories
             return null;
         }
 
+        public Inventory GetOneItemFromRoom(string id, string roomId)
+        {
+            List<Inventory> inventory = GetAll();
+            foreach (Inventory inv in inventory)
+            {
+                if (inv.Id.Equals(id) && inv.RoomID.Equals(roomId))
+                {
+                    return inv;
+                }
+            }
+            return null;
+        }
+
         public void Save(Inventory parameter)
         {
             List<Inventory> inventory = GetAll();
             inventory.Add(parameter);
 
             Serialize(inventory);
+        }
+
+        public void EditItem(Inventory editedItem)
+        {
+            List<Inventory> inventory = GetAll();
+            foreach (Inventory item in inventory)
+            {
+                if (item.Id.Equals(editedItem.Id) && item.RoomID.Equals(editedItem.RoomID))
+                {
+                    inventory.Remove(item);
+                    inventory.Add(editedItem);
+                    Serialize(inventory);
+                    break;
+                }
+            }
+        }
+
+        public void DeleteItemFromRoom(string id, string roomID)
+        {
+            List<Inventory> inventory = GetAll();
+            foreach (Inventory inv in inventory)
+            {
+                if (inv.Id.Equals(id) && inv.RoomID.Equals(roomID))
+                {
+                    inventory.Remove(inv);
+                    Serialize(inventory);
+                    return;
+                }
+            }
         }
 
         public void Serialize(List<Inventory> parameter)

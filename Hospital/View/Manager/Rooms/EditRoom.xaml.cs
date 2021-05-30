@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,6 @@ namespace Hospital.View
     public partial class EditRoom : Page
     {
         public Room EditedRoom { get; set; }
-        private RoomStorage _roomStorage;
 
         public EditRoom(Room room)
         {
@@ -28,13 +28,14 @@ namespace Hospital.View
             this.DataContext = this;
 
             EditedRoom = room;
-            _roomStorage = new RoomStorage();
         }
 
         private void acceptEdit(object sender, RoutedEventArgs e)
         {
             SaveEditedProperties();
-            _roomStorage.EditRoom(EditedRoom);
+
+            RoomService roomService = new RoomService();
+            roomService.EditRoom(EditedRoom);
 
             NavigationService.Navigate(new RoomsWindow());
         }

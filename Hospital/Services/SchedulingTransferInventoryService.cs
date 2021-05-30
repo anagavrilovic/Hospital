@@ -1,5 +1,6 @@
 ﻿using Hospital.Model;
 using Hospital.Repositories;
+using Hospital.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,20 @@ namespace Hospital.Services
 {
     class SchedulingTransferInventoryService
     {
+        private ITransferInventoryRepository transferInventoryRepository;
+        public SchedulingTransferInventoryService() 
+        {
+            transferInventoryRepository = new TransferInventoryFileRepository();
+        }
         public SchedulingTransferInventoryService(TransferInventory transfer)
         {
             TransferRequest = transfer;
+            transferInventoryRepository = new TransferInventoryFileRepository();
+        }
+
+        public List<TransferInventory> GetAll()
+        {
+            return transferInventoryRepository.GetAll();
         }
 
         public void ProcessRequest()
@@ -34,16 +46,16 @@ namespace Hospital.Services
 
         public bool AreTransferAttributesValid()
         {
-            InventoryStorage storage = new InventoryStorage();
-            Inventory ItemForTransfer = storage.GetOneByRoom(TransferRequest.ItemID, TransferRequest.FirstRoomID);
+            IStaticInventoryRepository staticInventoryRepository = new StaticInventoryFileRepository();
+            Inventory ItemForTransfer = staticInventoryRepository.GetOneItemFromRoom(TransferRequest.ItemID, TransferRequest.FirstRoomID);
             if (TransferRequest.TransferDate < DateTime.Now)
             {
-                MessageBox.Show("Niste ispravno uneli vreme!");
+                MessageBox.Show("Niste ispravno uneli vreme!"); //TODO: throw exception
                 return false;
             }
             else if (ItemForTransfer.Quantity < TransferRequest.Quantity)
             {
-                MessageBox.Show("Pogrešan unos količine!");
+                MessageBox.Show("Pogrešan unos količine!");    //TODO: throw exception
                 return false;
             }
             return true;
@@ -51,6 +63,7 @@ namespace Hospital.Services
 
         private void TransferCantBeExecuted()
         {
+            //TODO: throw exception
             MessageBox.Show("Sala ne raspolaže traženom količinom stavke. \n Pokušajte sa manjom količinom ili pogledajte stanje u drugim salama.");
             return;
         }
@@ -58,11 +71,10 @@ namespace Hospital.Services
         private int GetTotalQuantityForAllTransfersOfItem()
         {
             int totalQuantityForTransfer = 0;
-            foreach (TransferInventory ti in _transferInventoryStorage.GetAll())
-            {
+            foreach (TransferInventory ti in transferInventoryRepository.GetAll())
                 if (ti.ItemID.Equals(TransferRequest.ItemID) && ti.FirstRoomID.Equals(TransferRequest.FirstRoomID))
                     totalQuantityForTransfer += ti.Quantity;
-            }
+            
             return totalQuantityForTransfer;
         }
 
@@ -70,22 +82,19 @@ namespace Hospital.Services
         {
             TransferInventory firstReservedTransfer = new TransferInventory();
 
-            foreach (TransferInventory ti in _transferInventoryStorage.GetAll())
-            {
+            foreach (TransferInventory ti in transferInventoryRepository.GetAll())
                 if (ti.ItemID.Equals(TransferRequest.ItemID) && ti.FirstRoomID.Equals(TransferRequest.FirstRoomID))
-                {
                     if (ti.TransferDate > firstReservedTransfer.TransferDate)
                         firstReservedTransfer = ti;
-                }
-            }
+                          
             return firstReservedTransfer;
         }
 
         public bool NotEnoughItemForNewTransfer()
         {
             int totalQuantityForEachTransferOfItem = GetTotalQuantityForAllTransfersOfItem();
-            InventoryStorage storage = new InventoryStorage();
-            Inventory ItemForTransfer = storage.GetOneByRoom(TransferRequest.ItemID, TransferRequest.FirstRoomID);
+            IStaticInventoryRepository inventoryRepository = new StaticInventoryFileRepository();
+            Inventory ItemForTransfer = inventoryRepository.GetOneItemFromRoom(TransferRequest.ItemID, TransferRequest.FirstRoomID);
             if (totalQuantityForEachTransferOfItem + TransferRequest.Quantity > ItemForTransfer.Quantity)
                 return true;
 
@@ -115,17 +124,17 @@ namespace Hospital.Services
             if (_firstReservedTransfer.Quantity <= TransferRequest.Quantity)
             {
                 _firstReservedTransfer.FirstRoomID = TransferRequest.DestinationRoomID;
-                _transferInventoryStorage.EditTransfer(_firstReservedTransfer);
+                transferInventoryRepository.EditTransfer(_firstReservedTransfer);
             }
             else
             {
                 int newQuantity = _firstReservedTransfer.Quantity - TransferRequest.Quantity;
                 _firstReservedTransfer.FirstRoomID = TransferRequest.DestinationRoomID;
                 _firstReservedTransfer.Quantity = TransferRequest.Quantity;
-                _transferInventoryStorage.EditTransfer(_firstReservedTransfer);
+                transferInventoryRepository.EditTransfer(_firstReservedTransfer);
 
-                InventoryStorage storage = new InventoryStorage();
-                Inventory ItemForTransfer = storage.GetOneByRoom(TransferRequest.ItemID, TransferRequest.FirstRoomID);
+                IStaticInventoryRepository inventoryRepository = new StaticInventoryFileRepository();
+                Inventory ItemForTransfer = inventoryRepository.GetOneItemFromRoom(TransferRequest.ItemID, TransferRequest.FirstRoomID);
                 TransferInventory newTransfer = new TransferInventory(_firstReservedTransfer.ItemID, newQuantity, ItemForTransfer.RoomID, _firstReservedTransfer.DestinationRoomID, _firstReservedTransfer.TransferDate + new TimeSpan(0, 0, 2));
                 SaveTransfer(newTransfer);
             }
@@ -134,14 +143,14 @@ namespace Hospital.Services
         private void SaveTransfer(TransferInventory transfer)
         {
             transfer.TransferID = GenerateTransferID();
-            _transferInventoryStorage.Save(transfer);
+            transferInventoryRepository.Save(transfer);
             TransferInventoryService service = new TransferInventoryService(transfer);
             service.ScheduleTransfer();
         }
 
         private string GenerateTransferID()
         {
-            List<int> allScheduledTransfersIDs = _transferFileRepositry.GetAllScheduledTransferIDs();
+            List<int> allScheduledTransfersIDs = transferInventoryRepository.GetAllScheduledTransferIDs();
             int id = 1;
             while(true)
             {
@@ -155,7 +164,5 @@ namespace Hospital.Services
 
         public TransferInventory TransferRequest { get; set; }
         private TransferInventory _firstReservedTransfer = new TransferInventory();
-        private TransferInventoryStorage _transferInventoryStorage = new TransferInventoryStorage();
-        private TransferInventoryFileRepository _transferFileRepositry = new TransferInventoryFileRepository();
     }
 }

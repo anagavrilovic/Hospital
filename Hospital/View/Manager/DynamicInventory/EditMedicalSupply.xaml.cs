@@ -40,8 +40,8 @@ namespace Hospital.View
         private void AcceptButtonClick(object sender, RoutedEventArgs e)
         {
             SaveEditedProperties();
-            DynamicInventoryService inventoryService = new DynamicInventoryService(DynamicInventoryItem);
-            inventoryService.EditItem();
+            DynamicInventoryService inventoryService = new DynamicInventoryService();
+            inventoryService.EditItem(DynamicInventoryItem);
 
             NavigationService.Navigate(new DynamicInventoryView(DynamicInventoryItem.RoomID));
         }

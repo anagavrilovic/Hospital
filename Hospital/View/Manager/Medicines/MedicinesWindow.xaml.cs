@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -46,9 +47,8 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
-            MedicineStorage medicineStorage = new MedicineStorage();
-
-            Medicines = medicineStorage.GetAll();
+            MedicineService medicineService = new MedicineService();
+            Medicines = new ObservableCollection<Medicine>(medicineService.GetAll());
             MedicineCollection = CollectionViewSource.GetDefaultView(Medicines);
         }
 
@@ -61,6 +61,9 @@ namespace Hospital.View
         private void EditMedicineButtonClick(object sender, RoutedEventArgs e)
         {
             Medicine selectedMedicine = (Medicine)dataGridMedicines.SelectedItem;
+            if (selectedMedicine == null)
+                return;
+
             EditMedicine editMedicine = new EditMedicine(selectedMedicine);
             NavigationService.Navigate(editMedicine);
         }
@@ -102,10 +105,9 @@ namespace Hospital.View
 
         private bool Filter(object item)
         {
-            if (((Medicine)item).Name.Contains(_searchCriterion) || ((Medicine)item).ID.Contains(_searchCriterion) || ((Medicine)item).Price.ToString().Contains(_searchCriterion))
-            {
+            if (((Medicine)item).Name.Contains(_searchCriterion) || ((Medicine)item).ID.Contains(_searchCriterion) || ((Medicine)item).Price.ToString().Contains(_searchCriterion))       
                 return true;
-            }
+            
             return false;
         }
 

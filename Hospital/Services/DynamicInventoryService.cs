@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Hospital.Repositories;
+using Hospital.Repositories.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,39 +11,51 @@ namespace Hospital.Services
 {
     public class DynamicInventoryService
     {
-        public DynamicInventoryService(DynamicInventory item)
+        private IDynamicInventoryRepository dynamicInventoryRepository;
+        public DynamicInventoryService()
         {
-            _dynamicInventoryStorage = new DynamicInventoryStorage();
-            InventoryItem = item;
+            dynamicInventoryRepository = new DynamicInventoryFileRepository();
         }
 
-        private bool IsItemIdUnique()
+        public List<DynamicInventory> GetAll()
         {
-            foreach (DynamicInventory inv in _dynamicInventoryStorage.GetByRoomID(InventoryItem.RoomID))
+            return dynamicInventoryRepository.GetAll();
+        }
+
+        public List<DynamicInventory> GetAllDynamicInventoryFroomRoom(string roomID)
+        {
+            return dynamicInventoryRepository.GetAllInventoryFromRoom(roomID);
+        }
+
+        public void DeleteItemFromRoom(string itemId, string roomId)
+        {
+            dynamicInventoryRepository.DeleteFromRoom(itemId, roomId);
+        }
+
+        private bool IsItemIdUnique(DynamicInventory InventoryItem)
+        {
+            foreach (DynamicInventory inv in dynamicInventoryRepository.GetAllInventoryFromRoom(InventoryItem.RoomID))
             {
                 if (inv.Id.Equals(InventoryItem.Id))
                 {
-                    MessageBox.Show("Već postoji stavka sa unetom oznakom!");
+                    MessageBox.Show("Već postoji stavka sa unetom oznakom!");       //TODO: throw exception
                     return false;
                 }
             }
             return true;
         }
 
-        public void AddNewItem()
+        public void AddNewItem(DynamicInventory InventoryItem)
         {
-            if (!IsItemIdUnique())
+            if (!IsItemIdUnique(InventoryItem))
                 return;
 
-            _dynamicInventoryStorage.Save(InventoryItem);
+            dynamicInventoryRepository.Save(InventoryItem);
         }
 
-        public void EditItem()
+        public void EditItem(DynamicInventory InventoryItem)
         {
-            _dynamicInventoryStorage.EditItem(InventoryItem);
+            dynamicInventoryRepository.EditItem(InventoryItem);
         }
-
-        public DynamicInventory InventoryItem { get; set; }
-        private DynamicInventoryStorage _dynamicInventoryStorage;
     }
 }

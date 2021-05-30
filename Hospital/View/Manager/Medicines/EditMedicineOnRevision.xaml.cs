@@ -39,26 +39,21 @@ namespace Hospital.View
 
         private void AddDoctorsInComboBox()
         {
-            ObservableCollection<string>  DoctorsNameSurname = new ObservableCollection<string>();
-            DoctorStorage doctorStorage = new DoctorStorage();
-            foreach (Hospital.Model.Doctor doctor in doctorStorage.GetAll())
-                DoctorsNameSurname.Add(doctor.ToString());
-
+            DoctorService doctorService = new DoctorService();
+            ObservableCollection<string>  DoctorsNameSurname = new ObservableCollection<string>(doctorService.GetDoctorsNameSurname());
             doctorsCB.ItemsSource = DoctorsNameSurname;
         }
 
         private void SetDoctorOnComboBox()
         {
-            DoctorStorage doctorStorage = new DoctorStorage();
-            doctorsCB.SelectedItem = doctorStorage.GetOne(MedicineOnRevision.DoctorID).ToString();
+            DoctorService doctorService = new DoctorService();
+            doctorsCB.SelectedItem = doctorService.GetDoctorById(MedicineOnRevision.DoctorID).ToString();
         }
 
         private void AddIngredientsInListBox()
         {
-            Ingredients = new List<string>();
-            string[] ingredients = File.ReadAllLines("..\\..\\Files\\ingredients.txt");
-            foreach (string line in ingredients)
-                Ingredients.Add(line);
+            MedicineService medicineService = new MedicineService();
+            Ingredients = medicineService.GetAllIngredients();
         }
 
         private void SearchIngredients(object sender, RoutedEventArgs e)
@@ -84,9 +79,8 @@ namespace Hospital.View
         private bool Filter(object item)
         {
             if (((string)item).Contains(_searchCriterion))
-            {
                 return true;
-            }
+            
             return false;
         }
 
@@ -109,7 +103,7 @@ namespace Hospital.View
 
         private void BtnMinusIngredients(object sender, RoutedEventArgs e)
         {
-            Ingredient ingredientToDelete = (Ingredient)ingredientsList.SelectedItem; ;
+            Ingredient ingredientToDelete = (Ingredient)ingredientsList.SelectedItem; 
             if (ingredientToDelete == null)
                 return;
 
@@ -126,14 +120,21 @@ namespace Hospital.View
 
         private void SendAgainOnRevision(object sender, RoutedEventArgs e)
         {
-            priceTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            quantityTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            doctorsCB.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
+            SaveUpdatedProperties();
 
             MedicineRevisionService service = new MedicineRevisionService();
             service.EditMedicine(MedicineOnRevision);
 
             NavigationService.Navigate(new MedicineRevisionWindow());
+        }
+
+        private void SaveUpdatedProperties()
+        {
+            nameTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            dosageTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            priceTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            quantityTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            doctorsCB.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
         }
 
         private void CancelButtonClick(object sender, RoutedEventArgs e)

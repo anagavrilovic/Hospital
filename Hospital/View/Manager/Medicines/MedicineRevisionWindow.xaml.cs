@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -43,8 +44,8 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
-            MedicineRevisionStorage medicineRevisionStorage = new MedicineRevisionStorage();
-            MedicinesOnRevision = medicineRevisionStorage.GetAll();
+            MedicineRevisionService medicineRevisionService = new MedicineRevisionService();
+            MedicinesOnRevision = new ObservableCollection<MedicineRevision>(medicineRevisionService.GetAll());
 
             SetRevisionStatusTextBlock();
             SetRevisionDoctorTextBlock();
@@ -52,11 +53,11 @@ namespace Hospital.View
 
         private void SetRevisionDoctorTextBlock()
         {
-            DoctorStorage doctorStorage = new DoctorStorage();
+            DoctorService doctorService = new DoctorService();
 
             foreach(MedicineRevision mr in MedicinesOnRevision)
             {
-                Hospital.Model.Doctor dr = doctorStorage.GetDoctorByID(mr.DoctorID);
+                Hospital.Model.Doctor dr = doctorService.GetDoctorById(mr.DoctorID);
                 mr.RevisionDoctor = dr;
                 mr.RevisionDoctor.FirstName = dr.ToString();
             }

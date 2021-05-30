@@ -71,9 +71,7 @@ namespace Hospital.View
                 }
             }
             else if(selectedItem.StartDate < DateTime.Now)
-            {
                 MessageBox.Show("Renoviranje je u toku. \n Naknadno otkazivanje nije moguće!");
-            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

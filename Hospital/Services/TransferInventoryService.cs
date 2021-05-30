@@ -1,5 +1,6 @@
 ﻿using Hospital.Model;
 using Hospital.Repositories;
+using Hospital.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,12 @@ namespace Hospital.Services
 {
     public class TransferInventoryService
     {
+        private IStaticInventoryRepository staticInventoryRepository;
+        public TransferInventory Transfer { get; set; }
+
         public TransferInventoryService(TransferInventory transfer)
         {
+            staticInventoryRepository = new StaticInventoryFileRepository();
             Transfer = transfer;
         }
 
@@ -40,7 +45,7 @@ namespace Hospital.Services
 
         public void UpdateInventory()
         {
-            Inventory inventoryItem = _inventoryStorage.GetOneByRoom(Transfer.ItemID, Transfer.FirstRoomID);
+            Inventory inventoryItem = staticInventoryRepository.GetOneItemFromRoom(Transfer.ItemID, Transfer.FirstRoomID);
             if (inventoryItem.Quantity >= Transfer.Quantity)
             {
                 if (IsTransferingItemExistsInDestinationRoom())
@@ -62,7 +67,7 @@ namespace Hospital.Services
 
         private bool IsTransferingItemExistsInDestinationRoom()
         {
-            foreach (Inventory item in _inventoryStorage.GetByRoomID(Transfer.DestinationRoomID))
+            foreach (Inventory item in staticInventoryRepository.GetAllInventoryFromRoom(Transfer.DestinationRoomID))
             {
                 if (item.Id.Equals(Transfer.ItemID))
                     return true;
@@ -72,27 +77,24 @@ namespace Hospital.Services
 
         private void IncreaseItemQuantityInDestinationRoom()
         {
-            Inventory itemInDestinationRoom = _inventoryStorage.GetOneByRoom(Transfer.ItemID, Transfer.DestinationRoomID);
+            Inventory itemInDestinationRoom = staticInventoryRepository.GetOneItemFromRoom(Transfer.ItemID, Transfer.DestinationRoomID);
             itemInDestinationRoom.Quantity += Transfer.Quantity;
-            _inventoryStorage.EditItem(itemInDestinationRoom);
+            staticInventoryRepository.EditItem(itemInDestinationRoom);
         }
 
         private void AddTransferingItemDestinationRoom()
         {
-            Inventory itemFromFirstRoom = _inventoryStorage.GetOneByRoom(Transfer.ItemID, Transfer.FirstRoomID);
+            Inventory itemFromFirstRoom = staticInventoryRepository.GetOneItemFromRoom(Transfer.ItemID, Transfer.FirstRoomID);
             itemFromFirstRoom.Quantity = Transfer.Quantity;
             itemFromFirstRoom.RoomID = Transfer.DestinationRoomID;
-            _inventoryStorage.Save(itemFromFirstRoom);
+            staticInventoryRepository.Save(itemFromFirstRoom);
         }
 
         private void ReduceItemQuantitiyInFirstRoom()
         {
-            Inventory itemInFirstRoom = _inventoryStorage.GetOneByRoom(Transfer.ItemID, Transfer.FirstRoomID);
+            Inventory itemInFirstRoom = staticInventoryRepository.GetOneItemFromRoom(Transfer.ItemID, Transfer.FirstRoomID);
             itemInFirstRoom.Quantity -= Transfer.Quantity;
-            _inventoryStorage.EditItem(itemInFirstRoom);
+            staticInventoryRepository.EditItem(itemInFirstRoom);
         }
-
-        public TransferInventory Transfer { get; set; }
-        private InventoryStorage _inventoryStorage = new InventoryStorage();
     }
 }

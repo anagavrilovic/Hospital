@@ -74,6 +74,21 @@ namespace Hospital.Repositories
 
         }
 
+        public void EditTransfer(TransferInventory editedTransfer)
+        {
+            List<TransferInventory> transferInventory = GetAll();
+            foreach (TransferInventory transfer in transferInventory)
+            {
+                if (transfer.TransferID.Equals(editedTransfer.TransferID))
+                {
+                    transferInventory.Remove(transfer);
+                    transferInventory.Add(editedTransfer);
+                    Serialize(transferInventory);
+                    break;
+                }
+            }
+        }
+
         public void Serialize(List<TransferInventory> parameter)
         {
             using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))

@@ -8,5 +8,9 @@ namespace Hospital.Repositories.Interfaces
 {
     interface IDynamicInventoryRepository : IGenericRepository<DynamicInventory>
     {
+        void EditItem(DynamicInventory editedItem);
+        DynamicInventory GetOneItemFromRoom(string id, string roomId);
+        List<DynamicInventory> GetAllInventoryFromRoom(string roomId);
+        void DeleteFromRoom(string id, string roomID);
     }
 }

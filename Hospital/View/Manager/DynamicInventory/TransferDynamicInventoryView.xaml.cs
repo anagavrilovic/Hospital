@@ -1,94 +1,53 @@
 ﻿using Hospital.Model;
-using System;
-using System.Collections.Generic;
+using Hospital.Services;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    public partial class TransferDynamicInventoryView : Page, INotifyPropertyChanged
+    public partial class TransferDynamicInventoryView : Page
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
         public DynamicInventory ItemForTransfer { get; set; }
-        public TransferDynamicInventory ItemTransfering { get; set; }
-
-        private ObservableCollection<string> _allRoomsIDs;
-        public ObservableCollection<string> AllRoomsIDs
-        {
-            get => _allRoomsIDs;
-
-            set
-            {
-                _allRoomsIDs = value;
-                OnPropertyChanged("RoomsIDs");
-            }
-        }
+        public TransferDynamicInventory TransferRequest { get; set; }
 
         public TransferDynamicInventoryView(DynamicInventory itemForTransfer)
         {
             InitializeComponent();
             this.DataContext = this;
             ItemForTransfer = itemForTransfer;
-            ItemTransfering = new TransferDynamicInventory();
+            TransferRequest = new TransferDynamicInventory();
 
             InitializeComboBoxItems();
         }
 
         private void AcceptButtonClick(object sender, RoutedEventArgs e)
         {
-            if (!AreTransferAttributesValid())
-                return;
-
-            ExecuteTransfer();
+            InitializeTransferRequest();
+            TransferDynamicInventoryService service = new TransferDynamicInventoryService(TransferRequest);
+            service.ProcessRequest();
 
             NavigationService.Navigate(new DynamicInventoryView(ItemForTransfer.RoomID));
         }
 
-        private bool AreTransferAttributesValid()
+        private void InitializeTransferRequest()
         {
-            if (ItemForTransfer.Quantity >= int.Parse(kolicinaTxt.Text))
-                return true;
-            else
-            {
-                MessageBox.Show("Sala ne raspolaže unetom količinom stavke. \n Pokušajte sa manjom količinom.");
-                return false;
-            }
-        }
-
-        private void ExecuteTransfer()
-        {
-            ItemTransfering = new TransferDynamicInventory(ItemForTransfer.Id, int.Parse(kolicinaTxt.Text), ItemForTransfer.RoomID, destinationRoomsCB.Text);
-            ItemTransfering.UpdateDynamicInventory();
+            TransferRequest.ItemID = ItemForTransfer.Id;
+            TransferRequest.FirstRoomID = ItemForTransfer.RoomID;
+            TransferRequest.Quantity = int.Parse(kolicinaTxt.Text);
+            TransferRequest.DestinationRoomID = destinationRoomsCB.Text;
         }
 
         private void InitializeComboBoxItems()
         {
-            AllRoomsIDs = new ObservableCollection<string>();
-            RoomStorage roomStorage = new RoomStorage();
-            foreach (Room room in roomStorage.GetAll())
+            ObservableCollection<string> AllRoomsIDs = new ObservableCollection<string>();
+            RoomService roomService = new RoomService();
+            foreach (Room room in roomService.GetAll())
             {
                 if(!room.Id.Equals(ItemForTransfer.RoomID))
                     AllRoomsIDs.Add(room.Id);
             }
+            destinationRoomsCB.ItemsSource = AllRoomsIDs;
         }
 
         private void CancelButtonClick(object sender, RoutedEventArgs e)

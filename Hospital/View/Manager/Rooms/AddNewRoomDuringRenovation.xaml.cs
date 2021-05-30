@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,8 +22,7 @@ namespace Hospital.View.Manager.Rooms
     {
         public Room NewRoom { get; set; }
         public RoomRenovation RoomRenovation { get; set; }
-
-        private RoomStorage _roomStorage;
+        private RoomService roomService;
 
         public AddNewRoomDuringRenovation(RoomRenovation renovation)
         {
@@ -30,7 +30,7 @@ namespace Hospital.View.Manager.Rooms
             this.DataContext = this;
 
             NewRoom = new Room();
-            this._roomStorage = new RoomStorage();
+            roomService = new RoomService();
             RoomRenovation = renovation;
         }
 
@@ -38,25 +38,14 @@ namespace Hospital.View.Manager.Rooms
         {
             NewRoom.Type = (RoomType)Enum.Parse(typeof(RoomType), typeCB.Text);
 
-            if (!IsNewRoomIdUnique())
+            if (!roomService.IsNewRoomIdUnique(NewRoom.Id))
+            {
+                MessageBox.Show("Vec postoji prostorija sa unetom oznakom!");
                 return;
-
+            }
             RoomRenovation.RoomsCreatedDuringRenovation.Add(NewRoom);
 
             NavigationService.GoBack();
-        }
-
-        private bool IsNewRoomIdUnique()
-        {
-            foreach (Room room in _roomStorage.GetAll())
-            {
-                if (room.Id.Equals(NewRoom.Id))
-                {
-                    MessageBox.Show("Već postoji sala sa unetom oznakom!");
-                    return false;
-                }
-            }
-            return true;
         }
 
         private void CancelAddingButtonClick(object sender, RoutedEventArgs e)

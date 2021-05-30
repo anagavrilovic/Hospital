@@ -24,7 +24,6 @@ namespace Hospital.Repositories
             {
                 if (r.Id.Equals(id))
                 {
-                    //TransferRoomInventoryToWarehouse(id);
                     rooms.Remove(r);
                     Serialize(rooms);
                     return;
@@ -73,6 +72,21 @@ namespace Hospital.Repositories
             List<Room> rooms = GetAll();
             rooms.Add(parameter);
             Serialize(rooms);
+        }
+
+        public void EditRoom(Room editedRoom)
+        {
+            List<Room> rooms = GetAll();
+            foreach (Room room in rooms)
+            {
+                if (room.Id.Equals(editedRoom.Id))
+                {
+                    rooms.Remove(room);
+                    rooms.Add(editedRoom);
+                    Serialize(rooms);
+                    break;
+                }
+            }
         }
 
         public void Serialize(List<Room> parameter)

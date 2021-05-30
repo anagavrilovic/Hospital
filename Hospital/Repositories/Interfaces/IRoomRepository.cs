@@ -10,5 +10,6 @@ namespace Hospital.Repositories.Interfaces
     interface IRoomRepository : IGenericRepository<Room>
     {
         List<Room> GetAllRoomsWithoutMagazines();
+        void EditRoom(Room editedRoom);
     }
 }

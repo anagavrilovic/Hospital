@@ -8,5 +8,9 @@ namespace Hospital.Repositories.Interfaces
 {
     interface IStaticInventoryRepository : IGenericRepository<Inventory>
     {
+        void EditItem(Inventory editedItem);
+        void DeleteItemFromRoom(string id, string roomID);
+        List<Inventory> GetAllInventoryFromRoom(string id);
+        Inventory GetOneItemFromRoom(string id, string roomId);
     }
 }

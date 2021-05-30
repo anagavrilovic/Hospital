@@ -61,13 +61,9 @@ namespace Hospital.Services
         {
             List<Medicine> medicines = GetAll();
             foreach (Medicine medicine in medicines)
-            {
                 if (medicine.ID.Equals(id))
-                {
-                    MessageBox.Show("Vec postoji lek sa unetom oznakom!");
                     return false;
-                }
-            }
+            
             return true;
         }
 

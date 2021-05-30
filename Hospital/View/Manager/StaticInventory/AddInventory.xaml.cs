@@ -31,8 +31,9 @@ namespace Hospital.View
 
         private void AcceptAddingButtonClick(object o, RoutedEventArgs e)
         {
-            StaticInventoryService inventoryService = new StaticInventoryService(InventoryItem);
-            inventoryService.AddNewItem();
+            StaticInventoryService inventoryService = new StaticInventoryService();
+            if (!inventoryService.AddNewItem(InventoryItem))
+                MessageBox.Show("Vec postoji stavka sa postojecom oznakom!");
          
             NavigationService.Navigate(new StaticInventoryView(InventoryItem.RoomID));
         }

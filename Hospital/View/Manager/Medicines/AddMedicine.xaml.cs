@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,40 +19,10 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    public partial class AddMedicine : Page, INotifyPropertyChanged
+    public partial class AddMedicine : Page
     { 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
-        private MedicineRevision _medicineRevision;
-        public MedicineRevision MedicineRevision
-        {
-            get => _medicineRevision;
-            set
-            {
-                _medicineRevision = value;
-                OnPropertyChanged("MedicineRevision");
-            }
-        }
-
-        private ObservableCollection<string> _doctorsNameSurname;
-        public ObservableCollection<string> DoctorsNameSurname
-        {
-            get => _doctorsNameSurname;
-            set
-            {
-                _doctorsNameSurname = value;
-                OnPropertyChanged("DoctorsNameSurname");
-            }
-        }
-
-        private MedicineRevisionStorage _medicineRevisionStorage;
+        public MedicineRevision MedicineRevision { get; set; }
+        public ObservableCollection<string> DoctorsNameSurname { get; set; }
         public List<string> Ingredients { get; set; }
         private string _searchCriterion;
         public ICollectionView IngredientsCollection { get; set; }
@@ -60,7 +31,6 @@ namespace Hospital.View
         {
             InitializeComponent();
 
-            _medicineRevisionStorage = new MedicineRevisionStorage();
             MedicineRevision = new MedicineRevision();
             MedicineRevision.Medicine = new Medicine();
             InitializeComboBoxItems();
@@ -72,20 +42,15 @@ namespace Hospital.View
 
         private void InitializeComboBoxItems()
         {
-            DoctorsNameSurname = new ObservableCollection<string>();
-            DoctorStorage doctorStorage = new DoctorStorage();
-            foreach (Hospital.Model.Doctor doctor in doctorStorage.GetAll())
-            {
-                DoctorsNameSurname.Add(doctor.ToString());
-            }
+            DoctorService doctorService = new DoctorService();
+            ObservableCollection<string> DoctorsNameSurname = new ObservableCollection<string>(doctorService.GetDoctorsNameSurname());
+            doctorsCB.ItemsSource = DoctorsNameSurname;
         }
 
         private void InitializeIngredientsListBox()
         {
-            Ingredients = new List<string>();
-            string[] ingredients = File.ReadAllLines("..\\..\\Files\\ingredients.txt");
-            foreach (string line in ingredients)
-                Ingredients.Add(line);
+            MedicineService medicineService = new MedicineService();
+            Ingredients = medicineService.GetAllIngredients();
         }
 
         private void SearchIngredients(object sender, RoutedEventArgs e)
@@ -155,36 +120,27 @@ namespace Hospital.View
         private void SendOnRevision(object sender, RoutedEventArgs e)
         {
             InitializeMedicine();
+            MedicineService medicineService = new MedicineService();
 
-            if (!IsMedicineIDUnique())
+            if (!medicineService.IsMedicineIDUnique(MedicineRevision.Medicine.ID))
+            {
+                MessageBox.Show("Vec postoji lek sa unetom oznakom!");
                 return;
-
-            _medicineRevisionStorage.Save(MedicineRevision);
+            }
+            MedicineRevisionService medicineRevisionService = new MedicineRevisionService();
+            medicineRevisionService.Save(MedicineRevision);
 
             NavigationService.Navigate(new MedicinesWindow());
         }
 
-        private bool IsMedicineIDUnique()
-        {
-            MedicineStorage medicineStorage = new MedicineStorage();
-            ObservableCollection<Medicine> medicines = medicineStorage.GetAll();
-            foreach (Medicine medicine in medicines)
-            {
-                if (medicine.ID.Equals(MedicineRevision.Medicine.ID))
-                {
-                    MessageBox.Show("Vec postoji lek sa unetom oznakom!");
-                    return false;
-                }
-            }
-            return true;
-        }
 
         private void InitializeMedicine()
         {
             string doctorSelected = doctorsCB.Text.Trim().Substring(3);
             DoctorStorage doctorStorage = new DoctorStorage();
+            DoctorService doctorService = new DoctorService();
             MedicineRevision.DoctorID = doctorStorage.GetIDByNameSurname(doctorSelected);
-            MedicineRevision.RevisionDoctor = doctorStorage.GetOne(MedicineRevision.DoctorID);
+            MedicineRevision.RevisionDoctor = doctorService.GetDoctorById(MedicineRevision.DoctorID);
             MedicineRevision.IsMedicineRevised = false;
         }
 
