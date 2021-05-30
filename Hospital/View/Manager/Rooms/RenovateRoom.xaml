@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
       Background="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" 
-        Title="Zakazivanje renoviranja" Height="730" Width="420">
+        Title="Zakazivanje renoviranja" Height="750" Width="430">
 
     <Page.Resources>
         <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
@@ -100,7 +100,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Label Content="Oznaka sale:"         Grid.Row="0"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="16,0,200,10"  Grid.ColumnSpan="2" />
+                <Label Content="Oznaka sale:"         Grid.Row="0"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="16,6,200.4,4"  Grid.ColumnSpan="2" />
                 <Label Content="Datum početka:"       Grid.Row="2"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="16,0.6,200,5"    Grid.ColumnSpan="2" Grid.RowSpan="2" />
                 <Label Content="Datum završetka:"     Grid.Row="4"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="16,9,19,10"   Grid.ColumnSpan="2" Grid.RowSpan="2"/>
                 <Label Content="Magacin za privremeno skladištenje opreme:" Grid.Row="6" Foreground="#FF1E49D9" FontSize="16" Margin="16,5,19,0" Grid.ColumnSpan="2" />
@@ -124,7 +124,7 @@
                             SelectedItem="{Binding SomeBindingPropertySelectedCurrently, 
                             Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.RowSpan="2" />
 
-                <Button Grid.Column="1" Grid.Row="8" Content="IZMENA PLANA PROSTORIJA" Background="#FFB9DDED" Foreground="#FF061031" Style="{StaticResource RoundButtonStyle}" Margin="9.6,14,28,53" Click="EditRoomsOrganization" RenderTransformOrigin="0.458,1.15" Grid.RowSpan="2" />
+                <!--Button Grid.Column="1" Grid.Row="8" Content="IZMENA PLANA PROSTORIJA" Background="#FFB9DDED" Foreground="#FF061031" Style="{StaticResource RoundButtonStyle}" Margin="9.6,14,28,53" Click="EditRoomsOrganization" Grid.RowSpan="2" /-->
 
                 <TextBox    x:Name="description"  Grid.Row="9" Grid.ColumnSpan="2" Grid.RowSpan="3" Margin="30,12,28,21" Text="{Binding Path=RoomRenovation.Description, Mode=OneWayToSource}" BorderBrush="#FF26282C" TextWrapping="Wrap">
                     <TextBox.Resources>

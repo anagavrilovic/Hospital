@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
         Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
-        Title="Renoviranja sala" Height="730" Width="420">
+        Title="Renoviranja sala" Height="750" Width="430">
 
     <Page.Resources>
         <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
@@ -34,7 +34,7 @@
                 <Image Source="/Icon/back.png"  Margin="0,0,5,0" Height="63" Width="55"/>
             </Button>
             <Label Content="ZAKAZANA RENOVIRANJA"    Margin="0,27,5,28.4" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="18"  />
-            <Image Source="/Icon/logo.png"  Margin="0,19,6,18.2" Width="115"/>
+            <Image Source="/Icon/logo.png"  Margin="0,0,6,10.4" Width="132"/>
         </StackPanel>
 
         <Button Grid.Row="1" Grid.Column="0" Content="ZAKAŽI RENOVIRANJE" Margin="10,18.4,10,19.2" Background="#FFAAD0E0" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="ScheduleNewRenovation" FontSize="14"/>

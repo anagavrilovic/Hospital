@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Hospital.View"
              mc:Ignorable="d" 
             Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
-            Title="Statički inventar" Height="730" Width="420">
+            Title="Statički inventar" Height="750" Width="430">
 
     <Page.Resources>
         <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
@@ -40,11 +40,11 @@
             <Image Source="/Icon/logo.png"      Margin="60,15,25,10" Width="153"/>
         </StackPanel>
 
-        <Button Grid.Column="0"     Grid.Row="1"  Content="IZMENI STAVKU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="10,17.2,7.4,5.6" Style="{StaticResource RoundButtonStyle}" Click="EditButtonClick" FontSize="14" />
-        <Button Grid.Column="1"     Grid.Row="1"  Content="OBRIŠI STAVKU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="6.6,17.2,17,5.6"   Style="{StaticResource RoundButtonStyle}" Click="DeleteButtonClick" FontSize="14"/>
-        <Button Grid.ColumnSpan="2" Grid.Row="2"  Content="PREBACI STAVKU U DRUGU SALU" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Margin="10,7.4,17,10.4" Click="TransferButtonClick" FontSize="14"/>
+        <Button Grid.Column="0"     Grid.Row="1"  Content="IZMENI STAVKU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="21,16.8,7.2,5.4" Style="{StaticResource RoundButtonStyle}" Click="EditButtonClick" FontSize="14" />
+        <Button Grid.Column="1"     Grid.Row="1"  Content="OBRIŠI STAVKU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="6.8,16.8,21.4,5.4"   Style="{StaticResource RoundButtonStyle}" Click="DeleteButtonClick" FontSize="14"/>
+        <Button Grid.ColumnSpan="2" Grid.Row="2"  Content="PREBACI STAVKU U DRUGU SALU" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Margin="21,7.6,21.4,10.6" Click="TransferButtonClick" FontSize="14"/>
 
-        <TextBox x:Name="search" TextChanged="SearchInventory" Grid.ColumnSpan="2" Grid.Row="3" Margin="10,19.6,51,21">
+        <TextBox x:Name="search" TextChanged="SearchInventory" Grid.ColumnSpan="2" Grid.Row="3" Margin="21,19.4,51.4,20.8">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -60,7 +60,7 @@
             <Grid MinWidth="200" Height="330">
                 <DataGrid  x:Name ="dataGridInventory"  Style="{StaticResource dataGridMedicines}" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}"
                                ItemsSource="{Binding Path=InventoryInRoom, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                               Background="#FFCADEED" Foreground="#FF536AA0" Margin="10,-9,0,0" Width="393">
+                               Background="#FFCADEED" Foreground="#FF536AA0" Margin="20,-9,0,0" Width="383">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Oznaka"   Binding="{Binding Id}"          Width="70"/>
                         <DataGridTextColumn Header="Naziv"    Binding="{Binding Name}"        Width="100"/>
@@ -73,7 +73,7 @@
             </Grid>
         </ScrollViewer>
 
-        <Button Grid.ColumnSpan="2" Grid.Row="9"  Content="DODAJ STAVKU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="10,0.2,17,23.6" Style="{StaticResource RoundButtonStyle}" Click="AddButtonClick" FontSize="14"/>
+        <Button Grid.ColumnSpan="2" Grid.Row="8"  Content="DODAJ STAVKU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="21,64.4,27.4,36.4" Style="{StaticResource RoundButtonStyle}" Click="AddButtonClick" FontSize="14" Grid.RowSpan="2"/>
 
     </Grid>
 </Page>

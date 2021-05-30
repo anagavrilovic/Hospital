@@ -7,7 +7,7 @@
         xmlns:val="clr-namespace:Hospital.ValidationRulesManager"
         mc:Ignorable="d"
         Background="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" 
-        Title="Unos opreme" Height="730" Width="420">
+        Title="Unos opreme" Height="750" Width="430">
 
     <Page.Resources>
         <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
@@ -197,7 +197,7 @@
             <ComboBoxItem>FLAŠICE</ComboBoxItem>
         </ComboBox>
 
-        <Button Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,10.4,5.4,43.6" Click="AcceptAddingButtonClick" FontSize="16">
+        <Button Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,0.8,5.2,53.4" Click="AcceptAddingButtonClick" FontSize="16">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Template">
@@ -225,7 +225,7 @@
             </Button.Style>
         </Button>
 
-        <Button Grid.Row="12" Grid.Column="1" Grid.RowSpan="2" Content="ODUSTANI" Background="white"   Foreground="#FF1E49D9" Margin="4.6,9.4,28,43.6" Style="{StaticResource RoundButtonStyle}" Click="CancelButtonClick" FontSize="16"/>
+        <Button Grid.Row="11" Grid.Column="1" Grid.RowSpan="3" Content="ODUSTANI" Background="white"   Foreground="#FF1E49D9" Margin="4.8,53.4,28.4,53.4" Style="{StaticResource RoundButtonStyle}" Click="CancelButtonClick" FontSize="16"/>
 
     </Grid>
 </Page>

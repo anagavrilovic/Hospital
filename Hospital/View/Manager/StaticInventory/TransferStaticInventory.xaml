@@ -8,7 +8,7 @@
         xmlns:val="clr-namespace:Hospital.ValidationRulesManager"
         mc:Ignorable="d"
         Background="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" 
-        Title="Prebacivanje inventara" Height="730" Width="420">
+        Title="Prebacivanje inventara" Height="750" Width="430">
 
     <Page.Resources>
         <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
@@ -39,12 +39,12 @@
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4" Margin="0,0,0,48.8" Grid.RowSpan="2">
             <Button  Click="BackButtonClick" Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
-                <Image  Source="/Icon/back.png" Height="37" Width="46"/>
+                <Image  Source="/Icon/back.png" Height="48" Width="50"/>
             </Button>
             <Image Source="/Icon/logo.png"      Margin="250,0,25,-0.4" Width="114"/>
         </StackPanel>
 
-        <Label Content="RAZMENA INVENTARA" Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="64,0,41,4.8" FontWeight="Bold" Height="44" VerticalAlignment="Bottom"/>
+        <Label Content="PRENOS INVENTARA" Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="85,0,20.4,5.2" FontWeight="Bold" Height="44" VerticalAlignment="Bottom"/>
 
         <Label Content="Oznaka i naziv stavke:" Grid.Row="2"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0.2,186,9.8"  Grid.ColumnSpan="2" />
         <Label Content="Količina:"              Grid.Row="4"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0.2,5.4,14.6" />
@@ -60,7 +60,7 @@
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        
+
         <TextBox x:Name="kolicinaTxt"   Grid.Row="5" Grid.ColumnSpan="2" Margin="30,0.4,28,14.6" BorderBrush="#FF26282C">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -134,7 +134,7 @@
             </Validation.ErrorTemplate>
         </TextBox>
 
-        <Button Grid.Column="0" Grid.Row="12"  Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,24.4,10.4,34.6" Click="AcceptButtonClick" FontSize="14">
+        <Button Grid.Column="0" Grid.Row="12"  Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,9.8,10.2,49.4" Click="AcceptButtonClick" FontSize="14">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Template">
@@ -159,7 +159,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button Grid.Column="1" Grid.Row="12"  Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="9.6,24.4,28,34.6" Style="{StaticResource RoundButtonStyle}" Click="CancelButtonClick" FontSize="14" />
+        <Button Grid.Column="1" Grid.Row="12"  Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="8.8,9.8,28.4,49.4" Style="{StaticResource RoundButtonStyle}" Click="CancelButtonClick" FontSize="14" />
 
     </Grid>
 </Page>

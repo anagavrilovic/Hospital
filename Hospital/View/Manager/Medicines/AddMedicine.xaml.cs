@@ -4,25 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Hospital.View
 {
     public partial class AddMedicine : Page
     { 
         public MedicineRevision MedicineRevision { get; set; }
-        public ObservableCollection<string> DoctorsNameSurname { get; set; }
         public List<string> Ingredients { get; set; }
         private string _searchCriterion;
         public ICollectionView IngredientsCollection { get; set; }
@@ -43,8 +35,7 @@ namespace Hospital.View
         private void InitializeComboBoxItems()
         {
             DoctorService doctorService = new DoctorService();
-            ObservableCollection<string> DoctorsNameSurname = new ObservableCollection<string>(doctorService.GetDoctorsNameSurname());
-            doctorsCB.ItemsSource = DoctorsNameSurname;
+            doctorsCB.ItemsSource  = new ObservableCollection<string>(doctorService.GetDoctorsNameSurname());
         }
 
         private void InitializeIngredientsListBox()
@@ -110,6 +101,8 @@ namespace Hospital.View
             MedicineRevision.Medicine.RemoveIngredient(ingredientToDelete);
             ingredientsList.ItemsSource = MedicineRevision.Medicine.Ingredient;
             ingredientsList.Items.Refresh();
+            Ingredients.Add(ingredientToDelete.Name);
+            allIngredientsList.Items.Refresh();
         }
 
         private void BtnSearchMouseDown(object sender, RoutedEventArgs e)
@@ -142,6 +135,69 @@ namespace Hospital.View
             MedicineRevision.DoctorID = doctorStorage.GetIDByNameSurname(doctorSelected);
             MedicineRevision.RevisionDoctor = doctorService.GetDoctorById(MedicineRevision.DoctorID);
             MedicineRevision.IsMedicineRevised = false;
+        }
+
+        private Point startPoint;
+
+        private void ListBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            startPoint = e.GetPosition(null);
+        }
+
+        private void ListBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            Point mousePos = e.GetPosition(null);
+            Vector diff = startPoint - mousePos;
+
+            if (e.LeftButton == MouseButtonState.Pressed &&
+                (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance || Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
+            {
+                ListBox listBox = sender as ListBox;
+                ListBoxItem listBoxItem =
+                    FindAncestor<ListBoxItem>((DependencyObject)e.OriginalSource);
+
+                if (listBoxItem == null) 
+                    return;
+
+                Ingredient ingredient = new Ingredient();         
+                string ingredientName = (string)listBox.ItemContainerGenerator.ItemFromContainer(listBoxItem);
+                ingredient.Name = ingredientName;
+
+                DataObject dragData = new DataObject("myFormat", ingredient);
+                DragDrop.DoDragDrop(listBoxItem, dragData, DragDropEffects.Move);
+            }
+        }
+
+        private static T FindAncestor<T>(DependencyObject current) where T : DependencyObject
+        {
+            do
+            {
+                if (current is T)
+                    return (T)current;
+                
+                current = VisualTreeHelper.GetParent(current);
+            }
+            while (current != null);
+            return null;
+        }
+
+        private void ListBox_DragOver(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent("myFormat") || e.Source == sender)
+                e.Effects = DragDropEffects.None;           
+        }
+
+        private void ListBox_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent("myFormat"))
+            {
+                Ingredient ingredient = e.Data.GetData("myFormat") as Ingredient;
+                Ingredients.Remove(ingredient.Name);
+                allIngredientsList.Items.Refresh();
+                MedicineRevision.Medicine.AddIngredient(ingredient);
+                ingredientsList.ItemsSource = MedicineRevision.Medicine.Ingredient;
+                ingredientsList.Items.Refresh();
+            }
         }
 
         private void Cancel(object sender, RoutedEventArgs e)

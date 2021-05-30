@@ -2,9 +2,6 @@
 using Hospital.Repositories;
 using Hospital.Repositories.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -58,11 +55,9 @@ namespace Hospital.Services
         }
 
         public void RemoveTransferRequest()
-        {
-            TransferInventoryStorage transferStorage = new TransferInventoryStorage();
-            transferStorage.Delete(Transfer);
-            //TransferInventoryFileRepository transferRepository = new TransferInventoryFileRepository();
-           // transferRepository.Delete(Transfer.TransferID);
+        {          
+            TransferInventoryFileRepository transferRepository = new TransferInventoryFileRepository();
+            transferRepository.Delete(Transfer.TransferID);
         }
 
         private bool IsTransferingItemExistsInDestinationRoom()

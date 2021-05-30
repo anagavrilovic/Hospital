@@ -8,7 +8,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Background="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" 
-        Title="Dodavanje sale" Height="730" Width="420">
+        Title="Dodavanje sale" Height="750" Width="430">
 
     <Page.Resources>
         <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
@@ -51,13 +51,13 @@
                 </Button>
                 <Image Source="/Icon/logo.png"      Margin="124.8,0,10,-0.4" Grid.Column="3" Grid.ColumnSpan="2"/>
             </Grid>
-            <Label Content="UNOS SALE" Foreground="#FF4B72F6" FontSize="24" Margin="131,65,143,-0.2" FontWeight="Bold"/>
+            <Label Content="UNOS SALE" Foreground="#FF4B72F6" FontSize="24" Margin="136,65,137.4,0.2" FontWeight="Bold"/>
         </Grid>
 
         <Label Content="Oznaka:"           Grid.Row="2"   Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5,8"/>
         <Label Content="Naziv:"            Grid.Row="4"   Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5,8"/>
-        <Label Content="Sprat:"            Grid.Row="6"   Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,0,8"/>
-        <Label Content="Status:"           Grid.Row="7"   Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,45.2,0.4,8" Grid.RowSpan="2"/>
+        <Label Content="Sprat:"            Grid.Row="6"   Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,3.4,0.2,5.2"/>
+        <Label Content="Status:"           Grid.Row="8"   Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,4.2,0.2,5.4"/>
         <Label Content="Tip:"              Grid.Row="10"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5,8"/>
 
         <TextBox x:Name="idTxt"            Grid.Row="3"  Grid.ColumnSpan="2" Margin="30,0.2,28,9.8" BorderBrush="#FF26282C" >
@@ -90,7 +90,7 @@
                 </ControlTemplate>
             </Validation.ErrorTemplate>
         </TextBox>
-        
+
         <TextBox x:Name="nameTxt"          Grid.Row="5"  Grid.ColumnSpan="2" Margin="30,0.4,28,10" BorderBrush="#FF26282C" >
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -122,7 +122,7 @@
                 </ControlTemplate>
             </Validation.ErrorTemplate>
         </TextBox>
-        
+
         <TextBox x:Name="floorTxt"         Grid.Row="7"  Grid.ColumnSpan="2" Margin="30,0.2,28,10" BorderBrush="#FF26282C" >
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -169,7 +169,7 @@
             <ComboBoxItem                   Content="MAGACIN"            Foreground="#FF2E83BF"/>
         </ComboBox>
 
-        <Button Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,10.4,10.4,41.6" Click="AcceptAddingButtonClick" FontSize="16">
+        <Button Grid.Row="11" Grid.Column="0" Grid.RowSpan="3" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,53.4,10.2,52.4" Click="AcceptAddingButtonClick" FontSize="16" RenderTransformOrigin="0.494,0.301">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Template">
@@ -195,7 +195,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button Grid.Row="12" Grid.Column="1" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="9.6,10.4,28,41.6" Style="{StaticResource RoundButtonStyle}" Click="CancelAddingButtonClick" FontSize="16"/>
+        <Button Grid.Row="11" Grid.Column="1" Grid.RowSpan="3" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="9.8,53.4,28.4,52.4" Style="{StaticResource RoundButtonStyle}" Click="CancelAddingButtonClick" FontSize="16"/>
 
     </Grid>
 

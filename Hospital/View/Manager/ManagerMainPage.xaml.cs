@@ -63,5 +63,10 @@ namespace Hospital.View
         {
             NavigationService.Navigate(new ManagerMainPage());
         }
+
+        private void LogOut(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.Close();
+        }
     }
 }

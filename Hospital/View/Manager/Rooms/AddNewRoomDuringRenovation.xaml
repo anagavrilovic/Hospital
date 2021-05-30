@@ -7,7 +7,7 @@
       xmlns:val="clr-namespace:Hospital.ValidationRulesManager"
       mc:Ignorable="d" 
       Background="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" 
-      Title="Dodavanje sale" Height="630" Width="420">
+      Title="Dodavanje sale" Height="630" Width="430">
 
     <Page.Resources>
         <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>

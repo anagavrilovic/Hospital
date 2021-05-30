@@ -31,6 +31,12 @@ namespace Hospital.View
         {
             this.Close();
         }
+
+        private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonDown(e);
+            this.DragMove();
+        }
     }
 }
 

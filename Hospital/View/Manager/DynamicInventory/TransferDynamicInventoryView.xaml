@@ -7,7 +7,7 @@
         xmlns:val="clr-namespace:Hospital.ValidationRulesManager"
         mc:Ignorable="d"
         Background="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" 
-        Title="Prebacivanje inventara" Height="730" Width="420">
+        Title="Prebacivanje inventara" Height="750" Width="430">
 
     <Page.Resources>
         <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
@@ -39,7 +39,7 @@
             <Image Source="/Icon/logo.png"      Margin="220,0,25,0" Width="131"/>
         </StackPanel>
 
-        <Label Content="RAZMENA OPREME" Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="85,10.2,96,9.6" FontWeight="Bold"/>
+        <Label Content="RAZMENA OPREME" Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="87,4.8,93.4,14.4" FontWeight="Bold"/>
 
         <Label Content="Naziv stavke:"          Grid.Row="2" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0.4,5.4,33.4" />
         <Label Content="Količina:"              Grid.Row="4" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5.4,25.6" />

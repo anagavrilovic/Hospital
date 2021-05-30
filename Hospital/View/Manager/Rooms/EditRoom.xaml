@@ -7,7 +7,7 @@
         xmlns:val="clr-namespace:Hospital.ValidationRulesManager"
         mc:Ignorable="d"
         Background="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" 
-        Title="Izmena sale" Height="730" Width="420">
+        Title="Izmena sale" Height="750" Width="430">
 
     <Page.Resources>
         <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
@@ -138,14 +138,14 @@
             <ComboBoxItem                   Content="RENOVIRA_SE"         Foreground="#FF2E83BF"/>
         </ComboBox>
 
-        <ComboBox x:Name="typeCB"          Grid.Row="11"  Grid.ColumnSpan="2" Margin="30,2.4,28,9.6"    BorderThickness="1">
+        <ComboBox x:Name="typeCB"          Grid.Row="11"  Grid.ColumnSpan="2" Margin="30,0.4,28.4,12.2"    BorderThickness="1">
             <ComboBoxItem                   Content="OPERACIONA_SALA"     Foreground="#FF2E83BF"/>
             <ComboBoxItem IsSelected="True" Content="SALA_ZA_PREGLEDE"    Foreground="#FF2E83BF"/>
             <ComboBoxItem                   Content="SOBA_ZA_ODMOR"       Foreground="#FF2E83BF"/>
             <ComboBoxItem                   Content="MAGACIN"             Foreground="#FF2E83BF"/>
         </ComboBox>
 
-        <Button Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,10.4,10.4,43.6"  Click="acceptEdit">
+        <Button Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,0.8,10.2,53.4"  Click="acceptEdit">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Template">
@@ -171,7 +171,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button Grid.Row="12" Grid.Column="1" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="9.6,10.4,28,43.6"  Style="{StaticResource RoundButtonStyle}" Click="CancelEdit"/>
+        <Button Grid.Row="12" Grid.Column="1" Grid.RowSpan="2" Content="ODUSTANI" Background="white"     Foreground="#FF1E49D9" Margin="8.8,0.8,28.4,53.4"  Style="{StaticResource RoundButtonStyle}" Click="CancelEdit"/>
 
     </Grid>
 </Page>

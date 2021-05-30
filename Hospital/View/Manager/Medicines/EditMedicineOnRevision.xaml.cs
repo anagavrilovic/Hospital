@@ -4,18 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Hospital.View
 {
@@ -110,6 +103,8 @@ namespace Hospital.View
             MedicineOnRevision.Medicine.RemoveIngredient(ingredientToDelete);
             ingredientsList.ItemsSource = MedicineOnRevision.Medicine.Ingredient;
             ingredientsList.Items.Refresh();
+            Ingredients.Add(ingredientToDelete.Name);
+            allIngredientsList.Items.Refresh();
         }
 
         private void BtnSearchMouseDown(object sender, RoutedEventArgs e)
@@ -135,6 +130,69 @@ namespace Hospital.View
             priceTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             quantityTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             doctorsCB.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
+        }
+
+        private Point startPoint;
+
+        private void ListBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            startPoint = e.GetPosition(null);
+        }
+
+        private void ListBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            Point mousePos = e.GetPosition(null);
+            Vector diff = startPoint - mousePos;
+
+            if (e.LeftButton == MouseButtonState.Pressed &&
+                (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance || Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
+            {
+                ListBox listBox = sender as ListBox;
+                ListBoxItem listBoxItem =
+                    FindAncestor<ListBoxItem>((DependencyObject)e.OriginalSource);
+
+                if (listBoxItem == null)
+                    return;
+
+                Ingredient ingredient = new Ingredient();
+                string ingredientName = (string)listBox.ItemContainerGenerator.ItemFromContainer(listBoxItem);
+                ingredient.Name = ingredientName;
+
+                DataObject dragData = new DataObject("myFormat", ingredient);
+                DragDrop.DoDragDrop(listBoxItem, dragData, DragDropEffects.Move);
+            }
+        }
+
+        private static T FindAncestor<T>(DependencyObject current) where T : DependencyObject
+        {
+            do
+            {
+                if (current is T)
+                    return (T)current;
+
+                current = VisualTreeHelper.GetParent(current);
+            }
+            while (current != null);
+            return null;
+        }
+
+        private void ListBox_DragOver(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent("myFormat") || e.Source == sender)
+                e.Effects = DragDropEffects.None;
+        }
+
+        private void ListBox_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent("myFormat"))
+            {
+                Ingredient ingredient = e.Data.GetData("myFormat") as Ingredient;
+                Ingredients.Remove(ingredient.Name);
+                allIngredientsList.Items.Refresh();
+                MedicineOnRevision.Medicine.AddIngredient(ingredient);
+                ingredientsList.ItemsSource = MedicineOnRevision.Medicine.Ingredient;
+                ingredientsList.Items.Refresh();
+            }
         }
 
         private void CancelButtonClick(object sender, RoutedEventArgs e)

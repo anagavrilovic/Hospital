@@ -7,7 +7,7 @@
         xmlns:val="clr-namespace:Hospital.ValidationRulesManager"
         mc:Ignorable="d"
        Background="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" 
-       Title="Izmena leka" Height="730" Width="420">
+       Title="Izmena leka" Height="750" Width="430">
 
     <Page.Resources>
         <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
@@ -47,7 +47,7 @@
             <Button  Click="BackButtonClick"   Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
                 <Image  Source="/Icon/back.png" Margin="10,8,0,5"/>
             </Button>
-            <Label Content="IZMENA LEKA" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" Margin="8,20,9,9.8"/>
+            <Label Content="IZMENA LEKA" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" Margin="8,16,9,17.2" Width="161"/>
             <Image Source="/Icon/logo.png" Margin="30,5,23,9.8" Width="137"/>
         </StackPanel>
 
@@ -202,7 +202,7 @@
                                 <TextBox x:Name="search" TextChanged="SearchIngredients"  Margin="5,2,2,2" Width="244"/>
                                 <Image Source="/Icon/search-blue.png"  Margin="2,2,2,2" MouseDown="BtnSearchMouseDown" Height="30" Width="41"/>
                             </StackPanel>
-                            <ListBox ItemsSource="{Binding Ingredients}" x:Name="allIngredientsList" Height="100" Margin="0,0,0.6,0" />
+                            <ListBox ItemsSource="{Binding Ingredients}" x:Name="allIngredientsList" Height="100" Margin="0,0,0.6,0" PreviewMouseLeftButtonDown="ListBox_PreviewMouseLeftButtonDown" MouseMove="ListBox_MouseMove"/>
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -215,7 +215,7 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Margin="2,2,2,2">
-                            <ListBox ItemsSource="{Binding MedicineOnRevision.Medicine.Ingredient, Mode=TwoWay, UpdateSourceTrigger=Explicit}" x:Name="ingredientsList" Height="100" Margin="0,0,0.6,0" />
+                            <ListBox ItemsSource="{Binding MedicineOnRevision.Medicine.Ingredient, Mode=TwoWay, UpdateSourceTrigger=Explicit}" AllowDrop="True" DragOver="ListBox_DragOver" Drop="ListBox_Drop" x:Name="ingredientsList" Height="100" Margin="0,0,0.6,0" />
                         </StackPanel>
                     </Grid>
                 </Border>

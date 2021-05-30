@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Hospital.View"
       mc:Ignorable="d" 
-      d:DesignHeight="750" d:DesignWidth="423"
+      d:DesignHeight="750" d:DesignWidth="430"
       Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
       Title="Početna stranica">
 
@@ -39,12 +39,12 @@
 
         <Label  Grid.Row="1" Content="Lider u inovaciji, na usluzi pacijenta" FontSize="20" Foreground="#FF4A83CB"  Margin="53,10.2,-30,79.8" Grid.RowSpan="2" />
 
-        <Button x:Name="profil"         Content="PROFIL"                      Grid.Row="2"  Margin="15,6,25,6"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Style="{StaticResource RoundButtonStyle}"/>
-        <Button x:Name="rooms"          Content="SALE"                        Grid.Row="3"  Margin="15,6,25,6"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Style="{StaticResource RoundButtonStyle}" Click="ShowRooms" />
-        <Button x:Name="employees"      Content="LEKOVI"                      Grid.Row="4"  Margin="15,6,25,6"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Style="{StaticResource RoundButtonStyle}" Click="ShowMedicines"/>
-        <Button x:Name="notifications"  Content="OBAVEŠTENJA"                 Grid.Row="5"  Margin="15,6,25,6"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Style="{StaticResource RoundButtonStyle}" Click="ShowNotifications"/>
-        <Button x:Name="tutorial"       Content="TUTORIJAL"                   Grid.Row="6"  Margin="15,6,25,6"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Style="{StaticResource RoundButtonStyle}"/>
-        <Button x:Name="report"         Content="IZVEŠTAJ O STANJU LEKOVA"    Grid.Row="7"  Margin="15,6,25,6"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Style="{StaticResource RoundButtonStyle}"/>
-
+        <Button x:Name="profil"         Content="PROFIL"                      Grid.Row="2"  Margin="20,6,20,6"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Style="{StaticResource RoundButtonStyle}"/>
+        <Button x:Name="rooms"          Content="SALE"                        Grid.Row="3"  Margin="20,6,20,6"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Style="{StaticResource RoundButtonStyle}" Click="ShowRooms" />
+        <Button x:Name="employees"      Content="LEKOVI"                      Grid.Row="4"  Margin="20,6,20,6"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Style="{StaticResource RoundButtonStyle}" Click="ShowMedicines"/>
+        <Button x:Name="tutorial"       Content="TUTORIJAL"                   Grid.Row="5"  Margin="20,6,20,6"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Style="{StaticResource RoundButtonStyle}"/>
+        <Button x:Name="report"         Content="IZVEŠTAJ O STANJU LEKOVA"    Grid.Row="6"  Margin="20,6,20,6"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Style="{StaticResource RoundButtonStyle}"/>
+        <Button x:Name="logout"         Content="ODJAVITE SE"                 Grid.Row="7"  Margin="20,6,20,10"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Style="{StaticResource RoundButtonStyle}" Click="LogOut"/>
+        
     </Grid>
 </Page>

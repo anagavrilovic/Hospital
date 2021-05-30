@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
-        WindowStartupLocation="CenterOwner"
+        WindowStartupLocation="CenterOwner"  AllowsTransparency="True" WindowStyle="None" MouseLeftButtonDown="OnMouseLeftButtonDown"
         Title="Zdravo" Height="750" Width="430">
+
+    <Window.Clip>
+        <RectangleGeometry Rect="0,0,1280,720" RadiusX="10" RadiusY="10"/>
+    </Window.Clip>
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -40,8 +44,8 @@
         <Button x:Name="notifications"  Content="OBAVEŠTENJA"                 Grid.Row="5"  Margin="15,10"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20" Click="getNotifications"/>
         <Button x:Name="report"         Content="IZVEŠTAJ O STANJU OPREME"    Grid.Row="6"  Margin="15,10"  Background="#FFAAD0E0" Foreground="#FF051D6E" FontSize="20"/-->
 
-        <DockPanel Grid.Row="0" Grid.RowSpan="9" Width="423" Background="#FFDCE6ED" Margin="0">
-            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Source="ManagerMainPage.xaml" Width="423" Margin="0"/>
+        <DockPanel Grid.Row="0" Grid.RowSpan="9" Width="430" Background="#FFDCE6ED" Margin="0">
+            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Source="ManagerMainPage.xaml" Width="430" Margin="0"/>
         </DockPanel>
     </Grid>
 </Window>
