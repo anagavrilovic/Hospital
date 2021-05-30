@@ -47,5 +47,9 @@ namespace Hospital.Services
 
             return doctorsNameSurname;
         }
+        public String GetIDByNameSurname(string nameSurname)
+        {
+            return doctorRepository.GetIDByNameSurname(nameSurname);
+        }
     }
 }

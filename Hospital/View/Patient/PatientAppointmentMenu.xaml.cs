@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientAppointmentMenu : Page
     {
-        private PatientSettingsStorage patientSettingsStorage = new PatientSettingsStorage();
+        private PatientSettingsService patientSettingsService = new PatientSettingsService();
         public PatientAppointmentMenu()
         {
             InitializeComponent();
@@ -47,7 +48,7 @@ namespace Hospital.View
 
         private void MakeAnAppointment(object sender, RoutedEventArgs e)
         {
-            if (patientSettingsStorage.IsAntiTrollTriggered())
+            if (patientSettingsService.IsAntiTrollTriggered())
             {
                 MessageBox.Show("Previše puta ste zakazali/pomerili termin u kratkom vremenskom periodu.");
                 return;

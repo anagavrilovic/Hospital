@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +22,11 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientAdditionalOptions : Page
     {
-        private PatientCommentsStorage patientCommentsStorage = new PatientCommentsStorage();
+        private PatientCommentsService patientCommentsService = new PatientCommentsService();
         public PatientAdditionalOptions()
         {
             InitializeComponent();
-            if (!patientCommentsStorage.IsTimeForHospitalRating()) RateButton.Visibility = Visibility.Collapsed;
+            if (!patientCommentsService.IsTimeForHospitalRating()) RateButton.Visibility = Visibility.Collapsed;
             NotesButton.Focus();
         }
 
@@ -42,7 +43,7 @@ namespace Hospital.View
 
         public void Refresh()
         {
-            if (!patientCommentsStorage.IsTimeForHospitalRating()) RateButton.Visibility = Visibility.Collapsed;
+            if (!patientCommentsService.IsTimeForHospitalRating()) RateButton.Visibility = Visibility.Collapsed;
         }
 
         private void NotesButton_Click(object sender, RoutedEventArgs e)

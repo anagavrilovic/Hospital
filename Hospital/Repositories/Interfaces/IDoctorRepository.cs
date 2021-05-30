@@ -12,5 +12,6 @@ namespace Hospital.Repositories.Interfaces
     {
         List<Doctor> GetBySpecialty(DoctorSpecialty doctorSpecialty);
         void Update(Doctor doctorForUpdating);
+        String GetIDByNameSurname(string nameSurname);
     }
 }

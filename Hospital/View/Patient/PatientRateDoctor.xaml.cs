@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,8 +23,8 @@ namespace Hospital.View
     public partial class PatientRateDoctor : Page
     {
         Appointment app;
-        PatientCommentsStorage patientCommentsStorage=new PatientCommentsStorage();
         PatientComment patientComment;
+        PatientCommentsService patientCommentsService = new PatientCommentsService();
         public PatientRateDoctor(Appointment app)
         {
             InitializeComponent();
@@ -44,7 +45,6 @@ namespace Hospital.View
 
             if ((e.Key == Key.Add) && GradeButton.IsFocused)
             {
-                //Da.Content = 1;
                 int ButtonValue = Int32.Parse((String)GradeButton.Content);
                 if (ButtonValue < 5) ButtonValue++;
                 GradeButton.Content = ButtonValue.ToString();
@@ -80,7 +80,7 @@ namespace Hospital.View
             {
                 patientComment = new PatientComment(MainWindow.IDnumber, app.IDAppointment, CommentArea.Text, Int32.Parse((String)GradeButton.Content), "string", DateTime.Now);
             }
-            patientCommentsStorage.Save(patientComment);
+            patientCommentsService.Save(patientComment);
             if (app == null)
             {
                 PatientAdditionalOptions additionalOptions = new PatientAdditionalOptions();
@@ -90,5 +90,6 @@ namespace Hospital.View
             }
             this.NavigationService.GoBack();
         }
+
     }
 }

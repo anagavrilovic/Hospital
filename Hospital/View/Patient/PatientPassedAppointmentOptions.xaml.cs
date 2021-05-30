@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientPassedAppointmentOptions : Page
     {
-        PatientCommentsStorage patientCommentsStorage = new PatientCommentsStorage();
+        PatientCommentsService patientCommentsService = new PatientCommentsService();
         Appointment app;
         public PatientPassedAppointmentOptions(Appointment app)
         {
@@ -37,7 +38,7 @@ namespace Hospital.View
 
         private void RateDoctor(object sender, RoutedEventArgs e)
         {
-            if (patientCommentsStorage.IsAppointmentAlreadyGraded(app.IDAppointment))
+            if (patientCommentsService.IsAppointmentAlreadyGraded(app.IDAppointment))
             {
                 MessageBox.Show("Već ste ocenili doktora za ovaj pregled.");
                 return;

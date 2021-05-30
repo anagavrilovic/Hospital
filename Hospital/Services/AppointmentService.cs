@@ -19,6 +19,8 @@ namespace Hospital.Services
 
         private RoomService roomService = new RoomService();
         private NotificationService notificationService = new NotificationService();
+        private const int MINIMUM_DAYS_DIFFERENCE = 2;
+        private const int MAXIMUM_DAYS_DIFFERENCE = 10;
 
         public AppointmentService()
         {
@@ -103,7 +105,7 @@ namespace Hospital.Services
         public Appointment ScheduleUrgentAppointmentWithRescheduling(Appointment newUrgentAppointment, OptionForRescheduling selectedOption)
         {
             DateTime timeForNewUrgentAppointment = selectedOption.NewUrgentAppointmentTime;
-            newUrgentAppointment.DateTime = new DateTime(timeForNewUrgentAppointment.Year, timeForNewUrgentAppointment.Month, timeForNewUrgentAppointment.Day, 
+            newUrgentAppointment.DateTime = new DateTime(timeForNewUrgentAppointment.Year, timeForNewUrgentAppointment.Month, timeForNewUrgentAppointment.Day,
                 timeForNewUrgentAppointment.Hour, timeForNewUrgentAppointment.Minute, timeForNewUrgentAppointment.Second, timeForNewUrgentAppointment.Kind);
 
             newUrgentAppointment.IDDoctor = selectedOption.Option[0].Doctor.PersonalID;
@@ -457,5 +459,77 @@ namespace Hospital.Services
             return appointments;
         }
 
+        public Boolean IsTooLateForAppointmentChange(Appointment appointment)
+        {
+            return !((appointment.DateTime - DateTime.Now).TotalDays >= MINIMUM_DAYS_DIFFERENCE);
+        }
+
+        public String GetNewID()
+        {
+           return appointmentRepository.GetNewID();
+        }
+
+        public Boolean ExistByTime(DateTime dt, String idDoctor)
+        {
+            List<Appointment> appointment = GetAll();
+            if (appointment == null) return false;
+            foreach (Appointment a in appointment)
+            {
+                if (a.DateTime == dt && a.IDDoctor.Equals(idDoctor))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public int GetNumberOfAppointmentsForDoctor(string id)
+        {
+            List<Appointment> appointment = GetAll();
+            int number = 0;
+            if (appointment == null) return 0;
+            foreach (Appointment a in appointment)
+            {
+                if (a.IDDoctor.Equals(id))
+                {
+                    number++;
+                }
+            }
+            return number;
+        }
+
+        public Boolean IsChosenDateAcceptableForNewAppointment(Appointment appointment,Appointment oldAppointment)
+        {
+            if (IsThisRescheduling(oldAppointment))
+            {
+                if (!IsDateAcceptableForRescheduling(appointment,oldAppointment)) return false;
+            }
+            if (!IsDateAcceptableForScheduling(appointment)) return false;
+
+            return true;
+        }
+
+        private Boolean IsThisRescheduling(Appointment oldAppointment)
+        {
+            return oldAppointment != null;
+        }
+        private Boolean IsDateAcceptableForRescheduling(Appointment appointment, Appointment oldAppointment)
+        {
+            if ((Math.Abs((appointment.DateTime - oldAppointment.DateTime).TotalDays) > MAXIMUM_DAYS_DIFFERENCE))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private Boolean IsDateAcceptableForScheduling(Appointment appointment)
+        {
+            if ((appointment.DateTime - DateTime.Now).TotalDays < MINIMUM_DAYS_DIFFERENCE)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

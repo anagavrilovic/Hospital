@@ -9,5 +9,7 @@ namespace Hospital.Repositories.Interfaces
 {
     interface IPatientNotificationsRepository : IGenericRepository<PatientTherapyMedicineNotification>
     {
+        List<PatientTherapyMedicineNotification> GetByPatientID();
+        void Update(PatientTherapyMedicineNotification patientTherapyMedicineNotification);
     }
 }

@@ -24,6 +24,7 @@ namespace Hospital.View
     public partial class PatientNotifications : Page
     {
         private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService();
+        private PatientNotificationService patientNotificationService = new PatientNotificationService();
         public ObservableCollection<PatientNotification> Lista
         {
             get;
@@ -35,8 +36,7 @@ namespace Hospital.View
             this.DataContext = this;
             //MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
             // MedicalRecord medicalRecord = medicalRecordStorage.GetByPatientID(MainWindow.IDnumber);
-            PatientNotificationsStorage patientNotificationsStorage = new PatientNotificationsStorage();
-            Lista = new ObservableCollection<PatientNotification>(patientNotificationsStorage.GetAll());
+            Lista = new ObservableCollection<PatientNotification>(patientNotificationService.GetAll());
             ObservableCollection<PatientNotification> auxiliaryList = new ObservableCollection<PatientNotification>(patientNotesNotificationService.GetByPatientID());
             foreach(PatientNotification pt in auxiliaryList)
             {
