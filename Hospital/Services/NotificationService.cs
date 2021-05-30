@@ -36,6 +36,11 @@ namespace Hospital.Services
             notificationRepository.Delete(notification.Id);
         }
 
+        public void DeleteNotificationsUsersByNotificationID(string id)
+        {
+            notificationsUsersRepository.DeleteNotificationsUsersByNotificationID(id);
+        }
+
         public int CountNotificationByRole(Notification notification, UserType userType)
         {
             List<NotificationsUsers> recipientsOfRequestedNotification = notificationsUsersRepository.GetNotificationRecipientsByIDNotification(notification.Id);

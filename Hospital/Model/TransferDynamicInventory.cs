@@ -10,8 +10,6 @@ namespace Hospital.Model
         private string _firstRoomID;
         private string _destinationRoomID;
 
-       private DynamicInventoryStorage _dynamicInventoryStorage = new DynamicInventoryStorage();
-
         public string ItemID
         {
             get => _itemID;

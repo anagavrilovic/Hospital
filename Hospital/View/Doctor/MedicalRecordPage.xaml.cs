@@ -27,7 +27,7 @@ namespace Hospital.View.Doctor
         private MedicalRecord medicalRecord;
         private MedicalRecordService medicalRecordSerivce;
         private Appointment appointment=new Appointment();
-        private PatientNotificationService patientNotificationService = new PatientNotificationService();
+        private PatientTherapyNotificationService patientNotificationService = new PatientTherapyNotificationService();
         public MedicalRecord MedicalRecord
         {
             get { return medicalRecord; }

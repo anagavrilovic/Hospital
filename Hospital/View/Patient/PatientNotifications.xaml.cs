@@ -24,8 +24,8 @@ namespace Hospital.View
     public partial class PatientNotifications : Page
     {
         private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService();
-        private PatientNotificationService patientNotificationService = new PatientNotificationService();
-        public ObservableCollection<PatientNotification> Lista
+        private PatientTherapyNotificationService patientNotificationService = new PatientTherapyNotificationService();
+        public ObservableCollection<IPatientNotification> Lista
         {
             get;
             set;
@@ -36,9 +36,9 @@ namespace Hospital.View
             this.DataContext = this;
             //MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
             // MedicalRecord medicalRecord = medicalRecordStorage.GetByPatientID(MainWindow.IDnumber);
-            Lista = new ObservableCollection<PatientNotification>(patientNotificationService.GetAll());
-            ObservableCollection<PatientNotification> auxiliaryList = new ObservableCollection<PatientNotification>(patientNotesNotificationService.GetByPatientID());
-            foreach(PatientNotification pt in auxiliaryList)
+            Lista = new ObservableCollection<IPatientNotification>(patientNotificationService.GetAll());
+            ObservableCollection<IPatientNotification> auxiliaryList = new ObservableCollection<IPatientNotification>(patientNotesNotificationService.GetByPatientID());
+            foreach(IPatientNotification pt in auxiliaryList)
             {
                 Lista.Add(pt);
             }
@@ -86,7 +86,7 @@ namespace Hospital.View
                     PatientTherapyMedicineNotification selectedItem = (PatientTherapyMedicineNotification)dataGridApp.SelectedItem;
                     selectedItem.LastRead = DateTime.Now;
                     selectedItem.Read = true;
-                    PatientNotificationService patientNotificationsService = new PatientNotificationService();
+                    PatientTherapyNotificationService patientNotificationsService = new PatientTherapyNotificationService();
                     patientNotificationsService.Update(selectedItem);
                     PatientTherapy patientTherapy = new PatientTherapy(selectedItem);
                     this.NavigationService.Navigate(patientTherapy);

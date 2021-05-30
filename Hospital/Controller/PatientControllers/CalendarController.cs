@@ -18,6 +18,7 @@ namespace Hospital.Controller.PatientControllers
         private PatientSettingsService patientSettingsService = new PatientSettingsService();
         private RoomService roomService = new RoomService();
         private PatientSettings patientSettings;
+
         public CalendarController()
         {
             

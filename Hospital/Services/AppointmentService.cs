@@ -19,6 +19,7 @@ namespace Hospital.Services
 
         private RoomService roomService = new RoomService();
         private NotificationService notificationService = new NotificationService();
+
         private const int MINIMUM_DAYS_DIFFERENCE = 2;
         private const int MAXIMUM_DAYS_DIFFERENCE = 10;
 
@@ -26,11 +27,6 @@ namespace Hospital.Services
         {
             appointmentRepository = new AppointmentFileRepository();
             doctorRepository = new DoctorFileRepository();
-        }
-
-        public void DeleteAppointment(string id)
-        {
-            appointmentRepository.Delete(id);
         }
 
         public List<Appointment> GetAppointmentsByDoctor(Doctor doctor)

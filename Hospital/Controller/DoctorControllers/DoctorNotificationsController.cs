@@ -13,14 +13,12 @@ namespace Hospital.Controller.DoctorControllers
     {
         private DoctorService doctorService;
         private NotificationService notificationService;
-        private NotificationsUsersService notificationsUsersService;
         private DoctorNotificationsDTO DTO;
 
         public DoctorNotificationsController(DoctorNotificationsDTO DTO)
         {
             this.DTO = DTO;
             doctorService = new DoctorService();
-            notificationsUsersService = new NotificationsUsersService();
             notificationService = new NotificationService();
         }
 
@@ -36,7 +34,7 @@ namespace Hospital.Controller.DoctorControllers
 
         public void DeleteNotificationsUsersByNotificationID()
         {
-            notificationsUsersService.DeleteNotificationsUsersByNotificationID((DTO.SelectedNotification).Id);
+            notificationService.DeleteNotificationsUsersByNotificationID((DTO.SelectedNotification).Id);
         }
         public void DeleteNotification()
         {

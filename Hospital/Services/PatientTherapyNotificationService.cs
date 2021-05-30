@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Hospital.Services
 {
-    public class PatientNotificationService
+    public class PatientTherapyNotificationService
     {
         IPatientNotificationsRepository patientNotificationsRepository;
         IMedicineRepository medicineRepository;
 
-        public PatientNotificationService()
+        public PatientTherapyNotificationService()
         {
             patientNotificationsRepository = new PatientNotificationsFileRepository();
             medicineRepository = new MedicineFileRepository();
@@ -31,7 +31,7 @@ namespace Hospital.Services
 
         public void SaveFirst(Examination e)
         {
-            MedicineStorage medicineStorage = new MedicineStorage();
+            MedicineService medicineService = new MedicineService();
             List<PatientTherapyMedicineNotification> patientNotifications = patientNotificationsRepository.GetAll();
             if (patientNotifications == null)
             {

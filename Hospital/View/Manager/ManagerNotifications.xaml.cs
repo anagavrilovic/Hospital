@@ -36,7 +36,6 @@ namespace Hospital.View
             }
         }
 
-        private NotificationStorage _notificationStorage;
         private string _searchCriterion;
 
         public ICollectionView NotificationCollection { get; set; }
@@ -46,7 +45,6 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
-            _notificationStorage = new NotificationStorage();
 
             /*foreach(Notification n in notificationStorage.GetAll())
             {

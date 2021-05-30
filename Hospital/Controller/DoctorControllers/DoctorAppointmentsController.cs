@@ -32,7 +32,7 @@ namespace Hospital.Controller.DoctorControllers
         }
         public void DeleteAppointment()
         {
-            appointmentService.DeleteAppointment(DTO.SelectedAppointment.IDAppointment);
+            appointmentService.Delete(DTO.SelectedAppointment.IDAppointment);
         }
         public MedicalRecord GetByPatientId()
         {

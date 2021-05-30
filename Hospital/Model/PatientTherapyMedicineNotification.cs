@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Model
 {
-    public class PatientTherapyMedicineNotification:PatientNotification
+    public class PatientTherapyMedicineNotification:IPatientNotification
     {
         public string Description { get; set; }
         public string Name { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Model
 {
-   public interface PatientNotification
+   public interface IPatientNotification
     {
         String Name { get; set; }
         String Times { get; set; }

@@ -34,6 +34,7 @@ namespace Hospital
         {
             InitializeComponent();
             DoctorsShiftService = new DoctorsShiftService();
+            RegistratedUserService = new RegistratedUserService();
             DoctorsShiftService.UpdateAllShifts();
         }
 

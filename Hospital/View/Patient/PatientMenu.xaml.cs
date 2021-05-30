@@ -24,7 +24,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientMenu : Page
     {
-        private PatientNotificationService patientNotificationService = new PatientNotificationService();
+        private PatientTherapyNotificationService patientNotificationService = new PatientTherapyNotificationService();
         private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService();
         public PatientMenu()
         {
