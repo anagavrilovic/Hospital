@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
         Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
-        Title="Pregled Sala" Height="730" Width="423">
+        Title="Pregled Sala" Height="750" Width="430">
 
     <Page.Resources>
         <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
@@ -66,8 +66,8 @@
             </DataGrid>
         </ScrollViewer>
 
-        <Button x:Name="add"     Content="DODAJ SALU"    Grid.Row="9" Grid.Column="0"  Margin="19,0.2,6,30.6"  Background="#FFBBD7F9" Foreground="#FF051D6E"  Style="{StaticResource RoundButtonStyle}" Click="AddRoom" FontSize="14"/>
-        <Button x:Name="delete"  Content="IZBRIŠI SALU"  Grid.Row="9" Grid.Column="1"  Margin="6,0.2,22.2,30.6" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="DeleteRoom" FontSize="14"/>
+        <Button x:Name="add"     Content="DODAJ SALU"    Grid.Row="8" Grid.Column="0"  Margin="19,69.4,6.2,35.4"  Background="#FFBBD7F9" Foreground="#FF051D6E"  Style="{StaticResource RoundButtonStyle}" Click="AddRoom" FontSize="14" Grid.RowSpan="2"/>
+        <Button x:Name="delete"  Content="IZBRIŠI SALU"  Grid.Row="8" Grid.Column="1"  Margin="5.8,69.4,22.4,35.4" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="DeleteRoom" FontSize="14" Grid.RowSpan="2"/>
     </Grid>
 
 

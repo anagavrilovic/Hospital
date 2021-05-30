@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Hospital.View"
              mc:Ignorable="d" 
             Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
-            Title="Statički inventar" Height="730" Width="420">
+            Title="Statički inventar" Height="750" Width="430">
 
     <Page.Resources>
         <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
@@ -73,7 +73,7 @@
             </Grid>
         </ScrollViewer>
 
-        <Button Grid.ColumnSpan="2" Grid.Row="9"  Content="DODAJ STAVKU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="10,0.2,17,23.6" Style="{StaticResource RoundButtonStyle}" Click="AddButtonClick" FontSize="14"/>
+        <Button Grid.ColumnSpan="2" Grid.Row="9"  Content="DODAJ STAVKU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="10,0,17.4,26.4" Style="{StaticResource RoundButtonStyle}" Click="AddButtonClick" FontSize="14"/>
 
     </Grid>
 </Page>

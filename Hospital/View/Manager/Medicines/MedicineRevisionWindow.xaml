@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Hospital.View"
         mc:Ignorable="d"
        Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
-       Title="Lekovi na reviziji" Height="730" Width="420">
+       Title="Lekovi na reviziji" Height="750" Width="430">
 
     <Page.Resources>
         <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
@@ -35,7 +35,7 @@
             <Button Background="#FF95C0F4" BorderBrush="#FF95C0F4" Click="BackButtonClick">
                 <Image Source="/Icon/back.png"  Margin="0,0,5,0" Height="63" Width="55"/>
             </Button>
-            <Label Content="REVIZIJA LEKOVA"    Margin="0,25,5,18.6" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="18"  />
+            <Label Content="REVIZIJA LEKOVA"    Margin="0,22,5,20.2" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="20" Width="162"  />
             <Image Source="/Icon/logo.png"  Margin="60,10,6,9.8" Width="131"/>
         </StackPanel>
 
@@ -50,7 +50,7 @@
                          ScrollViewer.VerticalScrollBarVisibility="Hidden">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid Height="200" Width="400">
+                        <Grid Height="250" Width="400">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>

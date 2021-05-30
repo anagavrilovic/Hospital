@@ -7,7 +7,7 @@
         xmlns:val="clr-namespace:Hospital.ValidationRulesManager"
         mc:Ignorable="d"
        Background="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" 
-       Title="Izmena leka" Height="730" Width="420">
+       Title="Izmena leka" Height="750" Width="430">
 
     <Page.Resources>
         <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
@@ -47,7 +47,7 @@
             <Button  Click="BackButtonClick"   Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
                 <Image  Source="/Icon/back.png" Margin="10,8,0,5"/>
             </Button>
-            <Label Content="IZMENA LEKA" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" Margin="8,20,9,9.8"/>
+            <Label Content="IZMENA LEKA" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" Margin="8,16,9,17.2" Width="161"/>
             <Image Source="/Icon/logo.png" Margin="30,5,23,9.8" Width="137"/>
         </StackPanel>
 
