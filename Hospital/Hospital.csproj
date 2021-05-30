@@ -38,6 +38,12 @@
     <Reference Include="Caliburn.Micro.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <HintPath>packages\Caliburn.Micro.Core.4.0.173\lib\netstandard2.0\Caliburn.Micro.Core.dll</HintPath>
     </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Xaml.Behaviors.Wpf.1.1.31\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
@@ -438,6 +444,9 @@
     <Compile Include="View\Manager\Rooms\Renovations.xaml.cs">
       <DependentUpon>Renovations.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Secretary\Analitika.xaml.cs">
+      <DependentUpon>Analitika.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Secretary\DetaljiKarton.xaml.cs">
       <DependentUpon>DetaljiKarton.xaml</DependentUpon>
     </Compile>
@@ -473,6 +482,9 @@
     </Compile>
     <Compile Include="View\Secretary\OdaberiPacijenta.xaml.cs">
       <DependentUpon>OdaberiPacijenta.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\PocetnaStranica.xaml.cs">
+      <DependentUpon>PocetnaStranica.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\PrikazObavestenja.xaml.cs">
       <DependentUpon>PrikazObavestenja.xaml</DependentUpon>
@@ -800,6 +812,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Secretary\Analitika.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Secretary\DetaljiKarton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -857,6 +873,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Secretary\OdaberiPacijenta.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\PocetnaStranica.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1205,6 +1225,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\Secretary\image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\Secretary\pdf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\Secretary\time.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\Secretary\time1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

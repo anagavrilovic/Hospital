@@ -24,22 +24,23 @@ namespace Hospital.View
         public SecretaryWindow()
         {
             InitializeComponent();
+            Main.Navigate(new PocetnaStranica());
         }
 
         private void NextBtnClick(object sender, RoutedEventArgs e)
         {
             if (Main.NavigationService.CanGoForward)
                 Main.NavigationService.GoForward();
-            /*else
-                NavigationService.Navigate(new HomeView());*/
+            else
+                Main.Navigate(new PocetnaStranica());
         }
 
         private void BackBtnClick(object sender, RoutedEventArgs e)
         {
             if (Main.NavigationService.CanGoBack)
                 Main.NavigationService.GoBack();
-            /*else
-                NavigationService.Navigate(new HomeView());*/
+            else
+                Main.Navigate(new PocetnaStranica());
         }
 
         private void ExitBtnClick(object sender, RoutedEventArgs e)
@@ -50,7 +51,7 @@ namespace Hospital.View
 
         private void ButtonPocetnaClick(object sender, RoutedEventArgs e)
         {
-
+            Main.Navigate(new PocetnaStranica());
         }
 
         private void ButtonPacijentiClick(object sender, RoutedEventArgs e)
@@ -80,7 +81,7 @@ namespace Hospital.View
 
         private void ButtonAnalitikaClick(object sender, RoutedEventArgs e)
         {
-
+            Main.Navigate(new Analitika());
         }
 
         private void ButtonNaseBolniceClick(object sender, RoutedEventArgs e)
