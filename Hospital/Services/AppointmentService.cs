@@ -17,7 +17,7 @@ namespace Hospital.Services
         IMedicalRecordRepository medicalRecordRepository;
 
         private RoomService roomService = new RoomService();
-        private MedicalRecordService medicalRecordService = new MedicalRecordService();
+        private NotificationService notificationService = new NotificationService();
 
         public AppointmentService()
         {
@@ -92,8 +92,42 @@ namespace Hospital.Services
             if (!IsPatientAvaliableForAppointment(newAppointment))
                 return "Ovaj pacijent već ima zakazan pregled/operaciju u ovom terminu!";
 
+            if (newAppointment.Room == null || newAppointment.Room.Equals(new Room()))
+                return "Odaberite salu/ordinaciju!";
+
             appointmentRepository.Save(newAppointment);
             return "";
+        }
+
+        public Appointment ScheduleUrgentAppointmentWithRescheduling(Appointment newUrgentAppointment, OptionForRescheduling selectedOption)
+        {
+            DateTime timeForNewUrgentAppointment = selectedOption.NewUrgentAppointmentTime;
+            newUrgentAppointment.DateTime = new DateTime(timeForNewUrgentAppointment.Year, timeForNewUrgentAppointment.Month, timeForNewUrgentAppointment.Day, 
+                timeForNewUrgentAppointment.Hour, timeForNewUrgentAppointment.Minute, timeForNewUrgentAppointment.Second, timeForNewUrgentAppointment.Kind);
+
+            newUrgentAppointment.IDDoctor = selectedOption.Option[0].Doctor.PersonalID;
+            newUrgentAppointment.Doctor = doctorRepository.GetByID(newUrgentAppointment.IDDoctor);
+
+            RescheduleAppointments(selectedOption);
+            SetRoomForNewUrgentAppointment(newUrgentAppointment);
+            appointmentRepository.Save(newUrgentAppointment);
+
+            notificationService.NotifyDoctor(newUrgentAppointment);
+
+            return newUrgentAppointment;
+        }
+
+        public void RescheduleAppointments(OptionForRescheduling selectedOption)
+        {
+            foreach (var moveAppointmnet in selectedOption.Option)
+                RescheduleAppointment(moveAppointmnet.Appointment, moveAppointmnet.ToTime);
+        }
+
+        public void RescheduleAppointment(Appointment appointment, DateTime newTime)
+        {
+            notificationService.NotifyPatientAboutRescheduledAppointment(appointment, newTime);
+            appointment.DateTime = newTime;
+            appointmentRepository.Update(appointment);
         }
 
         public void ScheduleUrgentAppointment(Appointment newUrgentAppointment)
@@ -414,11 +448,12 @@ namespace Hospital.Services
                 if (a.IDDoctor.Equals(doctorId))
                 {
                     a.Doctor = doctorRepository.GetByID(a.IDDoctor);
-                    a.PatientsRecord = medicalRecordService.GetByPatientId(a.IDpatient);
+                    a.PatientsRecord = medicalRecordRepository.GetByPatientID(a.IDpatient);
                     appointments.Add(a);
                 }
             }
             return appointments;
         }
+
     }
 }

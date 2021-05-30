@@ -17,6 +17,7 @@ namespace Hospital.Repositories
 
         private IDoctorRepository doctorRepository;
         private IMedicalRecordRepository medicalRecordRepository;
+
         public AppointmentFileRepository() {
             doctorRepository = new DoctorFileRepository();
             medicalRecordRepository = new MedicalRecordFileRepository();
@@ -219,5 +220,12 @@ namespace Hospital.Repositories
 
         }
 
+        public void Update(Appointment appointment)
+        {
+            List<Appointment> appointments = GetAll();
+            appointments[appointments.FindIndex(a => a.IDAppointment.Equals(appointment.IDAppointment))] = appointment;
+            Serialize(appointments);
+        }
+        
     }
 }
