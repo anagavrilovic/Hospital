@@ -27,6 +27,7 @@ namespace Hospital.View.Doctor
         private MedicalRecord medicalRecord;
         private MedicalRecordService medicalRecordSerivce;
         private Appointment appointment=new Appointment();
+        private PatientNotificationService patientNotificationService = new PatientNotificationService();
         public MedicalRecord MedicalRecord
         {
             get { return medicalRecord; }
@@ -82,8 +83,7 @@ namespace Hospital.View.Doctor
 
         private void SaveExamination()
         {
-            PatientNotificationsStorage patientNotificationsStorage = new PatientNotificationsStorage();
-            patientNotificationsStorage.SaveFirst(((AppointmentWindow)Window.GetWindow(this)).Examintaion);
+            patientNotificationService.SaveFirst(((AppointmentWindow)Window.GetWindow(this)).Examintaion);
             MedicalRecord.AddExamination(((AppointmentWindow)Window.GetWindow(this)).Examintaion);
             medicalRecordSerivce.UpdateMedicalRecord(MedicalRecord);
         }

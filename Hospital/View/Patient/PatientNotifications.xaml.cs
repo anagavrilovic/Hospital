@@ -86,9 +86,8 @@ namespace Hospital.View
                     PatientTherapyMedicineNotification selectedItem = (PatientTherapyMedicineNotification)dataGridApp.SelectedItem;
                     selectedItem.LastRead = DateTime.Now;
                     selectedItem.Read = true;
-                    PatientNotificationsStorage patientNotificationsStorage = new PatientNotificationsStorage();
-                    patientNotificationsStorage.Delete(selectedItem.ID);
-                    patientNotificationsStorage.Save(selectedItem);
+                    PatientNotificationService patientNotificationsService = new PatientNotificationService();
+                    patientNotificationsService.Update(selectedItem);
                     PatientTherapy patientTherapy = new PatientTherapy(selectedItem);
                     this.NavigationService.Navigate(patientTherapy);
                 }

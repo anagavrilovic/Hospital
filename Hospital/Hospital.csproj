@@ -134,13 +134,10 @@
     <Compile Include="Model\NotificationsUsers.cs" />
     <Compile Include="Model\OptionForRescheduling.cs" />
     <Compile Include="Model\PatientComment.cs" />
-    <Compile Include="Model\PatientCommentsStorage.cs" />
     <Compile Include="Model\PatientNote.cs" />
     <Compile Include="Model\PatientNotesNotification.cs" />
     <Compile Include="Model\PatientNotification.cs" />
-    <Compile Include="Model\PatientNotificationsStorage.cs" />
     <Compile Include="Model\PatientSettings.cs" />
-    <Compile Include="Model\PatientSettingsStorage.cs" />
     <Compile Include="Model\PatientTherapyMedicineNotification.cs" />
     <Compile Include="Model\RoomRenovation.cs" />
     <Compile Include="Model\RoomRenovationStorage.cs" />
@@ -156,7 +153,6 @@
     <Compile Include="Model\Shift.cs" />
     <Compile Include="Model\TransferDynamicInventory.cs" />
     <Compile Include="Model\TransferInventory.cs" />
-    <Compile Include="Model\TransferInventoryStorage.cs" />
     <Compile Include="Model\UnitsType.cs" />
     <Compile Include="Model\UserType.cs" />
     <Compile Include="Repositories\AppointmentFileRepository.cs" />
@@ -971,7 +967,6 @@
     <Compile Include="Model\Patient.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="Model\Room.cs" />
-    <Compile Include="Model\RoomStorage.cs" />
     <Compile Include="Model\RoomType.cs" />
     <Compile Include="Model\Secretary.cs" />
     <Compile Include="Model\Therapy.cs" />

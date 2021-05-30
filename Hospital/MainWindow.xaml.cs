@@ -28,6 +28,7 @@ namespace Hospital
     {
         public static String IDnumber;
         public DoctorsShiftService DoctorsShiftService { get; set; }
+        public RegistratedUserService RegistratedUserService { get; set; }
 
         public MainWindow()
         {
@@ -38,8 +39,7 @@ namespace Hospital
 
         private void BtnUlogujSe(object sender, RoutedEventArgs e)
         {
-            RegistratedUserStorage rus = new RegistratedUserStorage();
-            ObservableCollection<RegistratedUser> users = rus.GetAll();
+            ObservableCollection<RegistratedUser> users = new ObservableCollection<RegistratedUser>(RegistratedUserService.GetAllRegistratedUsers());
             bool found = false;
 
             foreach (RegistratedUser user in users)

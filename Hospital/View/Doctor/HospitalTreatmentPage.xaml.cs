@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,7 +23,7 @@ namespace Hospital.View.Doctor
     public partial class HospitalTreatmentPage : Page,INotifyPropertyChanged
     {
         private static int MEDICAL_RECORD_TAB = 1;
-        private RoomStorage roomStorage = new RoomStorage();
+        private RoomService roomService = new RoomService();
         private HospitalTreatment hospitalTreatment = new HospitalTreatment();
         private Room selectedRoom = new Room();
         private MedicalRecord medicalRecord;
@@ -100,7 +101,7 @@ namespace Hospital.View.Doctor
         private void initProperties(string patientId)
         {
             medicalRecord=medicalRecordStorage.GetByPatientID(patientId);
-            foreach(Room roomForDisplay in roomStorage.GetAll())
+            foreach(Room roomForDisplay in roomService.GetAll())
             {
                 if (roomForDisplay.Type.Equals(RoomType.SOBA_ZA_ODMOR))
                     roomsForDisplay.Add(roomForDisplay);

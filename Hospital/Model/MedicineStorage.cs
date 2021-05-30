@@ -33,28 +33,6 @@ namespace Hospital
             return medicines;
         }
 
-        public void Save(Medicine parameter1)
-        {
-            ObservableCollection<Medicine> medicines = GetAll();
-            medicines.Add(parameter1);
-            DoSerialization(medicines);
-        }
-
-        public Boolean Delete(string id)
-        {
-              ObservableCollection<Medicine> records = GetAll();
-              foreach(Medicine r in records)
-              {
-                  if (r.ID.Equals(id))
-                  {
-                      records.Remove(r);
-                      DoSerialization(records);
-                      return true;
-                  }
-              }
-              return false;
-        }
-
         public Medicine GetOne(string id)
         {
             ObservableCollection<Medicine> medicines = GetAll();
@@ -68,29 +46,8 @@ namespace Hospital
 
             return null;
         }
-        public void EditMedicine(Medicine editedMedicine)
-        {
-            ObservableCollection<Medicine> medicines = GetAll();
-            foreach (Medicine medicine in medicines)
-            {
-                if (editedMedicine.ID.Equals(medicine.ID))
-                {
-                    medicines.Remove(medicine);
-                    medicines.Add(editedMedicine);
-                    DoSerialization(medicines);
-                    break;
-                }
-            }
-        }
+       
 
-        public void DoSerialization(ObservableCollection<Medicine> medicines)
-        {
-            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, medicines);
-            }
-        }
 
     }
 }

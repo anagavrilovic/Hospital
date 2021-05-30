@@ -31,21 +31,6 @@ namespace Hospital.Model
             return users;
         }
 
-        public void Save(RegistratedUser user)
-        {
-            ObservableCollection<RegistratedUser> users = GetAll();
-            users.Add(user);
-            DoSerialization(users);
-        }
-
-        public void DoSerialization(ObservableCollection<RegistratedUser> users)
-        {
-            using (StreamWriter file = File.CreateText(@"..\\..\\Files\\" + fileName))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, users);
-            }
-        }
 
         public UserType GetRoleByUsername(string username)
         {
@@ -60,61 +45,6 @@ namespace Hospital.Model
             return UserType.doctor;
         }
 
-        public int CountSecretaries()
-        {
-            ObservableCollection<RegistratedUser> registratedUsers = GetAll();
-            int retVal = 0;
-
-            foreach(RegistratedUser user in registratedUsers)
-            {
-                if (user.Type.Equals(UserType.secretary))
-                    retVal += 1;
-            }
-
-            return retVal;
-        }
-
-        public int CountDoctors()
-        {
-            ObservableCollection<RegistratedUser> registratedUsers = GetAll();
-            int retVal = 0;
-
-            foreach (RegistratedUser user in registratedUsers)
-            {
-                if (user.Type.Equals(UserType.doctor))
-                    retVal += 1;
-            }
-
-            return retVal;
-        }
-
-        public int CountManagers()
-        {
-            ObservableCollection<RegistratedUser> registratedUsers = GetAll();
-            int retVal = 0;
-
-            foreach (RegistratedUser user in registratedUsers)
-            {
-                if (user.Type.Equals(UserType.manager))
-                    retVal += 1;
-            }
-
-            return retVal;
-        }
-
-        public int CountPatients()
-        {
-            ObservableCollection<RegistratedUser> registratedUsers = GetAll();
-            int retVal = 0;
-
-            foreach (RegistratedUser user in registratedUsers)
-            {
-                if (user.Type.Equals(UserType.patient))
-                    retVal += 1;
-            }
-
-            return retVal;
-        }
 
     }
 }
