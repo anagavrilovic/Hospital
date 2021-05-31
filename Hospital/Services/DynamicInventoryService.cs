@@ -38,7 +38,7 @@ namespace Hospital.Services
             {
                 if (inv.Id.Equals(InventoryItem.Id))
                 {
-                    MessageBox.Show("Već postoji stavka sa unetom oznakom!");       //TODO: throw exception
+                    //TODO: throw exception : Already exists ID
                     return false;
                 }
             }

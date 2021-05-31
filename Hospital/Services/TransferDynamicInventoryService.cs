@@ -36,7 +36,7 @@ namespace Hospital.Services
                 return true;
             else
             {
-                MessageBox.Show("Sala ne raspolaže unetom količinom stavke. \n Pokušajte sa manjom količinom.");    //TODO: throw exception
+                //MessageBox.Show("Sala ne raspolaže unetom količinom stavke. \n Pokušajte sa manjom količinom.");    //TODO: throw exception
                 return false;
             }
         }
