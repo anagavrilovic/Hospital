@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
+        xmlns:controls="clr-namespace:Hospital.View.Secretary"
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="ZakazivanjeTermina" d:DesignHeight="700" d:DesignWidth="1065"
@@ -17,15 +18,21 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-
-        <StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="RASPORED PREGLEDA I OPERACIJA " Style="{StaticResource TitleStyle}"/>
                 <Image Source="../../Icon/Secretary/arrow.png" Width="10" Margin="0,20,0,5"/>
                 <TextBlock Text=" Zakazati termin?" Style="{StaticResource TitleStyle}" Margin="0,20,0,5"/>
             </StackPanel>
-            <!--<Separator Margin="15,0"/>-->
-        </StackPanel>
+
+            <controls:OptionBar Grid.Column="2" Height="30" Width="170" Margin="0,15,15,0" VerticalAlignment="Top" ></controls:OptionBar>
+        </Grid>
 
         <Border Grid.Row="1" Margin="15,30,0,15" Width="600" CornerRadius="10" Background="{StaticResource MainWhite}" HorizontalAlignment="Left">
             <Border.Effect>

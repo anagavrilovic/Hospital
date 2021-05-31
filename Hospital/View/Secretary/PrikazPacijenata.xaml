@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Hospital.View"
+             xmlns:controls="clr-namespace:Hospital.View.Secretary"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1065"
              Background="{StaticResource BackgroundGray}">
@@ -17,10 +18,21 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel>
-            <TextBlock Text="PACIJENTI" Style="{StaticResource TitleStyle}"/>
-            <!--<Separator Margin="15,0"/>-->
-        </StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                <TextBlock Text="PACIJENTI" Style="{StaticResource TitleStyle}"/>
+                <!--<Separator Margin="15,0"/>-->
+            </StackPanel>
+
+            <controls:OptionBar Grid.Column="2" Height="30" Width="170" Margin="0,15,15,0" VerticalAlignment="Top" ></controls:OptionBar>
+        </Grid>
+        
 
         <Grid Grid.Row="1" Margin="15,10,15,15">
             <Grid.RowDefinitions>

@@ -15,14 +15,31 @@ using System.Windows.Shapes;
 
 namespace Hospital.View.Secretary
 {
-    /// <summary>
-    /// Interaction logic for OptionBar.xaml
-    /// </summary>
     public partial class OptionBar : UserControl
     {
         public OptionBar()
         {
             InitializeComponent();
+        }
+
+        private void HelpBtn_Click(object sender, RoutedEventArgs e)
+        {
+            // open help page
+        }
+
+        private void NotificationBtn_Click(object sender, RoutedEventArgs e)
+        {
+            // notification page
+        }
+
+        private void GmailBtn_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.gmail.com");
+        }
+
+        private void ProfileBtn_Click(object sender, RoutedEventArgs e)
+        {
+            // open profile settings
         }
     }
 }

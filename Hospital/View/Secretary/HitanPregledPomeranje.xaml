@@ -22,14 +22,24 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- NASLOV -->
-        <StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="15,20,0,5">
-                <Image Source="../../Icon/Secretary/warning.png"/>
-                <TextBlock Text=" HITAN PREGLED" Style="{StaticResource TitleStyle}" Margin="0"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- NASLOV -->
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="15,20,0,5">
+                    <Image Source="../../Icon/Secretary/warning.png"/>
+                    <TextBlock Text=" HITAN PREGLED" Style="{StaticResource TitleStyle}" Margin="0"/>
+                </StackPanel>
+                <!--<Separator Margin="15,0"/>-->
             </StackPanel>
-            <!--<Separator Margin="15,0"/>-->
-        </StackPanel>
+
+            <local:OptionBar Grid.Column="2" Height="30" Width="170" Margin="0,15,15,0" VerticalAlignment="Top" ></local:OptionBar>
+        </Grid>
 
         <!-- PORUKE OBAVESTENJA -->
         <TextBlock Grid.Row="1" Text="Ne postoji slobodan termin u narednih sat vremena!" Style="{StaticResource TextBlockStyle}" FontSize="18" Margin="15,10,0,0"/>

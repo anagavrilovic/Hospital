@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View"
+        xmlns:controls="clr-namespace:Hospital.View.Secretary"
         mc:Ignorable="d"
         Title="DodajObavestenje" d:DesignHeight="700" d:DesignWidth="1065"
         Background="{StaticResource BackgroundGray}">
@@ -17,14 +18,24 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="OBAVEŠTENJA " Style="{StaticResource TitleStyle}"/>
-                <Image Source="../../Icon/Secretary/arrow.png" Width="10" Margin="0,20,0,5"/>
-                <TextBlock Text=" Kreiranje novog obveštenja" Style="{StaticResource TitleStyle}" Margin="0,20,0,5"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="OBAVEŠTENJA " Style="{StaticResource TitleStyle}"/>
+                    <Image Source="../../Icon/Secretary/arrow.png" Width="10" Margin="0,20,0,5"/>
+                    <TextBlock Text=" Kreiranje novog obveštenja" Style="{StaticResource TitleStyle}" Margin="0,20,0,5"/>
+                </StackPanel>
+                <!--<Separator Margin="15,0"/>-->
             </StackPanel>
-            <!--<Separator Margin="15,0"/>-->
-        </StackPanel>
+
+            <controls:OptionBar Grid.Column="2" Height="30" Width="170" Margin="0,15,15,0" VerticalAlignment="Top" ></controls:OptionBar>
+        </Grid>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

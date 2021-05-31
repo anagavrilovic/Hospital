@@ -465,6 +465,9 @@
     <Compile Include="View\Secretary\Kalendar.xaml.cs">
       <DependentUpon>Kalendar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Secretary\NaseBolnice.xaml.cs">
+      <DependentUpon>NaseBolnice.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Secretary\ObavestenjaSekretar.xaml.cs">
       <DependentUpon>ObavestenjaSekretar.xaml</DependentUpon>
     </Compile>
@@ -859,6 +862,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Secretary\NaseBolnice.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Secretary\ObavestenjaSekretar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1226,6 +1233,22 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\Secretary\time1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\Secretary\bell.png" />
+    <Resource Include="Icon\Secretary\help.png" />
+    <Resource Include="Icon\Secretary\message.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\Secretary\secretary.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\Secretary\bell1.png" />
+    <Resource Include="Icon\Secretary\help1.png" />
+    <Resource Include="Icon\Secretary\message1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\Secretary\clinic.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
