@@ -11,5 +11,6 @@ namespace Hospital.Repositories.Interfaces
     {
         List<PatientTherapyMedicineNotification> GetByPatientID();
         void Update(PatientTherapyMedicineNotification patientTherapyMedicineNotification);
+        String GetNewID();
     }
 }

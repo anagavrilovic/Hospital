@@ -24,8 +24,8 @@ namespace Hospital.View
     public partial class PatientNotifications : Page
     {
         private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService();
-        private PatientTherapyNotificationService patientNotificationService = new PatientTherapyNotificationService();
-        public ObservableCollection<IPatientNotification> Lista
+        private PatientTherapyNotificationService patientTherapyNotificationService = new PatientTherapyNotificationService();
+        public ObservableCollection<IPatientNotification> NotificationList
         {
             get;
             set;
@@ -34,47 +34,17 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
-            //MedicalRecordStorage medicalRecordStorage = new MedicalRecordStorage();
-            // MedicalRecord medicalRecord = medicalRecordStorage.GetByPatientID(MainWindow.IDnumber);
-            Lista = new ObservableCollection<IPatientNotification>(patientNotificationService.GetAll());
+            List<PatientTherapyMedicineNotification> therapyNotifications = patientTherapyNotificationService.GetByPatientID();
+            therapyNotifications = patientTherapyNotificationService.SetNotifactionsActivity(therapyNotifications);
+            NotificationList = new ObservableCollection<IPatientNotification>(therapyNotifications);
             ObservableCollection<IPatientNotification> auxiliaryList = new ObservableCollection<IPatientNotification>(patientNotesNotificationService.GetByPatientID());
             foreach(IPatientNotification pt in auxiliaryList)
             {
-                Lista.Add(pt);
+                NotificationList.Add(pt);
             }
             dataGridApp.SelectedIndex = 0;
 
             dataGridApp.Focus();
-            /*    foreach(Examination e in medicalRecord.Examination)
-                {
-
-                    foreach(Medicine med in e.therapy.Medicine)
-                    {
-                        PatientTherapyMedicineNotification patientTherapyMedicineNotification = new PatientTherapyMedicineNotification();
-                        patientTherapyMedicineNotification.Name = e.therapy.name+": "+med.Name;
-                        for(int i = 0; i < med.TimesPerDay; i++)
-                        {
-                            TimeSpan ts = new TimeSpan(i*3 + 10, 0, 0);
-                            DateTime dateTime = DateTime.Now.Date + ts;
-                            patientTherapyMedicineNotification.updateTimes(dateTime);
-                        }
-                        patientTherapyMedicineNotification.Read = false;
-                        DateTime date1 = e.appointment.DateTime;
-                        DateTime date2 = date1.AddDays(med.DurationInDays);
-                        patientTherapyMedicineNotification.FromDate = date1;
-                        patientTherapyMedicineNotification.ToDate = date2;
-                        patientTherapyMedicineNotification.updateDuration();
-                        if ((date1.Date <= DateTime.Now) && (date2.Date>=DateTime.Now))
-                        {
-                            patientTherapyMedicineNotification.Active = true;
-                        }
-                        else
-                        {
-                            patientTherapyMedicineNotification.Active = false;
-                        }
-                        Lista.Add(patientTherapyMedicineNotification);
-                    }
-                }*/
         }
 
         private void myTestKey(object sender, KeyEventArgs e)
