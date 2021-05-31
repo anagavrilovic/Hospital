@@ -1,25 +1,19 @@
 ﻿using Hospital.Services;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    public partial class EditMedicine : Page
+    public partial class EditMedicine : Page, INotifyPropertyChanged
     {
-        public Medicine Medicine { get; set; }
+        private Medicine _medicine;
+        public Medicine Medicine
+        {
+            get { return _medicine; }
+            set { _medicine = value; OnPropertyChanged("Medicine"); }
+        }
 
         public EditMedicine(Medicine medicine)
         {
@@ -48,6 +42,15 @@ namespace Hospital.View
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new MedicinesWindow());
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

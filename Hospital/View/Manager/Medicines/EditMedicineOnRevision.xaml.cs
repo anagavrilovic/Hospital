@@ -12,9 +12,14 @@ using System.Windows.Media;
 
 namespace Hospital.View
 {
-    public partial class EditMedicineOnRevision : Page
+    public partial class EditMedicineOnRevision : Page, INotifyPropertyChanged
     {
-        public MedicineRevision MedicineOnRevision { get; set; }
+        private MedicineRevision _medicineOnRevision;
+        public MedicineRevision MedicineOnRevision 
+        { 
+            get { return _medicineOnRevision; }
+            set { _medicineOnRevision = value; OnPropertyChanged("MedicineOnRevision"); }
+        }
         public List<string> Ingredients { get; set; }
         private string _searchCriterion;
         public ICollectionView IngredientsCollection {  get; set; }
@@ -112,7 +117,6 @@ namespace Hospital.View
             IngredientsCollection.Refresh();
         }
 
-
         private void SendAgainOnRevision(object sender, RoutedEventArgs e)
         {
             SaveUpdatedProperties();
@@ -203,6 +207,15 @@ namespace Hospital.View
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new MedicineRevisionWindow());
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

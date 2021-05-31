@@ -1,125 +1,29 @@
-// File:    Medicine.cs
-// Author:  Ana Gavrilovic
-// Created: Monday, April 5, 2021 6:57:36 PM
-// Purpose: Definition of Class Medicine
-
 using Newtonsoft.Json;
-using System;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace Hospital
 {
-    public class Medicine : INotifyPropertyChanged
+    public class Medicine
     {
-       private string id;
-        public string ID
-        {
-            get => id;
-            set
-            {
-                id = value;
-                OnPropertyChanged("ID");
-            }
-        }
-        private int durationInDays;
-        [JsonIgnore]
-        public int DurationInDays
-        {
-            get => durationInDays;
-            set
-            {
-                durationInDays = value;
-                OnPropertyChanged("durationInDays");
-            }
-        }
-        private int timesPerDay;
-        [JsonIgnore]
-        public int TimesPerDay
-        {
-            get => timesPerDay;
-            set
-            {
-                timesPerDay = value;
-                OnPropertyChanged("timesPerDay");
-            }
-        }
-        private string name;
-        public string Name
-        {
-            get => name;
-            set
-            {
-                name = value;
-                OnPropertyChanged("Name");
-            }
-        }
-      
-        private double dosageInMg;
-        public double DosageInMg
-        {
-            get => dosageInMg;
-            set
-            {
-                dosageInMg = value;
-                OnPropertyChanged("DosageInMg");
-            }
-        }
+        public string ID { get; set; }
 
-        private int quantity;
-        public int Quantity
-        {
-            get => quantity;
-            set
-            {
-                quantity = value;
-                OnPropertyChanged("Quuantity");
-            }
-        }
+        public string Name { get; set; }
 
-        private double price;
-        public double Price
-        {
-            get => price;
-            set
-            {
-                price = value;
-                OnPropertyChanged("Price");
-            }
-        }
+        public double DosageInMg { get; set; }
+
+        public int Quantity { get; set; }
+
+        public double Price { get; set; }
        
-        private string description;
         [JsonIgnore]
-        public string Description
-        {
-            get => description;
-            set
-            {
-                description = value;
-                OnPropertyChanged("Description");
-            }
-        }
+        public string Description { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
         public override string ToString()
         {
             return Name + " " + ID;
         }
         private System.Collections.Generic.List<Ingredient> ingredient;
 
-
-        /// <summary>
-        /// Property for collection of Ingredient
-        /// </summary>
-        /// <pdGenerated>Default opposite class collection property</pdGenerated>
         public System.Collections.Generic.List<Ingredient> Ingredient
         {
             get
@@ -136,15 +40,9 @@ namespace Hospital
                     foreach (Ingredient oIngredient in value)
                         AddIngredient(oIngredient);
                 }
-
-                OnPropertyChanged("Ingredient");
             }
         }
 
-        /// <summary>
-        /// Add a new Ingredient in the collection
-        /// </summary>
-        /// <pdGenerated>Default Add</pdGenerated>
         public void AddIngredient(Ingredient newIngredient)
         {
             if (newIngredient == null)
@@ -155,10 +53,6 @@ namespace Hospital
                 this.ingredient.Add(newIngredient);
         }
 
-        /// <summary>
-        /// Remove an existing Ingredient from the collection
-        /// </summary>
-        /// <pdGenerated>Default Remove</pdGenerated>
         public void RemoveIngredient(Ingredient oldIngredient)
         {
             if (oldIngredient == null)
@@ -168,10 +62,6 @@ namespace Hospital
                     this.ingredient.Remove(oldIngredient);
         }
 
-        /// <summary>
-        /// Remove all instances of Ingredient from the collection
-        /// </summary>
-        /// <pdGenerated>Default removeAll</pdGenerated>
         public void RemoveAllIngredient()
         {
             if (ingredient != null)
@@ -180,11 +70,6 @@ namespace Hospital
 
         private System.Collections.Generic.List<string> replacementMedicineIDs;
 
-
-        /// <summary>
-        /// Property for collection of Ingredient
-        /// </summary>
-        /// <pdGenerated>Default opposite class collection property</pdGenerated>
         public System.Collections.Generic.List<string> ReplacementMedicineIDs
         {
             get
@@ -204,10 +89,6 @@ namespace Hospital
             }
         }
 
-        /// <summary>
-        /// Add a new Ingredient in the collection
-        /// </summary>
-        /// <pdGenerated>Default Add</pdGenerated>
         public void AddMedicineID(string medicineID)
         {
             if (medicineID == null)
@@ -218,7 +99,6 @@ namespace Hospital
                 this.ReplacementMedicineIDs.Add(medicineID);
         }
 
-
         public void RemoveMedicineID(string medicineID)
         {
             if (medicineID == null)
@@ -227,7 +107,6 @@ namespace Hospital
                 if (this.ReplacementMedicineIDs.Contains(medicineID))
                     this.ReplacementMedicineIDs.Remove(medicineID);
         }
-
 
         public void RemoveAllMedicineID()
         {

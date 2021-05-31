@@ -1,26 +1,18 @@
 ﻿using Hospital.Services;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    public partial class EditInventory : Page
+    public partial class EditInventory : Page, INotifyPropertyChanged
     {
-        public Inventory InventoryItem {  get; set; }
+        private Inventory _inventoryItem;
+        public Inventory InventoryItem
+        {
+            get { return _inventoryItem; }
+            set { _inventoryItem = value; OnPropertyChanged("InventoryItem"); }
+        }
 
         public EditInventory(Inventory inventory)
         {
@@ -55,6 +47,15 @@ namespace Hospital.View
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new StaticInventoryView(InventoryItem.RoomID));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

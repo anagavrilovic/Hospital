@@ -1,92 +1,20 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hospital.Model
 {
-    public class MedicineRevision : INotifyPropertyChanged
+    public class MedicineRevision
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public Medicine Medicine { get; set; }
 
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
+        public string DoctorID { get; set; }
 
-        private Medicine _medicine;
-        public Medicine Medicine
-        {
-            get => _medicine;
-            set
-            {
-                _medicine = value;
-                OnPropertyChanged("Medicine");
-            }
-        }
-
-        private string _doctorID;
-        public string DoctorID
-        {
-            get => _doctorID;
-            set
-            {
-                _doctorID = value;
-                OnPropertyChanged("DoctorID");
-            }
-        }
-
-        private Doctor _revisionDoctor;
         [JsonIgnore]
-        public Doctor RevisionDoctor
-        {
-            get => _revisionDoctor;
-            set
-            {
-                _revisionDoctor = value;
-                OnPropertyChanged("RevisionDoctor");
-            }
-        }
+        public Doctor RevisionDoctor { get; set; }
 
-        private string _revisionExplanation;
-        public string RevisionExplanation
-        {
-            get => _revisionExplanation;
-            set
-            {
-                _revisionExplanation = value;
-                OnPropertyChanged("RevisionExplanation");
-            }
-        }
+        public string RevisionExplanation { get; set; }
 
-        private bool _isMedicineRevised;
-        public bool IsMedicineRevised
-        {
-            get => _isMedicineRevised;
-            set
-            {
-                _isMedicineRevised = value;
-                OnPropertyChanged("IsMedicineRevised");
-            }
-        }
-
-        
-        private string revisionStatus;
+        public bool IsMedicineRevised { get; set; }
         [JsonIgnore]
-        public string RevisionStatus
-        {
-            get => revisionStatus;
-            set
-            {
-                revisionStatus = value;
-                OnPropertyChanged("RevisionStatus");
-            }
-        }
+        public string RevisionStatus { get; set; }
     }
 }

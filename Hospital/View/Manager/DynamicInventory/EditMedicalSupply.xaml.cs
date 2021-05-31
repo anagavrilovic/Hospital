@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,14 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    public partial class EditMedicalSupply : Page
+    public partial class EditMedicalSupply : Page, INotifyPropertyChanged
     {
-        public DynamicInventory DynamicInventoryItem { get; set; }
+        private DynamicInventory _dynamicInventoryItem;
+        public DynamicInventory DynamicInventoryItem
+        {
+            get { return _dynamicInventoryItem; }
+            set { _dynamicInventoryItem = value; OnPropertyChanged("DynamicInventoryItem"); }
+        }
 
         public EditMedicalSupply(DynamicInventory item)
         {
@@ -69,6 +75,15 @@ namespace Hospital.View
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new DynamicInventoryView(DynamicInventoryItem.RoomID));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

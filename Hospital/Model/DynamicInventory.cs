@@ -1,94 +1,21 @@
-// File:    MedicalSupply.cs
-// Author:  Marija
-// Created: Wednesday, March 24, 2021 3:04:22 PM
-// Purpose: Definition of Class MedicalSupply
-
 using Newtonsoft.Json;
 using System;
-using System.ComponentModel;
 
 namespace Hospital
 {
-    public class DynamicInventory : INotifyPropertyChanged
+    public class DynamicInventory
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public string Id { get; set; }
 
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
+        public String Name { get; set; }
 
-       private String _id;
-       private String _name;
-       private double _price;
-       private int _quantity;
-       private UnitsType _units;
-       private string _roomID;
+        public double Price { get; set; }
 
-        public string Id
-        {
-            get => _id;
-            set
-            {
-                 _id = value;
-                 OnPropertyChanged("Id");
-            }
-        }
+        public int Quantity { get; set; }
 
+        public UnitsType Units { get; set; }
 
-        public String Name
-        {
-            get => _name;
-            set
-            {
-                _name = value;
-                OnPropertyChanged("Name");
-            }
-        }
-
-        public double Price 
-        {
-            get => _price;
-            set
-            {
-                _price = value;
-                OnPropertyChanged("Price");
-            }
-        }
-
-
-        public int Quantity
-        {
-            get => _quantity;
-            set
-            {
-                _quantity = value;
-                OnPropertyChanged("Quantity");
-            }
-        }
-
-        public UnitsType Units
-        {
-            get => _units;
-            set
-            {
-               _units = value;
-               OnPropertyChanged("Units");
-            }
-        }
-
-        public string RoomID
-        {
-            get => _roomID;
-            set
-            {
-               _roomID = value;
-               OnPropertyChanged("RoomID");
-            }
-        }
+        public string RoomID { get; set; }
 
         [JsonIgnore]
         public Room Room { get; set; }

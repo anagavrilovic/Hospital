@@ -1,12 +1,18 @@
 ﻿using Hospital.Services;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace Hospital.View
 {
-    public partial class AddMedicalSupply : Page
+    public partial class AddMedicalSupply : Page, INotifyPropertyChanged
     {
-        public DynamicInventory DynamicInventoryItem  { get; set; }
+        private DynamicInventory _dynamicInventoryItem;
+        public DynamicInventory DynamicInventoryItem  
+        {
+            get { return _dynamicInventoryItem; }
+            set { _dynamicInventoryItem = value; OnPropertyChanged("DynamicInventoryItem"); }
+        }
 
         public AddMedicalSupply(string id)
         {
@@ -40,6 +46,15 @@ namespace Hospital.View
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new DynamicInventoryView(DynamicInventoryItem.RoomID));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }
