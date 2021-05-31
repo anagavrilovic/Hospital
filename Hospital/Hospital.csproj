@@ -471,6 +471,9 @@
     <Compile Include="View\Secretary\OdaberiPacijenta.xaml.cs">
       <DependentUpon>OdaberiPacijenta.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Secretary\OptionBar.xaml.cs">
+      <DependentUpon>OptionBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Secretary\PocetnaStranica.xaml.cs">
       <DependentUpon>PocetnaStranica.xaml</DependentUpon>
     </Compile>
@@ -861,6 +864,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Secretary\OdaberiPacijenta.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\OptionBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
