@@ -48,6 +48,15 @@ namespace Hospital.Services
             return doctorsNameSurname;
         }
 
+        public List<string> GetDoctorsIdNameSurname()
+        {
+            List<string> doctorsIdNameSurname = new List<string>();
+            foreach (Hospital.Model.Doctor doctor in GetAll())
+                doctorsIdNameSurname.Add(doctor.PersonalID + "-" + doctor.ToString());
+
+            return doctorsIdNameSurname;
+        }
+
         public String GetIDByNameSurname(string nameSurname)
         {
             return doctorRepository.GetIDByNameSurname(nameSurname);

@@ -33,7 +33,7 @@ namespace Hospital.View
         private void AddDoctorsInComboBox()
         {
             DoctorService doctorService = new DoctorService();
-            ObservableCollection<string>  DoctorsNameSurname = new ObservableCollection<string>(doctorService.GetDoctorsNameSurname());
+            ObservableCollection<string>  DoctorsNameSurname = new ObservableCollection<string>(doctorService.GetDoctorsIdNameSurname());
             doctorsCB.ItemsSource = DoctorsNameSurname;
         }
 

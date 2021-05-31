@@ -167,7 +167,7 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Margin="2,2,2,2">
-                            <ListBox ItemsSource="{Binding RoomRenovation.RoomsDestroyedDuringRenovation, Mode=TwoWay, UpdateSourceTrigger=Explicit}" x:Name="ingredientsList" Height="110" Margin="0,0,0.4,0" />
+                            <ListBox ItemsSource="{Binding RoomsToDestroy, Mode=TwoWay, UpdateSourceTrigger=Explicit}" x:Name="ingredientsList" Height="110" Margin="0,0,0.4,0" />
                         </StackPanel>
                     </Grid>
                 </Border>

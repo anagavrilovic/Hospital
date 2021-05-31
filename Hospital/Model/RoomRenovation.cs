@@ -18,8 +18,8 @@ namespace Hospital.Model
         private DateTime _startDate;
         private DateTime _endDate;
         private string _description;
-        private ObservableCollection<Room> _roomsDestroyedDuringRenovation;
-        private ObservableCollection<Room> _roomsCreatedDuringRenovation;
+        private List<Room> _roomsDestroyedDuringRenovation;
+        private List<Room> _roomsCreatedDuringRenovation;
 
         public string Id
         {
@@ -61,7 +61,7 @@ namespace Hospital.Model
             }
         }
 
-        public ObservableCollection<Room> RoomsDestroyedDuringRenovation
+        public List<Room> RoomsDestroyedDuringRenovation
         {
             get => _roomsDestroyedDuringRenovation;
             set
@@ -71,7 +71,7 @@ namespace Hospital.Model
             }
         }
 
-        public ObservableCollection<Room> RoomsCreatedDuringRenovation
+        public List<Room> RoomsCreatedDuringRenovation
         {
             get => _roomsCreatedDuringRenovation;
             set
@@ -86,8 +86,8 @@ namespace Hospital.Model
 
         public  RoomRenovation()
         {
-            RoomsCreatedDuringRenovation = new ObservableCollection<Room>();
-            RoomsDestroyedDuringRenovation = new ObservableCollection<Room>();
+            RoomsCreatedDuringRenovation = new List<Room>();
+            RoomsDestroyedDuringRenovation = new List<Room>();
             Room = new Room();
             WareHouse = new Room();
         }

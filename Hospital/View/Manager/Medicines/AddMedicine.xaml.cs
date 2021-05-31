@@ -35,7 +35,7 @@ namespace Hospital.View
         private void InitializeComboBoxItems()
         {
             DoctorService doctorService = new DoctorService();
-            doctorsCB.ItemsSource  = new ObservableCollection<string>(doctorService.GetDoctorsNameSurname());
+            doctorsCB.ItemsSource  = new ObservableCollection<string>(doctorService.GetDoctorsIdNameSurname());
         }
 
         private void InitializeIngredientsListBox()
@@ -129,10 +129,10 @@ namespace Hospital.View
 
         private void InitializeMedicine()
         {
-            string doctorSelected = doctorsCB.Text.Trim().Substring(3);
+            string doctorSelected = doctorsCB.Text.Trim().Split("-".ToCharArray())[0];
             DoctorService doctorService = new DoctorService();
-            MedicineRevision.DoctorID = doctorService.GetIDByNameSurname(doctorSelected);
-            MedicineRevision.RevisionDoctor = doctorService.GetDoctorById(MedicineRevision.DoctorID);
+            MedicineRevision.DoctorID = doctorSelected;
+            MedicineRevision.RevisionDoctor = doctorService.GetDoctorById(doctorSelected);
             MedicineRevision.IsMedicineRevised = false;
         }
 
