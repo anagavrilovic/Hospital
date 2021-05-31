@@ -22,6 +22,8 @@ namespace Hospital.View
 
         public ObservableCollection<string> WarehousesIDs { get; set; }
         public ObservableCollection<string> RoomIDs { get; set; }
+        public ObservableCollection<string> RoomsToDestroy { get; set; }
+        public ObservableCollection<string> RoomsToCreate { get; set; }
 
         private ObservableCollection<String> _roomsFromSameFloor;
         public ObservableCollection<String> RoomsFromSameFloor
@@ -43,6 +45,8 @@ namespace Hospital.View
             this.DataContext = this;
           
             RoomRenovation = new RoomRenovation();
+            RoomsToDestroy = new ObservableCollection<string>();
+            RoomsToCreate = new ObservableCollection<string>();
             this._roomService = new RoomService();
 
             FindRoomsFromSameFloor();
@@ -98,6 +102,7 @@ namespace Hospital.View
                 return;
 
             RoomRenovation.RoomsDestroyedDuringRenovation.Remove(selectedRoom);
+            RoomsToDestroy.Remove(allRoomsFromSameFloorList.SelectedItem.ToString());
             allRoomsFromSameFloorList.Items.Refresh();
         }
 
@@ -109,6 +114,7 @@ namespace Hospital.View
             String str = (String) allRoomsFromSameFloorList.SelectedItem;
             String[] splitedStr = str.Split('-');
             String roomID = splitedStr[0];
+            RoomsToDestroy.Add(allRoomsFromSameFloorList.SelectedItem.ToString());
 
             return _roomService.GetById(roomID);
         }

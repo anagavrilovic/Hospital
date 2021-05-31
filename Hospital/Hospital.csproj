@@ -113,7 +113,7 @@
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Allergen.cs" />
     <Compile Include="Model\BloodType.cs" />
-    <Compile Include="Model\BoolToStringConverter.cs" />
+    <Compile Include="DoktorConverters\BoolToStringConverter.cs" />
     <Compile Include="Model\City.cs" />
     <Compile Include="Model\Country.cs" />
     <Compile Include="DTO\DatesInWeeklyCalendarDTO.cs" />
