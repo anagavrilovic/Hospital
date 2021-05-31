@@ -98,9 +98,7 @@ namespace Hospital.DTO
             }
         }
 
-        public DoctorsShiftsDTO()
-        {
-        }
+        public DoctorsShiftsDTO() {}
 
 
         public event PropertyChangedEventHandler PropertyChanged;

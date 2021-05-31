@@ -19,9 +19,15 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    public partial class KreiranjeKartona : Page
+    public partial class KreiranjeKartona : Page, INotifyPropertyChanged
     {
-        public MedicalRecord NewRecord { get; set; }
+        private MedicalRecord newRecord;
+        public MedicalRecord NewRecord
+        {
+            get { return newRecord; }
+            set { newRecord = value; OnPropertyChanged("NewRecord"); }
+        }
+
         public MedicalRecordService MedicalRecordService { get; set; }
 
 
@@ -57,6 +63,15 @@ namespace Hospital.View
         private void BtnOdustaniClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new PrikazPacijenata());
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
 
     }

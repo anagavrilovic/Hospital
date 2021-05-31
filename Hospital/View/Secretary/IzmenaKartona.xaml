@@ -204,7 +204,8 @@
                     </TextBox.Text>
                 </TextBox>
 
-                <TextBox x:Name="JMBGText" Grid.Row="1" Grid.Column="3" Style="{StaticResource KartoniTextBox}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                <TextBox x:Name="JMBGText" Grid.Row="1" Grid.Column="3" Style="{StaticResource KartoniTextBox}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
+                         IsEnabled="False">
                     <TextBox.Text>
                         <Binding Path="PatientsRecord.Patient.PersonalID" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>

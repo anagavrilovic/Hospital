@@ -18,10 +18,21 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    public partial class OdaberiPacijenta : Window
+    public partial class OdaberiPacijenta : Window, INotifyPropertyChanged
     {
-        public MedicalRecord PatientInCalendar { get; set; }
-        public MedicalRecord SelectedPatient { get; set; }
+        private MedicalRecord patientInCalendar;
+        public MedicalRecord PatientInCalendar
+        {
+            get { return patientInCalendar; }
+            set { patientInCalendar = value; OnPropertyChanged("PatientInCalendar"); }
+        }
+
+        private MedicalRecord selectedPatient;
+        public MedicalRecord SelectedPatient
+        {
+            get { return selectedPatient; }
+            set { selectedPatient = value; OnPropertyChanged("SelectedPatient"); }
+        }
 
         public ObservableCollection<MedicalRecord> Patients { get; set; }
         public ObservableCollection<Appointment> PatientsAppointments { get; set; }
@@ -134,6 +145,15 @@ namespace Hospital.View
         private void AppointmentsFilterTextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(TabelaTermina.ItemsSource).Refresh();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

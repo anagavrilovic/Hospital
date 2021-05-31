@@ -7,25 +7,8 @@ namespace Hospital
         private String username;
         private String password;
 
-        public String Username
-        {
-            get => username;
-            set
-            {
-                username = value;
-                OnPropertyChanged("Username");
-            }
-        }
-
-        public String Password
-        {
-            get => password;
-            set
-            {
-                password = value;
-                OnPropertyChanged("Password");
-            }
-        }
+        public String Username { get; set; }
+        public String Password { get; set; }
 
     }
 }

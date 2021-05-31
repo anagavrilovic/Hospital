@@ -18,9 +18,14 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    public partial class ModifikacijaAlergena : Page
-    {  
-        public MedicalRecord PatientsRecord { get; set; }
+    public partial class ModifikacijaAlergena : Page, INotifyPropertyChanged
+    {
+        private MedicalRecord patientsRecord;
+        public MedicalRecord PatientsRecord
+        {
+            get { return patientsRecord; }
+            set { patientsRecord = value; OnPropertyChanged("PatientsRecord"); }
+        }
 
         public ObservableCollection<string> AllMedicines { get; set; }
         public ObservableCollection<string> AllIngredients { get; set; }
@@ -125,6 +130,15 @@ namespace Hospital.View
         private void SastojciUkloni(object sender, RoutedEventArgs e)
         {
             PatientsRecord.Allergen.IngredientNames.Remove((string)DodatiSastojci.SelectedItem);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

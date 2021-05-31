@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Hospital
 {
-    public class MedicalRecord : INotifyPropertyChanged
+    public class MedicalRecord
     {
         private string healthCardNumber;
         private string parentName;
@@ -18,74 +18,13 @@ namespace Hospital
         private BloodType bloodType;
 
         public MedicalRecord() {}
-
-        public BloodType BloodType
-        {
-            get { return bloodType; }
-            set 
-            { 
-                bloodType = value;
-                OnPropertyChanged("BloodType");
-            }
-        }
-
-        public Allergen Allergen
-        {
-            get => allergen;
-            set
-            {
-                allergen = value;
-            }
-        }
-
-        public Patient Patient
-        {
-            get => patient;
-            set
-            {
-                patient = value;
-            }
-        }
-
-        public string HealthCardNumber
-        {
-            get => healthCardNumber;
-            set
-            {
-                healthCardNumber = value;
-                OnPropertyChanged("HealthCardNumber");
-            }
-        }
-
-        public string ParentName
-        {
-            get => parentName;
-            set
-            {
-                parentName = value;
-                OnPropertyChanged("ParentName");
-            }
-        }
-
-        public bool IsInsured
-        {
-            get => isInsured;
-            set
-            {
-                isInsured = value;
-                OnPropertyChanged("isInsured");
-            }
-        }
-
-        public string MedicalRecordID
-        {
-            get => medicalRecordID;
-            set
-            {
-                medicalRecordID = value;
-                OnPropertyChanged("MedicalRecordID");
-            }
-        }
+        public BloodType BloodType { get; set; }
+        public Allergen Allergen { get; set; }
+        public Patient Patient { get; set; }
+        public string HealthCardNumber { get; set; }
+        public string ParentName { get; set; }
+        public bool IsInsured { get; set; }
+        public string MedicalRecordID { get; set; }
 
         public List<Examination> Examination
         {
@@ -129,16 +68,6 @@ namespace Hospital
         {
             if (examination != null)
                 examination.Clear();
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
         }
 
         override

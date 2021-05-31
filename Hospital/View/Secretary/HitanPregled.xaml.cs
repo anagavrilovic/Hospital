@@ -18,7 +18,7 @@ using System.Windows.Shapes;
 
 namespace Hospital.View.Secretary
 {
-    public partial class HitanPregled : Page
+    public partial class HitanPregled : Page, INotifyPropertyChanged
     {
         private const double minDurationForAppointment = 0.5;
         private const double maxDurationForAppointment = 24;
@@ -31,7 +31,13 @@ namespace Hospital.View.Secretary
         public MedicalRecord SelectedPatient { get; set; }
         public ObservableCollection<MedicalRecord> Patients { get; set; }
         public ICollectionView PatientsCollection { get; set; }
-        public MedicalRecord NewGuestPatient { get; set; }
+
+        private MedicalRecord newGuestPatient;
+        public MedicalRecord NewGuestPatient
+        {
+            get { return newGuestPatient; }
+            set { newGuestPatient = value; OnPropertyChanged("NewGuestPatient"); }
+        }
 
         public MedicalRecordService MedicalRecordService { get; set; }
         public AppointmentService AppointmentService { get; set; }
@@ -152,6 +158,13 @@ namespace Hospital.View.Secretary
         private void PatientsFilterTextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(ListBoxPatients.ItemsSource).Refresh();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
         }
     }
 }

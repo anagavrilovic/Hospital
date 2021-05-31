@@ -5,106 +5,29 @@ using System.Text;
 
 namespace Hospital
 {
-   public class Appointment : INotifyPropertyChanged
+   public class Appointment
    {
         private double durationInHours = 0.5;
-        public double DurationInHours
-        {
-            get
-            {
-                return durationInHours;
-            }
-            set
-            {
-                durationInHours = value;
-                OnPropertyChanged("DurationInHours");
-            }
-        }
+        public double DurationInHours { get; set; }
 
         private DateTime dateTime;
-        public DateTime DateTime 
-        {
-            get
-            {
-                return dateTime;
-            }
-            set
-            {
-                dateTime = value;
-                OnPropertyChanged("DateTime");
-            } 
-        }
+        public DateTime DateTime { get; set; }
 
         public AppointmentType type;
-        public AppointmentType Type
-        {
-            get
-            {
-                return type;
-            }
-            set
-            {
-                type = value;
-                OnPropertyChanged("AppointmentType");
-            }
-        }
+        public AppointmentType Type { get; set; }
 
         private string iDpatient;
-        public string IDpatient 
-        {
-            get
-            {
-                return iDpatient;
-            }
-            set
-            {
-                iDpatient = value;
-                OnPropertyChanged("IDpatient");
-            } 
-        }
+        public string IDpatient { get; set; }
 
         private string iDDoctor;
-        public string IDDoctor 
-        {
-            get
-            {
-                return iDDoctor;
-            }
-            set
-            {
-                iDDoctor = value;
-                OnPropertyChanged("IDDoctor");
-            }
-        }
+        public string IDDoctor { get; set; }
 
         private string iDAppointment;
-        public string IDAppointment 
-        {
-            get
-            {
-                return iDAppointment;
-            }
-            set
-            {
-               iDAppointment = value;
-                OnPropertyChanged("IDAppointment");
-            } 
-        }
+        public string IDAppointment { get; set; }
 
-      
+
         private Room room = new Room();
-        public Room Room
-        {
-            get
-            {
-                return room;
-            }
-            set
-            {
-                this.room = value;
-                OnPropertyChanged("Room");
-            }
-        }
+        public Room Room { get; set; }
 
 
         [JsonIgnore]
@@ -189,14 +112,6 @@ namespace Hospital
 
                 return stringBuilder.ToString();
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
         }
     }
 }

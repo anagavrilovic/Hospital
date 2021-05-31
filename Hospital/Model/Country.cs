@@ -7,29 +7,9 @@ using System.Threading.Tasks;
 
 namespace Hospital.Model
 {
-    public class Country : INotifyPropertyChanged
+    public class Country
     {
         private string countryName;
-
-        public string CountryName
-        {
-            get { return countryName; }
-            set 
-            { 
-                countryName = value;
-                OnPropertyChanged("CountryName");
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
+        public string CountryName { get; set; }
     }
 }

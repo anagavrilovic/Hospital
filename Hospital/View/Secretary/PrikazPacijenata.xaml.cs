@@ -19,13 +19,19 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    public partial class PrikazPacijenata : Page
+    public partial class PrikazPacijenata : Page, INotifyPropertyChanged
     {
         public ObservableCollection<MedicalRecord> PatientsRecords { get; set; }
-        public MedicalRecord SelectedPatientsRecord { get; set; }
-        public MedicalRecordService MedicalRecordService { get; set; }
-
         public ICollectionView PatientCollection { get; set; }
+
+        private MedicalRecord selectedPatientsRecord;
+        public MedicalRecord SelectedPatientsRecord
+        {
+            get { return selectedPatientsRecord; }
+            set { selectedPatientsRecord = value; OnPropertyChanged("SelectedPatientsRecord"); }
+        }
+
+        public MedicalRecordService MedicalRecordService { get; set; }
 
         public PrikazPacijenata()
         {
@@ -148,6 +154,15 @@ namespace Hospital.View
         private void PatientsRecordsFilterTextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(PacijentiTable.ItemsSource).Refresh();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }
