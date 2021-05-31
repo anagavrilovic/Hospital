@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for SecretaryWindow.xaml
-    /// </summary>
     public partial class SecretaryWindow : Window
     {
         public SecretaryWindow()
@@ -86,7 +83,7 @@ namespace Hospital.View
 
         private void ButtonNaseBolniceClick(object sender, RoutedEventArgs e)
         {
-
+            Main.Navigate(new NaseBolnice());
         }
 
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

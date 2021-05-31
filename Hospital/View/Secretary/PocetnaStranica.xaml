@@ -22,8 +22,17 @@
 
         <StackPanel>
             <StackPanel Orientation="Vertical">
-                <TextBlock Text="DOBRO DOŠLI! " Style="{StaticResource TitleStyle}" FontSize="45" FontWeight="SemiBold" Margin="15,15,0,0"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="DOBRO DOŠLI! " Style="{StaticResource TitleStyle}" FontSize="45" FontWeight="SemiBold" Margin="15,15,0,0"/>
+                    <local:OptionBar Grid.Column="2" Height="30" Width="170" Margin="0,15,15,0" VerticalAlignment="Top" ></local:OptionBar>
+                </Grid>
                 <TextBlock Text="Sekretar" Style="{StaticResource TitleStyle}" Margin="15,-20,0,15" />
+                
             </StackPanel>
             <!--<Separator Margin="15,0"/>-->
         </StackPanel>

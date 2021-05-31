@@ -18,14 +18,24 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="PACIJENTI " Style="{StaticResource TitleStyle}"/>
-                <Image Source="../../Icon/Secretary/arrow.png" Width="10"  Margin="0,20,0,5"/>
-                <TextBlock Text=" Detalji o pacijentu" Style="{StaticResource TitleStyle}" Margin="0,20,0,5"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="PACIJENTI " Style="{StaticResource TitleStyle}"/>
+                    <Image Source="../../Icon/Secretary/arrow.png" Width="10"  Margin="0,20,0,5"/>
+                    <TextBlock Text=" Detalji o pacijentu" Style="{StaticResource TitleStyle}" Margin="0,20,0,5"/>
+                </StackPanel>
+                <!--<Separator Margin="15,0"/>-->
             </StackPanel>
-            <!--<Separator Margin="15,0"/>-->
-        </StackPanel>
+
+            <local:OptionBar Grid.Column="2" Height="30" Width="170" Margin="0,15,15,0" VerticalAlignment="Top" ></local:OptionBar>
+        </Grid>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,20,15,0">
             <TextBlock Text="Broj zdravstvenog kartona:" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Center"/>

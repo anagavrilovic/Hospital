@@ -30,13 +30,23 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="15,20,0,5">
-                <Image Source="../../Icon/Secretary/warning.png"/>
-                <TextBlock Text=" HITAN PREGLED" Style="{StaticResource TitleStyle}" Margin="0"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="15,20,0,5">
+                    <Image Source="../../Icon/Secretary/warning.png"/>
+                    <TextBlock Text=" HITAN PREGLED" Style="{StaticResource TitleStyle}" Margin="0"/>
+                </StackPanel>
+                <!--<Separator Margin="15,0"/>-->
             </StackPanel>
-            <!--<Separator Margin="15,0"/>-->
-        </StackPanel>
+
+            <local:OptionBar Grid.Column="2" Height="30" Width="170" Margin="0,15,15,0" VerticalAlignment="Top" ></local:OptionBar>
+        </Grid>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
