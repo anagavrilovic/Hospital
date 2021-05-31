@@ -17,14 +17,70 @@ namespace Hospital
         private Allergen allergen = new Allergen();
         private BloodType bloodType;
 
-        public MedicalRecord() {}
-        public BloodType BloodType { get; set; }
-        public Allergen Allergen { get; set; }
-        public Patient Patient { get; set; }
-        public string HealthCardNumber { get; set; }
-        public string ParentName { get; set; }
-        public bool IsInsured { get; set; }
-        public string MedicalRecordID { get; set; }
+        public MedicalRecord() { }
+
+        public BloodType BloodType
+        {
+            get { return bloodType; }
+            set
+            {
+                bloodType = value;
+            }
+        }
+
+        public Allergen Allergen
+        {
+            get => allergen;
+            set
+            {
+                allergen = value;
+            }
+        }
+
+        public Patient Patient
+        {
+            get => patient;
+            set
+            {
+                patient = value;
+            }
+        }
+
+        public string HealthCardNumber
+        {
+            get => healthCardNumber;
+            set
+            {
+                healthCardNumber = value;
+            }
+        }
+
+        public string ParentName
+        {
+            get => parentName;
+            set
+            {
+                parentName = value;
+            }
+        }
+
+        public bool IsInsured
+        {
+            get => isInsured;
+            set
+            {
+                isInsured = value;
+            }
+        }
+
+        public string MedicalRecordID
+        {
+            get => medicalRecordID;
+            set
+            {
+                medicalRecordID = value;
+            }
+        }
 
         public List<Examination> Examination
         {
@@ -69,7 +125,6 @@ namespace Hospital
             if (examination != null)
                 examination.Clear();
         }
-
         override
         public string ToString()
         {
