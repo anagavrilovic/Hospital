@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace Hospital.Services
 {
@@ -27,13 +26,11 @@ namespace Hospital.Services
         {
             if (Renovation.Room.Status == RoomStatus.RENOVIRA_SE)
             {
-               // MessageBox.Show("Izabrana sala se trenutno renovira!");     //TODO: throw exception
                 return false;
             }
 
             if (Renovation.StartDate >= Renovation.EndDate)
             {
-               // MessageBox.Show("Pogrešan izbor datuma renoviranja!");      //TODO: throw exception
                 return false;
             }
 
@@ -46,7 +43,6 @@ namespace Hospital.Services
             {
                 if (appointment.DateTime > Renovation.StartDate && appointment.DateTime < Renovation.EndDate + new TimeSpan(23, 59, 59))
                 {
-                   // MessageBox.Show("U izabranom periodu postoje zakazani termini pa nije moguće zakazati renoviranje!");   //TODO: throw exception
                     return true;
                 }
             }
