@@ -53,8 +53,6 @@ namespace Hospital.Model
             }
         }
 
-        // public string combindedString = string.Join(",", Times.ToString("hh:mm tt"));
-
         public void updateTimes(DateTime dt)
         {
             times = Times + dt.ToString("hh:mm tt") + " ";
@@ -68,5 +66,15 @@ namespace Hospital.Model
 
         [JsonIgnore]
         public MedicalRecord PatientsRecord { get; set; }
+
+        public PatientTherapyMedicineNotification(string iD, string iDpatient, bool read, DateTime fromDate, DateTime toDate,string description)
+        {
+            ID = iD;
+            IDpatient = iDpatient;
+            Read = read;
+            FromDate = fromDate;
+            ToDate = toDate;
+            Description = description;
+        }
     }
 }

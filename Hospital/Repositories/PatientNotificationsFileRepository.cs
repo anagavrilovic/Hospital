@@ -84,5 +84,24 @@ namespace Hospital.Repositories
             Save(patientTherapyMedicineNotification);
 
         }
+        public String GetNewID()
+        {
+            int newID = 0;
+            while (true)
+            {
+                if (!CheckIfIDExists(newID.ToString())) return newID.ToString();
+                newID++;
+            }
+        }
+
+        private Boolean CheckIfIDExists(String ID)
+        {
+            List<PatientTherapyMedicineNotification> patientTherapyMedicineNotifications = GetAll();
+            foreach (PatientTherapyMedicineNotification notification in patientTherapyMedicineNotifications)
+            {
+                if (notification.ID.Equals(ID)) return true;
+            }
+            return false;
+        }
     }
 }

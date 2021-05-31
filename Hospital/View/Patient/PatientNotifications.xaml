@@ -10,7 +10,7 @@
        KeyDown="myTestKey">
 
     <Grid Background="White">
-        <DataGrid x:Name="dataGridApp" ItemsSource="{Binding Lista}" IsReadOnly="True" 
+        <DataGrid x:Name="dataGridApp" ItemsSource="{Binding NotificationList}" IsReadOnly="True" 
                   SelectionMode="Single" AutoGenerateColumns="False" Margin="0,0,107,110">
             <DataGrid.Columns>
                 <DataGridTextColumn  Header="Naziv" Binding="{Binding Name}" Width="*"/>

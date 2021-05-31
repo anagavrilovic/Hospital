@@ -24,49 +24,12 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientMenu : Page
     {
-        private PatientTherapyNotificationService patientNotificationService = new PatientTherapyNotificationService();
+        private PatientTherapyNotificationService patientTherapyNotificationService = new PatientTherapyNotificationService();
         private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService();
         public PatientMenu()
         {
-            
             InitializeComponent();
-            Boolean newNotification = false;
-            if (patientNotesNotificationService.IsThereNewNotification()) newNotification = true;
-           
- 
-            ObservableCollection<PatientTherapyMedicineNotification> lista = new ObservableCollection<PatientTherapyMedicineNotification>(patientNotificationService.GetByPatientID());
-            if (lista != null)
-            {
-                foreach (PatientTherapyMedicineNotification ptm in lista)
-                {
-                    if ((ptm.FromDate.Date <= DateTime.Now.Date) && (ptm.ToDate.Date >= DateTime.Now.Date))
-                    {
-                        if (ptm.LastRead.Date <= DateTime.Now.Date)
-                        {
-                            string[] times = ptm.Times.Split(' ');
-                            for (int i = 0; i < times.Length - 1; i += 2)
-                            {
-
-                                TimeSpan ts = TimeSpan.Parse(times[i]);
-
-
-                                DateTime dt = DateTime.Now.Date + ts;
-                                if (times[i + 1].Equals("PM")) dt = dt.AddHours(12);
-                                if ((ptm.LastRead < dt) && (dt <= DateTime.Now))
-                                {
-                                    newNotification = true;
-                                    ptm.Read = false;
-                                    patientNotificationService.Update(ptm);
-                                }
-                            }
-                        }
-                    }
-                }
-                if (newNotification)
-                {
-                    MessageBox.Show("Imate novo obavestenje!");
-                }
-            }
+            if (patientNotesNotificationService.IsThereNewNotification() || patientTherapyNotificationService.IsThereNewNotification()) MessageBox.Show("Imate novo obavestenje!");
             NotificationButton.Focus();
         }
 
