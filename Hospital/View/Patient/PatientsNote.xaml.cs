@@ -37,14 +37,11 @@ namespace Hospital.View
             BackButton.Focus();
             SubjectLabel.Content = patientNotesNotification.Name;
             TextBlock.Text = patientNotesNotification.Content;
-            patientNotesNotification.LastRead = DateTime.Now;
-            patientNotesNotification.Read = true;
-            patientNotesNotificationService.Update(patientNotesNotification);
         }
 
         private void GoBack(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            this.NavigationService.Navigate(new PatientNotifications());
         }
     }
 }

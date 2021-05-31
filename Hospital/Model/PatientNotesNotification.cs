@@ -97,15 +97,16 @@ namespace Hospital.Model
 
         private void SetDurationBasedOnDays()
         {
-            duration = "";
-            if (!Days.Contains(true)) duration = "Samo jednom";
-            else if (Days[0] == true) duration = duration + "Pon ";
-            else if (Days[1] == true) duration = duration + "Uto ";
-            else if (Days[2] == true) duration = duration + "Sre ";
-            else if (Days[3] == true) duration = duration + "Čet ";
-            else if (Days[4] == true) duration = duration + "Pet ";
-            else if (Days[5] == true) duration = duration + "Sub ";
-            else if (Days[6] == true) duration = duration + "Ned ";
+            StringBuilder stringBuilder = new StringBuilder();
+            if (!Days.Contains(true)) stringBuilder.Append("Samo jednom");
+            if (Days[0] == true) stringBuilder.Append("Pon ");
+            if (Days[1] == true) stringBuilder.Append("Uto ");
+            if (Days[2] == true) stringBuilder.Append("Sre ");
+            if (Days[3] == true) stringBuilder.Append("Cet ");
+            if (Days[4] == true) stringBuilder.Append("Pet ");
+            if (Days[5] == true) stringBuilder.Append("Sub ");
+            if (Days[6] == true) stringBuilder.Append("Ned ");
+            duration = stringBuilder.ToString();
         }
     }
 }

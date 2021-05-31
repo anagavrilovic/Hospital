@@ -44,6 +44,7 @@ namespace Hospital.View
             TimeSpan ts = TimeSpan.Parse(ComboBoxHours.Text + ":" + ComboBoxMinutes.Text + ":00");
             PatientNotesNotification patientNotesNotification = new PatientNotesNotification(patientNote.Subject, patientNote.Text, patientNotesNotificationService.GetNewID(), MainWindow.IDnumber, days, ts);
             patientNotesNotificationService.Save(patientNotesNotification);
+            this.NavigationService.Navigate(new PatientNotifications());
         }
 
         private void SetDaysList()
@@ -59,27 +60,27 @@ namespace Hospital.View
             {
                 days[0] = true;
             }
-            else if ((bool)CheckBoxTuesday.IsChecked)
+            if ((bool)CheckBoxTuesday.IsChecked)
             {
                 days[1] = true;
             }
-            else if ((bool)CheckBoxWednesday.IsChecked)
+            if ((bool)CheckBoxWednesday.IsChecked)
             {
                 days[2] = true;
             }
-            else if ((bool)CheckBoxThursday.IsChecked)
+            if ((bool)CheckBoxThursday.IsChecked)
             {
                 days[3] = true;
             }
-            else if ((bool)CheckBoxFriday.IsChecked)
+            if ((bool)CheckBoxFriday.IsChecked)
             {
                 days[4] = true;
             }
-            else if ((bool)CheckBoxSaturday.IsChecked)
+            if ((bool)CheckBoxSaturday.IsChecked)
             {
                 days[5] = true;
             }
-            else if ((bool)CheckBoxSunday.IsChecked)
+            if ((bool)CheckBoxSunday.IsChecked)
             {
                 days[6] = true;
             }

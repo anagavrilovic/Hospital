@@ -46,10 +46,5 @@ namespace Hospital.View
             }
         }
 
-        public void Refresh()
-        {
-            //dataGridApp.ItemsSource = null;
-           // dataGridApp.ItemsSource = Lista;
-        }
     }
 }

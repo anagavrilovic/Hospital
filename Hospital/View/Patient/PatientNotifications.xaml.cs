@@ -53,26 +53,40 @@ namespace Hospital.View
             {
                 if (dataGridApp.SelectedItem.GetType() == typeof(PatientTherapyMedicineNotification))
                 {
-                    PatientTherapyMedicineNotification selectedItem = (PatientTherapyMedicineNotification)dataGridApp.SelectedItem;
-                    selectedItem.LastRead = DateTime.Now;
-                    selectedItem.Read = true;
-                    PatientTherapyNotificationService patientNotificationsService = new PatientTherapyNotificationService();
-                    patientNotificationsService.Update(selectedItem);
-                    PatientTherapy patientTherapy = new PatientTherapy(selectedItem);
-                    this.NavigationService.Navigate(patientTherapy);
+
+                    UpdateTherapyNotification();
                 }
                 else
                 {
-                    PatientsNote patientsNote = new PatientsNote((PatientNotesNotification)dataGridApp.SelectedItem);
-                    this.NavigationService.Navigate(patientsNote);
+                    UpdateNoteNotification();
                 }
 
             }
 
             if (e.Key == Key.Escape)
             {
-                this.NavigationService.GoBack();
+                this.NavigationService.Navigate(new PatientMenu());
             }
+        }
+
+        private void UpdateTherapyNotification()
+        {
+            PatientTherapyMedicineNotification selectedItem = (PatientTherapyMedicineNotification)dataGridApp.SelectedItem;
+            selectedItem.LastRead = DateTime.Now;
+            selectedItem.Read = true;
+            patientTherapyNotificationService.Update(selectedItem);
+            PatientTherapy patientTherapy = new PatientTherapy(selectedItem);
+            this.NavigationService.Navigate(patientTherapy);
+        }
+
+        private void UpdateNoteNotification()
+        {
+            PatientNotesNotification selectedItem = (PatientNotesNotification)dataGridApp.SelectedItem;
+            selectedItem.LastRead = DateTime.Now;
+            selectedItem.Read = true;
+            patientNotesNotificationService.Update(selectedItem);
+            PatientsNote patientsNote = new PatientsNote((PatientNotesNotification)dataGridApp.SelectedItem);
+            this.NavigationService.Navigate(patientsNote);
         }
     }
 }

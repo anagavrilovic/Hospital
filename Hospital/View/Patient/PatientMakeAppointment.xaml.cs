@@ -89,7 +89,6 @@ namespace Hospital.View
         private void NavigateBack()
         {
             PatientAppointments patientAppointments = new PatientAppointments();
-            patientAppointments.Refresh();
             this.NavigationService.Navigate(patientAppointments);
         }
 
