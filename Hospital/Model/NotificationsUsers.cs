@@ -33,10 +33,7 @@ namespace Hospital.Model
             set { read = value; }
         }
 
-        public NotificationsUsers()
-        {
-
-        }
+        public NotificationsUsers() {} 
 
         public NotificationsUsers(string notificationID, string username)
         {

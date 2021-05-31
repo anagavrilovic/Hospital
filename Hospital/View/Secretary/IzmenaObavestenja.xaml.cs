@@ -19,9 +19,15 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    public partial class IzmenaObavestenja : Page
+    public partial class IzmenaObavestenja : Page, INotifyPropertyChanged
     {
-        public Notification Notification { get; set; }
+        private Notification notification;
+        public Notification Notification
+        {
+            get { return notification; }
+            set { notification = value; OnPropertyChanged("Notification"); }
+        }
+
         public NotificationRecipientsDTO Recipients { get; set; }
 
         public ObservableCollection<MedicalRecord> AllMedicalRecords { get; set; }
@@ -153,6 +159,16 @@ namespace Hospital.View
                 Recipients.IsEveryPatientRecipient = false;
             else
                 Recipients.IsEveryPatientRecipient = true;
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

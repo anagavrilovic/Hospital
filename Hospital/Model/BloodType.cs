@@ -9,13 +9,13 @@ namespace Hospital.Model
 {
     public enum BloodType
     {
-        [Display(Name = "A+")] Aplus,
-        [Display(Name = "A-")] Aneg,
-        [Display(Name = "B+")] Bplus,
-        [Display(Name = "B-")] Bneg,
-        [Display(Name = "AB+")] ABplus,
-        [Display(Name = "AB-")] ABneg,
-        [Display(Name = "O+")] Oplus,
-        [Display(Name = "O-")] Oneg
+        Aplus,
+        Aneg,
+        Bplus,
+        Bneg,
+        ABplus,
+        ABneg,
+        Oplus,
+        Oneg
     }
 }

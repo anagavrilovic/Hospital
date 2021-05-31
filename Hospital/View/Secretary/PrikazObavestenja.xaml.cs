@@ -1,6 +1,7 @@
 ﻿using Hospital.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,12 +16,14 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    /// <summary>
-    /// Interaction logic for PrikazObavestenja.xaml
-    /// </summary>
-    public partial class PrikazObavestenja : Window
+    public partial class PrikazObavestenja : Window, INotifyPropertyChanged
     {
-        public Notification Notification { get; set; }
+        private Notification notification;
+        public Notification Notification
+        {
+            get { return notification; }
+            set { notification = value; OnPropertyChanged("Notification"); }
+        }
 
         public PrikazObavestenja(Notification selectedNotification)
         {
@@ -32,6 +35,16 @@ namespace Hospital.View
         private void BtnNazadClick(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

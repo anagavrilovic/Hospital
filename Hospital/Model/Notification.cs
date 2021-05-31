@@ -7,60 +7,14 @@ using System.Threading.Tasks;
 
 namespace Hospital.Model
 {
-    public class Notification : INotifyPropertyChanged
+    public class Notification
     {
-        private string id;
+        public string Id { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
+        public DateTime Date { get; set; }
 
-        public string Id
-        {
-            get { return id; }
-            set 
-            { 
-                id = value;
-                OnPropertyChanged("Id");
-            }
-        }
-
-        private string title;
-
-        public string Title
-        {
-            get { return title; }
-            set 
-            { 
-                title = value;
-                OnPropertyChanged("Title");
-            }
-        }
-
-        private string content;
-
-        public string Content
-        {
-            get { return content; }
-            set 
-            { 
-                content = value;
-                OnPropertyChanged("Content");
-            }
-        }
-
-        private DateTime date;
-
-        public DateTime Date
-        {
-            get { return date; }
-            set 
-            { 
-                date = value;
-                OnPropertyChanged("Date");
-            }
-        }
-
-        public Notification()
-        {
-
-        }
+        public Notification() {}
 
         public Notification(string title, string content)
         {
@@ -72,16 +26,5 @@ namespace Hospital.Model
 
             this.Id = this.GetHashCode().ToString();
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
     }
 }

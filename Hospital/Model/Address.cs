@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Model
 {
-    public class Address : INotifyPropertyChanged
+    public class Address
     {
         private string street;
 
@@ -17,7 +17,6 @@ namespace Hospital.Model
             set 
             { 
                 street = value;
-                OnPropertyChanged("Street");
             }
         }
 
@@ -30,7 +29,6 @@ namespace Hospital.Model
             set 
             { 
                 streetNumber = value;
-                OnPropertyChanged("StreetNumber");
             }
         }
 
@@ -43,20 +41,7 @@ namespace Hospital.Model
             set
             {
                 city = value;
-                OnPropertyChanged("City");
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
-
     }
 }

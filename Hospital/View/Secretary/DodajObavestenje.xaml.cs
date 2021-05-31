@@ -21,7 +21,13 @@ namespace Hospital.View
 {
     public partial class DodajObavestenje : Page
     {
-        public Notification NewNotification { get; set; }
+        private Notification newNotification;
+        public Notification NewNotification
+        {
+            get { return newNotification; }
+            set { newNotification = value; OnPropertyChanged("Notification"); }
+        }
+
         public NotificationRecipientsDTO Recipients { get; set; }
 
         public ObservableCollection<MedicalRecord> AllMedicalRecords { get; set; }
@@ -115,6 +121,16 @@ namespace Hospital.View
         private void PacijentiFilterTextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(SviPacijentiListBox.ItemsSource).Refresh();
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }
