@@ -123,7 +123,7 @@ namespace Hospital.Services
             roomRepository.EditRoom(room);
             FinishSeparatingRooms();
             FinishMergingRooms();
-            roomRepository.Delete(Renovation.Id);
+            renovationRepository.Delete(Renovation.Id);
         }
 
         private void FinishSeparatingRooms()
