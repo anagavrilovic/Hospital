@@ -205,6 +205,17 @@ namespace Hospital.Repositories
 
         }
 
+        public List<Appointment> GetAppointmentsFromRoom(string roomID)
+        {
+            List<Appointment> appointmentsFromRoom = new List<Appointment>();
+
+            foreach (Appointment app in GetAll())
+                if (app.Room.Id.Equals(roomID))
+                    appointmentsFromRoom.Add(app);
+            
+            return appointmentsFromRoom;
+        }
+
         public void Update(Appointment appointment)
         {
             List<Appointment> appointments = GetAll();

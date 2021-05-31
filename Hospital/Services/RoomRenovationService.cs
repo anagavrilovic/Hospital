@@ -40,11 +40,11 @@ namespace Hospital.Services
             return true;
         }
 
-        private bool IsAnyScheduledAppointmentInRoomDuringRenovation()
+        private bool IsAnyScheduledAppointmentInRoomDuringRenovation(string roomId)
         {
-            foreach (Appointment appointment in appointmentRepository.GetAll())
+            foreach (Appointment appointment in appointmentRepository.GetAppointmentsFromRoom(roomId))
             {
-                if (appointment.DateTime > Renovation.StartDate && appointment.DateTime < Renovation.EndDate + new TimeSpan(23, 59, 59) && appointment.Room.Id.Equals(Renovation.Room.Id))
+                if (appointment.DateTime > Renovation.StartDate && appointment.DateTime < Renovation.EndDate + new TimeSpan(23, 59, 59))
                 {
                    // MessageBox.Show("U izabranom periodu postoje zakazani termini pa nije moguće zakazati renoviranje!");   //TODO: throw exception
                     return true;
@@ -53,13 +53,25 @@ namespace Hospital.Services
             return false;
         }
 
+        private bool IsAnyScheduledAppointmentInRoomsForMergingDuringRenovation()
+        {
+            foreach (Room room in Renovation.RoomsDestroyedDuringRenovation)
+                if (IsAnyScheduledAppointmentInRoomDuringRenovation(room.Id))
+                    return true;
+            
+            return false;
+        }
+
         public void ProccessRenovationRequest()
         {
             if (!AreRenovationAttributesValid())
                 return;
 
-            if (IsAnyScheduledAppointmentInRoomDuringRenovation())
+            if (IsAnyScheduledAppointmentInRoomDuringRenovation(Renovation.Room.Id))
                 return;
+
+            if (IsAnyScheduledAppointmentInRoomsForMergingDuringRenovation())
+                return; 
 
             SaveScheduledRenovation();
         }
