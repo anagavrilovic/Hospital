@@ -167,7 +167,7 @@
     <Compile Include="Repositories\Interfaces\IPatientCommentsRepository.cs" />
     <Compile Include="Repositories\Interfaces\IPatientNotesNotificationRepository.cs" />
     <Compile Include="Repositories\Interfaces\IPatientNotesRepository.cs" />
-    <Compile Include="Repositories\Interfaces\IPatientNotificationsRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IPatientTherapyNotificationRepository.cs" />
     <Compile Include="Repositories\Interfaces\IPatientSettingsRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRegistratedUsersRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRoomRenovationRepository.cs" />
@@ -182,7 +182,7 @@
     <Compile Include="Repositories\PatientCommentsFileRepository.cs" />
     <Compile Include="Repositories\PatientNotesFileRepository.cs" />
     <Compile Include="Repositories\PatientNotesNotificationFileRepository.cs" />
-    <Compile Include="Repositories\PatientNotificationsFileRepository.cs" />
+    <Compile Include="Repositories\PatientTherapyNotificationFileRepository.cs" />
     <Compile Include="Repositories\PatientSettingsFileRepository.cs" />
     <Compile Include="Repositories\RegistratedUserFileRepository.cs" />
     <Compile Include="Repositories\RoomFileRepository.cs" />

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Repositories.Interfaces
 {
-    interface IPatientNotificationsRepository : IGenericRepository<PatientTherapyMedicineNotification>
+    interface IPatientTherapyNotificationRepository : IGenericRepository<PatientTherapyMedicineNotification>
     {
         List<PatientTherapyMedicineNotification> GetByPatientID();
         void Update(PatientTherapyMedicineNotification patientTherapyMedicineNotification);

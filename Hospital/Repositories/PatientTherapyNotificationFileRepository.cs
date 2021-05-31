@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace Hospital.Repositories
 {
-    public class PatientNotificationsFileRepository : IPatientNotificationsRepository
+    public class PatientTherapyNotificationFileRepository : IPatientTherapyNotificationRepository
     {
         private string fileName = "patientNotificationsStorage.json";
 
-        public PatientNotificationsFileRepository() { }
+        public PatientTherapyNotificationFileRepository() { }
 
         public void Delete(string id)
         {

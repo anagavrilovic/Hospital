@@ -11,12 +11,12 @@ namespace Hospital.Services
 {
     public class PatientTherapyNotificationService
     {
-        IPatientNotificationsRepository patientTherapyNotificationsRepository;
+        IPatientTherapyNotificationRepository patientTherapyNotificationsRepository;
         IMedicineRepository medicineRepository;
 
         public PatientTherapyNotificationService()
         {
-            patientTherapyNotificationsRepository = new PatientNotificationsFileRepository();
+            patientTherapyNotificationsRepository = new PatientTherapyNotificationFileRepository();
             medicineRepository = new MedicineFileRepository();
         }
         public List<PatientTherapyMedicineNotification> GetByPatientID()
