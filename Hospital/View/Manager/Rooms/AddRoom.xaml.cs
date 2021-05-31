@@ -1,24 +1,20 @@
 ﻿using Hospital.Model;
 using Hospital.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    public partial class AddRoom : Page
-    { 
-        public Room NewRoom { get; set; }
+    public partial class AddRoom : Page, INotifyPropertyChanged
+    {
+        private Room _newRoom;
+        public Room NewRoom
+        {
+            get { return _newRoom; }
+            set { _newRoom = value; OnPropertyChanged("NewRoom"); }
+        }
 
         public AddRoom()
         {
@@ -57,6 +53,15 @@ namespace Hospital.View
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RoomsWindow());
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

@@ -1,99 +1,24 @@
-
 using Hospital.Model;
-using Hospital.Services;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 
 namespace Hospital
 {
-    public class Room : INotifyPropertyChanged
+    public class Room 
     {
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-       
-        private string _id;
-        private string _name;
-        private int _floor;
-        private RoomStatus _status;
-        private RoomType _type;
-        private int freeBeds;
-
         public Room()
         {
             SerializeInfo = true;
         }
 
-        public string Id 
-        {
-            get => _id;
-            set
-            {
-               _id = value;
-               OnPropertyChanged("Id");
-            }
-        }
+        public string Id { get; set; }
+        public String Name { get; set; }
 
+        public int Floor { get; set; }
+        public RoomStatus Status { get; set; }
 
-        public String Name
-        {
-            get => _name;
-            set
-            {
-               _name = value;
-               OnPropertyChanged("Name");
-            }
-        }
- 
-
-        public int Floor
-        {
-            get => _floor;
-            set
-            {
-                _floor = value;
-                OnPropertyChanged("Floor");
-            }
-        }
-
-        public RoomStatus Status
-        {
-            get => _status;
-            set
-            {
-                _status = value;
-                OnPropertyChanged("Status");
-            }
-        }
-
-        public RoomType Type
-        {
-            get => _type;
-            set
-            {
-               _type = value;
-               OnPropertyChanged("Type");
-            }
-        }
-        public int FreeBeds
-        {
-            get => freeBeds;
-            set
-            {
-                freeBeds = value;
-                OnPropertyChanged("freeBeds");
-            }
-        }
+        public RoomType Type { get; set; }
+        public int FreeBeds { get; set; }
 
         public bool ShouldSerializeName()
         {
@@ -112,14 +37,12 @@ namespace Hospital
 
         public bool ShouldSerializeType()
         {
-            return this.SerializeInfo;
-          
+            return this.SerializeInfo;       
         }
 
         public bool ShouldSerializeFreeBeds()
         {
             return this.SerializeInfo;
-
         }
 
         [JsonIgnore]

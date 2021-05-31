@@ -1,26 +1,20 @@
 ﻿using Hospital.Model;
 using Hospital.Services;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    public partial class EditRoom : Page
+    public partial class EditRoom : Page, INotifyPropertyChanged
     {
-        public Room EditedRoom { get; set; }
+        private Room _editedRoom;
+        public Room EditedRoom
+        {
+            get { return _editedRoom; }
+            set { _editedRoom = value; OnPropertyChanged("EditedRoom"); }
+        }
 
         public EditRoom(Room room)
         {
@@ -68,6 +62,15 @@ namespace Hospital.View
         private void BackButtonClick (object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RoomsWindow());
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

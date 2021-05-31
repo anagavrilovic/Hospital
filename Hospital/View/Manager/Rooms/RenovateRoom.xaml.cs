@@ -37,7 +37,12 @@ namespace Hospital.View
         }
 
         private RoomService _roomService;
-        public RoomRenovation RoomRenovation { get; set; }
+        private RoomRenovation _roomRenovation;
+        public RoomRenovation RoomRenovation
+        {
+            get { return _roomRenovation; }
+            set { _roomRenovation = value; OnPropertyChanged("RoomRenovation"); }
+        }
 
         public RenovateRoom()
         {
