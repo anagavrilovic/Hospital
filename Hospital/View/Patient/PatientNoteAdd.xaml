@@ -6,15 +6,16 @@
       xmlns:local="clr-namespace:Hospital.View"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PatientNoteAdd">
+      Title="PatientNoteAdd"
+      KeyDown="myTestKey">
 
     <Grid Background="White">
         <Label Name="SubjectLabel" Content="Naslov: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="31,33,0,0"/>
         <TextBox Name="SubjectTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="435" Margin="214,37,0,0"/>
         <Label Content="Sadržaj: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="31,100,0,0"/>
         <TextBox Name="ContentTextBox" HorizontalAlignment="Left" Height="199" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="435" Margin="214,112,0,0"/>
-        <Button Content="Nazad" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="374,386,0,0" Click="GoBack"/>
-        <Button Name="SaveButton" Content="Sačuvaj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="374,340,0,0" Click="Save"/>
+        <Button Content="Nazad" HorizontalAlignment="Left" VerticalAlignment="Top" Width="173" Margin="334,371,0,0" Click="GoBack" Height="30"/>
+        <Button Name="SaveButton" Content="Sačuvaj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="173" Margin="334,326,0,0" Click="Save" Height="30"/>
 
     </Grid>
 </Page>

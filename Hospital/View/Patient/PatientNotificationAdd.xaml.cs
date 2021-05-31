@@ -30,6 +30,7 @@ namespace Hospital.View
             InitializeComponent();
             this.patientNote = patientNote;
             SetDaysList();
+            CheckBoxMonday.Focus();
         }
 
         private void GoBack(object sender, RoutedEventArgs e)
@@ -41,13 +42,13 @@ namespace Hospital.View
         {
             FindPickedDays();
             TimeSpan ts = TimeSpan.Parse(ComboBoxHours.Text + ":" + ComboBoxMinutes.Text + ":00");
-            PatientNotesNotification patientNotesNotification = new PatientNotesNotification(patientNote.Subject,patientNote.Text,patientNotesNotificationService.GetNewID(),MainWindow.IDnumber,days,ts);
+            PatientNotesNotification patientNotesNotification = new PatientNotesNotification(patientNote.Subject, patientNote.Text, patientNotesNotificationService.GetNewID(), MainWindow.IDnumber, days, ts);
             patientNotesNotificationService.Save(patientNotesNotification);
         }
 
         private void SetDaysList()
         {
-            for(int i = 0; i < 7; i++)
+            for (int i = 0; i < 7; i++)
             {
                 days[i] = false;
             }
@@ -81,6 +82,22 @@ namespace Hospital.View
             else if ((bool)CheckBoxSunday.IsChecked)
             {
                 days[6] = true;
+            }
+        }
+
+        private void KeyPressed(object sender, KeyEventArgs e)
+        {
+            if ((e.Key == Key.Space) && ComboBoxHours.IsFocused)
+            {
+                Keyboard.ClearFocus();
+                ComboBoxMinutes.Focus();
+            }
+
+
+            else if ((e.Key == Key.Space) && ComboBoxMinutes.IsFocused)
+            {
+                Keyboard.ClearFocus();
+                AddButton.Focus();
             }
         }
     }

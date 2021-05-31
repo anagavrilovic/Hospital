@@ -10,9 +10,9 @@
       KeyDown="KeyPressed">
 
     <Grid Background="White">
-        <Button Name="BackButton" Content="Nazad" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="338,373,0,0" Click="Nazad"/>
+        <Button Name="BackButton" Content="Nazad" HorizontalAlignment="Left" VerticalAlignment="Top" Width="185"  Margin="317,365,0,0" Height="38" Click="Nazad"/>
         <Label Content="Preferiran lekar:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,101,0,0"/>
-        <Button Name="SaveButton" Content="Sačuvaj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="338,315,0,0" Command="{Binding Path=SaveSettingsCommand}"/>
+        <Button Name="SaveButton" Content="Sačuvaj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="185" Margin="317,296,0,0" Command="{Binding Path=SaveSettingsCommand}" Height="38"/>
         <ComboBox Name="ComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="247" Margin="437,105,0,0" ItemsSource="{Binding DoctorsNamesSurnames}" SelectedValue="{Binding SelectedDoctor, Mode=TwoWay}"/>
     </Grid>
 </Page>

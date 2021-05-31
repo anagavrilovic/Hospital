@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Hospital.View"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PatientNotificationAdd">
+      Title="PatientNotificationAdd"
+      KeyDown="KeyPressed">
 
     <Grid Background="White">
         <Label Content="Vreme:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="149,238,0,0"/>
@@ -18,7 +19,7 @@
         <CheckBox Name="CheckBoxFriday" Content="Petak" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="462,131,0,0"/>
         <CheckBox Name="CheckBoxSaturday" Content="Subota" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="462,151,0,0"/>
         <CheckBox Name="CheckBoxSunday" Content="Nedelja" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="462,171,0,0"/>
-        <ComboBox Name="ComboBoxHours" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="374,242,0,0">
+        <ComboBox Name="ComboBoxHours" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Margin="462,242,0,0">
             <ComboBoxItem Content="00"></ComboBoxItem>
             <ComboBoxItem Content="01"></ComboBoxItem>
             <ComboBoxItem Content="02"></ComboBoxItem>
@@ -32,16 +33,82 @@
             <ComboBoxItem Content="10"></ComboBoxItem>
             <ComboBoxItem Content="11"></ComboBoxItem>
             <ComboBoxItem Content="12"></ComboBoxItem>
+            <ComboBoxItem Content="13"></ComboBoxItem>
+            <ComboBoxItem Content="14"></ComboBoxItem>
+            <ComboBoxItem Content="15"></ComboBoxItem>
+            <ComboBoxItem Content="16"></ComboBoxItem>
+            <ComboBoxItem Content="17"></ComboBoxItem>
+            <ComboBoxItem Content="18"></ComboBoxItem>
+            <ComboBoxItem Content="19"></ComboBoxItem>
+            <ComboBoxItem Content="20"></ComboBoxItem>
+            <ComboBoxItem Content="21"></ComboBoxItem>
+            <ComboBoxItem Content="22"></ComboBoxItem>
+            <ComboBoxItem Content="23"></ComboBoxItem>
         </ComboBox>
-        <ComboBox Name="ComboBoxMinutes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="517,242,0,0">
+        <ComboBox Name="ComboBoxMinutes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Margin="527,242,0,0">
             <ComboBoxItem Content="00"></ComboBoxItem>
             <ComboBoxItem Content="01"></ComboBoxItem>
             <ComboBoxItem Content="02"></ComboBoxItem>
             <ComboBoxItem Content="03"></ComboBoxItem>
             <ComboBoxItem Content="04"></ComboBoxItem>
+            <ComboBoxItem Content="05"></ComboBoxItem>
+            <ComboBoxItem Content="06"></ComboBoxItem>
+            <ComboBoxItem Content="07"></ComboBoxItem>
+            <ComboBoxItem Content="08"></ComboBoxItem>
+            <ComboBoxItem Content="09"></ComboBoxItem>
+            <ComboBoxItem Content="10"></ComboBoxItem>
+            <ComboBoxItem Content="11"></ComboBoxItem>
+            <ComboBoxItem Content="12"></ComboBoxItem>
+            <ComboBoxItem Content="13"></ComboBoxItem>
+            <ComboBoxItem Content="14"></ComboBoxItem>
+            <ComboBoxItem Content="15"></ComboBoxItem>
+            <ComboBoxItem Content="16"></ComboBoxItem>
+            <ComboBoxItem Content="17"></ComboBoxItem>
+            <ComboBoxItem Content="18"></ComboBoxItem>
+            <ComboBoxItem Content="19"></ComboBoxItem>
+            <ComboBoxItem Content="20"></ComboBoxItem>
+            <ComboBoxItem Content="21"></ComboBoxItem>
+            <ComboBoxItem Content="22"></ComboBoxItem>
+            <ComboBoxItem Content="23"></ComboBoxItem>
+            <ComboBoxItem Content="24"></ComboBoxItem>
+            <ComboBoxItem Content="25"></ComboBoxItem>
+            <ComboBoxItem Content="26"></ComboBoxItem>
+            <ComboBoxItem Content="27"></ComboBoxItem>
+            <ComboBoxItem Content="28"></ComboBoxItem>
+            <ComboBoxItem Content="29"></ComboBoxItem>
+            <ComboBoxItem Content="30"></ComboBoxItem>
+            <ComboBoxItem Content="31"></ComboBoxItem>
+            <ComboBoxItem Content="32"></ComboBoxItem>
+            <ComboBoxItem Content="33"></ComboBoxItem>
+            <ComboBoxItem Content="34"></ComboBoxItem>
+            <ComboBoxItem Content="35"></ComboBoxItem>
+            <ComboBoxItem Content="36"></ComboBoxItem>
+            <ComboBoxItem Content="37"></ComboBoxItem>
+            <ComboBoxItem Content="38"></ComboBoxItem>
+            <ComboBoxItem Content="39"></ComboBoxItem>
+            <ComboBoxItem Content="40"></ComboBoxItem>
+            <ComboBoxItem Content="41"></ComboBoxItem>
+            <ComboBoxItem Content="42"></ComboBoxItem>
+            <ComboBoxItem Content="43"></ComboBoxItem>
+            <ComboBoxItem Content="44"></ComboBoxItem>
+            <ComboBoxItem Content="45"></ComboBoxItem>
+            <ComboBoxItem Content="46"></ComboBoxItem>
+            <ComboBoxItem Content="47"></ComboBoxItem>
+            <ComboBoxItem Content="48"></ComboBoxItem>
+            <ComboBoxItem Content="49"></ComboBoxItem>
+            <ComboBoxItem Content="50"></ComboBoxItem>
+            <ComboBoxItem Content="51"></ComboBoxItem>
+            <ComboBoxItem Content="52"></ComboBoxItem>
+            <ComboBoxItem Content="53"></ComboBoxItem>
+            <ComboBoxItem Content="54"></ComboBoxItem>
+            <ComboBoxItem Content="55"></ComboBoxItem>
+            <ComboBoxItem Content="56"></ComboBoxItem>
+            <ComboBoxItem Content="57"></ComboBoxItem>
+            <ComboBoxItem Content="58"></ComboBoxItem>
+            <ComboBoxItem Content="59"></ComboBoxItem>
         </ComboBox>
         <Button Content="Nazad" HorizontalAlignment="Left" VerticalAlignment="Top" Width="123" Margin="313,377,0,0" Height="32" Click="GoBack"/>
-        <Button Content="Dodaj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="123" Margin="313,320,0,0" Height="32" Click="AddNotification"/>
+        <Button Name="AddButton" Content="Dodaj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="123" Margin="313,320,0,0" Height="32" Click="AddNotification"/>
 
 
 

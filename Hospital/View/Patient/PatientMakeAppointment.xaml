@@ -11,7 +11,7 @@
 
     <Grid Background="White">
         <DataGrid x:Name="dataGridApp" ItemsSource="{Binding WeeklyTerms}" IsReadOnly="True" 
-                  SelectionMode="Single" AutoGenerateColumns="False" Margin="0,45,0,79" SelectionUnit="Cell" Background="White">
+                  SelectionMode="Single" AutoGenerateColumns="False" Margin="0,45,0,0" SelectionUnit="Cell" Background="White" Height="326" VerticalAlignment="Top">
             <DataGrid.Columns>
                 <DataGridTextColumn  Header="Vreme" Binding="{Binding Term}" Width="*"/>
                 <DataGridTextColumn  Header="Ponedeljak" Binding="{Binding Doctors[0]}" Width="*">
@@ -101,9 +101,9 @@
             </DataGrid.Columns>
         </DataGrid>
         <Label Name="label" Content="" HorizontalAlignment="Left" Height="29" Margin="278,10,0,0" VerticalAlignment="Top" Width="251"/>
-        <Image Source="/Images/esc.png" Margin="-21,371,392,35"/>
-        <Label Content="Pritisnite za povratak nazad" HorizontalAlignment="Left" Height="39" Margin="225,376,0,0" VerticalAlignment="Top" Width="158"/>
-        <Image Source="/Images/space-key.png" Margin="408,376,207,38"/>
-        <Label Content="Pritisnite da zakažete pregled" HorizontalAlignment="Left" Height="27" Margin="538,376,0,0" VerticalAlignment="Top" Width="172"/>
+        <Image Source="/Images/esc.png"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Margin="109,376,0,0" Width="39"/>
+        <Label Content="Pritisnite za povratak nazad" HorizontalAlignment="Left" Height="39" Margin="203,376,0,0" VerticalAlignment="Top" Width="158"/>
+        <Image Source="/Images/space-key.png" Margin="408,376,207,0" Height="27" VerticalAlignment="Top"/>
+        <Label Content="Pritisnite da zakažete pregled" HorizontalAlignment="Left" Height="27" Margin="593,376,0,0" VerticalAlignment="Top" Width="172"/>
     </Grid>
 </Page>

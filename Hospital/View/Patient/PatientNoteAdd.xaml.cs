@@ -22,11 +22,11 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientNoteAdd : Page
     {
-        private PatientNotesService patientNotesService=new PatientNotesService();
+        private PatientNotesService patientNotesService = new PatientNotesService();
         public PatientNoteAdd()
         {
             InitializeComponent();
-            SaveButton.Focus();
+            SubjectTextBox.Focus();
         }
 
         private void GoBack(object sender, RoutedEventArgs e)
@@ -37,9 +37,24 @@ namespace Hospital.View
         private void Save(object sender, RoutedEventArgs e)
         {
             String newID = patientNotesService.GetNewID();
-            PatientNote patientNote = new PatientNote(newID,SubjectTextBox.Text,ContentTextBox.Text,MainWindow.IDnumber);
+            PatientNote patientNote = new PatientNote(newID, SubjectTextBox.Text, ContentTextBox.Text, MainWindow.IDnumber);
             patientNotesService.Save(patientNote);
             this.NavigationService.Navigate(new PatientNotes());
+        }
+
+        private void myTestKey(object sender, KeyEventArgs e)
+        {
+            if ((e.Key == Key.Escape) && SubjectTextBox.IsFocused)
+            {
+                Keyboard.ClearFocus();
+                ContentTextBox.Focus();
+            }
+
+            else if ((e.Key == Key.Escape) && ContentTextBox.IsFocused)
+            {
+                Keyboard.ClearFocus();
+                SaveButton.Focus();
+            }
         }
     }
 }
