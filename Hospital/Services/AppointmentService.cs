@@ -317,7 +317,7 @@ namespace Hospital.Services
             }
         }
 
-        private bool CheckIfOverlapWithAnyAppointment(DateTime startTime, DateTime endTime, string doctorID, ObservableCollection<MoveAppointment> option)
+        private bool CheckIfOverlapWithAnyAppointment(DateTime startTime, DateTime endTime, string doctorID, List<MoveAppointment> option)
         {
             List<Appointment> appointments = GetAll();
 
@@ -351,7 +351,7 @@ namespace Hospital.Services
         private void SortOption(OptionForRescheduling option)
         {
             List<MoveAppointment> sortedList = option.Option.OrderBy(o => o.Appointment.DateTime).ToList();
-            option.Option = new ObservableCollection<MoveAppointment>(sortedList);
+            option.Option = sortedList;
         }
 
         private void SetTimeForNewUrgentAppointmentInOption(OptionForRescheduling option, DateTime dateTime)

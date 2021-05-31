@@ -9,12 +9,12 @@ namespace Hospital
 {
     public class OptionForRescheduling
     {
-        public ObservableCollection<MoveAppointment> Option { get; set; }
+        public List<MoveAppointment> Option { get; set; }
         public DateTime NewUrgentAppointmentTime { get; set; }
 
         public OptionForRescheduling()
         {
-            Option = new ObservableCollection<MoveAppointment>();
+            Option = new List<MoveAppointment>();
         }
 
         public bool IsEqual(OptionForRescheduling optionForRescheduling)
