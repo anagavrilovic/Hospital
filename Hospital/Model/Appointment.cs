@@ -5,29 +5,99 @@ using System.Text;
 
 namespace Hospital
 {
-   public class Appointment
-   {
+    public class Appointment
+    {
         private double durationInHours = 0.5;
-        public double DurationInHours { get; set; }
+        public double DurationInHours
+        {
+            get
+            {
+                return durationInHours;
+            }
+            set
+            {
+                durationInHours = value;
+            }
+        }
 
         private DateTime dateTime;
-        public DateTime DateTime { get; set; }
+        public DateTime DateTime
+        {
+            get
+            {
+                return dateTime;
+            }
+            set
+            {
+                dateTime = value;
+            }
+        }
 
         public AppointmentType type;
-        public AppointmentType Type { get; set; }
+        public AppointmentType Type
+        {
+            get
+            {
+                return type;
+            }
+            set
+            {
+                type = value;
+            }
+        }
 
         private string iDpatient;
-        public string IDpatient { get; set; }
+        public string IDpatient
+        {
+            get
+            {
+                return iDpatient;
+            }
+            set
+            {
+                iDpatient = value;
+            }
+        }
 
         private string iDDoctor;
-        public string IDDoctor { get; set; }
+        public string IDDoctor
+        {
+            get
+            {
+                return iDDoctor;
+            }
+            set
+            {
+                iDDoctor = value;
+            }
+        }
 
         private string iDAppointment;
-        public string IDAppointment { get; set; }
+        public string IDAppointment
+        {
+            get
+            {
+                return iDAppointment;
+            }
+            set
+            {
+                iDAppointment = value;
+            }
+        }
 
 
         private Room room = new Room();
-        public Room Room { get; set; }
+        public Room Room
+        {
+            get
+            {
+                return room;
+            }
+            set
+            {
+                this.room = value;
+            }
+        }
 
 
         [JsonIgnore]
@@ -99,7 +169,7 @@ namespace Hospital
         override
         public string ToString()
         {
-            if(this.Equals(new Appointment()))
+            if (this.Equals(new Appointment()))
                 return "";
             else
             {

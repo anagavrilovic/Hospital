@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace Hospital
 {
-    public abstract class Person
+    public abstract class Person 
     {
         private String firstName;
         private String lastName;
@@ -18,16 +18,89 @@ namespace Hospital
         private Genders gender;
         private Address address = new Address();
 
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string PersonalID { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Email { get; set; }
-        public DateTime DateOfBirth { get; set; }
-        public string CardID { get; set; }
-        public MaritalStatus MaritalStatus { get; set; }
-        public Genders Gender { get; set; }
-        public Address Address { get; set; }
+        public string FirstName
+        {
+            get => firstName;
+            set
+            {
+                firstName = value;
+            }
+        }
+        public string LastName
+        {
+            get => lastName;
+            set
+            {
+                lastName = value;
+            }
+        }
+        public string PersonalID
+        {
+            get => personalID;
+            set
+            {
+                personalID = value;
+            }
+        }
+        public string PhoneNumber
+        {
+            get => phoneNumber;
+            set
+            {
+                phoneNumber = value;
+            }
+        }
+        public string Email
+        {
+            get => email;
+            set
+            {
+                email = value;
+            }
+        }
 
+
+        public DateTime DateOfBirth
+        {
+            get => dateOfBirth;
+            set
+            {
+                dateOfBirth = value;
+            }
+        }
+
+        public string CardID
+        {
+            get => cardID;
+            set
+            {
+                cardID = value;
+            }
+        }
+        public MaritalStatus MaritalStatus
+        {
+            get => maritalStatus;
+            set
+            {
+                maritalStatus = value;
+            }
+        }
+        public Genders Gender
+        {
+            get => gender;
+            set
+            {
+                gender = value;
+            }
+        }
+
+        public Address Address
+        {
+            get => address;
+            set
+            {
+                address = value;
+            }
+        }
     }
 }

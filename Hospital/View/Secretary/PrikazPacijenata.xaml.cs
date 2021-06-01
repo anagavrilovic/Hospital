@@ -1,5 +1,6 @@
 ﻿using Hospital.Services;
 using Hospital.View.Secretary;
+using Hospital.ViewModels.Secretary;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -57,7 +58,7 @@ namespace Hospital.View
 
         private void NewPatientClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new KreiranjeKartona());
+            NavigationService.Navigate(new KreiranjeKartona(new KreiranjeKartonaViewModel(this.NavigationService)));
         }
         
         private void UpdatePatientClick(object sender, RoutedEventArgs e)

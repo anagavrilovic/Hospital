@@ -10,6 +10,16 @@ namespace Hospital.Model
     public class Country
     {
         private string countryName;
-        public string CountryName { get; set; }
+
+        public string CountryName
+        {
+            get { return countryName; }
+            set
+            {
+                countryName = value;
+            }
+        }
+
+
     }
 }

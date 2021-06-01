@@ -82,6 +82,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\DoctorCommands\RelayCommand.cs" />
     <Compile Include="Commands\Patient\RelayCommand.cs" />
+    <Compile Include="Commands\Secretary\RelayCommand.cs" />
     <Compile Include="Controller\DoctorControllers\AppointmentDetailsController.cs" />
     <Compile Include="Controller\DoctorControllers\DoctorAppointmentsController.cs" />
     <Compile Include="Controller\DoctorControllers\DoctorMainWindowController.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Controller\NavigationController.cs" />
     <Compile Include="Controller\PatientControllers\CalendarController.cs" />
     <Compile Include="Controller\WpfNavigationController.cs" />
+    <Compile Include="DoktorConverters\InsuranceConverter.cs" />
     <Compile Include="DoktorConverters\ListToStringConverter.cs" />
     <Compile Include="DTO\DoctorDTO\AddAppointmentDTO.cs" />
     <Compile Include="DTO\DoctorDTO\AppointmentDetailsDTO.cs" />
@@ -244,6 +246,8 @@
     <Compile Include="ViewModels\Patient\PatientNotesViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientPassedAppointmentsViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientSettingsPageViewModel.cs" />
+    <Compile Include="ViewModels\Secretary\KreiranjeKartonaViewModel.cs" />
+    <Compile Include="ViewModels\Secretary\PrikazPacijenataViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="View\Doctor\DisplayNotification.xaml.cs">
       <DependentUpon>DisplayNotification.xaml</DependentUpon>
