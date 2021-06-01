@@ -1,5 +1,6 @@
 ﻿using Hospital.Model;
 using Hospital.Services;
+using Hospital.ViewModels.Secretary;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,60 +20,12 @@ using System.Windows.Shapes;
 
 namespace Hospital.View
 {
-    public partial class KreiranjeKartona : Page, INotifyPropertyChanged
+    public partial class KreiranjeKartona : Page
     {
-        private MedicalRecord newRecord;
-        public MedicalRecord NewRecord
-        {
-            get { return newRecord; }
-            set { newRecord = value; OnPropertyChanged("NewRecord"); }
-        }
-
-        public MedicalRecordService MedicalRecordService { get; set; }
-
-
-        public KreiranjeKartona()
+        public KreiranjeKartona(KreiranjeKartonaViewModel kreiranjeKartonaViewModel)
         {
             InitializeComponent();
-            this.DataContext = this;
-            this.MedicalRecordService = new MedicalRecordService();
-            InitializeNewRecord();
+            this.DataContext = kreiranjeKartonaViewModel;
         }
-
-        private void InitializeNewRecord()
-        {
-            NewRecord = new MedicalRecord();
-            NewRecord.MedicalRecordID = MedicalRecordService.GenerateID();
-        }
-
-        private void BtnPotvrdiClick(object sender, RoutedEventArgs e)
-        {
-            SetPatientsInsurance();
-            MedicalRecordService.RegisterNewRecord(NewRecord);
-            NavigationService.Navigate(new PrikazPacijenata());
-        }
-
-        private void SetPatientsInsurance()
-        {
-            if ((bool)DaButton.IsChecked)
-                NewRecord.IsInsured = true;
-            else
-                NewRecord.IsInsured = false;
-        }
-
-        private void BtnOdustaniClick(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new PrikazPacijenata());
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
     }
 }

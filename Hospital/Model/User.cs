@@ -7,8 +7,23 @@ namespace Hospital
         private String username;
         private String password;
 
-        public String Username { get; set; }
-        public String Password { get; set; }
+        public String Username
+        {
+            get => username;
+            set
+            {
+                username = value;
+            }
+        }
+
+        public String Password
+        {
+            get => password;
+            set
+            {
+                password = value;
+            }
+        }
 
     }
 }

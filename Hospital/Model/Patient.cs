@@ -11,11 +11,25 @@ namespace Hospital
         private bool isGuest = false;
         private bool isBlocked = false;
 
-        public Patient() {}
+        public Patient() { }
 
-        public bool IsGuest { get; set; }
+        public bool IsGuest
+        {
+            get => isGuest;
+            set
+            {
+                isGuest = value;
+            }
+        }
 
-        public bool IsBlocked { get; set; }
+        public bool IsBlocked
+        {
+            get { return isBlocked; }
+            set
+            {
+                isBlocked = value;
+            }
+        }
 
         override
         public string ToString()
