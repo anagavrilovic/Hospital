@@ -54,7 +54,7 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Doctor ComboBox -->
-                <ComboBox x:Name="DoctorComboBox" Width="160" Height="25" Margin="5" Style="{StaticResource ComboBoxStyle}"
+                <ComboBox x:Name="DoctorComboBox" Width="160" Height="25" Margin="5" Style="{StaticResource ComboBoxStyleSecretary}"
                               ItemsSource="{Binding AllDoctors}" SelectedItem="{Binding SelectedDoctorForNewAppointment}" SelectionChanged="ComboBoxDoctorEvent">
                     <ComboBox.Resources>
                         <Style TargetType="Border">
