@@ -104,6 +104,18 @@ namespace Hospital.Services
             return newUrgentAppointment;
         }
 
+        public List<Appointment> GetAppointmentsByDoctorInSelectedPeriod(Doctor selectedDoctor, DateTime dateBegin, DateTime dateEnd)
+        {
+            List<Appointment> appointmentsByDoctor = GetAppointmentsByDoctor(selectedDoctor);
+            List<Appointment> requestedAppointments = new List<Appointment>();
+
+            foreach(Appointment appointment in appointmentsByDoctor)
+                if(appointment.DateTime >= dateBegin && appointment.DateTime <= dateEnd)
+                    requestedAppointments.Add(appointment);
+
+            return requestedAppointments;
+        }
+
         public void RescheduleAppointments(OptionForRescheduling selectedOption)
         {
             foreach (var moveAppointmnet in selectedOption.Option)

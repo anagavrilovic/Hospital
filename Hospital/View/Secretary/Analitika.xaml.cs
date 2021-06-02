@@ -66,5 +66,10 @@ namespace Hospital.View.Secretary
         }
 
         #endregion
+
+        private void GenerateReportClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Izvestaj());
+        }
     }
 }
