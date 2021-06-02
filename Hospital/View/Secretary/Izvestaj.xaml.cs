@@ -74,12 +74,24 @@ namespace Hospital.View.Secretary
                 PdfPage page = document.Pages.Add();
 
                 PdfGraphics graphics = page.Graphics;
-                PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 17);
+                PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 7);
 
+                // HEADER
+                graphics.DrawString("Adresa: Hajduk Veljkova 5", font, PdfBrushes.Black, new PointF(0, 19));
+                graphics.DrawString("21000 Novi Sad, Srbija", font, PdfBrushes.Black, new PointF(0, 27));
+                graphics.DrawString("Kontakt telefon: 021568136", font, PdfBrushes.Black, new PointF(0, 36));
+                graphics.DrawString("E-mail adresa: nszdravo@gmail.com", font, PdfBrushes.Black, new PointF(0, 44));
+
+
+                // SLIKA
+                PdfImage image = PdfImage.FromFile("../../Icon/Secretary/logo.png");
+                RectangleF bounds = new RectangleF(170, 12, 150, 50);
+                page.Graphics.DrawImage(image, bounds);
 
                 // NASLOV
-                graphics.DrawString("Izveštaj o zauzetosti", font, PdfBrushes.Black, new PointF(170, 30));
-                graphics.DrawString("lekara pojedinca za određeni vremenski period", font, PdfBrushes.Black, new PointF(70, 50));
+                font = new PdfStandardFont(PdfFontFamily.Helvetica, 17);
+                graphics.DrawString("Izveštaj o zauzetosti", font, PdfBrushes.Black, new PointF(170, 100));
+                graphics.DrawString("lekara pojedinca za određeni vremenski period", font, PdfBrushes.Black, new PointF(70, 120));
 
 
                 // SADRZAJ
@@ -87,7 +99,7 @@ namespace Hospital.View.Secretary
                 StringBuilder stringBuilder = new StringBuilder("");
                 stringBuilder.Append("Prikaz zakazanih termina kod lekara ").Append(SelectedDoctor.ToString()).Append(" za vremenski period od ")
                     .Append(DateBegin.ToString("dd.MM.yyyy.")).Append(" do ").Append(DateEnd.ToString("dd.MM.yyyy."));
-                graphics.DrawString(stringBuilder.ToString(), font, PdfBrushes.Black, new PointF(30, 110));
+                graphics.DrawString(stringBuilder.ToString(), font, PdfBrushes.Black, new PointF(30, 180));
 
 
                 // TABELA
@@ -143,17 +155,17 @@ namespace Hospital.View.Secretary
 
 
                 pdfLightTable.DataSource = table;
-                pdfLightTable.Draw(page, new PointF(0, 170));
+                pdfLightTable.Draw(page, new PointF(0, 240));
 
                 stringBuilder = new StringBuilder("");
                 stringBuilder.Append("U ovom vremenskom periodu, lekar ").Append(SelectedDoctor.ToString()).Append(" ima zakazano ").Append
                     (examinations.ToString()).Append(" pregleda, ").Append(operations.ToString()).Append(" operacija, ").Append(urgentExaminations.ToString())
                     .Append(" hitnih").Append(" pregleda");
-                graphics.DrawString(stringBuilder.ToString(), font, PdfBrushes.Black, new PointF(30, 125));
+                graphics.DrawString(stringBuilder.ToString(), font, PdfBrushes.Black, new PointF(30, 195));
 
                 stringBuilder = new StringBuilder("");
                 stringBuilder.Append(" i ").Append(urgentOperations.ToString()).Append(" hitnih operacija.");
-                graphics.DrawString(stringBuilder.ToString(), font, PdfBrushes.Black, new PointF(0, 140));
+                graphics.DrawString(stringBuilder.ToString(), font, PdfBrushes.Black, new PointF(0, 210));
 
                 document.Save("../../Reports/SecretaryReport.pdf");
                 document.Close(true);
