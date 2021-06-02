@@ -12,6 +12,8 @@ using System.Windows.Navigation;
 using System.Drawing;
 using System.Collections.Generic;
 using Syncfusion.Pdf.Graphics;
+using System.Linq;
+using System.Text;
 
 namespace Hospital.View.Secretary
 {
@@ -65,11 +67,30 @@ namespace Hospital.View.Secretary
                 return;
 
             List<Appointment> appointments = AppointmentService.GetAppointmentsByDoctorInSelectedPeriod(SelectedDoctor, DateBegin, DateEnd);
+            appointments = appointments.OrderBy(a => a.DateTime).ToList();
 
             using (PdfDocument document = new PdfDocument())
             {
                 PdfPage page = document.Pages.Add();
 
+                PdfGraphics graphics = page.Graphics;
+                PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 17);
+
+
+                // NASLOV
+                graphics.DrawString("Izveštaj o zauzetosti", font, PdfBrushes.Black, new PointF(170, 30));
+                graphics.DrawString("lekara pojedinca za određeni vremenski period", font, PdfBrushes.Black, new PointF(70, 50));
+
+
+                // SADRZAJ
+                font = new PdfStandardFont(PdfFontFamily.Helvetica, 9);
+                StringBuilder stringBuilder = new StringBuilder("");
+                stringBuilder.Append("Prikaz zakazanih termina kod lekara ").Append(SelectedDoctor.ToString()).Append(" za vremenski period od ")
+                    .Append(DateBegin.ToString("dd.MM.yyyy.")).Append(" do ").Append(DateEnd.ToString("dd.MM.yyyy."));
+                graphics.DrawString(stringBuilder.ToString(), font, PdfBrushes.Black, new PointF(30, 110));
+
+
+                // TABELA
                 PdfLightTable pdfLightTable = new PdfLightTable();
                 DataTable table = new DataTable();
 
@@ -80,20 +101,59 @@ namespace Hospital.View.Secretary
                 table.Columns.Add("Prostorija");
                 table.Columns.Add("Tip");
 
-                table.Rows.Add(new string[] { "Datum i vreme", "Trajanje termina", "Pacijent", "Prostorija", "Tip" });
+                table.Rows.Add(new string[] { "Datum i vreme", "Trajanje termina (u satima)", "Pacijent", "Prostorija", "Tip" });
 
+                int examinations = 0;
+                int operations = 0;
+                int urgentExaminations = 0;
+                int urgentOperations = 0;
                 foreach (Appointment appointment in appointments)
                 {
+                    string type = "";
+                    if (appointment.Type.Equals(AppointmentType.examination))
+                    {
+                        type = "pregled";
+                        examinations++;
+                    }                        
+                    else if (appointment.Type.Equals(AppointmentType.urgentExamination))
+                    {
+                        type = "hitan pregled";
+                        urgentExaminations++;
+                    }            
+                    else if (appointment.Type.Equals(AppointmentType.operation))
+                    {
+                        type = "operacija";
+                        operations++;
+                    }
+                    else if (appointment.Type.Equals(AppointmentType.urgentOperation))
+                    {
+                        type = "hitna operacija";
+                        urgentOperations++;
+                    }    
+
+                    string patientName = MedicalRecordService.GetByPatientId(appointment.IDpatient).Patient.FirstName + " " +
+                        MedicalRecordService.GetByPatientId(appointment.IDpatient).Patient.LastName;
+
                     table.Rows.Add(new string[] { appointment.DateTime.ToString("dd.MM.yyyy. HH:mm"),
                                                   appointment.DurationInHours.ToString(),
-                                                  MedicalRecordService.GetByPatientId(appointment.IDpatient).ToString(),
+                                                  patientName,
                                                   appointment.Room.Name,
-                                                  appointment.Type.ToString()});
+                                                  type});
                 }
 
 
                 pdfLightTable.DataSource = table;
-                pdfLightTable.Draw(page, new PointF(0, 0));
+                pdfLightTable.Draw(page, new PointF(0, 170));
+
+                stringBuilder = new StringBuilder("");
+                stringBuilder.Append("U ovom vremenskom periodu, lekar ").Append(SelectedDoctor.ToString()).Append(" ima zakazano ").Append
+                    (examinations.ToString()).Append(" pregleda, ").Append(operations.ToString()).Append(" operacija, ").Append(urgentExaminations.ToString())
+                    .Append(" hitnih").Append(" pregleda");
+                graphics.DrawString(stringBuilder.ToString(), font, PdfBrushes.Black, new PointF(30, 125));
+
+                stringBuilder = new StringBuilder("");
+                stringBuilder.Append(" i ").Append(urgentOperations.ToString()).Append(" hitnih operacija.");
+                graphics.DrawString(stringBuilder.ToString(), font, PdfBrushes.Black, new PointF(0, 140));
 
                 document.Save("../../Reports/SecretaryReport.pdf");
                 document.Close(true);
