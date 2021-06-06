@@ -56,20 +56,20 @@
             <RadioButton GroupName="tipTermina" x:Name="rdbOperacija" FontSize="17"  Content="{ns:Loc operationLabel}" Style="{DynamicResource RadioButtonStyle}" IsChecked="False"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" >
-            <Label FontSize="17"  Width="190" Content="{ns:Loc dateAndTime}" Style="{DynamicResource Label}"/>
+            <Label FontSize="17"  Width="220" Content="{ns:Loc dateAppointment}" Style="{DynamicResource Label}"/>
             <DatePicker x:Name="datePicker" Width="150" Height="25"  DisplayDateStart="{x:Static sys:DateTime.Today}"
                         SelectedDate="{Binding DTO.DateOfAppointment, Mode=OneWayToSource}" FirstDayOfWeek="Monday" Margin="10,0,5,0"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" >
+            <Label FontSize="17"  Width="220" Content="{ns:Loc timeAppointment}" Style="{DynamicResource Label}"/>
             <ComboBox x:Name="timeComboBox" Width="20" Height="25" SelectedValue="{Binding DTO.TimeOfAppointment
                 ,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ComboBoxStyle}"></ComboBox>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center">
+        <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Label FontSize="17" Margin="0,0,10,0" Content="{ns:Loc durationLabel}" Style="{DynamicResource Label}"></Label>
             <ComboBox FontSize="17" x:Name="durationInMinutesComboBox" Width="150" Height="25" Style="{DynamicResource ComboBoxStyle}" SelectedValue="{Binding DTO.DurationInMinutes, Mode=OneWayToSource}"></ComboBox>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <Label FontSize="17" Margin="0,0,10,0" Content="{ns:Loc typeExaminationLabel}" Style="{DynamicResource Label}"></Label>
-            <TextBox FontSize="17" Name="sale" Width="150" Height="25" IsEnabled="False">Text</TextBox>
-        </StackPanel>
+
         <StackPanel Orientation="Horizontal" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Top">
             <Button x:Name="save" FontSize="18" Click="save_Click" Margin="0,0,40,0" Style="{DynamicResource ImageButtonsHorizontal}">
                 <StackPanel Orientation="Horizontal">

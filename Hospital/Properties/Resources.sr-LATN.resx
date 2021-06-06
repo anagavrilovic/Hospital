@@ -171,6 +171,9 @@
   <data name="dateAndTime" xml:space="preserve">
     <value>Datum i vreme terimna:</value>
   </data>
+  <data name="dateAppointment" xml:space="preserve">
+    <value>Datum termina:</value>
+  </data>
   <data name="dateOfBirthLabel" xml:space="preserve">
     <value>Datum rođenja:</value>
   </data>
@@ -333,6 +336,9 @@
   <data name="saveTherapyButton" xml:space="preserve">
     <value>Sačuvaj terapiju</value>
   </data>
+  <data name="searchAppointment" xml:space="preserve">
+    <value>Traži termin:</value>
+  </data>
   <data name="searchIngredientLabel" xml:space="preserve">
     <value>Pretraži sastojak:</value>
   </data>
@@ -344,6 +350,9 @@
   </data>
   <data name="startExaminationTB" xml:space="preserve">
     <value>Započni pregled</value>
+  </data>
+  <data name="startHospitalTreatment" xml:space="preserve">
+    <value>Početak bolničkog lečenja:</value>
   </data>
   <data name="startOfTreatmentLabel" xml:space="preserve">
     <value>Početak bolničkog lečenja:</value>
@@ -371,6 +380,9 @@
   </data>
   <data name="therapyNameLabel" xml:space="preserve">
     <value>Naziv terapije:</value>
+  </data>
+  <data name="timeAppointment" xml:space="preserve">
+    <value>Vreme početka termina:</value>
   </data>
   <data name="typeExaminationLabel" xml:space="preserve">
     <value>Tip pregleda/operacije</value>

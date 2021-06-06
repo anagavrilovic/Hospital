@@ -57,21 +57,20 @@
             <RadioButton GroupName="tipTermina" x:Name="rdbOperacija" FontSize="17"  Visibility="{Binding OperationVisibility}" Content="{ns:Loc operationLabel}" IsChecked="{Binding OperationIsChecked}" Style="{DynamicResource RadioButtonStyle}" Margin="0,10,0,0"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" >
-            <Label FontSize="17"  Width="190" Content="{ns:Loc dateAndTime}" Style="{DynamicResource Label}"/>
-            <DatePicker x:Name="datePicker" Width="150" Height="25"  DisplayDateStart="{x:Static sys:DateTime.Today}"
+            <Label FontSize="17"  Width="190" Content="{ns:Loc dateAppointment}" Style="{DynamicResource Label}"/>
+            <DatePicker x:Name="datePicker" Width="120" Height="25"  DisplayDateStart="{x:Static sys:DateTime.Today}"
                         SelectedDate="{Binding DTO.DateOfAppointment, Mode=OneWayToSource}" FirstDayOfWeek="Monday" Margin="10,0,5,0"/>
-            <ComboBox x:Name="timeComboBox" Width="20" Height="25" SelectedValue="{Binding DTO.TimeOfAppointment
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" >
+            <Label FontSize="17"  Width="190" Content="{ns:Loc timeAppointment}" Style="{DynamicResource Label}"/>
+            <ComboBox x:Name="timeComboBox"  Height="25" SelectedValue="{Binding DTO.TimeOfAppointment
                 ,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding DTO.SetTimeComboBox}"
                       Style="{DynamicResource ComboBoxStyle}"></ComboBox>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <Label FontSize="17" Margin="0,0,10,0" Style="{DynamicResource Label}" Content="{ns:Loc durationLabel}"></Label>
-            <ComboBox FontSize="17" x:Name="durationInMinutesComboBox" Width="150" Height="25" ItemsSource="{Binding DTO.DurationForComboBox}"
-                      SelectedValue="{Binding DTO.DurationInMinutes, Mode=OneWayToSource}" Style="{DynamicResource ComboBoxStyle}"></ComboBox>
-        </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <Label FontSize="17" Margin="0,0,10,0" Style="{DynamicResource Label}" Content="{ns:Loc typeExaminationLabel}"></Label>
-            <TextBox FontSize="17" Name="sale" Width="150" Height="25" IsEnabled="False">Text</TextBox>
+            <Label FontSize="17" Margin="0,0,10,0" Style="{DynamicResource Label}" Content="{ns:Loc durationLabel}"></Label>
+            <ComboBox FontSize="17" x:Name="durationInMinutesComboBox" Width="120" Height="25" ItemsSource="{Binding DTO.DurationForComboBox}"
+                      SelectedValue="{Binding DTO.DurationInMinutes, Mode=OneWayToSource}" Style="{DynamicResource ComboBoxStyle}"></ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Top">
             <Button x:Name="save" FontSize="18" Command="{Binding SaveCommand}" Margin="0,0,40,0" Style="{DynamicResource ImageButtonsHorizontal}">

@@ -22,8 +22,8 @@
                 <DataGridTextColumn Header="{ns:Loc namePatientLabel}" Width="0.25*" Binding="{Binding PatientsRecord.Patient.FirstName}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
                 <DataGridTextColumn Header="{ns:Loc surnamePatientLabel}" Width="0.25*" Binding="{Binding PatientsRecord.Patient.LastName}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
                 <DataGridTextColumn Header="{ns:Loc roomLabel}" Width="0.25*" Binding="{Binding Room.Name}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="{ns:Loc dateLabel}" Width="0.25*" Binding="{Binding StartOfTreatment, StringFormat=dd-MM-yyyy}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
-                <DataGridTextColumn Header="{ns:Loc appointmentTypeLabel}" Width="0.25*" Binding="{Binding EndOfTreatment, StringFormat=dd-MM-yyyy}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="{ns:Loc startHospitalTreatment}" Width="0.25*" Binding="{Binding StartOfTreatment, StringFormat=dd-MM-yyyy}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="{ns:Loc endOfTreatmentLabel}" Width="0.25*" Binding="{Binding EndOfTreatment, StringFormat=dd-MM-yyyy}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel x:Name="patientInfo" Orientation="Vertical" Margin="30,30,30,30" Visibility="{Binding PanelVisibility}" Background="{DynamicResource SecondBackground}" Grid.Column="1">

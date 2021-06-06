@@ -56,8 +56,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Label FontSize="17" Margin="0,0,10,0" Content="{ns:Loc typeExaminationLabel}" Style="{DynamicResource Label}"></Label>
-            <Label FontSize="17" Name="novac" IsEnabled="False" FontFamily="Yu Gothic" 
-                   Content="{Binding DTO.Appointment.Type}" Style="{DynamicResource Label}"/>
+            <Label FontSize="17" Name="novac" Content="{Binding DTO.Appointment.Type}" Style="{DynamicResource Label}" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Label FontSize="17"     Content="{ns:Loc roomLabel}" Style="{DynamicResource Label}"></Label>

@@ -52,10 +52,6 @@
                 <Label FontSize="13" Style="{DynamicResource Label}" Content="{Binding MedicalRecord.Patient.Address.City.PostalCode}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
-                <Label FontSize="13" Content="{ns:Loc cityLabel}" Style="{DynamicResource Label}"/>
-                <Label FontSize="13" Content="{Binding MedicalRecord.Patient.Address.City.Township}" Style="{DynamicResource Label}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="20,-5,0,0">
                 <Label FontSize="13" Content="{ns:Loc countryLabel}" Style="{DynamicResource Label}"/>
                 <Label FontSize="13" Content="{Binding MedicalRecord.Patient.Address.City.Country.CountryName }" Style="{DynamicResource Label}"/>
             </StackPanel>

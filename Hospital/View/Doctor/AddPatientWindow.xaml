@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.View.Doctor" xmlns:i1="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="PacijentListBox" Height="450" Width="450" WindowStartupLocation="CenterOwner"
+        Title="PacijentListBox" Height="450" Width="450" WindowStartupLocation="CenterScreen"
         Background="{DynamicResource Background}">
     <Window.Resources>
     </Window.Resources>

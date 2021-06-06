@@ -151,7 +151,7 @@ namespace Hospital.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Appointment type.
+        ///   Looks up a localized string similar to Appointment type:.
         /// </summary>
         internal static string appointmentTypeLabel {
             get {
@@ -223,7 +223,16 @@ namespace Hospital.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Datum:.
+        ///   Looks up a localized string similar to Date of appointment:.
+        /// </summary>
+        internal static string dateAppointment {
+            get {
+                return ResourceManager.GetString("dateAppointment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date:.
         /// </summary>
         internal static string dateLabel {
             get {
@@ -340,7 +349,7 @@ namespace Hospital.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to End of hospital treatment:.
+        ///   Looks up a localized string similar to End of treatment:.
         /// </summary>
         internal static string endOfTreatmentLabel {
             get {
@@ -727,6 +736,15 @@ namespace Hospital.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search for appointment:.
+        /// </summary>
+        internal static string searchAppointment {
+            get {
+                return ResourceManager.GetString("searchAppointment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search for ingredient:.
         /// </summary>
         internal static string searchIngredientLabel {
@@ -759,6 +777,15 @@ namespace Hospital.Properties {
         internal static string startExaminationTB {
             get {
                 return ResourceManager.GetString("startExaminationTB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start of treatment:.
+        /// </summary>
+        internal static string startHospitalTreatment {
+            get {
+                return ResourceManager.GetString("startHospitalTreatment", resourceCulture);
             }
         }
         
@@ -840,6 +867,15 @@ namespace Hospital.Properties {
         internal static string therapyNameLabel {
             get {
                 return ResourceManager.GetString("therapyNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time of appointment:.
+        /// </summary>
+        internal static string timeAppointment {
+            get {
+                return ResourceManager.GetString("timeAppointment", resourceCulture);
             }
         }
         

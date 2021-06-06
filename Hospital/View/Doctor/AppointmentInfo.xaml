@@ -29,7 +29,6 @@
                 </Button>
             </Grid>
         </DockPanel>
-
         <DataGrid x:Name="dataGridPregledi" ItemsSource="{Binding Path=DTO.Appointments}"
                SelectionMode="Single" IsReadOnly="True" Margin="30,30,30,30" AutoGenerateColumns="False" Style="{DynamicResource PacijentiDataGrid}">
             <DataGrid.Columns>

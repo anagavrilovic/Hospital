@@ -31,6 +31,5 @@ namespace Hospital.View.Doctor
             InitializeComponent();
             this.DataContext = new EditMedicineViewModel();
         }
-
     }
 }

@@ -33,8 +33,8 @@
 
                 <ListBox Name="listBox" Margin="40,10,40,40" MouseDoubleClick="AddMedicineToTherapy" Height="300" Width="400" IsSynchronizedWithCurrentItem="True" Style="{DynamicResource ListBoxStyle}"></ListBox>
                 <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
-                    <Label Margin="40,20,0,10" Style="{DynamicResource Label}" Content="{ns:Loc daysForConsumptionLabel}"></Label>
-                    <ComboBox x:Name="daysConsumptionComboBox" Margin="0,25,20,20" SelectedValue="{Binding DTO.DaysForConsumption, Mode=OneWayToSource}" Style="{DynamicResource ComboBoxStyle}"/>
+                    <Label Margin="0,20,0,10" Style="{DynamicResource Label}" Content="{ns:Loc daysForConsumptionLabel}"></Label>
+                    <ComboBox x:Name="daysConsumptionComboBox" Margin="0,25,20,20" Width="30" SelectedValue="{Binding DTO.DaysForConsumption, Mode=OneWayToSource}" Style="{DynamicResource ComboBoxStyle}"/>
                     <Button  Margin="20,40,20,0" VerticalAlignment="Top" Click="BackToTherapy" Style="{DynamicResource ImageButtonsHorizontal}">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="../../Icon/DoctorIcons/back.png" Width="20"/>
@@ -43,8 +43,8 @@
                     </Button>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Margin="60,0,25,10" Style="{DynamicResource Label}" Content="{ns:Loc dailyIntakeLabel}"></Label>
-                    <ComboBox x:Name="dailyIntakeComboBox" Margin="0,0,20,20" SelectedValue="{Binding DTO.DailyIntake, Mode=OneWayToSource}" Style="{DynamicResource ComboBoxStyle}"></ComboBox>
+                    <Label Margin="25,0,60,10" Style="{DynamicResource Label}" Content="{ns:Loc dailyIntakeLabel}"></Label>
+                    <ComboBox x:Name="dailyIntakeComboBox" Height="25" Width="30" Margin="0,0,0,10" HorizontalAlignment="Right" SelectedValue="{Binding DTO.DailyIntake, Mode=OneWayToSource}" Style="{DynamicResource ComboBoxStyle}"></ComboBox>
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Center" Margin="0,10,0,0">

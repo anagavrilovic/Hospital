@@ -26,7 +26,7 @@
             <StackPanel Orientation="Horizontal">
                 <Label x:Name="roomLabel" Content="Soba: " HorizontalAlignment="Left" Margin="5,0,0,15" FontSize="14" Style="{DynamicResource Label}">
             </Label>
-                <ComboBox x:Name="roomComboBox" Width="250" Height="30" SelectedValue="{Binding DTO.SelectedRoom}" 
+                <ComboBox x:Name="roomComboBox" Width="250" Height="30" SelectedValue="{Binding DTO.SelectedRoom}" Style="{DynamicResource ComboBoxStyle}"
                       VerticalAlignment="Top" Margin="5,0,0,15">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>

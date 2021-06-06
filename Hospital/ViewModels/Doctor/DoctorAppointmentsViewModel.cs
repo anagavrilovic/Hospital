@@ -7,10 +7,12 @@ using Hospital.View.Doctor;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 
 namespace Hospital.ViewModels.Doctor
 {
@@ -27,6 +29,46 @@ namespace Hospital.ViewModels.Doctor
                 OnPropertyChanged("DTO");
             }
         }
+        private Model.Doctor doctor = new Model.Doctor();
+        public Model.Doctor Doctor
+        {
+            get { return doctor; }
+            set
+            {
+                doctor = value;
+                OnPropertyChanged("Doctor");
+            }
+        }
+        private Appointment selectedAppointment;
+        public Appointment SelectedAppointment
+        {
+            get { return selectedAppointment; }
+            set
+            {
+                selectedAppointment = value;
+                OnPropertyChanged("SelectedAppointment");
+            }
+        }
+
+        private string dateFilter;
+        public string DateFilter
+        {
+            get { return dateFilter; }
+            set
+            {
+                dateFilter = value;
+                OnPropertyChanged("DateFilter");
+                Execute_FilterChanged();
+            }
+        }
+        private ICollectionView dateCollection;
+
+        public ICollectionView DateCollection
+        {
+            get { return dateCollection; }
+            set { dateCollection = value; }
+        }
+
         private DoctorAppointmentsController controller; 
         private RelayCommand newCommand;
         public RelayCommand NewCommand
@@ -61,8 +103,37 @@ namespace Hospital.ViewModels.Doctor
             controller = new DoctorAppointmentsController(DTO);
             this.navigationController = navigationController;
             SetCommands();
-            DTO.Doctor = controller.GetDoctorById(IDnumber);
+            SetFilterAndSorter();
+            Doctor = controller.GetDoctorById(IDnumber);
             DTO.Appointments = new ObservableCollection<Appointment>(controller.InitAppointments());
+        }
+
+        private void SetFilterAndSorter()
+        {
+            DateCollection= CollectionViewSource.GetDefaultView(DTO.Appointments);
+            DateCollection.Filter = FilterByDate;
+            ICollectionView view = GetPretraga();
+            view.SortDescriptions.Add(new SortDescription("DateTime", ListSortDirection.Ascending));
+        }
+
+        private bool FilterByDate(object obj)
+        {
+            if (string.IsNullOrEmpty(DateFilter))
+            {
+                return true;
+            }
+            else
+            {
+                return (((Appointment)obj).DateTime.ToString().IndexOf(DateFilter, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+        }
+        private void Execute_FilterChanged()
+        {
+            CollectionViewSource.GetDefaultView(DTO.Appointments).Refresh();
+        }
+        public ICollectionView GetPretraga()
+        {
+            return CollectionViewSource.GetDefaultView(DTO.Appointments);
         }
 
         private void SetCommands()
@@ -74,9 +145,9 @@ namespace Hospital.ViewModels.Doctor
 
         private void dataGridAppointments_MouseDoubleClick(object sender)
         {
-            if (DTO.SelectedAppointment != null)
+            if (SelectedAppointment != null)
             {
-                AppointmentDetails review = new AppointmentDetails(DTO.SelectedAppointment);
+                AppointmentDetails review = new AppointmentDetails(SelectedAppointment);
                 review.Owner = Window.GetWindow(App.Current.MainWindow);
                 review.Show();
                 Window.GetWindow(App.Current.MainWindow).Hide();
@@ -89,22 +160,22 @@ namespace Hospital.ViewModels.Doctor
         }
         private void Execute_Delete(object sender)
         {
-            if (DTO.SelectedAppointment != null)
+            if (SelectedAppointment != null)
             {
-                Appointment selectedAppointment = DTO.SelectedAppointment;
+                Appointment selectedAppointment = SelectedAppointment;
                 controller.DeleteAppointment();
                 MedicalRecord medicalRecord = controller.GetByPatientId();
                 if (medicalRecord != null)
                 {
                     controller.DeleteAppointmentFromExamination(medicalRecord);
                 }
-                DTO.Appointments.Remove(DTO.SelectedAppointment);
+                DTO.Appointments.Remove(SelectedAppointment);
             }
         }
 
         private void Execute_AddAppointment(object sender)
         {
-            NewAppointment newAppointment = new NewAppointment(DTO.Doctor.PersonalID,navigationController);
+            NewAppointment newAppointment = new NewAppointment(Doctor.PersonalID,navigationController);
             newAppointment.Show();
         }
     }

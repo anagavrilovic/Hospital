@@ -148,7 +148,7 @@
     <value>Appointments</value>
   </data>
   <data name="appointmentTypeLabel" xml:space="preserve">
-    <value>Appointment type</value>
+    <value>Appointment type:</value>
   </data>
   <data name="backButton" xml:space="preserve">
     <value>Back</value>
@@ -171,8 +171,11 @@
   <data name="dateAndTime" xml:space="preserve">
     <value>Date and time of examination:</value>
   </data>
+  <data name="dateAppointment" xml:space="preserve">
+    <value>Date of appointment:</value>
+  </data>
   <data name="dateLabel" xml:space="preserve">
-    <value>Datum:</value>
+    <value>Date:</value>
   </data>
   <data name="dateOfBirthLabel" xml:space="preserve">
     <value>Date of birth:</value>
@@ -211,7 +214,7 @@
     <value>Emergency operation</value>
   </data>
   <data name="endOfTreatmentLabel" xml:space="preserve">
-    <value>End of hospital treatment:</value>
+    <value>End of treatment:</value>
   </data>
   <data name="errorrLabel" xml:space="preserve">
     <value>Error</value>
@@ -339,6 +342,9 @@
   <data name="saveTherapyButton" xml:space="preserve">
     <value>Save therapy</value>
   </data>
+  <data name="searchAppointment" xml:space="preserve">
+    <value>Search for appointment:</value>
+  </data>
   <data name="searchIngredientLabel" xml:space="preserve">
     <value>Search for ingredient:</value>
   </data>
@@ -350,6 +356,9 @@
   </data>
   <data name="startExaminationTB" xml:space="preserve">
     <value>Start examination</value>
+  </data>
+  <data name="startHospitalTreatment" xml:space="preserve">
+    <value>Start of treatment:</value>
   </data>
   <data name="startOfTreatmentLabel" xml:space="preserve">
     <value>Start of hospital treatment:</value>
@@ -377,6 +386,9 @@
   </data>
   <data name="therapyNameLabel" xml:space="preserve">
     <value>Therapy name:</value>
+  </data>
+  <data name="timeAppointment" xml:space="preserve">
+    <value>Time of appointment:</value>
   </data>
   <data name="typeExaminationLabel" xml:space="preserve">
     <value>Type of examination/operation</value>
