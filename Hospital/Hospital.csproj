@@ -133,6 +133,7 @@
     <Compile Include="DoktorConverters\ListToStringConverter.cs" />
     <Compile Include="DTO\DoctorDTO\AddAppointmentDTO.cs" />
     <Compile Include="DTO\DoctorDTO\AppointmentDetailsDTO.cs" />
+    <Compile Include="DTO\DoctorDTO\AppointmentDTO.cs" />
     <Compile Include="DTO\DoctorDTO\AppointmentInfoDTO.cs" />
     <Compile Include="Controller\DoctorControllers\CreateAppointmentController.cs" />
     <Compile Include="DTO\DoctorDTO\CreateAppointmentDTO.cs" />
@@ -142,8 +143,8 @@
     <Compile Include="DTO\DoctorDTO\HospitalTreatmentDTO.cs" />
     <Compile Include="DTO\DoctorDTO\MedicineTherapyDTO.cs" />
     <Compile Include="DTO\DoctorDTO\MedicineValidityDTO.cs" />
-    <Compile Include="DTO\DoctorDTO\NewAppointmentDTO.cs" />
     <Compile Include="DTO\DatesForShiftsDTO.cs" />
+    <Compile Include="DTO\DoctorDTO\NewAppointmentDTO.cs" />
     <Compile Include="DTO\DoctorDTO\TherapyDTO.cs" />
     <Compile Include="DTO\DoctorsShiftsDTO.cs" />
     <Compile Include="DTO\FilteringRoomsDTO.cs" />

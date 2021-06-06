@@ -20,105 +20,25 @@ namespace Hospital.DTO.DoctorDTO
                 OnPropertyChanged("Appointments");
             }
         }
-        private double durationInHours = 0.5;
-        public double DurationInHours
+        private Model.Doctor doctor = new Model.Doctor();
+        public Model.Doctor Doctor
         {
-            get
-            {
-                return durationInHours;
-            }
+            get { return doctor; }
             set
             {
-                durationInHours = value;
-                OnPropertyChanged("DurationInHours");
+                doctor = value;
+                OnPropertyChanged("Doctor");
             }
         }
-
-        private DateTime dateTime;
-        public DateTime DateTime
+        private Appointment selectedAppointment;
+        public Appointment SelectedAppointment
         {
-            get
-            {
-                return dateTime;
-            }
+            get { return selectedAppointment; }
             set
             {
-                dateTime = value;
-                OnPropertyChanged("DateTime");
+                selectedAppointment = value;
+                OnPropertyChanged("SelectedAppointment");
             }
         }
-
-        public AppointmentType type;
-        public AppointmentType Type
-        {
-            get
-            {
-                return type;
-            }
-            set
-            {
-                type = value;
-                OnPropertyChanged("Type");
-            }
-        }
-
-        private string iDpatient;
-        public string IDpatient
-        {
-            get
-            {
-                return iDpatient;
-            }
-            set
-            {
-                iDpatient = value;
-                OnPropertyChanged("IDpatient");
-            }
-        }
-
-        private string iDDoctor;
-        public string IDDoctor
-        {
-            get
-            {
-                return iDDoctor;
-            }
-            set
-            {
-                iDDoctor = value;
-                OnPropertyChanged("IDDoctor");
-            }
-        }
-
-        private string iDAppointment;
-        public string IDAppointment
-        {
-            get
-            {
-                return iDAppointment;
-            }
-            set
-            {
-                iDAppointment = value;
-                OnPropertyChanged("IDDoctor");
-            }
-        }
-
-
-        private Room room = new Room();
-        public Room Room
-        {
-            get
-            {
-                return room;
-            }
-            set
-            {
-                this.room = value;
-                OnPropertyChanged("Room");
-            }
-        }
-
-
     }
 }
