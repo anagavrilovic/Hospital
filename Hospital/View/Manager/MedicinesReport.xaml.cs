@@ -36,23 +36,18 @@ namespace Hospital.View.Manager
                 PdfGraphics graphics = page.Graphics;
                 PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 9);
 
-                // HEADER
                 graphics.DrawString("Adresa: Hajduk Veljkova 5", font, PdfBrushes.Black, new PointF(0, 19));
                 graphics.DrawString("21000 Novi Sad, Srbija", font, PdfBrushes.Black, new PointF(12, 27));
                 graphics.DrawString("Kontakt telefon: 021568136", font, PdfBrushes.Black, new PointF(0, 36));
                 graphics.DrawString("E-mail adresa: nszdravo@gmail.com", font, PdfBrushes.Black, new PointF(0, 44));
 
-
-                // SLIKA
                 PdfImage image = PdfImage.FromFile("../../Icon/logo.png");
                 RectangleF bounds = new RectangleF(170, 12, 150, 50);
                 page.Graphics.DrawImage(image, bounds);
 
-                // NASLOV
                 font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);
                 graphics.DrawString("Izveštaj o trenutnom stanju lekova", font, PdfBrushes.Black, new PointF(120, 100));
 
-                // TABELA
                 PdfLightTable pdfLightTable = new PdfLightTable();
                 DataTable table = new DataTable();
 
@@ -76,6 +71,9 @@ namespace Hospital.View.Manager
             
                 document.Save("../../Reports/MedicinesReport.pdf");
                 document.Close(true);
+
+                MessageWindow message = new MessageWindow("Izveštaj možete pregledati u folderu Records");
+                message.Show();
             }
         }
 

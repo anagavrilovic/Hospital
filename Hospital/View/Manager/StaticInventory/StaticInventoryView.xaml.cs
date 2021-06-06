@@ -125,9 +125,7 @@ namespace Hospital.View
 
             TransferStaticInventory transfer = new TransferStaticInventory(selectedItem);
             StringBuilder sb = new StringBuilder();
-            sb.Append(selectedItem.Id);
-            sb.Append("-");
-            sb.Append(selectedItem.Name);
+            sb.Append(selectedItem.Id).Append("-").Append(selectedItem.Name);
             transfer.nazivTxt.Text = sb.ToString();
             NavigationService.Navigate(transfer);
         }

@@ -31,7 +31,8 @@ namespace Hospital.View
             RoomService roomService = new RoomService();
             if (!roomService.IsNewRoomIdUnique(NewRoom.Id))
             {
-                MessageBox.Show("Vec postoji prostorija sa unetom oznakom!");
+                Hospital.View.Manager.MessageWindow message = new Hospital.View.Manager.MessageWindow("Vec postoji prostorija sa unetom oznakom!");
+                message.Show();
                 return;
             }
             roomService.Save(NewRoom);

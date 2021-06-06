@@ -27,8 +27,10 @@ namespace Hospital.View
         {
             StaticInventoryService inventoryService = new StaticInventoryService();
             if (!inventoryService.AddNewItem(InventoryItem))
-                MessageBox.Show("Vec postoji stavka sa postojecom oznakom!");
-         
+            {
+               Hospital.View.Manager.MessageWindow message = new Hospital.View.Manager.MessageWindow("Vec postoji stavka sa postojecom oznakom!");
+                message.Show();
+            }
             NavigationService.Navigate(new StaticInventoryView(InventoryItem.RoomID));
         }
 

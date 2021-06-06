@@ -40,8 +40,8 @@ namespace Hospital.View.Manager.Rooms
 
             if (!roomService.IsNewRoomIdUnique(NewRoom.Id))
             {
-                MessageBox.Show("Vec postoji prostorija sa unetom oznakom!");
-                return;
+                Hospital.View.Manager.MessageWindow message = new Hospital.View.Manager.MessageWindow("Vec postoji prostorija sa unetom oznakom!");
+                message.Show();
             }
             RoomRenovation.RoomsCreatedDuringRenovation.Add(NewRoom);
 

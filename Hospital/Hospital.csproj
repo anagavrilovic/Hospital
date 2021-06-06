@@ -296,6 +296,9 @@
     <Compile Include="View\Manager\MedicinesReport.xaml.cs">
       <DependentUpon>MedicinesReport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Manager\MessageWindow.xaml.cs">
+      <DependentUpon>MessageWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Manager\Rooms\AddNewRoomDuringRenovation.xaml.cs">
       <DependentUpon>AddNewRoomDuringRenovation.xaml</DependentUpon>
     </Compile>
@@ -626,6 +629,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Manager\MedicinesReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\MessageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
