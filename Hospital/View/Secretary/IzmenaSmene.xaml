@@ -85,12 +85,15 @@
 
                 <CheckBox Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource CheckBoxStyle}" FontSize="17" VerticalContentAlignment="Center"
                           Margin="70,20,0,30" VerticalAlignment="Center" BorderBrush="{StaticResource MediumGray}" IsChecked="{Binding NewScheduledShift.RollShifts}">
-                    <TextBlock Text="Trajno izmeni smene" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    <TextBlock Text="Trajno izmeni smene" VerticalAlignment="Center" Margin="10,0,0,0"
+                               ToolTip="Za trajnu izmenu smena čekirajte ovo polje"/>
                 </CheckBox>
 
                 <!-- Buttons -->
-                <Button Grid.Row="5" Grid.Column="0" Content="Potvrdi" Style="{StaticResource ButtonPotvrdiStyle}" Click="ButtonYes" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,50,-20,30" />
-                <Button Grid.Row="5" Grid.Column="1" Content="Odustani"  Style="{StaticResource ButtonOdustaniStyle}" Click="ButtonCancel" Margin="0,50,150,30" HorizontalAlignment="Right"/>
+                <Button Grid.Row="5" Grid.Column="0" Content="Potvrdi" Style="{StaticResource ButtonPotvrdiStyle}" Click="ButtonYes" 
+                        HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,50,-20,30" ToolTip="Potvrdi izmenu smene"/>
+                <Button Grid.Row="5" Grid.Column="1" Content="Odustani"  Style="{StaticResource ButtonOdustaniStyle}" 
+                        Click="ButtonCancel" Margin="0,50,150,30" HorizontalAlignment="Right" ToolTip="Odustani od izmene smene"/>
 
             </Grid>
         </Border>

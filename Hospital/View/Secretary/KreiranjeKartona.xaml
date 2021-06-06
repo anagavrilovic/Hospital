@@ -47,7 +47,8 @@
             </Grid.ColumnDefinitions>
 
             <CheckBox x:Name="Gost" Content="GOSTUJUĆI PACIJENT" Style="{StaticResource CheckBoxStyle}" Margin="20,40,0,0" 
-                      IsChecked="{Binding Path=NewRecord.Patient.IsGuest, Mode=OneWayToSource}"/>
+                      IsChecked="{Binding Path=NewRecord.Patient.IsGuest, Mode=OneWayToSource}"
+                      ToolTip="Ukoliko je pacijent gostujući, otkačite ovo polje"/>
             
 
             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,20,0">
@@ -278,10 +279,11 @@
                          Text="{Binding NewRecord.Patient.Password, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                 </TextBox>
 
-                <Button x:Name="btnPotvrdi" Grid.Row="10" Grid.Column="1" Content="Potvrdi" Command="{Binding AddStudentCommand}">
+                <Button x:Name="btnPotvrdi" Grid.Row="10" Grid.Column="1" Content="Potvrdi" Command="{Binding AddStudentCommand}"
+                        ToolTip="Potvrdi dodavanje pacijenta">
                     <Button.Style>
                         <Style TargetType="Button" BasedOn="{StaticResource ButtonPotvrdiStyle}">
-                            <!--<Setter Property="IsEnabled" Value="False"/>
+                            <Setter Property="IsEnabled" Value="False"/>
                             <Style.Triggers>
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
@@ -302,12 +304,13 @@
                                     </MultiDataTrigger.Conditions>
                                     <Setter Property="IsEnabled" Value="True"/>
                                 </MultiDataTrigger>
-                            </Style.Triggers>-->
+                            </Style.Triggers>
                         </Style>
                     </Button.Style>
                 </Button>
                 <Button x:Name="btnOdustani" Grid.Row="10" Grid.Column="2" Content="Odustani" Style="{StaticResource ButtonOdustaniStyle}"
-                        Command="{Binding CancelCommand}"/>
+                        Command="{Binding CancelCommand}"
+                        ToolTip="Odustani od dodavanja pacijenta"/>
             </Grid>
         </Border>
 

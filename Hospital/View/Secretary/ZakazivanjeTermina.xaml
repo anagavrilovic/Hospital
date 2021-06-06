@@ -94,8 +94,8 @@
                           Grid.Row="7" Grid.Column="1" Height="22" Margin="3,10,40,10"/>
 
                 <!-- Buttons -->
-                <Button Grid.Row="8" Grid.Column="0" Content="Potvrdi" Margin="150,35,40,35" Style="{StaticResource ButtonPotvrdiStyle}" Click="PotvrdiClick" />
-                <Button Grid.Row="8" Grid.Column="1" Content="Odustani" Margin="40,35,150,35" Style="{StaticResource ButtonOdustaniStyle}" Click="OdustaniClick"/>
+                <Button Grid.Row="8" Grid.Column="0" Content="Potvrdi" Margin="150,35,40,35" Style="{StaticResource ButtonPotvrdiStyle}" Click="PotvrdiClick" ToolTip="Potvrdite zakazivanje termina"/>
+                <Button Grid.Row="8" Grid.Column="1" Content="Odustani" Margin="40,35,150,35" Style="{StaticResource ButtonOdustaniStyle}" Click="OdustaniClick" ToolTip="Odustanite od zakazivanje termina"/>
 
             </Grid>
         </Border>

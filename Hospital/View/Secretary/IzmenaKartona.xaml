@@ -46,7 +46,8 @@
             </Grid.ColumnDefinitions>
 
             <CheckBox x:Name="Gost" Content="GOSTUJUĆI PACIJENT" Style="{StaticResource CheckBoxStyle}" Margin="20,40,0,0" 
-                      IsChecked="{Binding Path=PatientsRecord.Patient.IsGuest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                      IsChecked="{Binding Path=PatientsRecord.Patient.IsGuest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      ToolTip="Ukoliko je pacijent gostujući, otkačite ovo polje"/>
            
 
             <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,40,20,0">
@@ -276,7 +277,7 @@
                 <TextBox x:Name="PasswordText" Grid.Row="9" Grid.Column="3" Text="{Binding Path=PatientsRecord.Patient.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}" >
                 </TextBox>
 
-                <Button x:Name="btnPotvrdi" Grid.Row="10" Grid.Column="1" Content="Potvrdi" Click="BtnPotvrdiClick" >
+                <Button x:Name="btnPotvrdi" Grid.Row="10" Grid.Column="1" Content="Potvrdi" Click="BtnPotvrdiClick" ToolTip="Potvrdi napravljene izmene">
                     <Button.Style>
                         <Style TargetType="Button" BasedOn="{StaticResource ButtonPotvrdiStyle}">
                             <Setter Property="IsEnabled" Value="False"/>
@@ -304,7 +305,8 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Button x:Name="btnOdustani" Grid.Row="10" Grid.Column="2" Content="Odustani" Style="{StaticResource ButtonOdustaniStyle}" Click="BtnOdustaniClick" />
+                <Button x:Name="btnOdustani" Grid.Row="10" Grid.Column="2" Content="Odustani" Style="{StaticResource ButtonOdustaniStyle}"
+                        Click="BtnOdustaniClick"  ToolTip="Odbaci napravljene izmene"/>
             </Grid>
         </Border>
     </Grid>

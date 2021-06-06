@@ -92,7 +92,8 @@
                     </ComboBox>
 
                     <!-- Search -->
-                    <Border Grid.Row="3" Grid.Column="1" Width="200" Height="25" Style="{StaticResource TextBoxBorder}" Margin="15,20,40,10" HorizontalAlignment="Left">
+                    <Border Grid.Row="3" Grid.Column="1" Width="200" Height="25" Style="{StaticResource TextBoxBorder}" Margin="15,20,40,10" 
+                            HorizontalAlignment="Left" ToolTip="Pretraži pacijente">
                         <StackPanel Margin="5" Orientation="Horizontal">
                             <Image Source="../../Icon/Secretary/search.png" Height="13" VerticalAlignment="Center"/>
                             <TextBox x:Name="TextBoxPatientsFilter"  BorderThickness="0" Width="200" Height="23" Margin="10,0,0,0" 
@@ -106,8 +107,10 @@
                     </ListBox>
 
                     <StackPanel Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,40,0,50">
-                        <Button Content="Potvrdi" Width="100" Height="30" Style="{StaticResource ButtonPotvrdiStyle}" Click="BtnPotvrdiClick"/>
-                        <Button Content="Odustani" Width="100" Style="{StaticResource ButtonOdustaniStyle}" Click="BtnOdustaniClick" />
+                        <Button Content="Potvrdi" Width="100" Height="30" Style="{StaticResource ButtonPotvrdiStyle}" Click="BtnPotvrdiClick"
+                                ToolTip="Povrdi zakazivanje hitnog pregleda"/>
+                        <Button Content="Odustani" Width="100" Style="{StaticResource ButtonOdustaniStyle}" Click="BtnOdustaniClick" 
+                                ToolTip="Odustani od zakazivanja hitnog pregleda"/>
                     </StackPanel>
 
                 </Grid>
@@ -136,7 +139,8 @@
                     </Grid.ColumnDefinitions>
 
                     <CheckBox x:Name="GostNalog" Grid.Row="0" Grid.ColumnSpan="2" Content="Formiranje guest naloga pacijentu" Style="{StaticResource CheckBoxStyle}" 
-                              Margin="40,20,0,0" IsChecked="{Binding NewGuestPatient.Patient.IsGuest}"/>
+                              Margin="40,20,0,0" IsChecked="{Binding NewGuestPatient.Patient.IsGuest}"
+                              ToolTip="Za kreiranje guest naloga čekirajte ovo polje"/>
 
                     <!-- Placeholderi -->
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Ime: " Style="{StaticResource KartoniTextBlock}" Margin="40,10,0,10"/>

@@ -55,7 +55,7 @@
                                 <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
                             </Border.Effect>
                         </Border>
-                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="40" Height="40">
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="40" Height="40" ToolTip="Odaberite dan za prikaz smena">
                             <DatePicker Width="30" Height="30" Margin="0,7,3,0" BorderBrush="Transparent" SelectedDateChanged="DatePicker_SelectedDateChanged"
                                         SelectedDate="{Binding SelectedDate}" DisplayDateStart="{x:Static sys:DateTime.Today}"/>
                         </Border>
@@ -68,7 +68,7 @@
                             </Border.Effect>
                         </Border>
                         <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="15,0,0,0" Width="150" Height="40">
-                            <Button BorderBrush="Transparent" Background="Transparent" Click="ChangeShiftClick" >
+                            <Button BorderBrush="Transparent" Background="Transparent" Click="ChangeShiftClick" ToolTip="Izmenite smenu određenom lekaru">
                                 <TextBlock Text="Izmena smene" Style="{StaticResource TitleStyleBlue}" FontWeight="Medium"/>
                             </Button>
                         </Border>
@@ -81,7 +81,7 @@
                             </Border.Effect>
                         </Border>
                         <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="15,0,0,0" Width="150" Height="40">
-                            <Button Background="Transparent" BorderBrush="Transparent" Click="FreeDaysClick" >
+                            <Button Background="Transparent" BorderBrush="Transparent" Click="FreeDaysClick" ToolTip="Dodajte slobodne dane lekaru">
                                 <TextBlock Text="Slobodni dani" Style="{StaticResource TitleStyleBlue}" FontWeight="Medium"/>
                             </Button>
                         </Border>
@@ -90,7 +90,7 @@
                 </StackPanel>
 
                 <!-- Search -->
-                <Border Grid.Column="1" Width="250" Height="30" HorizontalAlignment="Right" Margin="0,10"
+                <Border Grid.Column="1" Width="250" Height="30" HorizontalAlignment="Right" Margin="0,10" ToolTip="Pretraži lekare"
                             Style="{StaticResource TextBoxBorder}" BorderThickness="0">
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />

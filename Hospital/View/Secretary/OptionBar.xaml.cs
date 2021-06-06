@@ -39,7 +39,8 @@ namespace Hospital.View.Secretary
 
         private void ProfileBtn_Click(object sender, RoutedEventArgs e)
         {
-            // open profile settings
+            // moj profil
         }
+
     }
 }
