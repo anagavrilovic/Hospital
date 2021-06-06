@@ -21,6 +21,7 @@ namespace Hospital.View.Secretary
     public partial class Analitika : Page
     {
         private DoctorService doctorService = new DoctorService();
+        private AppointmentService appointmentService = new AppointmentService();
 
         public Analitika()
         {
@@ -43,10 +44,14 @@ namespace Hospital.View.Secretary
 
         private void DrawWorkTimeChart()
         {
+            int[] periodsFirstMonth = getPeriodsFirstMonth();
+            int[] periodsSecondMonth = getPeriodsSecondMonth();
+            int[] periodsThirdMonth = getPeriosThirdMonth();
+
             DoctorsSeriesCollection = new SeriesCollection();
-            DoctorsSeriesCollection.Add(new ColumnSeries { Title = "jun", Values = new ChartValues<int> { 50, 67, 42 } });
-            DoctorsSeriesCollection.Add(new ColumnSeries { Title = "jul", Values = new ChartValues<int> { 66, 98, 38 } });
-            DoctorsSeriesCollection.Add(new ColumnSeries { Title = "avgust", Values = new ChartValues<int> { 30, 50, 74 } });
+            DoctorsSeriesCollection.Add(new ColumnSeries { Title = "jun", Values = new ChartValues<int> { periodsFirstMonth[0], periodsFirstMonth[1], periodsFirstMonth[2] } });
+            DoctorsSeriesCollection.Add(new ColumnSeries { Title = "jul", Values = new ChartValues<int> { periodsSecondMonth[0], periodsSecondMonth[1], periodsSecondMonth[2] } });
+            DoctorsSeriesCollection.Add(new ColumnSeries { Title = "avgust", Values = new ChartValues<int> { periodsThirdMonth[0], periodsThirdMonth[1], periodsThirdMonth[2] } });
 
             List<Model.Doctor> doctors = doctorService.GetAll();
             DoctorsLabels = new string[doctors.Count];
@@ -54,6 +59,49 @@ namespace Hospital.View.Secretary
                 DoctorsLabels[i] = doctors[i].ToString();
 
             Formatter = value => value.ToString("N");
+        }
+
+        private int[] getPeriosThirdMonth()
+        {
+            int[] periods = { 0, 0, 0 };
+            int i = 0;
+            foreach(Model.Doctor d in doctorService.GetAll())
+            {
+                foreach(Appointment a in appointmentService.GetAll())
+                    if(a.IDDoctor.Equals(d.PersonalID) && a.DateTime.Month.Equals(DateTime.Now.AddMonths(2).Month))
+                        periods[i]++;
+                i++;
+            }
+            return periods;
+        }
+
+        private int[] getPeriodsSecondMonth()
+        {
+            int[] periods = { 0, 0, 0 };
+            int i = 0;
+            foreach (Model.Doctor d in doctorService.GetAll())
+            {
+                foreach (Appointment a in appointmentService.GetAll())
+                    if (a.IDDoctor.Equals(d.PersonalID) && a.DateTime.Month.Equals(DateTime.Now.AddMonths(1).Month))
+                        periods[i]++;
+                i++;
+            }
+            return periods;
+        }
+
+        private int[] getPeriodsFirstMonth()
+        {
+            int[] periods = { 0, 0, 0 };
+            int i = 0;
+            foreach (Model.Doctor d in doctorService.GetAll())
+            {
+                foreach (Appointment a in appointmentService.GetAll())
+                    if (a.IDDoctor.Equals(d.PersonalID) && a.DateTime.Month.Equals(DateTime.Now.Month))
+                        periods[i]++;
+
+                i++;
+            }
+            return periods;
         }
 
         #endregion
