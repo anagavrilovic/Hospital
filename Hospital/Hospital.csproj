@@ -133,7 +133,6 @@
     <Compile Include="DoktorConverters\ListToStringConverter.cs" />
     <Compile Include="DTO\DoctorDTO\AddAppointmentDTO.cs" />
     <Compile Include="DTO\DoctorDTO\AppointmentDetailsDTO.cs" />
-    <Compile Include="DTO\DoctorDTO\AppointmentDTO.cs" />
     <Compile Include="DTO\DoctorDTO\AppointmentInfoDTO.cs" />
     <Compile Include="Controller\DoctorControllers\CreateAppointmentController.cs" />
     <Compile Include="DTO\DoctorDTO\CreateAppointmentDTO.cs" />

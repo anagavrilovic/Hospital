@@ -20,6 +20,7 @@ namespace Hospital.DTO.DoctorDTO
                 OnPropertyChanged("Appointments");
             }
         }
+
         private double _durationInHours;
         public double DurationInHours
         {

@@ -165,7 +165,10 @@ namespace Hospital
         {
             return this.DateTime.DayOfWeek;
         }
-
+        public string toDate()
+        {
+            return String.Format("{0:dd-MM-yyyy}", this.DateTime);
+        }
         override
         public string ToString()
         {

@@ -30,6 +30,7 @@ namespace Hospital.DTO.DoctorDTO
                 OnPropertyChanged("Doctor");
             }
         }
+
         private Appointment selectedAppointment;
         public Appointment SelectedAppointment
         {
@@ -40,5 +41,6 @@ namespace Hospital.DTO.DoctorDTO
                 OnPropertyChanged("SelectedAppointment");
             }
         }
+
     }
 }

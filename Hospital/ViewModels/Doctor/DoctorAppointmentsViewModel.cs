@@ -29,26 +29,6 @@ namespace Hospital.ViewModels.Doctor
                 OnPropertyChanged("DTO");
             }
         }
-        private Model.Doctor doctor = new Model.Doctor();
-        public Model.Doctor Doctor
-        {
-            get { return doctor; }
-            set
-            {
-                doctor = value;
-                OnPropertyChanged("Doctor");
-            }
-        }
-        private Appointment selectedAppointment;
-        public Appointment SelectedAppointment
-        {
-            get { return selectedAppointment; }
-            set
-            {
-                selectedAppointment = value;
-                OnPropertyChanged("SelectedAppointment");
-            }
-        }
 
         private string dateFilter;
         public string DateFilter
@@ -103,20 +83,20 @@ namespace Hospital.ViewModels.Doctor
             controller = new DoctorAppointmentsController(DTO);
             this.navigationController = navigationController;
             SetCommands();
-            SetFilterAndSorter();
-            Doctor = controller.GetDoctorById(IDnumber);
+            DTO.Doctor = controller.GetDoctorById(IDnumber);
             DTO.Appointments = new ObservableCollection<Appointment>(controller.InitAppointments());
+            SetFilterAndSorter();
         }
 
         private void SetFilterAndSorter()
         {
             DateCollection= CollectionViewSource.GetDefaultView(DTO.Appointments);
-            DateCollection.Filter = FilterByDate;
+            DateCollection.Filter = filterByDate;
             ICollectionView view = GetPretraga();
             view.SortDescriptions.Add(new SortDescription("DateTime", ListSortDirection.Ascending));
         }
 
-        private bool FilterByDate(object obj)
+        private bool filterByDate(object obj)
         {
             if (string.IsNullOrEmpty(DateFilter))
             {
@@ -124,7 +104,7 @@ namespace Hospital.ViewModels.Doctor
             }
             else
             {
-                return (((Appointment)obj).DateTime.ToString().IndexOf(DateFilter, StringComparison.OrdinalIgnoreCase) >= 0);
+                return (((Appointment)obj).toDate().IndexOf(DateFilter, StringComparison.OrdinalIgnoreCase) >= 0);
             }
         }
         private void Execute_FilterChanged()
@@ -145,9 +125,9 @@ namespace Hospital.ViewModels.Doctor
 
         private void dataGridAppointments_MouseDoubleClick(object sender)
         {
-            if (SelectedAppointment != null)
+            if (DTO.SelectedAppointment != null)
             {
-                AppointmentDetails review = new AppointmentDetails(SelectedAppointment);
+                AppointmentDetails review = new AppointmentDetails(DTO.SelectedAppointment);
                 review.Owner = Window.GetWindow(App.Current.MainWindow);
                 review.Show();
                 Window.GetWindow(App.Current.MainWindow).Hide();
@@ -160,22 +140,22 @@ namespace Hospital.ViewModels.Doctor
         }
         private void Execute_Delete(object sender)
         {
-            if (SelectedAppointment != null)
+            if (DTO.SelectedAppointment != null)
             {
-                Appointment selectedAppointment = SelectedAppointment;
+                Appointment selectedAppointment = DTO.SelectedAppointment;
                 controller.DeleteAppointment();
                 MedicalRecord medicalRecord = controller.GetByPatientId();
                 if (medicalRecord != null)
                 {
                     controller.DeleteAppointmentFromExamination(medicalRecord);
                 }
-                DTO.Appointments.Remove(SelectedAppointment);
+                DTO.Appointments.Remove(DTO.SelectedAppointment);
             }
         }
 
         private void Execute_AddAppointment(object sender)
         {
-            NewAppointment newAppointment = new NewAppointment(Doctor.PersonalID,navigationController);
+            NewAppointment newAppointment = new NewAppointment(DTO.Doctor.PersonalID,navigationController);
             newAppointment.Show();
         }
     }

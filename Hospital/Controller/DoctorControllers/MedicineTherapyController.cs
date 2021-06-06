@@ -1,5 +1,6 @@
 ﻿using Hospital.DTO.DoctorDTO;
 using Hospital.Services;
+using Hospital.View.Doctor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,12 @@ namespace Hospital.Controller.DoctorControllers
 
         public bool AllergicToMedic(Medicine medicToBeAdded, MedicalRecord medicalRecord)
         {
-            return medicineService.AllergicToMedic(medicToBeAdded, medicalRecord);
+            if (medicineService.AllergicToMedic(medicToBeAdded, medicalRecord))
+            {
+                ErrorBox errorBox = new ErrorBox("Pacijent je alergican na dati lek");
+                return true;
+            }
+            return false;
         }
     }
 }

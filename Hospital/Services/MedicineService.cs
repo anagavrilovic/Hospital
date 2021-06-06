@@ -137,7 +137,6 @@ namespace Hospital.Services
             {
                 if (medicineName.Equals(medicToBeAdded.Name))
                 {
-                    ErrorBox errorBox = new ErrorBox("Pacijent je alergican na dati lek");
                     return true;
                 }
             }
