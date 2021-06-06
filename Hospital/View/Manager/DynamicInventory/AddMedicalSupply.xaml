@@ -54,10 +54,10 @@
             <Label Content="UNOS INVENTARA" Foreground="#FF4B72F6" FontSize="24" Margin="91,66,96,-0.2" FontWeight="Bold"/>
         </Grid>
 
-        <Label Content="Oznaka:"           Grid.Row="2"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0.2,5.4,10.4"/>
-        <Label Content="Naziv:"            Grid.Row="4"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5.4,10.6"/>
-        <Label Content="Cena po jedinici:" Grid.Row="5"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,45.4,0.4,9.8" Grid.RowSpan="2"/>
-        <Label Content="Količina:"         Grid.Row="7"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,45.2,5.4,10" Grid.RowSpan="2"/>
+        <Label Content="Oznaka*:"           Grid.Row="2"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0.2,5.4,10.4"/>
+        <Label Content="Naziv*:"            Grid.Row="4"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5.4,10.6"/>
+        <Label Content="Cena po jedinici*:" Grid.Row="5"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,45.4,0.4,9.8" Grid.RowSpan="2"/>
+        <Label Content="Količina*:"         Grid.Row="7"  Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,45.2,5.4,10" Grid.RowSpan="2"/>
         <Label Content="Merna jedinica:"   Grid.Row="10" Grid.Column="0"  Foreground="#FF1E49D9" FontSize="20" Margin="30,0.4,5.4,10.2"/>
 
         <TextBox x:Name="idTxt" Grid.Row="3" Grid.ColumnSpan="2" Margin="30,0.6,28,14" BorderBrush="#FF26282C">
@@ -197,7 +197,7 @@
             <ComboBoxItem>FLAŠICE</ComboBoxItem>
         </ComboBox>
 
-        <Button Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,0.8,5.2,53.4" Click="AcceptAddingButtonClick" FontSize="16">
+        <Button Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Content="POTVRDI"  Foreground="#FF051D6E" Margin="30,0.8,5.2,53.4" Click="AcceptAddingButtonClick" FontSize="16">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Template">
@@ -209,6 +209,7 @@
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
+                    <Setter Property="Background" Value="#C0C0C0"/>
                     <Setter Property="IsEnabled" Value="False"/>
                     <Style.Triggers>
                         <MultiDataTrigger>
@@ -219,6 +220,7 @@
                                 <Condition Binding="{Binding Path=(Validation.HasError), ElementName=cenaTxt}"     Value="False"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="IsEnabled" Value="True"/>
+                            <Setter Property="Background" Value="#FFAAD0E0"/>
                         </MultiDataTrigger>
                     </Style.Triggers>
                 </Style>

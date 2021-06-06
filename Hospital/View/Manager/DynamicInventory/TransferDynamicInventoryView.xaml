@@ -41,9 +41,9 @@
 
         <Label Content="RAZMENA OPREME" Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="87,4.8,93.4,14.4" FontWeight="Bold"/>
 
-        <Label Content="Naziv stavke:"          Grid.Row="2" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0.4,5.4,33.4" />
-        <Label Content="Količina:"              Grid.Row="4" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5.4,25.6" />
-        <Label Content="ID odredišne sale:"     Grid.Row="5" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,72.4,5.4,25.2" Grid.RowSpan="2" />
+        <Label Content="Naziv stavke*:"          Grid.Row="2" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0.4,5.4,33.4" />
+        <Label Content="Količina*:"              Grid.Row="4" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5.4,25.6" />
+        <Label Content="ID odredišne sale*:"     Grid.Row="5" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,72.4,5.4,25.2" Grid.RowSpan="2" />
 
         <TextBox x:Name="nazivTxt"      Grid.Row="2" Grid.ColumnSpan="2" Margin="30,52.4,28,35" BorderBrush="#FF26282C" Grid.RowSpan="2" >
             <TextBox.Resources>

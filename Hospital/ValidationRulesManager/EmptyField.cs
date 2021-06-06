@@ -21,7 +21,7 @@ namespace Hospital.ValidationRulesManager
                     return new ValidationResult(true, null);
                 }
 
-                return new ValidationResult(false, "Morate uneti vrednost.");
+                return new ValidationResult(false, "");
             }
             catch
             {

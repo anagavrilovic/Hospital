@@ -16,6 +16,12 @@ namespace Hospital.ValidationRulesManager
             {
                 var s = value as string;
 
+
+                if (string.IsNullOrEmpty(s))
+                {
+                    return new ValidationResult(false, "");
+                }
+
                 if (System.Text.RegularExpressions.Regex.IsMatch(s, @"^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"))
                 {
                     return new ValidationResult(true, null);
