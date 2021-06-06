@@ -293,6 +293,9 @@
     <Compile Include="View\Doctor\NewAppointment.xaml.cs">
       <DependentUpon>NewAppointment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Manager\MedicinesReport.xaml.cs">
+      <DependentUpon>MedicinesReport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Manager\Rooms\AddNewRoomDuringRenovation.xaml.cs">
       <DependentUpon>AddNewRoomDuringRenovation.xaml</DependentUpon>
     </Compile>
@@ -619,6 +622,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Doctor\NewAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\MedicinesReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1300,6 +1307,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\Secretary\print.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\pdf.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
