@@ -14,7 +14,7 @@ namespace Hospital.Controller
 
         public abstract void NavigateToDoctorNotifications(string id,NavigationController navigationController);
 
-        public abstract void NavigateToDoctorValidation(Model.Doctor doctor);
+        public abstract void NavigateToDoctorValidation(Model.Doctor doctor, NavigationController navigationController);
 
         public abstract void NavigateToDoctorAppointments(string id, NavigationController navigationController);
 

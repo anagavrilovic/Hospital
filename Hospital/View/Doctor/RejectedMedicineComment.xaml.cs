@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Controller;
+using Hospital.Model;
 using Hospital.ViewModels.Doctor;
 using System;
 using System.Collections.Generic;
@@ -23,10 +24,10 @@ namespace Hospital.View.Doctor
     public partial class RejectedMedicineComment : Window
     {
 
-        public RejectedMedicineComment(MedicineRevision medicineRevision)
+        public RejectedMedicineComment(MedicineRevision medicineRevision, NavigationController navigationController,Model.Doctor doctor)
         {
             InitializeComponent();
-            RejectedMedicineViewModel viewModel = new RejectedMedicineViewModel(medicineRevision);
+            RejectedMedicineViewModel viewModel = new RejectedMedicineViewModel(medicineRevision,navigationController,doctor);
             this.DataContext = viewModel;
             if (viewModel.CloseAction == null)
                 viewModel.CloseAction = new Action(this.Close);

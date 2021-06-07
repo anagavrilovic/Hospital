@@ -52,9 +52,9 @@ namespace Hospital.Controller
             navService.Navigate(new DoctorReport());
         }
 
-        public override void NavigateToDoctorValidation(Model.Doctor doctor)
+        public override void NavigateToDoctorValidation(Model.Doctor doctor, NavigationController navigationController)
         {
-            navService.Navigate(new MedicineValidity(doctor));
+            navService.Navigate(new MedicineValidity(doctor,navigationController));
         }
     }
 }

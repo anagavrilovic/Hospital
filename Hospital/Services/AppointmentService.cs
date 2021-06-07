@@ -471,9 +471,12 @@ namespace Hospital.Services
             if (appointment == null) return false;
             foreach (Appointment a in appointment)
             {
-                if (a.DateTime == dt && a.IDDoctor.Equals(idDoctor))
+                if (a.IDAppointment != null)
                 {
-                    return true;
+                    if (a.DateTime == dt && a.IDDoctor.Equals(idDoctor))
+                    {
+                        return true;
+                    }
                 }
             }
 

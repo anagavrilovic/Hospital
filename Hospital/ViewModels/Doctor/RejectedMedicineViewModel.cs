@@ -1,4 +1,5 @@
 ﻿using Hospital.Commands.DoctorCommands;
+using Hospital.Controller;
 using Hospital.Model;
 using Hospital.Services;
 using System;
@@ -11,6 +12,8 @@ namespace Hospital.ViewModels.Doctor
 {
     public class RejectedMedicineViewModel : ViewModel
     {
+        private Model.Doctor doctor;
+        private NavigationController navigationController;
         public Action CloseAction { get; set; }
         private RelayCommand backCommand;
         public RelayCommand BackCommand
@@ -47,8 +50,10 @@ namespace Hospital.ViewModels.Doctor
                 }
             }
         }
-        public RejectedMedicineViewModel(MedicineRevision medicineRevision)
+        public RejectedMedicineViewModel(MedicineRevision medicineRevision, NavigationController navigationController,Model.Doctor doctor)
         {
+            this.doctor = doctor;
+            this.navigationController = navigationController;
             SaveCommand = new RelayCommand(Execute_SaveRejection, CanExecute_Command);
             BackCommand = new RelayCommand(Execute_Back, CanExecute_Command);
             this.medicineRevision = medicineRevision;
@@ -66,6 +71,7 @@ namespace Hospital.ViewModels.Doctor
             MedicineRevision.IsMedicineRevised = true;
             medicineRevisionService.EditMedicine(MedicineRevision);
             CloseAction();
+            navigationController.NavigateToDoctorValidation(doctor,navigationController);
         }
     }
 }

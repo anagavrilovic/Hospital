@@ -64,12 +64,11 @@ namespace Hospital.Services
         internal List<Medicine> GetConsumedMedicineInPeriod(DateTime startDate, DateTime endDate)
         {
             List<Medicine> medicines = new List<Medicine>();
-            foreach(MedicalRecord record in medicalRecordRepository.GetAll())
-                foreach(Examination examination in record.Examination)
-                    if(examination.dateOfExamination>=startDate && examination.dateOfExamination <= endDate)
-                        foreach(MedicineTherapy medicineTherapy in examination.therapy.Medicine)
-                            medicines.Add(medicineTherapy.Medicine);
-
+            foreach (MedicalRecord record in medicalRecordRepository.GetAll())
+                foreach (Examination examination in record.Examination)
+                    if (examination.dateOfExamination.Date >= startDate.Date && examination.dateOfExamination.Date <= endDate.Date)
+                        foreach (MedicineTherapy medicineTherapy in examination.therapy.Medicine)
+                            medicines.Add(medicineRepository.GetByID(medicineTherapy.MedicineID));
             return medicines;
         }
 

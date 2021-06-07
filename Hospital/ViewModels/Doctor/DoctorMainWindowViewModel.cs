@@ -109,7 +109,7 @@ namespace Hospital.ViewModels.Doctor
 
         private void Execute_Revision(object sender)
         {
-            navigationController.NavigateToDoctorValidation(doctor);
+            navigationController.NavigateToDoctorValidation(doctor, navigationController);
         }
 
 

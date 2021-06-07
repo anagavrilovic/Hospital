@@ -1,4 +1,5 @@
 ﻿using Hospital.Commands.DoctorCommands;
+using Hospital.Controller;
 using Hospital.Controller.DoctorControllers;
 using Hospital.DTO.DoctorDTO;
 using Hospital.Model;
@@ -21,6 +22,8 @@ namespace Hospital.ViewModels.Doctor
     {
         private MedicineValidityController controller;
         private MedicineValidityDTO dTO;
+        private Model.Doctor doctor;
+        NavigationController navigationController;
         public MedicineValidityDTO DTO
         {
             get
@@ -63,8 +66,10 @@ namespace Hospital.ViewModels.Doctor
             get { return this.cancelImage; }
             set { this.cancelImage = value; this.OnPropertyChanged("OkImage"); }
         }
-        public MedicineValidityViewModel(Model.Doctor doctor)
+        public MedicineValidityViewModel(Model.Doctor doctor, NavigationController navigationController)
         {
+            this.doctor = doctor;
+            this.navigationController = navigationController;
             DTO = new MedicineValidityDTO();
             controller = new MedicineValidityController(DTO);
             DTO.MedicineRevisions = new ObservableCollection<MedicineRevision>();
@@ -110,7 +115,7 @@ namespace Hospital.ViewModels.Doctor
         {
             if (DTO.SelectedRevision != null)
             {
-                RejectedMedicineComment dialog = new RejectedMedicineComment(DTO.SelectedRevision);
+                RejectedMedicineComment dialog = new RejectedMedicineComment(DTO.SelectedRevision,navigationController,doctor);
                 dialog.Show();
             }
         }

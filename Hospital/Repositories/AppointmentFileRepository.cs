@@ -165,7 +165,8 @@ namespace Hospital.Repositories
             appointments.AddRange(GetPassedAppointments());
             foreach (Appointment appointment in appointments)
             {
-                if (appointment.IDAppointment.Equals(ID)) return true;
+                if(appointment.IDAppointment != null)
+                    if (appointment.IDAppointment.Equals(ID)) return true;
             }
             return false;
         }

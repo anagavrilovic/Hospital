@@ -73,6 +73,7 @@ namespace Hospital.View.Doctor
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
+            CheckFreeBeds();
             hospitalTreatment.PatientId = DTO.MedicalRecord.Patient.PersonalID;
             hospitalTreatment.RoomId = DTO.SelectedRoom.Id;
             hospitalTreatment.StartOfTreatment = DateTime.Now;
@@ -80,6 +81,16 @@ namespace Hospital.View.Doctor
             HospitalTreatmentService hospitalTreatmentService = new HospitalTreatmentService();
             hospitalTreatmentService.Save(hospitalTreatment);
             changeUI();
+        }
+
+        private void CheckFreeBeds()
+        {
+            if (DTO.SelectedRoom.FreeBeds == 0) {
+                ErrorBox errorBox = new ErrorBox("Data soba nema slobodnih kreveta");
+                return;
+             }
+            DTO.SelectedRoom.FreeBeds--;
+            roomService.EditRoom(DTO.SelectedRoom);
         }
 
         private void changeUI()

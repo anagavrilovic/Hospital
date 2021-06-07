@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Controller;
+using Hospital.Model;
 using Hospital.Services;
 using Hospital.ViewModels.Doctor;
 using System;
@@ -15,10 +16,10 @@ namespace Hospital.View.Doctor
     /// </summary>
     public partial class MedicineValidity : Page
     {
-        public MedicineValidity(Model.Doctor doctor)
+        public MedicineValidity(Model.Doctor doctor, NavigationController navigationController)
         {
             InitializeComponent();
-            this.DataContext = new MedicineValidityViewModel(doctor);
+            this.DataContext = new MedicineValidityViewModel(doctor,navigationController);
         }
     }
 }
