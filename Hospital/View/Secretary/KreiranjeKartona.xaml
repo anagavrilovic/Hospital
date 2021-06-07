@@ -279,7 +279,7 @@
                          Text="{Binding NewRecord.Patient.Password, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                 </TextBox>
 
-                <Button x:Name="btnPotvrdi" Grid.Row="10" Grid.Column="1" Content="Potvrdi" Command="{Binding AddStudentCommand}"
+                <Button x:Name="btnPotvrdi" Grid.Row="10" Grid.Column="1" Content="Potvrdi" Command="{Binding AddPatientCommand}"
                         ToolTip="Potvrdi dodavanje pacijenta">
                     <Button.Style>
                         <Style TargetType="Button" BasedOn="{StaticResource ButtonPotvrdiStyle}">

@@ -182,6 +182,13 @@ namespace Hospital.View.Secretary
                 InformationBox informationBox = new InformationBox("Izaberite lekara!");
                 informationBox.Show();
                 return false;
+            } 
+
+            if(DateBegin > DateEnd)
+            {
+                InformationBox informationBox = new InformationBox("Početni dan ne može biti nakon krajnjeg!");
+                informationBox.Show();
+                return false;
             }
 
             return true;

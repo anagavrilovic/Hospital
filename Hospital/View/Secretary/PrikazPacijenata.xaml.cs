@@ -66,7 +66,7 @@ namespace Hospital.View
             if (!IsPatientSelected(PatientForUpdateNotSelectedMessage()))
                 return;
 
-            NavigationService.Navigate(new IzmenaKartona(SelectedPatientsRecord.MedicalRecordID));
+            NavigationService.Navigate(new IzmenaKartona(new IzmenaKartonaViewModel(this.NavigationService, SelectedPatientsRecord.MedicalRecordID)));
         }
 
         private void PatientsDetailsClick(object sender, RoutedEventArgs e)

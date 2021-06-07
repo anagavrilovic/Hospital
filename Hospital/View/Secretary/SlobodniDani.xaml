@@ -31,7 +31,7 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="RADNO VREME " Style="{StaticResource TitleStyle}"/>
                     <Image Source="../../Icon/Secretary/arrow.png" Width="10" Margin="0,20,0,5"/>
-                    <TextBlock Text=" Izmena smene" Style="{StaticResource TitleStyle}" Margin="0,20,0,5"/>
+                    <TextBlock Text=" Slobodni dani" Style="{StaticResource TitleStyle}" Margin="0,20,0,5"/>
                 </StackPanel>
                 <!--<Separator Margin="15,0"/>-->
             </StackPanel>

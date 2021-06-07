@@ -49,6 +49,13 @@ namespace Hospital.View.Secretary
 
         private void ButtonYes(object sender, RoutedEventArgs e)
         {
+            if(DoctorComboBox.SelectedIndex == -1 || ShiftComboBox.SelectedIndex == -1)
+            {
+                InformationBox informationBox = new InformationBox("Popunite sva polja!");
+                informationBox.Show();
+                return;
+            }
+
             DoctorsShiftService.ChangeShift(SelectedDoctor, NewScheduledShift);
             NavigationService.Navigate(new RadnoVreme());
         }
@@ -60,8 +67,11 @@ namespace Hospital.View.Secretary
 
         private void DateChanged(object sender, SelectionChangedEventArgs e)
         {
-            OldShift = DoctorsShiftService.GetDoctorsShiftByDate(SelectedDoctor, (DateTime)DatePickerDate.SelectedDate);
-            OldShiftText.Text = OldShift;
+            if(SelectedDoctor != null)
+            {
+                OldShift = DoctorsShiftService.GetDoctorsShiftByDate(SelectedDoctor, (DateTime)DatePickerDate.SelectedDate);
+                OldShiftText.Text = OldShift;
+            }
         }
     }
 }

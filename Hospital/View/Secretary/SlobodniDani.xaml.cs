@@ -51,6 +51,13 @@ namespace Hospital.View.Secretary
 
         private void PotvrdiClick(object sender, RoutedEventArgs e)
         {
+            if(SelectedDoctor == null)
+            {
+                InformationBox informationBox = new InformationBox("Odaberite lekara!");
+                informationBox.Show();
+                return;
+            }
+
             bool freeDaysSet = DoctorsShiftService.SetFreeDays(SelectedDoctor, StartDate, EndDate);
             if (!freeDaysSet)
             {
