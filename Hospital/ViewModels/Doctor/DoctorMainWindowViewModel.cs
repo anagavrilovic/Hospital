@@ -19,7 +19,7 @@ namespace Hospital.ViewModels.Doctor
         public Action CloseAction { get; set; }
         private DoctorMainWindowController controller;
         public Frame frameMainPage;
-        private DoctorMainPage mainPage;
+        public DoctorMainPage mainPage;
         private string doctorId;
         private NavigationController navigationController;
         private Model.Doctor doctor = new Model.Doctor();

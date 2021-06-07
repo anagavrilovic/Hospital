@@ -33,19 +33,19 @@ namespace Hospital.ViewModels.Doctor
                 }
             }
         }
-        private IEnumerable<FeedbackType> types;
-        public IEnumerable<FeedbackType> Types
+        private Boolean isEnable;
+        public Boolean IsEnable
         {
             get
             {
-                return types;
+                return isEnable;
             }
             set
             {
-                if (value != types)
+                if (value != isEnable)
                 {
-                    types = value;
-                    OnPropertyChanged("Type");
+                    isEnable = value;
+                    OnPropertyChanged("IsEnable");
                 }
             }
         }
@@ -79,19 +79,20 @@ namespace Hospital.ViewModels.Doctor
         {
             this.navigationController = navigationController;
             Feedback.UserId = doctorId;
-            Types=Enum.GetValues(typeof(FeedbackType)).Cast<FeedbackType>();
             SaveCommand = new RelayCommand(Execute_Save, CanExecute_Command);
             service = new FeedbackService();
+            IsEnable = true;
         }
         private void Execute_Save(object obj)
-        {
+        {   
             if (Feedback.Comment == null)
                 return;
             Feedback.FeedbackType = SelectedType;
             service.SaveFeedBack(Feedback);
             ErrorBox box = new ErrorBox("Feedback uspešno sačuvan.");
-            navigationController.NavigateToDoctorNotifications(Feedback.UserId, navigationController);
+            IsEnable = false;
         }
+
         private bool CanExecute_Command(object obj)
         {
             return true;
