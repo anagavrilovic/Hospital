@@ -74,7 +74,7 @@ namespace Hospital.View
             if (!IsPatientSelected(PatientForDetailsNotSelectedMessage()))
                 return;
 
-            NavigationService.Navigate(new DetaljiKarton(SelectedPatientsRecord));
+            NavigationService.Navigate(new DetaljiKarton(new DetaljiKartonViewModel(this.NavigationService, SelectedPatientsRecord)));
         }
 
         private void DeletePatientClick(object sender, RoutedEventArgs e)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.ViewModels.Secretary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,13 +18,10 @@ namespace Hospital.View.Secretary
 {
     public partial class DetaljiKarton : Page
     {
-        public MedicalRecord PatientsRecord { get; set; }
-
-        public DetaljiKarton(MedicalRecord selectedPatient)
+        public DetaljiKarton(DetaljiKartonViewModel detaljiKartonViewModel)
         {
             InitializeComponent();
-            this.DataContext = this;
-            this.PatientsRecord = selectedPatient;
+            this.DataContext = detaljiKartonViewModel;
         }
     }
 }

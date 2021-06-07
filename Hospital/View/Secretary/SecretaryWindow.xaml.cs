@@ -1,4 +1,5 @@
 ﻿using Hospital.View.Secretary;
+using Hospital.ViewModels.Secretary;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -77,7 +78,7 @@ namespace Hospital.View
 
         private void ButtonAnalitikaClick(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new Analitika());
+            Main.Navigate(new Analitika(new AnalitikaViewModel(Main.NavigationService)));
         }
 
         private void ButtonNaseBolniceClick(object sender, RoutedEventArgs e)

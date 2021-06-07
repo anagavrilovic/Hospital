@@ -196,7 +196,7 @@ namespace Hospital.View.Secretary
 
         private void CancelBtnClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Analitika());
+            NavigationService.Navigate(new Analitika(new ViewModels.Secretary.AnalitikaViewModel(this.NavigationService)));
         }
 
         private void DoctorFilter_TextChanged(object sender, TextChangedEventArgs e)
