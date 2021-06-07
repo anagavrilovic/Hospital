@@ -1,0 +1,43 @@
+﻿<Page x:Class="Hospital.View.Secretary.FeedbackSekretar"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hospital.View.Secretary"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1065"
+      Background="{StaticResource BackgroundGray}"
+      Title="FeedbackSekretar">
+    <Page.Resources>
+        <ResourceDictionary Source="../../Resources/SecretaryResourceDictionary.xaml"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="FEEDBACK " Style="{StaticResource TitleStyle}"/>
+            </StackPanel>
+
+            <local:OptionBar Grid.Column="2" Height="30" Width="170" Margin="0,15,15,0" VerticalAlignment="Top" ></local:OptionBar>
+        </Grid>
+
+        <Border Grid.Row="1" Margin="15,30,0,15" Width="600" CornerRadius="10" Background="{StaticResource MainWhite}" HorizontalAlignment="Left">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+            </Border.Effect>
+        </Border>
+        <Border Grid.Row="1" Margin="15,30,0,15" Width="600" CornerRadius="10" Background="{StaticResource MainWhite}" HorizontalAlignment="Left">
+            
+        </Border>
+    </Grid>
+</Page>

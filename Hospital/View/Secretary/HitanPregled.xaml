@@ -171,7 +171,7 @@
                         </TextBox.Text>
                     </TextBox>
                     <DatePicker Grid.Row="3" Grid.Column="1" Style="{StaticResource GuestForm}" Margin="0,15,40,15" 
-                                Text="{Binding NewGuestPatient.Patient.DateOfBirth, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" FirstDayOfWeek="Monday"
+                                Text="{Binding NewGuestPatient.Patient.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FirstDayOfWeek="Monday"
                                 Validation.ErrorTemplate="{x:Null}"/>
                     <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource GuestForm}" Margin="0,15,40,15"
                              Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">

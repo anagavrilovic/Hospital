@@ -51,7 +51,7 @@ namespace Hospital.View.Secretary
             DoctorsShifts = new ObservableCollection<DoctorsShiftsDTO>(DoctorsShiftService.GetAllDoctorsShiftsForNextFiveDays(DateTime.Today));
 
             DoctorsShiftsCollection = CollectionViewSource.GetDefaultView(DoctorsShifts);
-            DoctorsShiftsCollection.Filter = CustomFilterPatientsRecords;
+            DoctorsShiftsCollection.Filter = CustomFilterDoctors;
         }
 
         private void ChangeShiftClick(object sender, RoutedEventArgs e)
@@ -82,7 +82,7 @@ namespace Hospital.View.Secretary
             }
         }
 
-        private bool CustomFilterPatientsRecords(object obj)
+        private bool CustomFilterDoctors(object obj)
         {
             if (string.IsNullOrEmpty(DoctorsFilter.Text))
                 return true;

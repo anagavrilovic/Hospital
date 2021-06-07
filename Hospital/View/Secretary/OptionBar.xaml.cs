@@ -29,7 +29,7 @@ namespace Hospital.View.Secretary
 
         private void NotificationBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.secretaryWindow.Main.Navigate(new ObavestenjaSekretar());
+            MainWindow.secretaryWindow.Main.Navigate(new FeedbackSekretar());
         }
 
         private void GmailBtn_Click(object sender, RoutedEventArgs e)

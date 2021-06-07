@@ -115,7 +115,7 @@
                           Style="{StaticResource RadnoVremeStyle}"
                           ItemsSource="{Binding DoctorsShifts, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Lekar" Width="3     *" Binding="{Binding Doctor}" HeaderStyle="{StaticResource GridHeaderStyle}">
+                        <DataGridTextColumn Header="Lekar" Width="3*" Binding="{Binding Doctor}" HeaderStyle="{StaticResource GridHeaderStyle}">
                         </DataGridTextColumn>
 
                         <DataGridTextColumn Width="1*" Binding="{Binding ShiftDay1}" HeaderStyle="{StaticResource GridHeaderStyle}">

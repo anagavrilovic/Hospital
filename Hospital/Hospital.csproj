@@ -482,6 +482,9 @@
     <Compile Include="View\Secretary\DodajObavestenje.xaml.cs">
       <DependentUpon>DodajObavestenje.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Secretary\FeedbackSekretar.xaml.cs">
+      <DependentUpon>FeedbackSekretar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Secretary\HitanPregled.xaml.cs">
       <DependentUpon>HitanPregled.xaml</DependentUpon>
     </Compile>
@@ -875,6 +878,10 @@
     <Page Include="View\Doctor\AppointmentWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Secretary\FeedbackSekretar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Secretary\HitanPregled.xaml">
       <SubType>Designer</SubType>
