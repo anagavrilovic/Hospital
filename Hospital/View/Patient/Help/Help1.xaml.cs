@@ -1,8 +1,5 @@
-﻿using Hospital.Model;
-using Hospital.View.Patient.Help;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,28 +10,27 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Hospital.View
+namespace Hospital.View.Patient.Help
 {
     /// <summary>
-    /// Interaction logic for PatientMain.xaml
+    /// Interaction logic for Help1.xaml
     /// </summary>
-    public partial class PatientMain : Window
+    public partial class Help1 : Page
     {
-      
-        public PatientMain()
+        public Help1()
         {
             InitializeComponent();
-            
+            BackButton.IsEnabled = false;
+            NextButton.Focus();
         }
 
-        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void FinishButton_Click(object sender, RoutedEventArgs e)
         {
-            Help help = new Help();
-            help.Show();
+            var myWindow = Window.GetWindow(this);
+            myWindow.Close();
         }
-
-
     }
 }

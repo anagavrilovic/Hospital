@@ -410,6 +410,12 @@
     <Compile Include="View\Manager\ManagerNotifications.xaml.cs">
       <DependentUpon>ManagerNotifications.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Patient\Help\Help.xaml.cs">
+      <DependentUpon>Help.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\Help\Help1.xaml.cs">
+      <DependentUpon>Help1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Patient\PatientNotificationAdd.xaml.cs">
       <DependentUpon>PatientNotificationAdd.xaml</DependentUpon>
     </Compile>
@@ -773,6 +779,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Manager\ManagerNotifications.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\Help\Help.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\Help\Help1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
