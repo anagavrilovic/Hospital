@@ -63,7 +63,7 @@ namespace Hospital.View
 
         private void ButtonHitanPregledClick(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new HitanPregled());
+            Main.Navigate(new HitanPregled(new HitanPregledViewModel(Main.NavigationService)));
         }
 
         private void ButtonRadnoVremeClick(object sender, RoutedEventArgs e)

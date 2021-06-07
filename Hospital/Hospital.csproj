@@ -290,6 +290,7 @@
     <Compile Include="ViewModels\Secretary\AnalitikaViewModel.cs" />
     <Compile Include="ViewModels\Secretary\DetaljiKartonViewModel.cs" />
     <Compile Include="ViewModels\Secretary\FeedbackViewModel.cs" />
+    <Compile Include="ViewModels\Secretary\HitanPregledViewModel.cs" />
     <Compile Include="ViewModels\Secretary\IzmenaKartonaViewModel.cs" />
     <Compile Include="ViewModels\Secretary\KreiranjeKartonaViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />

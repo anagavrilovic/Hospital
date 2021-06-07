@@ -86,7 +86,8 @@
                               ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedItem="{Binding DoctorsSpecialty}"/>
                     <ComboBox Grid.Row="1" Grid.Column="1" Margin="0,20,40,20" ItemsSource="{Binding PossibleDuration}" 
                               Style="{StaticResource cbTB}" SelectedItem="{Binding NewUrgentAppointment.DurationInHours, Mode=OneWayToSource}" SelectedIndex="0"/>
-                    <ComboBox x:Name="AppointmentType" Grid.Row="2" Grid.Column="1" Margin="0,20,40,20" Style="{StaticResource cbTB}">
+                    <ComboBox x:Name="AppointmentType" Grid.Row="2" Grid.Column="1" Margin="0,20,40,20" Style="{StaticResource cbTB}"
+                              SelectedIndex="{Binding SelectedAppointment}">
                         <ComboBoxItem IsSelected="True">Pregled</ComboBoxItem>
                         <ComboBoxItem>Operacija</ComboBoxItem>
                     </ComboBox>
@@ -97,7 +98,8 @@
                         <StackPanel Margin="5" Orientation="Horizontal">
                             <Image Source="../../Icon/Secretary/search.png" Height="13" VerticalAlignment="Center"/>
                             <TextBox x:Name="TextBoxPatientsFilter"  BorderThickness="0" Width="200" Height="23" Margin="10,0,0,0" 
-                                     Background="Transparent" FontSize="13" VerticalAlignment="Center" TextChanged="PatientsFilterTextChanged"/>
+                                     Background="Transparent" FontSize="13" VerticalAlignment="Center" 
+                                     Text="{Binding SearchText, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Border>
 
@@ -107,9 +109,9 @@
                     </ListBox>
 
                     <StackPanel Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,40,0,50">
-                        <Button Content="Potvrdi" Width="100" Height="30" Style="{StaticResource ButtonPotvrdiStyle}" Click="BtnPotvrdiClick"
+                        <Button Content="Potvrdi" Width="100" Height="30" Style="{StaticResource ButtonPotvrdiStyle}" Command="{Binding ScheduleAppointmentCommand}"
                                 ToolTip="Povrdi zakazivanje hitnog pregleda"/>
-                        <Button Content="Odustani" Width="100" Style="{StaticResource ButtonOdustaniStyle}" Click="BtnOdustaniClick" 
+                        <Button Content="Odustani" Width="100" Style="{StaticResource ButtonOdustaniStyle}" Command="{Binding CancelCommand}"
                                 ToolTip="Odustani od zakazivanja hitnog pregleda"/>
                     </StackPanel>
 

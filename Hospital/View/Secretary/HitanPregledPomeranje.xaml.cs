@@ -70,12 +70,12 @@ namespace Hospital.View.Secretary
             var urgentAppointmentDetails = new HitanPregledDetalji(NewUrgentAppointment);
             urgentAppointmentDetails.Show();
 
-            NavigationService.Navigate(new HitanPregled());
+            NavigationService.Navigate(new HitanPregled(new ViewModels.Secretary.HitanPregledViewModel(this.NavigationService)));
         }
 
         private void BtnOdustaniClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new HitanPregled());
+            NavigationService.Navigate(new HitanPregled(new ViewModels.Secretary.HitanPregledViewModel(this.NavigationService)));
         }
     }
 }
