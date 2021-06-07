@@ -74,8 +74,8 @@
                             SelectedDate="{Binding EndDate}" DisplayDateStart="{x:Static sys:DateTime.Today}"/>
 
                 <!-- Buttons -->
-                <Button Grid.Row="5" Grid.Column="0" Content="Potvrdi" Style="{StaticResource ButtonPotvrdiStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,50,-20,30" Click="PotvrdiClick" />
-                <Button Grid.Row="5" Grid.Column="1" Content="Odustani"  Style="{StaticResource ButtonOdustaniStyle}" Margin="0,50,150,30" HorizontalAlignment="Right" Click="OdustaniClick"/>
+                <Button Grid.Row="5" Grid.Column="0" Content="Potvrdi" Style="{StaticResource ButtonPotvrdiStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,50,-20,30" Click="PotvrdiClick" ToolTip="Potvrdi izmenu smene"/>
+                <Button Grid.Row="5" Grid.Column="1" Content="Odustani"  Style="{StaticResource ButtonOdustaniStyle}" Margin="0,50,150,30" HorizontalAlignment="Right" Click="OdustaniClick" ToolTip="Odustani od izmene smene"/>
 
             </Grid>
         </Border>

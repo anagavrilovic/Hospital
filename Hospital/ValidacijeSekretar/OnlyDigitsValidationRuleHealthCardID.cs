@@ -17,7 +17,7 @@ namespace Hospital.ValidacijeSekretar
 
             if (stringValue.Length == 0)
             {
-                return new ValidationResult(false, "");
+                return new ValidationResult(true, "");
             }
 
             if (!System.Text.RegularExpressions.Regex.IsMatch(stringValue, @"^[0-9]+$"))

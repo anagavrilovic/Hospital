@@ -39,7 +39,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Grid Margin="15,5,15,0" >
+            <Grid Margin="15,0" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -54,8 +54,9 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Doctor ComboBox -->
-                <ComboBox x:Name="DoctorComboBox" Width="160" Height="25" Margin="5" Style="{StaticResource ComboBoxStyleSecretary}"
-                              ItemsSource="{Binding AllDoctors}" SelectedItem="{Binding SelectedDoctorForNewAppointment}" SelectionChanged="ComboBoxDoctorEvent">
+                <ComboBox x:Name="DoctorComboBox" Width="160" Height="30" Margin="3,5,5,5" Style="{StaticResource ComboBoxStyleSecretary}"
+                              ItemsSource="{Binding AllDoctors}" SelectedItem="{Binding SelectedDoctorForNewAppointment}" 
+                          SelectionChanged="ComboBoxDoctorEvent" ToolTip="Odaberi lekara za prikaz zakazanih termina">
                     <ComboBox.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -64,8 +65,8 @@
                 </ComboBox>
 
                 <!-- Prozor za odabir pacijenta -->
-                <Button x:Name="Pacijent" Grid.Column="1" Content="Odaberi pacijenta" Margin="5" Width="120" Height="25" 
-                            Style="{StaticResource ButtonCalendar}" Click="ChoosePatientClick">
+                <Button x:Name="Pacijent" Grid.Column="1" Content="Odaberi pacijenta" Margin="5" Width="140" Height="30" 
+                            Style="{StaticResource ButtonCalendar}" Click="ChoosePatientClick" ToolTip="Odaberi pacijenta za zakazivanje termina">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -74,28 +75,34 @@
                 </Button>
 
                 <!-- Dugmad za zakazivanje i otkazivanje pregleda -->
-                <Button x:Name="Zakazi" Grid.Column="2" Height="25" Width="25" Margin="5" Style="{StaticResource ButtonCalendar}" Click="ScheduleAppointmentClick">
+                <Button x:Name="Zakazi" Grid.Column="2" Height="30" Width="30" Margin="5,5,2.5,5" Style="{StaticResource ButtonCalendar}"
+                        Click="ScheduleAppointmentClick" ToolTip="Zakaži termin">
                     <Button.Resources>
                         <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="11"/>
+                            <Setter Property="CornerRadius" Value="9"/>
                         </Style>
                     </Button.Resources>
-                    <Image Source="../../Icon/Secretary/plusdate.png" Width="15" Height="15"/>
+                    <Image Source="../../Icon/Secretary/plusdate.png" Width="20" Height="20" Margin="1,0,0,0"/>
                 </Button>
-                <Button x:Name="Otkazi" Grid.Column="3" Height="25" Width="25" Margin="5" Style="{StaticResource ButtonCalendar}" Click="CancelAppointmentClick">
+                <Button x:Name="Otkazi" Grid.Column="3" Height="30" Width="30" Margin="2.5,5,5,5" Style="{StaticResource ButtonCalendar}"
+                        Click="CancelAppointmentClick" ToolTip="Otkaži termin">
                     <Button.Resources>
                         <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="11"/>
+                            <Setter Property="CornerRadius" Value="9"/>
                         </Style>
                     </Button.Resources>
-                    <Image Source="../../Icon/Secretary/minusdate.png" Width="15" Height="25"/>
+                    <Image Source="../../Icon/Secretary/minusdate.png" Width="20" Height="20"/>
                 </Button>
 
                 <!-- Odabir datuma prikaza  -->
-                <DatePicker x:Name="Datum" Grid.Column="6" Focusable="False" Width="30" Height="25" Margin="5" 
-                                SelectedDate="{Binding ChosenDate}" FirstDayOfWeek="Monday" SelectedDateChanged="DateChanged"/>
-                <Button x:Name="CurrentWeek" Grid.Column="7" Height="25" Width="120" Content="Trenutna nedelja" Margin="5" 
-                            Style="{StaticResource ButtonCalendar}" Click="CurrentWeekClick">
+                <Border Grid.Column="6" CornerRadius="10" Background="{StaticResource MainBlue}" Width="35" Height="30" 
+                        ToolTip="Odaberite dan za prikaz smena" Margin="5,5,2.5,5">
+                    <DatePicker x:Name="Datum"  Focusable="False" Width="30" Height="25" BorderBrush="Transparent" 
+                                SelectedDate="{Binding ChosenDate}" FirstDayOfWeek="Monday" SelectedDateChanged="DateChanged"
+                            ToolTip="Odaberi datum za prikaz" Margin="-3,1,0,0"/>
+                </Border>
+                <Button x:Name="CurrentWeek" Grid.Column="7" Height="30" Width="130" Content="Trenutna nedelja" Margin="2.5,5,5,5" 
+                            Style="{StaticResource ButtonCalendar}" Click="CurrentWeekClick" ToolTip="Pregled termina trenutne nedelje">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -104,17 +111,19 @@
                 </Button>
 
                 <!-- Previous week -->
-                <Button x:Name="Previous" Grid.Column="8" Width="25" Height="25" Margin="5" Style="{StaticResource ButtonCalendar}" Click="PreviousClick">
+                <Button x:Name="Previous" Grid.Column="8" Width="30" Height="30" Margin="5,5,2.5,5" Style="{StaticResource ButtonCalendar}"
+                        Click="PreviousClick" ToolTip="Prethodna nedelja">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="25"/>
                         </Style>
                     </Button.Resources>
-                    <Image Source="../../Icon/Secretary/1.png" Width="15" Height="25"/>
+                    <Image Source="../../Icon/Secretary/1.png" Width="15" Height="15"/>
                 </Button>
 
                 <!-- Next week -->
-                <Button x:Name="Next" Grid.Column="9" Width="25" Height="25" Margin="5" Style="{StaticResource ButtonCalendar}" Click="NextClick">
+                <Button x:Name="Next" Grid.Column="9" Width="30" Height="30" Margin="2.5,5,3,5" Style="{StaticResource ButtonCalendar}" Click="NextClick"
+                        ToolTip="Sledeća nedelja">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="25"/>

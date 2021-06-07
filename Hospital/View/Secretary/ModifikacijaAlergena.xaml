@@ -71,24 +71,27 @@
                     <StackPanel Margin="0,20,0,0">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,5" Height="25">
                             <TextBlock Text="Dodati lekovi:" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Center"/>
-                            <Button Style="{StaticResource ButtonPotvrdiStyle}" Height="20" Width="20" Margin="350,0,0,0" Click="LekoviUkloni">
+                            <Button Style="{StaticResource ButtonPotvrdiStyle}" Height="20" Width="20" Margin="350,0,0,0" Click="LekoviUkloni"
+                                    ToolTip="Ukloni lek iz alergena">
                                 <Image Source="../../Icon/Secretary/del.png" Width="10" Height="10"/>
                             </Button>
                         </StackPanel>
                         <ListBox x:Name="DodatiLekovi" ItemsSource="{Binding PatientsRecord.Allergen.MedicineNames, Mode=TwoWay, UpdateSourceTrigger=Explicit}" 
-                                 Style="{StaticResource ListBoxStyle}" Height="100" Margin="30,0,15,25" ItemContainerStyle="{StaticResource ListBoxItemStyle}">
+                                 Style="{StaticResource ListBoxStyle}" Height="100" Margin="30,0,15,25" ItemContainerStyle="{StaticResource ListBoxItemStyle}" 
+                                 DragOver="ListBoxPatientsMedicinesDragOver" Drop="ListBoxPatientsMedicinesDrop" AllowDrop="True">
 
                         </ListBox>
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Margin="15,20,30,0">
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                            <Button Width="20" Height="20" Style="{StaticResource ButtonPotvrdiStyle}" Click="BtnPlusLekoviClick">
+                            <Button Width="20" Height="20" Style="{StaticResource ButtonPotvrdiStyle}" Click="BtnPlusLekoviClick" ToolTip="Dodaj lek u alergene">
                                 <Image Source="../../Icon/Secretary/plus.png" Width="10" Height="10"/>
                             </Button>
 
                             <!-- Search -->
-                            <Border Grid.Column="1" Width="250" Height="25" Style="{StaticResource TextBoxBorder}" Margin="147,0,0,0">
+                            <Border Grid.Column="1" Width="250" Height="25" Style="{StaticResource TextBoxBorder}" Margin="147,0,0,0"
+                                    ToolTip="Pretraži lekove">
                                 <StackPanel Margin="5" Orientation="Horizontal">
                                     <Image Source="../../Icon/Secretary/search.png" Height="13" VerticalAlignment="Center"/>
                                     <TextBox x:Name="LekoviFilter" TextChanged="LekoviFilterTextChanged" BorderThickness="0" Width="200" Height="23" Margin="10,0,0,0" Background="Transparent" FontSize="13" VerticalAlignment="Center"/>
@@ -96,7 +99,8 @@
                             </Border>
                         </StackPanel>
                         <ListBox ItemsSource="{Binding AllMedicines}" x:Name="LekoviLista" Height="100" Style="{StaticResource ListBoxStyle}" 
-                                 ItemContainerStyle="{StaticResource ListBoxItemStyle}" SelectedItem="{Binding SelectedMedicine}">
+                                 ItemContainerStyle="{StaticResource ListBoxItemStyle}" SelectedItem="{Binding SelectedMedicine}" MouseLeftButtonDown="ListBoxMedicinesPreviewMouseLeftButtonDown" MouseMove="ListBoxMedicinesMouseDown"
+                                 >
 
                         </ListBox>
                     </StackPanel>
@@ -119,24 +123,28 @@
                     <StackPanel Margin="0,20,0,0">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,5" Height="25">
                             <TextBlock Text="Dodati sastojci:" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Center"/>
-                            <Button Style="{StaticResource ButtonPotvrdiStyle}" Height="20" Width="20" Margin="336,0,0,0" Click="SastojciUkloni">
+                            <Button Style="{StaticResource ButtonPotvrdiStyle}" Height="20" Width="20" Margin="336,0,0,0" Click="SastojciUkloni"
+                                    ToolTip="Ukloni sastojak iz alergena">
                                 <Image Source="../../Icon/Secretary/del.png" Height="10" Width="10"/>
                             </Button>
                         </StackPanel>
                         <ListBox x:Name="DodatiSastojci" ItemsSource="{Binding PatientsRecord.Allergen.IngredientNames, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
-                                 Style="{StaticResource ListBoxStyle}" Height="100" Margin="30,0,15,25"  ItemContainerStyle="{StaticResource ListBoxItemStyle}">
+                                 Style="{StaticResource ListBoxStyle}" Height="100" Margin="30,0,15,25"  ItemContainerStyle="{StaticResource ListBoxItemStyle}" 
+                                 DragOver="ListBoxPatientsIngredientsDragOver" Drop="ListBoxPatientsIngredientsDrop" AllowDrop="True">
 
                         </ListBox>
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Margin="15,20,30,0">
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                            <Button Width="20" Height="20" Style="{StaticResource ButtonPotvrdiStyle}" Click="BtnPlusSastojciClick">
+                            <Button Width="20" Height="20" Style="{StaticResource ButtonPotvrdiStyle}" Click="BtnPlusSastojciClick"
+                                    ToolTip="Dodaj sastojak u alergene">
                                 <Image Source="../../Icon/Secretary/plus.png" Width="10" Height="10"/>
                             </Button>
 
                             <!-- Search -->
-                            <Border Grid.Column="1" Width="250" Height="25" Style="{StaticResource TextBoxBorder}" Margin="147,0,0,0">
+                            <Border Grid.Column="1" Width="250" Height="25" Style="{StaticResource TextBoxBorder}" Margin="147,0,0,0"
+                                    ToolTip="Pretraži sastojke">
                                 <StackPanel Margin="5" Orientation="Horizontal">
                                     <Image Source="../../Icon/Secretary/search.png" Height="13" VerticalAlignment="Center"/>
                                     <TextBox x:Name="SastojciFilter" TextChanged="SastojciFilterTextChanged" BorderThickness="0" Width="200" Height="23" Margin="10,0,0,0" Background="Transparent" FontSize="13" VerticalAlignment="Center"/>
@@ -144,7 +152,8 @@
                             </Border>
                         </StackPanel>
                         <ListBox ItemsSource="{Binding AllIngredients}" x:Name="SastojciLista" Height="100" Style="{StaticResource ListBoxStyle}" 
-                                 ItemContainerStyle="{StaticResource ListBoxItemStyle}" SelectedItem="{Binding SelectedIngredient}">
+                                 ItemContainerStyle="{StaticResource ListBoxItemStyle}" SelectedItem="{Binding SelectedIngredient}" 
+                                 MouseLeftButtonDown="ListBoxIngredientsPreviewMouseLeftButtonDown" MouseMove="ListBoxIngredientsMouseDown">
 
                         </ListBox>
                     </StackPanel>
@@ -165,12 +174,12 @@
             </Border>
 
             <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,30">
-                <Button x:Name="btnPotvrdi" Content="Potvrdi" Style="{StaticResource ButtonPotvrdiStyle}" Click="BtnPotvrdiClick" >
+                <Button x:Name="btnPotvrdi" Content="Potvrdi" Style="{StaticResource ButtonPotvrdiStyle}" Click="BtnPotvrdiClick" ToolTip="Potvrdi napravljene izmene">
                     <Button.Effect>
                         <DropShadowEffect BlurRadius="7" ShadowDepth="2" Color="LightGray"/>
                     </Button.Effect>
                 </Button>
-                <Button x:Name="btnOdustani" Content="Odustani" Style="{StaticResource ButtonOdustaniStyle}" Click="BtnOtkaziClick">
+                <Button x:Name="btnOdustani" Content="Odustani" Style="{StaticResource ButtonOdustaniStyle}" Click="BtnOtkaziClick" ToolTip="Odbaci napravljene izmene">
                     <Button.Effect>
                         <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray"/>
                     </Button.Effect>

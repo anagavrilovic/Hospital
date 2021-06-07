@@ -49,7 +49,7 @@
                         </Border.Effect>
                     </Border>
                     <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="60" Height="60" Margin="0,45,0,0">
-                        <Button Style="{StaticResource BigButtons}" Click="CreateNotificationClick">
+                        <Button Style="{StaticResource BigButtons}" Click="CreateNotificationClick" ToolTip="Dodaj novo obaveštenje">
                             <StackPanel Orientation="Vertical">
                                 <Image Source="../../Icon/Secretary/new.png" Width="25"/>
                                 <TextBlock Text="Novo"/>
@@ -65,7 +65,7 @@
                         </Border.Effect>
                     </Border>
                     <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="60" Height="60" Margin="0,23,0,0">
-                        <Button Style="{StaticResource BigButtons}" Click="UpdateNotificationClick">
+                        <Button Style="{StaticResource BigButtons}" Click="UpdateNotificationClick" ToolTip="Izmeni odabrano obaveštenje">
                             <StackPanel Orientation="Vertical">
                                 <Image Source="../../Icon/Secretary/edit.png" Width="25"/>
                                 <TextBlock Text="Izmeni"/>
@@ -81,7 +81,7 @@
                         </Border.Effect>
                     </Border>
                     <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="60" Height="60" Margin="0,23,0,0">
-                        <Button Style="{StaticResource BigButtons}" Click="ShowNotificationClick">
+                        <Button Style="{StaticResource BigButtons}" Click="ShowNotificationClick" ToolTip="Pročitaj obaveštenje">
                             <StackPanel Orientation="Vertical">
                                 <Image Source="../../Icon/Secretary/info.png" Width="25"/>
                                 <TextBlock Text="Pregledaj"/>
@@ -97,7 +97,7 @@
                         </Border.Effect>
                     </Border>
                     <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="60" Height="60" Margin="0,23,0,0">
-                        <Button  Style="{StaticResource BigButtons}" Click="DeleteNotificationClick">
+                        <Button  Style="{StaticResource BigButtons}" Click="DeleteNotificationClick" ToolTip="Izbriši obaveštenje">
                             <StackPanel Orientation="Vertical">
                                 <Image Source="../../Icon/Secretary/delete.png" Width="25"/>
                                 <TextBlock Text="Izbriši"/>
@@ -115,7 +115,8 @@
                 </Grid.RowDefinitions>
 
                 <!-- Search -->
-                <Border Width="250" Height="25" Style="{StaticResource TextBoxBorder}" Margin="0,0,35,0" HorizontalAlignment="Right" BorderThickness="0">
+                <Border Width="250" Height="25" Style="{StaticResource TextBoxBorder}" Margin="0,0,35,0" HorizontalAlignment="Right" BorderThickness="0"
+                        ToolTip="Pretraži obaveštenja">
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
                     </Border.Effect>

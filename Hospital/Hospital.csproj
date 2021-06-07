@@ -491,6 +491,9 @@
     <Compile Include="View\Secretary\DodajObavestenje.xaml.cs">
       <DependentUpon>DodajObavestenje.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Secretary\FeedbackSekretar.xaml.cs">
+      <DependentUpon>FeedbackSekretar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Secretary\HitanPregled.xaml.cs">
       <DependentUpon>HitanPregled.xaml</DependentUpon>
     </Compile>
@@ -517,6 +520,9 @@
     </Compile>
     <Compile Include="View\Secretary\Kalendar.xaml.cs">
       <DependentUpon>Kalendar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\MojProfil.xaml.cs">
+      <DependentUpon>MojProfil.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\NaseBolnice.xaml.cs">
       <DependentUpon>NaseBolnice.xaml</DependentUpon>
@@ -584,6 +590,9 @@
     </Compile>
     <Compile Include="View\Secretary\SecretaryWindow.xaml.cs">
       <DependentUpon>SecretaryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\SekretarHelp.xaml.cs">
+      <DependentUpon>SekretarHelp.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\SlobodniDani.xaml.cs">
       <DependentUpon>SlobodniDani.xaml</DependentUpon>
@@ -883,6 +892,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Secretary\FeedbackSekretar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Secretary\HitanPregled.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -920,6 +933,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Secretary\Kalendar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\MojProfil.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1008,6 +1025,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Secretary\SecretaryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\SekretarHelp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -31,7 +31,8 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Odaberi pacijenta" Style="{StaticResource TitleStyle}" Foreground="{StaticResource MainDarkBlue}" Margin="30,20,0,5"/>
-            <Button x:Name="ExitBtn" Grid.Column="2" Background="Transparent" BorderThickness="0" Width="25" Height="25" Margin="0,20,30,30" Click="BtnExitClick">
+            <Button x:Name="ExitBtn" Grid.Column="2" Background="Transparent" BorderThickness="0" Width="25" Height="25" Margin="0,20,30,30" Click="BtnExitClick"
+                    ToolTip="Izlaz">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="15"/>
@@ -49,9 +50,9 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Button Content="Registracija" Width="100" FontSize="15" Style="{StaticResource ButtonCalendar}" Margin="30,0,0,0"/>
+            <Button Content="Registracija" Width="100" FontSize="15" Style="{StaticResource ButtonCalendar}" Margin="30,0,0,0" ToolTip="Registruj novog pacijenta"/>
             <!-- Search -->
-            <Border Grid.Column="2" Width="200" Height="25" HorizontalAlignment="Right" Margin="30,0,0,0" 
+            <Border Grid.Column="2" Width="200" Height="25" HorizontalAlignment="Right" Margin="30,0,0,0"  ToolTip="Pretraži pacijente"
                             Style="{StaticResource TextBoxBorder}">
                 <StackPanel Margin="5" Orientation="Horizontal" Height="25" VerticalAlignment="Center">
                     <Image Source="../../Icon/Secretary/search.png" Height="13"/>
@@ -76,7 +77,7 @@
                 <Image Source="../../Icon/Secretary/minusdate.png" Width="15"/>
             </Button>
             <!-- Search -->
-            <Border Grid.Column="3" Width="200" Height="25" Margin="10,40,30,0"
+            <Border Grid.Column="3" Width="200" Height="25" Margin="10,40,30,0" ToolTip="Pretraži termine odabranog pacijenta"
                             Style="{StaticResource TextBoxBorder}">
                 <StackPanel Margin="5" Orientation="Horizontal" Height="25" VerticalAlignment="Center">
                     <Image Source="../../Icon/Secretary/search.png" Height="13"/>
@@ -97,8 +98,8 @@
         </DataGrid>
 
         <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,30">
-            <Button Content="Potvrdi" Width="100" Margin="0,0,40,0" Style="{StaticResource ButtonPotvrdiStyle}" Click="PotvrdiClick" />
-            <Button Content="Odustani" Width="100" Margin="40,0,0,0" Style="{StaticResource ButtonOdustaniStyle}" Click="OdustaniClick"  />
+            <Button Content="Potvrdi" Width="100" Margin="0,0,40,0" Style="{StaticResource ButtonPotvrdiStyle}" Click="PotvrdiClick" ToolTip="Potvrdi odabir pacijanta"/>
+            <Button Content="Odustani" Width="100" Margin="40,0,0,0" Style="{StaticResource ButtonOdustaniStyle}" Click="OdustaniClick" ToolTip="Odustani od odabira pacijenta" />
         </StackPanel>
     </Grid>
 </Window>

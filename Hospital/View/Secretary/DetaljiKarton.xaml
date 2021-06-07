@@ -37,7 +37,7 @@
             <local:OptionBar Grid.Column="2" Height="30" Width="170" Margin="0,15,15,0" VerticalAlignment="Top" ></local:OptionBar>
         </Grid>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,20,15,0">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20,20,0,0">
             <TextBlock Text="Broj zdravstvenog kartona:" Style="{StaticResource TextBlockStyle}" VerticalAlignment="Center"/>
             <TextBlock Text="{Binding PatientsRecord.MedicalRecordID, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
         </StackPanel>
@@ -54,7 +54,10 @@
                 </Border.Effect>
             </Border>
             <Border Margin="15,5,7,30" CornerRadius="10" Background="{StaticResource MainWhite}">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Width="509">
+
+                    <TextBlock Text="OPŠTE:" Style="{StaticResource DetaljiKartonaTextBlock}" FontSize="20" FontWeight="SemiBold" Margin="40,0,0,10"/>
+
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Ime:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
                         <TextBlock Text="{Binding PatientsRecord.Patient.FirstName, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
@@ -74,6 +77,35 @@
                         <TextBlock Text="Datum rođenja:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
                         <TextBlock Text="{Binding PatientsRecord.Patient.DateOfBirth, Mode=OneWay, StringFormat='{}{0: dd.MM.yyyy}'}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
                     </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="JMBG:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding PatientsRecord.Patient.PersonalID, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Broj lične karte:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding PatientsRecord.Patient.CardID, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Bračno stanje:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding PatientsRecord.Patient.MaritalStatus, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Pol:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding PatientsRecord.Patient.Gender, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,25">
+                        <TextBlock Text="Osiguran:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding PatientsRecord.IsInsured, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                    </StackPanel>
+
+                    <Separator Background="{StaticResource TextGray}" Margin="40,0"/>
+
+                    <TextBlock Text="ADRESA:" Style="{StaticResource DetaljiKartonaTextBlock}" FontSize="20" FontWeight="SemiBold" Margin="40,25,0,10"/>
 
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Ulica stanovanja:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
@@ -96,29 +128,21 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Opština:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
-                        <TextBlock Text="{Binding PatientsRecord.Patient.Address.City.Township, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Država:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
                         <TextBlock Text="{Binding PatientsRecord.Patient.Address.City.Country.CountryName, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
                     </StackPanel>
+                </StackPanel>
+            </Border>
 
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Broj zdrav. knjizice:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
-                        <TextBlock Text="{Binding PatientsRecord.HealthCardNumber, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Broj lične karte:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
-                        <TextBlock Text="{Binding PatientsRecord.Patient.CardID, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="JMBG:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
-                        <TextBlock Text="{Binding PatientsRecord.Patient.PersonalID, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
-                    </StackPanel>
+            <Border Grid.Column="1" Margin="7,5,15,30" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                </Border.Effect>
+            </Border>
+            <Border Grid.Column="1" Margin="7,5,15,30" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0">
+                    
+                    <TextBlock Text="KONTAKT:" Style="{StaticResource DetaljiKartonaTextBlock}" FontSize="20" FontWeight="SemiBold" Margin="40,0,0,10"/>
 
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Kontakt telefon:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
@@ -130,60 +154,45 @@
                         <TextBlock Text="{Binding PatientsRecord.Patient.Email, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
                     </StackPanel>
 
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                        <TextBlock Text="Korisničko ime:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding PatientsRecord.Patient.Username, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}" Margin="10,0,0,0"/>
+                    </StackPanel>
+
+                    <Separator Background="{StaticResource TextGray}" Margin="40,0"/>
+
+                    <TextBlock Text="ZDRAVSTVENI:" Style="{StaticResource DetaljiKartonaTextBlock}" FontSize="20" FontWeight="SemiBold" Margin="40,20,0,10"/>
+
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Bračno stanje:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
-                        <TextBlock Text="{Binding PatientsRecord.Patient.MaritalStatus, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
+                        <TextBlock Text="Broj zdrav. knjizice:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="{Binding PatientsRecord.HealthCardNumber, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Pol:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
-                        <TextBlock Text="{Binding PatientsRecord.Patient.Gender, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Krvna grupa:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
+                        <TextBlock Text="Krvna grupa:" Style="{StaticResource DetaljiKartonaTextBlock}" Margin="40,0,0,0"/>
                         <TextBlock Text="{Binding PatientsRecord.BloodType, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Osiguran:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
-                        <TextBlock Text="{Binding PatientsRecord.IsInsured, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Korisničko ime:" Style="{StaticResource DetaljiKartonaTextBlock}"/>
-                        <TextBlock Text="{Binding PatientsRecord.Patient.Username, Mode=OneWay}" Style="{StaticResource DetaljiKartonaTextBlock2}"/>
-                    </StackPanel>
-
-                </StackPanel>
-            </Border>
-
-            <Border Grid.Column="1" Margin="7,5,15,30" CornerRadius="10" Background="{StaticResource MainWhite}">
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
-                </Border.Effect>
-            </Border>
-            <Border Grid.Column="1" Margin="7,5,15,30" CornerRadius="10" Background="{StaticResource MainWhite}">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0">
-                    <StackPanel Margin="0,20" >
-                        <TextBlock Text="Alergičan na lek:" Style="{StaticResource KartoniTextBlock}"/>
-                        <ListBox x:Name="LekoviListBox" ItemsSource="{Binding PatientsRecord.Allergen.MedicineNames}" Margin="40,0" Width="430" Height="100"
+                    <StackPanel Margin="0,10,0,5" >
+                        <TextBlock Text="Alergičan na lek:" Style="{StaticResource KartoniTextBlock}" Margin="40,0,0,0"/>
+                        <ListBox x:Name="LekoviListBox" ItemsSource="{Binding PatientsRecord.Allergen.MedicineNames}" Margin="40,0" Width="430" Height="50"
                                  Style="{StaticResource ListBoxStyle}" ItemContainerStyle="{StaticResource ListBoxItemStyle}">
 
                         </ListBox>
                     </StackPanel>
 
-                    <StackPanel Margin="0,20" >
-                        <TextBlock Text="Alergičan na sastojak:" Style="{StaticResource KartoniTextBlock}"/>
-                        <ListBox x:Name="SastojciListBox" ItemsSource="{Binding PatientsRecord.Allergen.IngredientNames}" Margin="40,0" Width="430" Height="100"
+                    <StackPanel Margin="0,5" >
+                        <TextBlock Text="Alergičan na sastojak:" Style="{StaticResource KartoniTextBlock}" Margin="40,0,0,0"/>
+                        <ListBox x:Name="SastojciListBox" ItemsSource="{Binding PatientsRecord.Allergen.IngredientNames}" Margin="40,0" Width="430" Height="50"
                                  Style="{StaticResource ListBoxStyle}" ItemContainerStyle="{StaticResource ListBoxItemStyle}">
 
                         </ListBox>
                     </StackPanel>
 
-                    <StackPanel Margin="0,20" >
-                        <TextBlock Text="Ostalo:" Style="{StaticResource KartoniTextBlock}"/>
-                        <TextBox Margin="40,0" Width="430" Height="100" Style="{StaticResource KartoniTextBox}" Text="{Binding PatientsRecord.Allergen.Other}">
+                    <StackPanel Margin="0,5,0,10" >
+                        <TextBlock Text="Ostalo:" Style="{StaticResource KartoniTextBlock}" Margin="40,0,0,0"/>
+                        <TextBox Margin="40,0" Width="430" Height="50" Style="{StaticResource KartoniTextBox}" Text="{Binding PatientsRecord.Allergen.Other}"
+                                 IsReadOnly="True">
 
                         </TextBox>
                     </StackPanel>

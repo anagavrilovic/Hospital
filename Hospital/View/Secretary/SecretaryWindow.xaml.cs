@@ -45,7 +45,6 @@ namespace Hospital.View
             Application.Current.Shutdown();
         }
 
-
         private void ButtonPocetnaClick(object sender, RoutedEventArgs e)
         {
             Main.Navigate(new PocetnaStranica());

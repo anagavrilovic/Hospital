@@ -21,7 +21,7 @@ namespace Hospital.ValidacijeSekretar
 
                 if(stringValue.Length == 0)
                 {
-                    return new ValidationResult(false, "");
+                    return new ValidationResult(true, "");
                 }
 
                 if (r.IsMatch(stringValue))

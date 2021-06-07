@@ -32,6 +32,8 @@ namespace Hospital
         public DoctorsShiftService DoctorsShiftService { get; set; }
         public RegistratedUserService RegistratedUserService { get; set; }
 
+        public static SecretaryWindow secretaryWindow = new SecretaryWindow();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -73,8 +75,7 @@ namespace Hospital
                             this.Close();
                             break;
                         case UserType.secretary:
-                            var s = new SecretaryWindow();
-                            s.Show();
+                            secretaryWindow.Show();
                             break;
                     }
                 }

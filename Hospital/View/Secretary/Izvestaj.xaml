@@ -66,7 +66,7 @@
                     </ListBox>
 
                     <!-- Search -->
-                    <Border Grid.Column="2" Width="200" Height="25" HorizontalAlignment="Right" 
+                    <Border Grid.Column="2" Width="200" Height="25" HorizontalAlignment="Right"  ToolTip="Pretraži lekare"
                             Style="{StaticResource TextBoxBorder}" VerticalAlignment="Bottom" Margin="0,0,50,5">
                         <StackPanel Margin="5" Orientation="Horizontal" Height="25" VerticalAlignment="Center">
                             <Image Source="../../Icon/Secretary/search.png" Height="13"/>
@@ -91,7 +91,8 @@
                             <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
                         </Border.Effect>
                     </Border>
-                    <Border CornerRadius="10" Height="60" Background="{StaticResource MainWhite}" Width="60">
+                    <Border CornerRadius="10" Height="60" Background="{StaticResource MainWhite}" Width="60"
+                            ToolTip="Generiši izveštaj u pdf formatu">
                         <Button Style="{StaticResource BigButtons}" Click="GenerateReportClick">
                             <StackPanel Orientation="Vertical">
                                 <Image Source="../../Icon/Secretary/pdf.png" Width="25"/>
@@ -107,7 +108,8 @@
                             <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
                         </Border.Effect>
                     </Border>
-                    <Border CornerRadius="10" Height="60" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
+                    <Border CornerRadius="10" Height="60" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60"
+                            ToolTip="Štampaj izveštaj">
                         <Button Style="{StaticResource BigButtons}" >
                             <StackPanel Orientation="Vertical">
                                 <Image Source="../../Icon/Secretary/print.png" Width="25"/>

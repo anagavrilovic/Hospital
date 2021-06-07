@@ -55,7 +55,7 @@
                             </Border.Effect>
                         </Border>
                         <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="60">
-                            <Button Style="{StaticResource BigButtons}" Click="NewPatientClick">
+                            <Button Style="{StaticResource BigButtons}" Click="NewPatientClick" ToolTip="Dodajte novog pacijenta">
                                 <StackPanel Orientation="Vertical">
                                     <Image Source="../../Icon/Secretary/adduser.png" Width="25"/>
                                     <TextBlock Text="Novi"/>
@@ -71,7 +71,7 @@
                             </Border.Effect>
                         </Border>
                         <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
-                            <Button Style="{StaticResource BigButtons}" Click="UpdatePatientClick" >
+                            <Button Style="{StaticResource BigButtons}" Click="UpdatePatientClick" ToolTip="Izmenite postojećeg pacijenta">
                                 <StackPanel Orientation="Vertical">
                                     <Image Source="../../Icon/Secretary/edit.png" Width="25"/>
                                     <TextBlock Text="Izmeni"/>
@@ -87,7 +87,7 @@
                             </Border.Effect>
                         </Border>
                         <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
-                            <Button Style="{StaticResource BigButtons}" Click="PatientsDetailsClick" >
+                            <Button Style="{StaticResource BigButtons}" Click="PatientsDetailsClick" ToolTip="Pogledajte detalje o pacijentu">
                                 <StackPanel Orientation="Vertical">
                                     <Image Source="../../Icon/Secretary/info.png" Width="25"/>
                                     <TextBlock Text="Detalji"/>
@@ -103,7 +103,7 @@
                             </Border.Effect>
                         </Border>
                         <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
-                            <Button Style="{StaticResource BigButtons}" Click="DeletePatientClick" >
+                            <Button Style="{StaticResource BigButtons}" Click="DeletePatientClick" ToolTip="Izbrišite odabranog pacijenta">
                                 <StackPanel Orientation="Vertical">
                                     <Image Source="../../Icon/Secretary/delete.png" Width="25"/>
                                     <TextBlock Text="Brisanje"/>
@@ -119,7 +119,7 @@
                             </Border.Effect>
                         </Border>
                         <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
-                            <Button Style="{StaticResource BigButtons}" Click="AlergeniClick" >
+                            <Button Style="{StaticResource BigButtons}" Click="AlergeniClick" ToolTip="Modifikacija alergena odabranog pacijenta">
                                 <StackPanel Orientation="Vertical">
                                     <Image Source="../../Icon/Secretary/alergies.png" Width="25"/>
                                     <TextBlock Text="Alergeni"/>
@@ -132,7 +132,7 @@
 
                 <!-- Search -->
                 <Border Grid.Column="1" Width="250" Height="30" HorizontalAlignment="Right" Margin="0,10" VerticalAlignment="Bottom"
-                            Style="{StaticResource TextBoxBorder}" BorderThickness="0">
+                            Style="{StaticResource TextBoxBorder}" BorderThickness="0" ToolTip="Pretraži pacijente">
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
                     </Border.Effect>

@@ -79,8 +79,10 @@
                              Style="{StaticResource TextBoxStyle}" Grid.Row="1" Margin="30,0,30,20" TextWrapping="Wrap"/>
 
                     <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,20,0,40">
-                        <Button Content="Potvrdi" Width="100" Height="30" Style="{StaticResource ButtonPotvrdiStyle}" Click="BtnPotvrdiClick"/>
-                        <Button Content="Odustani" Width="100" Style="{StaticResource ButtonOdustaniStyle}" Click="BtnOdustaniClick"/>
+                        <Button Content="Potvrdi" Width="100" Height="30" Style="{StaticResource ButtonPotvrdiStyle}" Click="BtnPotvrdiClick"
+                                ToolTip="Potvrdi izmenu obaveštenja"/>
+                        <Button Content="Odustani" Width="100" Style="{StaticResource ButtonOdustaniStyle}" Click="BtnOdustaniClick"
+                                ToolTip="Odustani od izmene obaveštenja"/>
                     </StackPanel>
                 </Grid>
             </Border>
@@ -120,14 +122,16 @@
 
                     <StackPanel Orientation="Horizontal">
                         <!-- Search -->
-                        <Border Width="200" Height="25" Style="{StaticResource TextBoxBorder}" Margin="0,0,50,0" HorizontalAlignment="Left">
+                        <Border Width="200" Height="25" Style="{StaticResource TextBoxBorder}" Margin="0,0,50,0" HorizontalAlignment="Left"
+                                ToolTip="Pretraži pacijente">
                             <StackPanel Margin="5" Orientation="Horizontal">
                                 <Image Source="../../Icon/Secretary/search.png" Height="13" VerticalAlignment="Center"/>
                                 <TextBox x:Name="PacijentiFilter" BorderThickness="0" Width="200" Height="23" Margin="10,0,0,0" Background="Transparent" FontSize="13" VerticalAlignment="Center" TextChanged="PatientsFilterTextChanged"/>
                             </StackPanel>
                         </Border>
 
-                        <Button x:Name="Dodaj" Style="{StaticResource ButtonPotvrdiStyle}" Height="20" Width="20" Margin="0" Click="AddPatientRecipientClick" >
+                        <Button x:Name="Dodaj" Style="{StaticResource ButtonPotvrdiStyle}" Height="20" Width="20" Margin="0" 
+                                Click="AddPatientRecipientClick" ToolTip="Dodaj pacijenta">
                             <Image Source="../../Icon/Secretary/plus.png" Width="10"/>
                         </Button>
                     </StackPanel>
@@ -137,7 +141,7 @@
 
                     <StackPanel Orientation="Horizontal" Margin="0">
                         <TextBlock Text="Dodati pacijenti:" Style="{StaticResource TextBlockStyle}" Margin="0,10,105,0"/>
-                        <Button x:Name="UkloniPacijenta" Style="{StaticResource ButtonOdustaniStyle}"
+                        <Button x:Name="UkloniPacijenta" Style="{StaticResource ButtonOdustaniStyle}" ToolTip="Ukloni pacijenta"
                                 VerticalAlignment="Bottom" Width="20" Height="20" Click="RemovePatientRecipientClick">
                             <Image Source="../../Icon/Secretary/x.png" Width="13"/>
                         </Button>

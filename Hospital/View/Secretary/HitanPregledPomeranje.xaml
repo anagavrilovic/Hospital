@@ -89,6 +89,7 @@
                                         <Style TargetType="{x:Type ListBoxItem}">
                                             <Setter Property="Focusable" Value="False"/>
                                             <Setter Property="IsHitTestVisible" Value="False" />
+                                            <Setter Property="ToolTip" Value="Odaberi opciju"/>
                                         </Style>
                                     </ListBox.ItemContainerStyle>
                                     <ListBox.ItemTemplate>
@@ -119,8 +120,10 @@
 
 
         <StackPanel Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,30">
-            <Button Content="Potvrdi" Width="100" Height="30" Style="{StaticResource ButtonPotvrdiStyle}" Click="BtnPotvrdiClick"/>
-            <Button Content="Odustani" Width="100" Style="{StaticResource ButtonOdustaniStyle}" Click="BtnOdustaniClick"/>
+            <Button Content="Potvrdi" Width="100" Height="30" Style="{StaticResource ButtonPotvrdiStyle}" Click="BtnPotvrdiClick"
+                    ToolTip="Potvrdi zakazivanje hitnog pregleda"/>
+            <Button Content="Odustani" Width="100" Style="{StaticResource ButtonOdustaniStyle}" Click="BtnOdustaniClick"
+                    ToolTip="Odustani od zakazivanja hitnog pregleda"/>
         </StackPanel>
 
 

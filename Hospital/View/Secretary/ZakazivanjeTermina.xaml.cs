@@ -83,6 +83,13 @@ namespace Hospital.View
 
         private void PotvrdiClick(object sender, RoutedEventArgs e)
         {
+            if(ComboBoxTrajanje.SelectedIndex == -1 || ComboBoxType.SelectedIndex == -1 || ComboBoxRoom.SelectedIndex == -1)
+            {
+                InformationBox informationBox = new InformationBox("Popunite sve informacije o novom pregledu!");
+                informationBox.ShowDialog();
+                return;
+            }
+
             string message = AppointmentService.ScheduleAppointment(NewAppointment);
 
             if (!message.Equals(""))
@@ -114,7 +121,7 @@ namespace Hospital.View
         private void LoadAvaliableRooms()
         {
             AvaliableRooms = new ObservableCollection<Room>(RoomService.GetAvaliableRoomsForNewAppointment(NewAppointment));
-            Room.ItemsSource = AvaliableRooms;
+            ComboBoxRoom.ItemsSource = AvaliableRooms;
         }
         
     }
