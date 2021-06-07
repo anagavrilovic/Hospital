@@ -7,7 +7,7 @@ using System.Windows.Navigation;
 
 namespace Hospital.ViewModels.Secretary
 {
-    public class DetaljiKartonViewModel
+    public class DetaljiKartonViewModel : ViewModel
     {
         #region Properties
 

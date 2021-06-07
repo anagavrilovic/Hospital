@@ -12,7 +12,7 @@ using System.Windows.Navigation;
 
 namespace Hospital.ViewModels.Secretary
 {
-    public class AnalitikaViewModel
+    public class AnalitikaViewModel : ViewModel
     {
         #region Properties
 
