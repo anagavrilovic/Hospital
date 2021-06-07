@@ -13,6 +13,10 @@ namespace Hospital.Model
         public String IDPatient { get; set; }
 
         public List<DateTime> LatestScheduledAppointmentsTime { get; set; }
+        public Boolean ShowWizard { get; set; }
+
+        public Boolean IsFirstLogin { get; set; }
+        public Boolean ShowTooltips { get; set; }
 
         [JsonIgnore]
         public MedicalRecord PatientsRecord { get; set; }
@@ -22,6 +26,7 @@ namespace Hospital.Model
             ChosenDoctor = chosenDoctor;
             IDPatient = iDPatient;
         }
+
 
     }
 }

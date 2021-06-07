@@ -11,8 +11,30 @@
 
     <Grid Background="White">
         <Button Name="BackButton" Content="Nazad" HorizontalAlignment="Left" VerticalAlignment="Top" Width="185"  Margin="317,365,0,0" Height="38" Click="Nazad"/>
-        <Label Content="Preferiran lekar:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,101,0,0"/>
+        <Label Content="Preferiran lekar:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,50,0,0"/>
         <Button Name="SaveButton" Content="Sačuvaj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="185" Margin="317,296,0,0" Command="{Binding Path=SaveSettingsCommand}" Height="38"/>
-        <ComboBox Name="ComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="247" Margin="437,105,0,0" ItemsSource="{Binding DoctorsNamesSurnames}" SelectedValue="{Binding SelectedDoctor, Mode=TwoWay}"/>
+        <ComboBox Name="ComboBox" IsKeyboardFocusedChanged="ShowToolTip" HorizontalAlignment="Left" VerticalAlignment="Top" Width="247" Margin="437,54,0,0" ItemsSource="{Binding DoctorsNamesSurnames}" SelectedValue="{Binding SelectedDoctor, Mode=TwoWay}">
+            <ComboBox.ToolTip>
+                <ToolTip>
+                    Koristite strelice tastature da biste odabrali lekara, a taster "SPACE" da završite odabir.
+                </ToolTip>
+            </ComboBox.ToolTip>
+        </ComboBox>
+        <Label Content="Prikaz čarobnjaka za pomoć pri pokretanju:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,132,0,0" Width="245"/>
+        <CheckBox Name="CheckBoxWizard" IsKeyboardFocusedChanged="ShowToolTip" Content="Uključeno" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="437,138,0,0" Width="85" IsChecked="{Binding Path=ShowWizard, Mode=TwoWay}" >
+            <CheckBox.ToolTip>
+                <ToolTip>
+                    Koristite taster "SPACE" da uključite/isključite opciju.
+                </ToolTip>
+            </CheckBox.ToolTip>
+        </CheckBox>
+        <Label Content="Prikaz pomoćnih informacija:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,213,0,0"/>
+        <CheckBox Content="Uključeno" HorizontalAlignment="Left" IsKeyboardFocusedChanged="ShowToolTip" VerticalAlignment="Top" Margin="437,219,0,0" IsChecked="{Binding Path=ShowTooltips, Mode=TwoWay}">
+            <CheckBox.ToolTip>
+                <ToolTip>
+                    Koristite taster "SPACE" da uključite/isključite opciju.
+                </ToolTip>
+            </CheckBox.ToolTip>
+        </CheckBox>
     </Grid>
 </Page>

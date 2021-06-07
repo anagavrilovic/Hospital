@@ -8,7 +8,9 @@
         Title="PatientMain" Height="450" Width="800"
         WindowStartupLocation="CenterScreen"
         >
-
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </Window.CommandBindings>
     <Frame Name="frame" Source="PatientMenu.xaml" NavigationUIVisibility="Hidden" Focusable="False" />
 
 </Window>

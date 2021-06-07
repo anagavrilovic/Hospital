@@ -87,6 +87,9 @@ namespace Hospital.Repositories
         public void FirstSave(String id)
         {
             PatientSettings patientSettings = new PatientSettings(id, "Nije mi bitno");
+            patientSettings.IsFirstLogin = true;
+            patientSettings.ShowWizard = false;
+            patientSettings.ShowTooltips = true;
             Save(patientSettings);
         }
     }
