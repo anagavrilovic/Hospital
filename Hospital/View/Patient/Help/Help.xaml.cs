@@ -22,6 +22,7 @@ namespace Hospital.View.Patient.Help
         public Help()
         {
             InitializeComponent();
+            this.Topmost = true;
         }
     }
 }

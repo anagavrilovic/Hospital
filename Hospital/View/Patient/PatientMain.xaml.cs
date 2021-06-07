@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Services;
 using Hospital.View.Patient.Help;
 using System;
 using System.Collections.Generic;
@@ -22,10 +23,18 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientMain : Window
     {
-      
+        private PatientSettingsService patientSettingsService = new PatientSettingsService();
         public PatientMain()
         {
             InitializeComponent();
+            PatientSettings patientSettings = patientSettingsService.GetByID(MainWindow.IDnumber);
+            if (patientSettings.ShowWizard || patientSettings.IsFirstLogin)
+            {
+                patientSettings.IsFirstLogin = false;
+                patientSettingsService.Update(patientSettings);
+                Help help = new Help();
+                help.Show();
+            }
             
         }
 

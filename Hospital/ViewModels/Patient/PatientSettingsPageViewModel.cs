@@ -19,6 +19,8 @@ namespace Hospital.ViewModels.Patient
         public String SelectedDoctor {get;set;}
         private DoctorService doctorService=new DoctorService();
 
+        public Boolean ShowWizard { get; set; }
+
         private RelayCommand saveSettingsCommand;
         public RelayCommand SaveSettingsCommand
         {
@@ -31,6 +33,7 @@ namespace Hospital.ViewModels.Patient
         public void Executed_SaveSettingsCommand(object obj)
         {
             PatientSettings patientSettings = new PatientSettings(SelectedDoctor, MainWindow.IDnumber);
+            patientSettings.ShowWizard = ShowWizard;
             patientSettingsService.Update(patientSettings);
             this.navService.Navigate(new Uri("View/Patient/PatientMenu.xaml", UriKind.Relative));
         }
@@ -50,6 +53,7 @@ namespace Hospital.ViewModels.Patient
             }
             DoctorsNamesSurnames.Add("Nije mi bitno");
             SelectedDoctor = patientSettingsService.GetByID(MainWindow.IDnumber).ChosenDoctor;
+            ShowWizard = patientSettingsService.GetByID(MainWindow.IDnumber).ShowWizard;
             SaveSettingsCommand = new RelayCommand(Executed_SaveSettingsCommand, CanExecute_SaveSettingsCommand);
         }
     }

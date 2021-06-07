@@ -40,7 +40,7 @@ namespace Hospital.View
             if ((e.Key == Key.Space) && ComboBox.IsFocused)
             {
                 Keyboard.ClearFocus();
-                SaveButton.Focus();
+                CheckBoxWizard.Focus();
             }
         }
     }
