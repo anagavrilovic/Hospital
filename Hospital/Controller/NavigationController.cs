@@ -23,5 +23,7 @@ namespace Hospital.Controller
         public abstract void NavigateToDoctorHospitalizedPatients();
 
         public abstract void NavigateToDoctorFeedback(string id, NavigationController navigationController);
+
+        public abstract void NavigateToDoctorReport();
     }
 }

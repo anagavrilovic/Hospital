@@ -278,6 +278,7 @@
     <Compile Include="ViewModels\Doctor\DoctorMainPageViewModel.cs" />
     <Compile Include="ViewModels\Doctor\DoctorMainWindowViewModel.cs" />
     <Compile Include="ViewModels\Doctor\DoctorNotificationViewModel.cs" />
+    <Compile Include="ViewModels\Doctor\DoctorReportViewModel.cs" />
     <Compile Include="ViewModels\Doctor\EditMedicineViewModel.cs" />
     <Compile Include="ViewModels\Doctor\HospitalizedPatientsViewModel.cs" />
     <Compile Include="ViewModels\Doctor\MedicineValidityViewModel.cs" />
@@ -295,6 +296,9 @@
     </Compile>
     <Compile Include="View\Doctor\DoctorFeedbackPage.xaml.cs">
       <DependentUpon>DoctorFeedbackPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Doctor\DoctorReport.xaml.cs">
+      <DependentUpon>DoctorReport.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Doctor\HospitalizedPatients.xaml.cs">
       <DependentUpon>HospitalizedPatients.xaml</DependentUpon>
@@ -633,6 +637,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Doctor\DoctorFeedbackPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Doctor\DoctorReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1340,6 +1348,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\Secretary\feedback.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\pdf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\pdf1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

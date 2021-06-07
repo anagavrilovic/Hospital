@@ -1,4 +1,5 @@
-﻿using Hospital.Repositories;
+﻿using Hospital.Model;
+using Hospital.Repositories;
 using Hospital.Repositories.Interfaces;
 using Hospital.View.Doctor;
 using System;
@@ -15,10 +16,12 @@ namespace Hospital.Services
     public class MedicineService
     {
         private IMedicineRepository medicineRepository;
+        private IMedicalRecordRepository medicalRecordRepository;
 
         public MedicineService()
         {
             medicineRepository = new MedicineFileRepository();
+            medicalRecordRepository = new MedicalRecordFileRepository();
         }
 
         public List<string> GetAllMedicines()
@@ -56,6 +59,18 @@ namespace Hospital.Services
         public void EditMedicine(Medicine medicine)
         {
             medicineRepository.EditMedicine(medicine);
+        }
+
+        internal List<Medicine> GetConsumedMedicineInPeriod(DateTime startDate, DateTime endDate)
+        {
+            List<Medicine> medicines = new List<Medicine>();
+            foreach(MedicalRecord record in medicalRecordRepository.GetAll())
+                foreach(Examination examination in record.Examination)
+                    if(examination.dateOfExamination>=startDate && examination.dateOfExamination <= endDate)
+                        foreach(MedicineTherapy medicineTherapy in examination.therapy.Medicine)
+                            medicines.Add(medicineTherapy.Medicine);
+
+            return medicines;
         }
 
         public bool IsMedicineIDUnique(string id)

@@ -83,6 +83,7 @@ namespace Hospital.View.Doctor
 
         private void SaveExamination()
         {
+            ((AppointmentWindow)Window.GetWindow(this)).Examintaion.dateOfExamination = DateTime.Now;
             patientNotificationService.SaveFirst(((AppointmentWindow)Window.GetWindow(this)).Examintaion);
             MedicalRecord.AddExamination(((AppointmentWindow)Window.GetWindow(this)).Examintaion);
             medicalRecordSerivce.UpdateMedicalRecord(MedicalRecord);

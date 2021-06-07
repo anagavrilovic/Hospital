@@ -219,6 +219,9 @@
   <data name="emergencyOperationLabel" xml:space="preserve">
     <value>Emergency operation</value>
   </data>
+  <data name="endDateReport" xml:space="preserve">
+    <value>End date:</value>
+  </data>
   <data name="endOfTreatmentLabel" xml:space="preserve">
     <value>End of treatment:</value>
   </data>
@@ -327,6 +330,15 @@
   <data name="removeButton" xml:space="preserve">
     <value>Remove</value>
   </data>
+  <data name="report" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="reportButton" xml:space="preserve">
+    <value>Generate</value>
+  </data>
+  <data name="reportDetail" xml:space="preserve">
+    <value>on medicine consumption in certain period of time</value>
+  </data>
   <data name="requestLabel" xml:space="preserve">
     <value>Request for</value>
   </data>
@@ -362,6 +374,9 @@
   </data>
   <data name="signOutLabel" xml:space="preserve">
     <value>Sign Out</value>
+  </data>
+  <data name="startDateReport" xml:space="preserve">
+    <value>Start date:</value>
   </data>
   <data name="startExaminationTB" xml:space="preserve">
     <value>Start examination</value>

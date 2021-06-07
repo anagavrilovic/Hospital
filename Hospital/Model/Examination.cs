@@ -7,7 +7,7 @@ namespace Hospital
     {
         public String diagnosis;
         public String anamnesis;
-
+        public DateTime dateOfExamination;
         public Therapy therapy;
         public Appointment appointment;
 

@@ -367,6 +367,15 @@ namespace Hospital.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to End date:.
+        /// </summary>
+        internal static string endDateReport {
+            get {
+                return ResourceManager.GetString("endDateReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End of treatment:.
         /// </summary>
         internal static string endOfTreatmentLabel {
@@ -691,6 +700,33 @@ namespace Hospital.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Report.
+        /// </summary>
+        internal static string report {
+            get {
+                return ResourceManager.GetString("report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate.
+        /// </summary>
+        internal static string reportButton {
+            get {
+                return ResourceManager.GetString("reportButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to on medicine consumption in certain period of time.
+        /// </summary>
+        internal static string reportDetail {
+            get {
+                return ResourceManager.GetString("reportDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Request for.
         /// </summary>
         internal static string requestLabel {
@@ -795,6 +831,15 @@ namespace Hospital.Properties {
         internal static string signOutLabel {
             get {
                 return ResourceManager.GetString("signOutLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start date:.
+        /// </summary>
+        internal static string startDateReport {
+            get {
+                return ResourceManager.GetString("startDateReport", resourceCulture);
             }
         }
         

@@ -47,6 +47,11 @@ namespace Hospital.Controller
             navService.Navigate(new NotificationsPage(id, navigationController));
         }
 
+        public override void NavigateToDoctorReport()
+        {
+            navService.Navigate(new DoctorReport());
+        }
+
         public override void NavigateToDoctorValidation(Model.Doctor doctor)
         {
             navService.Navigate(new MedicineValidity(doctor));

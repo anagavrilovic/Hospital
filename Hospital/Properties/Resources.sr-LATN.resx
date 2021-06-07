@@ -216,6 +216,9 @@
   <data name="emergencyOperationLabel" xml:space="preserve">
     <value>Hitna operacija</value>
   </data>
+  <data name="endDateReport" xml:space="preserve">
+    <value>Krajnji datum:</value>
+  </data>
   <data name="endOfTreatmentLabel" xml:space="preserve">
     <value>Kraj bolničkog lečenja:</value>
   </data>
@@ -321,6 +324,15 @@
   <data name="removeButton" xml:space="preserve">
     <value>Izbaci</value>
   </data>
+  <data name="report" xml:space="preserve">
+    <value>Izveštaj</value>
+  </data>
+  <data name="reportButton" xml:space="preserve">
+    <value>Generiši</value>
+  </data>
+  <data name="reportDetail" xml:space="preserve">
+    <value>o potrošnji lekova u određenom vremenskom periodu</value>
+  </data>
   <data name="requestLabel" xml:space="preserve">
     <value>Zahtev za</value>
   </data>
@@ -356,6 +368,9 @@
   </data>
   <data name="signOutLabel" xml:space="preserve">
     <value>Odjavi se</value>
+  </data>
+  <data name="startDateReport" xml:space="preserve">
+    <value>Početni datum:</value>
   </data>
   <data name="startExaminationTB" xml:space="preserve">
     <value>Započni pregled</value>

@@ -72,8 +72,18 @@ namespace Hospital.ViewModels.Doctor
                 feedbackCommand = value;
             }
         }
+        private RelayCommand reportCommand;
+        public RelayCommand ReportCommand
+        {
+            get { return reportCommand; }
+            set
+            {
+                reportCommand = value;
+            }
+        }
         public DoctorMainPageViewModel(string doctorId, NavigationController navigationController)
         {
+            ReportCommand = new RelayCommand(Execute_Report, canExecuteMethod);
             FeedbackCommand = new RelayCommand(Execute_Feedback, canExecuteMethod);
             HospitalizedCommand = new RelayCommand(Execute_Hospitalized, canExecuteMethod);
             EditMedicineCommand = new RelayCommand(Execute_EditMedicine, canExecuteMethod);
@@ -98,6 +108,11 @@ namespace Hospital.ViewModels.Doctor
         {
             navigationController.NavigateToDoctorAppointments(doctorId,navigationController);
 
+        }
+
+        private void Execute_Report(object sender)
+        {
+            navigationController.NavigateToDoctorReport();
         }
 
         private void Execute_EditMedicine(object sender)
