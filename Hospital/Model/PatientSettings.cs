@@ -16,6 +16,7 @@ namespace Hospital.Model
         public Boolean ShowWizard { get; set; }
 
         public Boolean IsFirstLogin { get; set; }
+        public Boolean ShowTooltips { get; set; }
 
         [JsonIgnore]
         public MedicalRecord PatientsRecord { get; set; }

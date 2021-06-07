@@ -89,6 +89,7 @@ namespace Hospital.Repositories
             PatientSettings patientSettings = new PatientSettings(id, "Nije mi bitno");
             patientSettings.IsFirstLogin = true;
             patientSettings.ShowWizard = false;
+            patientSettings.ShowTooltips = true;
             Save(patientSettings);
         }
     }

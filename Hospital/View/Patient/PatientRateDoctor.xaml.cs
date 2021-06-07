@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -25,6 +26,7 @@ namespace Hospital.View
         Appointment app;
         PatientComment patientComment;
         PatientCommentsService patientCommentsService = new PatientCommentsService();
+        private PatientSettingsService patientSettingsService = new PatientSettingsService();
         public PatientRateDoctor(Appointment app)
         {
             InitializeComponent();
@@ -89,6 +91,15 @@ namespace Hospital.View
                 return;
             }
             this.NavigationService.GoBack();
+        }
+
+        public void ShowToolTip(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (!patientSettingsService.GetByID(MainWindow.IDnumber).ShowTooltips) return;
+            ToolTip tt = (ToolTip)(sender as Control).ToolTip;
+            tt.PlacementTarget = (UIElement)sender;
+            tt.Placement = PlacementMode.Right;
+            tt.IsOpen = (sender as Control).IsKeyboardFocusWithin;
         }
 
     }

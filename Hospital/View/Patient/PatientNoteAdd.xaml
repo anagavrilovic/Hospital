@@ -11,9 +11,21 @@
 
     <Grid Background="White">
         <Label Name="SubjectLabel" Content="Naslov: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="31,33,0,0"/>
-        <TextBox Name="SubjectTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="435" Margin="214,37,0,0"/>
+        <TextBox Name="SubjectTextBox" HorizontalAlignment="Left" IsKeyboardFocusedChanged="ShowToolTip" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="435" Margin="214,37,0,0">
+            <TextBox.ToolTip>
+                <ToolTip>
+                    Pritisnite taster "ESC" da biste završili pisanje naslova.
+                </ToolTip>
+            </TextBox.ToolTip>
+        </TextBox>
         <Label Content="Sadržaj: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="31,100,0,0"/>
-        <TextBox Name="ContentTextBox" HorizontalAlignment="Left" Height="199" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="435" Margin="214,112,0,0"/>
+        <TextBox Name="ContentTextBox" HorizontalAlignment="Left" IsKeyboardFocusedChanged="ShowToolTip" Height="199" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="435" Margin="214,112,0,0">
+            <TextBox.ToolTip>
+                <ToolTip>
+                    Pritisnite taster "ESC" da biste završili pisanje sadržaja.
+                </ToolTip>
+            </TextBox.ToolTip>
+        </TextBox>
         <Button Content="Nazad" HorizontalAlignment="Left" VerticalAlignment="Top" Width="173" Margin="334,371,0,0" Click="GoBack" Height="30"/>
         <Button Name="SaveButton" Content="Sačuvaj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="173" Margin="334,326,0,0" Click="Save" Height="30"/>
 
