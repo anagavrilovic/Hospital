@@ -158,6 +158,8 @@
     <Compile Include="DTO\DatesInWeeklyCalendarDTO.cs" />
     <Compile Include="Model\DoctorSpecialty.cs" />
     <Compile Include="Model\DoctorsShift.cs" />
+    <Compile Include="Model\Feedback.cs" />
+    <Compile Include="Model\FeedbackType.cs" />
     <Compile Include="Model\HospitalTreatment.cs" />
     <Compile Include="Model\Ingredient.cs" />
     <Compile Include="Model\Inventory.cs" />
@@ -189,11 +191,13 @@
     <Compile Include="Repositories\AppointmentFileRepository.cs" />
     <Compile Include="Repositories\DoctorFileRepository.cs" />
     <Compile Include="Repositories\DynamicInventoryFileRepository.cs" />
+    <Compile Include="Repositories\FeedbackFileRepository.cs" />
     <Compile Include="Repositories\GenericFileRepository.cs" />
     <Compile Include="Repositories\HospitalTreatmentFileRepository.cs" />
     <Compile Include="Repositories\Interfaces\IAppointmentRepository.cs" />
     <Compile Include="Repositories\Interfaces\IDoctorRepository.cs" />
     <Compile Include="Repositories\Interfaces\IDynamicInventoryRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IFeedbackRepository.cs" />
     <Compile Include="Repositories\Interfaces\IGenericRepository.cs" />
     <Compile Include="Repositories\Interfaces\IHospitalTreatmentRepository.cs" />
     <Compile Include="Repositories\Interfaces\IMedicalRecordRepository.cs" />
@@ -231,6 +235,7 @@
     <Compile Include="Services\DoctorsShiftService.cs" />
     <Compile Include="Services\DynamicInventoryService.cs" />
     <Compile Include="Services\ExaminationService.cs" />
+    <Compile Include="Services\FeedbackService.cs" />
     <Compile Include="Services\HospitalTreatmentService.cs" />
     <Compile Include="Services\MedicalRecordService.cs" />
     <Compile Include="Services\MedicineRevisionService.cs" />
@@ -269,6 +274,7 @@
     <Compile Include="ViewModels\Doctor\DiagnosisViewModel.cs" />
     <Compile Include="ViewModels\Doctor\DisplayNotificationViewModel.cs" />
     <Compile Include="ViewModels\Doctor\DoctorAppointmentsViewModel.cs" />
+    <Compile Include="ViewModels\Doctor\DoctorFeedbackViewModel.cs" />
     <Compile Include="ViewModels\Doctor\DoctorMainPageViewModel.cs" />
     <Compile Include="ViewModels\Doctor\DoctorMainWindowViewModel.cs" />
     <Compile Include="ViewModels\Doctor\DoctorNotificationViewModel.cs" />
@@ -286,6 +292,9 @@
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="View\Doctor\DisplayNotification.xaml.cs">
       <DependentUpon>DisplayNotification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Doctor\DoctorFeedbackPage.xaml.cs">
+      <DependentUpon>DoctorFeedbackPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Doctor\HospitalizedPatients.xaml.cs">
       <DependentUpon>HospitalizedPatients.xaml</DependentUpon>
@@ -611,6 +620,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Doctor\DisplayNotification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Doctor\DoctorFeedbackPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1300,6 +1313,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\Secretary\print.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\DoctorIcons\comments.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

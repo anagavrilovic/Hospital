@@ -44,7 +44,7 @@
                 </StackPanel>
             </Button.Content>
         </Button>
-        <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource GelButton}" Margin="0,40,40,0" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+        <Button Grid.Column="3" Grid.Row="2" Style="{StaticResource GelButton}" Margin="70,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom">
             <Button.Content>
                 <StackPanel Orientation="Vertical">
                     <Image Source="/Icon/odmor.png" Width="150" Height="50"/>
@@ -67,6 +67,14 @@
                 <StackPanel Orientation="Vertical" Height="180">
                     <Image Source="/Icon/DoctorIcons/lecenje.png" Width="150" Height="50" VerticalAlignment="Center" RenderTransformOrigin="0.526,1.409"/>
                     <Label FontSize="19" Content="{ns:Loc hospitalizedLabel}" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Button.Content>
+        </Button>
+        <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource GelButton}" Margin="0,20,20,0" Height="110" Command="{Binding FeedbackCommand}" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <Button.Content>
+                <StackPanel Orientation="Vertical">
+                    <Image Source="/Icon/DoctorIcons/comments.png" Width="150" Height="50"/>
+                    <Label FontSize="19" Content="Feedback" HorizontalAlignment="Center"/>
                 </StackPanel>
             </Button.Content>
         </Button>

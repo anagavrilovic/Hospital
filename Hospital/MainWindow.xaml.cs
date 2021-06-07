@@ -20,6 +20,8 @@ using Hospital.Model;
 using System.Collections.ObjectModel;
 using Hospital.View.Doctor;
 using Hospital.Services;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Graphics;
 
 namespace Hospital
 {

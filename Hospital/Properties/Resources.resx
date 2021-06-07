@@ -156,8 +156,14 @@
   <data name="bloodLabel" xml:space="preserve">
     <value>Blood type:</value>
   </data>
+  <data name="buttonFeedback" xml:space="preserve">
+    <value>Submit Feedback</value>
+  </data>
   <data name="cityLabel" xml:space="preserve">
     <value>City:</value>
+  </data>
+  <data name="comment" xml:space="preserve">
+    <value>Comments:</value>
   </data>
   <data name="consumptionLabel" xml:space="preserve">
     <value>Way of consumption:</value>
@@ -224,6 +230,9 @@
   </data>
   <data name="explanationLabel" xml:space="preserve">
     <value>Explanation:</value>
+  </data>
+  <data name="feedback" xml:space="preserve">
+    <value>Feedback Type:</value>
   </data>
   <data name="freeBedsTB" xml:space="preserve">
     <value>Free beds:</value>

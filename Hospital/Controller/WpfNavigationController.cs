@@ -27,6 +27,11 @@ namespace Hospital.Controller
             navService.Navigate(new EditMedicinePage());
         }
 
+        public override void NavigateToDoctorFeedback(string id, NavigationController navigationController)
+        {
+            navService.Navigate(new DoctorFeedbackPage(id,navigationController));
+        }
+
         public override void NavigateToDoctorHomePage(DoctorMainPage doctorMainPage)
         {
             navService.Navigate(doctorMainPage);

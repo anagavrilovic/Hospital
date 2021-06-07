@@ -156,8 +156,14 @@
   <data name="bloodLabel" xml:space="preserve">
     <value>Krvna grupa:</value>
   </data>
+  <data name="buttonFeedback" xml:space="preserve">
+    <value>Sačuvaj Feedback</value>
+  </data>
   <data name="cityLabel" xml:space="preserve">
     <value>Opština:</value>
+  </data>
+  <data name="comment" xml:space="preserve">
+    <value>Komentar:</value>
   </data>
   <data name="consumptionLabel" xml:space="preserve">
     <value>Način upotrebe leka:</value>
@@ -221,6 +227,9 @@
   </data>
   <data name="explanationLabel" xml:space="preserve">
     <value>Obrazloženje:</value>
+  </data>
+  <data name="feedback" xml:space="preserve">
+    <value>Tip Feedback-a:</value>
   </data>
   <data name="freeBedsTB" xml:space="preserve">
     <value>Slobodnih kreveta:</value>

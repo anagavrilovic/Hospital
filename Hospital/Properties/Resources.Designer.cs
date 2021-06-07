@@ -178,11 +178,29 @@ namespace Hospital.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Submit Feedback.
+        /// </summary>
+        internal static string buttonFeedback {
+            get {
+                return ResourceManager.GetString("buttonFeedback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to City:.
         /// </summary>
         internal static string cityLabel {
             get {
                 return ResourceManager.GetString("cityLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comments:.
+        /// </summary>
+        internal static string comment {
+            get {
+                return ResourceManager.GetString("comment", resourceCulture);
             }
         }
         
@@ -381,6 +399,15 @@ namespace Hospital.Properties {
         internal static string explanationLabel {
             get {
                 return ResourceManager.GetString("explanationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Feedback Type:.
+        /// </summary>
+        internal static string feedback {
+            get {
+                return ResourceManager.GetString("feedback", resourceCulture);
             }
         }
         

@@ -33,6 +33,7 @@ namespace Hospital.ViewModels.Doctor
                 ComboBox_SelectionChanged();
             }
         }
+
         private RelayCommand appointmentsCommand;
 
         public RelayCommand AppointmentsCommand
@@ -62,8 +63,18 @@ namespace Hospital.ViewModels.Doctor
                 hospitalizedCommand = value;
             }
         }
+        private RelayCommand feedbackCommand;
+        public RelayCommand FeedbackCommand
+        {
+            get { return feedbackCommand; }
+            set
+            {
+                feedbackCommand = value;
+            }
+        }
         public DoctorMainPageViewModel(string doctorId, NavigationController navigationController)
         {
+            FeedbackCommand = new RelayCommand(Execute_Feedback, canExecuteMethod);
             HospitalizedCommand = new RelayCommand(Execute_Hospitalized, canExecuteMethod);
             EditMedicineCommand = new RelayCommand(Execute_EditMedicine, canExecuteMethod);
             AppointmentsCommand = new RelayCommand(Execute_Appointments, canExecuteMethod);
@@ -72,6 +83,11 @@ namespace Hospital.ViewModels.Doctor
             this.doctorId = doctorId;
             var app = (App)Application.Current;
             ThemeIsChecked = app.DarkTheme;
+        }
+
+        private void Execute_Feedback(object obj)
+        {
+            navigationController.NavigateToDoctorFeedback(doctorId, navigationController);
         }
 
         private bool canExecuteMethod(object parameter)
