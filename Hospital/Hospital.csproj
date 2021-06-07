@@ -509,6 +509,9 @@
     <Compile Include="View\Secretary\Kalendar.xaml.cs">
       <DependentUpon>Kalendar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Secretary\MojProfil.xaml.cs">
+      <DependentUpon>MojProfil.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Secretary\NaseBolnice.xaml.cs">
       <DependentUpon>NaseBolnice.xaml</DependentUpon>
     </Compile>
@@ -575,6 +578,9 @@
     </Compile>
     <Compile Include="View\Secretary\SecretaryWindow.xaml.cs">
       <DependentUpon>SecretaryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Secretary\SekretarHelp.xaml.cs">
+      <DependentUpon>SekretarHelp.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\SlobodniDani.xaml.cs">
       <DependentUpon>SlobodniDani.xaml</DependentUpon>
@@ -910,6 +916,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Secretary\MojProfil.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Secretary\NaseBolnice.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -995,6 +1005,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Secretary\SecretaryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Secretary\SekretarHelp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

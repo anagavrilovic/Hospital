@@ -90,7 +90,7 @@
                     <ComboBoxItem Content="Operacija"/>
                 </ComboBox>
 
-                <ComboBox x:Name="Room" ItemsSource="{Binding AvaliableRooms}" SelectedItem="{Binding NewAppointment.Room}"  Style="{StaticResource RoomDisable}"
+                <ComboBox x:Name="ComboBoxRoom" ItemsSource="{Binding AvaliableRooms}" SelectedItem="{Binding NewAppointment.Room}"  Style="{StaticResource RoomDisable}"
                           Grid.Row="7" Grid.Column="1" Height="22" Margin="3,10,40,10"/>
 
                 <!-- Buttons -->
