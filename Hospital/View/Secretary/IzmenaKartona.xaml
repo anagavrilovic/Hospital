@@ -138,7 +138,7 @@
 
                 <DatePicker x:Name="Datum" Grid.Row="3" Grid.Column="1" Background="White" Margin="3,3,40,10" Foreground="{StaticResource MainDarkBlue}"
                             Text="{Binding Path=PatientsRecord.Patient.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                            FirstDayOfWeek="Monday" Validation.ErrorTemplate="{x:Null}"/>
+                            FirstDayOfWeek="Monday" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}" Focusable="False"/>
 
                 <TextBox x:Name="AdresaText" Grid.Row="4" Grid.Column="1" Style="{StaticResource cbTB}">
                     <TextBox.Text>
@@ -253,7 +253,7 @@
 
                 <ComboBox x:Name="KrvnaGrupa" Grid.Row="6" Grid.Column="3" Style="{StaticResource cbTB}"
                           SelectedIndex="{Binding PatientsRecord.BloodType, Mode=OneWayToSource}">
-                    <ComboBoxItem x:Name="Aplus"  Content="A+"/>
+                    <ComboBoxItem x:Name="Aplus"  Content="A+" IsSelected="True"/>
                     <ComboBoxItem x:Name="Aneg"   Content="A-"/>
                     <ComboBoxItem x:Name="Bplus"  Content="B+"/>
                     <ComboBoxItem x:Name="Bneg"   Content="B-"/>
@@ -271,7 +271,7 @@
                 </StackPanel>
 
                 <TextBox x:Name="UsernameText" Grid.Row="8" Grid.Column="3" Text="{Binding Path=PatientsRecord.Patient.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}"
-                         Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}" IsEnabled="False">
+                         Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
                 </TextBox>
 
                 <TextBox x:Name="PasswordText" Grid.Row="9" Grid.Column="3" Text="{Binding Path=PatientsRecord.Patient.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}" >

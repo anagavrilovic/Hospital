@@ -1,6 +1,7 @@
 ﻿using Hospital.Commands.Secretary;
 using Hospital.Services;
 using Hospital.View;
+using Hospital.View.Secretary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -61,6 +62,31 @@ namespace Hospital.ViewModels.Secretary
 
         public void Execute_AddStudentCommand(object obj)
         {
+            if (!NewRecord.Patient.IsGuest)
+            {
+                if(NewRecord.Patient.FirstName.Equals("") || NewRecord.ParentName.Equals("") || NewRecord.Patient.LastName.Equals("") ||
+                    NewRecord.Patient.Address.Street.Equals("") || NewRecord.Patient.Address.StreetNumber.Equals("") || 
+                    NewRecord.Patient.Address.City.CityName.Equals("") || NewRecord.Patient.Address.City.PostalCode.Equals("") ||
+                    NewRecord.Patient.Address.City.Country.CountryName.Equals("") || NewRecord.HealthCardNumber.Equals("") || 
+                    NewRecord.Patient.CardID.Equals("") || NewRecord.Patient.PersonalID.Equals("") || NewRecord.Patient.PhoneNumber.Equals("") || 
+                    NewRecord.Patient.Email.Equals("") || NewRecord.Patient.Username.Equals("") || NewRecord.Patient.Password.Equals(""))
+                {
+                    InformationBox informationBox = new InformationBox("Sva polja moraju biti popunjena!");
+                    informationBox.Show();
+                    return;
+                }
+            } 
+            else
+            {
+                if (NewRecord.Patient.FirstName.Equals("") || NewRecord.Patient.LastName.Equals("") ||
+                    NewRecord.Patient.CardID.Equals("") || NewRecord.Patient.PersonalID.Equals(""))
+                {
+                    InformationBox informationBox = new InformationBox("Sva polja moraju biti popunjena!");
+                    informationBox.Show();
+                    return;
+                }
+            }
+
             MedicalRecordService.RegisterNewRecord(NewRecord);
             this.NavigationService.Navigate(new PrikazPacijenata());
         }

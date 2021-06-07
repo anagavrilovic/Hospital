@@ -1,5 +1,6 @@
 ﻿using Hospital.Model;
 using Hospital.Services;
+using Hospital.View.Secretary;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -54,6 +55,31 @@ namespace Hospital.View
         private void BtnPotvrdiClick(object sender, RoutedEventArgs e)
         {
             UpdatePatientsInsurance();
+
+            if (!PatientsRecord.Patient.IsGuest)
+            {
+                if (PatientsRecord.Patient.FirstName.Equals("") || PatientsRecord.ParentName.Equals("") || PatientsRecord.Patient.LastName.Equals("") ||
+                    PatientsRecord.Patient.Address.Street.Equals("") || PatientsRecord.Patient.Address.StreetNumber.Equals("") ||
+                    PatientsRecord.Patient.Address.City.CityName.Equals("") || PatientsRecord.Patient.Address.City.PostalCode.Equals("") ||
+                    PatientsRecord.Patient.Address.City.Country.CountryName.Equals("") || PatientsRecord.HealthCardNumber.Equals("") ||
+                    PatientsRecord.Patient.CardID.Equals("") || PatientsRecord.Patient.PersonalID.Equals("") || PatientsRecord.Patient.PhoneNumber.Equals("") ||
+                    PatientsRecord.Patient.Email.Equals("") || PatientsRecord.Patient.Username.Equals("") || PatientsRecord.Patient.Password.Equals(""))
+                {
+                    InformationBox informationBox = new InformationBox("Sva polja moraju biti popunjena!");
+                    informationBox.Show();
+                    return;
+                }
+            }
+            else
+            {
+                if (PatientsRecord.Patient.FirstName.Equals("") || PatientsRecord.Patient.LastName.Equals("") ||
+                    PatientsRecord.Patient.CardID.Equals("") || PatientsRecord.Patient.PersonalID.Equals(""))
+                {
+                    InformationBox informationBox = new InformationBox("Sva polja moraju biti popunjena!");
+                    informationBox.Show();
+                    return;
+                }
+            }
 
             MedicalRecordService.UpdateMedicalRecord(PatientsRecord);
             NavigationService.Navigate(new PrikazPacijenata());

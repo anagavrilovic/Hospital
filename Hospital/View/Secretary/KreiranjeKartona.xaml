@@ -139,8 +139,8 @@
                 </TextBox>
 
                 <DatePicker x:Name="Datum" Grid.Row="3" Grid.Column="1" Background="White" Margin="3,3,40,10" Foreground="{StaticResource MainDarkBlue}"
-                            Text="{Binding Path=NewRecord.Patient.DateOfBirth, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" 
-                            FirstDayOfWeek="Monday" Validation.ErrorTemplate="{x:Null}"/>
+                            Text="{Binding Path=NewRecord.Patient.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                            FirstDayOfWeek="Monday" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}" Focusable="False"/>
 
                 <TextBox x:Name="AdresaText" Grid.Row="4" Grid.Column="1" Style="{StaticResource cbTB}" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
                     <TextBox.Text>
@@ -254,7 +254,7 @@
 
                 <ComboBox x:Name="KrvnaGrupa" Grid.Row="6" Grid.Column="3" Style="{StaticResource cbTB}"
                           SelectedIndex="{Binding NewRecord.BloodType, Mode=OneWayToSource}">
-                    <ComboBoxItem x:Name="Aplus"  Content="A+"/>
+                    <ComboBoxItem x:Name="Aplus"  Content="A+" IsSelected="True"/>
                     <ComboBoxItem x:Name="Aneg"   Content="A-"/>
                     <ComboBoxItem x:Name="Bplus"  Content="B+"/>
                     <ComboBoxItem x:Name="Bneg"   Content="B+"/>
