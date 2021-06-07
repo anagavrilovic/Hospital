@@ -41,7 +41,12 @@
         </StackPanel>
 
         <Button Grid.Column="0"     Grid.Row="1"  Content="IZMENI STAVKU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="21,16.8,7.2,5.4" Style="{StaticResource RoundButtonStyle}" Click="EditButtonClick" FontSize="14" />
-        <Button Grid.Column="1"     Grid.Row="1"  Content="OBRIŠI STAVKU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="6.8,16.8,21.4,5.4"   Style="{StaticResource RoundButtonStyle}" Click="DeleteButtonClick" FontSize="14"/>
+        <Button Grid.Column="1"     Grid.Row="1"  Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="6.8,16.8,21.4,5.4"   Style="{StaticResource RoundButtonStyle}" Click="DeleteButtonClick">
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="/Icon/delete.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="1,0,3,2" />
+                <TextBlock Text="IZBRIŠI STAVKU" Margin="5,1,0,0" FontSize="14"/>
+            </StackPanel>
+        </Button>
         <Button Grid.ColumnSpan="2" Grid.Row="2"  Content="PREBACI STAVKU U DRUGU SALU" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Margin="21,7.6,21.4,10.6" Click="TransferButtonClick" FontSize="14"/>
 
         <TextBox x:Name="search" TextChanged="SearchInventory" Grid.ColumnSpan="2" Grid.Row="3" Margin="21,19.4,51.4,20.8">
@@ -73,7 +78,12 @@
             </Grid>
         </ScrollViewer>
 
-        <Button Grid.ColumnSpan="2" Grid.Row="8"  Content="DODAJ STAVKU" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="21,64.4,27.4,36.4" Style="{StaticResource RoundButtonStyle}" Click="AddButtonClick" FontSize="14" Grid.RowSpan="2"/>
+        <Button Grid.ColumnSpan="2" Grid.Row="8"  Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="21,64.4,27.4,36.4" Style="{StaticResource RoundButtonStyle}" Click="AddButtonClick" Grid.RowSpan="2">
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="/Icon/Secretary/plus.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="1,0,3,0" />
+                <TextBlock Text="DODAJ STAVKU" Margin="5,0,0,0" FontSize="14"/>
+            </StackPanel>
+        </Button>
 
     </Grid>
 </Page>

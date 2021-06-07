@@ -41,7 +41,12 @@
         </StackPanel>
 
         <Button x:Name="edit"     Content="IZMENI STAVKU"    Grid.Row="1" Grid.Column="0" Margin="10,24.8,7.2,0.4" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="EditItemButtonClick"     FontSize="14" />
-        <Button x:Name="delete"   Content="IZBRIŠI STAVKU"   Grid.Row="1" Grid.Column="1" Margin="5.8,25.8,10.4,0.4" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="DeleteItemButtonClick"   FontSize="14"/>
+        <Button x:Name="delete"     Grid.Row="1" Grid.Column="1" Margin="5.8,25.8,10.4,0.4" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="DeleteItemButtonClick"  >
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="/Icon/delete.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="1,0,3,2" />
+                <TextBlock Text="IZBRIŠI STAVKU" Margin="5,0,0,0" FontSize="14"/>
+            </StackPanel>
+        </Button>
         <Button x:Name="transfer" Content="PREBACI STAVKU"   Grid.Row="2" Grid.Column="0" Margin="10,9.6,10.4,13.8" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="TransferItemButtonClick" FontSize="14" Grid.ColumnSpan="2"/>
 
         <TextBox x:Name="search"  TextChanged="SearchDynamicInventory" Grid.Row="3" Grid.ColumnSpan="2" Margin="18,10.2,65.4,27.2" >
@@ -71,7 +76,12 @@
             </Grid>
         </ScrollViewer>
 
-        <Button x:Name="add"    Content="DODAJ STAVKU"  Grid.Row="8" Grid.ColumnSpan="2" Margin="10,65,25.4,39.4" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="AddItemButtonClick" FontSize="14" Grid.RowSpan="2" />
+        <Button x:Name="add"  Grid.Row="8" Grid.ColumnSpan="2" Margin="10,65,25.4,39.4" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="AddItemButtonClick"  Grid.RowSpan="2" >
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="/Icon/Secretary/plus.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="1,0,3,0" />
+                <TextBlock Text="DODAJ STAVKU" Margin="5,0,0,0" FontSize="14"/>
+            </StackPanel>
+        </Button>
 
     </Grid>
 </Page>
