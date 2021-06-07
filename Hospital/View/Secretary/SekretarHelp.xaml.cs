@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace Hospital.View.Secretary
 {
-    /// <summary>
-    /// Interaction logic for SekretarHelp.xaml
-    /// </summary>
     public partial class SekretarHelp : Page
     {
         public SekretarHelp()
