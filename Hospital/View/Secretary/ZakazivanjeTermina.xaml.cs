@@ -85,19 +85,18 @@ namespace Hospital.View
         {
             if(ComboBoxTrajanje.SelectedIndex == -1 || ComboBoxType.SelectedIndex == -1 || ComboBoxRoom.SelectedIndex == -1)
             {
-                InformationBox informationBox = new InformationBox("Popunite sve informacije o novom pregledu!");
+                InformationBox informationBox = new InformationBox("Popunite sve informacije o novom terminu!");
                 informationBox.ShowDialog();
                 return;
             }
 
             string message = AppointmentService.ScheduleAppointment(NewAppointment);
 
-            if (!message.Equals(""))
-            {
-                InformationBox informationBox = new InformationBox(message);
-                informationBox.ShowDialog();
+            InformationBox informationBox1 = new InformationBox(message);
+            informationBox1.ShowDialog();
+
+            if(!message.Equals("Termin uspešno zakazan!"))
                 return;
-            }
 
             NavigationService.Navigate(new Kalendar(NewAppointment.Doctor));
         }

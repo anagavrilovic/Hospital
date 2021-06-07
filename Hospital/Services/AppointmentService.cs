@@ -83,7 +83,7 @@ namespace Hospital.Services
                 return "Odaberite salu/ordinaciju!";
 
             appointmentRepository.Save(newAppointment);
-            return "";
+            return "Termin uspešno zakazan!";
         }
 
         public Appointment ScheduleUrgentAppointmentWithRescheduling(Appointment newUrgentAppointment, OptionForRescheduling selectedOption)
