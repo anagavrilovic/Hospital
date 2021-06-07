@@ -39,7 +39,12 @@
             <Image Source="/Icon/logo.png"  Margin="60,10,6,9.8" Width="131"/>
         </StackPanel>
 
-        <Button Grid.Row="1" Grid.ColumnSpan="2" Content="IZMENI LEK" Margin="29,18.2,31,9.6" Background="#FFAAD0E0" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="EditMedicine" FontSize="14"/>
+        <Button Grid.Row="1" Grid.ColumnSpan="2" Margin="29,18.2,31,9.6" Background="#FFAAD0E0" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="EditMedicine">
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="/Icon/edit-16.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="0,0,10,0" />
+                <TextBlock Text="IZMENI LEK" Margin="2,0,5,0" FontSize="14"/>
+            </StackPanel>
+        </Button>
 
         <Grid Grid.Row="2" Grid.RowSpan="7" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>

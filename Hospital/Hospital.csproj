@@ -1342,5 +1342,8 @@
   <ItemGroup>
     <Resource Include="Icon\inbox-5-16.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\text-file-4-16.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
