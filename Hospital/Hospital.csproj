@@ -1321,5 +1321,26 @@
   <ItemGroup>
     <Resource Include="Icon\inv.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\box-3-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\edit-7-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\box-5-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\edit-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\paint-brush-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\rotate-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\inbox-5-16.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
