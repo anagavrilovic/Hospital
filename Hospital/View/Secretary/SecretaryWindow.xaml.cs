@@ -1,4 +1,5 @@
 ﻿using Hospital.View.Secretary;
+using Hospital.ViewModels.Secretary;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,7 +22,7 @@ namespace Hospital.View
         public SecretaryWindow()
         {
             InitializeComponent();
-            Main.Navigate(new PocetnaStranica());
+            Main.Navigate(new PocetnaStranica(new PocetnaStranicaViewModel(Main.NavigationService)));
         }
 
         private void NextBtnClick(object sender, RoutedEventArgs e)
@@ -29,7 +30,7 @@ namespace Hospital.View
             if (Main.NavigationService.CanGoForward)
                 Main.NavigationService.GoForward();
             else
-                Main.Navigate(new PocetnaStranica());
+                Main.Navigate(new PocetnaStranica(new PocetnaStranicaViewModel(Main.NavigationService)));
         }
 
         private void BackBtnClick(object sender, RoutedEventArgs e)
@@ -37,7 +38,7 @@ namespace Hospital.View
             if (Main.NavigationService.CanGoBack)
                 Main.NavigationService.GoBack();
             else
-                Main.Navigate(new PocetnaStranica());
+                Main.Navigate(new PocetnaStranica(new PocetnaStranicaViewModel(Main.NavigationService)));
         }
 
         private void ExitBtnClick(object sender, RoutedEventArgs e)
@@ -47,7 +48,7 @@ namespace Hospital.View
 
         private void ButtonPocetnaClick(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new PocetnaStranica());
+            Main.Navigate(new PocetnaStranica(new PocetnaStranicaViewModel(Main.NavigationService)));
         }
 
         private void ButtonPacijentiClick(object sender, RoutedEventArgs e)
@@ -62,7 +63,7 @@ namespace Hospital.View
 
         private void ButtonHitanPregledClick(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new HitanPregled());
+            Main.Navigate(new HitanPregled(new HitanPregledViewModel(Main.NavigationService)));
         }
 
         private void ButtonRadnoVremeClick(object sender, RoutedEventArgs e)
@@ -77,7 +78,7 @@ namespace Hospital.View
 
         private void ButtonAnalitikaClick(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new Analitika());
+            Main.Navigate(new Analitika(new AnalitikaViewModel(Main.NavigationService)));
         }
 
         private void ButtonNaseBolniceClick(object sender, RoutedEventArgs e)

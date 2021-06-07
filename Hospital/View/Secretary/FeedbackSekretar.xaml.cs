@@ -1,5 +1,6 @@
 ﻿using Hospital.Model;
 using Hospital.Services;
+using Hospital.ViewModels.Secretary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,36 +20,10 @@ namespace Hospital.View.Secretary
 {
     public partial class FeedbackSekretar : Page
     {
-        public Feedback NewFeedback { get; set; }
-        public FeedbackService FeedbackService { get; set; }
-
-        public FeedbackSekretar()
+        public FeedbackSekretar(FeedbackViewModel feedbackViewModel)
         {
             InitializeComponent();
-            this.DataContext = this;
-            InitializeEmptyProperties();
-        }
-
-        private void InitializeEmptyProperties()
-        {
-            NewFeedback = new Feedback();
-            FeedbackService = new FeedbackService();
-        }
-
-        private void SendFeedbackClick(object sender, RoutedEventArgs e)
-        {
-            NewFeedback.UserId = "5";
-            FeedbackService.SaveFeedBack(NewFeedback);
-
-            InformationBox informationBox = new InformationBox("Feedback poslat!");
-            informationBox.Show();
-
-            NavigationService.Navigate(new PocetnaStranica());
-        }
-
-        private void OdustaniClick(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new PocetnaStranica());
+            this.DataContext = feedbackViewModel;
         }
     }
 }

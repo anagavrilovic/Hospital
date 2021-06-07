@@ -54,8 +54,8 @@
                     </Border.Effect>
                 </Border>
                 <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="15,10,0,0" Width="630" Height="40" HorizontalAlignment="Left">
-                    <Button BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Left" Margin="0,0,0,0" Click="GenerateReportClick"
-                            Width="630">
+                    <Button BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Left" Margin="0,0,0,0" 
+                            Command="{Binding GenerateReportCommand}" Width="630">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="../../Icon/Secretary/pdf.png" Width="20" Margin="0,0,10,0"/>
                             <TextBlock Text=" Generiši izveštaj o zauzetosti lekara za odredjeni vremenski period" Style="{StaticResource TitleStyleBlue}"/>

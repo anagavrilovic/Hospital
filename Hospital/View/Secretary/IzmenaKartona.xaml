@@ -237,7 +237,7 @@
                 </TextBox>
 
                 <ComboBox x:Name="BracnoStanje" Grid.Row="4" Grid.Column="3" Style="{StaticResource cbTB}"
-                          SelectedIndex="{Binding PatientsRecord.Patient.MaritalStatus, Mode=OneWayToSource}">
+                          SelectedIndex="{Binding MaritalStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ComboBoxItem x:Name="Neozenjen" Content="neoženjen - neudata"/>
                     <ComboBoxItem x:Name="Ozenjen" Content="oženjen - udata"/>
                     <ComboBoxItem x:Name="Udovac" Content="udovac - udovica"/>
@@ -245,14 +245,14 @@
                 </ComboBox>
 
                 <ComboBox x:Name="Pol" Grid.Row="5" Grid.Column="3" Style="{StaticResource cbTB}"
-                          SelectedIndex="{Binding PatientsRecord.Patient.Gender, Mode=OneWayToSource}">
+                          SelectedIndex="{Binding Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ComboBoxItem x:Name="Muski" Content="muški"/>
                     <ComboBoxItem x:Name="Zenski" Content="ženski"/>
                     <ComboBoxItem x:Name="Ostalo" Content="ostalo"/>
                 </ComboBox>
 
                 <ComboBox x:Name="KrvnaGrupa" Grid.Row="6" Grid.Column="3" Style="{StaticResource cbTB}"
-                          SelectedIndex="{Binding PatientsRecord.BloodType, Mode=OneWayToSource}">
+                          SelectedIndex="{Binding BloodType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ComboBoxItem x:Name="Aplus"  Content="A+" IsSelected="True"/>
                     <ComboBoxItem x:Name="Aneg"   Content="A-"/>
                     <ComboBoxItem x:Name="Bplus"  Content="B+"/>
@@ -264,9 +264,11 @@
                 </ComboBox>
 
                 <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="3">
-                    <RadioButton x:Name="DaButton" Content="DA" Margin="35,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource cbTB}">
+                    <RadioButton x:Name="DaButton" Content="DA" Margin="35,0,15,0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource cbTB}"
+                                 IsChecked="{Binding PatientsRecord.IsInsured, Converter={StaticResource insuranceConverter}, Mode=TwoWay}" GroupName="Insurance">
                     </RadioButton>
-                    <RadioButton x:Name="NeButton" Content="NE" Margin="15,0,35,0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource cbTB}">
+                    <RadioButton x:Name="NeButton" Content="NE" Margin="15,0,35,0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource cbTB}"
+                                 IsChecked="{Binding PatientsRecord.IsInsured, Converter={StaticResource inverseInsuranceConverter}, Mode=TwoWay}"  GroupName="Insurance">
                     </RadioButton>
                 </StackPanel>
 
@@ -277,7 +279,8 @@
                 <TextBox x:Name="PasswordText" Grid.Row="9" Grid.Column="3" Text="{Binding Path=PatientsRecord.Patient.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource cbTB}" >
                 </TextBox>
 
-                <Button x:Name="btnPotvrdi" Grid.Row="10" Grid.Column="1" Content="Potvrdi" Click="BtnPotvrdiClick" ToolTip="Potvrdi napravljene izmene">
+                <Button x:Name="btnPotvrdi" Grid.Row="10" Grid.Column="1" Content="Potvrdi" Command="{Binding UpdatePatientCommand}" 
+                        ToolTip="Potvrdi napravljene izmene">
                     <Button.Style>
                         <Style TargetType="Button" BasedOn="{StaticResource ButtonPotvrdiStyle}">
                             <Setter Property="IsEnabled" Value="False"/>
@@ -306,7 +309,7 @@
                     </Button.Style>
                 </Button>
                 <Button x:Name="btnOdustani" Grid.Row="10" Grid.Column="2" Content="Odustani" Style="{StaticResource ButtonOdustaniStyle}"
-                        Click="BtnOdustaniClick"  ToolTip="Odbaci napravljene izmene"/>
+                        Command="{Binding CancelCommand}" ToolTip="Odbaci napravljene izmene"/>
             </Grid>
         </Border>
     </Grid>

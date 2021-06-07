@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace Hospital.View.Secretary
 {
-    /// <summary>
-    /// Interaction logic for NaseBolnice.xaml
-    /// </summary>
     public partial class NaseBolnice : Page
     {
         public NaseBolnice()

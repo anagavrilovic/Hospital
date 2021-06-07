@@ -2,12 +2,6 @@
 using Hospital.Services;
 using Hospital.View;
 using Hospital.View.Secretary;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Navigation;
 
 namespace Hospital.ViewModels.Secretary
@@ -34,7 +28,7 @@ namespace Hospital.ViewModels.Secretary
         {
             this.NavigationService = navigation;
             this.MedicalRecordService = new MedicalRecordService();
-            AddStudentCommand = new RelayCommand(Execute_AddStudentCommand, CanExecuteCommands);
+            AddPatientCommand = new RelayCommand(Execute_AddPatientCommand, CanExecuteCommands);
             CancelCommand = new RelayCommand(Execute_CancelCommand, CanExecuteCommands);
             InitializeNewRecord();
         }
@@ -53,14 +47,14 @@ namespace Hospital.ViewModels.Secretary
 
         #region Komande
 
-        public RelayCommand AddStudentCommand { get; set; }
+        public RelayCommand AddPatientCommand { get; set; }
         public RelayCommand CancelCommand { get; set; }
 
         #endregion
 
         #region Akcije
 
-        public void Execute_AddStudentCommand(object obj)
+        public void Execute_AddPatientCommand(object obj)
         {
             if (!NewRecord.Patient.IsGuest)
             {

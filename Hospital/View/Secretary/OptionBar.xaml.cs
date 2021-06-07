@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Hospital.ViewModels.Secretary;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace Hospital.View.Secretary
 {
@@ -29,7 +19,7 @@ namespace Hospital.View.Secretary
 
         private void NotificationBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.secretaryWindow.Main.Navigate(new FeedbackSekretar());
+            MainWindow.secretaryWindow.Main.Navigate(new FeedbackSekretar(new FeedbackViewModel(MainWindow.secretaryWindow.Main.NavigationService)));
         }
 
         private void GmailBtn_Click(object sender, RoutedEventArgs e)

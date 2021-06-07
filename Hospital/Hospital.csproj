@@ -288,8 +288,14 @@
     <Compile Include="ViewModels\Patient\PatientNotesViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientPassedAppointmentsViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientSettingsPageViewModel.cs" />
+    <Compile Include="ViewModels\Secretary\AnalitikaViewModel.cs" />
+    <Compile Include="ViewModels\Secretary\DetaljiKartonViewModel.cs" />
+    <Compile Include="ViewModels\Secretary\FeedbackViewModel.cs" />
+    <Compile Include="ViewModels\Secretary\HitanPregledViewModel.cs" />
+    <Compile Include="ViewModels\Secretary\IzmenaKartonaViewModel.cs" />
+    <Compile Include="ViewModels\Secretary\IzvestajViewModel.cs" />
     <Compile Include="ViewModels\Secretary\KreiranjeKartonaViewModel.cs" />
-    <Compile Include="ViewModels\Secretary\PrikazPacijenataViewModel.cs" />
+    <Compile Include="ViewModels\Secretary\PocetnaStranicaViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="View\Doctor\DisplayNotification.xaml.cs">
       <DependentUpon>DisplayNotification.xaml</DependentUpon>

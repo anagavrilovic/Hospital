@@ -60,9 +60,9 @@
 
                 <StackPanel Orientation="Horizontal" Grid.Row="4">
                     <Button Content="Pošalji" Margin="150,35,40,35" Style="{StaticResource ButtonPotvrdiStyle}" ToolTip="Potvrdite slanje feedback-a"
-                            Click="SendFeedbackClick"/>
+                            Command="{Binding SendFeedbackCommand}"/>
                     <Button Content="Odustani" Margin="40,35,150,35" Style="{StaticResource ButtonOdustaniStyle}" ToolTip="Odustanite od slanja feedback-a"
-                            Click="OdustaniClick"/>
+                            Command="{Binding CancelCommand}"/>
                 </StackPanel>
             </Grid>
         </Border>
