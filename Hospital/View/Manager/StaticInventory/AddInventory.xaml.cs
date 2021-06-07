@@ -1,56 +1,16 @@
-﻿using Hospital.Services;
-using System.ComponentModel;
-using System.Windows;
+﻿using Hospital.ViewModels.Manager;
 using System.Windows.Controls;
 
 namespace Hospital.View
 {
-    public partial class AddInventory : Page, INotifyPropertyChanged
+    public partial class AddInventory : Page
     {
-        private Inventory _inventoryItem;
-        public Inventory InventoryItem
-        {
-            get { return _inventoryItem; }
-            set { _inventoryItem = value; OnPropertyChanged("InventoryItem"); }
-        }
 
-        public AddInventory(string id)
+        public AddInventory(AddInventoryViewModel addInventoryViewModel)
         {
             InitializeComponent();
-            this.DataContext = this;
-
-            InventoryItem = new Inventory();
-            InventoryItem.RoomID = id;
+            this.DataContext = addInventoryViewModel;
         }
 
-        private void AcceptAddingButtonClick(object o, RoutedEventArgs e)
-        {
-            StaticInventoryService inventoryService = new StaticInventoryService();
-            if (!inventoryService.AddNewItem(InventoryItem))
-            {
-               Hospital.View.Manager.MessageWindow message = new Hospital.View.Manager.MessageWindow("Vec postoji stavka sa postojecom oznakom!");
-                message.Show();
-            }
-            NavigationService.Navigate(new StaticInventoryView(InventoryItem.RoomID));
-        }
-
-        private void CancelButtonClick(object o, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new StaticInventoryView(InventoryItem.RoomID));
-        }
-
-        private void BackButtonClick(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new StaticInventoryView(InventoryItem.RoomID));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
     }
 }

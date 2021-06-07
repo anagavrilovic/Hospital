@@ -117,6 +117,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\DoctorCommands\RelayCommand.cs" />
     <Compile Include="Commands\Patient\RelayCommand.cs" />
+    <Compile Include="Commands\Manager\RelayCommand.cs" />
     <Compile Include="Commands\Secretary\RelayCommand.cs" />
     <Compile Include="Controller\DoctorControllers\AppointmentDetailsController.cs" />
     <Compile Include="Controller\DoctorControllers\DoctorAppointmentsController.cs" />
@@ -277,6 +278,7 @@
     <Compile Include="ViewModels\Doctor\MedicineValidityViewModel.cs" />
     <Compile Include="ViewModels\Doctor\NewAppointmentViewModel.cs" />
     <Compile Include="ViewModels\Doctor\RejectedMedicineViewModel.cs" />
+    <Compile Include="ViewModels\Manager\AddInventoryViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientAppointmentsViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientNotesViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientPassedAppointmentsViewModel.cs" />
@@ -1344,6 +1346,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\text-file-4-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commands\Patient\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
