@@ -292,7 +292,9 @@
     <Compile Include="ViewModels\Secretary\FeedbackViewModel.cs" />
     <Compile Include="ViewModels\Secretary\HitanPregledViewModel.cs" />
     <Compile Include="ViewModels\Secretary\IzmenaKartonaViewModel.cs" />
+    <Compile Include="ViewModels\Secretary\IzvestajViewModel.cs" />
     <Compile Include="ViewModels\Secretary\KreiranjeKartonaViewModel.cs" />
+    <Compile Include="ViewModels\Secretary\PocetnaStranicaViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="View\Doctor\DisplayNotification.xaml.cs">
       <DependentUpon>DisplayNotification.xaml</DependentUpon>

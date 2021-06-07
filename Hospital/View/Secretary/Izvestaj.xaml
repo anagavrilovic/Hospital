@@ -70,7 +70,9 @@
                             Style="{StaticResource TextBoxBorder}" VerticalAlignment="Bottom" Margin="0,0,50,5">
                         <StackPanel Margin="5" Orientation="Horizontal" Height="25" VerticalAlignment="Center">
                             <Image Source="../../Icon/Secretary/search.png" Height="13"/>
-                            <TextBox x:Name="DoctorsFilter" TextChanged="DoctorFilter_TextChanged" BorderThickness="0" Width="150" Height="20" Margin="10,0,0,0" FontSize="12" Background="Transparent" VerticalAlignment="Center"/>
+                            <TextBox x:Name="DoctorsFilter" BorderThickness="0" Width="150" Height="20"
+                                     Margin="10,0,0,0" FontSize="12" Background="Transparent" VerticalAlignment="Center"
+                                     Text="{Binding SearchText}"/>
                         </StackPanel>
                     </Border>
 
@@ -93,7 +95,7 @@
                     </Border>
                     <Border CornerRadius="10" Height="60" Background="{StaticResource MainWhite}" Width="60"
                             ToolTip="Generiši izveštaj u pdf formatu">
-                        <Button Style="{StaticResource BigButtons}" Click="GenerateReportClick">
+                        <Button Style="{StaticResource BigButtons}" Command="{Binding GenerateReportCommand}">
                             <StackPanel Orientation="Vertical">
                                 <Image Source="../../Icon/Secretary/pdf.png" Width="25"/>
                                 <TextBlock Text="Generiši"/>

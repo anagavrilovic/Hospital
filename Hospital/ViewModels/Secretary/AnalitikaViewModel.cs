@@ -138,7 +138,7 @@ namespace Hospital.ViewModels.Secretary
 
         public void Execute_GenerateReportCommand(object obj)
         {
-            this.NavigationService.Navigate(new Izvestaj());
+            this.NavigationService.Navigate(new Izvestaj(new IzvestajViewModel(this.NavigationService)));
         }
 
         #endregion

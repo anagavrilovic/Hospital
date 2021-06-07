@@ -58,8 +58,8 @@
                     <StackPanel Orientation="Horizontal">
                         <Image Source="../../Icon/Secretary/time1.png" Width="100" Margin="40,0,0,0"/>
                         <StackPanel Margin="7,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock x:Name="DateShow" Text="" Style="{StaticResource TitleStyle}" FontSize="35" Margin="15,0,0,0" FontWeight="Medium"/>
-                            <TextBlock x:Name="TimeShow" Text="" Style="{StaticResource TitleStyle}" Margin="15,0,0,0"/>
+                            <TextBlock x:Name="DateShow" Text="{Binding DateText}" Style="{StaticResource TitleStyle}" FontSize="35" Margin="15,0,0,0" FontWeight="Medium"/>
+                            <TextBlock x:Name="TimeShow" Text="{Binding TimeText}" Style="{StaticResource TitleStyle}" Margin="15,0,0,0"/>
                         </StackPanel>
                     </StackPanel>
                 </Border>
