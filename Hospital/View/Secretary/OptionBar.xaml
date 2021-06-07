@@ -19,8 +19,8 @@
             <Image Source="../../Icon/Secretary/help1.png" Width="20" Height="20"/>
         </Button>
 
-        <Button Grid.Column="1" x:Name="NotificationBtn" Width="35" BorderBrush="Transparent" Click="NotificationBtn_Click" ToolTip="Moja obaveštenja">
-            <Image Source="../../Icon/Secretary/bell1.png" Width="20" Height="20"/>
+        <Button Grid.Column="1" x:Name="NotificationBtn" Width="35" BorderBrush="Transparent" Click="NotificationBtn_Click" ToolTip="Feedback">
+            <Image Source="../../Icon/Secretary/feedback.png" Width="20" Height="20"/>
         </Button>
 
         <Button Grid.Column="2" x:Name="GmailBtn" Width="35" BorderBrush="Transparent" Click="GmailBtn_Click" ToolTip="Gmail">

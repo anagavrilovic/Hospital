@@ -37,7 +37,34 @@
             </Border.Effect>
         </Border>
         <Border Grid.Row="1" Margin="15,30,0,15" Width="600" CornerRadius="10" Background="{StaticResource MainWhite}" HorizontalAlignment="Left">
-            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Tip feedback-a:" Style="{StaticResource TextBlockStyle}" FontSize="15" VerticalAlignment="Bottom" Margin="40,80,0,0"/>
+                <ComboBox Grid.Row="1" Style="{StaticResource cbTB}" Margin="40,0,350,0" Height="30"
+                          SelectedIndex="{Binding NewFeedback.FeedbackType, Mode=OneWayToSource}">
+                    <ComboBoxItem Content="Komentar na rad aplikacije" IsSelected="True"/>
+                    <ComboBoxItem Content="Zahtev za nove opcije"/>
+                    <ComboBoxItem Content="Prijava greške/kvara"/>
+                    <ComboBoxItem Content="Drugo"/>
+                </ComboBox>
+                <TextBlock Grid.Row="2" Text="Sadržaj:" Style="{StaticResource TextBlockStyle}" FontSize="15" VerticalAlignment="Bottom" Margin="40,40,0,0"/>
+                <TextBox Grid.Row="3" Style="{StaticResource TextBoxStyle}" TextWrapping="Wrap" Margin="40,0" Height="230"
+                         Text="{Binding NewFeedback.Comment, Mode=OneWayToSource}"/>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="4">
+                    <Button Content="Pošalji" Margin="150,35,40,35" Style="{StaticResource ButtonPotvrdiStyle}" ToolTip="Potvrdite slanje feedback-a"
+                            Click="SendFeedbackClick"/>
+                    <Button Content="Odustani" Margin="40,35,150,35" Style="{StaticResource ButtonOdustaniStyle}" ToolTip="Odustanite od slanja feedback-a"
+                            Click="OdustaniClick"/>
+                </StackPanel>
+            </Grid>
         </Border>
     </Grid>
 </Page>

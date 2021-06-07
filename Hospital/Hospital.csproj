@@ -1338,5 +1338,8 @@
   <ItemGroup>
     <Resource Include="Icon\DoctorIcons\comments.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\Secretary\feedback.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

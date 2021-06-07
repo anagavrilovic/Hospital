@@ -8,9 +8,9 @@ namespace Hospital.Model
 {
     public enum FeedbackType
     {
+        performance,
         featureRequest,
         buqReport,
-        performance,
         other
     }
 }
