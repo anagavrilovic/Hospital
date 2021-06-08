@@ -32,14 +32,14 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
-            <Button Background="#FF95C0F4" BorderBrush="#FF95C0F4" Click="BackButtonClick">
+            <Button Background="#FF95C0F4" BorderBrush="#FF95C0F4" Command="{Binding BackCommand}">
                 <Image Source="/Icon/back.png"  Margin="0,0,5,0" Height="63" Width="55"/>
             </Button>
             <Label Content="REVIZIJA LEKOVA"    Margin="0,22,5,20.2" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="20" Width="162"  />
             <Image Source="/Icon/logo.png"  Margin="60,10,6,9.8" Width="131"/>
         </StackPanel>
 
-        <Button Grid.Row="1" Grid.ColumnSpan="2" Margin="29,18.2,31,9.6" Background="#FFAAD0E0" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="EditMedicine">
+        <Button Grid.Row="1" Grid.ColumnSpan="2" Margin="29,18.2,31,9.6" Background="#FFAAD0E0" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Command="{Binding EditMedicineCommand}">
             <StackPanel Orientation="Horizontal" >
                 <Image Source="/Icon/edit-16.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="0,0,10,0" />
                 <TextBlock Text="IZMENI LEK" Margin="2,0,5,0" FontSize="14"/>
@@ -52,7 +52,7 @@
             </Grid.RowDefinitions>
 
             <ListBox x:Name="listBoxMedicines" ItemsSource="{Binding MedicinesOnRevision, Mode=OneWay}" Grid.Row="0" Margin="0,10,20,23" Width="420"
-                         ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                         ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectedItem="{Binding Path=SelectedMedicineRevision, Mode=TwoWay}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Height="250" Width="400">

@@ -1,5 +1,6 @@
 ﻿using Hospital.Model;
 using Hospital.Services;
+using Hospital.ViewModels.Manager;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -124,7 +125,7 @@ namespace Hospital.View
             MedicineRevisionService service = new MedicineRevisionService();
             service.EditMedicine(MedicineOnRevision);
 
-            NavigationService.Navigate(new MedicineRevisionWindow());
+            NavigationService.Navigate(new MedicineRevisionWindow(new MedicineRevisionViewModel(NavigationService)));
         }
 
         private void SaveUpdatedProperties()
@@ -201,12 +202,12 @@ namespace Hospital.View
 
         private void CancelButtonClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new MedicineRevisionWindow());
+            NavigationService.Navigate(new MedicineRevisionWindow(new MedicineRevisionViewModel(NavigationService)));
         }
 
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new MedicineRevisionWindow());
+            NavigationService.Navigate(new MedicineRevisionWindow(new MedicineRevisionViewModel(NavigationService)));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

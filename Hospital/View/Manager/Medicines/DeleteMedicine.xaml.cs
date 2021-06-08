@@ -1,18 +1,5 @@
-﻿using Hospital.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using Hospital.ViewModels.Manager;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Hospital.View
 {
@@ -20,23 +7,10 @@ namespace Hospital.View
     {
         public Medicine MedicineForDeleting { get; set; }
 
-        public DeleteMedicine(Medicine medicine)
+        public DeleteMedicine(DeleteMedicineViewModel viewModel)
         {
             InitializeComponent();
-            MedicineForDeleting = medicine;
-        }
-
-        private void AcceptDeleting(object sender, RoutedEventArgs e)
-        {
-            MedicineService service = new MedicineService();
-            service.DeleteMedicine(MedicineForDeleting);
-
-            NavigationService.Navigate(new MedicinesWindow());
-        }
-
-        private void CancelDeleting(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new MedicinesWindow());
+            this.DataContext = viewModel;
         }
     }
 }

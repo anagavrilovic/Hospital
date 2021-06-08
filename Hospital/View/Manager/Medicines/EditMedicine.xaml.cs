@@ -1,4 +1,5 @@
 ﻿using Hospital.Services;
+using Hospital.ViewModels.Manager;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,17 +32,17 @@ namespace Hospital.View
             MedicineService service = new MedicineService();
             service.EditMedicine(Medicine);
 
-            NavigationService.Navigate(new MedicinesWindow());
+            NavigationService.Navigate(new MedicinesWindow(new MedicinesWindowViewModel(NavigationService)));
         }
 
         private void CancelEditingMedicine(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new MedicinesWindow());
+            NavigationService.Navigate(new MedicinesWindow(new MedicinesWindowViewModel(NavigationService)));
         }
 
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new MedicinesWindow());
+            NavigationService.Navigate(new MedicinesWindow(new MedicinesWindowViewModel(NavigationService)));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
