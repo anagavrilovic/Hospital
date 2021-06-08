@@ -1,4 +1,4 @@
-﻿<Page x:Class="Hospital.View.Help4"
+﻿<Page x:Class="Hospital.View.Help9"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,15 +6,19 @@
       xmlns:local="clr-namespace:Hospital.View"
       mc:Ignorable="d" 
       d:DesignHeight="360" d:DesignWidth="640"
-      Title="Help4">
+      Title="Help9">
 
     <Grid Background="White">
         <Button Name="BackButton" Content="Nazad" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="159,255,0,0" Click="BackButton_Click"/>
-        <Button Name="NextButton" Content="Sledeća" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="272,255,0,0" Click="NextButton_Click"/>
+        <Button Name="NextButton" Content="Sledeća" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="272,255,0,0"/>
         <Button Name="FinishButton" Content="Završi" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="499,255,0,0" Click="FinishButton_Click" />
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="97,10,0,0" Height="240" Width="492">
-2.	Prikaz pregleda sa propratnom medicinskom dokumentacijom<LineBreak/><LineBreak/>
-Iz glavnog menija se selektuje dugme “Moji pregledi/operacije”, zatim dugme “Obavljeni pregledi/operacije”. Iz otvorene tabele se selektuje željeni pregled, nakon čega se korisniku prikažu opcije da vidi dijagnozu, anamnezu ili terapiju izdatu na tom pregledu.
+6.	Kreiranje izveštaja o rasporedu terapija na sedmičnom nivou<LineBreak/><LineBreak/>
+Iz glavnog menija se selektuje dugme “Dodatno”,zatim dugme “Kreiraj izveštaj o terapijama”. Nakon toga se prikaže tabela sa aktivnim terapijama za tekuću sedmicu, pri čemu je moguće prikazivati i terapije za prošle/naredne sedmice. Izveštaj se generiše za odabranu sedmicu preko odgovarajuće kontrole, u pdf formatu pod nazivom “IzveštajPacijent”.
+
+
+
+
 
         </TextBlock>
     </Grid>

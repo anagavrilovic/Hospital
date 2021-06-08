@@ -16,19 +16,15 @@ using System.Windows.Shapes;
 namespace Hospital.View
 {
     /// <summary>
-    /// Interaction logic for Help5.xaml
+    /// Interaction logic for Help9.xaml
     /// </summary>
-    public partial class Help5 : Page
+    public partial class Help9 : Page
     {
-        public Help5()
+        public Help9()
         {
             InitializeComponent();
-            NextButton.Focus();
-        }
-
-        private void NextButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new Help6());
+            NextButton.IsEnabled = false;
+            BackButton.Focus();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

@@ -23,11 +23,23 @@ namespace Hospital.View
         public Help4()
         {
             InitializeComponent();
+            NextButton.Focus();
         }
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new Help5());
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
+        }
+
+        private void FinishButton_Click(object sender, RoutedEventArgs e)
+        {
+            var myWindow = Window.GetWindow(this);
+            myWindow.Close();
         }
     }
 }

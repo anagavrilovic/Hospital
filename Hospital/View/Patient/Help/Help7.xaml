@@ -1,4 +1,4 @@
-﻿<Page x:Class="Hospital.View.Help4"
+﻿<Page x:Class="Hospital.View.Help7"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,15 +6,17 @@
       xmlns:local="clr-namespace:Hospital.View"
       mc:Ignorable="d" 
       d:DesignHeight="360" d:DesignWidth="640"
-      Title="Help4">
+      Title="Help7">
 
     <Grid Background="White">
         <Button Name="BackButton" Content="Nazad" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="159,255,0,0" Click="BackButton_Click"/>
         <Button Name="NextButton" Content="Sledeća" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="272,255,0,0" Click="NextButton_Click"/>
         <Button Name="FinishButton" Content="Završi" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="499,255,0,0" Click="FinishButton_Click" />
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="97,10,0,0" Height="240" Width="492">
-2.	Prikaz pregleda sa propratnom medicinskom dokumentacijom<LineBreak/><LineBreak/>
-Iz glavnog menija se selektuje dugme “Moji pregledi/operacije”, zatim dugme “Obavljeni pregledi/operacije”. Iz otvorene tabele se selektuje željeni pregled, nakon čega se korisniku prikažu opcije da vidi dijagnozu, anamnezu ili terapiju izdatu na tom pregledu.
+4.	Rad sa beleškama<LineBreak/><LineBreak/>
+Iz glavnog menija se selektuje dugme “Dodatno”, zatim dugme “Beleške”. Prikaže se tabela sa postojećim beleškama, odakle je moguće njihovo kreiranje/brisanje kao i kreiranje obaveštenja od njih, putem odgovarajućih kontrola.
+
+
 
         </TextBlock>
     </Grid>
