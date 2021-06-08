@@ -36,11 +36,13 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF66A6F3">
-            <Button  Click="BackButtonClick"   Background="#FF66A6F3" BorderBrush="#FF95C0F4" >
+            <Button  Command="{Binding BackCommand}"  Background="#FF66A6F3" BorderBrush="#FF95C0F4" >
                 <Image  Source="/Icon/menu.png" Margin="10,8,0,5"/>
             </Button>
             <Label Content="IZVEŠTAJ" Background="#FF66A6F3" Foreground="#FF051D6E" FontSize="24" Margin="5,9,5,0"/>
-            <Image Source="/Icon/pdf.png" Margin="170,5,5,10.2" Width="83" MouseDown="GenerateReport"/>
+            <Button  Background="#FF66A6F3" Command="{Binding GenerateReportCommand}" BorderBrush="#FF66A6F3">
+                <Image Source="/Icon/pdf.png" Margin="170,5,5,10.2" Width="83"/>
+            </Button>
         </StackPanel>
 
         <StackPanel Grid.Column="0" Grid.RowSpan="2" Grid.Row="1">

@@ -64,7 +64,8 @@ namespace Hospital
                             break;
                         case UserType.manager:
                             MenagerWindow mw = new MenagerWindow();
-                           // mw.Owner = Application.Current.MainWindow;
+                            // mw.Owner = Application.Current.MainWindow;
+                            mw.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                             mw.Show();
                             break;
                         case UserType.patient:

@@ -1,5 +1,6 @@
 ﻿using Hospital.Model;
 using Hospital.Services;
+using Hospital.ViewModels.Manager;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -129,7 +130,7 @@ namespace Hospital.View
             MedicineRevisionService medicineRevisionService = new MedicineRevisionService();
             medicineRevisionService.Save(MedicineRevision);
 
-            NavigationService.Navigate(new MedicinesWindow());
+            NavigationService.Navigate(new MedicinesWindow(new MedicinesWindowViewModel(NavigationService)));
         }
 
 
@@ -207,12 +208,12 @@ namespace Hospital.View
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new MedicinesWindow());
+            NavigationService.Navigate(new MedicinesWindow(new MedicinesWindowViewModel(NavigationService)));
         }
 
         private void BackToMenu(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new MedicinesWindow());
+            NavigationService.Navigate(new MedicinesWindow(new MedicinesWindowViewModel(NavigationService)));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

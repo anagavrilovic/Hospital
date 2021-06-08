@@ -1,0 +1,69 @@
+﻿<Page x:Class="Hospital.View.Manager.ManagerProfil"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hospital.View.Manager"
+      mc:Ignorable="d" 
+      Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
+      Title="Profil" Height="750" Width="430">
+
+    <Page.Resources>
+        <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
+    </Page.Resources>
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
+            <Button  Click="BackButtonClick" Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
+                <Image  Source="/Icon/back.png" Margin="10,8,0,5"/>
+            </Button>
+            <Label Content="UPRAVNIK" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" Margin="0,17,5,10.2"/>
+            <Image Source="/Icon/logo.png"      Margin="80,15,25,10" Width="153"/>
+        </StackPanel>
+
+        <Image Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Source="/Icon/profil.jpg"      Margin="43.8,4.8,-17.6,9.8"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Ime:"            Foreground="#FF051D6E" FontSize="16" Margin="10,16.8,160.2,10.4"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="Prezime:"        Foreground="#FF051D6E" FontSize="16" Margin="10,16.6,137.2,9.8"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Datum rođenja:"  Foreground="#FF051D6E" FontSize="16" Margin="10,17.2,60.2,10.2"/>
+        <Label Grid.Row="4" Grid.Column="0" Content="Adresa: "        Foreground="#FF051D6E" FontSize="16" Margin="10,16.8,137.2,9.6"/>
+        <Label Grid.Row="5" Grid.Column="0" Content="Grad: "          Foreground="#FF051D6E" FontSize="16" Margin="10,17,137.2,10.4"/>
+        <Label Grid.Row="6" Grid.Column="0" Content="Država:"         Foreground="#FF051D6E" FontSize="16" Margin="10,17,137.2,10.4"/>
+        <Label Grid.Row="7" Grid.Column="0" Content="Telefon: "       Foreground="#FF051D6E" FontSize="16" Margin="10,16.6,137.2,9.8"/>
+        <Label Grid.Row="8" Grid.Column="0" Content="E-mail adresa:"  Foreground="#FF051D6E" FontSize="16" Margin="10,17.2,97.2,10.2"/>
+        <Label Grid.Row="9" Grid.Column="0" Content="Korisničko ime:" Foreground="#FF051D6E" FontSize="16" Margin="10,16.8,81.2,9.6"/>
+
+
+        <TextBlock Grid.Row="1"  Grid.Column="0" Text="Marija"                           Foreground="#FF051D6E" FontSize="16" Margin="160,17,5,10"/>
+        <TextBlock Grid.Row="2"  Grid.Column="0" Text="Klještan"                         Foreground="#FF051D6E" FontSize="16" Margin="160,17.2,0.2,10.2"/>
+        <TextBlock Grid.Row="3"  Grid.ColumnSpan="2" Text="06.08.1999."                  Foreground="#FF051D6E" FontSize="16" Margin="160,17,5,10"/>
+        <TextBlock Grid.Row="4"  Grid.ColumnSpan="2" Text="Bulevar Despota Stefana 5a"   Foreground="#FF051D6E" FontSize="16" Margin="160,17,5,10"/>
+        <TextBlock Grid.Row="5"  Grid.Column="0" Text="Novi Sad"                         Foreground="#FF051D6E" FontSize="16" Margin="160,17,201.4,10.4" Grid.ColumnSpan="2"/>
+        <TextBlock Grid.Row="6"  Grid.Column="0" Text="Srbija"                           Foreground="#FF051D6E" FontSize="16" Margin="160,17,5,10"  />
+        <TextBlock Grid.Row="7"  Grid.ColumnSpan="2" Text="0651234567"                   Foreground="#FF051D6E" FontSize="16" Margin="160,17,5,10"/>
+        <TextBlock Grid.Row="8"  Grid.ColumnSpan="2" Text="marijakljestan@zdravo.rs"     Foreground="#FF051D6E" FontSize="16" Margin="160,17,5,10"/>
+        <TextBlock Grid.Row="9"  Grid.ColumnSpan="2" Text="marijakljestan"               Foreground="#FF051D6E" FontSize="16" Margin="160,17,5,10"/>
+
+
+    </Grid>
+</Page>
