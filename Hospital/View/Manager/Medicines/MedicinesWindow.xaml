@@ -34,33 +34,36 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
-            <Button  Click="BackButtonClick"   Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
+            <Button  Command="{Binding BackCommand}"   Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
                 <Image  Source="/Icon/menu.png" Margin="10,8,0,5"/>
             </Button>
             <Label Content="LEKOVI" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" Margin="5,9,5,0"/>
             <Image Source="/Icon/logo.png" Margin="120,5,15,10" Width="137"/>
         </StackPanel>
 
-        <Button Grid.ColumnSpan="2" Grid.Row="1"  Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="10,14.8,10.4,57.8"   Style="{StaticResource RoundButtonStyle}" Click="MedicinesRevision" Grid.RowSpan="2">
+        <Button Grid.ColumnSpan="2" Grid.Row="1"  Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="10,14.8,10.4,57.8"   Style="{StaticResource RoundButtonStyle}" Command="{Binding MedicineRevisionViewCommand}" Grid.RowSpan="2">
             <StackPanel Orientation="Horizontal" >
                 <Image Source="/Icon/text-file-4-16.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="1,0,3,2" />
                 <TextBlock Text="REVIZIJA LEKOVA" Margin="5,1,0,0" FontSize="14"/>
             </StackPanel>
         </Button>
-        <Button Grid.Column="0"     Grid.Row="2" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="10,9.6,6.2,4.8" Style="{StaticResource RoundButtonStyle}" Click="EditMedicineButtonClick">
+        <Button Grid.Column="0"     Grid.Row="2" Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="10,9.6,6.2,4.8" Style="{StaticResource RoundButtonStyle}" Command="{Binding EditMedicineCommand}">
             <StackPanel Orientation="Horizontal" >
                 <Image Source="/Icon/edit-16.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="0,0,10,0" />
                 <TextBlock Text="IZMENI LEK" Margin="2,0,5,0" FontSize="14"/>
             </StackPanel>
         </Button>
-        <Button Grid.Column="1"     Grid.Row="2"     Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="6.8,9.6,10.4,4.8" Style="{StaticResource RoundButtonStyle}" Click="DeleteMedicineButtonClick">
+        <Button Grid.Column="1"     Grid.Row="2"     Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="6.8,9.6,10.4,4.8" Style="{StaticResource RoundButtonStyle}" Command="{Binding DeleteMedicineCommand}">
             <StackPanel Orientation="Horizontal" >
                  <Image Source="/Icon/delete.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="1,0,3,2" />
                  <TextBlock Text="IZBRIŠI LEK" Margin="5,1,0,0" FontSize="14"/>
             </StackPanel>
         </Button>
 
-            <TextBox x:Name="search" TextChanged="SearchMedicine" Grid.ColumnSpan="2" Grid.Row="3" Margin="10,10.2,51,15">
+        <TextBox x:Name="search" Text="{Binding SearchCriterion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.ColumnSpan="2" Grid.Row="3" Margin="10,10.2,51,15">
+            <TextBox.InputBindings>
+                <KeyBinding Command="{Binding Path=SearchMedicineCommand}" Key="Enter" />
+            </TextBox.InputBindings>
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -69,14 +72,14 @@
             </TextBox.Resources>
         </TextBox>
 
-        <Image Source="/Icon/search-blue.png" Grid.Row="3" Grid.Column="1" Margin="161,10.2,7,15.8" MouseDown="ButtonSearchMouseDown"/>
+        <Image Source="/Icon/search-blue.png" Grid.Row="3" Grid.Column="1" Margin="161,10.2,7,15.8" />
 
         <ScrollViewer Grid.Row="4" Grid.RowSpan="7" Grid.ColumnSpan="2" Background="Azure" VerticalScrollBarVisibility="Auto" Margin="10,0,0,10">
 
             <Grid MinWidth="200">
-                <DataGrid  x:Name ="dataGridMedicines"  Style="{StaticResource dataGridMedicines}"
-                               ItemsSource="{Binding Path=Medicines, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}"
-                               Background="#FFCADEED"  Foreground="#FF536AA0" Margin="0,0,-0.2,16.2">
+                <DataGrid  x:Name ="dataGridMedicines"  Style="{StaticResource dataGridMedicines}" ItemsSource="{Binding Path=Medicines, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                           ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}" SelectedItem="{Binding Path=SelectedMedicine, Mode=TwoWay}"
+                            Background="#FFCADEED"  Foreground="#FF536AA0" Margin="0,0,-0.2,16.2">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Oznaka"     Binding="{Binding ID}"          Width="1.1*"/>
                         <DataGridTextColumn Header="Naziv"      Binding="{Binding Name}"        Width="1.5*"/>
@@ -87,7 +90,7 @@
             </Grid>
         </ScrollViewer>
 
-        <Button Grid.ColumnSpan="2" Grid.Row="10"  Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="10,52.4,10.4,25.4" Style="{StaticResource RoundButtonStyle}" Click="AddMedicineButtonClick" Grid.RowSpan="2">
+        <Button Grid.ColumnSpan="2" Grid.Row="10"  Background="#FFBBD7F9" Foreground="#FF051D6E" Margin="10,52.4,10.4,25.4" Style="{StaticResource RoundButtonStyle}" Command="{Binding AddMedicineCommand}" Grid.RowSpan="2">
             <StackPanel Orientation="Horizontal" >
                 <Image Source="/Icon/Secretary/plus.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="1,0,3,0" />
                 <TextBlock Text="DODAJ LEK" Margin="5,0,0,0" FontSize="14"/>

@@ -1,5 +1,6 @@
 ﻿using Hospital.Model;
 using Hospital.Services;
+using Hospital.ViewModels.Manager;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
@@ -75,7 +76,7 @@ namespace Hospital.View
 
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new MedicinesWindow());
+            NavigationService.Navigate(new MedicinesWindow(new MedicinesWindowViewModel(NavigationService)));
         }
     }
 }

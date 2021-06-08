@@ -46,7 +46,7 @@ namespace Hospital.View
 
         private void ShowMedicines(object sender, RoutedEventArgs e)
         {
-            MedicinesWindow medicinesWindow = new MedicinesWindow();
+            MedicinesWindow medicinesWindow = new MedicinesWindow(new MedicinesWindowViewModel(NavigationService));
             NavigationService.Navigate(medicinesWindow);
         }
 

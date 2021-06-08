@@ -1,4 +1,5 @@
 ﻿using Hospital.Services;
+using Hospital.ViewModels.Manager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,12 +32,12 @@ namespace Hospital.View
             MedicineService service = new MedicineService();
             service.DeleteMedicine(MedicineForDeleting);
 
-            NavigationService.Navigate(new MedicinesWindow());
+            NavigationService.Navigate(new MedicinesWindow(new MedicinesWindowViewModel(NavigationService)));
         }
 
         private void CancelDeleting(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new MedicinesWindow());
+            NavigationService.Navigate(new MedicinesWindow(new MedicinesWindowViewModel(NavigationService)));
         }
     }
 }
