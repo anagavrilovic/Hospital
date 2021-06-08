@@ -9,10 +9,11 @@
       Title="PatientAdditionalOptions">
 
     <Grid Background="White">
-        <Button Name="NotesButton" Content="Beleške" HorizontalAlignment="Left" VerticalAlignment="Top" Width="316" Margin="239,45,0,0" Height="55" Click="NotesButton_Click"/>
-        <Button Content="Izveštaj o terapijama" HorizontalAlignment="Left" VerticalAlignment="Top" Width="316" Margin="239,140,0,0" Height="55" Click="ViewReport"/>
-        <Button Name="RateButton" Content="Oceni bolnicu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="316" Margin="239,239,0,0" Height="55" Click="RateHospital"/>
-        <Button Content="Nazad" HorizontalAlignment="Left" VerticalAlignment="Top" Width="316" Margin="239,337,0,0" Height="55" Click="GoBack"/>
+        <Button Name="NotesButton" Content="Beleške" HorizontalAlignment="Left" VerticalAlignment="Top" Width="316" Margin="239,10,0,0" Height="48" Click="NotesButton_Click"/>
+        <Button Content="Kreiraj izveštaj o terapijama" HorizontalAlignment="Left" VerticalAlignment="Top" Width="316" Margin="239,94,0,0" Height="48" Click="ViewReport"/>
+        <Button Name="RateButton" Content="Oceni bolnicu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="316" Margin="239,179,0,0" Height="48" Click="RateHospital"/>
+        <Button Content="Pošalji povratne informacije" HorizontalAlignment="Left" VerticalAlignment="Top" Width="316" Margin="239,265,0,0" Height="48" Click="SendFeedback"/>
+        <Button Content="Nazad" HorizontalAlignment="Left" VerticalAlignment="Top" Width="316" Margin="239,355,0,0" Height="48" Click="GoBack"/>
 
     </Grid>
 </Page>
