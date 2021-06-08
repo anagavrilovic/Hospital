@@ -322,6 +322,7 @@
     <Compile Include="ViewModels\Doctor\NewAppointmentViewModel.cs" />
     <Compile Include="ViewModels\Doctor\RejectedMedicineViewModel.cs" />
     <Compile Include="ViewModels\Manager\AddInventoryViewModel.cs" />
+    <Compile Include="ViewModels\Manager\MedicinesReportViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientAppointmentsViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientNotesViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientPassedAppointmentsViewModel.cs" />
@@ -349,6 +350,9 @@
     </Compile>
     <Compile Include="View\Doctor\NewAppointment.xaml.cs">
       <DependentUpon>NewAppointment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\ManagerProfil.xaml.cs">
+      <DependentUpon>ManagerProfil.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Manager\MedicinesReport.xaml.cs">
       <DependentUpon>MedicinesReport.xaml</DependentUpon>
@@ -463,6 +467,9 @@
     </Compile>
     <Compile Include="View\Manager\ManagerNotifications.xaml.cs">
       <DependentUpon>ManagerNotifications.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\TutorialPage.xaml.cs">
+      <DependentUpon>TutorialPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patient\PatientReport.xaml.cs">
       <DependentUpon>PatientReport.xaml</DependentUpon>
@@ -711,6 +718,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Manager\ManagerProfil.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Manager\MedicinesReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -848,6 +859,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Manager\ManagerNotifications.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\TutorialPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1463,6 +1478,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\text-file-4-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\play-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\profil.jpg" />
+    <Content Include="Media\Tutorijal.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

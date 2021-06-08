@@ -1,6 +1,7 @@
 ﻿using Hospital.Model;
 using Hospital.Services;
 using Hospital.View.Manager;
+using Hospital.ViewModels.Manager;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,6 +33,11 @@ namespace Hospital.View
             }
         }
 
+        private void ViewProfile(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ManagerProfil());
+        }
+
         private void ShowRooms(object sender, RoutedEventArgs e)
         {
             RoomsWindow rw = new RoomsWindow();
@@ -46,8 +52,14 @@ namespace Hospital.View
 
         private void GenerateReport(object sender, RoutedEventArgs e)
         {
-            MedicinesReport report = new MedicinesReport();
+            MedicinesReport report = new MedicinesReport(new MedicinesReportViewModel(NavigationService));
             NavigationService.Navigate(report);
+        }
+
+        private void ShowTutorial(object sender, RoutedEventArgs e)
+        {
+            TutorialPage tutorial = new TutorialPage();
+            NavigationService.Navigate(tutorial);
         }
 
         private void Back(object sender, RoutedEventArgs e)
