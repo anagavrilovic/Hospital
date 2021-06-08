@@ -44,7 +44,7 @@ namespace Hospital.Services
         private PatientTherapyMedicineNotification GetNotification(Examination examination,MedicineTherapy medicineTherapy)
         {
             PatientTherapyMedicineNotification patientTherapyMedicineNotification = new PatientTherapyMedicineNotification(patientTherapyNotificationsRepository.GetNewID(), examination.appointment.IDpatient,false, examination.appointment.DateTime, examination.appointment.DateTime.AddDays(medicineTherapy.DurationInDays), examination.therapy.description);
-            patientTherapyMedicineNotification.Name = examination.therapy.name + ": " + medicineRepository.GetByID(medicineTherapy.MedicineID).Name;
+            patientTherapyMedicineNotification.Name = medicineRepository.GetByID(medicineTherapy.MedicineID).Name;
             patientTherapyMedicineNotification = SetNotificationTimes(patientTherapyMedicineNotification, medicineTherapy);
             patientTherapyMedicineNotification.updateDuration();
             patientTherapyMedicineNotification = SetNotifactionActivity(patientTherapyMedicineNotification);

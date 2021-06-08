@@ -10,7 +10,7 @@
 
     <Grid Background="White">
         <Button Name="NotesButton" Content="Beleške" HorizontalAlignment="Left" VerticalAlignment="Top" Width="316" Margin="239,45,0,0" Height="55" Click="NotesButton_Click"/>
-        <Button Content="Izveštaj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="316" Margin="239,140,0,0" Height="55"/>
+        <Button Content="Izveštaj o terapijama" HorizontalAlignment="Left" VerticalAlignment="Top" Width="316" Margin="239,140,0,0" Height="55" Click="ViewReport"/>
         <Button Name="RateButton" Content="Oceni bolnicu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="316" Margin="239,239,0,0" Height="55" Click="RateHospital"/>
         <Button Content="Nazad" HorizontalAlignment="Left" VerticalAlignment="Top" Width="316" Margin="239,337,0,0" Height="55" Click="GoBack"/>
 

@@ -51,5 +51,11 @@ namespace Hospital.View
             PatientNotes patientNotes = new PatientNotes();
             this.NavigationService.Navigate(patientNotes);
         }
+
+        private void ViewReport(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new PatientReport());
+        }
+
     }
 }
