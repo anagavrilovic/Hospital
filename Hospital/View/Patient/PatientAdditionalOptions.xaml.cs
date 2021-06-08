@@ -57,5 +57,10 @@ namespace Hospital.View
             this.NavigationService.Navigate(new PatientReport());
         }
 
+        private void SendFeedback(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new PatientFeedback());
+        }
+
     }
 }
