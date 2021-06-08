@@ -57,7 +57,7 @@ namespace Hospital.View
 
         private void LogOut(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Close();
+            Application.Current.Shutdown();
         }
     }
 }
