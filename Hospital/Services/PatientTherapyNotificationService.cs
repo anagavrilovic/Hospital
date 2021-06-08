@@ -136,5 +136,10 @@ namespace Hospital.Services
             }
             return patientTherapyMedicineNotifications;
         }
+
+        public void Delete(string id)
+        {
+            patientTherapyNotificationsRepository.Delete(id);
+        }
     }
 }

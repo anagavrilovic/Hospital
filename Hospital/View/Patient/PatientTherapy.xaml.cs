@@ -25,8 +25,14 @@ namespace Hospital.View
         public PatientTherapy(PatientTherapyMedicineNotification patientTherapyMedicineNotification)
         {
             InitializeComponent();
+            BackButton.Focus();
             this.PatientTherapyMedicineNotification = patientTherapyMedicineNotification;
-            label1.Content = patientTherapyMedicineNotification.Name;
+            SubjectLabel.Content = patientTherapyMedicineNotification.Name;
+            TextBlock.Text = patientTherapyMedicineNotification.Description;
+        }
+        private void GoBack(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new PatientNotifications());
         }
     }
 }

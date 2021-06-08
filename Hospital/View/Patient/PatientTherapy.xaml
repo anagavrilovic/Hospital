@@ -9,6 +9,10 @@
       Title="PatientTherapy">
 
     <Grid Background="White">
-        <Label Name="label1" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="363,106,0,0"/>
+        <Border BorderThickness="1" BorderBrush="Black"  HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="3.2">
+            <TextBlock Name="TextBlock" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Center"  Height="220" Width="438"/>
+        </Border>
+        <Label Name="SubjectLabel" Content="Naslov" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="37" Width="109" FontSize="20" Margin="348,33,0,0"  />
+        <Button Name="BackButton" Content="Nazad" HorizontalAlignment="Left" VerticalAlignment="Top" Width="134" Click="GoBack"  Height="32" Margin="334,356,0,0"/>
     </Grid>
 </Page>

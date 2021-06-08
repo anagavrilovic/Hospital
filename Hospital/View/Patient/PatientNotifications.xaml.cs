@@ -63,6 +63,26 @@ namespace Hospital.View
 
             }
 
+            if (e.Key == Key.Subtract)
+            {
+                if (dataGridApp.SelectedItem.GetType() == typeof(PatientTherapyMedicineNotification))
+                {
+                    PatientTherapyMedicineNotification selectedItem = (PatientTherapyMedicineNotification)dataGridApp.SelectedItem;
+                    if (MessageBox.Show("Da li ste sigurni da želite da obrišete obaveštenje?", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No) return;
+                    NotificationList.Remove(selectedItem);
+                    patientTherapyNotificationService.Delete(selectedItem.ID);
+                    dataGridApp.Focus();
+                }
+                else
+                {
+                    PatientNotesNotification selectedItem = (PatientNotesNotification)dataGridApp.SelectedItem;
+                    if (MessageBox.Show("Da li ste sigurni da želite da obrišete obaveštenje?", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No) return;
+                    NotificationList.Remove(selectedItem);
+                    patientNotesNotificationService.Delete(selectedItem.ID);
+                    dataGridApp.Focus();
+                }
+            }
+
             if (e.Key == Key.Escape)
             {
                 this.NavigationService.Navigate(new PatientMenu());
