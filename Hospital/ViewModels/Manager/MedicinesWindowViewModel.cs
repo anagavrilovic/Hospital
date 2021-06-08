@@ -90,7 +90,7 @@ namespace Hospital.ViewModels.Manager
 
         public void ExecuteMedicineRevisionViewCommand(object obj)
         {
-            MedicineRevisionWindow medicineRevisionWindow = new MedicineRevisionWindow();
+            MedicineRevisionWindow medicineRevisionWindow = new MedicineRevisionWindow(new MedicineRevisionViewModel(NavigationService));
             NavigationService.Navigate(medicineRevisionWindow);
         }
 

@@ -322,6 +322,7 @@
     <Compile Include="ViewModels\Doctor\NewAppointmentViewModel.cs" />
     <Compile Include="ViewModels\Doctor\RejectedMedicineViewModel.cs" />
     <Compile Include="ViewModels\Manager\AddInventoryViewModel.cs" />
+    <Compile Include="ViewModels\Manager\MedicineRevisionViewModel.cs" />
     <Compile Include="ViewModels\Manager\MedicinesReportViewModel.cs" />
     <Compile Include="ViewModels\Manager\MedicinesWindowViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientAppointmentsViewModel.cs" />
