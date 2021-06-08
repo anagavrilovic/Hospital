@@ -37,7 +37,28 @@
             </Border.Effect>
         </Border>
         <Border Grid.Row="1" Margin="15,20,15,15" CornerRadius="10" Background="{StaticResource MainWhite}">
-     
+            <ScrollViewer>
+                <StackPanel Margin="20,0">
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource TextBlockStyle}"
+                           Text="POČETNA STRANICA" FontWeight="SemiBold" Margin="0,20,0,0"/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource TextBlockStyle}" 
+                               Text="Na početnoj stranici možete videti trenutni datum i vreme kao i opis naše bolnice. Takođe, na grafikonu sa desne strane može se videti trenutno stanje lekara po specijalizacijama u svakom gradu u kojem se nalazi naša ekspozitura."/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource TextBlockStyle}" 
+                               Text="PACIJENTI" FontWeight="SemiBold" Margin="0,30,0,0"/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource TextBlockStyle}" 
+                               Text="Odabirom opcije pacijenti, prikazuju Vam se svi pacijenti naše bolnice, koje možete pretraživati radi lakšeg nalaženja željenog pacijenta. Na istom prozoru se nalaze opcije za operacije nad pacijentima kao što su: kreiranje novog pacijenta, izmena postojećeg pacijenta, brisanje, čitanje informacija o pacijentu i modifikacija alergena. Za sve opcije sem kreiranja novog pacijenta, potrebno je prvo selektovati pacijenta nad kojim želite da vršite određenu radnju a zatim i odabrati opciju. Na ovoj stranici se takođe vrši unblock pacijenata koje je Antitroll mehanizam blokirao. Potrebno je samo da kliknete na crveni kružić pored pacijenta kako biste promeniti njegov status (zeleni kružić)."/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource TextBlockStyle}" 
+                               Text="KALENDAR" FontWeight="SemiBold" Margin="0,30,0,0"/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource TextBlockStyle}"
+                               Text="Na ovom prozoru možete videti sve zakazane i prošle termine za sve lekare ove bolnice. Iznad samog nedeljnog kalendara su postavljeni dugmići sa opcijama. Prvi od njih je padajući meni u kojem treba da izaberete lekara čije termina želite da vidite ili zakažete/otkažete. Iza toga se nalazi dugme na koje možete vršiti izbor pacijenta. Odabirom ove opcije otvara se prozer u kome možete odabrati pacijeta ili kreirati novoga, kao i pogledati zakazane termine koje on ima, i eventualno otkazati neki postojeći termin. Zatim slede opcije ZAKAŽI i OTKAŽI. Da biste zakazali termin potrebno je da bude odabran lekar, pacijent kao i slobodan termin u kalendaru. Da biste otkazali termin potrebno je samo selektovati zauzet termin i potvrditi otkazivanje."/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource TextBlockStyle}"
+                               Text="Opcije sa leve strane predstavljaju opcije za navigaciju kroz kalendar. Mežu njima su: kalendar za odabir specifičnog dana odnosno nedlje, opcija odlaska na trenutnu nedelju, i strelice na koje možete vrteti nedelje (prethodna i sledeća)."/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource TextBlockStyle}" 
+                               Text="HITAN PREGLED" FontWeight="SemiBold" Margin="0,30,0,0"/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource TextBlockStyle}"
+                               Text=""/>
+                </StackPanel>
+            </ScrollViewer>
         </Border>
     </Grid>
 </Page>
