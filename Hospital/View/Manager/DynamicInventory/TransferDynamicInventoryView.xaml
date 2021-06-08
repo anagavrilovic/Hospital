@@ -39,7 +39,7 @@
             <Image Source="/Icon/logo.png"      Margin="220,0,25,0" Width="131"/>
         </StackPanel>
 
-        <Label Content="RAZMENA OPREME" Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="87,4.8,93.4,14.4" FontWeight="Bold"/>
+        <Label Content="PRENOS OPREME" Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="87,4.8,93.4,14.4" FontWeight="Bold"/>
 
         <Label Content="Naziv stavke*:"          Grid.Row="2" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0.4,5.4,33.4" />
         <Label Content="Količina*:"              Grid.Row="4" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0,5.4,25.6" />
@@ -61,6 +61,29 @@
                     <Setter Property="Padding" Value="2"/>
                 </Style>
             </TextBox.Resources>
+            <TextBox.Text>
+                <Binding  Path="TransferRequest.Quantity"  Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:StringToInteger ValidationStep="RawProposedValue"/>
+                        <val:MinValue        ValidationStep="ConvertedProposedValue" Min="0"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="kolicinaTxt"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
         </TextBox>
 
         <ComboBox x:Name="destinationRoomsCB" Grid.Row="6" Grid.ColumnSpan="2" Margin="30,52.6,28,32" BorderThickness="1"  Foreground="#FF2E83BF"
@@ -69,7 +92,32 @@
                     SelectedItem="{Binding SomeBindingPropertySelectedCurrently, 
                     Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.RowSpan="2" />
 
-        <Button Grid.Column="0" Grid.Row="8" Content="POTVRDI"   Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,0,10.4,9.8" Style="{StaticResource RoundButtonStyle}" Click="AcceptButtonClick" FontSize="14" />
+        <Button Grid.Column="0" Grid.Row="8" Content="POTVRDI"  Foreground="#FF051D6E" Margin="30,0,10.4,9.8" Click="AcceptButtonClick" FontSize="14">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderThickness="1">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Setter Property="Background" Value="#C0C0C0"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=kolicinaTxt}"   Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                            <Setter Property="Background" Value="#FFAAD0E0"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
         <Button Grid.Column="1" Grid.Row="8" Content="ODUSTANI"  Background="white"     Foreground="#FF051D6E" Margin="9.6,0,28,9.8"  Style="{StaticResource RoundButtonStyle}" Click="CancelButtonClick" FontSize="14" />
     </Grid>
 </Page>

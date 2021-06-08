@@ -84,7 +84,7 @@
                             <TextBlock Grid.Row="1" Grid.Column="1"     Text="{Binding StartDate,     Mode=OneWay, StringFormat='{}{0: dd.MM.yyyy, HH:mm}'}" Margin="0,4,0,0" />
                             <TextBlock Grid.Row="2" Grid.Column="1"     Text="{Binding EndDate,       Mode=OneWay, StringFormat='{}{0: dd.MM.yyyy, HH:mm}'}" Margin="0,4,0,0" />
                             <TextBlock Grid.Row="3" Grid.Column="1"     Text="{Binding WareHouse.Id,  Mode=OneWay, StringFormat='{}{0: dd.MM.yyyy, HH:mm}'}" Margin="0,4,0,0" />
-                            <ScrollViewer Grid.Row="5" Grid.ColumnSpan="3" Margin="5,5,5,5" VerticalScrollBarVisibility="Hidden">
+                            <ScrollViewer Grid.Row="5" Grid.ColumnSpan="3" Margin="15,5,5,5" VerticalScrollBarVisibility="Hidden">
                                 <TextBlock Text="{Binding Description, Mode=OneWay}" TextWrapping="Wrap" />
                             </ScrollViewer>
                             <Separator Grid.Row="6" Grid.ColumnSpan="3"/>
