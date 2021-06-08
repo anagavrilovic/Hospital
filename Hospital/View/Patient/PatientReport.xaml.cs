@@ -55,10 +55,6 @@ namespace Hospital.View
                 }
             }
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            GenerateReport();
-        }
 
         private DateTime SetDayToMonday(DateTime day)
         {

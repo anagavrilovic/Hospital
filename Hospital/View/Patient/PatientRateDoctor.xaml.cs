@@ -74,6 +74,7 @@ namespace Hospital.View
 
         private void Rate(object sender, RoutedEventArgs e)
         {
+            if (MessageBox.Show("Da li ste sigurni da želite da izvršite ocenjivanje?", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No) return;
             if (app == null)
             {
                 patientComment = new PatientComment(MainWindow.IDnumber, CommentArea.Text, Int32.Parse((String)GradeButton.Content), DateTime.Now);

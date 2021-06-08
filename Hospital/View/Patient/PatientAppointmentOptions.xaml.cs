@@ -65,6 +65,8 @@ namespace Hospital.View
         {
             if (!appointmentService.IsTooLateForAppointmentChange(selectedAppointment))
             {
+                if (MessageBox.Show("Da li ste sigurni da želite da otkažete termin?", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No) return;
+               
                 appointmentService.Delete(selectedAppointment.IDAppointment);
                 NavigateBack();
             }

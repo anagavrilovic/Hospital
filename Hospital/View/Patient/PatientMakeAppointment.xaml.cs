@@ -62,6 +62,7 @@ namespace Hospital.View
                     MessageBox.Show("Nije moguce zakazati izabrani termin");
                     return;
                 }
+                if (MessageBox.Show("Da li ste sigurni da želite da zakažete odabrani termin?", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No) return;
                 appointmentService.Save(appointment);
                 if (appointmentForDeleting != null) appointmentService.Delete(appointmentForDeleting.IDAppointment);
                 patientSettingsService.AddScheduling(DateTime.Now);
