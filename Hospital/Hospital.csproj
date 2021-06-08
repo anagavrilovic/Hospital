@@ -350,6 +350,18 @@
     <Compile Include="View\Doctor\NewAppointment.xaml.cs">
       <DependentUpon>NewAppointment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Patient\Help\Help6.xaml.cs">
+      <DependentUpon>Help6.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\Help\Help5.xaml.cs">
+      <DependentUpon>Help5.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\Help\Help4.xaml.cs">
+      <DependentUpon>Help4.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\Help\Help3.xaml.cs">
+      <DependentUpon>Help3.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Manager\MedicinesReport.xaml.cs">
       <DependentUpon>MedicinesReport.xaml</DependentUpon>
     </Compile>
@@ -463,6 +475,9 @@
     </Compile>
     <Compile Include="View\Manager\ManagerNotifications.xaml.cs">
       <DependentUpon>ManagerNotifications.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\Help\Help2.xaml.cs">
+      <DependentUpon>Help2.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patient\PatientFeedback.xaml.cs">
       <DependentUpon>PatientFeedback.xaml</DependentUpon>
@@ -714,6 +729,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Patient\Help\Help6.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\Help\Help5.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\Help\Help4.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\Help\Help3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Manager\MedicinesReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -851,6 +882,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Manager\ManagerNotifications.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\Help\Help2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
