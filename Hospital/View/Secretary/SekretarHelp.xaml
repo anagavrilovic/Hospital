@@ -56,7 +56,11 @@
                     <TextBlock TextWrapping="Wrap" Style="{StaticResource TextBlockStyle}" 
                                Text="HITAN PREGLED" FontWeight="SemiBold" Margin="0,30,0,0"/>
                     <TextBlock TextWrapping="Wrap" Style="{StaticResource TextBlockStyle}"
-                               Text=""/>
+                               Text="U ovom prozoru možete veoma brzo zakazati hitan pregled. Jedino što je potrebno je da odaberete struku lekara, okvirno trajanje pregleda, opciono tip, kao i pacijenta kome je potreban hitan pregled. Ukoliko pacijent ne postoji u sistemu, možete ga brzo registrovati kao guest-a, pa mu kasnije dodati informacije ukoliko želi da ostane u našoj bonici. Ukoliko postoji slobodan lekar odabrane struke u narednih sat vremena, hitan pregled će biti automatski zakazan, a ukoliko ne postoji bićete preusmereni na stranicu na kojoj traba da odaberete koje preglede želite da otkažete da bi se realizovao hitan termin."/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource TextBlockStyle}" 
+                               Text="RADNO VREME" FontWeight="SemiBold" Margin="0,30,0,0"/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource TextBlockStyle}"
+                               Text="Na ovom prozoru možete vršiti operacije nad radnim vremenom zaposlenih lekara. U tabeli je prikazan raspored smena lekara za naredni vremenski period, koji možete i odabrati sami. Postoji opcija izmene smene za samo jedan dan ili za trajnu izmenu smene, kao i za dodavanje slobodnih dana lekaru." Margin="0,0,0,30"/>
                 </StackPanel>
             </ScrollViewer>
         </Border>
