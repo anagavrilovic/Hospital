@@ -153,6 +153,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\DoctorCommands\RelayCommand.cs" />
     <Compile Include="Commands\Patient\RelayCommand.cs" />
+    <Compile Include="Commands\Manager\RelayCommand.cs" />
     <Compile Include="Commands\Secretary\RelayCommand.cs" />
     <Compile Include="Controller\DoctorControllers\AppointmentDetailsController.cs" />
     <Compile Include="Controller\DoctorControllers\DoctorAppointmentsController.cs" />
@@ -320,6 +321,7 @@
     <Compile Include="ViewModels\Doctor\MedicineValidityViewModel.cs" />
     <Compile Include="ViewModels\Doctor\NewAppointmentViewModel.cs" />
     <Compile Include="ViewModels\Doctor\RejectedMedicineViewModel.cs" />
+    <Compile Include="ViewModels\Manager\AddInventoryViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientAppointmentsViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientNotesViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientPassedAppointmentsViewModel.cs" />
@@ -347,6 +349,12 @@
     </Compile>
     <Compile Include="View\Doctor\NewAppointment.xaml.cs">
       <DependentUpon>NewAppointment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\MedicinesReport.xaml.cs">
+      <DependentUpon>MedicinesReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\MessageWindow.xaml.cs">
+      <DependentUpon>MessageWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Manager\Rooms\AddNewRoomDuringRenovation.xaml.cs">
       <DependentUpon>AddNewRoomDuringRenovation.xaml</DependentUpon>
@@ -700,6 +708,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Doctor\NewAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\MedicinesReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\MessageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1417,6 +1433,36 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\DoctorIcons\pdf1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\pdf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\inv.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\box-3-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\edit-7-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\box-5-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\edit-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\paint-brush-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\rotate-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\inbox-5-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\text-file-4-16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

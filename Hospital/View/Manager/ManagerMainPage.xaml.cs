@@ -1,5 +1,6 @@
 ﻿using Hospital.Model;
 using Hospital.Services;
+using Hospital.View.Manager;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -37,16 +38,16 @@ namespace Hospital.View
             NavigationService.Navigate(new RoomsWindow());
         }
 
-        private void ShowNotifications(object sender, RoutedEventArgs e)
-        {
-            ManagerNotifications notifications = new ManagerNotifications();
-            NavigationService.Navigate(notifications);
-        }
-
         private void ShowMedicines(object sender, RoutedEventArgs e)
         {
             MedicinesWindow medicinesWindow = new MedicinesWindow();
             NavigationService.Navigate(medicinesWindow);
+        }
+
+        private void GenerateReport(object sender, RoutedEventArgs e)
+        {
+            MedicinesReport report = new MedicinesReport();
+            NavigationService.Navigate(report);
         }
 
         private void Back(object sender, RoutedEventArgs e)
@@ -56,7 +57,7 @@ namespace Hospital.View
 
         private void LogOut(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Close();
+            Application.Current.Shutdown();
         }
     }
 }

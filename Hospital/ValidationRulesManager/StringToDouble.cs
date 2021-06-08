@@ -17,12 +17,17 @@ namespace Hospital.ValidationRulesManager
                 var s = value as string;
                 double r;
 
+                if(string.IsNullOrEmpty(s))
+                {
+                    return new ValidationResult(false, "");
+                }
+
                 if (double.TryParse(s, out r))
                 {
                     return new ValidationResult(true, null);
                 }
 
-                return new ValidationResult(false, "Unesite brojnu vrednost.");
+                return new ValidationResult(false, "Morate uneti brojnu vrednost.");
             }
             catch
             {

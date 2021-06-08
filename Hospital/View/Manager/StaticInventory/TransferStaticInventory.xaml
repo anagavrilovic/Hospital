@@ -47,10 +47,10 @@
         <Label Content="PRENOS INVENTARA" Grid.Row="1" Grid.ColumnSpan="2" Foreground="#FF4B72F6" FontSize="24" Margin="85,0,20.4,5.2" FontWeight="Bold" Height="44" VerticalAlignment="Bottom"/>
 
         <Label Content="Oznaka i naziv stavke:" Grid.Row="2"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0.2,186,9.8"  Grid.ColumnSpan="2" />
-        <Label Content="Količina:"              Grid.Row="4"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0.2,5.4,14.6" />
-        <Label Content="ID odredišne sale:"     Grid.Row="6"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,3.4,5.4,9.6" />
-        <Label Content="Datum prebacivanja:"    Grid.Row="8"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0.4,196,13.6"   Grid.ColumnSpan="2" />
-        <Label Content="Vreme prebacivanja:"    Grid.Row="10" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0.4,186,14.6" Grid.ColumnSpan="2"/>
+        <Label Content="Količina*:"              Grid.Row="4"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0.2,5.4,14.6" />
+        <Label Content="ID odredišne sale*:"     Grid.Row="6"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,3.4,5.4,9.6" />
+        <Label Content="Datum prebacivanja*:"    Grid.Row="8"  Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0.4,196,13.6"   Grid.ColumnSpan="2" />
+        <Label Content="Vreme prebacivanja*:"    Grid.Row="10" Grid.Column="0" Foreground="#FF1E49D9" FontSize="20" Margin="30,0.4,186,14.6" Grid.ColumnSpan="2"/>
 
         <TextBox x:Name="nazivTxt"      Grid.Row="3" Grid.ColumnSpan="2" Margin="30,0.2,28,14.8" BorderBrush="#FF26282C" IsReadOnly="True" >
             <TextBox.Resources>
@@ -95,10 +95,15 @@
         </TextBox>
 
         <ComboBox x:Name="roomID" Grid.Row="7" Grid.ColumnSpan="2" Margin="30,0.4,28,11.6" BorderThickness="1"  Foreground="#FF2E83BF"
-                    IsSynchronizedWithCurrentItem="True"
-                    ItemsSource="{Binding  AllRoomsIDs}"
-                    SelectedItem="{Binding SomeBindingPropertySelectedCurrently, 
-                    Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding  AllRoomsIDs}" >
+            <ComboBox.Text>
+                <Binding Path="TransferRequest.DestinationRoomID" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:EmptyField ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </ComboBox.Text>
+        </ComboBox>
 
         <DatePicker x:Name="datumPrebacivanja" DisplayDateStart="{x:Static sys:DateTime.Today}" Focusable="False" Grid.Row="9"  Grid.ColumnSpan="2" Margin="30,0.4,28,10.6"/>
 
@@ -134,7 +139,7 @@
             </Validation.ErrorTemplate>
         </TextBox>
 
-        <Button Grid.Column="0" Grid.Row="12"  Grid.RowSpan="2" Content="POTVRDI"  Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="30,9.8,10.2,49.4" Click="AcceptButtonClick" FontSize="14">
+        <Button Grid.Column="0" Grid.Row="12"  Grid.RowSpan="2" Content="POTVRDI" Foreground="#FF051D6E" Margin="30,9.8,10.2,49.4" Click="AcceptButtonClick" FontSize="14">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Template">
@@ -147,13 +152,16 @@
                         </Setter.Value>
                     </Setter>
                     <Setter Property="IsEnabled" Value="False"/>
+                    <Setter Property="Background" Value="#C0C0C0"/>
                     <Style.Triggers>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding Path=(Validation.HasError), ElementName=kolicinaTxt}"       Value="False"/>
                                 <Condition Binding="{Binding Path=(Validation.HasError), ElementName=vremePrebacivanja}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=roomID}"            Value="False"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="IsEnabled" Value="True"/>
+                            <Setter Property="Background" Value="#FFAAD0E0"/>
                         </MultiDataTrigger>
                     </Style.Triggers>
                 </Style>

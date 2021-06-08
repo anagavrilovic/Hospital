@@ -18,6 +18,7 @@ namespace Hospital.ValidationRulesManager
      
         public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
         {
+
             if (value is double)
             {
                 double d = (double)value;

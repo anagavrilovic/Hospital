@@ -56,12 +56,15 @@ namespace Hospital.View
                                         "Otkazivanje renoviranja", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
-                        _roomRenovationStorage.Delete(selectedItem.Id);
-                        RoomRenovations = _roomRenovationStorage.GetAll();
+                    _roomRenovationStorage.Delete(selectedItem.Id);
+                    RoomRenovations = _roomRenovationStorage.GetAll();
                 }
             }
-            else if(selectedItem.StartDate < DateTime.Now)
-                MessageBox.Show("Renoviranje je u toku. \n Naknadno otkazivanje nije moguće!");
+            else if (selectedItem.StartDate < DateTime.Now)
+            {
+                Hospital.View.Manager.MessageWindow message = new Hospital.View.Manager.MessageWindow("Renoviranje je u toku. \n Naknadno otkazivanje nije moguće!");
+                message.Show();
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

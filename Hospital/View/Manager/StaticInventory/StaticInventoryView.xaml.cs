@@ -2,6 +2,7 @@
 using Hospital.Repositories;
 using Hospital.Repositories.Interfaces;
 using Hospital.Services;
+using Hospital.ViewModels.Manager;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -94,7 +95,8 @@ namespace Hospital.View
 
         private void AddButtonClick(object o, RoutedEventArgs e)
         {
-            AddInventory addInv = new AddInventory(_roomID);
+            AddInventory addInv = new AddInventory(new AddInventoryViewModel(NavigationService, _roomID));
+           // AddInventoryViewModel addInvVM = new AddInventoryViewModel(NavigationService, _roomID);
             NavigationService.Navigate(addInv);
         }
 
@@ -125,9 +127,7 @@ namespace Hospital.View
 
             TransferStaticInventory transfer = new TransferStaticInventory(selectedItem);
             StringBuilder sb = new StringBuilder();
-            sb.Append(selectedItem.Id);
-            sb.Append("-");
-            sb.Append(selectedItem.Name);
+            sb.Append(selectedItem.Id).Append("-").Append(selectedItem.Name);
             transfer.nazivTxt.Text = sb.ToString();
             NavigationService.Navigate(transfer);
         }

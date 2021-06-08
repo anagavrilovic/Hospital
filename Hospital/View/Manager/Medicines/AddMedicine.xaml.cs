@@ -122,7 +122,8 @@ namespace Hospital.View
 
             if (!medicineService.IsMedicineIDUnique(MedicineRevision.Medicine.ID))
             {
-                MessageBox.Show("Vec postoji lek sa unetom oznakom!");
+                Hospital.View.Manager.MessageWindow message = new Hospital.View.Manager.MessageWindow("Vec postoji lek sa unetom oznakom!");
+                message.Show();
                 return;
             }
             MedicineRevisionService medicineRevisionService = new MedicineRevisionService();

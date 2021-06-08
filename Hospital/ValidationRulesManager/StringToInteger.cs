@@ -17,11 +17,17 @@ namespace Hospital.ValidationRulesManager
                 var s = value as string;
                 int r;
 
+
+                if (string.IsNullOrEmpty(s))
+                {
+                    return new ValidationResult(false, "");
+                }
+
                 if (int.TryParse(s, out r))
                 {
                     return new ValidationResult(true, null);
                 }
-                return new ValidationResult(false, "Unesite vrednost u obliku celog pozitivnog broja.");
+                return new ValidationResult(false, "Vrednost mora biti u obliku celog pozitivnog broja.");
             }
             catch
             {

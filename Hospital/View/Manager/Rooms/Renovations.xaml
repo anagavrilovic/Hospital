@@ -37,9 +37,18 @@
             <Image Source="/Icon/logo.png"  Margin="0,0,6,10.4" Width="132"/>
         </StackPanel>
 
-        <Button Grid.Row="1" Grid.Column="0" Content="ZAKAŽI RENOVIRANJE" Margin="10,18.4,10,19.2" Background="#FFAAD0E0" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="ScheduleNewRenovation" FontSize="14"/>
-        <Button Grid.Row="1" Grid.Column="1" Content="OTKAŽI RENOVIRANJE" Margin="10,18.4,10,19.2" Background="#FFAAD0E0" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="CancelRenovation" FontSize="14"/>
-
+        <Button Grid.Row="1" Grid.Column="0" Margin="10,18.4,10,19.2" Background="#FFAAD0E0" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="ScheduleNewRenovation">
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="/Icon/Secretary/plus.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="1,0,3,0" />
+                <TextBlock Text="ZAKAŽI RENOVIRANJE" Margin="5,0,0,0" FontSize="14"/>
+            </StackPanel>
+        </Button>
+        <Button Grid.Row="1" Grid.Column="1" Margin="10,18.4,10,19.2" Background="#FFAAD0E0" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="CancelRenovation">
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="/Icon/x.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="1,0,3,0" />
+                <TextBlock Text="OTKAŽI RENOVIRANJE" Margin="5,0,0,0" FontSize="14"/>
+            </StackPanel>
+        </Button>
         <Grid Grid.Row="2" Grid.RowSpan="6" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -75,7 +84,7 @@
                             <TextBlock Grid.Row="1" Grid.Column="1"     Text="{Binding StartDate,     Mode=OneWay, StringFormat='{}{0: dd.MM.yyyy, HH:mm}'}" Margin="0,4,0,0" />
                             <TextBlock Grid.Row="2" Grid.Column="1"     Text="{Binding EndDate,       Mode=OneWay, StringFormat='{}{0: dd.MM.yyyy, HH:mm}'}" Margin="0,4,0,0" />
                             <TextBlock Grid.Row="3" Grid.Column="1"     Text="{Binding WareHouse.Id,  Mode=OneWay, StringFormat='{}{0: dd.MM.yyyy, HH:mm}'}" Margin="0,4,0,0" />
-                            <ScrollViewer Grid.Row="5" Grid.ColumnSpan="3" Margin="5,5,5,5" VerticalScrollBarVisibility="Hidden">
+                            <ScrollViewer Grid.Row="5" Grid.ColumnSpan="3" Margin="15,5,5,5" VerticalScrollBarVisibility="Hidden">
                                 <TextBlock Text="{Binding Description, Mode=OneWay}" TextWrapping="Wrap" />
                             </ScrollViewer>
                             <Separator Grid.Row="6" Grid.ColumnSpan="3"/>
