@@ -53,7 +53,6 @@ namespace Hospital.ViewModels.Manager
 
         public void ExecuteEditMedicineCommand(object obj)
         {
-            //SelectedMedicineRevision = MedicineService.GetById(SelectedMedicineRevision.ID);
             if (SelectedMedicineRevision == null)
                 return;
 

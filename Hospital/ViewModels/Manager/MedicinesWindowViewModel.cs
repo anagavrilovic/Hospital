@@ -85,7 +85,7 @@ namespace Hospital.ViewModels.Manager
             if (SelectedMedicine == null)
                 return;
 
-            NavigationService.Navigate(new DeleteMedicine(SelectedMedicine));
+            NavigationService.Navigate(new DeleteMedicine(new DeleteMedicineViewModel(NavigationService, SelectedMedicine)));
         }
 
         public void ExecuteMedicineRevisionViewCommand(object obj)

@@ -39,7 +39,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="9">
-            <MediaElement x:Name="tutorijal" Source="/Media/Tutorijal.mp4" LoadedBehavior="Manual" Margin="5" Width="420" Height="600"/>
+            <MediaElement x:Name="tutorijal" Source="{Binding VideoUrl, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" LoadedBehavior="Manual" Margin="5" Width="420" Height="600"/>
         </StackPanel>
 
         <Image Grid.Row="10" Grid.Column="0" Source="/Icon/play.png"  MouseDown="PlayVideo"  Height="50" Width="50" Margin="110,0,0,0"/>

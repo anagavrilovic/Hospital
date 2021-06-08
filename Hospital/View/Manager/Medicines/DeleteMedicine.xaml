@@ -27,8 +27,8 @@
         <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="BRISANJE LEKA"  HorizontalAlignment="Center" Foreground="#FF051D6E" FontSize="22" Margin="114,0,124.6,62.8" Width="171" FontWeight="Bold"/>
         <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="Da li ste sigurni da želite da izbrišete izabrani lek?" HorizontalAlignment="Center" Foreground="#FF051D6E" FontSize="16"/>
 
-        <Button Grid.Row="2" Grid.Column="0"  Content="POTVRDI"  Background="#FFC2E2F0" Foreground="#FF0A1E62" Margin="30,10.6,10.8,34" Style="{StaticResource RoundButtonStyle}" Click="AcceptDeleting" FontSize="14"/>
-        <Button Grid.Row="2" Grid.Column="1"  Content="ODUSTANI" Background="white"     Foreground="#FF0A1E62" Margin="9.2,10.6,27.6,34"  Style="{StaticResource RoundButtonStyle}" Click="CancelDeleting" FontSize="14"/>
+        <Button Grid.Row="2" Grid.Column="0"  Content="POTVRDI"  Background="#FFC2E2F0" Foreground="#FF0A1E62" Margin="30,10.6,10.8,34" Style="{StaticResource RoundButtonStyle}"   Command="{Binding DeleteMedicineCommand}" FontSize="14"/>
+        <Button Grid.Row="2" Grid.Column="1"  Content="ODUSTANI" Background="white"     Foreground="#FF0A1E62" Margin="9.2,10.6,27.6,34"  Style="{StaticResource RoundButtonStyle}" Command="{Binding CancelCommand}" FontSize="14"/>
 
     </Grid>
 </Page>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Policy;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -8,12 +9,16 @@ namespace Hospital.View.Manager
 {
     public partial class TutorialPage : Page
     {
+        public Uri VideoUrl { get; set; }
+
         public TutorialPage()
         {
             InitializeComponent();
+            this.DataContext = this;
+
             MediaPlayer mp = new MediaPlayer();
             try {
-                mp.Open(new Uri("C:/Users/Marija/Desktop/SIMS/Git/SIMS_grupa3_tim10/Hospital/Media"));
+                VideoUrl = new Uri("Media/Tutorijal.mp4", UriKind.Relative);
             }
             catch (Exception ex)
             {
