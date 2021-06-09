@@ -22,67 +22,112 @@ namespace Hospital.Services
             Renovation = renovation;
         }
 
+        public string ProccessRenovationRequest()
+        {
+            string ret = "Renoviranje je uspešno zakazano!";
+            if (!AreRenovationAttributesValid())
+                ret = "Niste ispravno uneli podatke o renoviranju!";
+
+            if (IsAnyScheduledAppointmentInRoomDuringRenovation(Renovation.Room.Id))
+                ret = "\n Renoviranje je uspešno zakazano! \n Za izabrani period renoviranja, u sali su postojali zakazani termini " +
+                       "koji su premešteni u druge sale!";
+
+            if (IsAnyScheduledAppointmentInRoomsForMergingDuringAndAfterRenovation())
+                ret = "\n Renoviranje je uspešno zakazano! \n U salama koje ste izabrali za spajanje su postojali zakazani termini  " +
+                       "nakon početka renoviranja pa su oni premešteni u druge sale!"; 
+
+            SaveScheduledRenovation();
+            return ret;
+        }
+
         private bool AreRenovationAttributesValid()
         {
             if (Renovation.Room.Status == RoomStatus.RENOVIRA_SE)
-            {
-                return false;
-            }
+                return false;           
 
             if (Renovation.StartDate >= Renovation.EndDate)
-            {
                 return false;
-            }
 
             return true;
         }
 
         private bool IsAnyScheduledAppointmentInRoomDuringRenovation(string roomId)
         {
+            bool ret = false;
             foreach (Appointment appointment in appointmentRepository.GetAppointmentsFromRoom(roomId))
             {
                 if (appointment.DateTime > Renovation.StartDate && appointment.DateTime < Renovation.EndDate + new TimeSpan(23, 59, 59))
                 {
-                    return true;
+                    MoveAppointmentToAnotherRoom(appointment);
+                    NotifyPatientAndDoctorAboutAppointmentChange(appointment);
+                    ret = true;
                 }
             }
+            return ret;
+        }
+
+        private bool IsAnyScheduledAppointmentInRoomsForMergingDuringAndAfterRenovation()
+        {
+            foreach (Room room in Renovation.RoomsDestroyedDuringRenovation)
+                if (IsAnyScheduledAppointmentInRoomAfterRenovationStart(room.Id))
+                    return true;
+
             return false;
         }
 
-        private bool IsAnyScheduledAppointmentInMergingRoomsAfterRenovationStart(string roomId)
+        private bool IsAnyScheduledAppointmentInRoomAfterRenovationStart(string roomId)
         {
+            bool ret = false;
             foreach (Appointment appointment in appointmentRepository.GetAppointmentsFromRoom(roomId))
             {
                 if (appointment.DateTime > Renovation.StartDate)
                 {
-                    return true;
+                    MoveAppointmentToAnotherRoomOnAnotherFloor(appointment);
+                    NotifyPatientAndDoctorAboutAppointmentChange(appointment);
+                    ret = true;
                 }
             }
-            return false;
+            return ret;
         }
 
-        private bool IsAnyScheduledAppointmentInRoomsForMergingDuringRenovation()
+        private void MoveAppointmentToAnotherRoom(Appointment movingAppointment)
         {
-            foreach (Room room in Renovation.RoomsDestroyedDuringRenovation)
-                if (IsAnyScheduledAppointmentInMergingRoomsAfterRenovationStart(room.Id))
-                    return true;
-            
-            return false;
+            RoomService roomService = new RoomService();
+            Room newRoom = roomService.GetAvaliableRoomsForNewAppointment(movingAppointment)[0];
+            movingAppointment.Room = newRoom;
+            IAppointmentRepository appointmentRepository = new AppointmentFileRepository();
+            appointmentRepository.Update(movingAppointment);
         }
 
-        public string ProccessRenovationRequest()
+        private void MoveAppointmentToAnotherRoomOnAnotherFloor(Appointment appointment)
         {
-            if (!AreRenovationAttributesValid())
-                return "Niste ispravno uneli podatke o renoviranju!";
+            appointment.Room = GetNewRoomForAppointment(appointment);
+            IAppointmentRepository appointmentRepository = new AppointmentFileRepository();
+            appointmentRepository.Update(appointment);
+        }
 
-            if (IsAnyScheduledAppointmentInRoomDuringRenovation(Renovation.Room.Id))
-                return "Za izabrani period renoviranja, u sali postoje zakazani termini!";
+        private Room GetNewRoomForAppointment(Appointment movingAppointment)
+        {
+            RoomService roomService = new RoomService();
+            Room newRoom = roomService.GetAvaliableRoomsForNewAppointment(movingAppointment)[0];
+            List<Room> availableRooms = roomService.GetAvaliableRoomsForNewAppointment(movingAppointment);
+            foreach (Room room in availableRooms)
+            {
+                if (room.Floor != roomService.GetById(movingAppointment.Room.Id).Floor)
+                {
+                    newRoom = room;
+                    break;
+                }
+            }
 
-            if (IsAnyScheduledAppointmentInRoomsForMergingDuringRenovation())
-                return "U salama koje ste izabrali za spajanje postoje zakazani termini tokom i nakon renoviranja!"; 
+            return newRoom;
+        }
 
-            SaveScheduledRenovation();
-            return "Renoviranje uspešno zakazano!";
+        private void NotifyPatientAndDoctorAboutAppointmentChange(Appointment appointment)
+        {
+            NotificationService notificationService = new NotificationService();
+            notificationService.NotifyPatientAboutRescheduledAppointmentBeacuseOfRoomRenovation(appointment);
+            notificationService.NotifyDoctorAboutAppointmentRoomUpdate(appointment);
         }
 
         private void SaveScheduledRenovation()

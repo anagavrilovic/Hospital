@@ -172,6 +172,59 @@ namespace Hospital.Services
             notificationsUsersRepository.Save(notificationsUsers);
         }
 
+        public void NotifyPatientAboutRescheduledAppointmentBeacuseOfRoomRenovation(Appointment appointment)
+        {
+            Notification notification = GenerateNotificationForPatientsRescheduledAppointmentBecauseOfRenovation(appointment);
+            NotificationsUsers notificationsUsers = new NotificationsUsers(notification.Id, new MedicalRecordService().GetUsernameByIDPatient(appointment.IDpatient));
+
+            notificationRepository.Save(notification);
+            notificationsUsersRepository.Save(notificationsUsers);
+        }
+
+        public void NotifyDoctorAboutAppointmentRoomUpdate(Appointment updatedAppointment)
+        {
+            Notification notification = GenerateNotificationForDoctorsRescheduledAppointmentBecauseOfRenovation(updatedAppointment);
+            NotificationsUsers notificationsUsers = new NotificationsUsers(notification.Id, new DoctorService().GetUsernameByIDDoctor(updatedAppointment.IDDoctor));
+
+            notificationRepository.Save(notification);
+            notificationsUsersRepository.Save(notificationsUsers);
+        }
+
+        private Notification GenerateNotificationForPatientsRescheduledAppointmentBecauseOfRenovation(Appointment appointment)
+        {
+            StringBuilder stringBuilder = new StringBuilder("");
+            string title = "Izmena prostorije u kojoj se održava pregled zbog zakazanog renoviranja";
+            string content = "";
+           
+             stringBuilder.Append("Poštovani, ").AppendLine().AppendLine().Append("Obaveštavamo Vas da je Vaš pregled koji je zakazan dana ").
+             Append(appointment.DateTime.ToString("dd.MM.yyyy.")).Append(" u ").Append(appointment.DateTime.ToString(appointment.DateTime.ToString("HH:mm"))).
+             Append(" časova, premešten u prostoriju ").Append(appointment.Room.Name).
+             Append(", jer je u vreme Vašeg termina zakazano renoviranje prvobitne prostorije.").AppendLine().AppendLine().
+             Append("Za više informacija pozovite našeg sekretara na broj 06485625952 ili nam pišite e-mailom.").AppendLine().AppendLine().
+             Append("Srdačan pozdrav, Vaša ZDRAVO bolnica");
+             content = stringBuilder.ToString();
+             content = stringBuilder.ToString();
+          
+            return new Notification { Title = title, Content = content, Date = DateTime.Now, Id = GenerateID() };
+        }
+
+        private Notification GenerateNotificationForDoctorsRescheduledAppointmentBecauseOfRenovation(Appointment appointment)
+        {
+            StringBuilder stringBuilder = new StringBuilder("");
+            string title = "Izmena prostorije u kojoj se održava pregled zbog zakazanog renoviranja";
+            string content = "";
+
+            stringBuilder.Append("Zdravo, ").AppendLine().AppendLine().Append("Vaš pregled koji je zakazan dana ").
+            Append(appointment.DateTime.ToString("dd.MM.yyyy.")).Append(" u ").Append(appointment.DateTime.ToString(appointment.DateTime.ToString("HH:mm"))).
+            Append(" časova, premešten je u prostoriju ").Append(appointment.Room.Name).
+            Append(", jer je u vreme termina zakazano renoviranje prvobitne prostorije.").AppendLine().AppendLine().
+            Append("Pozdrav!");
+            content = stringBuilder.ToString();
+            content = stringBuilder.ToString();
+
+            return new Notification { Title = title, Content = content, Date = DateTime.Now, Id = GenerateID() };
+        }
+
         public void NotifyDoctor(Appointment newUrgentAppointment)
         {
             Notification notification = GenerateNotificationForDoctorsUrgentAppointment(newUrgentAppointment);
