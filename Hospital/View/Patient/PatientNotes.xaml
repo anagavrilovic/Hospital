@@ -11,10 +11,16 @@
 
     <Grid Background="White">
         <DataGrid x:Name="dataGridApp" ItemsSource="{Binding Notes}" IsReadOnly="True" 
-                  SelectionMode="Single" AutoGenerateColumns="False" Margin="0,0,107,110">
+                  SelectionMode="Single" AutoGenerateColumns="False" Height="340" VerticalAlignment="Top">
             <DataGrid.Columns>
                 <DataGridTextColumn  Header="Naslov" Binding="{Binding Subject}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Image Source="/Images/esc.png" Margin="10,348,705,20"/>
+        <Label Content="Pritisnite za povratak&#xA;            nazad" HorizontalAlignment="Left" Height="39" Margin="82,345,0,0" VerticalAlignment="Top" Width="158"/>
+        <Image Source="/Images/space-key.png" Margin="479,361,206,20"/>
+        <Label Content="Pritisnite da pročitate&#xA;             belešku" HorizontalAlignment="Left" Height="39" Margin="594,348,0,0" VerticalAlignment="Top" Width="196"/>
+        <Image Source="/Images/plusKey.png" Margin="218,348,463,10"/>
+        <Label Content="Pritisnite da kreirate&#xA;          belešku" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="337,352,0,0"/>
     </Grid>
 </Page>

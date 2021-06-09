@@ -11,7 +11,7 @@
 
     <Grid Background="White">
         <DataGrid x:Name="dataGridApp" ItemsSource="{Binding MedicineTherapies}" IsReadOnly="True" 
-                  SelectionMode="Single" AutoGenerateColumns="False" Margin="0,0,107,110">
+                  SelectionMode="Single" AutoGenerateColumns="False" Margin="0,0,0,110">
             <DataGrid.Columns>
                 <DataGridTextColumn  Header="Lekovi" Binding="{Binding Medicine}" Width="*">
                     <DataGridTextColumn.ElementStyle>
@@ -22,5 +22,9 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Image Source="/Images/esc.png" Margin="10,348,705,20"/>
+        <Label Content="Pritisnite za povratak&#xA;            nazad" HorizontalAlignment="Left" Height="39" Margin="82,345,0,0" VerticalAlignment="Top" Width="158"/>
+        <Image Source="/Images/space-key.png" Margin="479,361,206,20"/>
+        <Label Content="Pritisnite da pročitate&#xA;    detaljnije o leku" HorizontalAlignment="Left" Height="39" Margin="594,348,0,0" VerticalAlignment="Top" Width="196"/>
     </Grid>
 </Page>

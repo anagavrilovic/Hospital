@@ -12,13 +12,18 @@
     <Grid Background="White">
         <Label Name="label" Content="" HorizontalAlignment="Left" Height="29" Margin="278,10,0,0" VerticalAlignment="Top" Width="251"/>
         <DataGrid x:Name="dataGridApp" ItemsSource="{Binding Therapies}" IsReadOnly="True" 
-                  SelectionMode="Single" AutoGenerateColumns="False" Margin="0,45,0,0" SelectionUnit="Cell" Background="White" Height="326" VerticalAlignment="Top">
+                  SelectionMode="Single" AutoGenerateColumns="False" Margin="0,45,0,0" SelectionUnit="Cell" Background="White" Height="288" VerticalAlignment="Top">
             <DataGrid.Columns>
                 <DataGridTextColumn  Header="Naziv" Binding="{Binding Name}" Width="*"/>
                 <DataGridTextColumn  Header="Vreme" Binding="{Binding Times}" Width="*"/>
                 <DataGridTextColumn  Header="Trajanje" Binding="{Binding Duration}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-
+        <Image Source="/Images/esc.png" Margin="10,358,705,10"/>
+        <Label Content="Pritisnite za povratak&#xA;            nazad" HorizontalAlignment="Left" Height="39" Margin="118,366,0,0" VerticalAlignment="Top" Width="158"/>
+        <Image Source="/Images/space-key.png" Margin="528,366,157,15"/>
+        <Label Content="Pritisnite da kreirate&#xA;             izveštaj" HorizontalAlignment="Left" Height="46" Margin="648,366,0,0" VerticalAlignment="Top" Width="142"/>
+        <Image Source="/Images/ctrl.jpg" Margin="281,358,439,15"/>
+        <Label Content="Koristite za promenu &#xA;            nedelje" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="358,366,0,0"/>
     </Grid>
 </Page>

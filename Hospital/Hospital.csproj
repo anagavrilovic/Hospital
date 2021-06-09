@@ -1527,5 +1527,14 @@
   <ItemGroup>
     <Resource Include="Icon\text-file-4-16.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\minusKey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ctrl.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\plusKey.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
