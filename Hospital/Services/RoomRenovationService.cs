@@ -49,27 +49,40 @@ namespace Hospital.Services
             return false;
         }
 
+        private bool IsAnyScheduledAppointmentInMergingRoomsAfterRenovationStart(string roomId)
+        {
+            foreach (Appointment appointment in appointmentRepository.GetAppointmentsFromRoom(roomId))
+            {
+                if (appointment.DateTime > Renovation.StartDate)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         private bool IsAnyScheduledAppointmentInRoomsForMergingDuringRenovation()
         {
             foreach (Room room in Renovation.RoomsDestroyedDuringRenovation)
-                if (IsAnyScheduledAppointmentInRoomDuringRenovation(room.Id))
+                if (IsAnyScheduledAppointmentInMergingRoomsAfterRenovationStart(room.Id))
                     return true;
             
             return false;
         }
 
-        public void ProccessRenovationRequest()
+        public string ProccessRenovationRequest()
         {
             if (!AreRenovationAttributesValid())
-                return;
+                return "Niste ispravno uneli podatke o renoviranju!";
 
             if (IsAnyScheduledAppointmentInRoomDuringRenovation(Renovation.Room.Id))
-                return;
+                return "Za izabrani period renoviranja, u sali postoje zakazani termini!";
 
             if (IsAnyScheduledAppointmentInRoomsForMergingDuringRenovation())
-                return; 
+                return "U salama koje ste izabrali za spajanje postoje zakazani termini tokom i nakon renoviranja!"; 
 
             SaveScheduledRenovation();
+            return "Renoviranje uspešno zakazano!";
         }
 
         private void SaveScheduledRenovation()

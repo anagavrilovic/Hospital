@@ -10,6 +10,7 @@ namespace Hospital.Model
     {
         SLOBODNA,
         ZAUZETA,
-        RENOVIRA_SE
+        RENOVIRA_SE,
+        NEAKTIVNA
     }
 }

@@ -24,7 +24,7 @@ namespace Hospital.Repositories
             {
                 if (r.Id.Equals(id))
                 {
-                    rooms.Remove(r);
+                    r.Status = Model.RoomStatus.NEAKTIVNA;
                     Serialize(rooms);
                     return;
                 }
@@ -41,6 +41,10 @@ namespace Hospital.Repositories
 
             if (rooms == null)
                 return new List<Room>();
+
+            foreach (Room room in rooms.ToList())
+                if (room.Status == Model.RoomStatus.NEAKTIVNA)
+                    rooms.Remove(room);
 
             return rooms;
         }
