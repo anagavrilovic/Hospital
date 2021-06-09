@@ -3,9 +3,9 @@ using System.Windows.Controls;
 
 namespace Hospital.View.Manager
 {
-    public partial class ManagerProfil : Page
+    public partial class Feedback : Page
     {
-        public ManagerProfil(ManagerProfileViewModel viewModel)
+        public Feedback(FeedbackViewModel viewModel)
         {
             InitializeComponent();
             this.DataContext = viewModel;
