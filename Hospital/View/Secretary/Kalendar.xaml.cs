@@ -41,6 +41,7 @@ namespace Hospital.View
         public AppointmentService AppointmentService { get; set; }
         public DoctorService DoctorService { get; set; }
         public MedicalRecordService MedicalRecordService { get; set; }
+        public DoctorsShiftService DoctorsShiftService { get; set; }
 
 
         public Kalendar(Model.Doctor doctorWhoseAppointmentsWillInitialyBeShown)
@@ -63,6 +64,7 @@ namespace Hospital.View
             this.AppointmentService = new AppointmentService();
             this.DoctorService = new DoctorService();
             this.MedicalRecordService = new MedicalRecordService();
+            this.DoctorsShiftService = new DoctorsShiftService();
         }
 
         private void LoadAllDoctors()
@@ -297,7 +299,53 @@ namespace Hospital.View
             if (IsChosenDateInPast(dateTimeForNewAppointment))
                 return;
 
+            if (!IsDoctorWorkingAtSelectedTime(dateTimeForNewAppointment))
+                return;
+
             NavigationService.Navigate(new ZakazivanjeTermina(SelectedDoctorForNewAppointment, SelectedPatientForNewAppointment, dateTimeForNewAppointment));
+        }
+
+        private bool IsDoctorWorkingAtSelectedTime(DateTime dateTimeForNewAppointment)
+        {
+            string doctorsShift = DoctorsShiftService.GetDoctorsShiftByDate(SelectedDoctorForNewAppointment, dateTimeForNewAppointment);
+
+            TimeSpan morning = new TimeSpan(6, 0, 0);
+            TimeSpan day = new TimeSpan(14, 0, 0);
+            TimeSpan night = new TimeSpan(22, 0, 0);
+
+            if (IsTimeBetween(dateTimeForNewAppointment, morning, day) && doctorsShift.Equals("I"))
+                return true;
+            else if (IsTimeBetween(dateTimeForNewAppointment, day, night) && doctorsShift.Equals("II"))
+                return true;
+            else if (IsTimeBetween(dateTimeForNewAppointment, night, morning) && doctorsShift.Equals("III"))
+                return true;
+            else
+            {
+                string message = GenerateMessage(doctorsShift);
+                InformationBox informationBox = new InformationBox(message);
+                informationBox.Show();
+                return false;
+            }
+        }
+
+        private string GenerateMessage(string doctorsShift)
+        {
+            switch (doctorsShift)
+            {
+                case "P": return "Doktor ovog dana ne radi (pauza).";
+                case "I": return "Ne možete zakazati termin. Doktor ovog dana radi I smenu (6:00 - 14:00).";
+                case "II": return "Ne možete zakazati termin. Doktor ovog dana radi II smenu (14:00 - 22:00).";
+                case "III": return "Ne možete zakazati termin. Doktor ovog dana radi II smenu (22:00 - 6:00).";
+                default: return "Ne možete zakazati termin, doktor je na odmoru.";
+            }
+        }
+
+        private bool IsTimeBetween(DateTime datetime, TimeSpan start, TimeSpan end)
+        {
+            TimeSpan now = datetime.TimeOfDay;
+            if (start < end)
+                return start <= now && now <= end;
+            return !(end < now && now < start);
         }
 
         private bool IsEveryInformationForNewAppointmentChosen()

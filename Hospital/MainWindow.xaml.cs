@@ -90,7 +90,7 @@ namespace Hospital
 
         private void BtnOtkazi(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Application.Current.Shutdown();
         }
 
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

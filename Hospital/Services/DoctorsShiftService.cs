@@ -16,6 +16,7 @@ namespace Hospital.Services
     public class DoctorsShiftService
     {
         IDoctorRepository doctorRepository;
+        AppointmentService appointmentService = new AppointmentService();
 
         public DoctorsShiftService()
         {
@@ -179,6 +180,8 @@ namespace Hospital.Services
                 ScheduleShift(doctor, shiftForScheduling);
             
             doctorRepository.Update(doctor);
+
+            appointmentService.CancelAppointmentsBecauseOfShiftChange(doctor, shiftForScheduling);
         }
 
         private void ScheduleShift(Doctor doctor, ScheduledShift shiftForScheduling)
