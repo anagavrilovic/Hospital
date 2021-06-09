@@ -57,7 +57,6 @@ namespace Hospital.ViewModels.Doctor
         {
             Validate();
             List<Medicine> medicines = medicineService.GetConsumedMedicineInPeriod(StartDate, EndDate);
-            MessageBox.Show(medicines.Count.ToString());
             using (PdfDocument document = new PdfDocument())
             {
                 PdfPage page = document.Pages.Add();
