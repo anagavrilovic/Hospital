@@ -1565,6 +1565,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\profil.jpg" />
+    <Resource Include="Images\ctrl.jpg" />
+    <Resource Include="Images\minusKey.png" />
+    <Resource Include="Images\plusKey.png" />
     <Content Include="Media\Tutorijal.mp4">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
