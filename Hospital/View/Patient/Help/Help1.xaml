@@ -10,16 +10,16 @@
 
     <Grid Background="White">
         <Button Name="BackButton" Content="Nazad" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="159,255,0,0"/>
-        <Button Name="NextButton" Content="Sledeća" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="272,255,0,0"/>
+        <Button Name="NextButton" Content="Sledeća" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="272,255,0,0" Click="NextButton_Click"/>
         <Button Name="FinishButton" Content="Završi" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="499,255,0,0" Click="FinishButton_Click"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="97,10,0,0" Height="240" Width="492">
             Aplikacija je napravljena sa ciljem da olaksa koriscenje usluga bolnice Zdravo. <LineBreak/><LineBreak/>Mogucnosti koje nudi:<LineBreak/>
 1.	Zakazivanje/pomeranje/otkazivanje termina<LineBreak/>
 2.	Prikaz pregleda sa propratnom medicinskom dokumentacijom<LineBreak/>
-3.	Ocenjivanje lekara i bolnice<LineBreak/>
-4.	Kreiranje beleški<LineBreak/>
+3.	Ocenjivanje lekara, bolnice i aplikacije<LineBreak/>
+4.	Rad sa beleškama<LineBreak/>
 5.	Primanje obaveštenja o terapiji, kao i posebno napravljenih obaveštenja<LineBreak/>
-6.	Prikaz izveštaja o rasporedu terapija na sedmičnom nivou<LineBreak/>
+6.	Kreiranje izveštaja o rasporedu terapija na sedmičnom nivou<LineBreak/>
 
 Pogledati naredne strane za detaljniji opis.<LineBreak/><LineBreak/>
 Navigacija se vrši većinski pomoću strelica tastature, a selekcija dugmeta na "SPACE" taster.<LineBreak/><LineBreak/>
