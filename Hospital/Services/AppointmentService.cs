@@ -181,6 +181,25 @@ namespace Hospital.Services
             newUrgentAppointment.Room = avaliableRooms[0];
         }
 
+        public void CancelAppointmentsBecauseOfShiftChange(Doctor doctor, ScheduledShift shiftForScheduling)
+        {
+            List<Appointment> doctorsAppointments = appointmentRepository.GetByDoctorID(doctor.PersonalID);
+
+            foreach(Appointment appointment in doctorsAppointments)
+            {
+                if (shiftForScheduling.RollShifts && appointment.DateTime.Date >= shiftForScheduling.Date)
+                {
+                    appointmentRepository.Delete(appointment.IDAppointment);
+                    notificationService.NotifyPatientAboutCancelingAppointmentBecauseOfShiftChange(appointment);
+                }
+                else if(!shiftForScheduling.RollShifts && appointment.DateTime.Date == shiftForScheduling.Date)
+                {
+                    appointmentRepository.Delete(appointment.IDAppointment);
+                    notificationService.NotifyPatientAboutCancelingAppointmentBecauseOfShiftChange(appointment);
+                }
+            }
+        }
+
         private void SetDateTimeForNewUrgentAppointmentWithoutRescheduling(Appointment newUrgentAppointment)
         {
             SetCurrentTime(newUrgentAppointment);

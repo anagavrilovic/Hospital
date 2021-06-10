@@ -1,0 +1,27 @@
+﻿<Page x:Class="Hospital.View.Help5"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hospital.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="360" d:DesignWidth="640"
+      Title="Help5">
+
+    <Grid Background="White">
+        <Button Name="BackButton" Content="Nazad" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="159,255,0,0" Click="BackButton_Click"/>
+        <Button Name="NextButton" Content="Sledeća" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="272,255,0,0" Click="NextButton_Click"/>
+        <Button Name="FinishButton" Content="Završi" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="499,255,0,0" Click="FinishButton_Click" />
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="97,10,0,0" Height="240" Width="492">
+3.	Ocenjivanje lekara, bolnice i aplikacije<LineBreak/><LineBreak/>
+a)	Ocenjivanje lekara<LineBreak/>
+Iz glavnog menija se selektuje dugme “Moji pregledi/operacije”, zatim dugme “Obavljeni pregledi/operacije”. Iz otvorene tabele se selektuje željeni pregled, a nakon toga opcija da se oceni doktor koji je obavio pregled. Doktora je moguće oceniti samo jednom po pregledu, ocenom od jedan do pet, kao i ostaviti komentar. <LineBreak/><LineBreak/>
+b)	Ocenjivanje bolnice<LineBreak/>
+Iz glavnog menija se selektuje dugme “Dodatno”, zatim dugme “Oceni bolnicu”. Bolnicu je moguće oceniti jednom u nekoliko meseci, ocenom od jedan do pet, kao i ostaviti komentar.
+
+
+
+
+        </TextBlock>
+    </Grid>
+</Page>

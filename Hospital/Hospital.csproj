@@ -323,6 +323,8 @@
     <Compile Include="ViewModels\Doctor\RejectedMedicineViewModel.cs" />
     <Compile Include="ViewModels\Manager\AddInventoryViewModel.cs" />
     <Compile Include="ViewModels\Manager\DeleteMedicineViewModel.cs" />
+    <Compile Include="ViewModels\Manager\FeedbackViewModel.cs" />
+    <Compile Include="ViewModels\Manager\ManagerProfileViewModel.cs" />
     <Compile Include="ViewModels\Manager\MedicineRevisionViewModel.cs" />
     <Compile Include="ViewModels\Manager\MedicinesReportViewModel.cs" />
     <Compile Include="ViewModels\Manager\MedicinesWindowViewModel.cs" />
@@ -353,6 +355,33 @@
     </Compile>
     <Compile Include="View\Doctor\NewAppointment.xaml.cs">
       <DependentUpon>NewAppointment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\Help\Help9.xaml.cs">
+      <DependentUpon>Help9.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\Help\Help8.xaml.cs">
+      <DependentUpon>Help8.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\Help\Help7.xaml.cs">
+      <DependentUpon>Help7.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\Help\Help6.xaml.cs">
+      <DependentUpon>Help6.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\Help\Help5.xaml.cs">
+      <DependentUpon>Help5.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\Help\Help4.xaml.cs">
+      <DependentUpon>Help4.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\Help\Help3.xaml.cs">
+      <DependentUpon>Help3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\Help\Help2.xaml.cs">
+      <DependentUpon>Help2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\Feedback.xaml.cs">
+      <DependentUpon>Feedback.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Manager\ManagerProfil.xaml.cs">
       <DependentUpon>ManagerProfil.xaml</DependentUpon>
@@ -721,6 +750,42 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Doctor\NewAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\Help\Help9.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\Help\Help8.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\Help\Help7.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\Help\Help6.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\Help\Help5.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\Help\Help4.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\Help\Help3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\Help\Help2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\Feedback.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1500,6 +1565,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\profil.jpg" />
+    <Resource Include="Images\ctrl.jpg" />
+    <Resource Include="Images\minusKey.png" />
+    <Resource Include="Images\plusKey.png" />
     <Content Include="Media\Tutorijal.mp4">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

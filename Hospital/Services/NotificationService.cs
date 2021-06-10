@@ -181,6 +181,31 @@ namespace Hospital.Services
             notificationsUsersRepository.Save(notificationsUsers);
         }
 
+        public void NotifyPatientAboutCancelingAppointmentBecauseOfShiftChange(Appointment appointment)
+        {
+            Notification notification = GenerateNotificationForCancelingAppointmentBecauseOfShiftChange(appointment);
+            NotificationsUsers notificationsUsers = new NotificationsUsers(notification.Id, new MedicalRecordService().GetUsernameByIDPatient(appointment.IDpatient));
+
+            notificationRepository.Save(notification);
+            notificationsUsersRepository.Save(notificationsUsers);
+        }
+
+        private Notification GenerateNotificationForCancelingAppointmentBecauseOfShiftChange(Appointment appointment)
+        {
+            StringBuilder stringBuilder = new StringBuilder("");
+            string title = "Otkazivanje termina zbog promene smene lekara";
+            string content = "";
+
+            stringBuilder.Append("Poštovani, ").AppendLine().Append("Obaveštavamo Vas da je Vaš termin, koji se trebao održati dana ")
+                .Append(appointment.DateTime.ToString("dd.MM.yyyy.")).Append(" u ").Append(appointment.DateTime.ToString("hh:mm"))
+                .Append(", otkazan zbog promene smene lekara koji ga je trebao održati. Za više informacija ili ponovno zakazivanje termina, " +
+                "kontaktirajte našeg sekretara na broj 06485625952 ili nam pišite e-mailom.").AppendLine().AppendLine()
+                .Append("Srdačan pozdrav, Vaša ZDRAVO bolnica");
+            content = stringBuilder.ToString();
+
+            return new Notification { Title = title, Content = content, Date = DateTime.Now, Id = GenerateID() };
+        }
+
         private Notification GenerateNotificationForPatientsRescheduledAppointment(Appointment appointment, DateTime newTime)
         {
             StringBuilder stringBuilder = new StringBuilder("");

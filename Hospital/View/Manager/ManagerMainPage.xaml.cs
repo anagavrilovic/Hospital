@@ -35,7 +35,7 @@ namespace Hospital.View
 
         private void ViewProfile(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new ManagerProfil());
+            NavigationService.Navigate(new ManagerProfil(new ManagerProfileViewModel(NavigationService)));
         }
 
         private void ShowRooms(object sender, RoutedEventArgs e)

@@ -13,29 +13,33 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Hospital.View.Patient.Help
+namespace Hospital.View.Patient
 {
     /// <summary>
-    /// Interaction logic for Help1.xaml
+    /// Interaction logic for Help2.xaml
     /// </summary>
-    public partial class Help1 : Page
+    public partial class Help2 : Page
     {
-        public Help1()
+        public Help2()
         {
             InitializeComponent();
-            BackButton.IsEnabled = false;
             NextButton.Focus();
+        }
+
+        private void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new Help3());
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
         }
 
         private void FinishButton_Click(object sender, RoutedEventArgs e)
         {
             var myWindow = Window.GetWindow(this);
             myWindow.Close();
-        }
-
-        private void NextButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new Help2());
         }
     }
 }
