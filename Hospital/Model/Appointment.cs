@@ -160,7 +160,7 @@ namespace Hospital
         {
             return this.DateTime < endTime && startTime < this.DateTime.AddHours(this.DurationInHours);
         }
-
+         
         public DayOfWeek GetAppointmentsDayOfWeek()
         {
             return this.DateTime.DayOfWeek;

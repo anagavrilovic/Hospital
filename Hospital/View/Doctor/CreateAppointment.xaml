@@ -37,7 +37,7 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Margin="0,20,20,0">
             <Label x:Name="emergencyOperationLabel" Content="{ns:Loc emergencyOperationLabel}" FontSize="17" Style="{DynamicResource Label}" />
             <CheckBox x:Name="emergencyOperationCheckBox" IsChecked="False"  Style="{DynamicResource CircleCheckbox}"
-                      Width="20" Height="20" Margin="0,-35,0,0" Checked="CheckBoxEmergency_Changed" Unchecked="CheckBoxEmergency_Changed"/>
+                      Width="20" Height="20" Margin="0,-45,0,0" Checked="CheckBoxEmergency_Changed" Unchecked="CheckBoxEmergency_Changed"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center">
             <Label FontSize="17"  Width="76" Content="{ns:Loc doctorColonLabel}" Margin="0,0,10,0"  HorizontalAlignment="Left" Style="{DynamicResource Label}"/>

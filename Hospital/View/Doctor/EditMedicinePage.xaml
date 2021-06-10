@@ -24,7 +24,7 @@
                             Style="{StaticResource TextBoxBorder}">
                     <StackPanel Margin="5" Orientation="Horizontal">
                         <Image Source="../../Icon/Secretary/search.png" Height="13"/>
-                        <TextBox  x:Name="pretrazi" Width="200" Height="20" BorderThickness="0" Text="{Binding SearchMedicine , UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource SearchBox}" Margin="10,0,0,0"/>
+                        <TextBox  x:Name="pretrazi" Width="200" Height="20" BorderThickness="0" Text="{Binding SearchMedicine , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{DynamicResource SearchBox}" Margin="10,0,0,0"/>
                     </StackPanel>
                 </Border>
             </StackPanel>
@@ -43,7 +43,7 @@
                             Style="{StaticResource TextBoxBorder}">
                     <StackPanel Margin="5" Orientation="Horizontal">
                         <Image Source="../../Icon/Secretary/search.png" Height="13"/>
-                        <TextBox  x:Name="pretraziSastojak" Width="200" Height="20" BorderThickness="0" Text="{Binding SearchIngredient, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource SearchBox}" Margin="10,0,0,0"/>
+                        <TextBox  x:Name="pretraziSastojak" Width="200" Height="20" BorderThickness="0" Text="{Binding SearchIngredient, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{DynamicResource SearchBox}" Margin="10,0,0,0"/>
                     </StackPanel>
                 </Border>
             </StackPanel>

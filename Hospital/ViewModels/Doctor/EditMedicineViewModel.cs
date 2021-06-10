@@ -319,6 +319,7 @@ namespace Hospital.ViewModels.Doctor
 
         private void Execute_EditMedic(object sender)
         {
+            SearchMedicine = "";
             IsEnableAddSubstitute = true;
             IsEnableRemoveSubstitute = true;
             IsEnableRemoveIngredient = true;
@@ -330,6 +331,7 @@ namespace Hospital.ViewModels.Doctor
         {
             if (DTO.SelectedIngredient != null && ! controller.MedicineContainsIngredient())
             {
+                SearchIngredient = "";
                 DTO.Medicine.AddIngredient(DTO.SelectedIngredient);
                 DTO.MedicineIngredients.Add(DTO.SelectedIngredient);
             }
@@ -339,7 +341,6 @@ namespace Hospital.ViewModels.Doctor
         {
             if (DTO.SelectedMedicineIngredient != null)
             {
-                MessageBox.Show(DTO.SelectedMedicineIngredient.Name);
                 DTO.Medicine.RemoveIngredient(DTO.SelectedMedicineIngredient);
                 DTO.MedicineIngredients.Remove(DTO.SelectedMedicineIngredient);
             }
@@ -349,6 +350,7 @@ namespace Hospital.ViewModels.Doctor
         {
             if (!DTO.Medicine.ID.Equals(SelectedMedicine.ID) && !controller.MedicineAlreadyInSubstituteDrugs())
             {
+                SearchMedicine = "";
                 DTO.Medicine.AddMedicineID((SelectedMedicine).ID);
                 DTO.SubstituteDrugs.Add(SelectedMedicine);
             }

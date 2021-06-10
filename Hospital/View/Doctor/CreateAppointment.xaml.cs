@@ -166,7 +166,6 @@ namespace Hospital.View.Doctor
 
         private void UpdateParentPage()
         {
-            ((AppointmentWindow)Window.GetWindow(this.Owner)).Examintaion.appointment = DTO.Appointment;
             ObservableCollection<Appointment> list = new ObservableCollection<Appointment>();
             list =new ObservableCollection<Appointment>(controller.SetParentAppointments());
             parentWindow.dataGridPregledi.ItemsSource = list;

@@ -38,10 +38,5 @@ namespace Hospital.Controller.DoctorControllers
         {
             return medicalRecordService.GetByPatientId(DTO.SelectedAppointment.IDpatient);
         }
-
-        public void DeleteAppointmentFromExamination(MedicalRecord medicalRecord)
-        {
-            medicalRecordService.DeleteAppointmentFromExamination(DTO.SelectedAppointment.IDAppointment, medicalRecord);
-        }
     }
 }

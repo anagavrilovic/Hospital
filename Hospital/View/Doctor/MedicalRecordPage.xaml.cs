@@ -69,7 +69,6 @@ namespace Hospital.View.Doctor
         {
             ((DoctorMainWindow)Window.GetWindow(this).Owner).Show();
             Application.Current.MainWindow = ((DoctorMainWindow)Window.GetWindow(this).Owner);
-            //((DoctorMainWindow)Window.GetWindow(this).Owner).Main.Content = ((DoctorMainWindow)Window.GetWindow(this).Owner).frameMainPage;
             Window.GetWindow(this).Close();
             SaveExamination();
             DeleteAppointmentOfExamination();
@@ -83,6 +82,7 @@ namespace Hospital.View.Doctor
 
         private void SaveExamination()
         {
+            ((AppointmentWindow)Window.GetWindow(this)).Examintaion.appointment = appointment;
             ((AppointmentWindow)Window.GetWindow(this)).Examintaion.dateOfExamination = DateTime.Now;
             patientNotificationService.SaveFirst(((AppointmentWindow)Window.GetWindow(this)).Examintaion);
             MedicalRecord.AddExamination(((AppointmentWindow)Window.GetWindow(this)).Examintaion);

@@ -36,7 +36,7 @@ namespace Hospital
                 allergen = value;
             }
         }
-
+          
         public Patient Patient
         {
             get => patient;

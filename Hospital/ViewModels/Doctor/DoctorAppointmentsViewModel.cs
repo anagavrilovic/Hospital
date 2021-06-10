@@ -145,10 +145,6 @@ namespace Hospital.ViewModels.Doctor
                 Appointment selectedAppointment = DTO.SelectedAppointment;
                 controller.DeleteAppointment();
                 MedicalRecord medicalRecord = controller.GetByPatientId();
-                if (medicalRecord != null)
-                {
-                    controller.DeleteAppointmentFromExamination(medicalRecord);
-                }
                 DTO.Appointments.Remove(DTO.SelectedAppointment);
             }
         }
