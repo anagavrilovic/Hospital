@@ -1,5 +1,6 @@
 ﻿using Hospital.Model;
 using Hospital.Services;
+using Hospital.View.Manager;
 using Hospital.View.Manager.Rooms;
 using System;
 using System.Collections.ObjectModel;
@@ -63,7 +64,9 @@ namespace Hospital.View
             InitializeRenovation();
 
             RoomRenovationService renovationService = new RoomRenovationService(RoomRenovation);
-            renovationService.ProccessRenovationRequest();
+            string requestStatus = renovationService.ProccessRenovationRequest();
+            MessageWindow messageWindow = new MessageWindow(requestStatus);
+            messageWindow.Show();
 
             NavigationService.Navigate(new Renovations());
         }
