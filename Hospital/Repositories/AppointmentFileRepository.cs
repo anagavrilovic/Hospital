@@ -19,8 +19,8 @@ namespace Hospital.Repositories
         private IMedicalRecordRepository medicalRecordRepository;
 
         public AppointmentFileRepository() {
-            doctorRepository = new DoctorFileRepository();
-            medicalRecordRepository = new MedicalRecordFileRepository();
+            this.doctorRepository = new DoctorFileRepository();
+            this.medicalRecordRepository = new MedicalRecordFileRepository();
         }
 
         public void Delete(string appointmentID)

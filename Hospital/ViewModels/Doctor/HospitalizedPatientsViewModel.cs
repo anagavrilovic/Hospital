@@ -1,6 +1,8 @@
 ﻿using Hospital.Commands.DoctorCommands;
 using Hospital.DTO.DoctorDTO;
+using Hospital.Injection;
 using Hospital.Model;
+using Hospital.Repositories.Interfaces;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -16,7 +18,8 @@ namespace Hospital.ViewModels.Doctor
 {
     class HospitalizedPatientsViewModel : ViewModel
     {
-        private HospitalTreatmentService hospitalTreatmentService = new HospitalTreatmentService();
+        private CreateConfig createConfig;
+        private HospitalTreatmentService hospitalTreatmentService;
         private HospitalTreatment hospitalTreatment = new HospitalTreatment();
         private RelayCommand saveCommand;
         public RelayCommand SaveCommand
@@ -112,15 +115,21 @@ namespace Hospital.ViewModels.Doctor
         }
         public HospitalizedPatientsViewModel()
         {
+            hospitalTreatmentService = new HospitalTreatmentService((IHospitalTreatmentRepository)(createConfig =new CreateConfig()));
             DTO = new HospitalizedPatientsDTO();
             this.SaveCommand = new RelayCommand(Execute_Save, CanExecute_Command);
             this.EditCommand = new RelayCommand(Execute_Edit, CanExecute_Command);
+            SetUI();
+            DTO.HospitalTreatments = new ObservableCollection<HospitalTreatment>(hospitalTreatmentService.SetTreatments());
+        }
+
+        private void SetUI()
+        {
             panelVisibility = Visibility.Collapsed;
             saveButtonEnable = false;
             EditButtonEnable = true;
             CalendarPanel = Visibility.Collapsed;
             DTO.StartDate = DateTime.Today;
-            DTO.HospitalTreatments = new ObservableCollection<HospitalTreatment>(hospitalTreatmentService.SetTreatments());
         }
 
         private void Execute_SelectionChanged()

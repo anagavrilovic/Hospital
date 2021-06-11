@@ -1,6 +1,7 @@
 ﻿using Hospital.Model;
 using Hospital.Repositories;
 using Hospital.Repositories.Interfaces;
+using Hospital.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,20 +11,20 @@ using System.Threading.Tasks;
 
 namespace Hospital.Services
 {
-    public class HospitalTreatmentService
+    public class HospitalTreatmentService : IHospitalTreatmentService
     {
         IHospitalTreatmentRepository hospitalTreatmentRepository;
         IRoomRepository roomRepository;
         IMedicalRecordRepository medicalRecordRepository;
-        public HospitalTreatmentService()
+        public HospitalTreatmentService(IHospitalTreatmentRepository hospitalTreatmentRepository)
         {
+            this.hospitalTreatmentRepository = hospitalTreatmentRepository;
             medicalRecordRepository = new MedicalRecordFileRepository();
-            hospitalTreatmentRepository = new HospitalTreatmentFileRepository();
             roomRepository = new RoomFileRepository();
         }
         public void Delete(string id)
         {
-           hospitalTreatmentRepository.Delete(id);
+            hospitalTreatmentRepository.Delete(id);
         }
         public List<HospitalTreatment> GetAll()
         {

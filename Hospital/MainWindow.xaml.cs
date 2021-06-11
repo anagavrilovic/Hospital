@@ -22,6 +22,8 @@ using Hospital.View.Doctor;
 using Hospital.Services;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
+using Autofac;
+using Hospital.Injection;
 
 namespace Hospital
 {

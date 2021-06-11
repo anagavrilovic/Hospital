@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Repositories.Interfaces
 {
-    interface IHospitalTreatmentRepository : IGenericRepository<HospitalTreatment>
+    public interface IHospitalTreatmentRepository : IGenericRepository<HospitalTreatment>
     {
         void EditHospitalTreatment(HospitalTreatment hospitalTreatment);
     }
