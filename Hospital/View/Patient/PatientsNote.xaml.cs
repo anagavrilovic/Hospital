@@ -36,7 +36,7 @@ namespace Hospital.View
             InitializeComponent();
             BackButton.Focus();
             SubjectLabel.Content = patientNotesNotification.Name;
-            TextBlock.Text = patientNotesNotification.Content;
+            TextBlock.Text = patientNotesNotification.Text;
         }
 
         private void GoBack(object sender, RoutedEventArgs e)

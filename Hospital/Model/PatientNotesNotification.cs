@@ -70,7 +70,7 @@ namespace Hospital.Model
                 read = value;
             }
         }
-        public String Content { get; set; }
+        public String Text { get; set; }
         
         public String ID { get; set; }
        public string patientID { get; set; }
@@ -80,10 +80,10 @@ namespace Hospital.Model
 
        public DateTime LastRead { get; set; }
 
-        public PatientNotesNotification(string name, string content, string iD, string patientID, Boolean[] days, TimeSpan hoursMinutes)
+        public PatientNotesNotification(string name, string text, string iD, string patientID, Boolean[] days, TimeSpan hoursMinutes)
         {
             this.name = name;
-            Content = content;
+            Text = text;
             ID = iD;
             this.patientID = patientID;
             Days = days;

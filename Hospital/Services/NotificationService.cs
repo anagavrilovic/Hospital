@@ -315,5 +315,19 @@ namespace Hospital.Services
 
             return new Notification { Title = title, Content = content, Date = DateTime.Now, Id = GenerateID() };
         }
+
+        public List<NotificationsUsers> GetNotificationByUser(String username)
+        {
+            List<NotificationsUsers> notificationsUsers = notificationsUsersRepository.GetAll();
+            List<NotificationsUsers> notifications = new List<NotificationsUsers>();
+            foreach (NotificationsUsers nu in notificationsUsers)
+                if (nu.Username.Equals(username))
+                {
+                    nu.Notification = notificationRepository.GetByID(nu.NotificationID);
+                    notifications.Add(nu);
+                }
+            return notifications;
+        }
+
     }
 }

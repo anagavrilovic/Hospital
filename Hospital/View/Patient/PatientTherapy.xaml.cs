@@ -28,7 +28,7 @@ namespace Hospital.View
             BackButton.Focus();
             this.PatientTherapyMedicineNotification = patientTherapyMedicineNotification;
             SubjectLabel.Content = patientTherapyMedicineNotification.Name;
-            TextBlock.Text = patientTherapyMedicineNotification.Description;
+            TextBlock.Text = patientTherapyMedicineNotification.Text;
         }
         private void GoBack(object sender, RoutedEventArgs e)
         {

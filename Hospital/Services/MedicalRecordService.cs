@@ -110,7 +110,7 @@ namespace Hospital.Services
             return null;
         }
 
-        internal string GetUsernameByIDPatient(string idpatient)
+        public string GetUsernameByIDPatient(string idpatient)
         {
             List<MedicalRecord> records = GetAllRecords();
             foreach (MedicalRecord r in records)

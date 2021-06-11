@@ -9,7 +9,7 @@ namespace Hospital.Model
 {
     public class PatientTherapyMedicineNotification:IPatientNotification
     {
-        public string Description { get; set; }
+        public string Text { get; set; }
         public string Name { get; set; }
         public int DurationInDays { get; set; }
 
@@ -67,14 +67,14 @@ namespace Hospital.Model
         [JsonIgnore]
         public MedicalRecord PatientsRecord { get; set; }
 
-        public PatientTherapyMedicineNotification(string iD, string iDpatient, bool read, DateTime fromDate, DateTime toDate,string description)
+        public PatientTherapyMedicineNotification(string iD, string iDpatient, bool read, DateTime fromDate, DateTime toDate,string text)
         {
             ID = iD;
             IDpatient = iDpatient;
             Read = read;
             FromDate = fromDate;
             ToDate = toDate;
-            Description = description;
+            Text = text;
         }
     }
 }

@@ -25,6 +25,8 @@ namespace Hospital.View
     {
         private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService();
         private PatientTherapyNotificationService patientTherapyNotificationService = new PatientTherapyNotificationService();
+        private MedicalRecordService medicalRecordService = new MedicalRecordService();
+        private NotificationService notificationService = new NotificationService();
         public ObservableCollection<IPatientNotification> NotificationList
         {
             get;
@@ -41,6 +43,12 @@ namespace Hospital.View
             foreach(IPatientNotification pt in auxiliaryList)
             {
                 NotificationList.Add(pt);
+            }
+            String username = medicalRecordService.GetUsernameByIDPatient(MainWindow.IDnumber);
+            List<NotificationsUsers> generalNotifications = notificationService.GetNotificationByUser(username);
+            foreach (NotificationsUsers notification in generalNotifications)
+            {
+                    NotificationList.Add(new NotificationsUsersAdapter(notification));
             }
             dataGridApp.SelectedIndex = 0;
 

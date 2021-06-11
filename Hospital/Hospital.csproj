@@ -205,6 +205,7 @@
     <Compile Include="Model\MoveAppointment.cs" />
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\NotificationsUsers.cs" />
+    <Compile Include="Model\NotificationsUsersAdapter.cs" />
     <Compile Include="Model\OptionForRescheduling.cs" />
     <Compile Include="Model\PatientComment.cs" />
     <Compile Include="Model\PatientNote.cs" />
