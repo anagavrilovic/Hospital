@@ -27,6 +27,7 @@ namespace Hospital.View
         private PatientTherapyNotificationService patientTherapyNotificationService = new PatientTherapyNotificationService();
         private MedicalRecordService medicalRecordService = new MedicalRecordService();
         private NotificationService notificationService = new NotificationService();
+        private String username;
         public ObservableCollection<IPatientNotification> NotificationList
         {
             get;
@@ -44,7 +45,7 @@ namespace Hospital.View
             {
                 NotificationList.Add(pt);
             }
-            String username = medicalRecordService.GetUsernameByIDPatient(MainWindow.IDnumber);
+            username = medicalRecordService.GetUsernameByIDPatient(MainWindow.IDnumber);
             List<NotificationsUsers> generalNotifications = notificationService.GetNotificationByUser(username);
             foreach (NotificationsUsers notification in generalNotifications)
             {
@@ -64,9 +65,13 @@ namespace Hospital.View
 
                     UpdateTherapyNotification();
                 }
-                else
+                else if(dataGridApp.SelectedItem.GetType() == typeof(PatientNotesNotification))
                 {
                     UpdateNoteNotification();
+                }
+                else
+                {
+                    UpdateGeneralNotification();
                 }
 
             }
@@ -113,8 +118,16 @@ namespace Hospital.View
             selectedItem.LastRead = DateTime.Now;
             selectedItem.Read = true;
             patientNotesNotificationService.Update(selectedItem);
-            PatientsNote patientsNote = new PatientsNote((PatientNotesNotification)dataGridApp.SelectedItem);
-            this.NavigationService.Navigate(patientsNote);
+            this.NavigationService.Navigate(new PatientNoteNotification((PatientNotesNotification)dataGridApp.SelectedItem));
+        }
+
+        private void UpdateGeneralNotification()
+        {
+            NotificationsUsersAdapter selectedItem = (NotificationsUsersAdapter)dataGridApp.SelectedItem;
+            NotificationsUsers notificationsUsers = notificationService.GetUniqueNotificationsUsers(selectedItem.ID, username);
+            notificationsUsers.Read = true;
+            notificationService.UpdateNotificationsUsers(notificationsUsers);
+            this.NavigationService.Navigate(new PatientGeneralNotification(selectedItem));
         }
     }
 }

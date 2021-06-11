@@ -1,5 +1,4 @@
 ﻿using Hospital.Model;
-using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,22 +17,21 @@ using System.Windows.Shapes;
 namespace Hospital.View
 {
     /// <summary>
-    /// Interaction logic for PatientsNote.xaml
+    /// Interaction logic for PatientNoteNotification.xaml
     /// </summary>
-    public partial class PatientsNote : Page
+    public partial class PatientNoteNotification : Page
     {
-        
-        public PatientsNote(PatientNote patientNote)
+        public PatientNoteNotification(PatientNotesNotification patientNotesNotification)
         {
             InitializeComponent();
             BackButton.Focus();
-            SubjectLabel.Content = patientNote.Subject;
-            TextBlock.Text = patientNote.Text;
+            SubjectLabel.Content = patientNotesNotification.Name;
+            TextBlock.Text = patientNotesNotification.Text;
         }
 
         private void GoBack(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            this.NavigationService.Navigate(new PatientNotifications());
         }
     }
 }

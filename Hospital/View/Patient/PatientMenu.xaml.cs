@@ -26,10 +26,13 @@ namespace Hospital.View
     {
         private PatientTherapyNotificationService patientTherapyNotificationService = new PatientTherapyNotificationService();
         private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService();
+        private NotificationService notificationService = new NotificationService();
+        private MedicalRecordService medicalRecordService = new MedicalRecordService();
         public PatientMenu()
         {
             InitializeComponent();
-            if (patientNotesNotificationService.IsThereNewNotification() || patientTherapyNotificationService.IsThereNewNotification()) MessageBox.Show("Imate novo obavestenje!");
+            String username = medicalRecordService.GetUsernameByIDPatient(MainWindow.IDnumber);
+            if (patientNotesNotificationService.IsThereNewNotification() || patientTherapyNotificationService.IsThereNewNotification() || notificationService.DoesUserHaveNewNotification(username)) MessageBox.Show("Imate novo obavestenje!");
             NotificationButton.Focus();
         }
 

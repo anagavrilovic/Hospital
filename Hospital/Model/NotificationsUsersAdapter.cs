@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Model
 {
-    class NotificationsUsersAdapter : IPatientNotification
+  public  class NotificationsUsersAdapter : IPatientNotification
     {
         private readonly NotificationsUsers notification;
 

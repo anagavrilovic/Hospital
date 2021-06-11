@@ -329,5 +329,30 @@ namespace Hospital.Services
             return notifications;
         }
 
+        public Boolean DoesUserHaveNewNotification(String username)
+        {
+            List<NotificationsUsers> notifications = GetNotificationByUser(username);
+            foreach (NotificationsUsers notification in notifications)
+            {
+                if (notification.Read == false) return true;
+            }
+            return false;
+        }
+
+        public NotificationsUsers GetUniqueNotificationsUsers(String id,String username)
+        {
+           return notificationsUsersRepository.GetUniqueNotificationsUsers(id, username);
+        }
+
+        public void DeleteUniqueNotificationsUsers(String id, String username)
+        {
+            notificationsUsersRepository.DeleteUniqueNotificationsUsers(id, username);
+        }
+
+        public void UpdateNotificationsUsers(NotificationsUsers notificationsUsers)
+        {
+            notificationsUsersRepository.UpdateNotificationsUsers(notificationsUsers);
+        }
+
     }
 }
