@@ -95,14 +95,12 @@ namespace Hospital.Services
             RoomService roomService = new RoomService();
             Room newRoom = roomService.GetAvaliableRoomsForNewAppointment(movingAppointment)[0];
             movingAppointment.Room = newRoom;
-            IAppointmentRepository appointmentRepository = new AppointmentFileRepository();
             appointmentRepository.Update(movingAppointment);
         }
 
         private void MoveAppointmentToAnotherRoomOnAnotherFloor(Appointment appointment)
         {
             appointment.Room = GetNewRoomForAppointment(appointment);
-            IAppointmentRepository appointmentRepository = new AppointmentFileRepository();
             appointmentRepository.Update(appointment);
         }
 
