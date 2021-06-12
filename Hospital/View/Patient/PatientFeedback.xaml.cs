@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Repositories;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientFeedback : Page
     {
-        private FeedbackService feedbackSevice = new FeedbackService();
+        private FeedbackService feedbackSevice = new FeedbackService(new FeedbackFileRepository());
         private Feedback feedback = new Feedback();
         private PatientSettingsService patientSettingsService = new PatientSettingsService();
         public PatientFeedback()

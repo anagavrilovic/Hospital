@@ -1,5 +1,6 @@
 ﻿using Hospital.Commands.DoctorCommands;
 using Hospital.Model;
+using Hospital.Repositories;
 using Hospital.Services;
 using Hospital.View.Secretary;
 using System;
@@ -29,7 +30,7 @@ namespace Hospital.ViewModels.Secretary
             SendFeedbackCommand = new RelayCommand(Execute_SendFeedbackCommand, CanExecuteCommands);
             CancelCommand = new RelayCommand(Execute_CancelCommand, CanExecuteCommands);
             NewFeedback = new Feedback();
-            FeedbackService = new FeedbackService();
+            FeedbackService = new FeedbackService(new FeedbackFileRepository());
         }
 
         #endregion

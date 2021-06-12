@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Repositories.Interfaces
 {
-    interface IFeedbackRepository : IGenericRepository<Feedback>
+    public interface IFeedbackRepository : IGenericRepository<Feedback>
     {
     }
 }

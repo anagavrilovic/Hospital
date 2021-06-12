@@ -13,9 +13,9 @@ namespace Hospital.Services
     {
         IFeedbackRepository feedbackRepository;
 
-        public FeedbackService()
+        public FeedbackService(IFeedbackRepository repository)
         {
-            feedbackRepository = new FeedbackFileRepository();
+            feedbackRepository = repository;
         }
 
         public void SaveFeedBack(Feedback feedback)
