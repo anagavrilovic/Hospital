@@ -86,12 +86,20 @@ namespace Hospital.View
                     patientTherapyNotificationService.Delete(selectedItem.ID);
                     dataGridApp.Focus();
                 }
-                else
+                else if (dataGridApp.SelectedItem.GetType() == typeof(PatientNotesNotification))
                 {
                     PatientNotesNotification selectedItem = (PatientNotesNotification)dataGridApp.SelectedItem;
                     if (MessageBox.Show("Da li ste sigurni da želite da obrišete obaveštenje?", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No) return;
                     NotificationList.Remove(selectedItem);
                     patientNotesNotificationService.Delete(selectedItem.ID);
+                    dataGridApp.Focus();
+                }
+                else
+                {
+                    NotificationsUsersAdapter selectedItem = (NotificationsUsersAdapter)dataGridApp.SelectedItem;
+                    if (MessageBox.Show("Da li ste sigurni da želite da obrišete obaveštenje?", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No) return;
+                    NotificationList.Remove(selectedItem);
+                    notificationService.DeleteUniqueNotificationsUsers(selectedItem.ID, username);
                     dataGridApp.Focus();
                 }
             }

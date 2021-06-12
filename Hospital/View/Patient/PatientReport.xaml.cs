@@ -103,12 +103,14 @@ namespace Hospital.View
             {
                 int daysDifference = -7;
                 GetTherapies(daysDifference);
+                dataGridApp.Focus();
             }
 
             if (e.Key == Key.RightCtrl)
             {
                 int daysDifference = 7;
                 GetTherapies(daysDifference);
+                dataGridApp.Focus();
             }
         }
 
