@@ -6,19 +6,17 @@ using System.Collections.Generic;
 
 namespace Hospital.Services
 {
-    class SchedulingTransferInventoryService
+    public class SchedulingTransferInventoryService
     {
         private ITransferInventoryRepository transferInventoryRepository;
         private IStaticInventoryRepository staticInventoryRepository;
-        public SchedulingTransferInventoryService() 
-        {
-            transferInventoryRepository = new TransferInventoryFileRepository();
-            staticInventoryRepository = new StaticInventoryFileRepository();
-        }
-        public SchedulingTransferInventoryService(TransferInventory transfer)
+        public SchedulingTransferInventoryService() {}
+
+        public SchedulingTransferInventoryService(TransferInventory transfer, ITransferInventoryRepository transferRepo, IStaticInventoryRepository inventoryRepo)
         {
             TransferRequest = transfer;
-            transferInventoryRepository = new TransferInventoryFileRepository();
+            transferInventoryRepository = transferRepo;
+            staticInventoryRepository = inventoryRepo;
         }
 
         public List<TransferInventory> GetAll()

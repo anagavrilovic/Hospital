@@ -1,4 +1,6 @@
 ﻿using Hospital.Model;
+using Hospital.Repositories;
+using Hospital.Repositories.Interfaces;
 using Hospital.Services;
 using Hospital.View.Manager;
 using System;
@@ -43,7 +45,9 @@ namespace Hospital.View
 
             TimeSpan timeSpan = TimeSpan.ParseExact(TransferRequest.TransferTime, "c", null);
             TransferRequest.TransferDate = TransferRequest.TransferDate.Add(timeSpan);
-            _schedulingTransferService = new SchedulingTransferInventoryService(TransferRequest);
+            ITransferInventoryRepository transferRepo = new TransferInventoryFileRepository();
+            IStaticInventoryRepository inventoryRepo = new StaticInventoryFileRepository();
+            _schedulingTransferService = new SchedulingTransferInventoryService(TransferRequest, transferRepo, inventoryRepo);
         }
 
         private void InitializeComboBoxes()

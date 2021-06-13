@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Repositories.Interfaces
 {
-    interface IStaticInventoryRepository : IGenericRepository<Inventory>
+   public interface IStaticInventoryRepository : IGenericRepository<Inventory>
     {
         void EditItem(Inventory editedItem);
         void DeleteItemFromRoom(string id, string roomID);
