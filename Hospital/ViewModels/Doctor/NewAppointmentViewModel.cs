@@ -214,10 +214,13 @@ namespace Hospital.ViewModels.Doctor
             {
                 FillAppointmentProperties();
                 SetRoomAndRoomType();
-                if (SaveIfNotOvelapping())
+                if (IsDoctorWorking())
                 {
-                    UpdateParentPage();
-                    CloseAction();
+                    if (SaveIfNotOvelapping())
+                    {
+                        UpdateParentPage();
+                        CloseAction();
+                    }
                 }
             }
         }
@@ -239,6 +242,16 @@ namespace Hospital.ViewModels.Doctor
                 return false;
             }
 
+            return true;
+        }
+
+        private bool IsDoctorWorking()
+        {
+            if (!controller.IsDoctorWorkingAtSelectedTime())
+            {
+                ErrorBox errorBox = new ErrorBox("Lekar ne radi u zadatom terminu!");
+                return false;
+            }
             return true;
         }
 

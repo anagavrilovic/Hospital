@@ -14,6 +14,7 @@ namespace Hospital.DTO.DoctorDTO
         private AppointmentService appointmentService;
         private RoomService roomService;
         private CreateAppointmentDTO DTO;
+        private DoctorsShiftService doctorsShiftService;
 
         public CreateAppointmentController(CreateAppointmentDTO DTO)
         {
@@ -21,6 +22,7 @@ namespace Hospital.DTO.DoctorDTO
             doctorService = new DoctorService();
             appointmentService = new AppointmentService();
             roomService = new RoomService();
+            doctorsShiftService = new DoctorsShiftService();
             this.DTO = DTO;
         }
 
@@ -65,6 +67,11 @@ namespace Hospital.DTO.DoctorDTO
         public string GenerateAppointmentId()
         {
             return appointmentService.GetNewID();
+        }
+
+        internal bool IsDoctorWorkingAtSelectedTime()
+        {
+           return doctorsShiftService.IsDoctorWorkingAtSelectedTime(DTO.Appointment.Doctor, DTO.Appointment.DateTime);
         }
     }
 }

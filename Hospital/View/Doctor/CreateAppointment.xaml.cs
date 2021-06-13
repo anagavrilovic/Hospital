@@ -219,7 +219,15 @@ namespace Hospital.View.Doctor
             }
             return false;
         }
-
+        private bool IsDoctorWorking()
+        {
+            if (!controller.IsDoctorWorkingAtSelectedTime())
+            {
+                ErrorBox errorBox = new ErrorBox("Lekar ne radi u zadatom terminu!");
+                return false;
+            }
+            return true;
+        }
         private void SelectedDoctorChanged(object sender, SelectionChangedEventArgs e)
         {
            if(((AppointmentWindow)Window.GetWindow(this.Owner)).LoggedInDoctor.PersonalID.Equals
