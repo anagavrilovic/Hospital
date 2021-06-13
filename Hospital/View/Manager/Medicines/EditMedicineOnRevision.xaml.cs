@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Factory;
+using Hospital.Model;
 using Hospital.Services;
 using Hospital.ViewModels.Manager;
 using System;
@@ -38,14 +39,14 @@ namespace Hospital.View
 
         private void AddDoctorsInComboBox()
         {
-            DoctorService doctorService = new DoctorService();
+            DoctorService doctorService = new DoctorService(new DoctorFileFactory());
             ObservableCollection<string>  DoctorsNameSurname = new ObservableCollection<string>(doctorService.GetDoctorsIdNameSurname());
             doctorsCB.ItemsSource = DoctorsNameSurname;
         }
 
         private void SetDoctorOnComboBox()
         {
-            DoctorService doctorService = new DoctorService();
+            DoctorService doctorService = new DoctorService(new DoctorFileFactory());
             doctorsCB.SelectedItem = doctorService.GetDoctorById(MedicineOnRevision.DoctorID).ToString();
         }
 

@@ -47,7 +47,7 @@ namespace Hospital.View.Secretary
             Options = new ObservableCollection<OptionForRescheduling>();
             AppointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
             MedicalRecordService = new MedicalRecordService();
-            DoctorService = new DoctorService();
+            DoctorService = new DoctorService(new DoctorFileFactory());
             RoomService = new RoomService();
         }
 

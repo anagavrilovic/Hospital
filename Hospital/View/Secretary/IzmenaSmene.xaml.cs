@@ -38,7 +38,7 @@ namespace Hospital.View.Secretary
         }
         private void InitializeAllProperties()
         {
-            DoctorService = new DoctorService();
+            DoctorService = new DoctorService(new DoctorFileFactory());
             DoctorsShiftService = new DoctorsShiftService(new DoctorFileFactory());
             NewScheduledShift = new ScheduledShift();
         }

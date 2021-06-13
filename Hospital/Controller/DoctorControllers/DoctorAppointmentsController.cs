@@ -20,7 +20,7 @@ namespace Hospital.Controller.DoctorControllers
             this.DTO = DTO;
             appointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
             medicalRecordService = new MedicalRecordService();
-            doctorService = new DoctorService();
+            doctorService = new DoctorService(new DoctorFileFactory());
         }
 
         public Model.Doctor GetDoctorById(string id)

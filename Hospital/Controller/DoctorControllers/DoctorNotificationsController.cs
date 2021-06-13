@@ -1,4 +1,5 @@
 ﻿using Hospital.DTO.DoctorDTO;
+using Hospital.Factory;
 using Hospital.Model;
 using Hospital.Services;
 using System;
@@ -18,7 +19,7 @@ namespace Hospital.Controller.DoctorControllers
         public DoctorNotificationsController(DoctorNotificationsDTO DTO)
         {
             this.DTO = DTO;
-            doctorService = new DoctorService();
+            doctorService = new DoctorService(new DoctorFileFactory());
             notificationService = new NotificationService();
         }
 

@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Factory;
+using Hospital.Model;
 using Hospital.Repositories;
 using Hospital.Repositories.Interfaces;
 using System;
@@ -14,9 +15,9 @@ namespace Hospital.Services
     {
         private IDoctorRepository doctorRepository;
 
-        public DoctorService()
+        public DoctorService(IDoctorRepositoryFactory factory)
         {
-            doctorRepository = new DoctorFileRepository();
+            doctorRepository = factory.CreateDoctorRepository();
         }
 
         public Doctor GetDoctorById(string id)

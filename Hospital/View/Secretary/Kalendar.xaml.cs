@@ -63,7 +63,7 @@ namespace Hospital.View
             this.DatesInWeeklyCalendar = new DatesInWeeklyCalendarDTO();
             this.SelectedPatientForNewAppointment = new MedicalRecord();
             this.AppointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
-            this.DoctorService = new DoctorService();
+            this.DoctorService = new DoctorService(new DoctorFileFactory());
             this.MedicalRecordService = new MedicalRecordService();
             this.DoctorsShiftService = new DoctorsShiftService(new DoctorFileFactory());
         }

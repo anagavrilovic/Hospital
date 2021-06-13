@@ -39,7 +39,7 @@ namespace Hospital.View.Secretary
 
         private void InitializeAllProperties()
         {
-            DoctorService = new DoctorService();
+            DoctorService = new DoctorService(new DoctorFileFactory());
             DoctorsShiftService = new DoctorsShiftService(new DoctorFileFactory());
             StartDate = DateTime.Today;
             EndDate = DateTime.Today;

@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Factory;
+using Hospital.Model;
 using Hospital.Services;
 using Hospital.ViewModels.Manager;
 using System;
@@ -40,7 +41,7 @@ namespace Hospital.View
 
         private void InitializeComboBoxItems()
         {
-            DoctorService doctorService = new DoctorService();
+            DoctorService doctorService = new DoctorService(new DoctorFileFactory());
             doctorsCB.ItemsSource  = new ObservableCollection<string>(doctorService.GetDoctorsIdNameSurname());
         }
 
@@ -137,7 +138,7 @@ namespace Hospital.View
         private void InitializeMedicine()
         {
             string doctorSelected = doctorsCB.Text.Trim().Split("-".ToCharArray())[0];
-            DoctorService doctorService = new DoctorService();
+            DoctorService doctorService = new DoctorService(new DoctorFileFactory());
             MedicineRevision.DoctorID = doctorSelected;
             MedicineRevision.RevisionDoctor = doctorService.GetDoctorById(doctorSelected);
             MedicineRevision.IsMedicineRevised = false;

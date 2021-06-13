@@ -56,7 +56,7 @@ namespace Hospital
                     switch (user.Type)
                     {
                         case UserType.doctor:
-                            DoctorService ds = new DoctorService();
+                            DoctorService ds = new DoctorService(new DoctorFileFactory());
                             IDnumber= ds.GetByUsername(user.Username);
                             DoctorMainWindow de = new DoctorMainWindow(IDnumber);
                             Application.Current.MainWindow=de;

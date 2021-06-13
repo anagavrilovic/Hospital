@@ -17,7 +17,7 @@ namespace Hospital.ViewModels.Secretary
     {
         #region Properties
 
-        private DoctorService doctorService = new DoctorService();
+        private DoctorService doctorService = new DoctorService(new DoctorFileFactory());
         private AppointmentService appointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
         public NavigationService NavigationService { get; set; }
 

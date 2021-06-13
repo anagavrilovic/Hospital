@@ -82,7 +82,7 @@ namespace Hospital.ViewModels.Secretary
             Patients = new ObservableCollection<MedicalRecord>();
             MedicalRecordService = new MedicalRecordService();
             AppointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
-            DoctorService = new DoctorService();
+            DoctorService = new DoctorService(new DoctorFileFactory());
         }
 
         private void ShowPossibleDuration()

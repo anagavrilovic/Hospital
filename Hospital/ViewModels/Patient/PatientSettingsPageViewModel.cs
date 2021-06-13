@@ -21,7 +21,7 @@ namespace Hospital.ViewModels.Patient
         private PatientSettingsService patientSettingsService = new PatientSettingsService(new PatientSettingsFileFactory());
         public ObservableCollection<String> DoctorsNamesSurnames { get; set; }
         public String SelectedDoctor {get;set;}
-        private DoctorService doctorService=new DoctorService();
+        private DoctorService doctorService=new DoctorService(new DoctorFileFactory());
 
         public Boolean ShowWizard { get; set; }
         public Boolean ShowTooltips { get; set; }

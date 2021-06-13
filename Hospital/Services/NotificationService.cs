@@ -1,4 +1,5 @@
 ﻿using Hospital.DTO;
+using Hospital.Factory;
 using Hospital.Model;
 using Hospital.Repositories;
 using Hospital.Repositories.Interfaces;
@@ -184,7 +185,7 @@ namespace Hospital.Services
         public void NotifyDoctorAboutAppointmentRoomUpdate(Appointment updatedAppointment)
         {
             Notification notification = GenerateNotificationForDoctorsRescheduledAppointmentBecauseOfRenovation(updatedAppointment);
-            NotificationsUsers notificationsUsers = new NotificationsUsers(notification.Id, new DoctorService().GetUsernameByIDDoctor(updatedAppointment.IDDoctor));
+            NotificationsUsers notificationsUsers = new NotificationsUsers(notification.Id, new DoctorService(new DoctorFileFactory()).GetUsernameByIDDoctor(updatedAppointment.IDDoctor));
 
             notificationRepository.Save(notification);
             notificationsUsersRepository.Save(notificationsUsers);
@@ -228,7 +229,7 @@ namespace Hospital.Services
         public void NotifyDoctor(Appointment newUrgentAppointment)
         {
             Notification notification = GenerateNotificationForDoctorsUrgentAppointment(newUrgentAppointment);
-            NotificationsUsers notificationsUsers = new NotificationsUsers(notification.Id, new DoctorService().GetUsernameByIDDoctor(newUrgentAppointment.IDDoctor));
+            NotificationsUsers notificationsUsers = new NotificationsUsers(notification.Id, new DoctorService(new DoctorFileFactory()).GetUsernameByIDDoctor(newUrgentAppointment.IDDoctor));
 
             notificationRepository.Save(notification);
             notificationsUsersRepository.Save(notificationsUsers);
