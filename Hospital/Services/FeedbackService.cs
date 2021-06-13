@@ -23,5 +23,10 @@ namespace Hospital.Services
         {
             feedbackRepository.Save(feedback);
         }
+
+        public String GetNewID()
+        {
+            return feedbackRepository.GetNewID();
+        }
     }
 }

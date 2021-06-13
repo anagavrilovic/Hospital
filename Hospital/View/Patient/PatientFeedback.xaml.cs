@@ -26,13 +26,13 @@ namespace Hospital.View
     public partial class PatientFeedback : Page
     {
         private FeedbackService feedbackSevice = new FeedbackService(new FeedbackFileFactory());
-        private Feedback feedback = new Feedback();
+        private Feedback feedback;
         private PatientSettingsService patientSettingsService = new PatientSettingsService(new PatientSettingsFileFactory());
         public PatientFeedback()
         {
             InitializeComponent();
             ComboBoxType.Focus();
-            
+            feedback = new Feedback(feedbackSevice.GetNewID());
         }
 
         private void GoBack(object sender, RoutedEventArgs e)

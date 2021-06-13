@@ -19,11 +19,6 @@ namespace Hospital.Repositories
 
         public void Delete(string id)
         {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteNotificationsUsersByNotificationID(string id)
-        {
             List<NotificationsUsers> notificationsUsers = GetAll();
             foreach (NotificationsUsers n in notificationsUsers.ToList())
                 if (n.NotificationID.Equals(id))
@@ -49,7 +44,13 @@ namespace Hospital.Repositories
 
         public NotificationsUsers GetByID(string id)
         {
-            throw new NotImplementedException();
+            List<NotificationsUsers> notificationsUsers = GetAll();
+            List<NotificationsUsers> recipients = new List<NotificationsUsers>();
+            foreach (NotificationsUsers nu in notificationsUsers)
+                if (nu.NotificationID.Equals(id))
+                    recipients.Add(nu);
+
+            return recipients[0];
         }
 
         public List<NotificationsUsers> GetNotificationRecipientsByIDNotification(string id)

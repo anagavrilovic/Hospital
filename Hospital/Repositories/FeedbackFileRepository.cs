@@ -16,7 +16,16 @@ namespace Hospital.Repositories
 
         public void Delete(string id)
         {
-            throw new NotImplementedException();
+            List<Feedback> feedbacks = GetAll();
+            foreach (Feedback feedback in feedbacks)
+            {
+                if (feedback.ID.Equals(id))
+                {
+                    feedbacks.Remove(feedback);
+                    Serialize(feedbacks);
+                    return;
+                }
+            }
         }
 
         public List<Feedback> GetAll()
@@ -36,7 +45,12 @@ namespace Hospital.Repositories
 
         public Feedback GetByID(string id)
         {
-            throw new NotImplementedException();
+            List<Feedback> feedbacks = GetAll();
+            foreach (Feedback feedback in feedbacks)
+                if (feedback.ID.Equals(id))
+                    return feedback;
+
+            return null;
         }
 
         public void Save(Feedback feedback)
@@ -53,6 +67,26 @@ namespace Hospital.Repositories
                 JsonSerializer serializer = new JsonSerializer();
                 serializer.Serialize(file, feedbacks);
             }
+        }
+
+        public String GetNewID()
+        {
+            int newID = 0;
+            while (true)
+            {
+                if (!CheckIfIDExists(newID.ToString())) return newID.ToString();
+                newID++;
+            }
+        }
+
+        private Boolean CheckIfIDExists(String ID)
+        {
+            List<Feedback> feedbacks = GetAll();
+            foreach (Feedback feedback in feedbacks)
+            {
+                if (feedback.ID.Equals(ID)) return true;
+            }
+            return false;
         }
     }
 }

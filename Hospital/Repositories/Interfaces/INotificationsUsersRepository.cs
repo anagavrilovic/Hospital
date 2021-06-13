@@ -10,7 +10,6 @@ namespace Hospital.Repositories.Interfaces
 {
     interface INotificationsUsersRepository : IGenericRepository<NotificationsUsers>
     {
-        void DeleteNotificationsUsersByNotificationID(string id);
         List<NotificationsUsers> GetNotificationRecipientsByIDNotification(string id);
         NotificationsUsers GetUniqueNotificationsUsers(String id, String username);
         void DeleteUniqueNotificationsUsers(String id, String username);

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Hospital.Factory;
+using Hospital.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,5 +46,13 @@ namespace Hospital.Model
                 feedbackType = value;
             }
         }
+
+        public String ID { get; set; }
+
+        public Feedback(String id)
+        {
+            ID = id;
+        }
+        
     }
 }

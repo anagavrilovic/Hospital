@@ -33,13 +33,13 @@ namespace Hospital.Services
 
         public void DeleteNotification(Notification notification)
         {
-            notificationsUsersRepository.DeleteNotificationsUsersByNotificationID(notification.Id);
+            notificationsUsersRepository.Delete(notification.Id);
             notificationRepository.Delete(notification.Id);
         }
 
         public void DeleteNotificationsUsersByNotificationID(string id)
         {
-            notificationsUsersRepository.DeleteNotificationsUsersByNotificationID(id);
+            notificationsUsersRepository.Delete(id);
         }
 
         public int CountNotificationByRole(Notification notification, UserType userType)
@@ -72,7 +72,7 @@ namespace Hospital.Services
 
         public void ClearRecipientsOfNotification(Notification notification)
         {
-            notificationsUsersRepository.DeleteNotificationsUsersByNotificationID(notification.Id);
+            notificationsUsersRepository.Delete(notification.Id);
         }
 
         public void UpdateNotification(NotificationRecipientsDTO recipients, Notification notification)

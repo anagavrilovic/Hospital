@@ -30,8 +30,8 @@ namespace Hospital.ViewModels.Secretary
             this.NavigationService = navigationService;
             SendFeedbackCommand = new RelayCommand(Execute_SendFeedbackCommand, CanExecuteCommands);
             CancelCommand = new RelayCommand(Execute_CancelCommand, CanExecuteCommands);
-            NewFeedback = new Feedback();
             FeedbackService = new FeedbackService(new FeedbackFileFactory());
+            NewFeedback = new Feedback(FeedbackService.GetNewID());
         }
 
         #endregion

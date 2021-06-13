@@ -25,8 +25,8 @@ namespace Hospital.ViewModels.Manager
 
         public FeedbackViewModel(NavigationService navigation)
         {
-            NewFeedback = new Model.Feedback();
             FeedbackService = new FeedbackService(new FeedbackFileFactory());
+            NewFeedback = new Model.Feedback(FeedbackService.GetNewID());
             NavigationService = navigation;
             LeaveFeedbackCommand = new RelayCommand(ExecuteLeaveFeedbackCommand, CanExecuteCommands);
             CancelCommand = new RelayCommand(ExecuteCancelCommand, CanExecuteCommands);

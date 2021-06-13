@@ -19,7 +19,7 @@ namespace Hospital.ViewModels.Doctor
     {
         FeedbackService service;
         NavigationController navigationController;
-        private Feedback feedback=new Feedback();
+        private Feedback feedback;
         public Feedback Feedback
         {
             get
@@ -80,9 +80,10 @@ namespace Hospital.ViewModels.Doctor
         public DoctorFeedbackViewModel(string doctorId, NavigationController navigationController)
         {
             this.navigationController = navigationController;
+            service = new FeedbackService(new FeedbackFileFactory());
+            feedback = new Feedback(service.GetNewID());
             Feedback.UserId = doctorId;
             SaveCommand = new RelayCommand(Execute_Save, CanExecute_Command);
-            service = new FeedbackService(new FeedbackFileFactory());
             IsEnable = true;
         }
         private void Execute_Save(object obj)
