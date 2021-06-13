@@ -5,8 +5,64 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="770"
+        WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None" MouseLeftButtonDown="OnMouseLeftButtonDown" >
+    <Window.Background>
+        <ImageBrush ImageSource="/Icon/hospital.jpg"></ImageBrush>
+    </Window.Background>
+    <Window.Clip>
+        <RectangleGeometry Rect="0,0,770,450" RadiusX="25" RadiusY="25"/>
+    </Window.Clip>
     <Grid>
-        
+        <Grid Background="Black" Opacity="0.1">
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="300"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Row="1" Grid.Column="1" Background="#FF437182" Opacity="0.7" CornerRadius="30">
+            </Border>
+            <Border Grid.Row="1" Grid.Column="1">
+                <StackPanel VerticalAlignment="Center" >
+                    <TextBlock  Text="Korisničko ime:" Foreground="#FFE5E5E5" Margin="50,0,0,0" FontSize="17" FontFamily="Segoe UI Symbol"/>
+                    <TextBox x:Name="Username" Margin="50,0" Height="25" Padding="3,0,0,0" BorderBrush="White">
+                    </TextBox>
+                    <TextBlock Text="Lozinka:" Foreground="#FFE5E5E5" Margin="50,30,0,0" FontSize="17" FontFamily="Segoe UI Symbol"/>
+                    <PasswordBox x:Name="Password" Margin="50,0" Height="25" Padding="3,0,0,0" BorderBrush="White">
+                    </PasswordBox>
+                    <StackPanel Orientation="Horizontal" Margin="0,50,0,0" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Button Content="ULOGUJ SE" Margin="0,0,20,0" Width="90" Background="#FF315B6E" Foreground="White" FontFamily="Segoe UI Symbol" Click="BtnUlogujSe"
+                                BorderBrush="#FF437182">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                        <Button Content="ODUSTANI" Width="90" Background="White" Foreground="#FF437182" FontFamily="Segoe UI Symbol" Click="BtnOtkazi"
+                                BorderBrush="White">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            
+
+
+        </Grid>
+
     </Grid>
+   
 </Window>

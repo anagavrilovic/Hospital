@@ -1,73 +1,40 @@
+
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Hospital
 {
-   public class Patient : User
-   {
-      public Boolean isGuest;
-      
-      public System.Collections.Generic.List<Appointment> appointment;
-      
-      public System.Collections.Generic.List<Appointment> Appointment
-      {
-         get
-         {
-            if (appointment == null)
-               appointment = new System.Collections.Generic.List<Appointment>();
-            return appointment;
-         }
-         set
-         {
-            RemoveAllAppointment();
-            if (value != null)
+    public class Patient : User
+    {
+        private bool isGuest = false;
+        private bool isBlocked = false;
+
+        public Patient() { }
+
+        public bool IsGuest
+        {
+            get => isGuest;
+            set
             {
-               foreach (Appointment oAppointment in value)
-                  AddAppointment(oAppointment);
+                isGuest = value;
             }
-         }
-      }
-      
-      
-      public void AddAppointment(Appointment newAppointment)
-      {
-         if (newAppointment == null)
-            return;
-         if (this.appointment == null)
-            this.appointment = new System.Collections.Generic.List<Appointment>();
-         if (!this.appointment.Contains(newAppointment))
-         {
-            this.appointment.Add(newAppointment);
-            newAppointment.Patient = this;
-         }
-      }
-      
-      
-      public void RemoveAppointment(Appointment oldAppointment)
-      {
-         if (oldAppointment == null)
-            return;
-         if (this.appointment != null)
-            if (this.appointment.Contains(oldAppointment))
+        }
+
+        public bool IsBlocked
+        {
+            get { return isBlocked; }
+            set
             {
-               this.appointment.Remove(oldAppointment);
-               oldAppointment.Patient = null;
+                isBlocked = value;
             }
-      }
-      
-      
-      public void RemoveAllAppointment()
-      {
-         if (appointment != null)
-         {
-            System.Collections.ArrayList tmpAppointment = new System.Collections.ArrayList();
-            foreach (Appointment oldAppointment in appointment)
-               tmpAppointment.Add(oldAppointment);
-            appointment.Clear();
-            foreach (Appointment oldAppointment in tmpAppointment)
-               oldAppointment.Patient = null;
-            tmpAppointment.Clear();
-         }
-      }
-   
-   }
+        }
+
+        override
+        public string ToString()
+        {
+            return FirstName + " " + LastName + " " + PersonalID;
+        }
+    }
 }

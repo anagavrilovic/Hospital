@@ -1,0 +1,179 @@
+﻿<Page x:Class="Hospital.View.PrikazPacijenata"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Hospital.View"
+             xmlns:controls="clr-namespace:Hospital.View.Secretary"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1065"
+             Background="{StaticResource BackgroundGray}">
+    <Page.Resources>
+        <ResourceDictionary Source="../../Resources/SecretaryResourceDictionary.xaml"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                <TextBlock Text="PACIJENTI" Style="{StaticResource TitleStyle}"/>
+                <!--<Separator Margin="15,0"/>-->
+            </StackPanel>
+
+            <controls:OptionBar Grid.Column="2" Height="30" Width="170" Margin="0,15,15,0" VerticalAlignment="Top" ></controls:OptionBar>
+        </Grid>
+        
+
+        <Grid Grid.Row="1" Margin="15,10,15,15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Dugmici za opcije nad pacijentima -->
+                <StackPanel Orientation="Horizontal" Height="55" VerticalAlignment="Center" Margin="0,0,0,10">
+                    <Grid>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="60">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                            </Border.Effect>
+                        </Border>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="60">
+                            <Button Style="{StaticResource BigButtons}" Click="NewPatientClick" ToolTip="Dodajte novog pacijenta">
+                                <StackPanel Orientation="Vertical">
+                                    <Image Source="../../Icon/Secretary/adduser.png" Width="25"/>
+                                    <TextBlock Text="Novi"/>
+                                </StackPanel>
+                            </Button>
+                        </Border>
+                    </Grid>
+
+                    <Grid>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                            </Border.Effect>
+                        </Border>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
+                            <Button Style="{StaticResource BigButtons}" Click="UpdatePatientClick" ToolTip="Izmenite postojećeg pacijenta">
+                                <StackPanel Orientation="Vertical">
+                                    <Image Source="../../Icon/Secretary/edit.png" Width="25"/>
+                                    <TextBlock Text="Izmeni"/>
+                                </StackPanel>
+                            </Button>
+                        </Border>
+                    </Grid>
+
+                    <Grid>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                            </Border.Effect>
+                        </Border>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
+                            <Button Style="{StaticResource BigButtons}" Click="PatientsDetailsClick" ToolTip="Pogledajte detalje o pacijentu">
+                                <StackPanel Orientation="Vertical">
+                                    <Image Source="../../Icon/Secretary/info.png" Width="25"/>
+                                    <TextBlock Text="Detalji"/>
+                                </StackPanel>
+                            </Button>
+                        </Border>
+                    </Grid>
+
+                    <Grid>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                            </Border.Effect>
+                        </Border>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
+                            <Button Style="{StaticResource BigButtons}" Click="DeletePatientClick" ToolTip="Izbrišite odabranog pacijenta">
+                                <StackPanel Orientation="Vertical">
+                                    <Image Source="../../Icon/Secretary/delete.png" Width="25"/>
+                                    <TextBlock Text="Brisanje"/>
+                                </StackPanel>
+                            </Button>
+                        </Border>
+                    </Grid>
+
+                    <Grid>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                            </Border.Effect>
+                        </Border>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
+                            <Button Style="{StaticResource BigButtons}" Click="AlergeniClick" ToolTip="Modifikacija alergena odabranog pacijenta">
+                                <StackPanel Orientation="Vertical">
+                                    <Image Source="../../Icon/Secretary/alergies.png" Width="25"/>
+                                    <TextBlock Text="Alergeni"/>
+                                </StackPanel>
+                            </Button>
+                        </Border>
+                    </Grid>
+                    
+                </StackPanel>
+
+                <!-- Search -->
+                <Border Grid.Column="1" Width="250" Height="30" HorizontalAlignment="Right" Margin="0,10" VerticalAlignment="Bottom"
+                            Style="{StaticResource TextBoxBorder}" BorderThickness="0" ToolTip="Pretraži pacijente">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                    </Border.Effect>
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <Image Source="../../Icon/Secretary/search.png" Height="13"/>
+                        <TextBox x:Name="PatientsFilter" BorderThickness="0" Width="200" Height="20" Margin="10,0,0,0" Background="Transparent"
+                                 TextChanged="PatientsRecordsFilterTextChanged"/>
+                    </StackPanel>
+                </Border>
+
+            </Grid>
+
+            <Border Grid.Row="1" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                </Border.Effect>
+            </Border>
+            <Border Grid.Row="1" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <!-- Tabela sa prikazom svih pacijenata -->
+                <DataGrid x:Name="PacijentiTable" Grid.Row="1" Margin="5" Width="1038" ItemsSource="{Binding PatientsRecords}" Style="{StaticResource PacijentiDataGrid}"
+                          SelectedItem="{Binding SelectedPatientsRecord}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Ime" Width="0.85*" Binding="{Binding Patient.FirstName}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
+                        <DataGridTextColumn Header="Prezime" Width="*" Binding="{Binding Patient.LastName}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
+                        <DataGridTextColumn Header="JMBG" Width="*" Binding="{Binding Patient.PersonalID}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
+                        <DataGridTextColumn Header="Datum rođenja" Width="0.9*" Binding="{Binding Patient.DateOfBirth, StringFormat='{}{0: dd.MM.yyyy}'}" HeaderStyle="{StaticResource GridHeaderStyle}"/>
+
+                        <DataGridTemplateColumn Width="80" IsReadOnly="False" Header="Status" HeaderStyle="{StaticResource GridHeaderStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Path=Patient.IsBlocked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="15,3,0,0" 
+                                              HorizontalAlignment="Left" VerticalAlignment="Center" Unchecked="IsBlockedUnchecked" Checked="IsBlockedChecked"
+                                              Style="{StaticResource IsBlockedCheckBoxStyle}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+
+        </Grid>
+
+    </Grid>
+</Page>

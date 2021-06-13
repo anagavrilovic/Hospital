@@ -1,0 +1,129 @@
+﻿<Page x:Class="Hospital.View.Secretary.Izvestaj"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hospital.View.Secretary"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1065"
+      Background="{StaticResource BackgroundGray}"
+      Title="Izvestaj">
+    <Page.Resources>
+        <ResourceDictionary Source="../../Resources/SecretaryResourceDictionary.xaml"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="IZVEŠTAJ" Style="{StaticResource TitleStyle}" Margin="15,20,0,0"/>
+                <TextBlock Text="o zauzetosti lekara za određeni vremenski period" Style="{StaticResource TitleStyle}" FontSize="17" Margin="15,-10,0,0"/>
+            </StackPanel>
+
+            <local:OptionBar Grid.Column="2" Height="30" Width="170" Margin="0,15,15,0" VerticalAlignment="Top" ></local:OptionBar>
+        </Grid>
+
+
+        <Grid Grid.Row="1" Margin="15,30,15,15" Height="520" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <Border  Width="600" CornerRadius="10" Background="{StaticResource MainWhite}" HorizontalAlignment="Left">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                </Border.Effect>
+            </Border>
+            <Border  Width="600" CornerRadius="10" Background="{StaticResource MainWhite}" HorizontalAlignment="Left">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="110"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Odaberite lekara: " Style="{StaticResource TextBlockStyle}" VerticalAlignment="Bottom" Margin="50,0,0,0"
+                               FontSize="16"/>
+                    <ListBox Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource ListBoxStyle}" ItemContainerStyle="{StaticResource ListBoxItemStyle}"
+                             Margin="50,0" Height="150" x:Name="ListBoxDoctors" ItemsSource="{Binding AllDoctors, Mode=TwoWay}" SelectedItem="{Binding SelectedDoctor}">
+                    </ListBox>
+
+                    <!-- Search -->
+                    <Border Grid.Column="2" Width="200" Height="25" HorizontalAlignment="Right"  ToolTip="Pretraži lekare"
+                            Style="{StaticResource TextBoxBorder}" VerticalAlignment="Bottom" Margin="0,0,50,5">
+                        <StackPanel Margin="5" Orientation="Horizontal" Height="25" VerticalAlignment="Center">
+                            <Image Source="../../Icon/Secretary/search.png" Height="13"/>
+                            <TextBox x:Name="DoctorsFilter" BorderThickness="0" Width="150" Height="20"
+                                     Margin="10,0,0,0" FontSize="12" Background="Transparent" VerticalAlignment="Center"
+                                     Text="{Binding SearchText}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <TextBlock Grid.Row="2" Text="Početni dan:" Style="{StaticResource TextBlockStyle}" FontSize="16" VerticalAlignment="Bottom" Margin="50,0,0,0"/>
+                    <TextBlock Grid.Row="3" Text="Krajnji dan:" Style="{StaticResource TextBlockStyle}" FontSize="16" VerticalAlignment="Bottom" Margin="50,0,0,0"/>
+
+                    <DatePicker Grid.Row="2" Grid.Column="1" Style="{StaticResource cbTB}" Margin="0,0,50,0" Height="25" VerticalAlignment="Bottom"
+                                SelectedDate="{Binding DateBegin}"/>
+                    <DatePicker Grid.Row="3" Grid.Column="1" Style="{StaticResource cbTB}" Margin="0,0,50,0" Height="25" VerticalAlignment="Bottom"
+                                SelectedDate="{Binding DateEnd}"/>
+                </Grid>
+            </Border>
+
+            <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left" >
+                <Grid HorizontalAlignment="Left" Margin="20,0,0,10">
+                    <Border CornerRadius="10" Height="60" Background="{StaticResource MainWhite}" Width="60">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                        </Border.Effect>
+                    </Border>
+                    <Border CornerRadius="10" Height="60" Background="{StaticResource MainWhite}" Width="60"
+                            ToolTip="Generiši izveštaj u pdf formatu">
+                        <Button Style="{StaticResource BigButtons}" Command="{Binding GenerateReportCommand}">
+                            <StackPanel Orientation="Vertical">
+                                <Image Source="../../Icon/Secretary/pdf.png" Width="25"/>
+                                <TextBlock Text="Generiši"/>
+                            </StackPanel>
+                        </Button>
+                    </Border>
+                </Grid>
+
+                <Grid Margin="0,10,0,0">
+                    <Border CornerRadius="10" Height="60" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                        </Border.Effect>
+                    </Border>
+                    <Border CornerRadius="10" Height="60" Background="{StaticResource MainWhite}" Margin="20,0,0,0" Width="60"
+                            ToolTip="Štampaj izveštaj">
+                        <Button Style="{StaticResource BigButtons}" >
+                            <StackPanel Orientation="Vertical">
+                                <Image Source="../../Icon/Secretary/print.png" Width="25"/>
+                                <TextBlock Text="Štampaj"/>
+                            </StackPanel>
+                        </Button>
+                    </Border>
+                </Grid>
+
+            </StackPanel>
+
+        </Grid>
+
+    </Grid>
+</Page>

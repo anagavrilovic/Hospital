@@ -1,0 +1,131 @@
+﻿<Page x:Class="Hospital.View.Secretary.HitanPregledPomeranje"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hospital.View.Secretary"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1065"
+      Background="{StaticResource BackgroundGray}"
+      Title="HitanPregledPomeranje">
+    <Page.Resources>
+        <ResourceDictionary Source="../../Resources/SecretaryResourceDictionary.xaml"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- NASLOV -->
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="15,20,0,5">
+                    <Image Source="../../Icon/Secretary/warning.png"/>
+                    <TextBlock Text=" HITAN PREGLED" Style="{StaticResource TitleStyle}" Margin="0"/>
+                </StackPanel>
+                <!--<Separator Margin="15,0"/>-->
+            </StackPanel>
+
+            <local:OptionBar Grid.Column="2" Height="30" Width="170" Margin="0,15,15,0" VerticalAlignment="Top" ></local:OptionBar>
+        </Grid>
+
+        <!-- PORUKE OBAVESTENJA -->
+        <TextBlock Grid.Row="1" Text="Ne postoji slobodan termin u narednih sat vremena!" Style="{StaticResource TextBlockStyle}" FontSize="18" Margin="15,10,0,0"/>
+        <TextBlock Grid.Row="2" Text="Da biste zakazali hitan pregled u navedeno vreme, pomerite potojeće termine." Style="{StaticResource TextBlockStyle}" 
+                   FontSize="18" Margin="15,-10,0,10"/>
+
+        <!-- HEADERI -->
+        <Grid Grid.Row="3" Margin="0,10,0,0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="1" Text="Doktor:" Style="{StaticResource TextBlockStyle}" Margin="30,0,0,0" FontSize="12"/>
+            <TextBlock Grid.Column="2" Text="Pacijent:" Style="{StaticResource TextBlockStyle}" Margin="15,0,0,0" FontSize="12"/>
+            <TextBlock Grid.Column="3" Text="Zakazano:" Style="{StaticResource TextBlockStyle}" Margin="20,0,0,0" FontSize="12"/>
+            <TextBlock Grid.Column="4" Text="Pomeriti na:" Style="{StaticResource TextBlockStyle}" Margin="20,0,0,0" FontSize="12"/>
+
+        </Grid>
+
+        <ListBox Grid.Row="4" Margin="10,0" Background="Transparent" ItemsSource="{Binding Options}" Style="{StaticResource ListBoxStyle}" SelectedItem="{Binding SelectedOption}"
+                 ScrollViewer.HorizontalScrollBarVisibility="Hidden" x:Name="ListBoxOptions" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                 Width="1058" ItemContainerStyle="{StaticResource ListBoxItemStyle}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,0,10,0" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="{Binding NewUrgentAppointmentTime, StringFormat='{}{0: HH:mm}'}" Style="{StaticResource TitleStyle}" Margin="0,30,20,0"/>
+
+                        <Border Grid.Column="1" Background="{StaticResource MainWhite}" CornerRadius="15" Margin="0,3">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                            </Border.Effect>
+                        </Border>
+                        <Border Grid.Column="1" Background="{StaticResource MainWhite}" CornerRadius="15" Margin="0,3">
+                            <Grid>
+                                <ListBox x:Name="ListBoxOption" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ItemsSource="{Binding Option}" 
+                                         Background="Transparent" Height="100" Width="920" BorderThickness="0">
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="{x:Type ListBoxItem}">
+                                            <Setter Property="Focusable" Value="False"/>
+                                            <Setter Property="IsHitTestVisible" Value="False" />
+                                            <Setter Property="ToolTip" Value="Odaberi opciju"/>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Width="920">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition Width="1.5*"/>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock Grid.Column="0" Text="{Binding Doctor}" Style="{StaticResource TextBlockStyle}" Margin="10,0,0,0"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding Patient}" Style="{StaticResource TextBlockStyle}" Margin="10,0,0,0"/>
+                                                <TextBlock Grid.Column="2" Text="{Binding Appointment.DateTime, StringFormat='{}{0: dd.MM.yyyy, HH:mm}'}" Style="{StaticResource TextBlockStyle}" Margin="30,0,0,0"/>
+                                                <TextBlock Grid.Column="3" Text="{Binding ToTime, StringFormat='{}{0: dd.MM.yyyy, HH:mm}'}" Style="{StaticResource TextBlockStyle}" Margin="40,0,0,0"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </Grid>
+                        </Border>
+                    </Grid>
+
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,30">
+            <Button Content="Potvrdi" Width="100" Height="30" Style="{StaticResource ButtonPotvrdiStyle}" Click="BtnPotvrdiClick"
+                    ToolTip="Potvrdi zakazivanje hitnog pregleda"/>
+            <Button Content="Odustani" Width="100" Style="{StaticResource ButtonOdustaniStyle}" Click="BtnOdustaniClick"
+                    ToolTip="Odustani od zakazivanja hitnog pregleda"/>
+        </StackPanel>
+
+
+    </Grid>
+</Page>

@@ -8,9 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-
-namespace Hospital.Properties
-{
+namespace Hospital.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -18,52 +19,980 @@ namespace Hospital.Properties
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources
-    {
-
+    internal class Resources {
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources()
-        {
+        internal Resources() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager
-        {
-            get
-            {
-                if ((resourceMan == null))
-                {
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Hospital.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture
-        {
-            get
-            {
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
                 return resourceCulture;
             }
-            set
-            {
+            set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accept.
+        /// </summary>
+        internal static string acceptButton {
+            get {
+                return ResourceManager.GetString("acceptButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        internal static string addButton {
+            get {
+                return ResourceManager.GetString("addButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add or remove ingredient:.
+        /// </summary>
+        internal static string addOrRemoveIngredientLabel {
+            get {
+                return ResourceManager.GetString("addOrRemoveIngredientLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add or remove replacement:.
+        /// </summary>
+        internal static string addOrRemoveReplacement {
+            get {
+                return ResourceManager.GetString("addOrRemoveReplacement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allergic to ingredients:.
+        /// </summary>
+        internal static string allergicToIngredientLabel {
+            get {
+                return ResourceManager.GetString("allergicToIngredientLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allergic to medicine:.
+        /// </summary>
+        internal static string allergicToMedicineLabel {
+            get {
+                return ResourceManager.GetString("allergicToMedicineLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save anamnesis.
+        /// </summary>
+        internal static string anamnesisButton {
+            get {
+                return ResourceManager.GetString("anamnesisButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anamnesis:.
+        /// </summary>
+        internal static string anamnesisLabel {
+            get {
+                return ResourceManager.GetString("anamnesisLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Appointment at: .
+        /// </summary>
+        internal static string appointmentAtLabel {
+            get {
+                return ResourceManager.GetString("appointmentAtLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Appointments.
+        /// </summary>
+        internal static string appointmentsLabel {
+            get {
+                return ResourceManager.GetString("appointmentsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Appointment type:.
+        /// </summary>
+        internal static string appointmentTypeLabel {
+            get {
+                return ResourceManager.GetString("appointmentTypeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back.
+        /// </summary>
+        internal static string backButton {
+            get {
+                return ResourceManager.GetString("backButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blood type:.
+        /// </summary>
+        internal static string bloodLabel {
+            get {
+                return ResourceManager.GetString("bloodLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submit Feedback.
+        /// </summary>
+        internal static string buttonFeedback {
+            get {
+                return ResourceManager.GetString("buttonFeedback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to City:.
+        /// </summary>
+        internal static string cityLabel {
+            get {
+                return ResourceManager.GetString("cityLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comments:.
+        /// </summary>
+        internal static string comment {
+            get {
+                return ResourceManager.GetString("comment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Way of consumption:.
+        /// </summary>
+        internal static string consumptionLabel {
+            get {
+                return ResourceManager.GetString("consumptionLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Country:.
+        /// </summary>
+        internal static string countryLabel {
+            get {
+                return ResourceManager.GetString("countryLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Daily intake:.
+        /// </summary>
+        internal static string dailyIntakeLabel {
+            get {
+                return ResourceManager.GetString("dailyIntakeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date and time of examination:.
+        /// </summary>
+        internal static string dateAndTime {
+            get {
+                return ResourceManager.GetString("dateAndTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date of appointment:.
+        /// </summary>
+        internal static string dateAppointment {
+            get {
+                return ResourceManager.GetString("dateAppointment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date:.
+        /// </summary>
+        internal static string dateLabel {
+            get {
+                return ResourceManager.GetString("dateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date of birth:.
+        /// </summary>
+        internal static string dateOfBirthLabel {
+            get {
+                return ResourceManager.GetString("dateOfBirthLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Days for consumption:.
+        /// </summary>
+        internal static string daysForConsumptionLabel {
+            get {
+                return ResourceManager.GetString("daysForConsumptionLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decline.
+        /// </summary>
+        internal static string declineButton {
+            get {
+                return ResourceManager.GetString("declineButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string deleteButton {
+            get {
+                return ResourceManager.GetString("deleteButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save diagnosis.
+        /// </summary>
+        internal static string diagnosisButton {
+            get {
+                return ResourceManager.GetString("diagnosisButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Diagnosis:.
+        /// </summary>
+        internal static string diagnosisLabel {
+            get {
+                return ResourceManager.GetString("diagnosisLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Doctor:.
+        /// </summary>
+        internal static string doctorColonLabel {
+            get {
+                return ResourceManager.GetString("doctorColonLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Doctor.
+        /// </summary>
+        internal static string doctorLabel {
+            get {
+                return ResourceManager.GetString("doctorLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dosage in miligrams:.
+        /// </summary>
+        internal static string dosageInMgLabel {
+            get {
+                return ResourceManager.GetString("dosageInMgLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duration:.
+        /// </summary>
+        internal static string durationLabel {
+            get {
+                return ResourceManager.GetString("durationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        internal static string editButton {
+            get {
+                return ResourceManager.GetString("editButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Emergency operation.
+        /// </summary>
+        internal static string emergencyOperationLabel {
+            get {
+                return ResourceManager.GetString("emergencyOperationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End date:.
+        /// </summary>
+        internal static string endDateReport {
+            get {
+                return ResourceManager.GetString("endDateReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End of treatment:.
+        /// </summary>
+        internal static string endOfTreatmentLabel {
+            get {
+                return ResourceManager.GetString("endOfTreatmentLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string errorrLabel {
+            get {
+                return ResourceManager.GetString("errorrLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to examination.
+        /// </summary>
+        internal static string examinationLabel {
+            get {
+                return ResourceManager.GetString("examinationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Explanation:.
+        /// </summary>
+        internal static string explanationLabel {
+            get {
+                return ResourceManager.GetString("explanationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Feedback Type:.
+        /// </summary>
+        internal static string feedback {
+            get {
+                return ResourceManager.GetString("feedback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Free beds:.
+        /// </summary>
+        internal static string freeBedsTB {
+            get {
+                return ResourceManager.GetString("freeBedsTB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gender:.
+        /// </summary>
+        internal static string genderLabel {
+            get {
+                return ResourceManager.GetString("genderLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Health card number:.
+        /// </summary>
+        internal static string healthCardLabel {
+            get {
+                return ResourceManager.GetString("healthCardLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duration of hospital treatment:.
+        /// </summary>
+        internal static string hospitalDatePicker {
+            get {
+                return ResourceManager.GetString("hospitalDatePicker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hospitalized.
+        /// </summary>
+        internal static string hospitalizedLabel {
+            get {
+                return ResourceManager.GetString("hospitalizedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hospital treatment.
+        /// </summary>
+        internal static string hospitalTreatmentButton {
+            get {
+                return ResourceManager.GetString("hospitalTreatmentButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID card:.
+        /// </summary>
+        internal static string idCardLabel {
+            get {
+                return ResourceManager.GetString("idCardLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ingredients:.
+        /// </summary>
+        internal static string ingredientsLabel {
+            get {
+                return ResourceManager.GetString("ingredientsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Insured:.
+        /// </summary>
+        internal static string insuredLabel {
+            get {
+                return ResourceManager.GetString("insuredLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inventory.
+        /// </summary>
+        internal static string inventoryLabel {
+            get {
+                return ResourceManager.GetString("inventoryLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select language:.
+        /// </summary>
+        internal static string languageLabel {
+            get {
+                return ResourceManager.GetString("languageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maritial status:.
+        /// </summary>
+        internal static string maritialLabel {
+            get {
+                return ResourceManager.GetString("maritialLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Medical record id: .
+        /// </summary>
+        internal static string medicalRecordIdLabel {
+            get {
+                return ResourceManager.GetString("medicalRecordIdLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Medical record.
+        /// </summary>
+        internal static string medicalRecordLabel {
+            get {
+                return ResourceManager.GetString("medicalRecordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Medicine.
+        /// </summary>
+        internal static string medicineButton {
+            get {
+                return ResourceManager.GetString("medicineButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  Medicine:.
+        /// </summary>
+        internal static string medicineTB {
+            get {
+                return ResourceManager.GetString("medicineTB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name:.
+        /// </summary>
+        internal static string nameLabel {
+            get {
+                return ResourceManager.GetString("nameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Patient name:.
+        /// </summary>
+        internal static string namePatientLabel {
+            get {
+                return ResourceManager.GetString("namePatientLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New.
+        /// </summary>
+        internal static string newButton {
+            get {
+                return ResourceManager.GetString("newButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        internal static string noButton {
+            get {
+                return ResourceManager.GetString("noButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to operation.
+        /// </summary>
+        internal static string operationLabel {
+            get {
+                return ResourceManager.GetString("operationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other allergies:.
+        /// </summary>
+        internal static string otherAllergiesLabel {
+            get {
+                return ResourceManager.GetString("otherAllergiesLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parent name:.
+        /// </summary>
+        internal static string parentLabel {
+            get {
+                return ResourceManager.GetString("parentLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Patient:.
+        /// </summary>
+        internal static string patient {
+            get {
+                return ResourceManager.GetString("patient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Patient:.
+        /// </summary>
+        internal static string patientLabel {
+            get {
+                return ResourceManager.GetString("patientLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PATIENTS: patient details.
+        /// </summary>
+        internal static string patientTitleLabel {
+            get {
+                return ResourceManager.GetString("patientTitleLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone number:.
+        /// </summary>
+        internal static string phoneLabel {
+            get {
+                return ResourceManager.GetString("phoneLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Place of living:.
+        /// </summary>
+        internal static string placeLabel {
+            get {
+                return ResourceManager.GetString("placeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zip code:.
+        /// </summary>
+        internal static string postalCodeLabel {
+            get {
+                return ResourceManager.GetString("postalCodeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prescribed medicine:.
+        /// </summary>
+        internal static string prescribedMedicineLabel {
+            get {
+                return ResourceManager.GetString("prescribedMedicineLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        internal static string removeButton {
+            get {
+                return ResourceManager.GetString("removeButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report.
+        /// </summary>
+        internal static string report {
+            get {
+                return ResourceManager.GetString("report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate.
+        /// </summary>
+        internal static string reportButton {
+            get {
+                return ResourceManager.GetString("reportButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to on medicine consumption in certain period of time.
+        /// </summary>
+        internal static string reportDetail {
+            get {
+                return ResourceManager.GetString("reportDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request for.
+        /// </summary>
+        internal static string requestLabel {
+            get {
+                return ResourceManager.GetString("requestLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Return.
+        /// </summary>
+        internal static string returnLabel {
+            get {
+                return ResourceManager.GetString("returnLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Review.
+        /// </summary>
+        internal static string reviewButton {
+            get {
+                return ResourceManager.GetString("reviewButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Room:.
+        /// </summary>
+        internal static string roomLabel {
+            get {
+                return ResourceManager.GetString("roomLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save changes.
+        /// </summary>
+        internal static string saveChangesButton {
+            get {
+                return ResourceManager.GetString("saveChangesButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save examination.
+        /// </summary>
+        internal static string saveExaminationButton {
+            get {
+                return ResourceManager.GetString("saveExaminationButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save revision.
+        /// </summary>
+        internal static string saveRevisionTB {
+            get {
+                return ResourceManager.GetString("saveRevisionTB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save therapy.
+        /// </summary>
+        internal static string saveTherapyButton {
+            get {
+                return ResourceManager.GetString("saveTherapyButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search for appointment:.
+        /// </summary>
+        internal static string searchAppointment {
+            get {
+                return ResourceManager.GetString("searchAppointment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search for ingredient:.
+        /// </summary>
+        internal static string searchIngredientLabel {
+            get {
+                return ResourceManager.GetString("searchIngredientLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search for medicine:.
+        /// </summary>
+        internal static string searchMedicineLabel {
+            get {
+                return ResourceManager.GetString("searchMedicineLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sign Out.
+        /// </summary>
+        internal static string signOutLabel {
+            get {
+                return ResourceManager.GetString("signOutLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start date:.
+        /// </summary>
+        internal static string startDateReport {
+            get {
+                return ResourceManager.GetString("startDateReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start examination.
+        /// </summary>
+        internal static string startExaminationTB {
+            get {
+                return ResourceManager.GetString("startExaminationTB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start of treatment:.
+        /// </summary>
+        internal static string startHospitalTreatment {
+            get {
+                return ResourceManager.GetString("startHospitalTreatment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start of hospital treatment:.
+        /// </summary>
+        internal static string startOfTreatmentLabel {
+            get {
+                return ResourceManager.GetString("startOfTreatmentLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Street:.
+        /// </summary>
+        internal static string streetLabel {
+            get {
+                return ResourceManager.GetString("streetLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Supstitution medicines:.
+        /// </summary>
+        internal static string supstitutionMedicineLabel {
+            get {
+                return ResourceManager.GetString("supstitutionMedicineLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Surname:.
+        /// </summary>
+        internal static string surnameLabel {
+            get {
+                return ResourceManager.GetString("surnameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Patient surname:.
+        /// </summary>
+        internal static string surnamePatientLabel {
+            get {
+                return ResourceManager.GetString("surnamePatientLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Theme.
+        /// </summary>
+        internal static string themeLabel {
+            get {
+                return ResourceManager.GetString("themeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Therapy description:.
+        /// </summary>
+        internal static string therapyDescriptionLabel {
+            get {
+                return ResourceManager.GetString("therapyDescriptionLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Therapy.
+        /// </summary>
+        internal static string therapyLabel {
+            get {
+                return ResourceManager.GetString("therapyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Therapy name:.
+        /// </summary>
+        internal static string therapyNameLabel {
+            get {
+                return ResourceManager.GetString("therapyNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time of appointment:.
+        /// </summary>
+        internal static string timeAppointment {
+            get {
+                return ResourceManager.GetString("timeAppointment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type of examination/operation.
+        /// </summary>
+        internal static string typeExaminationLabel {
+            get {
+                return ResourceManager.GetString("typeExaminationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username:.
+        /// </summary>
+        internal static string usernameLabel {
+            get {
+                return ResourceManager.GetString("usernameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vacation.
+        /// </summary>
+        internal static string vacationLabel {
+            get {
+                return ResourceManager.GetString("vacationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validate.
+        /// </summary>
+        internal static string validateLabel {
+            get {
+                return ResourceManager.GetString("validateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string yesButton {
+            get {
+                return ResourceManager.GetString("yesButton", resourceCulture);
             }
         }
     }

@@ -1,0 +1,955 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Hospital"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    
+    <SolidColorBrush x:Key="Background">#FFDCDCDC</SolidColorBrush>
+    <SolidColorBrush x:Key="MainWhite">#FFF6F6F6</SolidColorBrush>
+    <SolidColorBrush x:Key="SecondBackground">#FFF6F6F6</SolidColorBrush>
+    <SolidColorBrush x:Key="LighterGray">#FFEDEDED</SolidColorBrush>
+    <SolidColorBrush x:Key="TextGray">#FF777777</SolidColorBrush>
+    <SolidColorBrush x:Key="MediumGray">#FFA8A9A9</SolidColorBrush>
+    <SolidColorBrush x:Key="MainBlue">#FF0B6298</SolidColorBrush>
+    <SolidColorBrush x:Key="MainGreen">#FF98B53D</SolidColorBrush> 
+    <SolidColorBrush x:Key="TabBlue">#6DC9E7</SolidColorBrush>
+    <SolidColorBrush x:Key="SecondBlue">#FF4F6D99</SolidColorBrush>
+    <SolidColorBrush x:Key="HoverBlue">#2272a3</SolidColorBrush>
+    <SolidColorBrush x:Key="MainDarkBlue">#094f7a</SolidColorBrush>
+    <SolidColorBrush x:Key="LightBlue">#FFADD8E6</SolidColorBrush>
+    <SolidColorBrush x:Key="DarkBlue">#0A1625</SolidColorBrush>
+    <!-- Rounder textbox style -->
+    <Style x:Key="TextBox" TargetType="TextBox">
+        <Setter Property="FontFamily" Value="Yu Gothic"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate >
+                    <Border Background="{TemplateBinding Background}" x:Name="Bd" 
+BorderThickness="3" CornerRadius="10" BorderBrush="{StaticResource HoverBlue}">
+                        <ScrollViewer x:Name="PART_ContentHost" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Stil za dugmice u web toolbaru-->
+    <Style x:Key="ButtonWebToolbar" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource MainDarkBlue}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Opacity" Value="0.9"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource HoverBlue}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Search box style -->
+    <Style x:Key="SearchBox" TargetType="TextBox">
+        <Setter Property="Foreground" Value="{StaticResource DarkBlue}"/>
+        <Setter Property="Background" Value="{StaticResource MainWhite}"/>
+        <Setter Property="FontFamily" Value="Yu Gothic"/>
+    </Style>
+
+    <!-- Label color -->
+    <Style x:Key="Label" TargetType="Label">
+        <Setter Property="Foreground" Value="{StaticResource DarkBlue}"/>
+        <Setter Property="FontFamily" Value="Yu Gothic"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+
+    <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource DarkBlue}"/>
+        <Setter Property="FontFamily" Value="Yu Gothic"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+
+    <Style x:Key="ButtonTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource DarkBlue}"/>
+        <Setter Property="FontFamily" Value="Yu Gothic"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+    <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
+        <Setter Property="Foreground" Value="{StaticResource DarkBlue}"/>
+        <Setter Property="FontFamily" Value="Yu Gothic"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+
+    <!-- Template za validacije -->
+    <ControlTemplate x:Key="ValidationErrorTemplate">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Margin="10,10,0,0" Grid.Column="0" Text="{Binding [0].ErrorContent}" Foreground="Red" FontSize="12" FontFamily="Yu Gothic"/>
+        </Grid>
+    </ControlTemplate>
+
+    <!-- Template za validacije naslova -->
+    <ControlTemplate x:Key="ValidationErrorTemplateVertical">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <AdornedElementPlaceholder Grid.Row="0" Margin="0,0,10,0"/>
+            <TextBlock Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red" FontSize="12" FontFamily="Yu Gothic"/>
+        </Grid>
+    </ControlTemplate>
+
+    <!-- Label color -->
+    <Style x:Key="LabelWhite" TargetType="Label">
+        <Setter Property="Foreground" Value="{StaticResource MainWhite}"/>
+        <Setter Property="FontFamily" Value="Yu Gothic"/>
+    </Style>
+
+    <!-- Search box border style -->
+    <Style x:Key="TextBoxBorder" TargetType="Border">
+        <Setter Property="BorderBrush" Value="{StaticResource MainBlue}"/>
+        <Setter Property="CornerRadius" Value="15"/>
+        <Setter Property="Background" Value="{StaticResource MainWhite}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+    
+    <!-- List box style -->
+    <Style x:Key="ListBoxStyle" TargetType="ListBox">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="{StaticResource DarkBlue}"/>
+        <Setter Property="FontFamily" Value="Yu Gothic"/>
+        <Setter Property="FontSize" Value="13.5"/>
+    </Style>
+
+    <!-- Button with text style -->
+    <Style x:Key="ButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource MainDarkBlue}"/>
+        <Setter Property="Foreground" Value="{StaticResource MainWhite}"/>
+        <Setter Property="Width" Value="120"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="FontFamily" Value="Yu Gothic"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource HoverBlue}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+       
+    <!--Text box for anamnesis-->
+    <Style x:Key="TextBoxStyle" TargetType="TextBox">
+        <Setter Property="BorderBrush" Value="{StaticResource MediumGray}"/>
+        <Setter Property="Foreground" Value="{StaticResource DarkBlue}"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="FontFamily" Value="Yu Gothic"/>
+        <Setter Property="FontSize" Value="15"/>
+    </Style>
+    
+    <!-- Button with icon style -->
+    <Style x:Key="ImageButtons" TargetType="Button">
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Width" Value="55"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="{StaticResource MainWhite}"/>
+        <Setter Property="Foreground" Value="{StaticResource MainDarkBlue}"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Margin" Value="20,0,0,0"/>
+        <Setter Property="FontFamily" Value="Yu Gothic"/>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="{StaticResource HoverBlue}"/>
+                <Setter Property="Foreground" Value="{StaticResource MainGreen}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <!-- Button with icon style horizontal -->
+    <Style x:Key="ImageButtonsHorizontal" TargetType="Button">
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Width" Value="160 "/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="{StaticResource MainWhite}"/>
+        <Setter Property="Foreground" Value="{StaticResource MainDarkBlue}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Margin" Value="20,0,0,0"/>
+        <Setter Property="FontFamily" Value="Yu Gothic"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="10" BorderThickness="1" BorderBrush="{StaticResource DarkBlue}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource HoverBlue}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="{StaticResource MainBlue}"/>
+                <Setter Property="Foreground" Value="{StaticResource MainWhite}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--dugme sa validaciom-->
+    <Style x:Key="ButtonWithValidation" TargetType="Button">
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Width" Value="160 "/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="{StaticResource MainWhite}"/>
+        <Setter Property="Foreground" Value="{StaticResource MainDarkBlue}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Margin" Value="20,0,0,0"/>
+        <Setter Property="FontFamily" Value="Yu Gothic"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="10" BorderThickness="1" BorderBrush="{StaticResource DarkBlue}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource HoverBlue}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="IsEnabled" Value="False"/>
+        <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtName}" Value="False"/>
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="True"/>
+            </MultiDataTrigger>
+        </Style.Triggers>
+
+    </Style>
+
+
+    <!-- Data grid style -->
+    <Style x:Key="PacijentiDataGrid" TargetType="DataGrid">
+        <Setter Property="RowBackground" Value="{StaticResource MainWhite}"  />
+        <Setter Property="AlternatingRowBackground" Value="{StaticResource LighterGray}"/>
+        <Setter Property="VerticalGridLinesBrush" Value="Transparent"/>
+        <Setter Property="AutoGenerateColumns" Value="False"/>
+        <Setter Property="SelectionMode" Value="Single"/>
+        <Setter Property="SelectionUnit" Value="FullRow"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Visible"/>
+        <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource MediumGray}"/>
+        <Setter Property="ColumnHeaderHeight" Value="25"/>
+        <Setter Property="CanUserSortColumns" Value="True"/>
+        <Setter Property="CanUserResizeColumns" Value="True"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="RowHeight" Value="30"/>
+        <Setter Property="FontFamily" Value="Yu Gothic"/>
+        <Setter Property="FontSize" Value="13.5"/>
+    </Style>
+
+    <!--Header style for datagrid-->
+    <Style x:Key="CenterGridHeaderStyle" TargetType="DataGridColumnHeader">
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="{StaticResource MainBlue}"/>
+        <Setter Property="Background" Value="{StaticResource MainBlue}"/>
+        <Setter Property="Foreground" Value="{StaticResource MainWhite}"/>
+        <Setter Property="FontFamily" Value="Yu Gothic"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+    <!--tabcontrol colors-->
+    <SolidColorBrush x:Key="SolidBorderBrush" Color="#888" />
+
+
+    <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#EEE" />
+
+    <SolidColorBrush x:Key="DisabledBorderBrush" Color="#AAA" />
+
+    <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" />
+    <Style TargetType="{x:Type TabItem}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Grid>
+                        <Border 
+                                Name="Border"
+                                Margin="0,0,-4,0" 
+                                Background="White"
+                                BorderBrush="{StaticResource  SolidBorderBrush}" 
+                                BorderThickness="1,1,1,1" 
+                                CornerRadius="2,12,0,0" >
+                            <ContentPresenter x:Name="ContentSite"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    ContentSource="Header"
+                                    Margin="12,2,12,2"
+                                    RecognizesAccessKey="True"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Panel.ZIndex" Value="100" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource TabBlue}" />
+                            <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,0" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource DisabledBackgroundBrush}" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource DisabledBorderBrush}" />
+                            <Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    
+       <!--Button with only image-->
+    <Style x:Key="NoChromeButton" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="Chrome" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="#ADADAD"/>
+                            <Setter Property="Opacity" TargetName="Chrome" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Cursor" Value="Hand"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <LinearGradientBrush x:Key="GreenGradientBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="#006700"/>
+        <GradientStop Offset="1" Color="#00ef00"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="RedGradientBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="#774040"/>
+        <GradientStop Offset="1" Color="#ef4040"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="BlueGradientBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="#404077"/>
+        <GradientStop Offset="1" Color="#4040ef"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="CyanGradientBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="#007777"/>
+        <GradientStop Offset="1" Color="#00efef"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="YellowGradientBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="#777740"/>
+        <GradientStop Offset="1" Color="Yellow"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="MagentaGradientBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="#770077"/>
+        <GradientStop Offset="1" Color="#ef00ef"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="OrangeGradientBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="DarkOrange"/>
+        <GradientStop Offset="1" Color="Orange"/>
+    </LinearGradientBrush>
+
+    <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="20" />
+            </Grid.ColumnDefinitions>
+            <Border
+                  x:Name="Border" 
+                  Grid.ColumnSpan="2"
+                  CornerRadius="0"
+                  Background="{StaticResource MainBlue}"
+                  BorderBrush="#FF97A0A5"
+                  BorderThickness="1" />
+            <Border 
+                  Grid.Column="0"
+                  CornerRadius="0" 
+                  Margin="1" 
+                  Background="{StaticResource MainBlue}" 
+                  BorderBrush="#FF97A0A5"
+                  BorderThickness="0,0,1,0" />
+            <Path 
+                  x:Name="Arrow"
+                  Grid.Column="1"     
+                  Fill="White"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,4 z"
+                />
+        </Grid>
+        <!--<ControlTemplate.Triggers>
+            <Trigger Property="ToggleButton.IsMouseOver" Value="true">
+                <Setter TargetName="Border" Property="Background" Value="#808080" />
+            </Trigger>
+            <Trigger Property="ToggleButton.IsChecked" Value="true">
+                <Setter TargetName="Border" Property="Background" Value="#E0E0E0" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="Border" Property="Background" Value="#EEEEEE" />
+                <Setter TargetName="Border" Property="BorderBrush" Value="#AAAAAA" />
+                <Setter Property="Foreground" Value="#888888"/>
+                <Setter TargetName="Arrow" Property="Fill" Value="#888888" />
+            </Trigger>
+        </ControlTemplate.Triggers>-->
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ComboBoxTextBox" TargetType="{x:Type TextBox}">
+        <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
+    </ControlTemplate>
+
+    <Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}">
+        <Setter Property="SnapsToDevicePixels" Value="true"/>
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+        <Setter Property="MinWidth" Value="120"/>
+        <Setter Property="MinHeight" Value="20"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ComboBox}">
+                    <Grid>
+                        <ToggleButton 
+                            Name="ToggleButton" 
+                            Template="{StaticResource ComboBoxToggleButton}" 
+                            Grid.Column="2" 
+                            Focusable="false"
+                            IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                            ClickMode="Press">
+                        </ToggleButton>
+                        <ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}"
+                            ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                            ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                            Margin="3,3,23,3"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left" />
+                        <TextBox x:Name="PART_EditableTextBox"
+                            Style="{x:Null}" 
+                            Template="{StaticResource ComboBoxTextBox}" 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Center" 
+                            Margin="3,3,23,3"
+                            Focusable="True" 
+                            Background="{StaticResource MainBlue}"
+                            Foreground="Green"
+                            Visibility="Hidden"
+                            IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                        <Popup 
+                            Name="Popup"
+                            Placement="Bottom"
+                            IsOpen="{TemplateBinding IsDropDownOpen}"
+                            AllowsTransparency="True" 
+                            Focusable="False"
+                            PopupAnimation="Slide">
+
+                            <Grid Name="DropDown"
+                              SnapsToDevicePixels="True"                
+                              MinWidth="{TemplateBinding ActualWidth}"
+                              MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                <Border 
+                                x:Name="DropDownBorder"
+                                Background="{DynamicResource MainBlue}"
+
+                                BorderThickness="1"
+                                BorderBrush="#888888"/>
+                                <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                    <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                </ScrollViewer>
+                            </Grid>
+                        </Popup>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HasItems" Value="false">
+                            <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="#888888"/>
+                        </Trigger>
+                        <Trigger Property="IsGrouping" Value="true">
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                        </Trigger>
+                        <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="true">
+                            <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="0"/>
+                            <Setter TargetName="DropDownBorder" Property="Margin" Value="0,2,0,0"/>
+                        </Trigger>
+                        <Trigger Property="IsEditable"  Value="true">
+                            <Setter Property="IsTabStop" Value="false"/>
+                            <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+        </Style.Triggers>
+    </Style>
+
+    <!-- SimpleStyles: ComboBoxItem -->
+    <Style x:Key="ComboBoxItemStyle " TargetType="{x:Type ComboBoxItem}">
+        <Setter Property="SnapsToDevicePixels" Value="true"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                    <Border Name="Border"
+                              Padding="2"
+                              SnapsToDevicePixels="true">
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsHighlighted" Value="true">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource LightBlue}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="#888888"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--radio  button style-->
+    <Color x:Key="WindowColor">#FFE8EDF9</Color>
+    <Color x:Key="ContentAreaColorLight">#FFC5CBF9</Color>
+    <Color x:Key="ContentAreaColorDark">#FF7381F9</Color>
+
+    <Color x:Key="DisabledControlLightColor">#FFE8EDF9</Color>
+    <Color x:Key="DisabledControlDarkColor">#FFC5CBF9</Color>
+    <Color x:Key="DisabledForegroundColor">#FF888888</Color>
+
+    <Color x:Key="SelectedBackgroundColor">#FFC5CBF9</Color>
+    <Color x:Key="SelectedUnfocusedColor">#FFDDDDDD</Color>
+
+    <Color x:Key="ControlLightColor">White</Color>
+    <Color x:Key="ControlMediumColor">#FF7381F9</Color>
+    <Color x:Key="ControlDarkColor">#FF211AA9</Color>
+
+    <Color x:Key="ControlMouseOverColor">#FF3843C4</Color>
+    <Color x:Key="ControlPressedColor">#FF211AA9</Color>
+
+
+    <Color x:Key="GlyphColor">#FF444444</Color>
+    <Color x:Key="GlyphMouseOver">sc#1, 0.004391443, 0.002428215, 0.242281124</Color>
+
+    <!--Border colors-->
+    <Color x:Key="BorderLightColor">#FFCCCCCC</Color>
+    <Color x:Key="BorderMediumColor">#FF888888</Color>
+    <Color x:Key="BorderDarkColor">#FF444444</Color>
+
+    <Color x:Key="PressedBorderLightColor">#FF888888</Color>
+    <Color x:Key="PressedBorderDarkColor">#FF444444</Color>
+
+    <Color x:Key="DisabledBorderLightColor">#FFAAAAAA</Color>
+    <Color x:Key="DisabledBorderDarkColor">#FF888888</Color>
+
+    <Color x:Key="DefaultBorderBrushDarkColor">Black</Color>
+
+    <!--Control-specific resources.-->
+    <Color x:Key="HeaderTopColor">#FFC5CBF9</Color>
+    <Color x:Key="DatagridCurrentCellBorderColor">Black</Color>
+    <Color x:Key="SliderTrackDarkColor">#FFC5CBF9</Color>
+
+    <Color x:Key="NavButtonFrameColor">#FF3843C4</Color>
+
+    <LinearGradientBrush x:Key="MenuPopupBrush"
+                     EndPoint="0.5,1"
+                     StartPoint="0.5,0">
+        <GradientStop Color="{DynamicResource ControlLightColor}"
+                Offset="0" />
+        <GradientStop Color="{DynamicResource ControlMediumColor}"
+                Offset="0.5" />
+        <GradientStop Color="{DynamicResource ControlLightColor}"
+                Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="ProgressBarIndicatorAnimatedFill"
+                     StartPoint="0,0"
+                     EndPoint="1,0">
+        <LinearGradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="#000000FF"
+                    Offset="0" />
+                <GradientStop Color="#600000FF"
+                    Offset="0.4" />
+                <GradientStop Color="#600000FF"
+                    Offset="0.6" />
+                <GradientStop Color="#000000FF"
+                    Offset="1" />
+            </GradientStopCollection>
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <Style x:Key="{x:Type RadioButton}"
+       TargetType="{x:Type RadioButton}">
+        <Setter Property="SnapsToDevicePixels"
+          Value="true" />
+        <Setter Property="OverridesDefaultStyle"
+          Value="true" />
+        <Setter Property="FocusVisualStyle"
+          Value="{DynamicResource RadioButtonFocusVisual}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+                    <BulletDecorator Background="Transparent">
+                        <BulletDecorator.Bullet>
+                            <Grid Width="13"
+                  Height="13">
+                                <Ellipse x:Name="Border"
+                       StrokeThickness="1">
+                                    <Ellipse.Stroke>
+                                        <LinearGradientBrush EndPoint="0.5,1"
+                                       StartPoint="0.5,0">
+                                            <GradientStop Color="{DynamicResource BorderLightColor}"
+                                  Offset="0" />
+                                            <GradientStop Color="{DynamicResource BorderDarkColor}"
+                                  Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Ellipse.Stroke>
+                                    <Ellipse.Fill>
+                                        <LinearGradientBrush StartPoint="0,0"
+                                       EndPoint="0,1">
+                                            <LinearGradientBrush.GradientStops>
+                                                <GradientStopCollection>
+                                                    <GradientStop Color="{DynamicResource ControlLightColor}" />
+                                                    <GradientStop Color="{DynamicResource ControlMediumColor}"
+                                      Offset="1.0" />
+                                                </GradientStopCollection>
+                                            </LinearGradientBrush.GradientStops>
+                                        </LinearGradientBrush>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <Ellipse x:Name="CheckMark"
+                       Margin="4"
+                       Visibility="Collapsed">
+                                    <Ellipse.Fill>
+                                        <SolidColorBrush Color="{DynamicResource GlyphColor}" />
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                            </Grid>
+                        </BulletDecorator.Bullet>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Shape.Fill).
+                    (GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                         Value="{StaticResource ControlMouseOverColor}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Shape.Fill).
+                    (GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                         Value="{StaticResource ControlPressedColor}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Shape.Fill).
+                    (GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                         Value="{StaticResource ControlLightColor}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Shape.Stroke).
+                    (GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                         Value="#40000000" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Shape.Stroke).
+                    (GradientBrush.GradientStops)[0].(GradientStop.Color)">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                         Value="#40000000" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="CheckStates">
+                                <VisualState x:Name="Checked">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                 Storyboard.TargetName="CheckMark">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                            Value="{x:Static Visibility.Visible}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unchecked" />
+                                <VisualState x:Name="Indeterminate" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentPresenter Margin="4,0,0,0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            RecognizesAccessKey="True" />
+                    </BulletDecorator>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--checkbox style-->
+    <Style TargetType="CheckBox" x:Key="CircleCheckbox">
+        <Setter Property="Cursor" Value="Hand"></Setter>
+        <Setter Property="Content" Value=""></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <Grid>
+                        <Ellipse x:Name="outerEllipse">
+                            <Ellipse.Fill>
+                                <RadialGradientBrush>
+                                    <GradientStop Offset="0" Color="Red"/>
+                                    <GradientStop Offset="0.88" Color="LightCoral"/>
+                                    <GradientStop Offset="1" Color="DarkRed"/>
+                                </RadialGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <Ellipse Margin="10" x:Name="highlightCircle" >
+                            <Ellipse.Fill >
+                                <LinearGradientBrush >
+                                    <GradientStop Offset="0" Color="Green"/>
+                                    <GradientStop Offset="0.5" Color="LightGreen"/>
+                                    <GradientStop Offset="1" Color="DarkGreen"/>
+                                </LinearGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <ContentPresenter x:Name="content" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="highlightCircle" Property="Fill">
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0.3,0" EndPoint="0.7,1">
+                                        <GradientStop Offset="0" Color="Green"/>
+                                        <GradientStop Offset="0.5" Color="LightGreen"/>
+                                        <GradientStop Offset="1" Color="DarkGreen"/>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="outerEllipse" Property="Fill">
+                                <Setter.Value>
+                                    <RadialGradientBrush>
+                                        <GradientStop Offset="0" Color="Green"/>
+                                        <GradientStop Offset="0.88" Color="LightGreen"/>
+                                        <GradientStop Offset="1" Color="DarkGreen"/>
+                                    </RadialGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter TargetName="highlightCircle" Property="Fill">
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0.3,0" EndPoint="0.7,1">
+                                        <GradientStop Offset="0" Color="Red"/>
+                                        <GradientStop Offset="0.5" Color="LightCoral"/>
+                                        <GradientStop Offset="1" Color="DarkRed"/>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <LinearGradientBrush x:Key="GradientBlueBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="#404077"/>
+        <GradientStop Offset="1" Color="#4040ef"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="GradientBrushCyan" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="#007777"/>
+        <GradientStop Offset="1" Color="#00efef"/>
+    </LinearGradientBrush>
+
+    <Style TargetType="Button" x:Key="GelButton">
+        <Setter Property="Background" Value="{StaticResource GradientBlueBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="RootElement">
+                        <!-- drop shadow - needs to be blurred for correct effect -->
+                        <Rectangle Fill="#40000000" Margin="1,1,0,0" RadiusX="6" RadiusY="6">
+                            <Rectangle.BitmapEffect>
+                                <BlurBitmapEffect Radius="3" />
+                            </Rectangle.BitmapEffect>
+                        </Rectangle>
+                        <Grid x:Name="mainButton"
+                                Margin="0,0,1,1"
+                                RenderTransformOrigin="0.5,0.5">
+                            <Grid.RenderTransform>
+                                <TransformGroup>
+                                    <TranslateTransform X="0.0" Y="0.0"/>
+                                    <ScaleTransform ScaleX="1.0" ScaleY="1.0" />
+                                </TransformGroup>
+                            </Grid.RenderTransform>
+                            <Rectangle x:Name="mainRect" Fill="{TemplateBinding Background}" RadiusX="6" RadiusY="6">
+                            </Rectangle>
+
+                            <!-- transparent rect -->
+                            <Rectangle x:Name="glowRect" Margin="1,1,1,1" RadiusX="5" RadiusY="5">
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Offset="0" Color="#EFFFFFFF"/>
+                                        <GradientStop Offset="1" Color="#00FFFFFF"/>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+
+                            <ContentPresenter HorizontalAlignment="Center"
+                             Margin="4,0,4,0"
+                             Content="{TemplateBinding Content}"
+                             VerticalAlignment="Center" />
+
+                        </Grid>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="mainButton" Property="RenderTransform" >
+                                <Setter.Value>
+                                    <TransformGroup>
+                                        <TranslateTransform X="0.0" Y="0.0"/>
+                                        <ScaleTransform ScaleX="1.03" ScaleY="1.03" />
+                                    </TransformGroup>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Foreground" Value="#FF4788c8" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="mainButton" Property="RenderTransform" >
+                                <Setter.Value>
+                                    <TransformGroup>
+                                        <TranslateTransform X="1" Y="1"/>
+                                        <ScaleTransform ScaleX="1.03" ScaleY="1.03" />
+                                    </TransformGroup>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="CheckBoxStyle1" TargetType="{x:Type CheckBox}">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="OnChecking">
+                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="slider" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                                <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="25"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="OnUnchecking">
+                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="slider" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                                <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <ThicknessAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="slider" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                                <SplineThicknessKeyFrame KeyTime="00:00:00.3000000" Value="1,1,1,1"/>
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+
+                    <DockPanel x:Name="dockPanel">
+                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}" RecognizesAccessKey="True" VerticalAlignment="Center"/>
+                        <Grid Margin="5,5,0,5" Width="60" Background="#FFC0CCD9">
+                            <TextBlock Text="LIGHT" TextWrapping="Wrap" FontWeight="Bold" FontSize="12" HorizontalAlignment="Right" Margin="0,0,3,0"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="2,0,0,0" FontSize="12" FontWeight="Bold" Text="OFF" TextWrapping="Wrap"/>
+                            <Border HorizontalAlignment="Left" x:Name="slider" Width="23" BorderThickness="1,1,1,1" CornerRadius="3,3,3,3" RenderTransformOrigin="0.5,0.5" Margin="1,1,1,1">
+                                <Border.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                        <SkewTransform AngleX="0" AngleY="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform X="0" Y="0"/>
+                                    </TransformGroup>
+                                </Border.RenderTransform>
+                                <Border.BorderBrush>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FFFFFFFF" Offset="0"/>
+                                        <GradientStop Color="#FF4490FF" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.BorderBrush>
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF8AB4FF" Offset="1"/>
+                                        <GradientStop Color="#FFD1E2FF" Offset="0"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                        </Grid>
+                    </DockPanel>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Trigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource OnUnchecking}" x:Name="OnUnchecking_BeginStoryboard"/>
+                            </Trigger.ExitActions>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource OnChecking}" x:Name="OnChecking_BeginStoryboard"/>
+                            </Trigger.EnterActions>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

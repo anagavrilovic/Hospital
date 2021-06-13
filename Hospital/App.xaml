@@ -4,6 +4,15 @@
              xmlns:local="clr-namespace:Hospital"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary x:Name="ThemeDictionary">
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="Resources/DoctorResourceDictionary.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="BackgroundGray">#FFDCDCDC</SolidColorBrush>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

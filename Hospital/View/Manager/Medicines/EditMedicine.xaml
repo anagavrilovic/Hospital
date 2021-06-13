@@ -1,0 +1,159 @@
+﻿<Page x:Class="Hospital.View.EditMedicine"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.View"
+        xmlns:val="clr-namespace:Hospital.ValidationRulesManager"
+        mc:Ignorable="d"
+       Background="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" 
+       Title="Izmena leka" Height="750" Width="430">
+
+    <Page.Resources>
+        <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
+            <Button  Click="BackButtonClick"   Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
+                <Image  Source="/Icon/back.png" Margin="10,0,0,0" Height="61" Width="56"/>
+            </Button>
+            <Label Content="IZMENA LEKA" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" Margin="8,25,9,9.8"/>
+            <Image Source="/Icon/logo.png" Margin="30,5,23,9.8" Width="137"/>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="2" Grid.RowSpan="14" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Hidden" Margin="0,0,0,0">
+            <Grid Grid.Row="0" Grid.RowSpan="16" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Oznaka:"   Grid.Row="0" Grid.Column="0"  Foreground="#FF1E49D9" FontSize="16" Margin="30,5,5,5" Grid.ColumnSpan="2" />
+                <Label Content="Naziv:"    Grid.Row="2" Grid.Column="0"  Foreground="#FF1E49D9" FontSize="16" Margin="30,1,1,1" Grid.ColumnSpan="2" />
+                <Label Content="Gramaža:"  Grid.Row="4" Grid.Column="0"  Foreground="#FF1E49D9" FontSize="16" Margin="30,1,1,1" Grid.ColumnSpan="2" />
+                <Label Content="Količina:" Grid.Row="6" Grid.Column="0"  Foreground="#FF1E49D9" FontSize="16" Margin="30,1,1,1" Grid.ColumnSpan="2" />
+                <Label Content="Cena:"     Grid.Row="8" Grid.Column="0"  Foreground="#FF1E49D9" FontSize="16" Margin="30,1,1,1" Grid.ColumnSpan="2" />
+                <Label Content="Sastojci:" Grid.Row="10" Grid.Column="0" Foreground="#FF1E49D9" FontSize="16" Margin="30,1,1,1" Grid.ColumnSpan="2" />
+
+                <TextBox x:Name="idTxt"     Text="{Binding Medicine.ID,         Mode=TwoWay,  UpdateSourceTrigger=Explicit}"    Grid.Row="1" Grid.ColumnSpan="2" Margin="30,0,28,21" BorderBrush="#FF26282C" IsEnabled="False">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="Padding" Value="2"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+
+                <TextBox x:Name="nameTxt"   Text="{Binding Medicine.Name,       Mode=TwoWay,  UpdateSourceTrigger=Explicit}"    Grid.Row="3" Grid.ColumnSpan="2" Margin="30,4,28,21" BorderBrush="#FF26282C" IsEnabled="False">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="Padding" Value="2"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+                
+                <TextBox x:Name="dosageTxt" Text="{Binding Medicine.DosageInMg, Mode=TwoWay,  UpdateSourceTrigger=Explicit}"    Grid.Row="5" Grid.ColumnSpan="2" Margin="30,4,28,20" BorderBrush="#FF26282C" IsEnabled="False">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="Padding" Value="2"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+
+                <TextBox x:Name="quantityTxt" Grid.Row="7" Grid.ColumnSpan="2" Margin="30,4,28,22" BorderBrush="#FF26282C">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="Padding" Value="2"/>
+                        </Style>
+                    </TextBox.Resources>
+                    <TextBox.Text>
+                        <Binding  Path="Medicine.Quantity"    Mode="TwoWay" UpdateSourceTrigger="Explicit"/>
+                    </TextBox.Text>
+               </TextBox>
+
+                <TextBox x:Name="priceTxt" Grid.Row="9" Grid.ColumnSpan="2" Margin="30,4,28,20" BorderBrush="#FF26282C">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="Padding" Value="2"/>
+                        </Style>
+                    </TextBox.Resources>
+                    <TextBox.Text>
+                        <Binding  Path="Medicine.Price"    Mode="TwoWay" UpdateSourceTrigger="Explicit"/>
+                    </TextBox.Text>
+                </TextBox>
+
+              <Border Grid.Row="11"  Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="30,4,28,5" CornerRadius="10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Margin="2,2,2,2">
+                            <ListBox ItemsSource="{Binding Medicine.Ingredient, Mode=TwoWay, UpdateSourceTrigger=Explicit}" x:Name="ingredientsList" Height="100" Margin="0,0,0.6,0" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <Button x:Name="sendOnRevision" Content="POTVRDI"    Grid.Row="15" Grid.Column="0"  Margin="19,0,10,0" Background="#FFAAD0E0" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="AcceptEditingMedicine"/>
+                <Button x:Name="cancel"         Content="ODUSTANI"   Grid.Row="15" Grid.Column="1"  Margin="10,0,22,0" Background="#FFAAD0E0" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="CancelEditingMedicine"/>
+
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

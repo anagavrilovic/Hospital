@@ -1,0 +1,170 @@
+﻿<Page x:Class="Hospital.View.Secretary.Analitika"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:Charts="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      xmlns:controls="clr-namespace:Hospital.View.Secretary"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1065"
+      Background="{StaticResource BackgroundGray}"
+      Title="Analitika">
+
+    <Page.Resources>
+        <ResourceDictionary Source="../../Resources/SecretaryResourceDictionary.xaml"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="ANALITIKA " Style="{StaticResource TitleStyle}"/>
+                </StackPanel>
+                <!--<Separator Margin="15,0"/>-->
+            </StackPanel>
+
+            <controls:OptionBar Grid.Column="2" Height="30" Width="170" Margin="0,15,15,0" VerticalAlignment="Top" ></controls:OptionBar>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="15,10,0,0" Width="630" Height="40" HorizontalAlignment="Left">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                    </Border.Effect>
+                </Border>
+                <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="15,10,0,0" Width="630" Height="40" HorizontalAlignment="Left">
+                    <Button BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Left" Margin="0,0,0,0" 
+                            Command="{Binding GenerateReportCommand}" Width="630">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../../Icon/Secretary/pdf.png" Width="20" Margin="0,0,10,0"/>
+                            <TextBlock Text=" Generiši izveštaj o zauzetosti lekara za odredjeni vremenski period" Style="{StaticResource TitleStyleBlue}"/>
+                        </StackPanel>
+                        
+                    </Button>
+                </Border>
+            </Grid>
+
+            <Border Grid.Row="1" Margin="15,10,0,15" Width="630" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                </Border.Effect>
+            </Border>
+            <Border Grid.Row="1" Margin="15,10,0,15" Width="630" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <StackPanel Margin="0,30,0,10" Height="500">
+
+                    <!-- Grafikon1 -->
+                    <Charts:CartesianChart Series="{Binding DoctorsSeriesCollection}" LegendLocation="Top" Height="450" Width="570">
+                        <Charts:CartesianChart.SeriesColors>
+                            <Charts:ColorsCollection>
+                                <Color>#6380ab</Color>
+                                <Color>#b7d45d</Color>
+                                <Color>#d97e7e</Color>
+                            </Charts:ColorsCollection>
+                        </Charts:CartesianChart.SeriesColors>
+                        <Charts:CartesianChart.AxisX>
+                            <Charts:Axis Title="Lekari" Labels="{Binding DoctorsLabels}"/>
+                        </Charts:CartesianChart.AxisX>
+                        <Charts:CartesianChart.AxisY>
+                            <Charts:Axis Title="Broj zakazanih pregleda" LabelFormatter="{Binding Formatter}"/>
+                        </Charts:CartesianChart.AxisY>
+                    </Charts:CartesianChart>
+
+                    <!-- Naziv grafikona1 -->
+                    <TextBlock Text="Broj zakazanih pregleda lekara u naredna 3 meseca" Style="{StaticResource TextBlockStyle}" HorizontalAlignment="Center" Margin="0,15"/>
+                </StackPanel>
+            </Border>
+
+            <Grid Grid.Column="1" Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Margin="15,10,15,7.5" CornerRadius="10" Background="{StaticResource MainWhite}">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                    </Border.Effect>
+                </Border>
+                <Border Grid.Row="0" Margin="15,10,15,7.5" CornerRadius="10" Background="{StaticResource MainWhite}">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        
+                        <!-- Grafikon2 -->
+                        <Charts:PieChart Width="300" Height="230" >
+                            <Charts:PieChart.SeriesColors>
+                                <Charts:ColorsCollection>
+                                    <Color>#6380ab</Color>
+                                    <Color>#b7d45d</Color>
+                                    <Color>#d97e7e</Color>
+                                </Charts:ColorsCollection>
+                            </Charts:PieChart.SeriesColors>
+                            <Charts:PieChart.Series>
+                                <Charts:PieSeries DataLabels="True" Title="Mladi ( &lt; 19 godina )"  Values="706" LabelPoint="{Binding PointLabel}"/>
+                                <Charts:PieSeries DataLabels="True" Title="Zreli ( 20 - 59 godina )" Values="4523" LabelPoint="{Binding PointLabel}"/>
+                                <Charts:PieSeries DataLabels="True" Title="Stari ( &gt; 60 godina )" Values="872" LabelPoint="{Binding PointLabel}"/>
+                            </Charts:PieChart.Series>
+                        </Charts:PieChart>
+
+                        <!-- Naziv grafikona1 -->
+                        <TextBlock Text="Pacijenti na osnovu starosti" Style="{StaticResource TextBlockStyle}" HorizontalAlignment="Center" Margin="0,5"/>
+                        
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="1" Margin="15,7.5,15,15" CornerRadius="10" Background="{StaticResource MainWhite}">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                    </Border.Effect>
+                </Border>
+                <Border Grid.Row="1" Margin="15,7.5,15,15" CornerRadius="10" Background="{StaticResource MainWhite}">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                        <!-- Grafikon3 -->
+                        <Charts:PieChart Width="300" Height="230" >
+                            <Charts:PieChart.SeriesColors>
+                                <Charts:ColorsCollection>
+                                    <Color>#6380ab</Color>
+                                    <Color>#b7d45d</Color>
+                                    <Color>#9da9bd</Color>
+                                    <Color>#d97e7e</Color>
+                                </Charts:ColorsCollection>
+                            </Charts:PieChart.SeriesColors>
+                            <Charts:PieChart.Series>
+                                <Charts:PieSeries DataLabels="True" Title="Lekari opšte prakse" Values="18"  LabelPoint="{Binding PointLabel}"/>
+                                <Charts:PieSeries DataLabels="True" Title="Lekari specijalisti" Values="26" LabelPoint="{Binding PointLabel}"/>
+                                <Charts:PieSeries DataLabels="True" Title="Medicinske sestre/tehničari" Values="47"  LabelPoint="{Binding PointLabel}"/>
+                                <Charts:PieSeries DataLabels="True" Title="Ostali zaposleni" Values="45"  LabelPoint="{Binding PointLabel}"/>
+                            </Charts:PieChart.Series>
+                        </Charts:PieChart>
+
+                        <!-- Naziv grafikona3 -->
+                        <TextBlock Text="Zaposleni" Style="{StaticResource TextBlockStyle}" HorizontalAlignment="Center" Margin="0,5"/>
+
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
+
+

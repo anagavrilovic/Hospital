@@ -1,0 +1,105 @@
+﻿<Page x:Class="Hospital.View.RoomsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.View"
+        mc:Ignorable="d"
+        Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
+        Title="Pregled Sala" Height="750" Width="430">
+
+    <Page.Resources>
+        <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
+            <Button Background="#FF95C0F4" BorderBrush="#FF95C0F4" Click="MenuButtonClick">
+                <Image Source="/Icon/menu.png"  Margin="10,8,5,5"/>
+            </Button>
+            <Label Content="PRIKAZ SALA"    Margin="0,15,5,10.2" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" />
+            <Image Source="/Icon/logo.png"  Margin="30,8,0,10" MouseDown="RefreshView"/>
+        </StackPanel>
+
+        <Button x:Name="edit"       Grid.Row="1" Grid.Column="0"   Margin="19,16.2,6,4.6" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="editRoom" >
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="/Icon/edit-16.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="0,0,15,0" />
+                <TextBlock Text="IZMENI SALU" Margin="0,0,5,0" FontSize="14"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="staticInventory" Grid.Row="1" Grid.Column="1"   Margin="6,16.2,19.2,4.6" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="ViewStaticInventory">
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="/Icon/box-3-16.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="4,0,3,0" />
+                <TextBlock Text="STATIČKI INVENTAR" Margin="5,0,10,0" FontSize="14"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="renovation"    Grid.Row="2" Grid.Column="0"   Margin="19,10.4,6,10.4"    Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="RenovateRoom">
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="/Icon/paint-brush-16.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="1,0,3,0" />
+                <TextBlock Text="RENOVIRANJA SALA" Margin="5,0,0,0" FontSize="14"/>
+            </StackPanel>
+        </Button>
+
+        <Button x:Name="dynamicInventory"  Grid.Row="2" Grid.Column="1"   Margin="6,10.4,19.2,10.4"    Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="ViewDynamicInventory">
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="/Icon/box-3-16.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="10,0,3,0" />
+                <TextBlock Text="DINAMIČKI INVENTAR" Margin="0,0,10,0" FontSize="14"/>
+            </StackPanel>
+        </Button>
+
+        <TextBox x:Name="searchRoom"        Grid.Row="3" Grid.ColumnSpan="2" Margin="19,15.6,50.2,24" TextChanged="SearchRooms">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <Image Source="/Icon/filtering.jpg" Grid.Row="3" Grid.Column="1"     Margin="161,9.6,0.2,24"   MouseDown="FilterRoomsByInventory"/>
+
+        <ScrollViewer Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="2" Background="Azure" VerticalScrollBarVisibility="Hidden" Margin="10,0.2,0,9.8">
+            <DataGrid x:Name="dataGridRooms" ItemsSource="{Binding Path=Rooms, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource dataGridMedicines}"
+                  ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}" Background="#FFCADEED" Foreground="#FF536AA0" Grid.RowSpan="2" Width="404" Height="350">
+                <DataGrid.Columns>
+                    <DataGridTextColumn     Header="Oznaka"   Width="Auto"     Binding="{Binding Id}"    />
+                    <DataGridTextColumn     Header="Naziv"    Width="1.5*"     Binding="{Binding Name}"  />
+                    <DataGridTextColumn     Header="Sprat"    Width="1.1*"     Binding="{Binding Floor}" />
+                    <DataGridTextColumn     Header="Status"   Width="1.4*"     Binding="{Binding Status}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+
+        <Button x:Name="add" Grid.Row="8" Grid.Column="0"  Margin="19,69.4,6.2,35.4"  Background="#FFBBD7F9" Foreground="#FF051D6E"  Style="{StaticResource RoundButtonStyle}" Click="AddRoom"  Grid.RowSpan="2">
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="/Icon/Secretary/plus.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="1,0,3,0" />
+                <TextBlock Text="DODAJ SALU" Margin="5,0,0,0" FontSize="14"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="delete"  Grid.Row="8" Grid.Column="1"  Margin="5.8,69.4,22.4,35.4" Background="#FFBBD7F9" Foreground="#FF051D6E" Style="{StaticResource RoundButtonStyle}" Click="DeleteRoom" Grid.RowSpan="2">
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="/Icon/delete.png" Width="20" Height="20" HorizontalAlignment="Right" Margin="1,0,3,0" />
+                <TextBlock Text="IZBRIŠI SALU" Margin="5,0,0,0" FontSize="14"/>
+            </StackPanel>
+        </Button>
+    </Grid>
+
+
+</Page>

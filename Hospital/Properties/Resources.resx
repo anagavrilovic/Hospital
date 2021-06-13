@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -109,9 +112,321 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="acceptButton" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="addButton" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="addOrRemoveIngredientLabel" xml:space="preserve">
+    <value>Add or remove ingredient:</value>
+  </data>
+  <data name="addOrRemoveReplacement" xml:space="preserve">
+    <value>Add or remove replacement:</value>
+  </data>
+  <data name="allergicToIngredientLabel" xml:space="preserve">
+    <value>Allergic to ingredients:</value>
+  </data>
+  <data name="allergicToMedicineLabel" xml:space="preserve">
+    <value>Allergic to medicine:</value>
+  </data>
+  <data name="anamnesisButton" xml:space="preserve">
+    <value>Save anamnesis</value>
+  </data>
+  <data name="anamnesisLabel" xml:space="preserve">
+    <value>Anamnesis:</value>
+  </data>
+  <data name="appointmentAtLabel" xml:space="preserve">
+    <value>Appointment at: </value>
+  </data>
+  <data name="appointmentsLabel" xml:space="preserve">
+    <value>Appointments</value>
+  </data>
+  <data name="appointmentTypeLabel" xml:space="preserve">
+    <value>Appointment type:</value>
+  </data>
+  <data name="backButton" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="bloodLabel" xml:space="preserve">
+    <value>Blood type:</value>
+  </data>
+  <data name="buttonFeedback" xml:space="preserve">
+    <value>Submit Feedback</value>
+  </data>
+  <data name="cityLabel" xml:space="preserve">
+    <value>City:</value>
+  </data>
+  <data name="comment" xml:space="preserve">
+    <value>Comments:</value>
+  </data>
+  <data name="consumptionLabel" xml:space="preserve">
+    <value>Way of consumption:</value>
+  </data>
+  <data name="countryLabel" xml:space="preserve">
+    <value>Country:</value>
+  </data>
+  <data name="dailyIntakeLabel" xml:space="preserve">
+    <value>Daily intake:</value>
+  </data>
+  <data name="dateAndTime" xml:space="preserve">
+    <value>Date and time of examination:</value>
+  </data>
+  <data name="dateAppointment" xml:space="preserve">
+    <value>Date of appointment:</value>
+  </data>
+  <data name="dateLabel" xml:space="preserve">
+    <value>Date:</value>
+  </data>
+  <data name="dateOfBirthLabel" xml:space="preserve">
+    <value>Date of birth:</value>
+  </data>
+  <data name="daysForConsumptionLabel" xml:space="preserve">
+    <value>Days for consumption:</value>
+  </data>
+  <data name="declineButton" xml:space="preserve">
+    <value>Decline</value>
+  </data>
+  <data name="deleteButton" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="diagnosisButton" xml:space="preserve">
+    <value>Save diagnosis</value>
+  </data>
+  <data name="diagnosisLabel" xml:space="preserve">
+    <value>Diagnosis:</value>
+  </data>
+  <data name="doctorColonLabel" xml:space="preserve">
+    <value>Doctor:</value>
+  </data>
+  <data name="doctorLabel" xml:space="preserve">
+    <value>Doctor</value>
+  </data>
+  <data name="dosageInMgLabel" xml:space="preserve">
+    <value>Dosage in miligrams:</value>
+  </data>
+  <data name="durationLabel" xml:space="preserve">
+    <value>Duration:</value>
+  </data>
+  <data name="editButton" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="emergencyOperationLabel" xml:space="preserve">
+    <value>Emergency operation</value>
+  </data>
+  <data name="endDateReport" xml:space="preserve">
+    <value>End date:</value>
+  </data>
+  <data name="endOfTreatmentLabel" xml:space="preserve">
+    <value>End of treatment:</value>
+  </data>
+  <data name="errorrLabel" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="examinationLabel" xml:space="preserve">
+    <value>examination</value>
+  </data>
+  <data name="explanationLabel" xml:space="preserve">
+    <value>Explanation:</value>
+  </data>
+  <data name="feedback" xml:space="preserve">
+    <value>Feedback Type:</value>
+  </data>
+  <data name="freeBedsTB" xml:space="preserve">
+    <value>Free beds:</value>
+  </data>
+  <data name="genderLabel" xml:space="preserve">
+    <value>Gender:</value>
+  </data>
+  <data name="healthCardLabel" xml:space="preserve">
+    <value>Health card number:</value>
+  </data>
+  <data name="hospitalDatePicker" xml:space="preserve">
+    <value>Duration of hospital treatment:</value>
+  </data>
+  <data name="hospitalizedLabel" xml:space="preserve">
+    <value>Hospitalized</value>
+  </data>
+  <data name="hospitalTreatmentButton" xml:space="preserve">
+    <value>Hospital treatment</value>
+  </data>
+  <data name="idCardLabel" xml:space="preserve">
+    <value>ID card:</value>
+  </data>
+  <data name="ingredientsLabel" xml:space="preserve">
+    <value>Ingredients:</value>
+  </data>
+  <data name="insuredLabel" xml:space="preserve">
+    <value>Insured:</value>
+  </data>
+  <data name="inventoryLabel" xml:space="preserve">
+    <value>Inventory</value>
+  </data>
+  <data name="languageLabel" xml:space="preserve">
+    <value>Select language:</value>
+  </data>
+  <data name="maritialLabel" xml:space="preserve">
+    <value>Maritial status:</value>
+  </data>
+  <data name="medicalRecordIdLabel" xml:space="preserve">
+    <value>Medical record id: </value>
+  </data>
+  <data name="medicalRecordLabel" xml:space="preserve">
+    <value>Medical record</value>
+  </data>
+  <data name="medicineButton" xml:space="preserve">
+    <value>Medicine</value>
+  </data>
+  <data name="medicineTB" xml:space="preserve">
+    <value> Medicine:</value>
+  </data>
+  <data name="nameLabel" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="namePatientLabel" xml:space="preserve">
+    <value>Patient name:</value>
+  </data>
+  <data name="newButton" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="noButton" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="operationLabel" xml:space="preserve">
+    <value>operation</value>
+  </data>
+  <data name="otherAllergiesLabel" xml:space="preserve">
+    <value>Other allergies:</value>
+  </data>
+  <data name="parentLabel" xml:space="preserve">
+    <value>Parent name:</value>
+  </data>
+  <data name="patient" xml:space="preserve">
+    <value>Patient:</value>
+  </data>
+  <data name="patientLabel" xml:space="preserve">
+    <value>Patient:</value>
+  </data>
+  <data name="patientTitleLabel" xml:space="preserve">
+    <value>PATIENTS: patient details</value>
+  </data>
+  <data name="phoneLabel" xml:space="preserve">
+    <value>Phone number:</value>
+  </data>
+  <data name="placeLabel" xml:space="preserve">
+    <value>Place of living:</value>
+  </data>
+  <data name="postalCodeLabel" xml:space="preserve">
+    <value>Zip code:</value>
+  </data>
+  <data name="prescribedMedicineLabel" xml:space="preserve">
+    <value>Prescribed medicine:</value>
+  </data>
+  <data name="removeButton" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="report" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="reportButton" xml:space="preserve">
+    <value>Generate</value>
+  </data>
+  <data name="reportDetail" xml:space="preserve">
+    <value>on medicine consumption in certain period of time</value>
+  </data>
+  <data name="requestLabel" xml:space="preserve">
+    <value>Request for</value>
+  </data>
+  <data name="returnLabel" xml:space="preserve">
+    <value>Return</value>
+  </data>
+  <data name="reviewButton" xml:space="preserve">
+    <value>Review</value>
+  </data>
+  <data name="roomLabel" xml:space="preserve">
+    <value>Room:</value>
+  </data>
+  <data name="saveChangesButton" xml:space="preserve">
+    <value>Save changes</value>
+  </data>
+  <data name="saveExaminationButton" xml:space="preserve">
+    <value>Save examination</value>
+  </data>
+  <data name="saveRevisionTB" xml:space="preserve">
+    <value>Save revision</value>
+  </data>
+  <data name="saveTherapyButton" xml:space="preserve">
+    <value>Save therapy</value>
+  </data>
+  <data name="searchAppointment" xml:space="preserve">
+    <value>Search for appointment:</value>
+  </data>
+  <data name="searchIngredientLabel" xml:space="preserve">
+    <value>Search for ingredient:</value>
+  </data>
+  <data name="searchMedicineLabel" xml:space="preserve">
+    <value>Search for medicine:</value>
+  </data>
+  <data name="signOutLabel" xml:space="preserve">
+    <value>Sign Out</value>
+  </data>
+  <data name="startDateReport" xml:space="preserve">
+    <value>Start date:</value>
+  </data>
+  <data name="startExaminationTB" xml:space="preserve">
+    <value>Start examination</value>
+  </data>
+  <data name="startHospitalTreatment" xml:space="preserve">
+    <value>Start of treatment:</value>
+  </data>
+  <data name="startOfTreatmentLabel" xml:space="preserve">
+    <value>Start of hospital treatment:</value>
+  </data>
+  <data name="streetLabel" xml:space="preserve">
+    <value>Street:</value>
+  </data>
+  <data name="supstitutionMedicineLabel" xml:space="preserve">
+    <value>Supstitution medicines:</value>
+  </data>
+  <data name="surnameLabel" xml:space="preserve">
+    <value>Surname:</value>
+  </data>
+  <data name="surnamePatientLabel" xml:space="preserve">
+    <value>Patient surname:</value>
+  </data>
+  <data name="themeLabel" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="therapyDescriptionLabel" xml:space="preserve">
+    <value>Therapy description:</value>
+  </data>
+  <data name="therapyLabel" xml:space="preserve">
+    <value>Therapy</value>
+  </data>
+  <data name="therapyNameLabel" xml:space="preserve">
+    <value>Therapy name:</value>
+  </data>
+  <data name="timeAppointment" xml:space="preserve">
+    <value>Time of appointment:</value>
+  </data>
+  <data name="typeExaminationLabel" xml:space="preserve">
+    <value>Type of examination/operation</value>
+  </data>
+  <data name="usernameLabel" xml:space="preserve">
+    <value>Username:</value>
+  </data>
+  <data name="vacationLabel" xml:space="preserve">
+    <value>Vacation</value>
+  </data>
+  <data name="validateLabel" xml:space="preserve">
+    <value>Validate</value>
+  </data>
+  <data name="yesButton" xml:space="preserve">
+    <value>Yes</value>
+  </data>
 </root>

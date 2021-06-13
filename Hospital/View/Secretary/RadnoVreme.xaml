@@ -1,0 +1,181 @@
+﻿<Page x:Class="Hospital.View.Secretary.RadnoVreme"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hospital.View.Secretary"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1065"
+      Background="{StaticResource BackgroundGray}"
+      Title="RadnoVreme">
+    <Page.Resources>
+        <ResourceDictionary Source="../../Resources/SecretaryResourceDictionary.xaml"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                <TextBlock Text="RADNO VREME" Style="{StaticResource TitleStyle}"/>
+                <!--<Separator Margin="15,0"/>-->
+            </StackPanel>
+
+            <local:OptionBar Grid.Column="2" Height="30" Width="170" Margin="0,15,15,0" VerticalAlignment="Top" ></local:OptionBar>
+        </Grid>
+        
+
+        <Grid Grid.Row="1" Margin="15,10,15,15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Dugmici za opcije nad pacijentima -->
+                <StackPanel Orientation="Horizontal" Height="55" VerticalAlignment="Center" Margin="0,0,0,5">
+                    <Grid>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="40" Height="40">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                            </Border.Effect>
+                        </Border>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Width="40" Height="40" ToolTip="Odaberite dan za prikaz smena">
+                            <DatePicker Width="30" Height="30" Margin="0,7,3,0" BorderBrush="Transparent" SelectedDateChanged="DatePicker_SelectedDateChanged"
+                                        SelectedDate="{Binding SelectedDate}" DisplayDateStart="{x:Static sys:DateTime.Today}"/>
+                        </Border>
+                    </Grid>
+
+                    <Grid>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="15,0,0,0" Width="150" Height="40">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                            </Border.Effect>
+                        </Border>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="15,0,0,0" Width="150" Height="40">
+                            <Button BorderBrush="Transparent" Background="Transparent" Click="ChangeShiftClick" ToolTip="Izmenite smenu određenom lekaru">
+                                <TextBlock Text="Izmena smene" Style="{StaticResource TitleStyleBlue}" FontWeight="Medium"/>
+                            </Button>
+                        </Border>
+                    </Grid>
+
+                    <Grid>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="15,0,0,0" Width="150" Height="40">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                            </Border.Effect>
+                        </Border>
+                        <Border CornerRadius="10" Background="{StaticResource MainWhite}" Margin="15,0,0,0" Width="150" Height="40">
+                            <Button Background="Transparent" BorderBrush="Transparent" Click="FreeDaysClick" ToolTip="Dodajte slobodne dane lekaru">
+                                <TextBlock Text="Slobodni dani" Style="{StaticResource TitleStyleBlue}" FontWeight="Medium"/>
+                            </Button>
+                        </Border>
+                    </Grid>
+
+                </StackPanel>
+
+                <!-- Search -->
+                <Border Grid.Column="1" Width="250" Height="30" HorizontalAlignment="Right" Margin="0,10" ToolTip="Pretraži lekare"
+                            Style="{StaticResource TextBoxBorder}" BorderThickness="0">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="7" ShadowDepth="1" Color="LightGray" />
+                    </Border.Effect>
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <Image Source="../../Icon/Secretary/search.png" Height="13"/>
+                        <TextBox x:Name="DoctorsFilter" BorderThickness="0" Width="200" Height="20" Margin="10,0,0,0" Background="Transparent"
+                                 TextChanged="DoctorFilterTextChanged"/>
+                    </StackPanel>
+                </Border>
+
+            </Grid>
+
+            <Border Grid.Row="1" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                </Border.Effect>
+            </Border>
+            <Border Grid.Row="1" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <!-- Tabela sa prikazom svih pacijenata -->
+                <DataGrid x:Name="DoctorsTable" Grid.Row="1" Margin="5" Width="1038" 
+                          Style="{StaticResource RadnoVremeStyle}"
+                          ItemsSource="{Binding DoctorsShifts, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Lekar" Width="3*" Binding="{Binding Doctor}" HeaderStyle="{StaticResource GridHeaderStyle}">
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Width="1*" Binding="{Binding ShiftDay1}" HeaderStyle="{StaticResource GridHeaderStyle}">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="{Binding DatesForShifts.Day1, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type local:RadnoVreme}}}"
+                                               HorizontalAlignment="Center"/>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Width="1*" Binding="{Binding ShiftDay2}" HeaderStyle="{StaticResource GridHeaderStyle}">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="{Binding DatesForShifts.Day2, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type local:RadnoVreme}}}"
+                                               HorizontalAlignment="Center"/>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Width="1*" Binding="{Binding ShiftDay3}" HeaderStyle="{StaticResource GridHeaderStyle}">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="{Binding DatesForShifts.Day3, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type local:RadnoVreme}}}"
+                                               HorizontalAlignment="Center"/>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Width="1*" Binding="{Binding ShiftDay4}" HeaderStyle="{StaticResource GridHeaderStyle}">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="{Binding DatesForShifts.Day4, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type local:RadnoVreme}}}"
+                                               HorizontalAlignment="Center"/>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Width="1*" Binding="{Binding ShiftDay5}" HeaderStyle="{StaticResource GridHeaderStyle}">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="{Binding DatesForShifts.Day5, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type local:RadnoVreme}}}"
+                                               HorizontalAlignment="Center"/>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Width="1*" Binding="{Binding ShiftDay6}" HeaderStyle="{StaticResource GridHeaderStyle}">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="{Binding DatesForShifts.Day6, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type local:RadnoVreme}}}"
+                                               HorizontalAlignment="Center"/>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Width="1*" Binding="{Binding ShiftDay7}" HeaderStyle="{StaticResource GridHeaderStyle}">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="{Binding DatesForShifts.Day7, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType={x:Type local:RadnoVreme}}}"
+                                               HorizontalAlignment="Center"/>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="IsHitTestVisible" Value="False"/>
+                        </Style>
+                    </DataGrid.RowStyle>
+                </DataGrid>
+            </Border>
+
+        </Grid>
+
+    </Grid>
+</Page>

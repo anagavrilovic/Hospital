@@ -1,71 +1,39 @@
+using Newtonsoft.Json;
 using System;
+using System.Text;
 
-namespace Hospital
+namespace Hospital.Model
 {
    public class Doctor : User
    {
-      public System.Collections.Generic.List<Appointment> appointment;
-      
-      public System.Collections.Generic.List<Appointment> Appointment
-      {
-         get
-         {
-            if (appointment == null)
-               appointment = new System.Collections.Generic.List<Appointment>();
-            return appointment;
-         }
-         set
-         {
-            RemoveAllAppointment();
-            if (value != null)
+        public DoctorSpecialty Specialty { get; set; }
+        public string RoomID { get; set; }
+        public DoctorsShift Shifts { get; set; }
+
+        public Doctor()
+        {
+            Shifts = new DoctorsShift();
+        }
+
+        [JsonIgnore]
+        public Room Room { get; set; }
+
+        public bool IsEqualWith(Doctor doctorForComparing)
+        {
+            return this.PersonalID.Equals(doctorForComparing.PersonalID);
+        }
+
+        public override string ToString()
+        {
+            if (this.FirstName == null || this.LastName == null)
+                return "";
+            else
             {
-               foreach (Appointment oAppointment in value)
-                  AddAppointment(oAppointment);
+                StringBuilder stringBuilder = new StringBuilder("");
+                stringBuilder.Append("dr ").Append(this.FirstName).Append(" ").Append(this.LastName);
+
+                return stringBuilder.ToString();
             }
-         }
-      }
-      
-      
-      public void AddAppointment(Appointment newAppointment)
-      {
-         if (newAppointment == null)
-            return;
-         if (this.appointment == null)
-            this.appointment = new System.Collections.Generic.List<Appointment>();
-         if (!this.appointment.Contains(newAppointment))
-         {
-            this.appointment.Add(newAppointment);
-            newAppointment.AddDoctor(this);      
-         }
-      }
-      
-      
-      public void RemoveAppointment(Appointment oldAppointment)
-      {
-         if (oldAppointment == null)
-            return;
-         if (this.appointment != null)
-            if (this.appointment.Contains(oldAppointment))
-            {
-               this.appointment.Remove(oldAppointment);
-               oldAppointment.RemoveDoctor(this);
-            }
-      }
-      
-      
-      public void RemoveAllAppointment()
-      {
-         if (appointment != null)
-         {
-            System.Collections.ArrayList tmpAppointment = new System.Collections.ArrayList();
-            foreach (Appointment oldAppointment in appointment)
-               tmpAppointment.Add(oldAppointment);
-            appointment.Clear();
-            foreach (Appointment oldAppointment in tmpAppointment)
-               oldAppointment.RemoveDoctor(this);
-            tmpAppointment.Clear();
-         }
-      }
-   
+        }
    }
 }

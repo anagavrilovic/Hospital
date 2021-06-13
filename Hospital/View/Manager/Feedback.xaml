@@ -1,0 +1,58 @@
+﻿<Page x:Class="Hospital.View.Manager.Feedback"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hospital.View.Manager"
+      mc:Ignorable="d" 
+      Background="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" 
+      Title="Feedback" Height="750" Width="430">
+
+    <Page.Resources>
+        <ResourceDictionary Source="/Resources/ManagerResourceDictionary.xaml"/>
+    </Page.Resources>
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF95C0F4">
+            <Button  Command="{Binding BackCommand}" Background="#FF95C0F4" BorderBrush="#FF95C0F4" >
+                <Image  Source="/Icon/back.png" Margin="10,0,0,0" Height="81" Width="62"/>
+            </Button>
+            <Label Content="FEEDBACK" Background="#FF95C0F4" Foreground="#FF051D6E" FontSize="24" Margin="0,30,5,10.2"/>
+            <Image Source="/Icon/logo.png"      Margin="70,15,25,10" Width="153"/>
+        </StackPanel>
+
+        <Label    Grid.Row="1" Grid.ColumnSpan="2" Content="Tip feedback-a:" Foreground="#FF051D6E" FontSize="16" Margin="20,50,150,10" />
+        <ComboBox x:Name="typeCB"          Grid.Row="2" Grid.ColumnSpan="2" Margin="40,1,40.4,43.6" BorderThickness="1" Foreground="#FF051D6E"
+                  SelectedIndex="{Binding NewFeedback.FeedbackType, Mode=OneWayToSource}">
+            <ComboBoxItem Content="Komentar na rad aplikacije" IsSelected="True"/>
+            <ComboBoxItem Content="Zahtev za nove opcije"/>
+            <ComboBoxItem Content="Prijava greške/kvara"/>
+            <ComboBoxItem Content="Drugo"/>
+        </ComboBox>
+
+        <Label    Grid.Row="3" Grid.ColumnSpan="2" Content="Sadržaj:" Foreground="#FF051D6E" FontSize="16" Margin="20,0.4,150.4,59.6" />
+        <TextBox Grid.Row="3"  Grid.ColumnSpan="2" Grid.RowSpan="3" Style="{StaticResource TextBoxStyle}" TextWrapping="Wrap" Margin="40,50.4,40.4,22.8"
+                         Text="{Binding NewFeedback.Comment, Mode=OneWayToSource}"/>
+
+        <Button Grid.Column="0" Grid.Row="6" Content="POTVRDI" Background="#FFAAD0E0" Foreground="#FF051D6E" Margin="40,10.2,10.2,46.4"   Style="{StaticResource RoundButtonStyle}" Command="{Binding LeaveFeedbackCommand}" FontSize="16" />
+        <Button Grid.Column="1" Grid.Row="6" Content="ODUSTANI" Background="White"     Foreground="#FF1E49D9" Margin="9.8,10.2,40.4,46.4" Style="{StaticResource RoundButtonStyle}" Command="{Binding CancelCommand}" FontSize="16"/>
+
+
+    </Grid>
+</Page>

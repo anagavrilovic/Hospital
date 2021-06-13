@@ -1,0 +1,18 @@
+﻿<Page x:Class="Hospital.View.PatientAppointmentMenu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hospital.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PatientAppointmentMenu">
+
+    <Grid Background="White">
+        <Button Name="DoneAppointmentsButton" Content="Obavljeni pregledi/operacije" HorizontalAlignment="Left" Height="43" Margin="251,255,0,0" VerticalAlignment="Top" Width="239" Click="PassedAppointments"/>
+        <Button Content="Zakazani pregledi/operacije" HorizontalAlignment="Left" Height="43" Margin="251,183,0,0" VerticalAlignment="Top" Width="239" Click="Appointments"/>
+        <Button Content="Nazad" HorizontalAlignment="Left" Height="43" Margin="251,326,0,0" VerticalAlignment="Top" Width="239" Click="Back"/>
+        <Button Name="ScheduleButton" Content="Zakaži pregled" HorizontalAlignment="Left" Height="43" Margin="251,87,0,0" VerticalAlignment="Top" Width="239" Click="MakeAnAppointment" />
+
+    </Grid>
+</Page>

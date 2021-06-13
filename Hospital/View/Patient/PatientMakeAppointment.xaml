@@ -1,0 +1,111 @@
+﻿<Page x:Class="Hospital.View.PatientMakeAppointment"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hospital.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PatientMakeAppointment"
+      KeyDown="KeyPress">
+
+    <Grid Background="White">
+        <DataGrid x:Name="dataGridApp" ItemsSource="{Binding WeeklyTerms}" IsReadOnly="True" 
+                  SelectionMode="Single" AutoGenerateColumns="False" Margin="0,45,0,0" SelectionUnit="Cell" Background="White" Height="308" VerticalAlignment="Top">
+            <DataGrid.Columns>
+                <DataGridTextColumn  Header="Vreme" Binding="{Binding Term}" Width="*"/>
+                <DataGridTextColumn  Header="Ponedeljak" Binding="{Binding Doctors[0]}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Background" Value="LightGreen"/>
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="">
+                                    <Setter Property="Background" Value="Red"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn  Header="Utorak" Binding="{Binding Doctors[1]}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Background" Value="LightGreen"/>
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="">
+                                    <Setter Property="Background" Value="Red"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn  Header="Sreda" Binding="{Binding Doctors[2]}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Background" Value="LightGreen"/>
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="">
+                                    <Setter Property="Background" Value="Red"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn  Header="Cetvrtak" Binding="{Binding Doctors[3]}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Background" Value="LightGreen"/>
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="">
+                                    <Setter Property="Background" Value="Red"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn  Header="Petak" Binding="{Binding Doctors[4]}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Background" Value="LightGreen"/>
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="">
+                                    <Setter Property="Background" Value="Red"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn  Header="Subota" Binding="{Binding Doctors[5]}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Background" Value="LightGreen"/>
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="">
+                                    <Setter Property="Background" Value="Red"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn  Header="Nedelja" Binding="{Binding Doctors[6]}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Background" Value="LightGreen"/>
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="">
+                                    <Setter Property="Background" Value="Red"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Name="label" Content="" HorizontalAlignment="Left" Height="29" Margin="278,10,0,0" VerticalAlignment="Top" Width="251"/>
+        <Image Source="/Images/esc.png" Margin="10,358,705,10"/>
+        <Label Content="Pritisnite za povratak&#xA;            nazad" HorizontalAlignment="Left" Height="39" Margin="118,366,0,0" VerticalAlignment="Top" Width="158"/>
+        <Image Source="/Images/space-key.png" Margin="528,366,157,15"/>
+        <Label Content="Pritisnite da zakažete&#xA;             termin" HorizontalAlignment="Left" Height="46" Margin="648,366,0,0" VerticalAlignment="Top" Width="142"/>
+        <Image Source="/Images/ctrl.jpg" Margin="281,358,439,15"/>
+        <Label Content="Koristite za promenu &#xA;            nedelje" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="358,366,0,0"/>
+    </Grid>
+</Page>

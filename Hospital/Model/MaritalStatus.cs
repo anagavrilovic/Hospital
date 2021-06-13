@@ -1,12 +1,13 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Hospital
 {
    public enum MaritalStatus
    {
-      neozenjen,
-      ozenjen,
-      udovac,
-      razveden
+        neozenjen,
+        ozenjen,
+        udovac,
+        razveden
    }
 }

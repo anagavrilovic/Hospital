@@ -1,0 +1,30 @@
+﻿<Page x:Class="Hospital.View.PatientNotifications"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hospital.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PatientNotifications"
+       KeyDown="KeyPressed">
+
+    <Grid Background="White">
+        <DataGrid x:Name="dataGridApp" ItemsSource="{Binding NotificationList}" IsReadOnly="True" 
+                  SelectionMode="Single" AutoGenerateColumns="False" Height="340" VerticalAlignment="Top">
+            <DataGrid.Columns>
+                <DataGridTextColumn  Header="Naziv" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn  Header="Vreme" Binding="{Binding Times}" Width="*"/>
+                <DataGridTextColumn  Header="Trajanje" Binding="{Binding Duration}" Width="*"/>
+                <DataGridTextColumn  Header="Pročitano" Binding="{Binding Read}" Width="*"/>
+                <DataGridTextColumn  Header="Aktivan" Binding="{Binding Active}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Image Source="/Images/esc.png" Margin="10,348,705,20"/>
+        <Label Content="Pritisnite za povratak&#xA;            nazad" HorizontalAlignment="Left" Height="39" Margin="82,345,0,0" VerticalAlignment="Top" Width="158"/>
+        <Image Source="/Images/space-key.png" Margin="479,361,206,20"/>
+        <Label Content="Pritisnite da pročitate&#xA;         obaveštenje" HorizontalAlignment="Left" Height="39" Margin="594,348,0,0" VerticalAlignment="Top" Width="196"/>
+        <Image Source="/Images/minusKey.png" Margin="218,348,463,10"/>
+        <Label Content="Pritisnite da obrišete&#xA;       obaveštenje" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="337,352,0,0"/>
+    </Grid>
+</Page>

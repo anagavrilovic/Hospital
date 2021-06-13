@@ -4,8 +4,9 @@ namespace Hospital
 {
    public enum RoomType
    {
-      operationRoom,
-      examinationRoom,
-      restRoom
+      OPERACIONA_SALA,
+      SALA_ZA_PREGLEDE,
+      SOBA_ZA_ODMOR,
+      MAGACIN
    }
 }

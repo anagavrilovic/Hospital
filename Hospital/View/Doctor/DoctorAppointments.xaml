@@ -1,0 +1,83 @@
+﻿<Page x:Class="Hospital.View.Doctor.DoctorAppointments"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.View"
+      xmlns:ns="clr-namespace:Hospital" 
+        xmlns:sys="clr-namespace:System;assembly=mscorlib" xmlns:i1="http://schemas.microsoft.com/xaml/behaviors"
+      mc:Ignorable="d"
+        Title="KalendarTermini" Background="{DynamicResource Background}">
+    <Page.Resources>
+    </Page.Resources>
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="20,50,0,0">
+                <Label Content="{ns:Loc doctorLabel}" FontSize="20" Style="{DynamicResource Label}"></Label>
+                <Label x:Name="DoktorLabel" HorizontalAlignment="Left" FontSize="20" Style="{DynamicResource Label}">
+                    <Label.Content>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0}  {1}">
+                                    <Binding Path="DTO.Doctor.FirstName" />
+                                    <Binding Path="DTO.Doctor.LastName" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </Label.Content>
+                </Label>
+                <Button x:Name="addAppointment" Margin="15,0,0,0" Style="{DynamicResource NoChromeButton}" Command="{Binding NewCommand}">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="../../Icon/DoctorIcons/addDark.png" Width="30"/>
+                        <TextBlock Text="{ns:Loc newButton}" Style="{DynamicResource TextBlockStyle}"/>
+                    </StackPanel>
+                </Button>
+                <Button Margin="15,0,0,0" Style="{DynamicResource NoChromeButton}" 
+                       Command="{Binding DeleteCommand}">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="../../Icon/DoctorIcons/minus.png" Width="30"/>
+                        <TextBlock Text="{ns:Loc deleteButton}" Style="{DynamicResource TextBlockStyle}"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,20,0">
+                <Label Content="{ns:Loc searchAppointment}" FontSize="18" Style="{DynamicResource Label}"/>
+                <Border Width="250" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,5"
+                            Style="{StaticResource TextBoxBorder}">
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <Image Source="../../Icon/Secretary/search.png" Height="13"/>
+                        <TextBlock IsHitTestVisible="False" Text="dd-mm-yyyy" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,2,0,1.2" Foreground="DarkGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=pretraziSastojak}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBox  x:Name="pretraziSastojak" Width="200" Height="20" BorderThickness="0" Text="{Binding DateFilter,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource SearchBox}" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </DockPanel>
+        <DataGrid x:Name="dataGridAppointments" ItemsSource="{Binding Path=DTO.Appointments}" Style="{DynamicResource PacijentiDataGrid}"
+               SelectionMode="Single" IsReadOnly="True" Margin="30,30,30,50" AutoGenerateColumns="False"  SelectedValue="{Binding DTO.SelectedAppointment}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{ns:Loc namePatientLabel}" Width="0.25*" Binding="{Binding PatientsRecord.Patient.FirstName}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="{ns:Loc surnamePatientLabel}" Width="0.25*" Binding="{Binding PatientsRecord.Patient.LastName}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="{ns:Loc durationLabel}" Width="0.25*" Binding="{Binding DurationInHours}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="{ns:Loc dateLabel}" Width="0.25*" Binding="{Binding DateTime ,StringFormat=dd-MM-yyyy}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="{ns:Loc appointmentTypeLabel}" Width="0.25*" Binding="{Binding Type}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                <DataGridTextColumn Header="{ns:Loc roomLabel}" Width="0.25*" Binding="{Binding Room.Name}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+            </DataGrid.Columns>
+            <i1:Interaction.Triggers>
+                <i1:EventTrigger EventName="MouseDoubleClick">
+                    <i1:InvokeCommandAction Command="{Binding DoubleClickCommand}"/>
+                </i1:EventTrigger>
+            </i1:Interaction.Triggers>
+        </DataGrid>
+    </DockPanel>
+</Page>

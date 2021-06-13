@@ -1,0 +1,91 @@
+﻿<Window x:Class="Hospital.View.Doctor.NewAppointment"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.View.Doctor"
+        xmlns:ns="clr-namespace:Hospital" 
+         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Background="{DynamicResource Background }" AllowsTransparency="True" WindowStyle="None" 
+        Title="NoviTermin" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding CancelCommand}" Key="C" Modifiers="Ctrl"/>
+        <KeyBinding Command="{Binding SaveCommand}" Key="S" Modifiers="Ctrl"/>
+        <KeyBinding Command="{Binding AddPatientCommand}" Key="A" Modifiers="Ctrl"/>
+    </Window.InputBindings>
+    <Grid Margin="30,20,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Left">
+            <Label FontSize="17" Width="77" Margin="0,0,10,0" HorizontalAlignment="Left" Content="{ns:Loc patient}" VerticalAlignment="Center" Style="{DynamicResource Label}"/>
+            <Label x:Name="pacijentIme" FontSize="17" HorizontalAlignment="Left" Margin="0,30,5,0" Style="{DynamicResource Label}" Content="{Binding PatientLabel}">
+            </Label>
+            <Button x:Name="addPatient" Margin="15,0,0,0" Style="{DynamicResource NoChromeButton}" Command="{Binding AddPatientCommand}">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="../../Icon/DoctorIcons/addDark.png" Width="30"/>
+                    <TextBlock Text="{ns:Loc addButton}" Style="{DynamicResource TextBlockStyle}"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Margin="0,20,20,0">
+            <Label x:Name="emergencyOperationLabel" Content="{ns:Loc emergencyOperationLabel}" FontSize="17" Style="{DynamicResource Label}" Visibility="{Binding EmergencyOperationLabel}"/>
+            <CheckBox x:Name="emergencyOperationCheckBox" IsChecked="{Binding EmergencyOperationIsChecked}" Visibility="{Binding EmergencyOperationCheckBox}"  Style="{DynamicResource CircleCheckbox}"
+                      Width="20" Height="20" Margin="0,-45,0,0"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center">
+            <Label FontSize="17"  Width="76" Content="{ns:Loc doctorColonLabel}" Margin="0,0,10,0"  HorizontalAlignment="Left" Style="{DynamicResource Label}"/>
+            <Label x:Name="doctorLabel" FontSize="17" HorizontalAlignment="Left" Margin="0,0,5,0" Style="{DynamicResource Label}">
+                <Label.Content>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0}  {1}">
+                                <Binding Path="DTO.Appointment.Doctor.FirstName" />
+                                <Binding Path="DTO.Appointment.Doctor.LastName" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </Label.Content>
+            </Label>
+            <RadioButton GroupName="tipTermina" x:Name="rdbPregled" FontSize="17"  Content="{ns:Loc examinationLabel}" IsChecked="{Binding ExaminationIsChecked}" Style="{DynamicResource RadioButtonStyle}" Margin="0,10,0,0"/>
+            <RadioButton GroupName="tipTermina" x:Name="rdbOperacija" FontSize="17"  Visibility="{Binding OperationVisibility}" Content="{ns:Loc operationLabel}" IsChecked="{Binding OperationIsChecked}" Style="{DynamicResource RadioButtonStyle}" Margin="0,10,0,0"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" >
+            <Label FontSize="17"  Width="190" Content="{ns:Loc dateAppointment}" Style="{DynamicResource Label}"/>
+            <DatePicker x:Name="datePicker" Width="120" Height="25"  DisplayDateStart="{x:Static sys:DateTime.Today}"
+                        SelectedDate="{Binding DTO.DateOfAppointment, Mode=OneWayToSource}" FirstDayOfWeek="Monday" Margin="10,0,5,0"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" >
+            <Label FontSize="17"  Width="190" Content="{ns:Loc timeAppointment}" Style="{DynamicResource Label}"/>
+            <ComboBox x:Name="timeComboBox"  Height="25" SelectedValue="{Binding DTO.TimeOfAppointment
+                ,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding DTO.SetTimeComboBox}"
+                      Style="{DynamicResource ComboBoxStyle}"></ComboBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Label FontSize="17" Margin="0,0,10,0" Style="{DynamicResource Label}" Content="{ns:Loc durationLabel}"></Label>
+            <ComboBox FontSize="17" x:Name="durationInMinutesComboBox" Width="120" Height="25" ItemsSource="{Binding DTO.DurationForComboBox}"
+                      SelectedValue="{Binding DTO.DurationInMinutes, Mode=OneWayToSource}" Style="{DynamicResource ComboBoxStyle}"></ComboBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Button x:Name="save" FontSize="18" Command="{Binding SaveCommand}" Margin="0,0,40,0" Style="{DynamicResource ImageButtonsHorizontal}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../Icon/DoctorIcons/save.png" Width="20"/>
+                    <TextBlock Text="{ns:Loc acceptButton}"  Style="{DynamicResource ButtonTextBlockStyle}"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="cancel"  FontSize="18" Command="{Binding CancelCommand}" Style="{DynamicResource ImageButtonsHorizontal}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../Icon/DoctorIcons/back.png" Width="20"/>
+                    <TextBlock Text="{ns:Loc declineButton}" Style="{DynamicResource ButtonTextBlockStyle}"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </Grid>
+
+</Window>
