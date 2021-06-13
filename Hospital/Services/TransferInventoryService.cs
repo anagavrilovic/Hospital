@@ -10,7 +10,7 @@ namespace Hospital.Services
     public class TransferInventoryService
     {
         private IStaticInventoryRepository staticInventoryRepository;
-        private IRoomRepository roomRepository = new RoomFileRepository();
+        private IRoomRepository roomRepository;
         public TransferInventory Transfer { get; set; }
 
         public TransferInventoryService(TransferInventory transfer, IStaticInventoryRepository inventoryRepository, IRoomRepository roomRepository)
@@ -50,7 +50,7 @@ namespace Hospital.Services
             Inventory ItemForTransfer = staticInventoryRepository.GetOneItemFromRoom(Transfer.ItemID, Transfer.FirstRoomID);
             Room firstRoom = roomRepository.GetByID(Transfer.FirstRoomID);
             if (ItemForTransfer.Name.ToLower().Contains("krevet"))
-                if (firstRoom.FreeBeds < Transfer.Quantity)
+                if (firstRoom.FreeBeds < Transfer.Quantity && firstRoom.Type == RoomType.SOBA_ZA_ODMOR)
                     return true;
 
             return false;

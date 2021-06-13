@@ -60,7 +60,7 @@ namespace Hospital.Services
             IRoomRepository roomRepository = new RoomFileRepository();
             Room firstRoom = roomRepository.GetByID(TransferRequest.FirstRoomID);
             if(ItemForTransfer.Name.ToLower().Contains("krevet"))
-                if (firstRoom.FreeBeds < TransferRequest.Quantity)
+                if (firstRoom.FreeBeds < TransferRequest.Quantity && firstRoom.Type == RoomType.SOBA_ZA_ODMOR)
                     return false;
             
             return true;
