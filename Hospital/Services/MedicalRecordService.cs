@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Factory;
+using Hospital.Model;
 using Hospital.Repositories;
 using Hospital.Repositories.Interfaces;
 using System;
@@ -18,11 +19,11 @@ namespace Hospital.Services
 
         private RegistratedUserService registratedUserService = new RegistratedUserService();
 
-        public MedicalRecordService()
+        public MedicalRecordService(IMedicalRecordRepositoryFactory recordFactory,IAppointmentRepositoryFactory appointmentFactory,IHospitalTreatmentRepositoryFactory treatmentFactory)
         {
-            medicalRecordRepository = new MedicalRecordFileRepository();
-            appointmentRepository = new AppointmentFileRepository();
-            hospitalTreatmentRepository = new HospitalTreatmentFileRepository();
+            medicalRecordRepository = recordFactory.CreateMedicalRecordRepository();
+            appointmentRepository = appointmentFactory.CreateAppointmentRepository();
+            hospitalTreatmentRepository = treatmentFactory.CreateHospitalTreatmentRepository();
         }
 
         public List<MedicalRecord> GetAllRecords()

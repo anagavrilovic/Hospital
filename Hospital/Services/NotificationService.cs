@@ -18,7 +18,7 @@ namespace Hospital.Services
         private INotificationsUsersRepository notificationsUsersRepository;
 
         private RegistratedUserService registratedUserService = new RegistratedUserService();
-        private MedicalRecordService medicalRecordService = new MedicalRecordService();
+        private MedicalRecordService medicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
 
         public NotificationService()
         {
@@ -167,7 +167,7 @@ namespace Hospital.Services
         public void NotifyPatientAboutRescheduledAppointment(Appointment appointment, DateTime newTime)
         {
             Notification notification = GenerateNotificationForPatientsRescheduledAppointment(appointment, newTime);
-            NotificationsUsers notificationsUsers = new NotificationsUsers(notification.Id, new MedicalRecordService().GetUsernameByIDPatient(appointment.IDpatient));
+            NotificationsUsers notificationsUsers = new NotificationsUsers(notification.Id, new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory()).GetUsernameByIDPatient(appointment.IDpatient));
 
             notificationRepository.Save(notification);
             notificationsUsersRepository.Save(notificationsUsers);
@@ -176,7 +176,7 @@ namespace Hospital.Services
         public void NotifyPatientAboutRescheduledAppointmentBeacuseOfRoomRenovation(Appointment appointment)
         {
             Notification notification = GenerateNotificationForPatientsRescheduledAppointmentBecauseOfRenovation(appointment);
-            NotificationsUsers notificationsUsers = new NotificationsUsers(notification.Id, new MedicalRecordService().GetUsernameByIDPatient(appointment.IDpatient));
+            NotificationsUsers notificationsUsers = new NotificationsUsers(notification.Id, new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory()).GetUsernameByIDPatient(appointment.IDpatient));
 
             notificationRepository.Save(notification);
             notificationsUsersRepository.Save(notificationsUsers);
@@ -238,7 +238,7 @@ namespace Hospital.Services
         public void NotifyPatientAboutCancelingAppointmentBecauseOfShiftChange(Appointment appointment)
         {
             Notification notification = GenerateNotificationForCancelingAppointmentBecauseOfShiftChange(appointment);
-            NotificationsUsers notificationsUsers = new NotificationsUsers(notification.Id, new MedicalRecordService().GetUsernameByIDPatient(appointment.IDpatient));
+            NotificationsUsers notificationsUsers = new NotificationsUsers(notification.Id, new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory()).GetUsernameByIDPatient(appointment.IDpatient));
 
             notificationRepository.Save(notification);
             notificationsUsersRepository.Save(notificationsUsers);

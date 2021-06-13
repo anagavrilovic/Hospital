@@ -1,4 +1,5 @@
-﻿using Hospital.Services;
+﻿using Hospital.Factory;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Hospital.Model
     {
         private NotificationsUsersAdapter notification;
         private NotificationService notificationService = new NotificationService();
-        private MedicalRecordService medicalRecordService = new MedicalRecordService();
+        private MedicalRecordService medicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
         private String username;
 
         public ConcreteStrategyGeneralNotification(NotificationsUsersAdapter notification)

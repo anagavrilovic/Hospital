@@ -1,4 +1,5 @@
 ﻿using Hospital.DTO.DoctorDTO;
+using Hospital.Factory;
 using Hospital.Model;
 using Hospital.Services;
 using System;
@@ -64,7 +65,7 @@ namespace Hospital.View.Doctor
             this.DataContext = this;
             DTO = new TherapyDTO();
             medicineBox.ItemsSource = DTO.MedicineView;
-            medicalRecordService = new MedicalRecordService();
+            medicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
         }
 
         private void AddMedicine(object sender, RoutedEventArgs e)

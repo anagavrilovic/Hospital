@@ -1,4 +1,5 @@
 ﻿using Hospital.Commands.DoctorCommands;
+using Hospital.Factory;
 using Hospital.Model;
 using Hospital.Services;
 using Hospital.View;
@@ -55,7 +56,7 @@ namespace Hospital.ViewModels.Secretary
         public IzmenaKartonaViewModel(NavigationService navigation, string selectedPatientID)
         {
             this.NavigationService = navigation;
-            MedicalRecordService = new MedicalRecordService();
+            MedicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
             UpdatePatientCommand = new RelayCommand(Execute_UpdatePatientCommand, CanExecuteCommands);
             CancelCommand = new RelayCommand(Execute_CancelCommand, CanExecuteCommands);
             FillPatientsRecord(selectedPatientID); 

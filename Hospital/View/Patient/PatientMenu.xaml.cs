@@ -28,7 +28,7 @@ namespace Hospital.View
         private PatientTherapyNotificationService patientTherapyNotificationService = new PatientTherapyNotificationService(new PatientTherapyNotificationFileFactory());
         private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService(new PatientNotesNotificationFileFactory());
         private NotificationService notificationService = new NotificationService();
-        private MedicalRecordService medicalRecordService = new MedicalRecordService();
+        private MedicalRecordService medicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
         public PatientMenu()
         {
             InitializeComponent();

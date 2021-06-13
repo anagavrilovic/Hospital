@@ -1,4 +1,5 @@
-﻿using Hospital.Services;
+﻿using Hospital.Factory;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -53,7 +54,7 @@ namespace Hospital.View.Doctor
 
         private void initProperties(string id)
         {
-            medicalRecordService = new MedicalRecordService();
+            medicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
             MedicalRecordReview = medicalRecordService.GetRecordByID(id);
         }
 

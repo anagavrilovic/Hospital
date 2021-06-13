@@ -19,7 +19,7 @@ namespace Hospital.Controller.DoctorControllers
         {
             this.DTO = DTO;
             appointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
-            medicalRecordService = new MedicalRecordService();
+            medicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
             doctorService = new DoctorService(new DoctorFileFactory());
         }
 

@@ -64,7 +64,7 @@ namespace Hospital.View
             this.SelectedPatientForNewAppointment = new MedicalRecord();
             this.AppointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
             this.DoctorService = new DoctorService(new DoctorFileFactory());
-            this.MedicalRecordService = new MedicalRecordService();
+            this.MedicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
             this.DoctorsShiftService = new DoctorsShiftService(new DoctorFileFactory());
         }
 

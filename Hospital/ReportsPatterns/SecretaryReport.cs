@@ -1,4 +1,5 @@
-﻿using Hospital.Services;
+﻿using Hospital.Factory;
+using Hospital.Services;
 using Syncfusion.Pdf.Graphics;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace Hospital.ReportsPatterns
         {
             SelectedDoctor = doctor;
             Appointments = appointments;
-            MedicalRecordService = new MedicalRecordService();
+            MedicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
             DateBegin = begin;
             DateEnd = end;
         }

@@ -23,7 +23,7 @@ namespace Hospital
             this.Appointment = appointment;
             this.FromTime = appointment.DateTime;
             this.Doctor = new DoctorService(new DoctorFileFactory()).GetDoctorById(appointment.IDDoctor);
-            this.Patient = new MedicalRecordService().GetByPatientId(appointment.IDpatient);
+            this.Patient = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory()).GetByPatientId(appointment.IDpatient);
             this.ToTime = new DateTime();
         }
 

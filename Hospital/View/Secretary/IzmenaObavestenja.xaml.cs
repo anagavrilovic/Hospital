@@ -1,4 +1,5 @@
 ﻿using Hospital.DTO;
+using Hospital.Factory;
 using Hospital.Model;
 using Hospital.Services;
 using System;
@@ -53,7 +54,7 @@ namespace Hospital.View
         private void InitializeEmptyProperties()
         {
             this.NotificationService = new NotificationService();
-            this.MedicalRecordService = new MedicalRecordService();
+            this.MedicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
             this.AllMedicalRecords = new ObservableCollection<MedicalRecord>();
             this.Recipients = new NotificationRecipientsDTO();
         }

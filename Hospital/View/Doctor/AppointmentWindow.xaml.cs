@@ -73,7 +73,7 @@ namespace Hospital.View.Doctor
         public AppointmentWindow(Appointment appointment)
         {
             hospitalTreatmentService = new HospitalTreatmentService();
-            medicalRecordService = new MedicalRecordService();
+            medicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
             doctorService = new DoctorService(new DoctorFileFactory());
             this.appointment = appointment;
             examination = new Examination();

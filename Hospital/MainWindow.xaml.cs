@@ -70,7 +70,7 @@ namespace Hospital
                             mw.Show();
                             break;
                         case UserType.patient:
-                            MedicalRecordService medicalRecordService = new MedicalRecordService();
+                            MedicalRecordService medicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
                             IDnumber = medicalRecordService.GetByUsername(user.Username);
                             PatientMain patientMain = new PatientMain();
                             patientMain.Show();

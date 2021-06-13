@@ -58,7 +58,7 @@ namespace Hospital.View
         {
             Patients = new ObservableCollection<MedicalRecord>();
             PatientsAppointments = new ObservableCollection<Appointment>();
-            MedicalRecordService = new MedicalRecordService();
+            MedicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
             AppointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
         }
 

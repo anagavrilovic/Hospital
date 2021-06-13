@@ -67,7 +67,7 @@ namespace Hospital.ViewModels.Secretary
             DateEnd = DateTime.Now;
             DoctorService = new DoctorService(new DoctorFileFactory());
             AppointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
-            MedicalRecordService = new MedicalRecordService();
+            MedicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
         }
 
         private void LoadDoctors()

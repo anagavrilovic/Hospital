@@ -56,7 +56,7 @@ namespace Hospital.View.Doctor
 
         private void InitProperties(string id, Appointment pregled)
         {
-            medicalRecordSerivce = new MedicalRecordService();
+            medicalRecordSerivce = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
             MedicalRecord = medicalRecordSerivce.GetRecordByID(id);
             this.appointment = pregled;
             saveButton.Visibility = Visibility.Collapsed;

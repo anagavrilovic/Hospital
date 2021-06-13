@@ -1,4 +1,5 @@
-﻿using Hospital.Services;
+﻿using Hospital.Factory;
+using Hospital.Services;
 using Hospital.View.Secretary;
 using Hospital.ViewModels.Secretary;
 using System;
@@ -45,7 +46,7 @@ namespace Hospital.View
         private void InitializeAllProperties()
         {
             this.PatientsRecords = new ObservableCollection<MedicalRecord>();
-            this.MedicalRecordService = new MedicalRecordService();
+            this.MedicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
             this.SelectedPatientsRecord = new MedicalRecord();
         }
 

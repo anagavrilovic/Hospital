@@ -1,4 +1,5 @@
 ﻿using Hospital.Commands.Secretary;
+using Hospital.Factory;
 using Hospital.Services;
 using Hospital.View;
 using Hospital.View.Secretary;
@@ -27,7 +28,7 @@ namespace Hospital.ViewModels.Secretary
         public KreiranjeKartonaViewModel(NavigationService navigation)
         {
             this.NavigationService = navigation;
-            this.MedicalRecordService = new MedicalRecordService();
+            this.MedicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
             AddPatientCommand = new RelayCommand(Execute_AddPatientCommand, CanExecuteCommands);
             CancelCommand = new RelayCommand(Execute_CancelCommand, CanExecuteCommands);
             InitializeNewRecord();

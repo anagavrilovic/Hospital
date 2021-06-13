@@ -189,9 +189,11 @@
     <Compile Include="Factory\AppointmentFileFactory.cs" />
     <Compile Include="Factory\DoctorFileFactory.cs" />
     <Compile Include="Factory\FeedbackFileFactory.cs" />
+    <Compile Include="Factory\HospitalTreatmentFileFactory.cs" />
     <Compile Include="Factory\IAppointmentRepositoryFactory.cs" />
     <Compile Include="Factory\IDoctorRepositoryFactory.cs" />
     <Compile Include="Factory\IFeedbackRepositoryFactory.cs" />
+    <Compile Include="Factory\IHospitalTreatmentRepositoryFactory.cs" />
     <Compile Include="Factory\IMedicalRecordRepositoryFactory.cs" />
     <Compile Include="Factory\IPatientCommentsRepositoryFactory.cs" />
     <Compile Include="Factory\IPatientNotesNotificationRepositoryFactory.cs" />
