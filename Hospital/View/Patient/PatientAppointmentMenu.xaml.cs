@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Factory;
+using Hospital.Model;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientAppointmentMenu : Page
     {
-        private PatientSettingsService patientSettingsService = new PatientSettingsService();
+        private PatientSettingsService patientSettingsService = new PatientSettingsService(new PatientSettingsFileFactory());
         public PatientAppointmentMenu()
         {
             InitializeComponent();

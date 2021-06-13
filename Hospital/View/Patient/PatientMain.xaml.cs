@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Factory;
+using Hospital.Model;
 using Hospital.Services;
 using Hospital.View.Patient.Help;
 using System;
@@ -23,7 +24,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientMain : Window
     {
-        private PatientSettingsService patientSettingsService = new PatientSettingsService();
+        private PatientSettingsService patientSettingsService = new PatientSettingsService(new PatientSettingsFileFactory());
         public PatientMain()
         {
             InitializeComponent();

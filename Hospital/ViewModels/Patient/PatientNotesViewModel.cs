@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Factory;
+using Hospital.Model;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace Hospital.ViewModels.Patient
             set;
         }
 
-        private PatientNotesService patientNotesService = new PatientNotesService();
+        private PatientNotesService patientNotesService = new PatientNotesService(new PatientNotesFileFactory());
         public PatientNotesViewModel()
         {
             Notes = new ObservableCollection<PatientNote>(patientNotesService.GetByPatientID());

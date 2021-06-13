@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Factory;
+using Hospital.Model;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace Hospital.View.Doctor
         private MedicalRecord medicalRecord;
         private MedicalRecordService medicalRecordSerivce;
         private Appointment appointment=new Appointment();
-        private PatientTherapyNotificationService patientNotificationService = new PatientTherapyNotificationService();
+        private PatientTherapyNotificationService patientNotificationService = new PatientTherapyNotificationService(new PatientTherapyNotificationFileFactory());
         public MedicalRecord MedicalRecord
         {
             get { return medicalRecord; }

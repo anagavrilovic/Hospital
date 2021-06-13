@@ -1,4 +1,5 @@
-﻿using Hospital.Services;
+﻿using Hospital.Factory;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Hospital.Model
     class ConcreteStrategyNote : Strategy
     {
         PatientNotesNotification notification;
-        private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService();
+        private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService(new PatientNotesNotificationFileFactory());
 
         public ConcreteStrategyNote(PatientNotesNotification notification)
         {

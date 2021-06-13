@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Factory;
+using Hospital.Model;
 using Hospital.Repositories;
 using Hospital.Repositories.Interfaces;
 using System;
@@ -13,9 +14,9 @@ namespace Hospital.Services
     {
         IPatientNotesNotificationRepository patientNotesNotificationRepository;
 
-        public PatientNotesNotificationService()
+        public PatientNotesNotificationService(IPatientNotesNotificationRepositoryFactory factory)
         {
-            patientNotesNotificationRepository = new PatientNotesNotificationFileRepository();
+            patientNotesNotificationRepository = factory.CreatePatientNotesNotificationRepository();
         }
         public void Delete(string id)
         {

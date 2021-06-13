@@ -15,6 +15,7 @@ using System.Windows;
 using TextAlignment = iText.Layout.Properties.TextAlignment;
 using System.Linq;
 using iText.Kernel.Pdf.Canvas.Draw;
+using Hospital.Factory;
 
 namespace Hospital.View
 {
@@ -23,7 +24,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientReport : Page
     {
-        private PatientTherapyNotificationService patientTherapyNotificationService = new PatientTherapyNotificationService();
+        private PatientTherapyNotificationService patientTherapyNotificationService = new PatientTherapyNotificationService(new PatientTherapyNotificationFileFactory());
         private List<PatientTherapyMedicineNotification> therapyNotifications;
         private DateTime MondayDay;
         public ObservableCollection<PatientTherapyMedicineNotification> Therapies

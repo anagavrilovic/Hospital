@@ -1,5 +1,6 @@
 ﻿using Hospital.Controller.PatientControllers;
 using Hospital.DTO.PatientDTO;
+using Hospital.Factory;
 using Hospital.Model;
 using Hospital.Services;
 using System;
@@ -26,7 +27,7 @@ namespace Hospital.View
     public partial class PatientMakeAppointment : Page
     {
         private CalendarController calendarController = new CalendarController();
-       private PatientSettingsService patientSettingsService = new PatientSettingsService();
+       private PatientSettingsService patientSettingsService = new PatientSettingsService(new PatientSettingsFileFactory());
        private AppointmentService appointmentService = new AppointmentService();
        private DateTime firstDayOfWeek;
        private Appointment appointmentForDeleting = null;

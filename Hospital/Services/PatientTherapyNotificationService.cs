@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Factory;
+using Hospital.Model;
 using Hospital.Repositories;
 using Hospital.Repositories.Interfaces;
 using System;
@@ -14,9 +15,9 @@ namespace Hospital.Services
         IPatientTherapyNotificationRepository patientTherapyNotificationsRepository;
         IMedicineRepository medicineRepository;
 
-        public PatientTherapyNotificationService()
+        public PatientTherapyNotificationService(IPatientTherapyNotificationRepositoryFactory therapyFactory)
         {
-            patientTherapyNotificationsRepository = new PatientTherapyNotificationFileRepository();
+            patientTherapyNotificationsRepository = therapyFactory.CreatePatientTherapyNotificationRepository();
             medicineRepository = new MedicineFileRepository();
         }
         public List<PatientTherapyMedicineNotification> GetByPatientID()

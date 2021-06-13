@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Factory;
+using Hospital.Model;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace Hospital.View
     {
         private Appointment selectedAppointment;
         private AppointmentService appointmentService = new AppointmentService();
-        private PatientSettingsService patientSettingsService = new PatientSettingsService();
+        private PatientSettingsService patientSettingsService = new PatientSettingsService(new PatientSettingsFileFactory());
       
 
         public PatientAppointmentOptions(Appointment selectedAppointment)

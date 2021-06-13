@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Repositories.Interfaces
 {
-    interface IPatientSettingsRepository : IGenericRepository<PatientSettings>
+  public  interface IPatientSettingsRepository : IGenericRepository<PatientSettings>
     {
         void Update(PatientSettings patientSettings);
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Repositories.Interfaces
 {
-    interface IPatientNotesRepository : IGenericRepository<PatientNote>
+  public interface IPatientNotesRepository : IGenericRepository<PatientNote>
     {
         String GetNewID();
         List<PatientNote> GetByPatientID();

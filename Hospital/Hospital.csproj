@@ -191,7 +191,15 @@
     <Compile Include="Factory\IDoctorRepositoryFactory.cs" />
     <Compile Include="Factory\IFeedbackRepositoryFactory.cs" />
     <Compile Include="Factory\IPatientCommentsRepositoryFactory.cs" />
+    <Compile Include="Factory\IPatientNotesNotificationRepositoryFactory.cs" />
+    <Compile Include="Factory\IPatientNotesRepositoryFactory.cs" />
+    <Compile Include="Factory\IPatientSettingsRepositoryFactory.cs" />
+    <Compile Include="Factory\IPatientTherapyNotificationRepositoryFactory.cs" />
     <Compile Include="Factory\PatientCommentsFileFactory.cs" />
+    <Compile Include="Factory\PatientNotesFileFactory.cs" />
+    <Compile Include="Factory\PatientNotesNotificationFileFactory.cs" />
+    <Compile Include="Factory\PatientSettingsFileFactory.cs" />
+    <Compile Include="Factory\PatientTherapyNotificationFileFactory.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Allergen.cs" />
     <Compile Include="Model\BloodType.cs" />

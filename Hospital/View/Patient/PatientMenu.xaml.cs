@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Factory;
+using Hospital.Model;
 using Hospital.Services;
 using Hospital.ViewModels.Patient;
 using System;
@@ -24,8 +25,8 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientMenu : Page
     {
-        private PatientTherapyNotificationService patientTherapyNotificationService = new PatientTherapyNotificationService();
-        private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService();
+        private PatientTherapyNotificationService patientTherapyNotificationService = new PatientTherapyNotificationService(new PatientTherapyNotificationFileFactory());
+        private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService(new PatientNotesNotificationFileFactory());
         private NotificationService notificationService = new NotificationService();
         private MedicalRecordService medicalRecordService = new MedicalRecordService();
         public PatientMenu()

@@ -17,7 +17,7 @@ namespace Hospital.Controller.PatientControllers
         private const int NUMBER_OF_DAYS_IN_WEEK = 7;
         private DoctorService doctorService = new DoctorService();
         private AppointmentService appointmentService = new AppointmentService();
-        private PatientSettingsService patientSettingsService = new PatientSettingsService();
+        private PatientSettingsService patientSettingsService = new PatientSettingsService(new PatientSettingsFileFactory());
         private DoctorsShiftService doctorsShiftService = new DoctorsShiftService(new DoctorFileFactory());
         private RoomService roomService = new RoomService();
         private PatientSettings patientSettings;
