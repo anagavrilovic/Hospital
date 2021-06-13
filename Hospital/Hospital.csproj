@@ -253,8 +253,6 @@
     <Compile Include="Model\TransferInventory.cs" />
     <Compile Include="Model\UnitsType.cs" />
     <Compile Include="Model\UserType.cs" />
-    <Compile Include="ObserverPattern\Observer.cs" />
-    <Compile Include="ObserverPattern\Subject.cs" />
     <Compile Include="ReportsPatterns\MedicinesReport.cs" />
     <Compile Include="ReportsPatterns\ReportGenerator.cs" />
     <Compile Include="ReportsPatterns\SecretaryReport.cs" />

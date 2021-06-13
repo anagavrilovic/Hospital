@@ -48,7 +48,12 @@ namespace Hospital.Repositories
 
         public PatientTherapyMedicineNotification GetByID(string id)
         {
-            throw new NotImplementedException();
+            List<PatientTherapyMedicineNotification> patientTherapyMedicineNotifications = GetAll();
+            foreach (PatientTherapyMedicineNotification notification in patientTherapyMedicineNotifications)
+                if (notification.ID.Equals(id))
+                    return notification;
+
+            return null;
         }
 
         public void Save(PatientTherapyMedicineNotification notification)
