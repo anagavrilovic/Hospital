@@ -22,7 +22,8 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientPassedAppointmentOptions : Page
     {
-        PatientCommentsService patientCommentsService = new PatientCommentsService();
+        private PatientCommentsService patientCommentsService = new PatientCommentsService();
+        private ExaminationService examinationService = new ExaminationService();
         Appointment app;
         public PatientPassedAppointmentOptions(Appointment app)
         {
@@ -63,6 +64,13 @@ namespace Hospital.View
         {
             PatientsTherapy patientsTherapy = new PatientsTherapy(app);
             this.NavigationService.Navigate(patientsTherapy);
+        }
+
+        private void Delete(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Da li ste sigurni da želite da obrišete odabrani pregled?", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No) return;
+            examinationService.PatientDelete(app.IDAppointment);
+            this.NavigationService.Navigate(new PatientPassedAppointments());
         }
     }
 }

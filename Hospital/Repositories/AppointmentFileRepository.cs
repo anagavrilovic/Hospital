@@ -184,8 +184,11 @@ namespace Hospital.Repositories
             List<Appointment> appointments = new List<Appointment>();
             foreach (Examination examination in medicalRecord.Examination)
             {
-                Appointment appointmentWithDoctor = SetDoctorForAppointment(examination.appointment);
-                appointments.Add(appointmentWithDoctor);
+                if (examination.patientVisible)
+                {
+                    Appointment appointmentWithDoctor = SetDoctorForAppointment(examination.appointment);
+                    appointments.Add(appointmentWithDoctor);
+                }
             }
             return appointments;
 
