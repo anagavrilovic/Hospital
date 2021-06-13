@@ -65,7 +65,7 @@ namespace Hospital.View.Doctor
             this.DataContext = this;
             DTO = new TherapyDTO();
             medicineBox.ItemsSource = DTO.MedicineView;
-            medicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
+            medicalRecordService = new MedicalRecordService();
         }
 
         private void AddMedicine(object sender, RoutedEventArgs e)

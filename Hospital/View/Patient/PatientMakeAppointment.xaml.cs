@@ -27,8 +27,8 @@ namespace Hospital.View
     public partial class PatientMakeAppointment : Page
     {
         private CalendarController calendarController = new CalendarController();
-       private PatientSettingsService patientSettingsService = new PatientSettingsService(new PatientSettingsFileFactory());
-       private AppointmentService appointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
+       private PatientSettingsService patientSettingsService = new PatientSettingsService();
+       private AppointmentService appointmentService = new AppointmentService();
        private DateTime firstDayOfWeek;
        private Appointment appointmentForDeleting = null;
        private const int MAXIMUM_NUMBER_OF_TERMS_PER_DAY = 32; 

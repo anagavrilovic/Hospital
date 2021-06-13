@@ -1,5 +1,6 @@
 ﻿using Hospital.Factory;
 using Hospital.Model;
+using Hospital.Repositories;
 using Hospital.Services;
 using Hospital.ViewModels.Manager;
 using System;
@@ -41,13 +42,13 @@ namespace Hospital.View
 
         private void InitializeComboBoxItems()
         {
-            DoctorService doctorService = new DoctorService(new DoctorFileFactory());
+            DoctorService doctorService = new DoctorService(new DoctorFileRepository());
             doctorsCB.ItemsSource  = new ObservableCollection<string>(doctorService.GetDoctorsIdNameSurname());
         }
 
         private void InitializeIngredientsListBox()
         {
-            MedicineService medicineService = new MedicineService(new MedicineFileFactory(), new MedicalRecordFileFactory());
+            MedicineService medicineService = new MedicineService(new MedicineFileRepository(), new MedicalRecordFileRepository());
             Ingredients = medicineService.GetAllIngredients();
         }
 
@@ -120,7 +121,7 @@ namespace Hospital.View
         private void SendOnRevision(object sender, RoutedEventArgs e)
         {
             InitializeMedicine();
-            MedicineService medicineService = new MedicineService(new MedicineFileFactory(), new MedicalRecordFileFactory());
+            MedicineService medicineService = new MedicineService(new MedicineFileRepository(), new MedicalRecordFileRepository());
 
             if (!medicineService.IsMedicineIDUnique(MedicineRevision.Medicine.ID))
             {
@@ -138,7 +139,7 @@ namespace Hospital.View
         private void InitializeMedicine()
         {
             string doctorSelected = doctorsCB.Text.Trim().Split("-".ToCharArray())[0];
-            DoctorService doctorService = new DoctorService(new DoctorFileFactory());
+            DoctorService doctorService = new DoctorService(new DoctorFileRepository());
             MedicineRevision.DoctorID = doctorSelected;
             MedicineRevision.RevisionDoctor = doctorService.GetDoctorById(doctorSelected);
             MedicineRevision.IsMedicineRevised = false;

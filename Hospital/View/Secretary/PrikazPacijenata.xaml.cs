@@ -46,7 +46,7 @@ namespace Hospital.View
         private void InitializeAllProperties()
         {
             this.PatientsRecords = new ObservableCollection<MedicalRecord>();
-            this.MedicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
+            this.MedicalRecordService = new MedicalRecordService();
             this.SelectedPatientsRecord = new MedicalRecord();
         }
 

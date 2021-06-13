@@ -54,7 +54,7 @@ namespace Hospital.View.Doctor
 
         private void initProperties(string id)
         {
-            medicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
+            medicalRecordService = new MedicalRecordService();
             MedicalRecordReview = medicalRecordService.GetRecordByID(id);
         }
 

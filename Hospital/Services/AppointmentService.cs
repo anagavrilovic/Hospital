@@ -24,11 +24,11 @@ namespace Hospital.Services
         private const int MINIMUM_DAYS_DIFFERENCE = 2;
         private const int MAXIMUM_DAYS_DIFFERENCE = 10;
 
-        public AppointmentService(IAppointmentRepositoryFactory appointmentFactory, IDoctorRepositoryFactory doctorFactory, IMedicalRecordRepositoryFactory recordFactory)
+        public AppointmentService()
         {
-            appointmentRepository = appointmentFactory.CreateAppointmentRepository();
-            doctorRepository = doctorFactory.CreateDoctorRepository();
-            medicalRecordRepository = recordFactory.CreateMedicalRecordRepository();
+            appointmentRepository = new AppointmentFileRepository();
+            doctorRepository = new DoctorFileRepository();
+            medicalRecordRepository = new MedicalRecordFileRepository();
         }
 
         public List<Appointment> GetAppointmentsByDoctor(Doctor doctor)

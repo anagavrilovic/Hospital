@@ -1,4 +1,5 @@
 ﻿using Hospital.Factory;
+using Hospital.Repositories;
 using Hospital.Services;
 using Syncfusion.Pdf.Graphics;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace Hospital.ReportsPatterns
 
         public MedicinesReport()
         {
-            MedicineService service = new Services.MedicineService(new MedicineFileFactory(), new MedicalRecordFileFactory());
+            MedicineService service = new Services.MedicineService(new MedicineFileRepository(), new MedicalRecordFileRepository());
             Medicines = service.GetAll();
             Medicines = Medicines.OrderBy(med => med.Name).ToList();
         }

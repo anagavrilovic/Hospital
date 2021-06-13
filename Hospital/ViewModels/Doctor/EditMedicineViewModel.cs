@@ -3,6 +3,7 @@ using Hospital.Controller;
 using Hospital.Controller.DoctorControllers;
 using Hospital.DTO.DoctorDTO;
 using Hospital.Factory;
+using Hospital.Repositories;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace Hospital.ViewModels.Doctor
 {
     class EditMedicineViewModel : ViewModel
     {
-        private MedicineService medicineService = new MedicineService(new MedicineFileFactory(), new MedicalRecordFileFactory());
+        private MedicineService medicineService = new MedicineService(new MedicineFileRepository(), new MedicalRecordFileRepository());
         private ICollectionView medicineCollection;
         private EditMedicineController controller;
         private EditMedicineDTO dTO;

@@ -28,7 +28,7 @@ namespace Hospital.View.Doctor
         private MedicalRecord medicalRecord;
         private MedicalRecordService medicalRecordSerivce;
         private Appointment appointment=new Appointment();
-        private PatientTherapyNotificationService patientNotificationService = new PatientTherapyNotificationService(new PatientTherapyNotificationFileFactory());
+        private PatientTherapyNotificationService patientNotificationService = new PatientTherapyNotificationService();
         public MedicalRecord MedicalRecord
         {
             get { return medicalRecord; }
@@ -56,7 +56,7 @@ namespace Hospital.View.Doctor
 
         private void InitProperties(string id, Appointment pregled)
         {
-            medicalRecordSerivce = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
+            medicalRecordSerivce = new MedicalRecordService();
             MedicalRecord = medicalRecordSerivce.GetRecordByID(id);
             this.appointment = pregled;
             saveButton.Visibility = Visibility.Collapsed;
@@ -77,7 +77,7 @@ namespace Hospital.View.Doctor
 
         private void DeleteAppointmentOfExamination()
         {
-            AppointmentService appointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
+            AppointmentService appointmentService = new AppointmentService();
             appointmentService.Delete(appointment.IDAppointment);
         }
 

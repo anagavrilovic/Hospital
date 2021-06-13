@@ -23,7 +23,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientAppointmentMenu : Page
     {
-        private PatientSettingsService patientSettingsService = new PatientSettingsService(new PatientSettingsFileFactory());
+        private PatientSettingsService patientSettingsService = new PatientSettingsService();
         public PatientAppointmentMenu()
         {
             InitializeComponent();

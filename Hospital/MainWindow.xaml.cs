@@ -23,6 +23,7 @@ using Hospital.Services;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
 using Hospital.Factory;
+using Hospital.Repositories;
 
 namespace Hospital
 {
@@ -56,7 +57,7 @@ namespace Hospital
                     switch (user.Type)
                     {
                         case UserType.doctor:
-                            DoctorService ds = new DoctorService(new DoctorFileFactory());
+                            DoctorService ds = new DoctorService(new DoctorFileRepository());
                             IDnumber= ds.GetByUsername(user.Username);
                             DoctorMainWindow de = new DoctorMainWindow(IDnumber);
                             Application.Current.MainWindow=de;
@@ -70,7 +71,7 @@ namespace Hospital
                             mw.Show();
                             break;
                         case UserType.patient:
-                            MedicalRecordService medicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
+                            MedicalRecordService medicalRecordService = new MedicalRecordService();
                             IDnumber = medicalRecordService.GetByUsername(user.Username);
                             PatientMain patientMain = new PatientMain();
                             patientMain.Show();

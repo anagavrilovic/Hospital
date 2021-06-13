@@ -18,7 +18,7 @@ namespace Hospital.Services
     {
         private IDoctorRepository doctorRepository;
 
-        private AppointmentService appointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
+        private AppointmentService appointmentService = new AppointmentService();
 
         public DoctorsShiftService(IDoctorRepositoryFactory factory)
         {

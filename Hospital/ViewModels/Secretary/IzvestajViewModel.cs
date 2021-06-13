@@ -1,6 +1,7 @@
 ﻿using Hospital.Commands.Secretary;
 using Hospital.Factory;
 using Hospital.ReportsPatterns;
+using Hospital.Repositories;
 using Hospital.Services;
 using Hospital.View.Secretary;
 using Syncfusion.Pdf;
@@ -65,9 +66,9 @@ namespace Hospital.ViewModels.Secretary
         {
             DateBegin = DateTime.Now;
             DateEnd = DateTime.Now;
-            DoctorService = new DoctorService(new DoctorFileFactory());
-            AppointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
-            MedicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
+            DoctorService = new DoctorService(new DoctorFileRepository());
+            AppointmentService = new AppointmentService();
+            MedicalRecordService = new MedicalRecordService();
         }
 
         private void LoadDoctors()

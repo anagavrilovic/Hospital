@@ -19,11 +19,11 @@ namespace Hospital.Services
 
         private RegistratedUserService registratedUserService = new RegistratedUserService();
 
-        public MedicalRecordService(IMedicalRecordRepositoryFactory recordFactory,IAppointmentRepositoryFactory appointmentFactory,IHospitalTreatmentRepositoryFactory treatmentFactory)
+        public MedicalRecordService()
         {
-            medicalRecordRepository = recordFactory.CreateMedicalRecordRepository();
-            appointmentRepository = appointmentFactory.CreateAppointmentRepository();
-            hospitalTreatmentRepository = treatmentFactory.CreateHospitalTreatmentRepository();
+            medicalRecordRepository = new MedicalRecordFileRepository();
+            appointmentRepository = new AppointmentFileRepository();
+            hospitalTreatmentRepository = new HospitalTreatmentFileRepository();
         }
 
         public List<MedicalRecord> GetAllRecords()

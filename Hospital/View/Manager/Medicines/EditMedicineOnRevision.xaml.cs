@@ -1,5 +1,6 @@
 ﻿using Hospital.Factory;
 using Hospital.Model;
+using Hospital.Repositories;
 using Hospital.Services;
 using Hospital.ViewModels.Manager;
 using System;
@@ -39,20 +40,20 @@ namespace Hospital.View
 
         private void AddDoctorsInComboBox()
         {
-            DoctorService doctorService = new DoctorService(new DoctorFileFactory());
+            DoctorService doctorService = new DoctorService(new DoctorFileRepository());
             ObservableCollection<string>  DoctorsNameSurname = new ObservableCollection<string>(doctorService.GetDoctorsIdNameSurname());
             doctorsCB.ItemsSource = DoctorsNameSurname;
         }
 
         private void SetDoctorOnComboBox()
         {
-            DoctorService doctorService = new DoctorService(new DoctorFileFactory());
+            DoctorService doctorService = new DoctorService(new DoctorFileRepository());
             doctorsCB.SelectedItem = doctorService.GetDoctorById(MedicineOnRevision.DoctorID).ToString();
         }
 
         private void AddIngredientsInListBox()
         {
-            MedicineService medicineService = new MedicineService(new MedicineFileFactory(), new MedicalRecordFileFactory());
+            MedicineService medicineService = new MedicineService(new MedicineFileRepository(), new MedicalRecordFileRepository());
             Ingredients = medicineService.GetAllIngredients();
         }
 

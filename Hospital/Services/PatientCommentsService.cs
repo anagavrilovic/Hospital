@@ -14,9 +14,9 @@ namespace Hospital.Services
     {
         IPatientCommentsRepository patientCommentsRepository;
 
-        public PatientCommentsService(IPatientCommentsRepositoryFactory factory)
+        public PatientCommentsService()
         {
-            patientCommentsRepository = factory.CreatePatientCommentsRepository();
+            patientCommentsRepository = new PatientCommentsFileRepository();
         }
 
         public void Save(PatientComment patientComment)

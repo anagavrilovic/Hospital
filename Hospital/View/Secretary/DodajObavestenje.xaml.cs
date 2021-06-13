@@ -55,7 +55,7 @@ namespace Hospital.View
             this.NewNotification = new Notification();
             this.Recipients = new NotificationRecipientsDTO();
             this.NotificationService = new NotificationService();
-            this.MedicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
+            this.MedicalRecordService = new MedicalRecordService();
         }
 
         private void InitializeNewNotification()

@@ -1,5 +1,6 @@
 ﻿using Hospital.Commands.DoctorCommands;
 using Hospital.Factory;
+using Hospital.Repositories;
 using Hospital.Services;
 using Hospital.View.Doctor;
 using Syncfusion.Pdf;
@@ -16,7 +17,7 @@ namespace Hospital.ViewModels.Doctor
 {
     public class DoctorReportViewModel :ViewModel
     {
-        private MedicineService medicineService = new MedicineService(new MedicineFileFactory(), new MedicalRecordFileFactory());
+        private MedicineService medicineService = new MedicineService(new MedicineFileRepository(), new MedicalRecordFileRepository());
         private DateTime startDate;
         public DateTime StartDate
         {
@@ -52,7 +53,7 @@ namespace Hospital.ViewModels.Doctor
             ReportCommand = new RelayCommand(Execute_Report, CanExecuteMethod);
             EndDate = DateTime.Now;
             StartDate = DateTime.Now;
-            medicineService = new MedicineService(new MedicineFileFactory(), new MedicalRecordFileFactory());
+            medicineService = new MedicineService(new MedicineFileRepository(), new MedicalRecordFileRepository());
         }
         private void Execute_Report(object obj)
         {

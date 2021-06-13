@@ -22,7 +22,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientAnamnesis : Page
     {
-        private ExaminationService examinationService = new ExaminationService(new MedicalRecordFileFactory());
+        private ExaminationService examinationService = new ExaminationService();
         public PatientAnamnesis(Appointment appointment)
         {
             InitializeComponent();

@@ -16,7 +16,7 @@ namespace Hospital.Controller.DoctorControllers
         public AppointmentDetailsController(AppointmentDetailsDTO DTO)
         {
             this.DTO = DTO;
-            medicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(),new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
+            medicalRecordService = new MedicalRecordService();
         }
 
         public MedicalRecord GetMedicalRecordByPatientId()

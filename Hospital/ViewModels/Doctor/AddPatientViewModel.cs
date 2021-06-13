@@ -70,7 +70,7 @@ namespace Hospital.ViewModels.Doctor
             filterCommand = new RelayCommand(Execute_FilterPatients, CanExecute_Command);
             DoubleClickCommand = new RelayCommand(Execute_MouseDoubleClick, CanExecute_Command);
             this.parentViewModel = parentViewModel;
-            medicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
+            medicalRecordService = new MedicalRecordService();
             foreach (MedicalRecord record in medicalRecordService.GetAllRecords())
             {
                 Patients.Add(record.Patient);

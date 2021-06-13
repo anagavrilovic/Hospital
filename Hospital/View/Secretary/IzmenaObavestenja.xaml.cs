@@ -54,7 +54,7 @@ namespace Hospital.View
         private void InitializeEmptyProperties()
         {
             this.NotificationService = new NotificationService();
-            this.MedicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
+            this.MedicalRecordService = new MedicalRecordService();
             this.AllMedicalRecords = new ObservableCollection<MedicalRecord>();
             this.Recipients = new NotificationRecipientsDTO();
         }

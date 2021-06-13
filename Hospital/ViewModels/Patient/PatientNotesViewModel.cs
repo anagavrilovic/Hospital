@@ -18,7 +18,7 @@ namespace Hospital.ViewModels.Patient
             set;
         }
 
-        private PatientNotesService patientNotesService = new PatientNotesService(new PatientNotesFileFactory());
+        private PatientNotesService patientNotesService = new PatientNotesService();
         public PatientNotesViewModel()
         {
             Notes = new ObservableCollection<PatientNote>(patientNotesService.GetByPatientID());

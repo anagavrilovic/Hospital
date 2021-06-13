@@ -1,4 +1,5 @@
 ﻿using Hospital.Factory;
+using Hospital.Repositories;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace Hospital.Controller.DoctorControllers
 
         public DoctorMainWindowController()
         {
-            doctorService = new DoctorService(new DoctorFileFactory());
+            doctorService = new DoctorService(new DoctorFileRepository());
             hospitalTreatmentService = new HospitalTreatmentService();
         }
 

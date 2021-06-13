@@ -20,9 +20,9 @@ namespace Hospital.DTO.DoctorDTO
 
         public CreateAppointmentController(CreateAppointmentDTO DTO)
         {
-            medicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
-            doctorService = new DoctorService(new DoctorFileFactory());
-            appointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
+            medicalRecordService = new MedicalRecordService();
+            doctorService = new DoctorService(new DoctorFileRepository());
+            appointmentService = new AppointmentService();
             roomService = new RoomService();
             doctorsShiftService = new DoctorsShiftService(new DoctorFileFactory());
             this.DTO = DTO;

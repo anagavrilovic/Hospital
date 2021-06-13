@@ -1,6 +1,7 @@
 ﻿
 using Hospital.Commands.Secretary;
 using Hospital.Factory;
+using Hospital.Repositories;
 using Hospital.Services;
 using Hospital.View.Secretary;
 using System;
@@ -80,9 +81,9 @@ namespace Hospital.ViewModels.Secretary
             NewGuestPatient = new MedicalRecord();
             NewUrgentAppointment = new Appointment();
             Patients = new ObservableCollection<MedicalRecord>();
-            MedicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
-            AppointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
-            DoctorService = new DoctorService(new DoctorFileFactory());
+            MedicalRecordService = new MedicalRecordService();
+            AppointmentService = new AppointmentService();
+            DoctorService = new DoctorService(new DoctorFileRepository());
         }
 
         private void ShowPossibleDuration()

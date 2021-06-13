@@ -1,5 +1,6 @@
 ﻿using Hospital.Factory;
 using Hospital.Model;
+using Hospital.Repositories;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,7 @@ namespace Hospital.View.Secretary
         }
         private void InitializeAllProperties()
         {
-            DoctorService = new DoctorService(new DoctorFileFactory());
+            DoctorService = new DoctorService(new DoctorFileRepository());
             DoctorsShiftService = new DoctorsShiftService(new DoctorFileFactory());
             NewScheduledShift = new ScheduledShift();
         }

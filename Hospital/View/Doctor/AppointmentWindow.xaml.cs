@@ -1,5 +1,6 @@
 ﻿using Hospital.Factory;
 using Hospital.Model;
+using Hospital.Repositories;
 using Hospital.Services;
 using Newtonsoft.Json;
 using System;
@@ -73,8 +74,8 @@ namespace Hospital.View.Doctor
         public AppointmentWindow(Appointment appointment)
         {
             hospitalTreatmentService = new HospitalTreatmentService();
-            medicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
-            doctorService = new DoctorService(new DoctorFileFactory());
+            medicalRecordService = new MedicalRecordService();
+            doctorService = new DoctorService(new DoctorFileRepository());
             this.appointment = appointment;
             examination = new Examination();
             LoggedInDoctor = new Hospital.Model.Doctor();

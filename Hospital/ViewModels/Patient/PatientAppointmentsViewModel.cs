@@ -17,7 +17,7 @@ namespace Hospital.ViewModels.Patient
             set;
         }
 
-        private AppointmentService appointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
+        private AppointmentService appointmentService = new AppointmentService();
 
         public PatientAppointmentsViewModel()
         {

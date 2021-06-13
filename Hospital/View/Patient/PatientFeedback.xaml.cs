@@ -27,7 +27,7 @@ namespace Hospital.View
     {
         private FeedbackService feedbackSevice = new FeedbackService(new FeedbackFileFactory());
         private Feedback feedback;
-        private PatientSettingsService patientSettingsService = new PatientSettingsService(new PatientSettingsFileFactory());
+        private PatientSettingsService patientSettingsService = new PatientSettingsService();
         public PatientFeedback()
         {
             InitializeComponent();

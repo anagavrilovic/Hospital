@@ -29,7 +29,7 @@ namespace Hospital.ReportsPatterns
         {
             SelectedDoctor = doctor;
             Appointments = appointments;
-            MedicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
+            MedicalRecordService = new MedicalRecordService();
             DateBegin = begin;
             DateEnd = end;
         }

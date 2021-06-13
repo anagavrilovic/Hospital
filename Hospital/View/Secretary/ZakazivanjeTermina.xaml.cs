@@ -36,7 +36,7 @@ namespace Hospital.View
             NewAppointment = new Appointment();
             AvaliableRooms = new ObservableCollection<Room>();
             PossibleDuration = new ObservableCollection<string>();
-            AppointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
+            AppointmentService = new AppointmentService();
             RoomService = new RoomService();
         }
 

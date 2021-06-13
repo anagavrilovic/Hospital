@@ -28,7 +28,7 @@ namespace Hospital.ViewModels.Secretary
         public KreiranjeKartonaViewModel(NavigationService navigation)
         {
             this.NavigationService = navigation;
-            this.MedicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
+            this.MedicalRecordService = new MedicalRecordService();
             AddPatientCommand = new RelayCommand(Execute_AddPatientCommand, CanExecuteCommands);
             CancelCommand = new RelayCommand(Execute_CancelCommand, CanExecuteCommands);
             InitializeNewRecord();

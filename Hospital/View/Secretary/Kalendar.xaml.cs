@@ -1,6 +1,7 @@
 ﻿using Hospital.DTO;
 using Hospital.Factory;
 using Hospital.Model;
+using Hospital.Repositories;
 using Hospital.Services;
 using Hospital.View.Secretary;
 using System;
@@ -62,9 +63,9 @@ namespace Hospital.View
             this.ChosenDate = DateTime.Today;
             this.DatesInWeeklyCalendar = new DatesInWeeklyCalendarDTO();
             this.SelectedPatientForNewAppointment = new MedicalRecord();
-            this.AppointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
-            this.DoctorService = new DoctorService(new DoctorFileFactory());
-            this.MedicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
+            this.AppointmentService = new AppointmentService();
+            this.DoctorService = new DoctorService(new DoctorFileRepository());
+            this.MedicalRecordService = new MedicalRecordService();
             this.DoctorsShiftService = new DoctorsShiftService(new DoctorFileFactory());
         }
 

@@ -1,6 +1,7 @@
 ﻿using Hospital.Commands.Patient;
 using Hospital.Factory;
 using Hospital.Model;
+using Hospital.Repositories;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,10 @@ namespace Hospital.ViewModels.Patient
     public class PatientSettingsPageViewModel
     {
         private NavigationService navService;
-        private PatientSettingsService patientSettingsService = new PatientSettingsService(new PatientSettingsFileFactory());
+        private PatientSettingsService patientSettingsService = new PatientSettingsService();
         public ObservableCollection<String> DoctorsNamesSurnames { get; set; }
         public String SelectedDoctor {get;set;}
-        private DoctorService doctorService=new DoctorService(new DoctorFileFactory());
+        private DoctorService doctorService=new DoctorService(new DoctorFileRepository());
 
         public Boolean ShowWizard { get; set; }
         public Boolean ShowTooltips { get; set; }

@@ -23,7 +23,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientAdditionalOptions : Page
     {
-        private PatientCommentsService patientCommentsService = new PatientCommentsService(new PatientCommentsFileFactory());
+        private PatientCommentsService patientCommentsService = new PatientCommentsService();
         public PatientAdditionalOptions()
         {
             InitializeComponent();

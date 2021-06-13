@@ -25,7 +25,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientSettingsPage : Page
     {
-        private PatientSettingsService patientSettingsService = new PatientSettingsService(new PatientSettingsFileFactory());
+        private PatientSettingsService patientSettingsService = new PatientSettingsService();
         public PatientSettingsPage(PatientSettingsPageViewModel viewModel)
         {
             InitializeComponent();

@@ -15,9 +15,9 @@ namespace Hospital.Services
         IPatientTherapyNotificationRepository patientTherapyNotificationsRepository;
         IMedicineRepository medicineRepository;
 
-        public PatientTherapyNotificationService(IPatientTherapyNotificationRepositoryFactory therapyFactory)
+        public PatientTherapyNotificationService()
         {
-            patientTherapyNotificationsRepository = therapyFactory.CreatePatientTherapyNotificationRepository();
+            patientTherapyNotificationsRepository = new PatientTherapyNotificationFileRepository();
             medicineRepository = new MedicineFileRepository();
         }
         public List<PatientTherapyMedicineNotification> GetByPatientID()

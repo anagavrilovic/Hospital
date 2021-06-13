@@ -12,7 +12,7 @@ namespace Hospital.Model
     {
         private NotificationsUsersAdapter notification;
         private NotificationService notificationService = new NotificationService();
-        private MedicalRecordService medicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
+        private MedicalRecordService medicalRecordService = new MedicalRecordService();
         private String username;
 
         public ConcreteStrategyGeneralNotification(NotificationsUsersAdapter notification)

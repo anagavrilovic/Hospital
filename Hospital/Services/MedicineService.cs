@@ -19,10 +19,10 @@ namespace Hospital.Services
         private IMedicineRepository medicineRepository;
         private IMedicalRecordRepository medicalRecordRepository;
 
-        public MedicineService(IMedicineRepositoryFactory medicineFactory, IMedicalRecordRepositoryFactory recordFactory)
+        public MedicineService(IMedicineRepository medicineRepository, IMedicalRecordRepository medicalRecordRepository)
         {
-            medicineRepository = medicineFactory.CreateMedicineRepository();
-            medicalRecordRepository = recordFactory.CreateMedicalRecordRepository();
+            this.medicineRepository = medicineRepository;
+            this.medicalRecordRepository = medicalRecordRepository;
         }
 
         public List<string> GetAllMedicines()

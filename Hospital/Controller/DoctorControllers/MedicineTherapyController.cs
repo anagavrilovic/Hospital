@@ -1,5 +1,6 @@
 ﻿using Hospital.DTO.DoctorDTO;
 using Hospital.Factory;
+using Hospital.Repositories;
 using Hospital.Services;
 using Hospital.View.Doctor;
 using System;
@@ -17,7 +18,7 @@ namespace Hospital.Controller.DoctorControllers
         public MedicineTherapyController(MedicineTherapyDTO DTO)
         {
             this.DTO = DTO;
-            medicineService = new MedicineService(new MedicineFileFactory(), new MedicalRecordFileFactory());
+            medicineService = new MedicineService(new MedicineFileRepository(), new MedicalRecordFileRepository());
         }
 
         public List<Medicine> GetAllMedics()

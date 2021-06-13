@@ -13,9 +13,9 @@ namespace Hospital.Services
     {
         private IMedicalRecordRepository medicalRecordRepository;
 
-        public ExaminationService(IMedicalRecordRepositoryFactory factory)
+        public ExaminationService()
         {
-            medicalRecordRepository = factory.CreateMedicalRecordRepository();
+            medicalRecordRepository = new MedicalRecordFileRepository();
         }
         public Examination GetExaminationByID(String id)
         {

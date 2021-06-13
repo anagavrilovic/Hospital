@@ -14,9 +14,9 @@ namespace Hospital.Services
     {
         IPatientNotesRepository patientNotesRepository;
 
-        public PatientNotesService(IPatientNotesRepositoryFactory factory)
+        public PatientNotesService()
         {
-            patientNotesRepository = factory.CreatePatientNotesRepository();
+            patientNotesRepository = new PatientNotesFileRepository();
         }
 
         public void Delete(string id)

@@ -44,7 +44,7 @@ namespace Hospital.View.Doctor
                 }
             }
         }
-        private MedicalRecordService medicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
+        private MedicalRecordService medicalRecordService = new MedicalRecordService();
         public HospitalTreatmentPage(string patientId)
         {
             InitializeComponent();

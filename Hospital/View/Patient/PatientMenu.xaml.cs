@@ -25,10 +25,10 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientMenu : Page
     {
-        private PatientTherapyNotificationService patientTherapyNotificationService = new PatientTherapyNotificationService(new PatientTherapyNotificationFileFactory());
-        private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService(new PatientNotesNotificationFileFactory());
+        private PatientTherapyNotificationService patientTherapyNotificationService = new PatientTherapyNotificationService();
+        private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService();
         private NotificationService notificationService = new NotificationService();
-        private MedicalRecordService medicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
+        private MedicalRecordService medicalRecordService = new MedicalRecordService();
         public PatientMenu()
         {
             InitializeComponent();

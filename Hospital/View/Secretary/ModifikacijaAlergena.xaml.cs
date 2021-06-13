@@ -1,4 +1,5 @@
 ﻿using Hospital.Factory;
+using Hospital.Repositories;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -54,8 +55,8 @@ namespace Hospital.View
 
         private void InitializeEmptyProperties()
         {
-            MedicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
-            MedicineService = new MedicineService(new MedicineFileFactory(), new MedicalRecordFileFactory());
+            MedicalRecordService = new MedicalRecordService();
+            MedicineService = new MedicineService(new MedicineFileRepository(), new MedicalRecordFileRepository());
         }
 
         private void ReadAllMedicines()

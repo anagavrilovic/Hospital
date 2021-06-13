@@ -14,9 +14,9 @@ namespace Hospital.Services
     {
         IPatientSettingsRepository patientSettingsRepository;
 
-        public PatientSettingsService(IPatientSettingsRepositoryFactory factory)
+        public PatientSettingsService()
         {
-            patientSettingsRepository = factory.CreatePatientSettingsRepository();
+            patientSettingsRepository = new PatientSettingsFileRepository();
         }
 
         

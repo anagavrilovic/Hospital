@@ -15,9 +15,9 @@ namespace Hospital.Services
     {
         private IDoctorRepository doctorRepository;
 
-        public DoctorService(IDoctorRepositoryFactory factory)
+        public DoctorService(IDoctorRepository doctorRepository)
         {
-            doctorRepository = factory.CreateDoctorRepository();
+            this.doctorRepository = doctorRepository;
         }
 
         public Doctor GetDoctorById(string id)

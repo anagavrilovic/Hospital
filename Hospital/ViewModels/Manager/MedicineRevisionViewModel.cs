@@ -1,6 +1,7 @@
 ﻿using Hospital.Commands.Manager;
 using Hospital.Factory;
 using Hospital.Model;
+using Hospital.Repositories;
 using Hospital.Services;
 using Hospital.View;
 using System.Collections.ObjectModel;
@@ -81,7 +82,7 @@ namespace Hospital.ViewModels.Manager
 
         private void SetRevisionDoctorTextBlock()
         {
-            DoctorService doctorService = new DoctorService(new DoctorFileFactory());
+            DoctorService doctorService = new DoctorService(new DoctorFileRepository());
 
             foreach (MedicineRevision mr in MedicinesOnRevision)
             {
