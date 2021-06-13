@@ -1,5 +1,6 @@
 ﻿using Hospital.Commands.DoctorCommands;
 using Hospital.Controller;
+using Hospital.Factory;
 using Hospital.Model;
 using Hospital.Repositories;
 using Hospital.Services;
@@ -81,7 +82,7 @@ namespace Hospital.ViewModels.Doctor
             this.navigationController = navigationController;
             Feedback.UserId = doctorId;
             SaveCommand = new RelayCommand(Execute_Save, CanExecute_Command);
-            service = new FeedbackService(new FeedbackFileRepository());
+            service = new FeedbackService(new FeedbackFileFactory());
             IsEnable = true;
         }
         private void Execute_Save(object obj)

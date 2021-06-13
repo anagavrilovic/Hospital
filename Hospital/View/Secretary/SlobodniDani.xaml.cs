@@ -1,4 +1,5 @@
-﻿using Hospital.Services;
+﻿using Hospital.Factory;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -39,7 +40,7 @@ namespace Hospital.View.Secretary
         private void InitializeAllProperties()
         {
             DoctorService = new DoctorService();
-            DoctorsShiftService = new DoctorsShiftService();
+            DoctorsShiftService = new DoctorsShiftService(new DoctorFileFactory());
             StartDate = DateTime.Today;
             EndDate = DateTime.Today;
         }

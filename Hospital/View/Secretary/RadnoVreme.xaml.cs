@@ -1,4 +1,5 @@
 ﻿using Hospital.DTO;
+using Hospital.Factory;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,7 @@ namespace Hospital.View.Secretary
         {
             SelectedDate = DateTime.Now;
             DatesForShifts = new DatesForShiftsDTO();
-            DoctorsShiftService = new DoctorsShiftService();
+            DoctorsShiftService = new DoctorsShiftService(new DoctorFileFactory());
         }
 
         private void LoadAllDoctorsShifts()
