@@ -195,6 +195,10 @@
     <Compile Include="Model\BloodType.cs" />
     <Compile Include="DoktorConverters\BoolToStringConverter.cs" />
     <Compile Include="Model\City.cs" />
+    <Compile Include="Model\ConcreteStrategyGeneralNotification.cs" />
+    <Compile Include="Model\ConcreteStrategyNote.cs" />
+    <Compile Include="Model\ConcreteStrategyTherapy.cs" />
+    <Compile Include="Model\Context.cs" />
     <Compile Include="Model\Country.cs" />
     <Compile Include="DTO\DatesInWeeklyCalendarDTO.cs" />
     <Compile Include="Model\DoctorSpecialty.cs" />
@@ -226,6 +230,7 @@
     <Compile Include="Model\RegistratedUser.cs" />
     <Compile Include="Model\ScheduledShift.cs" />
     <Compile Include="Model\Shift.cs" />
+    <Compile Include="Model\Strategy.cs" />
     <Compile Include="Model\TransferDynamicInventory.cs" />
     <Compile Include="Model\TransferInventory.cs" />
     <Compile Include="Model\UnitsType.cs" />
@@ -366,11 +371,8 @@
     <Compile Include="View\Doctor\NewAppointment.xaml.cs">
       <DependentUpon>NewAppointment.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Patient\PatientGeneralNotification.xaml.cs">
-      <DependentUpon>PatientGeneralNotification.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Patient\PatientNoteNotification.xaml.cs">
-      <DependentUpon>PatientNoteNotification.xaml</DependentUpon>
+    <Compile Include="View\Patient\PatientNotification.xaml.cs">
+      <DependentUpon>PatientNotification.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patient\Help\Help9.xaml.cs">
       <DependentUpon>Help9.xaml</DependentUpon>
@@ -594,9 +596,6 @@
     <Compile Include="View\Patient\PatientSettingsPage.xaml.cs">
       <DependentUpon>PatientSettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Patient\PatientTherapy.xaml.cs">
-      <DependentUpon>PatientTherapy.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Manager\Rooms\RenovateRoom.xaml.cs">
       <DependentUpon>RenovateRoom.xaml</DependentUpon>
     </Compile>
@@ -769,11 +768,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Patient\PatientGeneralNotification.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Patient\PatientNoteNotification.xaml">
+    <Page Include="View\Patient\PatientNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1058,10 +1053,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Patient\PatientSettingsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Patient\PatientTherapy.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

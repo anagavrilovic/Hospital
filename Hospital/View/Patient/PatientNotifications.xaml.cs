@@ -23,11 +23,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientNotifications : Page
     {
-        private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService();
-        private PatientTherapyNotificationService patientTherapyNotificationService = new PatientTherapyNotificationService();
-        private MedicalRecordService medicalRecordService = new MedicalRecordService();
-        private NotificationService notificationService = new NotificationService();
-        private String username;
+        private Context context = new Context();
         public ObservableCollection<IPatientNotification> NotificationList
         {
             get;
@@ -37,105 +33,74 @@ namespace Hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
-            List<PatientTherapyMedicineNotification> therapyNotifications = patientTherapyNotificationService.GetByPatientID();
-            therapyNotifications = patientTherapyNotificationService.SetNotifactionsActivity(therapyNotifications);
-            NotificationList = new ObservableCollection<IPatientNotification>(therapyNotifications);
-            ObservableCollection<IPatientNotification> auxiliaryList = new ObservableCollection<IPatientNotification>(patientNotesNotificationService.GetByPatientID());
-            foreach(IPatientNotification pt in auxiliaryList)
-            {
-                NotificationList.Add(pt);
-            }
-            username = medicalRecordService.GetUsernameByIDPatient(MainWindow.IDnumber);
-            List<NotificationsUsers> generalNotifications = notificationService.GetNotificationByUser(username);
-            foreach (NotificationsUsers notification in generalNotifications)
-            {
-                    NotificationList.Add(new NotificationsUsersAdapter(notification));
-            }
+            NotificationList = new ObservableCollection<IPatientNotification>();
+            GetNotifications();
             dataGridApp.SelectedIndex = 0;
-
             dataGridApp.Focus();
         }
 
-        private void myTestKey(object sender, KeyEventArgs e)
+        private void GetNotifications()
         {
+            context.SetStrategy(new ConcreteStrategyTherapy());
+            AddToList();
+            context.SetStrategy(new ConcreteStrategyNote());
+            AddToList();
+            context.SetStrategy(new ConcreteStrategyGeneralNotification());
+            AddToList();
+        }
+
+        private void AddToList()
+        {
+            ObservableCollection<IPatientNotification> auxiliaryList = new ObservableCollection<IPatientNotification>(context.GetNotifications());
+            foreach (IPatientNotification pt in auxiliaryList)
+            {
+                NotificationList.Add(pt);
+            }
+        }
+
+        private void KeyPressed(object sender, KeyEventArgs e)
+        {
+            var selectedItem = dataGridApp.SelectedItem;
+            if (selectedItem == null) return;
+
+            SetStrategy((IPatientNotification)selectedItem);
+
             if (e.Key == Key.Space)
             {
-                if (dataGridApp.SelectedItem.GetType() == typeof(PatientTherapyMedicineNotification))
-                {
-
-                    UpdateTherapyNotification();
-                }
-                else if(dataGridApp.SelectedItem.GetType() == typeof(PatientNotesNotification))
-                {
-                    UpdateNoteNotification();
-                }
-                else
-                {
-                    UpdateGeneralNotification();
-                }
-
+                context.Update();
+                this.NavigationService.Navigate(new PatientNotification((IPatientNotification)selectedItem));
             }
 
             if (e.Key == Key.Subtract)
             {
-                if (dataGridApp.SelectedItem.GetType() == typeof(PatientTherapyMedicineNotification))
-                {
-                    PatientTherapyMedicineNotification selectedItem = (PatientTherapyMedicineNotification)dataGridApp.SelectedItem;
-                    if (MessageBox.Show("Da li ste sigurni da želite da obrišete obaveštenje?", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No) return;
-                    NotificationList.Remove(selectedItem);
-                    patientTherapyNotificationService.Delete(selectedItem.ID);
-                    dataGridApp.Focus();
-                }
-                else if (dataGridApp.SelectedItem.GetType() == typeof(PatientNotesNotification))
-                {
-                    PatientNotesNotification selectedItem = (PatientNotesNotification)dataGridApp.SelectedItem;
-                    if (MessageBox.Show("Da li ste sigurni da želite da obrišete obaveštenje?", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No) return;
-                    NotificationList.Remove(selectedItem);
-                    patientNotesNotificationService.Delete(selectedItem.ID);
-                    dataGridApp.Focus();
-                }
-                else
-                {
-                    NotificationsUsersAdapter selectedItem = (NotificationsUsersAdapter)dataGridApp.SelectedItem;
-                    if (MessageBox.Show("Da li ste sigurni da želite da obrišete obaveštenje?", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No) return;
-                    NotificationList.Remove(selectedItem);
-                    notificationService.DeleteUniqueNotificationsUsers(selectedItem.ID, username);
-                    dataGridApp.Focus();
-                }
+                if (MessageBox.Show("Da li ste sigurni da želite da obrišete obaveštenje?", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No) return;
+                context.Delete();
+                NotificationList.Remove((IPatientNotification)selectedItem);
             }
 
             if (e.Key == Key.Escape)
             {
                 this.NavigationService.Navigate(new PatientMenu());
             }
+
+            dataGridApp.Focus();
         }
 
-        private void UpdateTherapyNotification()
+        private void SetStrategy(IPatientNotification selectedItem)
         {
-            PatientTherapyMedicineNotification selectedItem = (PatientTherapyMedicineNotification)dataGridApp.SelectedItem;
-            selectedItem.LastRead = DateTime.Now;
-            selectedItem.Read = true;
-            patientTherapyNotificationService.Update(selectedItem);
-            PatientTherapy patientTherapy = new PatientTherapy(selectedItem);
-            this.NavigationService.Navigate(patientTherapy);
-        }
+            if (dataGridApp.SelectedItem.GetType() == typeof(PatientTherapyMedicineNotification))
+            {
+                context.SetStrategy(new ConcreteStrategyTherapy((PatientTherapyMedicineNotification)selectedItem));
 
-        private void UpdateNoteNotification()
-        {
-            PatientNotesNotification selectedItem = (PatientNotesNotification)dataGridApp.SelectedItem;
-            selectedItem.LastRead = DateTime.Now;
-            selectedItem.Read = true;
-            patientNotesNotificationService.Update(selectedItem);
-            this.NavigationService.Navigate(new PatientNoteNotification((PatientNotesNotification)dataGridApp.SelectedItem));
-        }
-
-        private void UpdateGeneralNotification()
-        {
-            NotificationsUsersAdapter selectedItem = (NotificationsUsersAdapter)dataGridApp.SelectedItem;
-            NotificationsUsers notificationsUsers = notificationService.GetUniqueNotificationsUsers(selectedItem.ID, username);
-            notificationsUsers.Read = true;
-            notificationService.UpdateNotificationsUsers(notificationsUsers);
-            this.NavigationService.Navigate(new PatientGeneralNotification(selectedItem));
+            }
+            else if (dataGridApp.SelectedItem.GetType() == typeof(PatientNotesNotification))
+            {
+                context.SetStrategy(new ConcreteStrategyNote((PatientNotesNotification)selectedItem));
+            }
+            else
+            {
+                context.SetStrategy(new ConcreteStrategyGeneralNotification((NotificationsUsersAdapter)selectedItem));
+            }
         }
     }
 }
