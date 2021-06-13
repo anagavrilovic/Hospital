@@ -186,6 +186,10 @@
     <Compile Include="DTO\FilteringRoomsDTO.cs" />
     <Compile Include="DTO\NotificationRecipientsDTO.cs" />
     <Compile Include="DTO\PatientDTO\CalendarDTO.cs" />
+    <Compile Include="Factory\DoctorFileFactory.cs" />
+    <Compile Include="Factory\FeedbackFileFactory.cs" />
+    <Compile Include="Factory\IDoctorRepositoryFactory.cs" />
+    <Compile Include="Factory\IFeedbackRepositoryFactory.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Allergen.cs" />
     <Compile Include="Model\BloodType.cs" />

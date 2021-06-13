@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Factory;
+using Hospital.Model;
 using Hospital.Repositories;
 using Hospital.Repositories.Interfaces;
 using System;
@@ -13,9 +14,9 @@ namespace Hospital.Services
     {
         IFeedbackRepository feedbackRepository;
 
-        public FeedbackService(IFeedbackRepository repository)
+        public FeedbackService(IFeedbackRepositoryFactory factory)
         {
-            feedbackRepository = repository;
+            feedbackRepository = factory.CreateFeedbackRepository();
         }
 
         public void SaveFeedBack(Feedback feedback)

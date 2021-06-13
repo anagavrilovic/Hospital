@@ -22,6 +22,7 @@ using Hospital.View.Doctor;
 using Hospital.Services;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
+using Hospital.Factory;
 
 namespace Hospital
 {
@@ -37,7 +38,7 @@ namespace Hospital
         public MainWindow()
         {
             InitializeComponent();
-            DoctorsShiftService = new DoctorsShiftService();
+            DoctorsShiftService = new DoctorsShiftService(new DoctorFileFactory());
             RegistratedUserService = new RegistratedUserService();
             DoctorsShiftService.UpdateAllShifts();
         }

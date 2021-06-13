@@ -1,4 +1,5 @@
 ﻿using Hospital.DTO;
+using Hospital.Factory;
 using Hospital.Model;
 using Hospital.Repositories;
 using Hospital.Repositories.Interfaces;
@@ -19,9 +20,9 @@ namespace Hospital.Services
 
         private AppointmentService appointmentService = new AppointmentService();
 
-        public DoctorsShiftService()
+        public DoctorsShiftService(IDoctorRepositoryFactory factory)
         {
-            doctorRepository = new DoctorFileRepository();
+            doctorRepository = factory.CreateDoctorRepository();
         }
 
 

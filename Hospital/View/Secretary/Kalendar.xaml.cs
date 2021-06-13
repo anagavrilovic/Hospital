@@ -1,4 +1,5 @@
 ﻿using Hospital.DTO;
+using Hospital.Factory;
 using Hospital.Model;
 using Hospital.Services;
 using Hospital.View.Secretary;
@@ -64,7 +65,7 @@ namespace Hospital.View
             this.AppointmentService = new AppointmentService();
             this.DoctorService = new DoctorService();
             this.MedicalRecordService = new MedicalRecordService();
-            this.DoctorsShiftService = new DoctorsShiftService();
+            this.DoctorsShiftService = new DoctorsShiftService(new DoctorFileFactory());
         }
 
         private void LoadAllDoctors()
