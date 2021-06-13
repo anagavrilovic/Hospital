@@ -30,7 +30,7 @@ namespace Hospital.View
        private AppointmentService appointmentService = new AppointmentService();
        private DateTime firstDayOfWeek;
        private Appointment appointmentForDeleting = null;
-       private const int MAXIMUM_NUMBER_OF_TERMS_PER_DAY = 24; 
+       private const int MAXIMUM_NUMBER_OF_TERMS_PER_DAY = 32; 
 
         public ObservableCollection<CalendarDTO> WeeklyTerms
         {
@@ -99,7 +99,7 @@ namespace Hospital.View
         {
             DateTime MondayDay = SetDayToMonday(day);
             label.Content = "Termini za nedelju: "+MondayDay.ToShortDateString() + " - " + MondayDay.AddDays(6).ToShortDateString();
-            for (int counter = 0, hour=8, minute=0; counter < MAXIMUM_NUMBER_OF_TERMS_PER_DAY; counter++)
+            for (int counter = 0, hour=6, minute=0; counter < MAXIMUM_NUMBER_OF_TERMS_PER_DAY; counter++)
             {
                 if (counter % 2 == 1) minute = 30;
                 CalendarDTO weeklyAppointmentsForTerm = calendarController.SetCalendarDTO(new CalendarDTO(hour, minute, MondayDay));

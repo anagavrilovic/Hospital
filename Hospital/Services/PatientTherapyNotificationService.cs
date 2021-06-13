@@ -32,7 +32,6 @@ namespace Hospital.Services
         public void SaveFirst(Examination e)
         {
             List<PatientTherapyMedicineNotification> patientNotifications =GetAll();
-            //int x = 0;
             foreach (MedicineTherapy med in e.therapy.Medicine)
             {
                 patientNotifications.Add(GetNotification(e,med));
@@ -43,7 +42,7 @@ namespace Hospital.Services
 
         private PatientTherapyMedicineNotification GetNotification(Examination examination,MedicineTherapy medicineTherapy)
         {
-            PatientTherapyMedicineNotification patientTherapyMedicineNotification = new PatientTherapyMedicineNotification(patientTherapyNotificationsRepository.GetNewID(), examination.appointment.IDpatient,false, examination.appointment.DateTime, examination.appointment.DateTime.AddDays(medicineTherapy.DurationInDays), examination.therapy.description);
+            PatientTherapyMedicineNotification patientTherapyMedicineNotification = new PatientTherapyMedicineNotification(patientTherapyNotificationsRepository.GetNewID(), examination.appointment.IDpatient,false, examination.appointment.DateTime, examination.appointment.DateTime.AddDays(medicineTherapy.DurationInDays), medicineTherapy.Description);
             patientTherapyMedicineNotification.Name = medicineRepository.GetByID(medicineTherapy.MedicineID).Name;
             patientTherapyMedicineNotification = SetNotificationTimes(patientTherapyMedicineNotification, medicineTherapy);
             patientTherapyMedicineNotification.updateDuration();
