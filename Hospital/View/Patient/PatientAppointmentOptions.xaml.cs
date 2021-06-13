@@ -24,7 +24,7 @@ namespace Hospital.View
     public partial class PatientAppointmentOptions : Page
     {
         private Appointment selectedAppointment;
-        private AppointmentService appointmentService = new AppointmentService();
+        private AppointmentService appointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
         private PatientSettingsService patientSettingsService = new PatientSettingsService(new PatientSettingsFileFactory());
       
 

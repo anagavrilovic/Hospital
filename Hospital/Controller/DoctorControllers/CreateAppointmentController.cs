@@ -22,7 +22,7 @@ namespace Hospital.DTO.DoctorDTO
         {
             medicalRecordService = new MedicalRecordService();
             doctorService = new DoctorService();
-            appointmentService = new AppointmentService();
+            appointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
             roomService = new RoomService();
             doctorsShiftService = new DoctorsShiftService(new DoctorFileFactory());
             this.DTO = DTO;

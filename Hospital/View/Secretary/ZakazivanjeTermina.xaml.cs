@@ -1,4 +1,5 @@
-﻿using Hospital.Services;
+﻿using Hospital.Factory;
+using Hospital.Services;
 using Hospital.View.Secretary;
 using System;
 using System.Collections.ObjectModel;
@@ -35,7 +36,7 @@ namespace Hospital.View
             NewAppointment = new Appointment();
             AvaliableRooms = new ObservableCollection<Room>();
             PossibleDuration = new ObservableCollection<string>();
-            AppointmentService = new AppointmentService();
+            AppointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
             RoomService = new RoomService();
         }
 

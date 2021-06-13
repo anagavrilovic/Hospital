@@ -23,7 +23,7 @@ namespace Hospital.Controller.DoctorControllers
             this.DTO = DTO;
             roomService = new RoomService();
             doctorService = new DoctorService();
-            appointmentService = new AppointmentService();
+            appointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
             doctorsShiftService = new DoctorsShiftService(new DoctorFileFactory());
         }
 

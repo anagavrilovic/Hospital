@@ -77,7 +77,7 @@ namespace Hospital.View.Doctor
 
         private void DeleteAppointmentOfExamination()
         {
-            AppointmentService appointmentService = new AppointmentService();
+            AppointmentService appointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
             appointmentService.Delete(appointment.IDAppointment);
         }
 

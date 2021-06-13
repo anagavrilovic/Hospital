@@ -1,4 +1,5 @@
-﻿using Hospital.Services;
+﻿using Hospital.Factory;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,7 +17,7 @@ namespace Hospital.ViewModels.Patient
             set;
         }
 
-        private AppointmentService appointmentService = new AppointmentService();
+        private AppointmentService appointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
         public PatientPassedAppointmentsViewModel()
         {
             Appointments = new ObservableCollection<Appointment>(appointmentService.GetPassedAppointmentsForPatient(MainWindow.IDnumber));

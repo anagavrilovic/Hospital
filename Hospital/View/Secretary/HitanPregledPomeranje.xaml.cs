@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Factory;
+using Hospital.Model;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -44,7 +45,7 @@ namespace Hospital.View.Secretary
         private void InitializeEmptyObjects()
         {
             Options = new ObservableCollection<OptionForRescheduling>();
-            AppointmentService = new AppointmentService();
+            AppointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
             MedicalRecordService = new MedicalRecordService();
             DoctorService = new DoctorService();
             RoomService = new RoomService();

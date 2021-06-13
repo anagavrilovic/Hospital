@@ -1,4 +1,5 @@
 ﻿using Hospital.Commands.DoctorCommands;
+using Hospital.Factory;
 using Hospital.Services;
 using Hospital.View.Secretary;
 using LiveCharts;
@@ -17,7 +18,7 @@ namespace Hospital.ViewModels.Secretary
         #region Properties
 
         private DoctorService doctorService = new DoctorService();
-        private AppointmentService appointmentService = new AppointmentService();
+        private AppointmentService appointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
         public NavigationService NavigationService { get; set; }
 
         #endregion

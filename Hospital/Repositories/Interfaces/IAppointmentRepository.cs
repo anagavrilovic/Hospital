@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Repositories.Interfaces
 {
-    interface IAppointmentRepository : IGenericRepository<Appointment>
+   public interface IAppointmentRepository : IGenericRepository<Appointment>
     {
         void DeletePatientsAppointments(string patientID);
         bool IsDoctorAvaliableForAppointment(Appointment newAppointment);

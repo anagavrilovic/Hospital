@@ -1,4 +1,5 @@
-﻿using Hospital.Services;
+﻿using Hospital.Factory;
+using Hospital.Services;
 using Hospital.View.Secretary;
 using System;
 using System.Collections.Generic;
@@ -58,7 +59,7 @@ namespace Hospital.View
             Patients = new ObservableCollection<MedicalRecord>();
             PatientsAppointments = new ObservableCollection<Appointment>();
             MedicalRecordService = new MedicalRecordService();
-            AppointmentService = new AppointmentService();
+            AppointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
         }
 
         private void LoadPatients()

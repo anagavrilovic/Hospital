@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Factory;
+using Hospital.Model;
 using Hospital.Repositories;
 using Hospital.Repositories.Interfaces;
 using System;
@@ -23,10 +24,11 @@ namespace Hospital.Services
         private const int MINIMUM_DAYS_DIFFERENCE = 2;
         private const int MAXIMUM_DAYS_DIFFERENCE = 10;
 
-        public AppointmentService()
+        public AppointmentService(IAppointmentRepositoryFactory appointmentFactory, IDoctorRepositoryFactory doctorFactory, IMedicalRecordRepositoryFactory recordFactory)
         {
-            appointmentRepository = new AppointmentFileRepository();
-            doctorRepository = new DoctorFileRepository();
+            appointmentRepository = appointmentFactory.CreateAppointmentRepository();
+            doctorRepository = doctorFactory.CreateDoctorRepository();
+            medicalRecordRepository = recordFactory.CreateMedicalRecordRepository();
         }
 
         public List<Appointment> GetAppointmentsByDoctor(Doctor doctor)
@@ -425,8 +427,6 @@ namespace Hospital.Services
 
         public List<Appointment> SetAppointmentDataGrid(DoctorSpecialty doctorSpecialty)
         {
-            doctorRepository = new DoctorFileRepository();
-            medicalRecordRepository = new MedicalRecordFileRepository();
             List<Appointment> appointments = new List<Appointment>();
 
             foreach (Appointment appointmentToAdd in GetAll())
@@ -443,8 +443,6 @@ namespace Hospital.Services
 
         public List<Appointment> SetParentAppointments(Appointment appointment)
         {
-            doctorRepository = new DoctorFileRepository();
-            medicalRecordRepository = new MedicalRecordFileRepository();
             List<Appointment> appointments = new List<Appointment>();
             foreach (Appointment appointmentFromStorage in GetAll())
             {
@@ -459,8 +457,6 @@ namespace Hospital.Services
 
         public List<Appointment> InitAppointments(string doctorId)
         {
-            doctorRepository = new DoctorFileRepository();
-            medicalRecordRepository = new MedicalRecordFileRepository();
             List<Appointment> appointments = new List<Appointment>();
             foreach (Appointment a in GetAll())
             {

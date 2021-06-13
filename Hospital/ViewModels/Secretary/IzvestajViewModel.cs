@@ -1,4 +1,5 @@
 ﻿using Hospital.Commands.Secretary;
+using Hospital.Factory;
 using Hospital.ReportsPatterns;
 using Hospital.Services;
 using Hospital.View.Secretary;
@@ -65,7 +66,7 @@ namespace Hospital.ViewModels.Secretary
             DateBegin = DateTime.Now;
             DateEnd = DateTime.Now;
             DoctorService = new DoctorService();
-            AppointmentService = new AppointmentService();
+            AppointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
             MedicalRecordService = new MedicalRecordService();
         }
 

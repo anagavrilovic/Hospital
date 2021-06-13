@@ -1,4 +1,5 @@
 ﻿using Hospital.DTO.DoctorDTO;
+using Hospital.Factory;
 using Hospital.Model;
 using Hospital.Services;
 using System;
@@ -54,7 +55,7 @@ namespace Hospital.View.Doctor
         private void InitProperties(Model.Doctor doctor, string patientId)
         {
             DTO = new AppointmentInfoDTO();
-            appointmentService = new AppointmentService();
+            appointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
             this.patientId = patientId;
             ComboBox.ItemsSource = Enum.GetValues(typeof(DoctorSpecialty)).Cast<DoctorSpecialty>();
             ComboBox.SelectedIndex = (int)doctor.Specialty;

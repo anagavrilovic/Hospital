@@ -1,4 +1,5 @@
-﻿using Hospital.Services;
+﻿using Hospital.Factory;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientAnamnesis : Page
     {
-        private ExaminationService examinationService = new ExaminationService();
+        private ExaminationService examinationService = new ExaminationService(new MedicalRecordFileFactory());
         public PatientAnamnesis(Appointment appointment)
         {
             InitializeComponent();

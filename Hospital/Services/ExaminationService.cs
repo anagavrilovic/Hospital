@@ -1,4 +1,5 @@
-﻿using Hospital.Repositories;
+﻿using Hospital.Factory;
+using Hospital.Repositories;
 using Hospital.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,9 @@ namespace Hospital.Services
     {
         private IMedicalRecordRepository medicalRecordRepository;
 
-        public ExaminationService()
+        public ExaminationService(IMedicalRecordRepositoryFactory factory)
         {
-            medicalRecordRepository = new MedicalRecordFileRepository();
+            medicalRecordRepository = factory.CreateMedicalRecordRepository();
         }
         public Examination GetExaminationByID(String id)
         {

@@ -1,4 +1,5 @@
 ﻿using Hospital.DTO.DoctorDTO;
+using Hospital.Factory;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace Hospital.Controller.DoctorControllers
         public DoctorAppointmentsController(NewAppointmentDTO DTO)
         {
             this.DTO = DTO;
-            appointmentService = new AppointmentService();
+            appointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
             medicalRecordService = new MedicalRecordService();
             doctorService = new DoctorService();
         }

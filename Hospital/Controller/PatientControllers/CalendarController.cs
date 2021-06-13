@@ -16,7 +16,7 @@ namespace Hospital.Controller.PatientControllers
         private CalendarDTO calendarDTO;
         private const int NUMBER_OF_DAYS_IN_WEEK = 7;
         private DoctorService doctorService = new DoctorService();
-        private AppointmentService appointmentService = new AppointmentService();
+        private AppointmentService appointmentService = new AppointmentService(new AppointmentFileFactory(), new DoctorFileFactory(), new MedicalRecordFileFactory());
         private PatientSettingsService patientSettingsService = new PatientSettingsService(new PatientSettingsFileFactory());
         private DoctorsShiftService doctorsShiftService = new DoctorsShiftService(new DoctorFileFactory());
         private RoomService roomService = new RoomService();
