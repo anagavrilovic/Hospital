@@ -36,8 +36,23 @@ namespace Hospital.Services
 
         public void FinishTransfer()
         {
+            if (IsRoomAvailabilityOfFreeBedsChanged())
+                return;
+
             UpdateInventory();
             RemoveTransferRequest();
+        }
+
+        private bool IsRoomAvailabilityOfFreeBedsChanged()
+        {
+            Inventory ItemForTransfer = staticInventoryRepository.GetOneItemFromRoom(Transfer.ItemID, Transfer.FirstRoomID);
+            IRoomRepository roomRepository = new RoomFileRepository();
+            Room firstRoom = roomRepository.GetByID(Transfer.FirstRoomID);
+            if (ItemForTransfer.Name.ToLower().Contains("krevet"))
+                if (firstRoom.FreeBeds < Transfer.Quantity)
+                    return true;
+
+            return false;
         }
 
         public void UpdateInventory()
