@@ -22,8 +22,9 @@ namespace Hospital.Model
         {
 
         }
-        public PatientComment(string iDPatient, string iDAppointment, string comment, int grade, string doctorsNameSurname, DateTime dateWhenRated)
+        public PatientComment(string id, string iDPatient, string iDAppointment, string comment, int grade, string doctorsNameSurname, DateTime dateWhenRated)
         {
+            ID = id;
             IDPatient = iDPatient;
             IDAppointment = iDAppointment;
             Comment = comment;
@@ -32,8 +33,9 @@ namespace Hospital.Model
             DateWhenRated = dateWhenRated;
         }
 
-        public PatientComment(string iDPatient, string comment, int grade, DateTime dateWhenRated)
+        public PatientComment(string id, string iDPatient, string comment, int grade, DateTime dateWhenRated)
         {
+            ID = id;
             IDPatient = iDPatient;
             IDAppointment = "";
             Comment = comment;

@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Factory;
+using Hospital.Model;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace Hospital.View
     {
         Appointment app;
         PatientComment patientComment;
-        PatientCommentsService patientCommentsService = new PatientCommentsService();
+        PatientCommentsService patientCommentsService = new PatientCommentsService(new PatientCommentsFileFactory());
         private PatientSettingsService patientSettingsService = new PatientSettingsService();
         public PatientRateDoctor(Appointment app)
         {
@@ -77,11 +78,11 @@ namespace Hospital.View
             if (MessageBox.Show("Da li ste sigurni da želite da izvršite ocenjivanje?", "Potvrda", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No) return;
             if (app == null)
             {
-                patientComment = new PatientComment(MainWindow.IDnumber, CommentArea.Text, Int32.Parse((String)GradeButton.Content), DateTime.Now);
+                patientComment = new PatientComment(patientCommentsService.GetNewID(),MainWindow.IDnumber, CommentArea.Text, Int32.Parse((String)GradeButton.Content), DateTime.Now);
             }
             else
             {
-                patientComment = new PatientComment(MainWindow.IDnumber, app.IDAppointment, CommentArea.Text, Int32.Parse((String)GradeButton.Content), "string", DateTime.Now);
+                patientComment = new PatientComment(patientCommentsService.GetNewID(),MainWindow.IDnumber, app.IDAppointment, CommentArea.Text, Int32.Parse((String)GradeButton.Content), "string", DateTime.Now);
             }
             patientCommentsService.Save(patientComment);
             if (app == null)

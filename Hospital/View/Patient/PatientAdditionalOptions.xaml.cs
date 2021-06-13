@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Factory;
+using Hospital.Model;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientAdditionalOptions : Page
     {
-        private PatientCommentsService patientCommentsService = new PatientCommentsService();
+        private PatientCommentsService patientCommentsService = new PatientCommentsService(new PatientCommentsFileFactory());
         public PatientAdditionalOptions()
         {
             InitializeComponent();

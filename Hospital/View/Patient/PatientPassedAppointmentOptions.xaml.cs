@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Factory;
+using Hospital.Model;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientPassedAppointmentOptions : Page
     {
-        private PatientCommentsService patientCommentsService = new PatientCommentsService();
+        private PatientCommentsService patientCommentsService = new PatientCommentsService(new PatientCommentsFileFactory());
         private ExaminationService examinationService = new ExaminationService();
         Appointment app;
         public PatientPassedAppointmentOptions(Appointment app)

@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Factory;
+using Hospital.Model;
 using Hospital.Repositories;
 using Hospital.Repositories.Interfaces;
 using System;
@@ -13,9 +14,9 @@ namespace Hospital.Services
     {
         IPatientCommentsRepository patientCommentsRepository;
 
-        public PatientCommentsService()
+        public PatientCommentsService(IPatientCommentsRepositoryFactory factory)
         {
-            patientCommentsRepository = new PatientCommentsFileRepository();
+            patientCommentsRepository = factory.CreatePatientCommentsRepository();
         }
 
         public void Save(PatientComment patientComment)
