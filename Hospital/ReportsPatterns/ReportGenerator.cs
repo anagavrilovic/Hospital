@@ -32,12 +32,14 @@ namespace Hospital.ReportsPatterns
                 InitializeGraphics(page);
                 GenerateHeader();
                 InsertImage(page);
-
+              
                 GenerateTitle();
+                GenerateContent();
+
                 GenerateTableContent();
+                GenerateTable(page);
                 GenerateConclusion();
 
-                GenerateTable(page);
                 SavePdf();
             }
         }
@@ -46,10 +48,12 @@ namespace Hospital.ReportsPatterns
 
         public abstract void GenerateTableContent();
 
+        public abstract void GenerateContent();
+
         private void GenerateTable(PdfPage page)
         {
             PdfLightTable.DataSource = Table;
-            PdfLightTable.Draw(page, new PointF(0, 170));
+            PdfLightTable.Draw(page, new PointF(0, 185));
         }
 
         public abstract void SavePdf ();

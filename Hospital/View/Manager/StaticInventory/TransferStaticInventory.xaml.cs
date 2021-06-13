@@ -1,5 +1,6 @@
 ﻿using Hospital.Model;
 using Hospital.Services;
+using Hospital.View.Manager;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -26,7 +27,9 @@ namespace Hospital.View
         private void AcceptButtonClick(object sender, RoutedEventArgs e)
         {
             InitializeTransferRequest();
-            _schedulingTransferService.ProcessRequest();
+            string message = _schedulingTransferService.ProcessRequest();
+            MessageWindow messageWindow = new MessageWindow(message);
+            messageWindow.Show();
          
             NavigationService.Navigate(new StaticInventoryView(ItemForTransfer.RoomID));
         }

@@ -228,6 +228,7 @@
     <Compile Include="Model\UserType.cs" />
     <Compile Include="ReportsPatterns\MedicinesReport.cs" />
     <Compile Include="ReportsPatterns\ReportGenerator.cs" />
+    <Compile Include="ReportsPatterns\SecretaryReport.cs" />
     <Compile Include="Repositories\AppointmentFileRepository.cs" />
     <Compile Include="Repositories\DoctorFileRepository.cs" />
     <Compile Include="Repositories\DynamicInventoryFileRepository.cs" />

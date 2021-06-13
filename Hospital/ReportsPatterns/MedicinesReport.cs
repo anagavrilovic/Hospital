@@ -44,5 +44,7 @@ namespace Hospital.ReportsPatterns
         }
 
         public override void GenerateConclusion() { }
+
+        public override void GenerateContent() { }
     }
 }
