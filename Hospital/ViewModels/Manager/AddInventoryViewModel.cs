@@ -1,4 +1,5 @@
 ﻿using Hospital.Commands.Manager;
+using Hospital.Repositories;
 using Hospital.Services;
 using Hospital.View;
 using System.Windows.Navigation;
@@ -41,7 +42,7 @@ namespace Hospital.ViewModels.Manager
 
         public void Execute_AddInventoryCommand(object obj)
         {
-            StaticInventoryService inventoryService = new StaticInventoryService();
+            StaticInventoryService inventoryService = new StaticInventoryService(new StaticInventoryFileRepository());
             inventoryService.AddNewItem(InventoryItem);
 
             NavigationService.Navigate(new StaticInventoryView(InventoryItem.RoomID));

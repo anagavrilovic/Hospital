@@ -15,9 +15,9 @@ namespace Hospital.Services
         private IDynamicInventoryRepository dynamicInventoryRepository;
         public TransferDynamicInventory TranferRequest;
 
-        public TransferDynamicInventoryService(TransferDynamicInventory transfer)
+        public TransferDynamicInventoryService(TransferDynamicInventory transfer, IDynamicInventoryRepository inventoryRepository)
         {
-            dynamicInventoryRepository = new DynamicInventoryFileRepository();
+            dynamicInventoryRepository = inventoryRepository;
             TranferRequest = transfer;
         }
 
@@ -35,10 +35,7 @@ namespace Hospital.Services
             if (TranferRequest.Quantity <= itemInFirstRoom.Quantity)
                 return true;
             else
-            {
-                //MessageBox.Show("Sala ne raspolaže unetom količinom stavke. \n Pokušajte sa manjom količinom.");    //TODO: throw exception
-                return false;
-            }
+                return false;            
         }
 
         private void ExecuteTransfer()

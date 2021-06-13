@@ -49,7 +49,7 @@ namespace Hospital.View.Secretary
             AppointmentService = new AppointmentService();
             MedicalRecordService = new MedicalRecordService();
             DoctorService = new DoctorService(new DoctorFileRepository());
-            RoomService = new RoomService();
+            RoomService = new RoomService(new RoomFileRepository(), new AppointmentFileRepository());
         }
 
         private void FindAllOptions()

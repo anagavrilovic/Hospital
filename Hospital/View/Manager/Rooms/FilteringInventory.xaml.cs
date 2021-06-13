@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Repositories;
+using System;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
@@ -25,7 +26,7 @@ namespace Hospital.View
         {
             ObservableCollection<string>  StaticInventoryItems = new ObservableCollection<string>();
 
-            Services.StaticInventoryService staticInventoryService = new Services.StaticInventoryService();
+            Services.StaticInventoryService staticInventoryService = new Services.StaticInventoryService(new StaticInventoryFileRepository());
             foreach (Inventory inventory in staticInventoryService.GetAll())
             {
                 StringBuilder sb = new StringBuilder();
@@ -42,7 +43,7 @@ namespace Hospital.View
         {
             ObservableCollection<string>  DynamicInventoryItems = new ObservableCollection<string>();
 
-            Services.DynamicInventoryService dynamicInventoryService = new Services.DynamicInventoryService();
+            Services.DynamicInventoryService dynamicInventoryService = new Services.DynamicInventoryService(new DynamicInventoryFileRepository());
             foreach (DynamicInventory medicalSupply in dynamicInventoryService.GetAll())
             {
                 StringBuilder sb = new StringBuilder();
@@ -124,7 +125,7 @@ namespace Hospital.View
         private void FinishFiltering(object sender, RoutedEventArgs e)
         {
             GetFilters();
-            Services.RoomsFilteringService filteringService = new Services.RoomsFilteringService(FilteringRoomsDTO);
+            Services.RoomsFilteringService filteringService = new Services.RoomsFilteringService(FilteringRoomsDTO, new RoomFileRepository(), new StaticInventoryFileRepository(), new DynamicInventoryFileRepository());
 
             NavigationService.Navigate(new RoomsWindow());
             RoomsWindow.Rooms = new ObservableCollection<Room>(filteringService.FilterRooms());

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Repositories
 {
-    class StaticInventoryFileRepository : IStaticInventoryRepository
+   public class StaticInventoryFileRepository : IStaticInventoryRepository
     {
         private string fileName = "inventory.json";
 

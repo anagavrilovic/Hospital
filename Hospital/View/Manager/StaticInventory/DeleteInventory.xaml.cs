@@ -1,4 +1,5 @@
-﻿using Hospital.Services;
+﻿using Hospital.Repositories;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace Hospital.View
 
         private void AcceptDeleting(object sender, RoutedEventArgs e)
         {
-            StaticInventoryService inventoryService = new StaticInventoryService();
+            StaticInventoryService inventoryService = new StaticInventoryService(new StaticInventoryFileRepository());
             inventoryService.DeleteItem(InventoryForDeleting);
 
             NavigationService.Navigate(new StaticInventoryView(InventoryForDeleting.RoomID));

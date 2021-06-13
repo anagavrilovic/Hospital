@@ -1,20 +1,15 @@
 ﻿using Hospital.Repositories;
 using Hospital.Repositories.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace Hospital.Services
 {
     public class DynamicInventoryService
     {
         private IDynamicInventoryRepository dynamicInventoryRepository;
-        public DynamicInventoryService()
+        public DynamicInventoryService(IDynamicInventoryRepository inventoryRepository)
         {
-            dynamicInventoryRepository = new DynamicInventoryFileRepository();
+            dynamicInventoryRepository = inventoryRepository;
         }
 
         public List<DynamicInventory> GetAll()
@@ -37,10 +32,7 @@ namespace Hospital.Services
             foreach (DynamicInventory inv in dynamicInventoryRepository.GetAllInventoryFromRoom(InventoryItem.RoomID))
             {
                 if (inv.Id.Equals(InventoryItem.Id))
-                {
-                    //TODO: throw exception : Already exists ID
                     return false;
-                }
             }
             return true;
         }

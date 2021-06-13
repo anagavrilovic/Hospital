@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Repositories;
 using Hospital.Services;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -24,7 +25,7 @@ namespace Hospital.View
         private void AcceptButtonClick(object sender, RoutedEventArgs e)
         {
             InitializeTransferRequest();
-            TransferDynamicInventoryService service = new TransferDynamicInventoryService(TransferRequest);
+            TransferDynamicInventoryService service = new TransferDynamicInventoryService(TransferRequest, new DynamicInventoryFileRepository());
             service.ProcessRequest();
 
             NavigationService.Navigate(new DynamicInventoryView(ItemForTransfer.RoomID));
@@ -41,7 +42,7 @@ namespace Hospital.View
         private void InitializeComboBoxItems()
         {
             ObservableCollection<string> AllRoomsIDs = new ObservableCollection<string>();
-            RoomService roomService = new RoomService();
+            RoomService roomService = new RoomService(new RoomFileRepository(), new AppointmentFileRepository());
             foreach (Room room in roomService.GetAll())
             {
                 if(!room.Id.Equals(ItemForTransfer.RoomID))

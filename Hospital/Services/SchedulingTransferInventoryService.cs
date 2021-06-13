@@ -141,7 +141,7 @@ namespace Hospital.Services
         {
             transfer.TransferID = GenerateTransferID();
             transferInventoryRepository.Save(transfer);
-            TransferInventoryService service = new TransferInventoryService(transfer);
+            TransferInventoryService service = new TransferInventoryService(transfer, new StaticInventoryFileRepository(), new RoomFileRepository());
             service.ScheduleTransfer();
         }
 

@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Repositories;
 using Hospital.Services;
 using System;
 using System.ComponentModel;
@@ -30,7 +31,7 @@ namespace Hospital.View.Manager.Rooms
             this.DataContext = this;
 
             NewRoom = new Room();
-            roomService = new RoomService();
+            roomService = new RoomService(new RoomFileRepository(), new AppointmentFileRepository());
             RoomRenovation = renovation;
         }
 

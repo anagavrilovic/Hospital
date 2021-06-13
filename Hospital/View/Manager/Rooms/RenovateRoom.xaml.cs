@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Repositories;
 using Hospital.Services;
 using Hospital.View.Manager;
 using Hospital.View.Manager.Rooms;
@@ -53,7 +54,7 @@ namespace Hospital.View
             RoomRenovation = new RoomRenovation();
             RoomsToDestroy = new ObservableCollection<string>();
             RoomsToCreate = new ObservableCollection<string>();
-            this._roomService = new RoomService();
+            this._roomService = new RoomService(new RoomFileRepository(), new AppointmentFileRepository());
 
             FindRoomsFromSameFloor();
             InitializeComboBoxes();

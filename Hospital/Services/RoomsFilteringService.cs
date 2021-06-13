@@ -23,11 +23,11 @@ namespace Hospital.Services
         public List<Room> FilteredRooms { get; set; }
         public DTO.FilteringRoomsDTO FilteringCriteriaDTO { get; set; }
 
-        public RoomsFilteringService(DTO.FilteringRoomsDTO criteria)
+        public RoomsFilteringService(DTO.FilteringRoomsDTO criteria, IRoomRepository roomRepository, IStaticInventoryRepository staticInventoryRepository, IDynamicInventoryRepository dynamicInventoryRepository)
         {
-            _roomRepository = new RoomFileRepository();
-            _staticInventoryRepository = new StaticInventoryFileRepository();
-            _dynamicInventoryRepository = new DynamicInventoryFileRepository();
+            _roomRepository = roomRepository;
+            _staticInventoryRepository = staticInventoryRepository;
+            _dynamicInventoryRepository = dynamicInventoryRepository;
             FilteredRooms = _roomRepository.GetAll();
             FilteringCriteriaDTO = criteria;
         }

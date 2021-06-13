@@ -18,7 +18,7 @@ namespace Hospital.Services
         IDoctorRepository doctorRepository;
         IMedicalRecordRepository medicalRecordRepository;
 
-        private RoomService roomService = new RoomService();
+        private RoomService roomService = new RoomService(new RoomFileRepository(), new AppointmentFileRepository());
         private NotificationService notificationService = new NotificationService();
 
         private const int MINIMUM_DAYS_DIFFERENCE = 2;

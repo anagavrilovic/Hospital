@@ -1,4 +1,5 @@
 ﻿using Hospital.Factory;
+using Hospital.Repositories;
 using Hospital.Services;
 using Hospital.View.Secretary;
 using System;
@@ -37,7 +38,7 @@ namespace Hospital.View
             AvaliableRooms = new ObservableCollection<Room>();
             PossibleDuration = new ObservableCollection<string>();
             AppointmentService = new AppointmentService();
-            RoomService = new RoomService();
+            RoomService = new RoomService(new RoomFileRepository(), new AppointmentFileRepository());
         }
 
         private void ShowPossibleDuration()

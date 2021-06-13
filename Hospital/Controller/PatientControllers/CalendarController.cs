@@ -19,7 +19,7 @@ namespace Hospital.Controller.PatientControllers
         private AppointmentService appointmentService = new AppointmentService();
         private PatientSettingsService patientSettingsService = new PatientSettingsService();
         private DoctorsShiftService doctorsShiftService = new DoctorsShiftService(new DoctorFileFactory());
-        private RoomService roomService = new RoomService();
+        private RoomService roomService = new RoomService(new RoomFileRepository(), new AppointmentFileRepository());
         private PatientSettings patientSettings;
 
         public CalendarController()

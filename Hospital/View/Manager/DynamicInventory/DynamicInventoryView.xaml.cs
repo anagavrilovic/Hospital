@@ -1,4 +1,5 @@
-﻿using Hospital.Services;
+﻿using Hospital.Repositories;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -44,7 +45,7 @@ namespace Hospital.View
             this.DataContext = this;
             this._roomID = id;
 
-            _dynamicInventoryService = new DynamicInventoryService();
+            _dynamicInventoryService = new DynamicInventoryService(new DynamicInventoryFileRepository());
             DynamicInventoryInRoom = new ObservableCollection<DynamicInventory>(_dynamicInventoryService.GetAllDynamicInventoryFroomRoom(id));
             DynamicInventoryCollection = CollectionViewSource.GetDefaultView(DynamicInventoryInRoom);
         }

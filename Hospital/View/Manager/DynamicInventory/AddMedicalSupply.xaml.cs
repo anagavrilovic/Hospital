@@ -1,4 +1,5 @@
-﻿using Hospital.Services;
+﻿using Hospital.Repositories;
+using Hospital.Services;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,7 +33,7 @@ namespace Hospital.View
                 case 2: DynamicInventoryItem.Units = UnitsType.flasice;  break;
             }
 
-            DynamicInventoryService inventoryService = new DynamicInventoryService();
+            DynamicInventoryService inventoryService = new DynamicInventoryService(new DynamicInventoryFileRepository());
             inventoryService.AddNewItem(DynamicInventoryItem);
  
             NavigationService.Navigate(new DynamicInventoryView(DynamicInventoryItem.RoomID));

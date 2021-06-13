@@ -12,9 +12,9 @@ namespace Hospital.Services
     public class StaticInventoryService
     {
         private IStaticInventoryRepository staticInventoryRepository;
-        public StaticInventoryService()
+        public StaticInventoryService(IStaticInventoryRepository inventoryRepository)
         {
-            staticInventoryRepository = new StaticInventoryFileRepository();
+            staticInventoryRepository = inventoryRepository;
         }
 
         public List<Inventory> GetAll()

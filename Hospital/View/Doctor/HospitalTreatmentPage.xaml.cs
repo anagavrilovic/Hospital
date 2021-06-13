@@ -1,6 +1,7 @@
 ﻿using Hospital.DTO.DoctorDTO;
 using Hospital.Factory;
 using Hospital.Model;
+using Hospital.Repositories;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace Hospital.View.Doctor
     public partial class HospitalTreatmentPage : Page,INotifyPropertyChanged
     {
         private static int MEDICAL_RECORD_TAB = 1;
-        private RoomService roomService = new RoomService();
+        private RoomService roomService = new RoomService(new RoomFileRepository(), new AppointmentFileRepository());
         private HospitalTreatment hospitalTreatment = new HospitalTreatment();
         public event PropertyChangedEventHandler PropertyChanged;
         private HospitalTreatmentDTO dTO;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Repositories.Interfaces
 {
-    interface IRoomRenovationRepository : IGenericRepository<RoomRenovation>
+    public interface IRoomRenovationRepository : IGenericRepository<RoomRenovation>
     {
         List<int> GetAllScheduledRenovationsIDs();
     }

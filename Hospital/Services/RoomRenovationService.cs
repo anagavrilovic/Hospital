@@ -92,7 +92,7 @@ namespace Hospital.Services
 
         private void MoveAppointmentToAnotherRoom(Appointment movingAppointment)
         {
-            RoomService roomService = new RoomService();
+            RoomService roomService = new RoomService(new RoomFileRepository(), new AppointmentFileRepository());
             Room newRoom = roomService.GetAvaliableRoomsForNewAppointment(movingAppointment)[0];
             movingAppointment.Room = newRoom;
             appointmentRepository.Update(movingAppointment);
@@ -106,7 +106,7 @@ namespace Hospital.Services
 
         private Room GetNewRoomForAppointment(Appointment movingAppointment)
         {
-            RoomService roomService = new RoomService();
+            RoomService roomService = new RoomService(new RoomFileRepository(), new AppointmentFileRepository());
             Room newRoom = roomService.GetAvaliableRoomsForNewAppointment(movingAppointment)[0];
             List<Room> availableRooms = roomService.GetAvaliableRoomsForNewAppointment(movingAppointment);
             foreach (Room room in availableRooms)
@@ -175,7 +175,7 @@ namespace Hospital.Services
             foreach (Inventory inventory in inventoryRepository.GetAllInventoryFromRoom(Renovation.Room.Id))
             {
                 TransferInventory transfer = new TransferInventory(inventory.Id, inventory.Quantity, Renovation.Room.Id, Renovation.WareHouse.Id, DateTime.Now);
-                TransferInventoryService service = new TransferInventoryService(transfer);
+                TransferInventoryService service = new TransferInventoryService(transfer, new StaticInventoryFileRepository(), new RoomFileRepository());
                 service.UpdateInventory();
             }
         }

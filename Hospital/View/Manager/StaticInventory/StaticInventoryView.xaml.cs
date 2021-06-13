@@ -39,7 +39,7 @@ namespace Hospital.View
             this.DataContext = this;
             this._roomID = id;
 
-            StaticInventoryService inventoryService = new StaticInventoryService();
+            StaticInventoryService inventoryService = new StaticInventoryService(new StaticInventoryFileRepository());
             InventoryInRoom = new ObservableCollection<Inventory>(inventoryService.GetAllInventoryFroomRoom(id));
             InventoryCollection = CollectionViewSource.GetDefaultView(InventoryInRoom);
             CheckScheduledTransfersStatus();
@@ -53,7 +53,7 @@ namespace Hospital.View
             {
                 if (ti.TransferDate < DateTime.Now)
                 {
-                    service = new TransferInventoryService(ti);
+                    service = new TransferInventoryService(ti, new StaticInventoryFileRepository(), new RoomFileRepository());
                     service.CheckTransferStatus();
                 }
             }

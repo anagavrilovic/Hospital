@@ -10,11 +10,13 @@ namespace Hospital.Services
     public class TransferInventoryService
     {
         private IStaticInventoryRepository staticInventoryRepository;
+        private IRoomRepository roomRepository = new RoomFileRepository();
         public TransferInventory Transfer { get; set; }
 
-        public TransferInventoryService(TransferInventory transfer)
+        public TransferInventoryService(TransferInventory transfer, IStaticInventoryRepository inventoryRepository, IRoomRepository roomRepository)
         {
-            staticInventoryRepository = new StaticInventoryFileRepository();
+            this.staticInventoryRepository = inventoryRepository;
+            this.roomRepository = roomRepository;
             Transfer = transfer;
         }
 
@@ -46,7 +48,6 @@ namespace Hospital.Services
         private bool IsRoomAvailabilityOfFreeBedsChanged()
         {
             Inventory ItemForTransfer = staticInventoryRepository.GetOneItemFromRoom(Transfer.ItemID, Transfer.FirstRoomID);
-            IRoomRepository roomRepository = new RoomFileRepository();
             Room firstRoom = roomRepository.GetByID(Transfer.FirstRoomID);
             if (ItemForTransfer.Name.ToLower().Contains("krevet"))
                 if (firstRoom.FreeBeds < Transfer.Quantity)

@@ -14,10 +14,10 @@ namespace Hospital.Services
         private IRoomRepository roomRepository;
         private IAppointmentRepository appointmentRepository;
 
-        public RoomService()
+        public RoomService(IRoomRepository roomRepo, IAppointmentRepository appointmentRepo)
         {
-            roomRepository = new RoomFileRepository();
-            appointmentRepository = new AppointmentFileRepository();
+            this.roomRepository = roomRepo;
+            this.appointmentRepository = appointmentRepo;
         }
 
         public Room GetById(string id)

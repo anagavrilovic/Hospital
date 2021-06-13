@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Repositories.Interfaces
 {
-    interface IDynamicInventoryRepository : IGenericRepository<DynamicInventory>
+    public interface IDynamicInventoryRepository : IGenericRepository<DynamicInventory>
     {
         void EditItem(DynamicInventory editedItem);
         DynamicInventory GetOneItemFromRoom(string id, string roomId);

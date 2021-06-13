@@ -1,4 +1,5 @@
-﻿using Hospital.Services;
+﻿using Hospital.Repositories;
+using Hospital.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -46,7 +47,7 @@ namespace Hospital.View
         private void AcceptButtonClick(object sender, RoutedEventArgs e)
         {
             SaveEditedProperties();
-            DynamicInventoryService inventoryService = new DynamicInventoryService();
+            DynamicInventoryService inventoryService = new DynamicInventoryService(new DynamicInventoryFileRepository());
             inventoryService.EditItem(DynamicInventoryItem);
 
             NavigationService.Navigate(new DynamicInventoryView(DynamicInventoryItem.RoomID));

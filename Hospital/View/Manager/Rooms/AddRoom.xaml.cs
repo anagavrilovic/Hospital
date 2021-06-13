@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Repositories;
 using Hospital.Services;
 using System;
 using System.ComponentModel;
@@ -28,7 +29,7 @@ namespace Hospital.View
         {
             InitializeNewRoom();
 
-            RoomService roomService = new RoomService();
+            RoomService roomService = new RoomService(new RoomFileRepository(), new AppointmentFileRepository());
             if (!roomService.IsNewRoomIdUnique(NewRoom.Id))
             {
                 Hospital.View.Manager.MessageWindow message = new Hospital.View.Manager.MessageWindow("Vec postoji prostorija sa unetom oznakom!");

@@ -1,4 +1,5 @@
-﻿using Hospital.Services;
+﻿using Hospital.Repositories;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace Hospital.View
 
         private void AcceptDeleting (object sender, RoutedEventArgs e)
         {
-            RoomService roomService = new RoomService();
+            RoomService roomService = new RoomService(new RoomFileRepository(), new AppointmentFileRepository());
             roomService.DeleteRoom(RoomForDeleting.Id);
 
             NavigationService.Navigate(new RoomsWindow());

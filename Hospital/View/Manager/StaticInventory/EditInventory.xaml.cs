@@ -1,4 +1,5 @@
-﻿using Hospital.Services;
+﻿using Hospital.Repositories;
+using Hospital.Services;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,7 +26,7 @@ namespace Hospital.View
         private void AcceptButtonClick(object sender, RoutedEventArgs e)
         {
             SaveEditedProperties();
-            StaticInventoryService inventoryService = new StaticInventoryService();
+            StaticInventoryService inventoryService = new StaticInventoryService(new StaticInventoryFileRepository());
             inventoryService.EditItem(InventoryItem);
 
             NavigationService.Navigate(new StaticInventoryView(InventoryItem.RoomID));

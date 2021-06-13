@@ -1,4 +1,5 @@
 ﻿using Hospital.Model;
+using Hospital.Repositories;
 using Hospital.Services;
 using System;
 using System.ComponentModel;
@@ -28,7 +29,7 @@ namespace Hospital.View
         {
             SaveEditedProperties();
 
-            RoomService roomService = new RoomService();
+            RoomService roomService = new RoomService(new RoomFileRepository(), new AppointmentFileRepository());
             roomService.EditRoom(EditedRoom);
 
             NavigationService.Navigate(new RoomsWindow());

@@ -53,7 +53,7 @@ namespace Hospital.View
         private void InitializeComboBoxes()
         {
             ObservableCollection<string> AllRoomsIDs = new ObservableCollection<string>();
-            RoomService roomService = new RoomService();
+            RoomService roomService = new RoomService(new RoomFileRepository(), new AppointmentFileRepository());
             foreach (Room room in roomService.GetAll())
                 if (!room.Id.Equals(ItemForTransfer.RoomID))
                     AllRoomsIDs.Add(room.Id);
