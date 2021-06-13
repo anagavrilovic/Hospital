@@ -1,4 +1,6 @@
-﻿using Hospital.Services;
+﻿using Hospital.Factory;
+using Hospital.Repositories;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +24,7 @@ namespace Hospital.DTO.DoctorDTO
             doctorService = new DoctorService();
             appointmentService = new AppointmentService();
             roomService = new RoomService();
-            doctorsShiftService = new DoctorsShiftService();
+            doctorsShiftService = new DoctorsShiftService(new DoctorFileFactory());
             this.DTO = DTO;
         }
 

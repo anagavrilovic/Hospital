@@ -1,4 +1,6 @@
 ﻿using Hospital.DTO.DoctorDTO;
+using Hospital.Factory;
+using Hospital.Repositories;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -22,7 +24,7 @@ namespace Hospital.Controller.DoctorControllers
             roomService = new RoomService();
             doctorService = new DoctorService();
             appointmentService = new AppointmentService();
-            doctorsShiftService = new DoctorsShiftService();
+            doctorsShiftService = new DoctorsShiftService(new DoctorFileFactory());
         }
 
         public Model.Doctor GetDoctorById(string doctorId)

@@ -1,5 +1,7 @@
 ﻿using Hospital.DTO.PatientDTO;
+using Hospital.Factory;
 using Hospital.Model;
+using Hospital.Repositories;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -16,7 +18,7 @@ namespace Hospital.Controller.PatientControllers
         private DoctorService doctorService = new DoctorService();
         private AppointmentService appointmentService = new AppointmentService();
         private PatientSettingsService patientSettingsService = new PatientSettingsService();
-        private DoctorsShiftService doctorsShiftService = new DoctorsShiftService();
+        private DoctorsShiftService doctorsShiftService = new DoctorsShiftService(new DoctorFileFactory());
         private RoomService roomService = new RoomService();
         private PatientSettings patientSettings;
 
