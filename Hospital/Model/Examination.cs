@@ -10,11 +10,13 @@ namespace Hospital
         public DateTime dateOfExamination;
         public Therapy therapy;
         public Appointment appointment;
+        public Boolean patientVisible;
 
         public Examination()
         {
             therapy = new Therapy();
             appointment = new Appointment();
+            patientVisible = true;
         }
     }
 }

@@ -205,6 +205,7 @@
     <Compile Include="Model\MoveAppointment.cs" />
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\NotificationsUsers.cs" />
+    <Compile Include="Model\NotificationsUsersAdapter.cs" />
     <Compile Include="Model\OptionForRescheduling.cs" />
     <Compile Include="Model\PatientComment.cs" />
     <Compile Include="Model\PatientNote.cs" />
@@ -357,6 +358,12 @@
     </Compile>
     <Compile Include="View\Doctor\NewAppointment.xaml.cs">
       <DependentUpon>NewAppointment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\PatientGeneralNotification.xaml.cs">
+      <DependentUpon>PatientGeneralNotification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Patient\PatientNoteNotification.xaml.cs">
+      <DependentUpon>PatientNoteNotification.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Patient\Help\Help9.xaml.cs">
       <DependentUpon>Help9.xaml</DependentUpon>
@@ -752,6 +759,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Doctor\NewAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\PatientGeneralNotification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Patient\PatientNoteNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

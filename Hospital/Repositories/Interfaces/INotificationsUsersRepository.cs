@@ -12,5 +12,8 @@ namespace Hospital.Repositories.Interfaces
     {
         void DeleteNotificationsUsersByNotificationID(string id);
         List<NotificationsUsers> GetNotificationRecipientsByIDNotification(string id);
+        NotificationsUsers GetUniqueNotificationsUsers(String id, String username);
+        void DeleteUniqueNotificationsUsers(String id, String username);
+        void UpdateNotificationsUsers(NotificationsUsers notificationsUsers);
     }
 }

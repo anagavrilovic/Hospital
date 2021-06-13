@@ -15,13 +15,15 @@ namespace Hospital.Services
 {
     public class DoctorsShiftService
     {
-        IDoctorRepository doctorRepository;
-        AppointmentService appointmentService = new AppointmentService();
+        private IDoctorRepository doctorRepository;
+
+        private AppointmentService appointmentService = new AppointmentService();
 
         public DoctorsShiftService()
         {
             doctorRepository = new DoctorFileRepository();
         }
+
 
         public void UpdateAllShifts()
         {
@@ -46,7 +48,7 @@ namespace Hospital.Services
                 {
                     ChangeToScheduledShift(doctor, scheduledShift);
                     doctor.Shifts.ScheduledShifts.Remove(scheduledShift);
-                }    
+                }
             }
         }
 
@@ -85,6 +87,7 @@ namespace Hospital.Services
         }
 
 
+
         public List<DoctorsShiftsDTO> GetAllDoctorsShiftsForNextFiveDays(DateTime selectedDate)
         {
             List<DoctorsShiftsDTO> doctorsShiftsDTOs = new List<DoctorsShiftsDTO>();
@@ -94,7 +97,7 @@ namespace Hospital.Services
             {
                 DoctorsShiftsDTO dto = GetDoctorsShiftsForNextFiveDays(doctor, selectedDate);
                 doctorsShiftsDTOs.Add(dto);
-            }    
+            }
 
             return doctorsShiftsDTOs;
         }
@@ -104,7 +107,7 @@ namespace Hospital.Services
             DoctorsShiftsDTO dto = new DoctorsShiftsDTO { Doctor = doctor };
 
             PropertyInfo[] properties = typeof(DoctorsShiftsDTO).GetProperties();
-            for(int i = 1; i < properties.Length; i++)
+            for (int i = 1; i < properties.Length; i++)
             {
                 properties[i].SetValue(dto, GetDoctorsShiftByDate(doctor, selectedDate));
                 selectedDate = selectedDate.AddDays(1);
@@ -112,6 +115,7 @@ namespace Hospital.Services
 
             return dto;
         }
+
 
         public string GetDoctorsShiftByDate(Doctor doctor, DateTime selectedDate)
         {
@@ -157,7 +161,7 @@ namespace Hospital.Services
                 case Shift.pause: return "P";
                 case Shift.free: return "O";
                 default: return "/";
-            }  
+            }
         }
 
         private ScheduledShift GetScheduledShiftForDate(Doctor doctor, DateTime selectedDate)
@@ -167,6 +171,7 @@ namespace Hospital.Services
                     return scheduledShift;
             return null;
         }
+
 
         public void ChangeShift(Doctor doctor, ScheduledShift shiftForScheduling)
         {
@@ -178,7 +183,7 @@ namespace Hospital.Services
             }
             else
                 ScheduleShift(doctor, shiftForScheduling);
-            
+
             doctorRepository.Update(doctor);
 
             appointmentService.CancelAppointmentsBecauseOfShiftChange(doctor, shiftForScheduling);
@@ -186,9 +191,9 @@ namespace Hospital.Services
 
         private void ScheduleShift(Doctor doctor, ScheduledShift shiftForScheduling)
         {
-            foreach(ScheduledShift shift in doctor.Shifts.ScheduledShifts)
+            foreach (ScheduledShift shift in doctor.Shifts.ScheduledShifts)
             {
-                if(shift.Date.Date == shiftForScheduling.Date.Date)
+                if (shift.Date.Date == shiftForScheduling.Date.Date)
                 {
                     shift.Shift = shiftForScheduling.Shift;
                     shift.RollShifts = shiftForScheduling.RollShifts;
@@ -198,6 +203,7 @@ namespace Hospital.Services
 
             doctor.Shifts.ScheduledShifts.Add(shiftForScheduling);
         }
+
 
         public bool SetFreeDays(Doctor selectedDoctor, DateTime startDate, DateTime endDate)
         {
@@ -218,7 +224,7 @@ namespace Hospital.Services
         private int CountWorkDays(DateTime startDate, DateTime endDate)
         {
             int workDays = 0;
-            for(DateTime i = startDate; i <= endDate; i = i.AddDays(1))
+            for (DateTime i = startDate; i <= endDate; i = i.AddDays(1))
             {
                 if (IsWorkDay(i))
                     workDays++;
@@ -230,15 +236,15 @@ namespace Hospital.Services
         {
             List<DateTime> nonWorkDays = GetNonWorkDays();
             bool isNonWorkDay = false;
-            foreach(DateTime date in nonWorkDays)
+            foreach (DateTime date in nonWorkDays)
             {
-                if(date.Day == i.Day && date.Month == i.Month)
+                if (date.Day == i.Day && date.Month == i.Month)
                 {
                     isNonWorkDay = true;
                     break;
                 }
             }
-                    
+
             return i.DayOfWeek != DayOfWeek.Saturday && i.DayOfWeek != DayOfWeek.Sunday && !isNonWorkDay;
         }
 
@@ -251,9 +257,36 @@ namespace Hospital.Services
             return nonWorkDays;
         }
 
+
         public int GetFreeDays(Doctor selectedDoctor)
         {
             return selectedDoctor.Shifts.NumberOfFreeDays;
+        }
+
+        public bool IsDoctorWorkingAtSelectedTime(Doctor doctor, DateTime dateTimeForNewAppointment)
+        {
+            string doctorsShift = GetDoctorsShiftByDate(doctor, dateTimeForNewAppointment);
+
+            TimeSpan morning = new TimeSpan(6, 0, 0);
+            TimeSpan day = new TimeSpan(14, 0, 0);
+            TimeSpan night = new TimeSpan(22, 0, 0);
+
+            if (IsTimeBetween(dateTimeForNewAppointment, morning, day) && doctorsShift.Equals("I"))
+                return true;
+            else if (IsTimeBetween(dateTimeForNewAppointment, day, night) && doctorsShift.Equals("II"))
+                return true;
+            else if (IsTimeBetween(dateTimeForNewAppointment, night, morning) && doctorsShift.Equals("III"))
+                return true;
+            else
+                return false;
+        }
+
+        private bool IsTimeBetween(DateTime datetime, TimeSpan start, TimeSpan end)
+        {
+            TimeSpan now = datetime.TimeOfDay;
+            if (start < end)
+                return start <= now && now <= end;
+            return !(end < now && now < start);
         }
     }
 }

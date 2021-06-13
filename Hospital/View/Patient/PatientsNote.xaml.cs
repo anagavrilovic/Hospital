@@ -22,7 +22,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientsNote : Page
     {
-        private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService();
+        
         public PatientsNote(PatientNote patientNote)
         {
             InitializeComponent();
@@ -31,17 +31,9 @@ namespace Hospital.View
             TextBlock.Text = patientNote.Text;
         }
 
-        public PatientsNote(PatientNotesNotification patientNotesNotification)
-        {
-            InitializeComponent();
-            BackButton.Focus();
-            SubjectLabel.Content = patientNotesNotification.Name;
-            TextBlock.Text = patientNotesNotification.Content;
-        }
-
         private void GoBack(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new PatientNotifications());
+            this.NavigationService.GoBack();
         }
     }
 }

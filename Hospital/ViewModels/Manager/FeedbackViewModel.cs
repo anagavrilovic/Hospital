@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
+using Hospital.Repositories;
 
 namespace Hospital.ViewModels.Manager
 {
@@ -24,7 +25,7 @@ namespace Hospital.ViewModels.Manager
         public FeedbackViewModel(NavigationService navigation)
         {
             NewFeedback = new Model.Feedback();
-            FeedbackService = new FeedbackService();
+            FeedbackService = new FeedbackService(new FeedbackFileRepository());
             NavigationService = navigation;
             LeaveFeedbackCommand = new RelayCommand(ExecuteLeaveFeedbackCommand, CanExecuteCommands);
             CancelCommand = new RelayCommand(ExecuteCancelCommand, CanExecuteCommands);

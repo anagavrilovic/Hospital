@@ -17,19 +17,18 @@ using System.Windows.Shapes;
 namespace Hospital.View
 {
     /// <summary>
-    /// Interaction logic for PatientTherapy.xaml
+    /// Interaction logic for PatientNoteNotification.xaml
     /// </summary>
-    public partial class PatientTherapy : Page
+    public partial class PatientNoteNotification : Page
     {
-        private PatientTherapyMedicineNotification PatientTherapyMedicineNotification;
-        public PatientTherapy(PatientTherapyMedicineNotification patientTherapyMedicineNotification)
+        public PatientNoteNotification(PatientNotesNotification patientNotesNotification)
         {
             InitializeComponent();
             BackButton.Focus();
-            this.PatientTherapyMedicineNotification = patientTherapyMedicineNotification;
-            SubjectLabel.Content = patientTherapyMedicineNotification.Name;
-            TextBlock.Text = patientTherapyMedicineNotification.Text;
+            SubjectLabel.Content = patientNotesNotification.Name;
+            TextBlock.Text = patientNotesNotification.Text;
         }
+
         private void GoBack(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new PatientNotifications());

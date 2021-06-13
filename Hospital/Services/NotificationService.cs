@@ -315,5 +315,44 @@ namespace Hospital.Services
 
             return new Notification { Title = title, Content = content, Date = DateTime.Now, Id = GenerateID() };
         }
+
+        public List<NotificationsUsers> GetNotificationByUser(String username)
+        {
+            List<NotificationsUsers> notificationsUsers = notificationsUsersRepository.GetAll();
+            List<NotificationsUsers> notifications = new List<NotificationsUsers>();
+            foreach (NotificationsUsers nu in notificationsUsers)
+                if (nu.Username.Equals(username))
+                {
+                    nu.Notification = notificationRepository.GetByID(nu.NotificationID);
+                    notifications.Add(nu);
+                }
+            return notifications;
+        }
+
+        public Boolean DoesUserHaveNewNotification(String username)
+        {
+            List<NotificationsUsers> notifications = GetNotificationByUser(username);
+            foreach (NotificationsUsers notification in notifications)
+            {
+                if (notification.Read == false) return true;
+            }
+            return false;
+        }
+
+        public NotificationsUsers GetUniqueNotificationsUsers(String id,String username)
+        {
+           return notificationsUsersRepository.GetUniqueNotificationsUsers(id, username);
+        }
+
+        public void DeleteUniqueNotificationsUsers(String id, String username)
+        {
+            notificationsUsersRepository.DeleteUniqueNotificationsUsers(id, username);
+        }
+
+        public void UpdateNotificationsUsers(NotificationsUsers notificationsUsers)
+        {
+            notificationsUsersRepository.UpdateNotificationsUsers(notificationsUsers);
+        }
+
     }
 }

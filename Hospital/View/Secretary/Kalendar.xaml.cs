@@ -78,7 +78,7 @@ namespace Hospital.View
 
             int days = 0;
             PropertyInfo[] properties = typeof(DatesInWeeklyCalendarDTO).GetProperties();
-            foreach(PropertyInfo property in properties)
+            foreach (PropertyInfo property in properties)
             {
                 property.SetValue(DatesInWeeklyCalendar, WeekBegin.AddDays(days).ToString("dd.MM."));
                 days += 1;
@@ -125,7 +125,7 @@ namespace Hospital.View
                 WeeklyCalendarRowDTO newRow = new WeeklyCalendarRowDTO();
                 newRow.TimeInRow = timeForRow.ToString("HH:mm", CultureInfo.InvariantCulture);
                 WeeklyCalendar.Add(newRow);
-                
+
                 timeForRow = timeForRow.AddMinutes(30);
             }
         }
@@ -140,7 +140,7 @@ namespace Hospital.View
 
         private void LoadDoctorAndPatientForAppointments(ObservableCollection<Appointment> selectedDoctorsAppointmentsInChosenWeek)
         {
-            foreach(Appointment appointment in selectedDoctorsAppointmentsInChosenWeek)
+            foreach (Appointment appointment in selectedDoctorsAppointmentsInChosenWeek)
             {
                 appointment.Doctor = DoctorService.GetByID(appointment.IDDoctor);
                 appointment.PatientsRecord = MedicalRecordService.GetByPatientId(appointment.IDpatient);
@@ -160,7 +160,7 @@ namespace Hospital.View
         }
 
         private bool IsAppointmentInChosenWeek(Appointment appointment)
-        { 
+        {
             return appointment.DateTime.Date >= WeekBegin.Date && appointment.DateTime.Date <= WeekEnd.Date;
         }
 
@@ -291,41 +291,23 @@ namespace Hospital.View
 
         private void ScheduleAppointmentClick(object sender, RoutedEventArgs e)
         {
-            if(!IsEveryInformationForNewAppointmentChosen())
+            if (!IsEveryInformationForNewAppointmentChosen())
                 return;
 
             DateTime dateTimeForNewAppointment = SetDateTimeForNewAppointment();
-            
+
             if (IsChosenDateInPast(dateTimeForNewAppointment))
                 return;
 
-            if (!IsDoctorWorkingAtSelectedTime(dateTimeForNewAppointment))
-                return;
-
-            NavigationService.Navigate(new ZakazivanjeTermina(SelectedDoctorForNewAppointment, SelectedPatientForNewAppointment, dateTimeForNewAppointment));
-        }
-
-        private bool IsDoctorWorkingAtSelectedTime(DateTime dateTimeForNewAppointment)
-        {
-            string doctorsShift = DoctorsShiftService.GetDoctorsShiftByDate(SelectedDoctorForNewAppointment, dateTimeForNewAppointment);
-
-            TimeSpan morning = new TimeSpan(6, 0, 0);
-            TimeSpan day = new TimeSpan(14, 0, 0);
-            TimeSpan night = new TimeSpan(22, 0, 0);
-
-            if (IsTimeBetween(dateTimeForNewAppointment, morning, day) && doctorsShift.Equals("I"))
-                return true;
-            else if (IsTimeBetween(dateTimeForNewAppointment, day, night) && doctorsShift.Equals("II"))
-                return true;
-            else if (IsTimeBetween(dateTimeForNewAppointment, night, morning) && doctorsShift.Equals("III"))
-                return true;
-            else
+            if (!DoctorsShiftService.IsDoctorWorkingAtSelectedTime(SelectedDoctorForNewAppointment, dateTimeForNewAppointment))
             {
-                string message = GenerateMessage(doctorsShift);
+                string message = GenerateMessage(DoctorsShiftService.GetDoctorsShiftByDate(SelectedDoctorForNewAppointment, dateTimeForNewAppointment));
                 InformationBox informationBox = new InformationBox(message);
                 informationBox.Show();
-                return false;
+                return;
             }
+
+            NavigationService.Navigate(new ZakazivanjeTermina(SelectedDoctorForNewAppointment, SelectedPatientForNewAppointment, dateTimeForNewAppointment));
         }
 
         private string GenerateMessage(string doctorsShift)
@@ -340,23 +322,15 @@ namespace Hospital.View
             }
         }
 
-        private bool IsTimeBetween(DateTime datetime, TimeSpan start, TimeSpan end)
-        {
-            TimeSpan now = datetime.TimeOfDay;
-            if (start < end)
-                return start <= now && now <= end;
-            return !(end < now && now < start);
-        }
-
         private bool IsEveryInformationForNewAppointmentChosen()
         {
-            if(KalendarDataGrid.SelectedCells.Count == 0)
+            if (KalendarDataGrid.SelectedCells.Count == 0)
             {
                 InformationBox informationBox = new InformationBox("Odaberite termin koji želite da zakažete.");
                 informationBox.ShowDialog();
                 return false;
             }
-            else if(SelectedDoctorForNewAppointment == null)
+            else if (SelectedDoctorForNewAppointment == null)
             {
                 InformationBox informationBox = new InformationBox("Odaberite doktora kod kojeg želite da zakažete termin.");
                 informationBox.ShowDialog();
@@ -374,7 +348,7 @@ namespace Hospital.View
 
         private bool IsChosenDateInPast(DateTime dateTimeForNewAppointment)
         {
-            if(dateTimeForNewAppointment < DateTime.Now)
+            if (dateTimeForNewAppointment < DateTime.Now)
             {
                 InformationBox informationBox = new InformationBox("Ne možete zakazati termin u prošlosti.");
                 informationBox.ShowDialog();

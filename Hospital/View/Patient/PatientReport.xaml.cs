@@ -103,12 +103,14 @@ namespace Hospital.View
             {
                 int daysDifference = -7;
                 GetTherapies(daysDifference);
+                dataGridApp.Focus();
             }
 
             if (e.Key == Key.RightCtrl)
             {
                 int daysDifference = 7;
                 GetTherapies(daysDifference);
+                dataGridApp.Focus();
             }
         }
 
@@ -128,7 +130,7 @@ namespace Hospital.View
                 paragraph.Add("Naziv leka: " + therapy.Name + "\n");
                 paragraph.Add("Vreme konzumiranja: " + therapy.Times + "\n");
                 paragraph.Add("Trajanje terapije: " + therapy.Duration + "\n");
-                paragraph.Add("Opis terapije: " + therapy.Description + "\n");
+                paragraph.Add("Opis terapije: " + therapy.Text + "\n");
                 document.Add(paragraph);
                 document.Add(new LineSeparator(new SolidLine()));
             }

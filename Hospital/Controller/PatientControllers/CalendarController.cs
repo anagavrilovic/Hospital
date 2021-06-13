@@ -16,6 +16,7 @@ namespace Hospital.Controller.PatientControllers
         private DoctorService doctorService = new DoctorService();
         private AppointmentService appointmentService = new AppointmentService();
         private PatientSettingsService patientSettingsService = new PatientSettingsService();
+        private DoctorsShiftService doctorsShiftService = new DoctorsShiftService();
         private RoomService roomService = new RoomService();
         private PatientSettings patientSettings;
 
@@ -50,7 +51,7 @@ namespace Hospital.Controller.PatientControllers
         private void SetAppointmentIfDoctorIsRelevant(int day)
         {
             calendarDTO.Doctors[day] = "";
-            if (!appointmentService.ExistByTime(calendarDTO.TrackedDateTime, doctorService.GetIDByNameSurname(patientSettings.ChosenDoctor)))
+            if ((!appointmentService.ExistByTime(calendarDTO.TrackedDateTime, doctorService.GetIDByNameSurname(patientSettings.ChosenDoctor))) && doctorsShiftService.IsDoctorWorkingAtSelectedTime(doctorService.GetDoctorById(doctorService.GetIDByNameSurname(patientSettings.ChosenDoctor)), calendarDTO.TrackedDateTime))
             {
                 calendarDTO.Doctors[day] = patientSettings.ChosenDoctor;
                calendarDTO.DoctorsID[day] = doctorService.GetIDByNameSurname(patientSettings.ChosenDoctor);
@@ -92,7 +93,7 @@ namespace Hospital.Controller.PatientControllers
 
             foreach (Hospital.Model.Doctor doctor in doctors)
             {
-                if ((doctor.Specialty != DoctorSpecialty.general) || (appointmentService.ExistByTime(calendarDTO.TrackedDateTime, doctor.PersonalID))) continue;
+                if ((doctor.Specialty != DoctorSpecialty.general) || (appointmentService.ExistByTime(calendarDTO.TrackedDateTime, doctor.PersonalID)) ||(!doctorsShiftService.IsDoctorWorkingAtSelectedTime(doctor, calendarDTO.TrackedDateTime))) continue;
                 if (first)
                 {
                     SetDoctor(day, doctor);

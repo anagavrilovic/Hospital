@@ -78,5 +78,35 @@ namespace Hospital.Repositories
                 serializer.Serialize(file, notificationsUsers);
             }
         }
+
+        public NotificationsUsers GetUniqueNotificationsUsers(String id, String username)
+        {
+            List<NotificationsUsers> notificationsUsers = GetAll();
+            foreach (NotificationsUsers notificationsUser in notificationsUsers)
+                if (notificationsUser.NotificationID.Equals(id) && notificationsUser.Username.Equals(username))
+                    return notificationsUser;
+
+            return null;
+        }
+
+        public void DeleteUniqueNotificationsUsers(String id, String username)
+        {
+            List<NotificationsUsers> notificationsUsers = GetAll();
+            foreach (NotificationsUsers notificationsUser in notificationsUsers)
+            {
+                if (notificationsUser.NotificationID.Equals(id) && notificationsUser.Username.Equals(username))
+                {
+                    notificationsUsers.Remove(notificationsUser);
+                    Serialize(notificationsUsers);
+                    return;
+                }
+            }
+        }
+
+        public void UpdateNotificationsUsers(NotificationsUsers notificationsUsers)
+        {
+            DeleteUniqueNotificationsUsers(notificationsUsers.NotificationID, notificationsUsers.Username);
+            Save(notificationsUsers);
+        }
     }
 }
