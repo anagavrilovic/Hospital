@@ -1,4 +1,5 @@
 ﻿using Hospital.Commands.Manager;
+using Hospital.Factory;
 using Hospital.Services;
 using Hospital.View;
 using System;
@@ -36,7 +37,7 @@ namespace Hospital.ViewModels.Manager
         #region Constructor
         public MedicinesWindowViewModel(NavigationService navigate)
         {
-            MedicineService = new MedicineService();
+            MedicineService = new MedicineService(new MedicineFileFactory(), new MedicalRecordFileFactory());
             SelectedMedicine = new Medicine();
             Medicines = new ObservableCollection<Medicine>(MedicineService.GetAll());
             MedicineCollection = CollectionViewSource.GetDefaultView(Medicines);

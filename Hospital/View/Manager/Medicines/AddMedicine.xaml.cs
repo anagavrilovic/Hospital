@@ -47,7 +47,7 @@ namespace Hospital.View
 
         private void InitializeIngredientsListBox()
         {
-            MedicineService medicineService = new MedicineService();
+            MedicineService medicineService = new MedicineService(new MedicineFileFactory(), new MedicalRecordFileFactory());
             Ingredients = medicineService.GetAllIngredients();
         }
 
@@ -120,7 +120,7 @@ namespace Hospital.View
         private void SendOnRevision(object sender, RoutedEventArgs e)
         {
             InitializeMedicine();
-            MedicineService medicineService = new MedicineService();
+            MedicineService medicineService = new MedicineService(new MedicineFileFactory(), new MedicalRecordFileFactory());
 
             if (!medicineService.IsMedicineIDUnique(MedicineRevision.Medicine.ID))
             {

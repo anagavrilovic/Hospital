@@ -1,4 +1,5 @@
 ﻿using Hospital.Commands.DoctorCommands;
+using Hospital.Factory;
 using Hospital.Services;
 using Hospital.View;
 using System.Windows.Navigation;
@@ -34,7 +35,7 @@ namespace Hospital.ViewModels.Manager
 
         public void ExecuteDeleteMedicineCommand(object obj)
         {
-            MedicineService service = new MedicineService();
+            MedicineService service = new MedicineService(new MedicineFileFactory(), new MedicalRecordFileFactory());
             service.DeleteMedicine(MedicineForDeleting);
 
             NavigationService.Navigate(new MedicinesWindow(new MedicinesWindowViewModel(NavigationService)));

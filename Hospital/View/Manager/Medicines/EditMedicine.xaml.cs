@@ -1,4 +1,5 @@
-﻿using Hospital.Services;
+﻿using Hospital.Factory;
+using Hospital.Services;
 using Hospital.ViewModels.Manager;
 using System.ComponentModel;
 using System.Windows;
@@ -29,7 +30,7 @@ namespace Hospital.View
             priceTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             quantityTxt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
 
-            MedicineService service = new MedicineService();
+            MedicineService service = new MedicineService(new MedicineFileFactory(), new MedicalRecordFileFactory());
             service.EditMedicine(Medicine);
 
             NavigationService.Navigate(new MedicinesWindow(new MedicinesWindowViewModel(NavigationService)));

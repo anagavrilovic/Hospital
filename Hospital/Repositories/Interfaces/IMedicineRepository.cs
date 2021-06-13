@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Repositories.Interfaces
 {
-    interface IMedicineRepository : IGenericRepository<Medicine>
+   public interface IMedicineRepository : IGenericRepository<Medicine>
     {
         List<string> GetAllMedicines();
         List<string> GetAllIngredients();

@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Factory;
+using Hospital.Model;
 using Hospital.Repositories;
 using Hospital.Repositories.Interfaces;
 using Hospital.View.Doctor;
@@ -18,10 +19,10 @@ namespace Hospital.Services
         private IMedicineRepository medicineRepository;
         private IMedicalRecordRepository medicalRecordRepository;
 
-        public MedicineService()
+        public MedicineService(IMedicineRepositoryFactory medicineFactory, IMedicalRecordRepositoryFactory recordFactory)
         {
-            medicineRepository = new MedicineFileRepository();
-            medicalRecordRepository = new MedicalRecordFileRepository();
+            medicineRepository = medicineFactory.CreateMedicineRepository();
+            medicalRecordRepository = recordFactory.CreateMedicalRecordRepository();
         }
 
         public List<string> GetAllMedicines()

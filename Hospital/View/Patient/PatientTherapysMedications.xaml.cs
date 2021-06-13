@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.Factory;
+using Hospital.Model;
 using Hospital.Services;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace Hospital.View
             set;
         }
        
-        private MedicineService medicineService=new MedicineService();
+        private MedicineService medicineService=new MedicineService(new MedicineFileFactory(), new MedicalRecordFileFactory());
         
         public PatientTherapysMedications(List<MedicineTherapy> medicineTherapies)
         {

@@ -52,7 +52,7 @@ namespace Hospital.View
 
         private void AddIngredientsInListBox()
         {
-            MedicineService medicineService = new MedicineService();
+            MedicineService medicineService = new MedicineService(new MedicineFileFactory(), new MedicalRecordFileFactory());
             Ingredients = medicineService.GetAllIngredients();
         }
 

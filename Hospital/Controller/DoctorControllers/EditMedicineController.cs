@@ -1,4 +1,5 @@
 ﻿using Hospital.DTO.DoctorDTO;
+using Hospital.Factory;
 using Hospital.Services;
 using Hospital.ViewModels;
 using System;
@@ -17,7 +18,7 @@ namespace Hospital.Controller.DoctorControllers
         public EditMedicineController(EditMedicineDTO editMedicineDTO)
         {
             this.editMedicineDTO = editMedicineDTO;
-            medicineService = new MedicineService();
+            medicineService = new MedicineService(new MedicineFileFactory(),new MedicalRecordFileFactory());
         }
 
         public bool MedicineContainsIngredient()

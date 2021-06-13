@@ -195,12 +195,14 @@
     <Compile Include="Factory\IFeedbackRepositoryFactory.cs" />
     <Compile Include="Factory\IHospitalTreatmentRepositoryFactory.cs" />
     <Compile Include="Factory\IMedicalRecordRepositoryFactory.cs" />
+    <Compile Include="Factory\IMedicineRepositoryFactory.cs" />
     <Compile Include="Factory\IPatientCommentsRepositoryFactory.cs" />
     <Compile Include="Factory\IPatientNotesNotificationRepositoryFactory.cs" />
     <Compile Include="Factory\IPatientNotesRepositoryFactory.cs" />
     <Compile Include="Factory\IPatientSettingsRepositoryFactory.cs" />
     <Compile Include="Factory\IPatientTherapyNotificationRepositoryFactory.cs" />
     <Compile Include="Factory\MedicalRecordFileFactory.cs" />
+    <Compile Include="Factory\MedicineFileFactory.cs" />
     <Compile Include="Factory\PatientCommentsFileFactory.cs" />
     <Compile Include="Factory\PatientNotesFileFactory.cs" />
     <Compile Include="Factory\PatientNotesNotificationFileFactory.cs" />

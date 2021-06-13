@@ -1,4 +1,5 @@
 ﻿using Hospital.DTO.DoctorDTO;
+using Hospital.Factory;
 using Hospital.Model;
 using Hospital.Services;
 using System;
@@ -18,7 +19,7 @@ namespace Hospital.Controller.DoctorControllers
         public MedicineValidityController(MedicineValidityDTO DTO)
         {
             this.DTO = DTO;
-            medicineService = new MedicineService();
+            medicineService = new MedicineService(new MedicineFileFactory(), new MedicalRecordFileFactory());
             medicineRevisionService = new MedicineRevisionService();
         }
 

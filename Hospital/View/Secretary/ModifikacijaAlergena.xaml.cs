@@ -55,7 +55,7 @@ namespace Hospital.View
         private void InitializeEmptyProperties()
         {
             MedicalRecordService = new MedicalRecordService(new MedicalRecordFileFactory(), new AppointmentFileFactory(), new HospitalTreatmentFileFactory());
-            MedicineService = new MedicineService();
+            MedicineService = new MedicineService(new MedicineFileFactory(), new MedicalRecordFileFactory());
         }
 
         private void ReadAllMedicines()

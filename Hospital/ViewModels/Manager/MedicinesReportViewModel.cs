@@ -1,4 +1,5 @@
 ﻿using Hospital.Commands.Manager;
+using Hospital.Factory;
 using Hospital.ReportsPatterns;
 using Hospital.View;
 using Hospital.View.Manager;
@@ -19,7 +20,7 @@ namespace Hospital.ViewModels.Manager
         #region Constructor
         public MedicinesReportViewModel(NavigationService navigate)
         {
-            MedicineService = new Services.MedicineService();
+            MedicineService = new Services.MedicineService(new MedicineFileFactory(), new MedicalRecordFileFactory());
             Medicines = MedicineService.GetAll();
             GenerateReportCommand = new RelayCommand(Execute_GenerateReportCommand, CanExecuteCommands);
             BackCommand = new RelayCommand(Execute_BackCommand, CanExecuteCommands);
