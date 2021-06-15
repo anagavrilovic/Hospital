@@ -70,8 +70,8 @@ namespace Hospital.Services
             }
         }
 
-        public void RemoveTransferRequest()
-        {          
+        private void RemoveTransferRequest()
+        {
             TransferInventoryFileRepository transferRepository = new TransferInventoryFileRepository();
             transferRepository.Delete(Transfer.TransferID);
         }

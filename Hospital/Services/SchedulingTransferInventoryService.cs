@@ -10,7 +10,7 @@ namespace Hospital.Services
     {
         private ITransferInventoryRepository transferInventoryRepository;
         private IStaticInventoryRepository staticInventoryRepository;
-        public SchedulingTransferInventoryService() {}
+        public SchedulingTransferInventoryService() { }
 
         public SchedulingTransferInventoryService(TransferInventory transfer, ITransferInventoryRepository transferRepo, IStaticInventoryRepository inventoryRepo)
         {
@@ -36,36 +36,36 @@ namespace Hospital.Services
                 ScheduleTemporaryTransferBeforeFirstReservedTransfer();
             else if (NotEnoughItemForNewTransfer() && IsTransferAfterFirstScheduledTransferOfItem())
                 return "Prenos se ne može izvršiti zbog nedostatka opreme!";
-            
+
 
             SaveTransfer(TransferRequest);
             return "Prebacivanje je uspešno zakazano!";
         }
 
-        public bool AreTransferAttributesValid()
+        private bool AreTransferAttributesValid()
         {
             Inventory ItemForTransfer = staticInventoryRepository.GetOneItemFromRoom(TransferRequest.ItemID, TransferRequest.FirstRoomID);
             if (TransferRequest.TransferDate < DateTime.Now)
                 return false;
-            
+
             else if (ItemForTransfer.Quantity < TransferRequest.Quantity)
                 return false;
-            
+
             return true;
         }
 
-        public bool CheckAvailabilityOfFreeBeds()
+        private bool CheckAvailabilityOfFreeBeds()
         {
             Inventory ItemForTransfer = staticInventoryRepository.GetOneItemFromRoom(TransferRequest.ItemID, TransferRequest.FirstRoomID);
             IRoomRepository roomRepository = new RoomFileRepository();
             Room firstRoom = roomRepository.GetByID(TransferRequest.FirstRoomID);
-            if(ItemForTransfer.Name.ToLower().Contains("krevet"))
+            if (ItemForTransfer.Name.ToLower().Contains("krevet"))
                 if (firstRoom.FreeBeds < TransferRequest.Quantity && firstRoom.Type == RoomType.SOBA_ZA_ODMOR)
                     return false;
-            
+
             return true;
         }
-  
+
 
         private int GetTotalQuantityForAllTransfersOfItem()
         {
@@ -73,7 +73,7 @@ namespace Hospital.Services
             foreach (TransferInventory ti in transferInventoryRepository.GetAll())
                 if (ti.ItemID.Equals(TransferRequest.ItemID) && ti.FirstRoomID.Equals(TransferRequest.FirstRoomID))
                     totalQuantityForTransfer += ti.Quantity;
-            
+
             return totalQuantityForTransfer;
         }
 
@@ -85,11 +85,11 @@ namespace Hospital.Services
                 if (ti.ItemID.Equals(TransferRequest.ItemID) && ti.FirstRoomID.Equals(TransferRequest.FirstRoomID))
                     if (ti.TransferDate > firstReservedTransfer.TransferDate)
                         firstReservedTransfer = ti;
-                          
+
             return firstReservedTransfer;
         }
 
-        public bool NotEnoughItemForNewTransfer()
+        private bool NotEnoughItemForNewTransfer()
         {
             int totalQuantityForEachTransferOfItem = GetTotalQuantityForAllTransfersOfItem();
             Inventory ItemForTransfer = staticInventoryRepository.GetOneItemFromRoom(TransferRequest.ItemID, TransferRequest.FirstRoomID);
@@ -149,7 +149,7 @@ namespace Hospital.Services
         {
             List<int> allScheduledTransfersIDs = transferInventoryRepository.GetAllScheduledTransferIDs();
             int id = 1;
-            while(true)
+            while (true)
             {
                 if (!allScheduledTransfersIDs.Contains(id))
                     break;
