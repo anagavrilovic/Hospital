@@ -1,0 +1,68 @@
+﻿<Page x:Class="Hospital.View.Secretary.Help"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hospital.View.Secretary"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1065"
+      Background="{StaticResource BackgroundGray}"
+      Title="SekretarHelp">
+    <Page.Resources>
+        <ResourceDictionary Source="../../Resources/SecretaryResourceDictionary.xaml"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="POMOĆ " Style="{StaticResource TitleStyle}"/>
+            </StackPanel>
+
+            <local:OptionBar Grid.Column="2" Height="30" Width="170" Margin="0,15,15,0" VerticalAlignment="Top" ></local:OptionBar>
+        </Grid>
+
+        <Border Grid.Row="1" Margin="15,20,15,15" CornerRadius="10" Background="{StaticResource MainWhite}">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+            </Border.Effect>
+        </Border>
+        <Border Grid.Row="1" Margin="15,20,15,15" CornerRadius="10" Background="{StaticResource MainWhite}">
+            <ScrollViewer>
+                <StackPanel Margin="20,0">
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource TextBlockStyle}"
+                           Text="POČETNA STRANICA" FontWeight="SemiBold" Margin="0,20,0,0"/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource TextBlockStyle}" 
+                               Text="Na početnoj stranici možete videti trenutni datum i vreme kao i opis naše bolnice. Takođe, na grafikonu sa desne strane može se videti trenutno stanje lekara po specijalizacijama u svakom gradu u kojem se nalazi naša ekspozitura."/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource TextBlockStyle}" 
+                               Text="PACIJENTI" FontWeight="SemiBold" Margin="0,30,0,0"/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource TextBlockStyle}" 
+                               Text="Odabirom opcije pacijenti, prikazuju Vam se svi pacijenti naše bolnice, koje možete pretraživati radi lakšeg nalaženja željenog pacijenta. Na istom prozoru se nalaze opcije za operacije nad pacijentima kao što su: kreiranje novog pacijenta, izmena postojećeg pacijenta, brisanje, čitanje informacija o pacijentu i modifikacija alergena. Za sve opcije sem kreiranja novog pacijenta, potrebno je prvo selektovati pacijenta nad kojim želite da vršite određenu radnju a zatim i odabrati opciju. Na ovoj stranici se takođe vrši unblock pacijenata koje je Antitroll mehanizam blokirao. Potrebno je samo da kliknete na crveni kružić pored pacijenta kako biste promeniti njegov status (zeleni kružić)."/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource TextBlockStyle}" 
+                               Text="KALENDAR" FontWeight="SemiBold" Margin="0,30,0,0"/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource TextBlockStyle}"
+                               Text="Na ovom prozoru možete videti sve zakazane i prošle termine za sve lekare ove bolnice. Iznad samog nedeljnog kalendara su postavljeni dugmići sa opcijama. Prvi od njih je padajući meni u kojem treba da izaberete lekara čije termina želite da vidite ili zakažete/otkažete. Iza toga se nalazi dugme na koje možete vršiti izbor pacijenta. Odabirom ove opcije otvara se prozer u kome možete odabrati pacijeta ili kreirati novoga, kao i pogledati zakazane termine koje on ima, i eventualno otkazati neki postojeći termin. Zatim slede opcije ZAKAŽI i OTKAŽI. Da biste zakazali termin potrebno je da bude odabran lekar, pacijent kao i slobodan termin u kalendaru. Da biste otkazali termin potrebno je samo selektovati zauzet termin i potvrditi otkazivanje."/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource TextBlockStyle}"
+                               Text="Opcije sa leve strane predstavljaju opcije za navigaciju kroz kalendar. Mežu njima su: kalendar za odabir specifičnog dana odnosno nedlje, opcija odlaska na trenutnu nedelju, i strelice na koje možete vrteti nedelje (prethodna i sledeća)."/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource TextBlockStyle}" 
+                               Text="HITAN PREGLED" FontWeight="SemiBold" Margin="0,30,0,0"/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource TextBlockStyle}"
+                               Text="U ovom prozoru možete veoma brzo zakazati hitan pregled. Jedino što je potrebno je da odaberete struku lekara, okvirno trajanje pregleda, opciono tip, kao i pacijenta kome je potreban hitan pregled. Ukoliko pacijent ne postoji u sistemu, možete ga brzo registrovati kao guest-a, pa mu kasnije dodati informacije ukoliko želi da ostane u našoj bonici. Ukoliko postoji slobodan lekar odabrane struke u narednih sat vremena, hitan pregled će biti automatski zakazan, a ukoliko ne postoji bićete preusmereni na stranicu na kojoj traba da odaberete koje preglede želite da otkažete da bi se realizovao hitan termin."/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource TextBlockStyle}" 
+                               Text="RADNO VREME" FontWeight="SemiBold" Margin="0,30,0,0"/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource TextBlockStyle}"
+                               Text="Na ovom prozoru možete vršiti operacije nad radnim vremenom zaposlenih lekara. U tabeli je prikazan raspored smena lekara za naredni vremenski period, koji možete i odabrati sami. Postoji opcija izmene smene za samo jedan dan ili za trajnu izmenu smene, kao i za dodavanje slobodnih dana lekaru." Margin="0,0,0,30"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Page>

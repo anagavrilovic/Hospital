@@ -1,0 +1,177 @@
+﻿<Page x:Class="Hospital.View.Secretary.OurHospitals"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hospital.View.Secretary"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1065"
+      Background="{StaticResource BackgroundGray}"
+      Title="NaseBolnice">
+
+    <Page.Resources>
+        <ResourceDictionary Source="../../Resources/SecretaryResourceDictionary.xaml"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="NAŠE BOLNICE " Style="{StaticResource TitleStyle}"/>
+                </StackPanel>
+                <!--<Separator Margin="15,0"/>-->
+            </StackPanel>
+
+            <local:OptionBar Grid.Column="2" Height="30" Width="170" Margin="0,15,15,0" VerticalAlignment="Top" ></local:OptionBar>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="0,15,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Row="0" Margin="15,15,7.5,7.5" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                </Border.Effect>
+            </Border>
+            <Border Grid.Row="0" Margin="15,15,7.5,7.5" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                        <Image Source="../../Icon/Secretary/clinic.png" Margin="0,0,15,5"/>
+                        <TextBlock Text="Novi Sad I" Style="{StaticResource TextBlockStyle}" FontSize="20" FontWeight="Medium"/>
+                    </StackPanel>
+                    
+                    <TextBlock Text="Ulica i broj: Hajduk Veljkova 5" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="Grad: Novi Sad" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="Poštanski broj: 21000" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="Država: Srbija" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="Kontakt telefon: 021568136" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="E-mail adresa: nszdravo@gmail.com" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="1" Margin="15,7.5,7.5,15" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                </Border.Effect>
+            </Border>
+            <Border Grid.Row="1" Margin="15,7.5,7.5,15" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                        <Image Source="../../Icon/Secretary/clinic.png" Margin="0,0,15,5"/>
+                        <TextBlock Text="Novi Sad II" Style="{StaticResource TextBlockStyle}" FontSize="20" FontWeight="Medium"/>
+                    </StackPanel>
+
+                    <TextBlock Text="Ulica i broj: Gospodar Jevremova 7/1" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="Grad: Novi Sad" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="Poštanski broj: 21000" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="Država: Srbija" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="Kontakt telefon: 0219899553" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="E-mail adresa: nszdravo@gmail.com" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="0" Grid.Column="1" Margin="7.5,15,7.5,7.5" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                </Border.Effect>
+            </Border>
+            <Border Grid.Row="0" Grid.Column="1" Margin="7.5,15,7.5,7.5" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                        <Image Source="../../Icon/Secretary/clinic.png" Margin="0,0,15,5"/>
+                        <TextBlock Text="Beograd I" Style="{StaticResource TextBlockStyle}" FontSize="20" FontWeight="Medium"/>
+                    </StackPanel>
+
+                    <TextBlock Text="Ulica i broj: Šafarikova 8" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="Grad: Beograd" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="Poštanski broj: 11000" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="Država: Srbija" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="Kontakt telefon: 0119899553" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="E-mail adresa: bgzdravo@gmail.com" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="1" Grid.Column="1" Margin="7.5,7.5,7.5,15" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                </Border.Effect>
+            </Border>
+            <Border Grid.Row="1" Grid.Column="1" Margin="7.5,7.5,7.5,15" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                        <Image Source="../../Icon/Secretary/clinic.png" Margin="0,0,15,5"/>
+                        <TextBlock Text="Beograd II" Style="{StaticResource TextBlockStyle}" FontSize="20" FontWeight="Medium"/>
+                    </StackPanel>
+
+                    <TextBlock Text="Ulica i broj: Njegoševa 47" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="Grad: Beograd" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="Poštanski broj: 11000" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="Država: Srbija" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="Kontakt telefon: 01186515651" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="E-mail adresa: bgzdravo@gmail.com" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="0" Grid.Column="2" Margin="7.5,15,15,7.5" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                </Border.Effect>
+            </Border>
+            <Border Grid.Row="0" Grid.Column="2" Margin="7.5,15,15,7.5" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                        <Image Source="../../Icon/Secretary/clinic.png" Margin="0,0,15,5"/>
+                        <TextBlock Text="Zagreb" Style="{StaticResource TextBlockStyle}" FontSize="20" FontWeight="Medium"/>
+                    </StackPanel>
+
+                    <TextBlock Text="Ulica i broj: Risanska 5" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="Grad: Zagreb" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="Poštanski broj: 10000" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="Država: Hrvatska" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="Kontakt telefon: 01086515651" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="E-mail adresa: hrzdravo@gmail.com" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="1" Grid.Column="2" Margin="7.5,7.5,15,15" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="LightGray" />
+                </Border.Effect>
+            </Border>
+            <Border Grid.Row="1" Grid.Column="2" Margin="7.5,7.5,15,15" CornerRadius="10" Background="{StaticResource MainWhite}">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                        <Image Source="../../Icon/Secretary/clinic.png" Margin="0,0,15,5"/>
+                        <TextBlock Text="Sarajevo" Style="{StaticResource TextBlockStyle}" FontSize="20" FontWeight="Medium"/>
+                    </StackPanel>
+
+                    <TextBlock Text="Ulica i broj: Maksima Gorkog 12" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="Grad: Sarajevo" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="Poštanski broj: 71000" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="Država: Bosna i Hercegovina" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="Kontakt telefon: 07186515651" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                    <TextBlock Text="E-mail adresa: bhzdravo@gmail.com" Style="{StaticResource TextBlockStyle}" FontSize="15" />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Page>

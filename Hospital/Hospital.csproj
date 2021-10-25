@@ -345,14 +345,14 @@
     <Compile Include="ViewModels\Patient\PatientNotesViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientPassedAppointmentsViewModel.cs" />
     <Compile Include="ViewModels\Patient\PatientSettingsPageViewModel.cs" />
-    <Compile Include="ViewModels\Secretary\AnalitikaViewModel.cs" />
-    <Compile Include="ViewModels\Secretary\DetaljiKartonViewModel.cs" />
+    <Compile Include="ViewModels\Secretary\AnalyticsViewModel.cs" />
+    <Compile Include="ViewModels\Secretary\MedicalRecordDetailsViewModel.cs" />
     <Compile Include="ViewModels\Secretary\FeedbackViewModel.cs" />
-    <Compile Include="ViewModels\Secretary\HitanPregledViewModel.cs" />
-    <Compile Include="ViewModels\Secretary\IzmenaKartonaViewModel.cs" />
-    <Compile Include="ViewModels\Secretary\IzvestajViewModel.cs" />
-    <Compile Include="ViewModels\Secretary\KreiranjeKartonaViewModel.cs" />
-    <Compile Include="ViewModels\Secretary\PocetnaStranicaViewModel.cs" />
+    <Compile Include="ViewModels\Secretary\UrgentExaminationViewModel.cs" />
+    <Compile Include="ViewModels\Secretary\UpdateMedicalRecordViewModel.cs" />
+    <Compile Include="ViewModels\Secretary\ReportViewModel.cs" />
+    <Compile Include="ViewModels\Secretary\CreateMedicalRecordViewModel.cs" />
+    <Compile Include="ViewModels\Secretary\HomepageViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="View\Doctor\DisplayNotification.xaml.cs">
       <DependentUpon>DisplayNotification.xaml</DependentUpon>
@@ -600,26 +600,26 @@
     <Compile Include="View\Manager\Rooms\Renovations.xaml.cs">
       <DependentUpon>Renovations.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\Analitika.xaml.cs">
-      <DependentUpon>Analitika.xaml</DependentUpon>
+    <Compile Include="View\Secretary\Analytics.xaml.cs">
+      <DependentUpon>Analytics.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\DetaljiKarton.xaml.cs">
-      <DependentUpon>DetaljiKarton.xaml</DependentUpon>
+    <Compile Include="View\Secretary\MedicalRecordDetails.xaml.cs">
+      <DependentUpon>MedicalRecordDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\DodajObavestenje.xaml.cs">
-      <DependentUpon>DodajObavestenje.xaml</DependentUpon>
+    <Compile Include="View\Secretary\AddNotification.xaml.cs">
+      <DependentUpon>AddNotification.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\FeedbackSekretar.xaml.cs">
-      <DependentUpon>FeedbackSekretar.xaml</DependentUpon>
+    <Compile Include="View\Secretary\FeedbackSecretary.xaml.cs">
+      <DependentUpon>FeedbackSecretary.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\HitanPregled.xaml.cs">
-      <DependentUpon>HitanPregled.xaml</DependentUpon>
+    <Compile Include="View\Secretary\UrgentExamination.xaml.cs">
+      <DependentUpon>UrgentExamination.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\HitanPregledDetalji.xaml.cs">
-      <DependentUpon>HitanPregledDetalji.xaml</DependentUpon>
+    <Compile Include="View\Secretary\UrgentExaminationDetails.xaml.cs">
+      <DependentUpon>UrgentExaminationDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\HitanPregledPomeranje.xaml.cs">
-      <DependentUpon>HitanPregledPomeranje.xaml</DependentUpon>
+    <Compile Include="View\Secretary\UrgentExaminationRescheduling.xaml.cs">
+      <DependentUpon>UrgentExaminationRescheduling.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\InformationBox.xaml.cs">
       <DependentUpon>InformationBox.xaml</DependentUpon>
@@ -627,38 +627,38 @@
     <Compile Include="View\Secretary\ConfirmBox.xaml.cs">
       <DependentUpon>ConfirmBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\IzmenaObavestenja.xaml.cs">
-      <DependentUpon>IzmenaObavestenja.xaml</DependentUpon>
+    <Compile Include="View\Secretary\UpdateNotification.xaml.cs">
+      <DependentUpon>UpdateNotification.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\IzmenaSmene.xaml.cs">
-      <DependentUpon>IzmenaSmene.xaml</DependentUpon>
+    <Compile Include="View\Secretary\UpdateShifts.xaml.cs">
+      <DependentUpon>UpdateShifts.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\Izvestaj.xaml.cs">
-      <DependentUpon>Izvestaj.xaml</DependentUpon>
+    <Compile Include="View\Secretary\Report.xaml.cs">
+      <DependentUpon>Report.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\Kalendar.xaml.cs">
-      <DependentUpon>Kalendar.xaml</DependentUpon>
+    <Compile Include="View\Secretary\Timetable.xaml.cs">
+      <DependentUpon>Timetable.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\MojProfil.xaml.cs">
-      <DependentUpon>MojProfil.xaml</DependentUpon>
+    <Compile Include="View\Secretary\MyProfile.xaml.cs">
+      <DependentUpon>MyProfile.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\NaseBolnice.xaml.cs">
-      <DependentUpon>NaseBolnice.xaml</DependentUpon>
+    <Compile Include="View\Secretary\OurHospitals.xaml.cs">
+      <DependentUpon>OurHospitals.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\ObavestenjaSekretar.xaml.cs">
-      <DependentUpon>ObavestenjaSekretar.xaml</DependentUpon>
+    <Compile Include="View\Secretary\NotificationsSecretary.xaml.cs">
+      <DependentUpon>NotificationsSecretary.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\OdaberiPacijenta.xaml.cs">
-      <DependentUpon>OdaberiPacijenta.xaml</DependentUpon>
+    <Compile Include="View\Secretary\ChoosePatient.xaml.cs">
+      <DependentUpon>ChoosePatient.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\OptionBar.xaml.cs">
       <DependentUpon>OptionBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\PocetnaStranica.xaml.cs">
-      <DependentUpon>PocetnaStranica.xaml</DependentUpon>
+    <Compile Include="View\Secretary\Homepage.xaml.cs">
+      <DependentUpon>Homepage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\PrikazObavestenja.xaml.cs">
-      <DependentUpon>PrikazObavestenja.xaml</DependentUpon>
+    <Compile Include="View\Secretary\ReadNotification.xaml.cs">
+      <DependentUpon>ReadNotification.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Manager\DynamicInventory\TransferDynamicInventoryView.xaml.cs">
       <DependentUpon>TransferDynamicInventoryView.xaml</DependentUpon>
@@ -666,8 +666,8 @@
     <Compile Include="View\Manager\StaticInventory\EditInventory.xaml.cs">
       <DependentUpon>EditInventory.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\ModifikacijaAlergena.xaml.cs">
-      <DependentUpon>ModifikacijaAlergena.xaml</DependentUpon>
+    <Compile Include="View\Secretary\UpdateAllergens.xaml.cs">
+      <DependentUpon>UpdateAllergens.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Manager\StaticInventory\TransferStaticInventory.xaml.cs">
       <DependentUpon>TransferStaticInventory.xaml</DependentUpon>
@@ -694,29 +694,29 @@
       <DependentUpon>RoomsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Genders.cs" />
-    <Compile Include="View\Secretary\IzmenaKartona.xaml.cs">
-      <DependentUpon>IzmenaKartona.xaml</DependentUpon>
+    <Compile Include="View\Secretary\UpdateMedicalRecord.xaml.cs">
+      <DependentUpon>UpdateMedicalRecord.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\KreiranjeKartona.xaml.cs">
-      <DependentUpon>KreiranjeKartona.xaml</DependentUpon>
+    <Compile Include="View\Secretary\CreateMedicalRecord.xaml.cs">
+      <DependentUpon>CreateMedicalRecord.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\PrikazPacijenata.xaml.cs">
-      <DependentUpon>PrikazPacijenata.xaml</DependentUpon>
+    <Compile Include="View\Secretary\AllPatients.xaml.cs">
+      <DependentUpon>AllPatients.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\RadnoVreme.xaml.cs">
-      <DependentUpon>RadnoVreme.xaml</DependentUpon>
+    <Compile Include="View\Secretary\WorkingHour.xaml.cs">
+      <DependentUpon>WorkingHour.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Secretary\SecretaryWindow.xaml.cs">
       <DependentUpon>SecretaryWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\SekretarHelp.xaml.cs">
-      <DependentUpon>SekretarHelp.xaml</DependentUpon>
+    <Compile Include="View\Secretary\Help.xaml.cs">
+      <DependentUpon>Help.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\SlobodniDani.xaml.cs">
-      <DependentUpon>SlobodniDani.xaml</DependentUpon>
+    <Compile Include="View\Secretary\FreeDays.xaml.cs">
+      <DependentUpon>FreeDays.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Secretary\ZakazivanjeTermina.xaml.cs">
-      <DependentUpon>ZakazivanjeTermina.xaml</DependentUpon>
+    <Compile Include="View\Secretary\ScheduleExamination.xaml.cs">
+      <DependentUpon>ScheduleExamination.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -1062,15 +1062,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\Analitika.xaml">
+    <Page Include="View\Secretary\Analytics.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\DetaljiKarton.xaml">
+    <Page Include="View\Secretary\MedicalRecordDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\DodajObavestenje.xaml">
+    <Page Include="View\Secretary\AddNotification.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1082,19 +1082,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Secretary\FeedbackSekretar.xaml">
+    <Page Include="View\Secretary\FeedbackSecretary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\HitanPregled.xaml">
+    <Page Include="View\Secretary\UrgentExamination.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\HitanPregledDetalji.xaml">
+    <Page Include="View\Secretary\UrgentExaminationDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\HitanPregledPomeranje.xaml">
+    <Page Include="View\Secretary\UrgentExaminationRescheduling.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1106,7 +1106,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\IzmenaObavestenja.xaml">
+    <Page Include="View\Secretary\UpdateNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1114,31 +1114,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\IzmenaSmene.xaml">
+    <Page Include="View\Secretary\UpdateShifts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\Izvestaj.xaml">
+    <Page Include="View\Secretary\Report.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\Kalendar.xaml">
+    <Page Include="View\Secretary\Timetable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\MojProfil.xaml">
+    <Page Include="View\Secretary\MyProfile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\NaseBolnice.xaml">
+    <Page Include="View\Secretary\OurHospitals.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\ObavestenjaSekretar.xaml">
+    <Page Include="View\Secretary\NotificationsSecretary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\OdaberiPacijenta.xaml">
+    <Page Include="View\Secretary\ChoosePatient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1146,11 +1146,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\PocetnaStranica.xaml">
+    <Page Include="View\Secretary\Homepage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\PrikazObavestenja.xaml">
+    <Page Include="View\Secretary\ReadNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1162,7 +1162,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\ModifikacijaAlergena.xaml">
+    <Page Include="View\Secretary\UpdateAllergens.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1198,19 +1198,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\IzmenaKartona.xaml">
+    <Page Include="View\Secretary\UpdateMedicalRecord.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\KreiranjeKartona.xaml">
+    <Page Include="View\Secretary\CreateMedicalRecord.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\PrikazPacijenata.xaml">
+    <Page Include="View\Secretary\AllPatients.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\RadnoVreme.xaml">
+    <Page Include="View\Secretary\WorkingHour.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1218,15 +1218,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\SekretarHelp.xaml">
+    <Page Include="View\Secretary\Help.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\SlobodniDani.xaml">
+    <Page Include="View\Secretary\FreeDays.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Secretary\ZakazivanjeTermina.xaml">
+    <Page Include="View\Secretary\ScheduleExamination.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

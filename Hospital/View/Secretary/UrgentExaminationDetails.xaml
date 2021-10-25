@@ -1,0 +1,58 @@
+﻿<Window x:Class="Hospital.View.Secretary.UrgentExaminationDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.View.Secretary"
+        mc:Ignorable="d"
+        Title="HitanPregledDetalji" Height="470" Width="430" AllowsTransparency="True" WindowStyle="None"
+        Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" WindowStartupLocation="CenterScreen"
+        BorderBrush="#094f7a" BorderThickness="1" Opacity="0.95">
+    <Window.Resources>
+        <ResourceDictionary Source="../../Resources/SecretaryResourceDictionary.xaml"/>
+    </Window.Resources>
+    <Grid>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,30,0,20">
+                <Image Source="../../Icon/Secretary/ok.png"/>
+                <TextBlock Text=" ZAKAZAN HITAN PREGLED" Style="{StaticResource MessageBoxTitle}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Lekar: " Style="{StaticResource MessageBoxTextBigger}" Margin="20,10,0,10" FontWeight="SemiBold" />
+                <TextBlock Text="{Binding Appointment.Doctor}" Style="{StaticResource MessageBoxTextBigger}" Margin="0,10" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Pacijent: " Style="{StaticResource MessageBoxTextBigger}" Margin="20,10,0,10" FontWeight="SemiBold"/>
+                <TextBlock Text="{Binding Appointment.PatientsRecord.Patient.FirstName}" Style="{StaticResource MessageBoxTextBigger}" Margin="0,10"/>
+                <TextBlock Text=" " Style="{StaticResource MessageBoxTextBigger}" Margin="0,10"/>
+                <TextBlock Text="{Binding Appointment.PatientsRecord.Patient.LastName}" Style="{StaticResource MessageBoxTextBigger}" Margin="0,10"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Datum i vreme: " Style="{StaticResource MessageBoxTextBigger}" Margin="20,10,0,10" FontWeight="SemiBold"/>
+                <TextBlock Text="{Binding Appointment.DateTime, StringFormat='{}{0: dd.MM.yyyy, HH:mm}'}" 
+                           Style="{StaticResource MessageBoxTextBigger}" Margin="0,10"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Trajanje termina u satima: " Style="{StaticResource MessageBoxTextBigger}" Margin="20,10,0,10" FontWeight="SemiBold"/>
+                <TextBlock Text="{Binding Appointment.DurationInHours}" Style="{StaticResource MessageBoxTextBigger}" Margin="0,10"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Tip: " Style="{StaticResource MessageBoxTextBigger}" Margin="20,10,0,10" FontWeight="SemiBold"/>
+                <TextBlock Text="{Binding Type}" Style="{StaticResource MessageBoxTextBigger}" Margin="0,10"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Ordinacija/sala: " Style="{StaticResource MessageBoxTextBigger}" Margin="20,10,0,10" FontWeight="SemiBold"/>
+                <TextBlock Text="{Binding Appointment.Room.Name}" Style="{StaticResource MessageBoxTextBigger}" Margin="0,10"/>
+            </StackPanel>
+
+            <Button x:Name="OKbtn" Content="OK" Style="{StaticResource ButtonPotvrdiStyle}" Click="OKbtnClick" Margin="0,30,20,0" />
+
+        </StackPanel>
+    </Grid>
+</Window>

@@ -14,12 +14,12 @@ namespace Hospital.View.Secretary
 
         private void HelpBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.secretaryWindow.Main.Navigate(new SekretarHelp());
+            MainWindow.secretaryWindow.Main.Navigate(new Help());
         }
 
         private void NotificationBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.secretaryWindow.Main.Navigate(new FeedbackSekretar(new FeedbackViewModel(MainWindow.secretaryWindow.Main.NavigationService)));
+            MainWindow.secretaryWindow.Main.Navigate(new FeedbackSecretary(new FeedbackViewModel(MainWindow.secretaryWindow.Main.NavigationService)));
         }
 
         private void GmailBtn_Click(object sender, RoutedEventArgs e)
@@ -29,7 +29,7 @@ namespace Hospital.View.Secretary
 
         private void ProfileBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.secretaryWindow.Main.Navigate(new MojProfil());
+            MainWindow.secretaryWindow.Main.Navigate(new MyProfile());
         }
 
     }

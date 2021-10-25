@@ -53,7 +53,7 @@ namespace Hospital.ViewModels.Secretary
             InformationBox informationBox = new InformationBox("Feedback poslat!");
             informationBox.Show();
 
-            this.NavigationService.Navigate(new PocetnaStranica(new PocetnaStranicaViewModel(this.NavigationService)));
+            this.NavigationService.Navigate(new Homepage(new HomepageViewModel(this.NavigationService)));
         }
 
         public bool CanExecuteCommands(object obj)
@@ -63,7 +63,7 @@ namespace Hospital.ViewModels.Secretary
 
         public void Execute_CancelCommand(object obj)
         {
-            this.NavigationService.Navigate(new PocetnaStranica(new PocetnaStranicaViewModel(this.NavigationService)));
+            this.NavigationService.Navigate(new Homepage(new HomepageViewModel(this.NavigationService)));
         }
 
         #endregion

@@ -22,7 +22,7 @@ namespace Hospital.View
         public SecretaryWindow()
         {
             InitializeComponent();
-            Main.Navigate(new PocetnaStranica(new PocetnaStranicaViewModel(Main.NavigationService)));
+            Main.Navigate(new Homepage(new HomepageViewModel(Main.NavigationService)));
         }
 
         private void NextBtnClick(object sender, RoutedEventArgs e)
@@ -30,7 +30,7 @@ namespace Hospital.View
             if (Main.NavigationService.CanGoForward)
                 Main.NavigationService.GoForward();
             else
-                Main.Navigate(new PocetnaStranica(new PocetnaStranicaViewModel(Main.NavigationService)));
+                Main.Navigate(new Homepage(new HomepageViewModel(Main.NavigationService)));
         }
 
         private void BackBtnClick(object sender, RoutedEventArgs e)
@@ -38,7 +38,7 @@ namespace Hospital.View
             if (Main.NavigationService.CanGoBack)
                 Main.NavigationService.GoBack();
             else
-                Main.Navigate(new PocetnaStranica(new PocetnaStranicaViewModel(Main.NavigationService)));
+                Main.Navigate(new Homepage(new HomepageViewModel(Main.NavigationService)));
         }
 
         private void ExitBtnClick(object sender, RoutedEventArgs e)
@@ -48,42 +48,42 @@ namespace Hospital.View
 
         private void ButtonPocetnaClick(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new PocetnaStranica(new PocetnaStranicaViewModel(Main.NavigationService)));
+            Main.Navigate(new Homepage(new HomepageViewModel(Main.NavigationService)));
         }
 
         private void ButtonPacijentiClick(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new PrikazPacijenata());
+            Main.Navigate(new AllPatients());
         }
 
         private void ButtonKalendarClick(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new Kalendar(null));
+            Main.Navigate(new Timetable(null));
         }
 
         private void ButtonHitanPregledClick(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new HitanPregled(new HitanPregledViewModel(Main.NavigationService)));
+            Main.Navigate(new UrgentExamination(new UrgentExaminationViewModel(Main.NavigationService)));
         }
 
         private void ButtonRadnoVremeClick(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new RadnoVreme());
+            Main.Navigate(new WorkingHour());
         }
 
         private void ButtonObavestenjaClick(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new ObavestenjaSekretar());
+            Main.Navigate(new NotificationsSecretary());
         }
 
         private void ButtonAnalitikaClick(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new Analitika(new AnalitikaViewModel(Main.NavigationService)));
+            Main.Navigate(new Analytics(new AnalyticsViewModel(Main.NavigationService)));
         }
 
         private void ButtonNaseBolniceClick(object sender, RoutedEventArgs e)
         {
-            Main.Navigate(new NaseBolnice());
+            Main.Navigate(new OurHospitals());
         }
 
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
