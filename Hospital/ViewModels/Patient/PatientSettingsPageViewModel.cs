@@ -19,7 +19,7 @@ namespace Hospital.ViewModels.Patient
     public class PatientSettingsPageViewModel
     {
         private NavigationService navService;
-        private PatientSettingsService patientSettingsService = new PatientSettingsService();
+        private PatientSettingsService patientSettingsService = new PatientSettingsService(MainWindow.IDnumber);
         public ObservableCollection<String> DoctorsNamesSurnames { get; set; }
         public String SelectedDoctor {get;set;}
         private DoctorService doctorService=new DoctorService(new DoctorFileRepository());

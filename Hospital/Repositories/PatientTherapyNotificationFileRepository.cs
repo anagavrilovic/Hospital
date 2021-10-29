@@ -72,13 +72,13 @@ namespace Hospital.Repositories
             }
         }
 
-        public List<PatientTherapyMedicineNotification> GetByPatientID()
+        public List<PatientTherapyMedicineNotification> GetByPatientID(String patientId)
         {
             List<PatientTherapyMedicineNotification> notifications = GetAll();
             List<PatientTherapyMedicineNotification> patientsNotifications = new List<PatientTherapyMedicineNotification>();
             foreach (PatientTherapyMedicineNotification notification in notifications)
             {
-                if (notification.IDpatient.Equals(MainWindow.IDnumber)) patientsNotifications.Add(notification);
+                if (notification.IDpatient.Equals(patientId)) patientsNotifications.Add(notification);
             }
             return patientsNotifications;
         }

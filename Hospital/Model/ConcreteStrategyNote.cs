@@ -11,7 +11,7 @@ namespace Hospital.Model
     class ConcreteStrategyNote : Strategy
     {
         PatientNotesNotification notification;
-        private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService();
+        private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService(MainWindow.IDnumber);
 
         public ConcreteStrategyNote(PatientNotesNotification notification)
         {

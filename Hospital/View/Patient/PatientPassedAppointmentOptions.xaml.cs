@@ -23,8 +23,8 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientPassedAppointmentOptions : Page
     {
-        private PatientCommentsService patientCommentsService = new PatientCommentsService();
-        private ExaminationService examinationService = new ExaminationService();
+        private PatientCommentsService patientCommentsService = new PatientCommentsService(MainWindow.IDnumber);
+        private ExaminationService examinationService = new ExaminationService(MainWindow.IDnumber);
         Appointment app;
         public PatientPassedAppointmentOptions(Appointment app)
         {

@@ -80,7 +80,7 @@ namespace Hospital.Repositories
 
         public void Update(PatientSettings patientSettings)
         {
-            Delete(MainWindow.IDnumber);
+            Delete(patientSettings.IDPatient);
             Save(patientSettings);
         }
 

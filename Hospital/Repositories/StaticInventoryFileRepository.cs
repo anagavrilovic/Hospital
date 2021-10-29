@@ -1,16 +1,11 @@
 ﻿using Hospital.Repositories.Interfaces;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hospital.Repositories
 {
-   public class StaticInventoryFileRepository : IStaticInventoryRepository
+    public class StaticInventoryFileRepository : IStaticInventoryRepository
     {
         private string fileName = "inventory.json";
 

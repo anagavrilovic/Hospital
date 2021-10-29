@@ -1,22 +1,20 @@
-﻿using Hospital.Factory;
-using Hospital.Model;
+﻿using Hospital.Model;
 using Hospital.Repositories;
 using Hospital.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hospital.Services
 {
     class PatientNotesNotificationService
     {
         IPatientNotesNotificationRepository patientNotesNotificationRepository;
+        String _patientId;
 
-        public PatientNotesNotificationService()
+        public PatientNotesNotificationService(String patientId)
         {
             patientNotesNotificationRepository = new PatientNotesNotificationFileRepository();
+            _patientId = patientId;
         }
         public void Delete(string id)
         {
@@ -45,7 +43,7 @@ namespace Hospital.Services
 
         public List<PatientNotesNotification> GetByPatientID()
         {
-            return patientNotesNotificationRepository.GetByPatientID();
+            return patientNotesNotificationRepository.GetByPatientID(_patientId);
         }
 
         public void Update(PatientNotesNotification patientNotesNotification)
@@ -56,7 +54,7 @@ namespace Hospital.Services
         public Boolean IsThereNewNotification()
         {
             Boolean retval = false;
-            List<PatientNotesNotification>  patientNotesNotifications=patientNotesNotificationRepository.GetByPatientID();
+            List<PatientNotesNotification>  patientNotesNotifications=patientNotesNotificationRepository.GetByPatientID(_patientId);
             foreach(PatientNotesNotification patientNotesNotification in patientNotesNotifications)
             {
                 if (IsTimeForNotification(patientNotesNotification))

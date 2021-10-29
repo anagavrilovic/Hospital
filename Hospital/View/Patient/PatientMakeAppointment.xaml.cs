@@ -27,7 +27,7 @@ namespace Hospital.View
     public partial class PatientMakeAppointment : Page
     {
         private CalendarController calendarController = new CalendarController();
-       private PatientSettingsService patientSettingsService = new PatientSettingsService();
+       private PatientSettingsService patientSettingsService = new PatientSettingsService(MainWindow.IDnumber);
        private AppointmentService appointmentService = new AppointmentService();
        private DateTime firstDayOfWeek;
        private Appointment appointmentForDeleting = null;

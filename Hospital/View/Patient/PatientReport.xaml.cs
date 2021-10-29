@@ -24,7 +24,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientReport : Page
     {
-        private PatientTherapyNotificationService patientTherapyNotificationService = new PatientTherapyNotificationService();
+        private PatientTherapyNotificationService patientTherapyNotificationService = new PatientTherapyNotificationService(MainWindow.IDnumber);
         private List<PatientTherapyMedicineNotification> therapyNotifications;
         private DateTime MondayDay;
         public ObservableCollection<PatientTherapyMedicineNotification> Therapies

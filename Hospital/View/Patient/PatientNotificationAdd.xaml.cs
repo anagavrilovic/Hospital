@@ -23,7 +23,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientNotificationAdd : Page
     {
-        private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService();
+        private PatientNotesNotificationService patientNotesNotificationService = new PatientNotesNotificationService(MainWindow.IDnumber);
         private Boolean[] days = new Boolean[7];
         private PatientNote patientNote;
         public PatientNotificationAdd(PatientNote patientNote)

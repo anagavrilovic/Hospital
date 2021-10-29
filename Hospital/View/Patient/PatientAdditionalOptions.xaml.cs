@@ -23,7 +23,7 @@ namespace Hospital.View
     /// </summary>
     public partial class PatientAdditionalOptions : Page
     {
-        private PatientCommentsService patientCommentsService = new PatientCommentsService();
+        private PatientCommentsService patientCommentsService = new PatientCommentsService(MainWindow.IDnumber);
         public PatientAdditionalOptions()
         {
             InitializeComponent();

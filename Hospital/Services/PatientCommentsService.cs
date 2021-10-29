@@ -13,10 +13,12 @@ namespace Hospital.Services
     public class PatientCommentsService
     {
         IPatientCommentsRepository patientCommentsRepository;
+        String _patientId;
 
-        public PatientCommentsService()
+        public PatientCommentsService(String patientId)
         {
             patientCommentsRepository = new PatientCommentsFileRepository();
+            _patientId = patientId;
         }
 
         public void Save(PatientComment patientComment)
@@ -51,7 +53,7 @@ namespace Hospital.Services
             if (patientComments == null) return true;
             foreach (PatientComment a in patientComments)
             {
-                if (a.IDPatient.Equals(MainWindow.IDnumber) && String.IsNullOrEmpty(a.IDAppointment))
+                if (a.IDPatient.Equals(_patientId) && String.IsNullOrEmpty(a.IDAppointment))
                 {
                     if ((a.DateWhenRated - DateTime.Now).TotalDays < 150) return false;
                 }

@@ -26,8 +26,8 @@ namespace Hospital.View
     {
         Appointment app;
         PatientComment patientComment;
-        PatientCommentsService patientCommentsService = new PatientCommentsService();
-        private PatientSettingsService patientSettingsService = new PatientSettingsService();
+        PatientCommentsService patientCommentsService = new PatientCommentsService(MainWindow.IDnumber);
+        private PatientSettingsService patientSettingsService = new PatientSettingsService(MainWindow.IDnumber);
         public PatientRateDoctor(Appointment app)
         {
             InitializeComponent();

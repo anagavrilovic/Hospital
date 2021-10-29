@@ -12,14 +12,15 @@ namespace Hospital.Services
     class ExaminationService
     {
         private IMedicalRecordRepository medicalRecordRepository;
+        private String _patientId;
 
-        public ExaminationService()
+        public ExaminationService(String patientId)
         {
             medicalRecordRepository = new MedicalRecordFileRepository();
+            _patientId = patientId;
         }
-        public Examination GetExaminationByID(String id)
-        {
-            MedicalRecord medicalRecord = medicalRecordRepository.GetByPatientID(MainWindow.IDnumber);
+        public Examination GetExaminationByID(String id) { 
+            MedicalRecord medicalRecord = medicalRecordRepository.GetByPatientID(_patientId);
             foreach (Examination examination in medicalRecord.Examination)
             {
                 if (examination.appointment.IDAppointment.Equals(id)) return examination;
@@ -40,7 +41,7 @@ namespace Hospital.Services
 
         private MedicalRecord DeleteExaminationFromMedicalRecord(String id)
         {
-            MedicalRecord medicalRecord = medicalRecordRepository.GetByPatientID(MainWindow.IDnumber);
+            MedicalRecord medicalRecord = medicalRecordRepository.GetByPatientID(_patientId);
             foreach (Examination examination in medicalRecord.Examination)
             {
                 if (examination.appointment.IDAppointment.Equals(id))

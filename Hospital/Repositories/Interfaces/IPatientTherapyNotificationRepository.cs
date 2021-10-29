@@ -9,7 +9,7 @@ namespace Hospital.Repositories.Interfaces
 {
    public interface IPatientTherapyNotificationRepository : IGenericRepository<PatientTherapyMedicineNotification>
     {
-        List<PatientTherapyMedicineNotification> GetByPatientID();
+        List<PatientTherapyMedicineNotification> GetByPatientID(String patientId);
         void Update(PatientTherapyMedicineNotification patientTherapyMedicineNotification);
         String GetNewID();
     }

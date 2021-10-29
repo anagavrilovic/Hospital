@@ -14,15 +14,17 @@ namespace Hospital.Services
     {
         IPatientTherapyNotificationRepository patientTherapyNotificationsRepository;
         IMedicineRepository medicineRepository;
+        String _patientId;
 
-        public PatientTherapyNotificationService()
+        public PatientTherapyNotificationService(String patientId)
         {
             patientTherapyNotificationsRepository = new PatientTherapyNotificationFileRepository();
             medicineRepository = new MedicineFileRepository();
+            _patientId = patientId;
         }
         public List<PatientTherapyMedicineNotification> GetByPatientID()
         {
-            return patientTherapyNotificationsRepository.GetByPatientID();
+            return patientTherapyNotificationsRepository.GetByPatientID(_patientId);
         }
 
         public void Update(PatientTherapyMedicineNotification patientTherapyMedicineNotification)
@@ -83,7 +85,7 @@ namespace Hospital.Services
         public Boolean IsThereNewNotification()
         {
             Boolean retVal = false;
-            List<PatientTherapyMedicineNotification> notifications =GetByPatientID();
+            List<PatientTherapyMedicineNotification> notifications = GetByPatientID();
                 foreach (PatientTherapyMedicineNotification notification in notifications)
                 {
                     if ((notification.FromDate.Date <= DateTime.Now.Date) && (notification.ToDate.Date >= DateTime.Now.Date))

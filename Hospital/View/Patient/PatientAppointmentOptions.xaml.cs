@@ -25,7 +25,7 @@ namespace Hospital.View
     {
         private Appointment selectedAppointment;
         private AppointmentService appointmentService = new AppointmentService();
-        private PatientSettingsService patientSettingsService = new PatientSettingsService();
+        private PatientSettingsService patientSettingsService = new PatientSettingsService(MainWindow.IDnumber);
       
 
         public PatientAppointmentOptions(Appointment selectedAppointment)

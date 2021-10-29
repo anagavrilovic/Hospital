@@ -25,7 +25,7 @@ namespace Hospital.View
     public partial class PatientNoteAdd : Page
     {
         private PatientNotesService patientNotesService = new PatientNotesService();
-        private PatientSettingsService patientSettingsService = new PatientSettingsService();
+        private PatientSettingsService patientSettingsService = new PatientSettingsService(MainWindow.IDnumber);
         public PatientNoteAdd()
         {
             InitializeComponent();

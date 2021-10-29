@@ -10,7 +10,7 @@ namespace Hospital.Model
 {
     class ConcreteStrategyTherapy : Strategy
     {
-        private PatientTherapyNotificationService patientTherapyNotificationService = new PatientTherapyNotificationService();
+        private PatientTherapyNotificationService patientTherapyNotificationService = new PatientTherapyNotificationService(MainWindow.IDnumber);
         PatientTherapyMedicineNotification notification;
         public ConcreteStrategyTherapy(PatientTherapyMedicineNotification notification)
         {

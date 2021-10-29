@@ -88,15 +88,20 @@ namespace Hospital.Repositories
             return false;
         }
 
-        public List<PatientNote> GetByPatientID()
+        public List<PatientNote> GetByPatientID(String patientId)
         {
             List<PatientNote> notes = GetAll();
             List<PatientNote> patientsNotes = new List<PatientNote>();
             foreach (PatientNote note in notes)
             {
-                if (note.patientID.Equals(MainWindow.IDnumber)) patientsNotes.Add(note);
+                if (note.patientID.Equals(patientId)) patientsNotes.Add(note);
             }
             return patientsNotes;
+        }
+
+        public List<PatientNote> GetByPatientID()
+        {
+            throw new NotImplementedException();
         }
     }
 }

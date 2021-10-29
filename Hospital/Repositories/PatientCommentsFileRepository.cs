@@ -1,13 +1,9 @@
 ﻿using Hospital.Model;
-using Newtonsoft.Json;
 using Hospital.Repositories.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hospital.Repositories
 {
@@ -92,13 +88,13 @@ namespace Hospital.Repositories
             return false;
         }
 
-        public List<PatientComment> GetByPatientID()
+        public List<PatientComment> GetByPatientID(String patientId)
         {
             List<PatientComment> comments = GetAll();
             List<PatientComment> patientComments = new List<PatientComment>();
             foreach (PatientComment comment in comments)
             {
-                if (comment.IDPatient.Equals(MainWindow.IDnumber)) patientComments.Add(comment);
+                if (comment.IDPatient.Equals(patientId)) patientComments.Add(comment);
             }
             return patientComments;
         }

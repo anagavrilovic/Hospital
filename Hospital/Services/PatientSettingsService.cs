@@ -13,13 +13,14 @@ namespace Hospital.Services
     public class PatientSettingsService
     {
         IPatientSettingsRepository patientSettingsRepository;
+        String _patientId;
 
-        public PatientSettingsService()
+        public PatientSettingsService(String patientId)
         {
             patientSettingsRepository = new PatientSettingsFileRepository();
+            _patientId = patientId;
         }
-
-        
+       
 
         public List<PatientSettings> GetAll()
         {
@@ -48,7 +49,7 @@ namespace Hospital.Services
 
         public Boolean IsAntiTrollTriggered()
         {
-            PatientSettings patientSettings = patientSettingsRepository.GetByID(MainWindow.IDnumber);
+            PatientSettings patientSettings = patientSettingsRepository.GetByID(_patientId);
 
             if ((patientSettings.LatestScheduledAppointmentsTime != null) && (patientSettings.LatestScheduledAppointmentsTime.Count == 3))
             {
@@ -72,7 +73,7 @@ namespace Hospital.Services
 
         public void AddScheduling(DateTime dt)
         {
-            PatientSettings patientSettings = patientSettingsRepository.GetByID(MainWindow.IDnumber);
+            PatientSettings patientSettings = patientSettingsRepository.GetByID(_patientId);
             if (patientSettings.LatestScheduledAppointmentsTime == null)
             {
                 patientSettings.LatestScheduledAppointmentsTime = new List<DateTime>();
